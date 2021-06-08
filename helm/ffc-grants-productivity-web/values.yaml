@@ -1,13 +1,13 @@
 environment: development
-name: ffc-template-node
-namespace: ffc-demo
-workstream: ffc-demo
-image: ffc-template-node
+name: ffc-grants-productivity-web
+namespace: ffc-grants
+workstream: ffc-grants
+image: ffc-grants-productivity-web
 
 labels: {}
 
 containerConfigMap:
-  name: ffc-template-node-config-map
+  name: ffc-grants-productivity-web-config-map
 
 deployment:
   restartPolicy: Always
