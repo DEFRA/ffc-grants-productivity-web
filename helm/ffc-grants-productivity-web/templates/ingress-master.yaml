@@ -1,3 +1,5 @@
 {{- include "ffc-helm-library.azure-ingress-master" (list . "ffc-grants-productivity-web.ingress-master") -}}
 {{- define "ffc-grants-productivity-web.ingress-master" -}}
+metadata:
+  name: {{.Values.name }}-master
 {{- end -}}
