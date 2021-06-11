@@ -44,5 +44,4 @@ ingress:
   class: nginx
   endpoint: check-ftf
   server: example.com
-  type: minion
   path: /productivity
