@@ -1,6 +1,8 @@
 {% extends "govuk/template.njk" %}
 {% from "govuk/components/header/macro.njk" import govukHeader %}
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+
+{% set assetPath = "productivity/assets" %}
 {% set siteTitle = "Check if you can apply for a Farming Transformation Fund water grant" %}
 {% block pageTitle %}
   {{siteTitle}}
@@ -45,13 +47,13 @@
   html: '<h2 class="govuk-visually-hidden">Support links</h2>
           <ul class="govuk-footer__inline-list">
             <li class="govuk-footer__inline-list-item">
-              <a class="govuk-footer__link" href="./accessibility" target="_blank" rel="noopener noreferrer">
+              <a class="govuk-footer__link" href="productivity/accessibility" target="_blank" rel="noopener noreferrer">
                 Accessibility
               </a>
             </li>
 
             <li class="govuk-footer__inline-list-item">
-              <a class="govuk-footer__link" href="./cookies" target="_blank" rel="noopener noreferrer">
+              <a class="govuk-footer__link" href="productivity/cookies" target="_blank" rel="noopener noreferrer">
                 Cookies
               </a>
             </li>
@@ -60,7 +62,7 @@
                 Feedback
               </a>
             </li>
-            
+
             <li class="govuk-footer__inline-list-item">
               <a class="govuk-footer__link" href="https://www.gov.uk/government/organisations/rural-payments-agency/about/personal-information-charter" target="_blank" rel="noopener noreferrer">
                 Privacy
