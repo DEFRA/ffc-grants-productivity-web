@@ -9,17 +9,18 @@ async function createServer () {
   const server = Hapi.server({
     port: process.env.PORT
   })
-  
+
+  await server.register(inert)
+  await server.register(vision)
   const routes = [].concat(
     require('./routes/healthy'),
     require('./routes/healthz'),
     require('./routes/start'),
-    ...require('./routes/index')
+    require('./routes/assets'),
+    ...require('./routes')
   )
   console.log(routes)
   server.route(routes)
-  await server.register(inert)
-  await server.register(vision)
 
   server.views({
     engines: {

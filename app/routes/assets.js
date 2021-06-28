@@ -1,6 +1,6 @@
 module.exports = {
   method: 'GET',
-  path: 'productivity/assets/{path*}',
+  path: '/productivity/assets/{path*}',
   options: {
     handler: {
       directory: {

@@ -56,9 +56,10 @@ module.exports = {
     ]
   },
   output: {
-    filename: 'js/bundle.[hash].js',
+    filename: 'js/bundle.[fullhash].js',
     path: path.resolve(__dirname, 'app/assets/dist'),
-    publicPath: '/assets/'
+    clean: true,
+    publicPath: 'assets/'
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -68,7 +69,7 @@ module.exports = {
       template: 'app/assets/src/layout.njk'
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/application.[hash].css'
+      filename: 'css/application.[fullhash].css'
     })
   ]
 }
