@@ -1,4 +1,4 @@
-const qb = require('../config/question-bank')
+const questionBank = require('../config/question-bank')
 
 function isChecked (data, option) {
   return !!data && data.includes(option)
@@ -24,9 +24,9 @@ function setLabelData (data, labelData) {
     }
   })
 }
-const getSingleAnswer = (question) => {
+const radioButtons = (question) => {
   return {
-    classes: 'govuk-radios--inline',
+    classes: question.classes,
     idPrefix: question.key,
     name: question.key,
     fieldset: {
@@ -36,62 +36,62 @@ const getSingleAnswer = (question) => {
         classes: 'govuk-fieldset__legend--l'
       }
     },
-    items: setLabelData(null, question.answers.map(x => x.value))
+    items: setLabelData(null, question.answers.map(answer => answer.value))
   }
 }
-const geMultiAnswer = (question) => {
+const checkBoxes = (question) => {
   // TODO:
   return { }
 }
-const getAnswerData = (question) => {
+const getOptions = (question) => {
   switch (question.type) {
     case 'single-answer':
-      return getSingleAnswer(question)
+      return radioButtons(question)
     case 'multi-answer':
-      return geMultiAnswer(question)
+      return checkBoxes(question)
     default:
-      return getSingleAnswer(question)
+      return radioButtons(question)
   }
 }
 const getModel = (question) => {
   const model = {
     type: question.type,
     backLink: question.backLink,
-    items: getAnswerData(question)
+    items: getOptions(question)
   }
   console.log(model)
   return model
 }
-const getHandler = (q) => {
+const getHandler = (question) => {
   return (request, h) => {
-    return h.view('page', getModel(q))
+    return h.view('page', getModel(question))
   }
 }
 const drawSectionGetRequests = (section) => {
-  return section.questions.map(q => {
+  return section.questions.map(question => {
     return {
       method: 'GET',
-      path: `/productivity/${q.url}`,
-      handler: getHandler(q)
+      path: `/productivity/${question.url}`,
+      handler: getHandler(question)
     }
   })
 }
-const getPostHandler = (q, nextq) => {
+const getPostHandler = (question, nextQuestion) => {
   return (request, h) => {
-    console.log(q.key, request.payload, 'setYarKkey')
-    return h.view('page', getModel(nextq ?? q))
+    console.log(question.key, request.payload, 'setYarKkey')
+    return h.view('page', getModel(nextQuestion ?? question))
   }
 }
 const drawSectionPostRequests = (section) => {
-  return section.questions.map((q, i, arr) => {
+  return section.questions.map((question, i, arr) => {
     return {
       method: 'POST',
-      path: `/productivity/${q.url}`,
-      handler: getPostHandler(q, arr.filter(x => x.order === q.order + 1)[0])
+      path: `/productivity/${question.url}`,
+      handler: getPostHandler(question, arr.filter(x => x.order === question.order + 1)[0])
     }
   })
 }
-let pages = qb.sections.map(x => drawSectionGetRequests(x))
-pages = [...pages, ...qb.sections.map(x => drawSectionPostRequests(x))]
+let pages = questionBank.sections.map(section => drawSectionGetRequests(section))
+pages = [...pages, ...questionBank.sections.map(section => drawSectionPostRequests(section))]
 
 module.exports = pages
