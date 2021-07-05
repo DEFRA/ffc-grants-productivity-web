@@ -15,7 +15,7 @@ module.exports = {
       title: 'Eligibility',
       questions: [
         {
-          key: 'Q1',
+          key: 'farming-type',
           order: 1,
           title: 'What crops are you growing?',
           pageTitle: 'Crops',
@@ -63,10 +63,11 @@ module.exports = {
               value: 'None of the above',
               isCorrect: false
             }
-          ]
+          ],
+          yarKey: 'farming-type'
         },
         {
-          key: 'Q2',
+          key: 'tenancy',
           order: 2,
           title: 'Is the planned project on land the farm business owns?',
           pageTitle: '',
@@ -100,7 +101,9 @@ module.exports = {
               value: 'No',
               isCorrect: true
             }
-          ]
+          ],
+          yarKey: 'tenancy'
+
         }
       ]
     }

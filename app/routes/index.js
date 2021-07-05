@@ -1,4 +1,5 @@
 const questionBank = require('../config/question-bank')
+const { setYarValue, getYarValue } = require('../helpers/session')
 
 function isChecked (data, option) {
   return !!data && data.includes(option)
@@ -78,8 +79,11 @@ const drawSectionGetRequests = (section) => {
 }
 const getPostHandler = (question, nextQuestion) => {
   return (request, h) => {
-    console.log(question.key, request.payload, 'setYarKkey')
-    return h.view('page', getModel(nextQuestion ?? question))
+    question.yarKey = request.payload
+    console.log(question.yarKey, request.payload, 'setYarKkeyoooooooooooo') // set yar key
+
+    setYarValue(request, question.key, question.yarKey)
+    return h.redirect(nextQuestion.url)
   }
 }
 const drawSectionPostRequests = (section) => {
