@@ -80,9 +80,7 @@ const drawSectionGetRequests = (section) => {
 const getPostHandler = (question, nextQuestion) => {
   return (request, h) => {
     question.yarKey = request.payload
-    console.log(question.yarKey, request.payload, 'setYarKkeyoooooooooooo') // set yar key
-
-    setYarValue(request, question.key, question.yarKey)
+    // setYarValue(request, question.key, question.yarKey)
     return h.redirect(nextQuestion.url)
   }
 }

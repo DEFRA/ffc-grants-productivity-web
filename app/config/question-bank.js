@@ -21,7 +21,7 @@ module.exports = {
           pageTitle: 'Crops',
           backLink: 'start',
           url: 'farming-type',
-          eliminationAnswerKeys: ['Q1-A5'],
+          eliminationAnswerKeys: ['farming-type-A5'],
           ineligibleContent: { heading: '', message: '', link: '' },
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
@@ -39,22 +39,22 @@ module.exports = {
           ],
           answers: [
             {
-              key: 'Q1-A1',
+              key: 'farming-type-A1',
               value: 'Change water source',
               isCorrect: true
             },
             {
-              key: 'Q1-A2',
+              key: 'farming-type-A2',
               value: 'Improve irrigation efficiency',
               isCorrect: true
             },
             {
-              key: 'Q1-A3',
+              key: 'farming-type-A3',
               value: 'Introduce Irrigation',
               isCorrect: true
             },
             {
-              key: 'Q1-A4',
+              key: 'farming-type-A4',
               value: 'Increase Irrigation',
               isCorrect: true
             },
@@ -92,17 +92,55 @@ module.exports = {
           ],
           answers: [
             {
-              key: 'Q2-A1',
+              key: 'tenancy-A1',
               value: 'Yes',
               isCorrect: true
             },
             {
-              key: 'Q2-A2',
+              key: 'tenancy-A2',
               value: 'No',
               isCorrect: true
             }
           ],
           yarKey: 'tenancy'
+        },
+        {
+          key: 'tenancy-length',
+          order: 3,
+          title: 'Is the planned project on land with a tenancy agreement in place until 2026 or after?',
+          pageTitle: '',
+          url: 'tenancy-length',
+          backLink: 'tenancy',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: 'Improving productivity',
+          type: 'single-answer',
+          classes: 'govuk-radios--inline',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          ga: { dimension: 'CD1', value: 'AnswerValue' },
+          sidebar: { heading: '', para: '', link: '', items: [] },
+          validations: [
+            {
+              type: 'answerCount',
+              error: 'Select only 2 options',
+              regEx: '',
+              dependentAnswerKey: 'Q1-A1'
+            }
+          ],
+          answers: [
+            {
+              key: 'tenancy-length-A1',
+              value: 'Yes',
+              isCorrect: true
+            },
+            {
+              key: 'tenancy-length-A2',
+              value: 'No',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'tenancy-length'
 
         }
       ]
