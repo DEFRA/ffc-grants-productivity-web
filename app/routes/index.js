@@ -60,7 +60,6 @@ const getModel = (question) => {
     backLink: question.backLink,
     items: getOptions(question)
   }
-  console.log(model)
   return model
 }
 const getHandler = (question) => {
@@ -79,8 +78,8 @@ const drawSectionGetRequests = (section) => {
 }
 const getPostHandler = (question, nextQuestion) => {
   return (request, h) => {
-    question.yarKey = request.payload
-    // setYarValue(request, question.key, question.yarKey)
+    // question.yarKey = request.payload
+    setYarValue(request, question.key, 'dummy data')
     return h.redirect(nextQuestion.url)
   }
 }
