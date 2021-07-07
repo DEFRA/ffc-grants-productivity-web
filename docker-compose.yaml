@@ -3,11 +3,11 @@ version: '3.8'
 services:
   ffc-grants-productivity-web:
     build:
+      context: .
       target: production
-    image: ffc-grants-productivity-web
-    container_name: ffc-grants-productivity-web
-    
+    image: ffc-grants-productivity-web    
     environment: 
+      NODE_ENV: production
       REDIS_HOSTNAME: redis
       REDIS_PORT: 6379
       REDIS_PARTITION: ffc-grants-productivity

@@ -11,7 +11,8 @@ services:
     depends_on:
       - redis
     image: ffc-grants-productivity-web-development
-    container_name: ffc-grants-productivity-web-development
+    environment:
+      NODE_ENV: development
     ports:
       - "3000:3000"
       - "9229:9229"
