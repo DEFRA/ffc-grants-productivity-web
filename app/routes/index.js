@@ -79,11 +79,11 @@ const drawSectionGetRequests = (section) => {
     }
   })
 }
-const getPostHandler = (currentQuestion, nextQuestion) => {
+const getPostHandler = (currentQuestion, nextUrl) => {
   return (request, h) => {
     currentQuestion.yarKey = request.payload
     // setYarValue(request, question.key, question.yarKey)
-    return h.redirect(nextQuestion.url)
+    return h.redirect(nextUrl)
   }
 }
 const drawSectionPostRequests = (section) => {
