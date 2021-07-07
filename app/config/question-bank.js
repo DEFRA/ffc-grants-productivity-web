@@ -158,7 +158,7 @@ module.exports = {
           maxAnswerCount: 1,
           ga: { dimension: 'CD1', value: 'AnswerValue' },
           sidebar:
-            { heading: 'Ellie', content: 'Hellooo', classes: '' },
+            { heading: 'test', content: 'testing', classes: '' },
           validations: [
             {
               type: 'answerCount',
