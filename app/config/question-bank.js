@@ -28,7 +28,7 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: 'CD1', value: 'AnswerValue' },
-          sidebar: { heading: '', para: '', items: '' },
+          sidebar: { heading: '', para: '', items: [] },
           validations: [
             {
               type: 'answerCount',
@@ -81,7 +81,7 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: 'CD1', value: 'AnswerValue' },
-          sidebar: { heading: '', para: '', items: '' },
+          sidebar: { heading: '', para: '', items: [] },
           validations: [
             {
               type: 'answerCount',
@@ -119,7 +119,7 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: 'CD1', value: 'AnswerValue' },
-          sidebar: { heading: '', para: '', items: '' },
+          sidebar: { heading: '', para: '', items: [] },
           validations: [
             {
               type: 'answerCount',
@@ -158,7 +158,7 @@ module.exports = {
           maxAnswerCount: 1,
           ga: { dimension: 'CD1', value: 'AnswerValue' },
           sidebar:
-            { heading: '', para: '', items: '' },
+            { heading: '', para: '', items: [] },
           validations: [
             {
               type: 'answerCount',
