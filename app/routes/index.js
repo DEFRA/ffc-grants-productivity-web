@@ -87,11 +87,11 @@ const getPostHandler = (currentQuestion, nextQuestion) => {
   }
 }
 const drawSectionPostRequests = (section) => {
-  return section.questions.map((currentQuestion, index, arryOfQuestions) => {
+  return section.questions.map((question) => {
     return {
       method: 'POST',
-      path: `/productivity/${currentQuestion.url}`,
-      handler: getPostHandler(currentQuestion, arryOfQuestions[index + 1])
+      path: `/productivity/${question.url}`,
+      handler: getPostHandler(question, question.nextUrl)
     }
   })
 }
