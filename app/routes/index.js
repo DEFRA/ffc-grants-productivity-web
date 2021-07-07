@@ -1,5 +1,5 @@
 const questionBank = require('../config/question-bank')
-const { setYarValue, getYarValue } = require('../helpers/session')
+const { setYarValue } = require('../helpers/session')
 
 function isChecked (data, option) {
   return !!data && data.includes(option)

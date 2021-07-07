@@ -24,6 +24,9 @@ container:
   port: 3000
   redisHostname: redis
   redisPassword: redis
+  redisPort: 6379
+  redisPartition: ffc-grants-productivity-web
+  sessionCacheTTL: 3600000
 
 livenessProbe:
   path: /healthz

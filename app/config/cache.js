@@ -3,12 +3,26 @@ const Joi = require('joi')
 // Define config schema
 const schema = Joi.object({
   useRedis: Joi.bool().default(false),
-  expiresIn: Joi.number().default(3600 * 1000) // 1 hour
+  expiresIn: Joi.number().default(3600 * 1000), // 1 hour
+  catboxOptions: Joi.object({
+    host: Joi.string().required(),
+    port: Joi.string().required(),
+    password: Joi.string().allow(''),
+    partition: Joi.string().required(),
+    tls: Joi.object()
+  })
 })
 
 const config = {
   useRedis: process.env.NODE_ENV !== 'test',
-  expiresIn: process.env.SESSION_CACHE_TTL
+  expiresIn: process.env.SESSION_CACHE_TTL,
+  catboxOptions: {
+    host: process.env.REDIS_HOSTNAME,
+    port: process.env.REDIS_PORT,
+    password: process.env.REDIS_PASSWORD,
+    partition: process.env.REDIS_PARTITION,
+    tls: process.env.NODE_ENV === 'production' ? {} : undefined
+  }
 }
 
 // Validate config
