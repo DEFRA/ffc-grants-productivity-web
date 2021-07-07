@@ -55,18 +55,11 @@ const getOptions = (question) => {
       return radioButtons(question)
   }
 }
-const sideBar = (question) => {
-  return {
-    title: question.sidebar.heading,
-    content: question.sidebar.content,
-    classes: question.sidebar.classes
-  }
-}
+
 const getModel = (question) => {
   const model = {
     type: question.type,
     backLink: question.backLink,
-    sidebar: sideBar(question),
     items: getOptions(question)
   }
   console.log(model)
