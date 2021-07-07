@@ -28,7 +28,7 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: 'CD1', value: 'AnswerValue' },
-          sidebar: { heading: '', para: '', link: '', items: [] },
+          sidebar: { heading: '', content: '', classes: '' },
           validations: [
             {
               type: 'answerCount',
@@ -81,7 +81,7 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: 'CD1', value: 'AnswerValue' },
-          sidebar: { heading: '', para: '', link: '', items: [] },
+          sidebar: { heading: '', content: '', classes: '' },
           validations: [
             {
               type: 'answerCount',
@@ -119,7 +119,7 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: 'CD1', value: 'AnswerValue' },
-          sidebar: { heading: '', para: '', link: '', items: [] },
+          sidebar: { heading: '', content: '', classes: '' },
           validations: [
             {
               type: 'answerCount',
@@ -141,6 +141,55 @@ module.exports = {
             }
           ],
           yarKey: 'tenancy-length'
+
+        },
+        {
+          key: 'tenancy-length',
+          order: 4,
+          title: 'Does the project have planning permission?',
+          pageTitle: '',
+          url: 'planning-permission',
+          backLink: 'tenancy-length',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: 'Improving productivity',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          ga: { dimension: 'CD1', value: 'AnswerValue' },
+          sidebar:
+            { heading: 'Ellie', content: 'Hellooo', classes: '' },
+          validations: [
+            {
+              type: 'answerCount',
+              error: 'Select only 2 options',
+              regEx: '',
+              dependentAnswerKey: 'Q1-A1'
+            }
+          ],
+          answers: [
+            {
+              key: 'planning-permission-A1',
+              value: 'Not needed',
+              isCorrect: true
+            },
+            {
+              key: 'planning-permission-A2',
+              value: 'Secured',
+              isCorrect: true
+            },
+            {
+              key: 'planning-permission-A2',
+              value: 'Expected to have by 31 December 2021',
+              isCorrect: true
+            },
+            {
+              key: 'planning-permission-A2',
+              value: 'Will not have by 31 December 2021',
+              isCorrect: false
+            }
+          ],
+          yarKey: 'planning-permission'
 
         }
       ]
