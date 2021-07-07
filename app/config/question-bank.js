@@ -28,7 +28,7 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: 'CD1', value: 'AnswerValue' },
-          sidebar: { heading: '', content: '', classes: '' },
+          sidebar: { heading: '', para: '', items: '' },
           validations: [
             {
               type: 'answerCount',
@@ -74,14 +74,14 @@ module.exports = {
           url: 'tenancy',
           backLink: 'farming-type',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligiblepara: { heading: '', message: '', link: '' },
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
           classes: 'govuk-radios--inline',
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: 'CD1', value: 'AnswerValue' },
-          sidebar: { heading: '', content: '', classes: '' },
+          sidebar: { heading: '', para: '', items: '' },
           validations: [
             {
               type: 'answerCount',
@@ -119,7 +119,7 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: 'CD1', value: 'AnswerValue' },
-          sidebar: { heading: '', content: '', classes: '' },
+          sidebar: { heading: '', para: '', items: '' },
           validations: [
             {
               type: 'answerCount',
@@ -158,7 +158,7 @@ module.exports = {
           maxAnswerCount: 1,
           ga: { dimension: 'CD1', value: 'AnswerValue' },
           sidebar:
-            { heading: 'test', content: 'testing', classes: '' },
+            { heading: '', para: '', items: '' },
           validations: [
             {
               type: 'answerCount',
