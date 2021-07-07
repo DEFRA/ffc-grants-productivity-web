@@ -38,6 +38,7 @@ const radioButtons = (question) => {
       }
     },
     items: setLabelData(null, question.answers.map(answer => answer.value))
+
   }
 }
 const checkBoxes = (question) => {
@@ -54,6 +55,7 @@ const getOptions = (question) => {
       return radioButtons(question)
   }
 }
+
 const getModel = (question) => {
   const model = {
     type: question.type,
@@ -77,19 +79,19 @@ const drawSectionGetRequests = (section) => {
     }
   })
 }
-const getPostHandler = (question, nextQuestion) => {
+const getPostHandler = (currentQuestion, nextUrl) => {
   return (request, h) => {
-    question.yarKey = request.payload
+    currentQuestion.yarKey = request.payload
     // setYarValue(request, question.key, question.yarKey)
-    return h.redirect(nextQuestion.url)
+    return h.redirect(nextUrl)
   }
 }
 const drawSectionPostRequests = (section) => {
-  return section.questions.map((question, i, arr) => {
+  return section.questions.map((question) => {
     return {
       method: 'POST',
       path: `/productivity/${question.url}`,
-      handler: getPostHandler(question, arr.filter(x => x.order === question.order + 1)[0])
+      handler: getPostHandler(question, question.nextUrl)
     }
   })
 }

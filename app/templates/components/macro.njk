@@ -2,16 +2,40 @@
   <input type="hidden" name="crumb" id="crumb"
          value="{{ crumb }}"  autocomplete="off" />
 {% endmacro %}
+
 {% macro sideBar(heading, para, items) %}
- <div style="padding-top:9px; border-top: 2px solid #1d70b8;">
-        <h2 class="govuk-heading-m" id="subsection-title">
-          {{ heading }}
-        </h2>        
-          <p>{{para  | striptags(true) | escape | nl2br }}</p>
-            <ul class="govuk-list govuk-list--bullet">
-              {% for item in items %}
-                <li>{{ item }}</li>
-              {% endfor %}
-            </ul>
-      </div>
+  <div class="govuk-grid-column-one-third  govuk-!-padding-top-4 govuk-body">
+  <hr class="sideBarColor"/>
+    <h2 class="govuk-heading-m" id="subsection-title">
+      {{ heading }}
+    </h2>        
+    <p>{{para  | striptags(true) | escape | nl2br }}</p>
+    <ul class="govuk-list govuk-list--bullet">
+      {% for item in items %}
+        <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endmacro %}
+
+{% macro multiSideBar(sideBars) %}
+  <div class="govuk-grid-column-one-third  govuk-!-padding-top-4 govuk-body">
+    <hr class="sideBarColor"/>
+
+    {% for sidebar in sideBars %}
+      <h2 class="govuk-heading-m" id="subsection-title">
+        {{ sidebar.heading }}
+      </h2>
+
+      {% for content in sidebar.content %}
+        <p>{{content.para  | striptags(true) | escape | nl2br }}</p>
+        <ul class="govuk-list govuk-list--bullet">
+          {% for item in content.items %}
+            <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      {% endfor %}
+    {% endfor %}
+
+  </div>
 {% endmacro %}
