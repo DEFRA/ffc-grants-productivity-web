@@ -9,6 +9,10 @@ labels: {}
 containerConfigMap:
   name: ffc-grants-productivity-web-config-map
 
+containerSecret:
+  name: ffc-grants-productivity-web-container-secret
+  type: Opaque
+
 deployment:
   restartPolicy: Always
   priorityClassName: default
