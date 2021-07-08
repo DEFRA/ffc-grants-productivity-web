@@ -1,5 +1,5 @@
 const questionBank = require('../config/question-bank')
-const { setYarValue } = require('../helpers/session')
+const { setYarValue, getYarValue } = require('../helpers/session')
 
 function isChecked (data, option) {
   return !!data && data.includes(option)
@@ -25,11 +25,11 @@ function setLabelData (data, labelData) {
     }
   })
 }
-const radioButtons = (question) => {
+const radioButtons = (data, question) => {
   return {
     classes: question.classes,
-    idPrefix: question.key,
-    name: question.key,
+    idPrefix: question.yarKey,
+    name: question.yarKey,
     fieldset: {
       legend: {
         text: question.title,
@@ -37,7 +37,7 @@ const radioButtons = (question) => {
         classes: 'govuk-fieldset__legend--l'
       }
     },
-    items: setLabelData(null, question.answers.map(answer => answer.value))
+    items: setLabelData(data, question.answers.map(answer => answer.value))
 
   }
 }
@@ -45,28 +45,29 @@ const checkBoxes = (question) => {
   // TODO:
   return { }
 }
-const getOptions = (question) => {
+const getOptions = (data, question) => {
   switch (question.type) {
     case 'single-answer':
-      return radioButtons(question)
+      return radioButtons(data, question)
     case 'multi-answer':
-      return checkBoxes(question)
+      return checkBoxes(data, question)
     default:
-      return radioButtons(question)
+      return radioButtons(data, question)
   }
 }
 
-const getModel = (question) => {
+const getModel = (data, question) => {
   const model = {
     type: question.type,
     backLink: question.backLink,
-    items: getOptions(question)
+    items: getOptions(data, question)
   }
   return model
 }
 const getHandler = (question) => {
   return (request, h) => {
-    return h.view('page', getModel(question))
+    const data = getYarValue(request, question.yarKey) || null
+    return h.view('page', getModel(data, question))
   }
 }
 const drawSectionGetRequests = (section) => {
@@ -80,8 +81,8 @@ const drawSectionGetRequests = (section) => {
 }
 const getPostHandler = (currentQuestion, nextUrl) => {
   return (request, h) => {
-    currentQuestion.yarKey = request.payload
-    // setYarValue(request, question.key, question.yarKey)
+    const value = request.payload[Object.keys(request.payload)[0]]
+    setYarValue(request, currentQuestion.yarKey, value)
     return h.redirect(nextUrl)
   }
 }
