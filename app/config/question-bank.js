@@ -16,26 +16,23 @@ module.exports = {
       questions: [
         {
           key: 'project-subject',
-          order: 1,
+          order: 10,
           title: 'What is your project about?',
-          pageTitle: 'Crops',
+          pageTitle: '',
           backLink: 'start',
           nextUrl: 'legal-status',
           url: 'project-subject',
-          eliminationAnswerKeys: ['project-subject-A5'],
-          ineligibleContent: { heading: '', message: '', link: '' },
-          fundingPriorities: 'Improving productivity',
           type: 'single-answer',
           minAnswerCount: 1,
           maxAnswerCount: 1,
-          ga: { dimension: 'CD1', value: 'AnswerValue' },
+          ga: { dimension: '', value: '' },
           sidebar: { heading: '', para: '', items: [] },
           validations: [
             {
-              type: 'answerCount',
-              error: 'Select only 2 options',
+              type: '',
+              error: '',
               regEx: '',
-              dependentAnswerKey: 'Q1-A1'
+              dependentAnswerKey: ''
             }
           ],
           answers: [
@@ -50,30 +47,30 @@ module.exports = {
               isCorrect: true
             }
           ],
-          yarKey: 'project-subject'
+          yarKey: 'projectSubject'
         },
         {
           key: 'legal-status',
-          order: 2,
+          order: 20,
           title: 'What is your project about?',
-          pageTitle: 'Crops',
+          pageTitle: '',
           backLink: 'project-subject',
           nextUrl: 'country',
           url: 'legal-status',
-          eliminationAnswerKeys: ['legal-status-A5'],
+          eliminationAnswerKeys: [''],
           ineligibleContent: { heading: '', message: '', link: '' },
-          fundingPriorities: 'Improving productivity',
+          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
           maxAnswerCount: 1,
-          ga: { dimension: 'CD1', value: 'AnswerValue' },
+          ga: { dimension: '', value: '' },
           sidebar: { heading: '', para: '', items: [] },
           validations: [
             {
-              type: 'answerCount',
-              error: 'Select only 2 options',
+              type: '',
+              error: '',
               regEx: '',
-              dependentAnswerKey: 'Q1-A1'
+              dependentAnswerKey: ''
             }
           ],
           answers: [
@@ -140,33 +137,33 @@ module.exports = {
             {
               key: 'legal-status-A13',
               value: 'None of the above',
-              isCorrect: true
+              isCorrect: false
             }
           ],
-          yarKey: 'legal-status'
+          yarKey: 'legalStatus'
         },
         {
           key: 'country',
-          order: 3,
+          order: 30,
           title: 'Is the planned project in England?',
-          pageTitle: 'Crops',
+          pageTitle: '',
           backLink: 'legal-status',
           nextUrl: 'planning-permission',
           url: 'country',
-          eliminationAnswerKeys: ['country-A5'],
+          eliminationAnswerKeys: [''],
           ineligibleContent: { heading: '', message: '', link: '' },
-          fundingPriorities: 'Improving productivity',
+          fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
           maxAnswerCount: 1,
-          ga: { dimension: 'CD1', value: 'AnswerValue' },
+          ga: { dimension: '', value: '' },
           sidebar: { heading: '', para: '', items: [] },
           validations: [
             {
-              type: 'answerCount',
-              error: 'Select only 2 options',
+              type: '',
+              error: '',
               regEx: '',
-              dependentAnswerKey: 'Q1-A1'
+              dependentAnswerKey: ''
             }
           ],
           answers: [
@@ -185,27 +182,27 @@ module.exports = {
         },
         {
           key: 'planning-permission',
-          order: 4,
+          order: 40,
           title: 'Does the project have planning permission?',
-          pageTitle: 'Crops',
+          pageTitle: '',
           url: 'planning-permission',
           backLink: 'country',
-          nextUrl: 'tenancy-length',
+          nextUrl: 'project-start',
           eliminationAnswerKeys: '',
           ineligibleContent: { heading: '', message: '', link: '' },
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
           minAnswerCount: 1,
           maxAnswerCount: 1,
-          ga: { dimension: 'CD1', value: 'AnswerValue' },
+          ga: { dimension: '', value: '' },
           sidebar:
             { heading: '', para: '', items: [] },
           validations: [
             {
-              type: 'answerCount',
-              error: 'Select only 2 options',
+              type: '',
+              error: '',
               regEx: '',
-              dependentAnswerKey: 'Q1-A1'
+              dependentAnswerKey: ''
             }
           ],
           answers: [
@@ -222,7 +219,7 @@ module.exports = {
             {
               key: 'planning-permission-A2',
               value: 'Expected to have by 31 December 2021',
-              isCorrect: true
+              isCorrect: 'maybe'
             },
             {
               key: 'planning-permission-A2',
@@ -230,7 +227,752 @@ module.exports = {
               isCorrect: false
             }
           ],
-          yarKey: 'planning-permission'
+          yarKey: 'planningPermission'
+        },
+        {
+          key: 'project-start',
+          order: 50,
+          title: 'Have you already started work on the project?',
+          pageTitle: '',
+          url: 'project-start',
+          backLink: 'planning-permission',
+          nextUrl: 'tenancy',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'project-start-A1',
+              value: 'Yes, preparatory work',
+              isCorrect: true
+            },
+            {
+              key: 'project-start-A2',
+              value: 'Yes, we have begun project work',
+              isCorrect: false
+            },
+            {
+              key: 'project-start-A3',
+              value: 'No, we have not done any work on this project yet',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'projectStart'
+
+        },
+        {
+          key: 'tenancy',
+          order: 60,
+          title: 'Is the planned project on land the farm business owns?',
+          pageTitle: '',
+          url: 'tenancy',
+          backLink: 'project-start',
+          nextUrl: 'tenancy-length',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          classes: 'govuk-radios govuk-radios--inline',
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'tenancy-A1',
+              value: 'Yes',
+              isCorrect: true
+            },
+            {
+              key: 'tenancy-A2',
+              value: 'No',
+              isCorrect: false
+            }
+          ],
+          yarKey: 'tenancy'
+        },
+        {
+          key: 'tenancy-length',
+          order: 70,
+          title: 'Do you have a tenancy agreement until 2026 or after?',
+          pageTitle: '',
+          url: 'tenancy-length',
+          backLink: 'tenancy',
+          nextUrl: 'associated-works',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          classes: 'govuk-radios govuk-radios--inline',
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'associated-works-A1',
+              value: 'Yes',
+              isCorrect: true
+            },
+            {
+              key: 'associated-works-A2',
+              value: 'No',
+              isCorrect: false
+            }
+          ],
+          yarKey: 'tenancyLength'
+        },
+        {
+          key: 'tenancy-length-condition',
+          order: 80,
+          title: 'You may be able to apply for a grant from this scheme',
+          pageTitle: '',
+          url: 'enancy-length-condition',
+          backLink: 'tenancy-length',
+          nextUrl: 'associated-works',
+          type: 'single-answer',
+          ga: { dimension: '', value: '' },
+          answers: [
+            {
+              key: 'tenancy-length-condition',
+              value: 'You will need to extend your tenancy agreement before you can complete a full application.',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'tenancyLengthCondition'
+
+        },
+
+        {
+          key: 'associated-works',
+          order: 80,
+          title: 'Which eligible items does your project need?',
+          pageTitle: '',
+          url: 'associated-works',
+          backLink: 'tenancy-length',
+          nextUrl: 'project-cost',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 3,
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'associated-works-A1',
+              value: 'Mild acidification equipment',
+              isCorrect: true
+            },
+            {
+              key: 'associated-works-A2',
+              value: 'Acidification infrastructure',
+              isCorrect: true
+            },
+            {
+              key: 'associated-works-A3',
+              value: 'Slurry pipework',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'associatedWorks'
+
+        },
+        {
+          key: 'project-cost',
+          order: 90,
+          title: 'What is the estimated cost of the items?',
+          pageTitle: '',
+          url: 'project-cost',
+          backLink: 'associated-works',
+          nextUrl: 'grant',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'input',
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'projectCost'
+
+        },
+        {
+          key: 'grant',
+          order: 100,
+          title: 'Potential grant funding',
+          pageTitle: 'Crops',
+          url: 'grant',
+          backLink: 'project-cost',
+          nextUrl: 'remaining-costs',
+          type: 'single-answer',
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          answers: [
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'grant'
+
+        },
+        {
+          key: 'remaining-costs',
+          order: 110,
+          title: 'Can you pay the remaining a costs? ',
+          pageTitle: '',
+          url: 'remaining-costs',
+          backLink: 'grant',
+          nextUrl: 'water-SSSI',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          classes: 'govuk-radios govuk-radios--inline',
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'remaining-costs-A1',
+              value: 'Yes',
+              isCorrect: true
+            },
+            {
+              key: 'remaining-costs-A2',
+              value: 'No',
+              isCorrect: false
+            }
+          ],
+          yarKey: 'remainingCosts'
+
+        },
+        {
+          key: 'water-SSSI',
+          order: 120,
+          title: 'Does the project directly impact a Site of Special Scientific Interest?',
+          pageTitle: '',
+          url: 'water-SSSI',
+          backLink: 'remaining-costs',
+          nextUrl: 'projects-impact',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          classes: 'govuk-radios govuk-radios--inline',
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'water-SSSI-A1',
+              value: 'Yes',
+              isCorrect: true
+            },
+            {
+              key: 'water-SSSI-A2',
+              value: 'No',
+              isCorrect: false
+            }
+          ],
+          yarKey: 'waterSSSI'
+
+        },
+        {
+          key: 'projects-impact',
+          order: 130,
+          title: 'What impact will the project have?',
+          pageTitle: '',
+          url: 'projects-impact',
+          backLink: 'water-SSSI',
+          nextUrl: 'slurry-currently-treated',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'projects-impact-A1',
+              value: 'Increase acidification',
+              nextUrl: '',
+              isCorrect: true
+            },
+            {
+              key: 'projects-impact-A2',
+              value: 'Introduce acidification',
+              nextUrl: '',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'projectsImpact'
+
+        },
+        {
+          key: 'slurry-currently-treated',
+          order: 140,
+          title: 'What volume of digestate do you currently acidify per year?',
+          pageTitle: '',
+          url: 'slurry-currently-treated',
+          backLink: 'projects-impact',
+          nextUrl: 'slurry-to-be-treated',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'input',
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'slurryCurrentlyTreated'
+
+        },
+        {
+          key: 'slurry-to-be-treated',
+          order: 150,
+          title: 'What volume of slurry or digestate will you acidify per year?',
+          pageTitle: '',
+          url: 'slurry-to-be-treated',
+          backLink: 'slurry-currently-treated',
+          nextUrl: 'answers',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'input',
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'slurryToBeTreated'
+
+        },
+        {
+          key: 'answers',
+          order: 160,
+          title: 'Score results',
+          pageTitle: 'Crops',
+          url: 'answers',
+          backLink: 'slurry-to-be-treated',
+          nextUrl: 'business',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'mullti-answer',
+          minAnswerCount: '',
+          maxAnswerCount: '',
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            },
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            },
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            },
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'answers'
+        },
+        {
+          key: 'business',
+          order: 170,
+          title: 'Business details',
+          pageTitle: 'Crops',
+          url: 'business',
+          backLink: 'answers',
+          nextUrl: 'applying',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'multiinput',
+          minAnswerCount: '',
+          maxAnswerCount: '',
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            },
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            },
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            },
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'business'
+        },
+        {
+          key: 'applying',
+          order: 180,
+          title: 'Who is applying for this grant?',
+          pageTitle: '',
+          url: 'applying',
+          backLink: 'business',
+          nextUrl: 'farmer-details',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          classes: 'govuk-radios govuk-radios--inline',
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'applying-A1',
+              value: 'farmer',
+              isCorrect: true
+            },
+            {
+              key: 'applying-A2',
+              value: 'agent',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'applying'
+
+        },
+        {
+          key: 'farmer-details',
+          order: 190,
+          title: 'Farmer’s details',
+          pageTitle: '',
+          url: 'farmer-details',
+          backLink: 'applying',
+          nextUrl: 'check-details',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'multiinput',
+          minAnswerCount: '',
+          maxAnswerCount: '',
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            },
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            },
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            },
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'farmerDetails'
+
+        },
+        {
+          key: 'check-details',
+          order: 200,
+          title: 'Check your details',
+          pageTitle: '',
+          url: 'check-details',
+          backLink: 'farmer-details',
+          nextUrl: 'consent',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            },
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            },
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            },
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'checkDetails'
+
+        },
+        {
+          key: 'consent',
+          order: 210,
+          title: 'Confirm and send',
+          pageTitle: 'Crops',
+          url: 'consent',
+          backLink: 'check-details',
+          nextUrl: 'reference-number',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'consent'
+
+        },
+        {
+          key: 'reference-number',
+          order: 220,
+          title: 'Details submitted',
+          pageTitle: 'Crops',
+          url: 'reference-number',
+          backLink: 'consent',
+          nextUrl: '',
+          eliminationAnswerKeys: '',
+          ineligibleContent: { heading: '', message: '', link: '' },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          ga: { dimension: '', value: '' },
+          sidebar:
+            { heading: '', para: '', items: [] },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: '',
+              value: '',
+              isCorrect: true
+            }
+          ],
+          yarKey: 'referenceNumber'
+
         }
       ]
     }
