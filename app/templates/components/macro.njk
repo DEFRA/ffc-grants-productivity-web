@@ -3,15 +3,15 @@
     value="{{ crumb }}"  autocomplete="off" />
 {% endmacro %}
 
-{% macro sideBar(heading, para, items) %}
+{% macro sideBar(content) %}
   <div class="govuk-grid-column-one-third  govuk-!-padding-top-4 govuk-body">
   <hr class="sideBarColor"/>
     <h2 class="govuk-heading-m" id="subsection-title">
-      {{ heading }}
+      {{ content.heading }}
     </h2>        
-    <p>{{para  | striptags(true) | escape | nl2br }}</p>
+    <p>{{content.para  | striptags(true) | escape | nl2br }}</p>
     <ul class="govuk-list govuk-list--bullet">
-      {% for item in items %}
+      {% for item in content.items %}
         <li>{{ item }}</li>
       {% endfor %}
     </ul>

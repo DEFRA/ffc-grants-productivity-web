@@ -25,6 +25,7 @@ function setLabelData (data, labelData) {
     }
   })
 }
+
 const radioButtons = (data, question) => {
   return {
     classes: question.classes,
@@ -38,9 +39,9 @@ const radioButtons = (data, question) => {
       }
     },
     items: setLabelData(data, question.answers.map(answer => answer.value))
-
   }
 }
+
 const checkBoxes = (data, question) => {
   return {
     classes: question.classes,
@@ -59,6 +60,7 @@ const checkBoxes = (data, question) => {
     items: setLabelData(data, question.answers.map(answer => answer.value))
   }
 }
+
 const getOptions = (data, question) => {
   switch (question.type) {
     case 'single-answer':
@@ -74,7 +76,8 @@ const getModel = (data, question) => {
   const model = {
     type: question.type,
     backLink: question.backLink,
-    items: getOptions(data, question)
+    items: getOptions(data, question),
+    sideBarText: question.sidebar
   }
   return model
 }

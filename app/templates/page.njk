@@ -5,6 +5,7 @@
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "./components/macro.njk" import crumbToken, sideBar %}
 {% from "./components/macro.njk" import crumbToken %}
 
 {% block pageTitle %}
@@ -28,9 +29,11 @@
         {%if type ==='single-answer' %}
           {{ govukRadios(items) }}
         {%endif%}
+
         {%if type ==='multi-answer' %}
           {{ govukCheckboxes(items) }}
         {%endif%}
+
         {%if type ==='input' %}
         {{ govukInput(items) }}
         {%endif%}
@@ -40,5 +43,8 @@
         }) }}
       </form>
     </div>
+    {%if sideBarText %}
+      {{ sideBar(sideBarText) }}
+    {%endif%}
   </div>
 {% endblock %}
