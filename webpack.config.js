@@ -6,12 +6,23 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const isDev = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
 
 console.log(`Running webpack in ${isDev ? 'development' : 'production'} mode`)
-
+const urlPrefix = '/productivity'
 module.exports = {
   entry: './app/assets/src/index.js',
   mode: isDev ? 'development' : 'production',
   module: {
     rules: [
+      {
+        test: /\.js$/,
+        use: {
+          loader: 'string-replace-loader',
+          options: {
+            search: '__URLPREFIX__',
+            replace: urlPrefix,
+            flags: 'g'
+          }
+        }
+      },
       {
         test: /\.s[ac]ss$/i,
         use: [

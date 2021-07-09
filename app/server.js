@@ -4,14 +4,77 @@ const path = require('path')
 const { version } = require('../package.json')
 const vision = require('@hapi/vision')
 const inert = require('@hapi/inert')
+const config = require('./config/server')
+const crumb = require('@hapi/crumb')
+const Uuid = require('uuid')
+const protectiveMonitoringServiceSendEvent = require('./services/protective-monitoring-service')
+const cacheConfig = require('./config/cache')
+const catbox = cacheConfig.useRedis ? require('@hapi/catbox-redis') : require('@hapi/catbox-memory')
 
 async function createServer () {
   const server = Hapi.server({
-    port: process.env.PORT
+    port: process.env.PORT,
+    cache: [{
+      name: 'session',
+      provider: {
+        constructor: catbox,
+        options: cacheConfig.catboxOptions
+      }
+    }]
   })
 
   await server.register(inert)
   await server.register(vision)
+  await server.register({
+    plugin: require('./plugins/header'),
+    options: {
+      keys: [
+        { key: 'X-Frame-Options', value: 'deny' },
+        { key: 'X-Content-Type-Options', value: 'nosniff' },
+        { key: 'Access-Control-Allow-Origin', value: server.info.uri },
+        { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
+        { key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
+        { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
+        { key: 'X-XSS-Protection', value: '1; mode=block' },
+        { key: 'Strict-Transport-Security', value: 'max-age=31536000;' },
+        { key: 'Cache-Control', value: 'no-cache' }
+      ]
+    }
+  })
+  // Session cache redis with yar
+
+  await server.register([
+    {
+      plugin: require('@hapi/yar'),
+      options: {
+        maxCookieSize: cacheConfig.useRedis ? 0 : 1024,
+        storeBlank: true,
+        cache: {
+          cache: 'session',
+          expiresIn: cacheConfig.expiresIn
+        },
+        cookieOptions: {
+          password: config.cookiePassword,
+          isSecure: config.cookieOptions.isSecure,
+          ttl: cacheConfig.expiresIn
+        },
+        customSessionIDGenerator: function (request) {
+          const sessionID = Uuid.v4()
+          protectiveMonitoringServiceSendEvent(request, sessionID, 'FTF-SESSION-CREATED', '0701')
+          return sessionID
+        }
+      }
+    },
+    {
+      plugin: crumb,
+      options: {
+        cookieOptions: {
+          isSecure: config.cookieOptions.isSecure
+        }
+      }
+    }]
+  )
+
   const routes = [].concat(
     require('./routes/healthy'),
     require('./routes/healthz'),

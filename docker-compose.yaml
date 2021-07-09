@@ -5,6 +5,12 @@ services:
     build:
       context: .
       target: production
-    image: ffc-grants-productivity-web
-    container_name: ffc-grants-productivity-web
-    environment: {}
+    image: ffc-grants-productivity-web    
+    environment: 
+      NODE_ENV: production
+      REDIS_HOSTNAME: redis
+      REDIS_PORT: 6379
+      REDIS_PARTITION: ffc-grants-productivity
+      REDIS_PASSWORD: ""
+      SESSION_CACHE_TTL: 3600000      
+      COOKIE_PASSWORD: thisistestcookiepasswordthisistestcookiepasswordthisistestcookiepassword

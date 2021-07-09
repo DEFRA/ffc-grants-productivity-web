@@ -9,6 +9,10 @@ labels: {}
 containerConfigMap:
   name: ffc-grants-productivity-web-config-map
 
+containerSecret:
+  name: ffc-grants-productivity-web-container-secret
+  type: Opaque
+
 deployment:
   restartPolicy: Always
   priorityClassName: default
@@ -22,6 +26,12 @@ container:
   limitMemory: 40Mi
   limitCpu: 40m
   port: 3000
+  redisHostname: redis
+  redisPassword: redis
+  cookiePassword: thisisnotarealpasswordthisisnotarealpassword
+  redisPort: 6379
+  redisPartition: ffc-grants-productivity-web
+  sessionCacheTTL: 3600000
 
 livenessProbe:
   path: /healthz
