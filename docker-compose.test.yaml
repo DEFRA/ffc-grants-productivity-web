@@ -8,11 +8,9 @@ services:
     build:
       target: development
     image: ffc-grants-productivity-web-development
-    container_name: ffc-grants-productivity-web-test
+    environment:
+      NODE_ENV: test
+      GOOGLE_TAG_MANAGER_KEY: 'GTM-WJ5C78H'
     command: npm run test
     volumes:
-      - ./app/:/home/node/app/
-      - ./test/:/home/node/test/
       - ./test-output/:/home/node/test-output/
-      - ./jest.config.js:/home/node/jest.config.js
-      - ./package.json:/home/node/package.json
