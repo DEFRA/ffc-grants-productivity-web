@@ -7,19 +7,21 @@ function isChecked (data, option) {
 
 function setLabelData (data, labelData) {
   return labelData.map((label) => {
-    if (typeof (label) === 'string') {
+    if (typeof (label.value) === 'string') {
       return {
-        value: label,
-        text: label,
-        checked: isChecked(data, label),
-        selected: data === label
+        value: label.value,
+        text: label.value,
+        hint: label.hint,
+        checked: isChecked(data, label.value),
+        selected: data === label.value
       }
     }
 
-    const { text, value } = label
+    const { text, value, hint } = label
     return {
       value,
       text,
+      hint,
       checked: isChecked(data, value),
       selected: data === value
     }
@@ -38,7 +40,7 @@ const radioButtons = (data, question) => {
         classes: 'govuk-fieldset__legend--l'
       }
     },
-    items: setLabelData(data, question.answers.map(answer => answer.value))
+    items: setLabelData(data, question.answers)
   }
 }
 
@@ -55,9 +57,9 @@ const checkBoxes = (data, question) => {
       }
     },
     hint: {
-      text: 'Select one or two options'
+      text: question.hint
     },
-    items: setLabelData(data, question.answers.map(answer => answer.value))
+    items: setLabelData(data, question.answers)
   }
 }
 
