@@ -82,7 +82,7 @@ async function createServer () {
     require('./routes/assets'),
     ...require('./routes')
   )
-  console.log(routes)
+  console.log('[SERVER][GET ALL ROUTES]')
   server.route(routes)
 
   server.views({

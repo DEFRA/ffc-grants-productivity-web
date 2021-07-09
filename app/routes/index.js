@@ -41,9 +41,23 @@ const radioButtons = (data, question) => {
 
   }
 }
-const checkBoxes = (question) => {
-  // TODO:
-  return { }
+const checkBoxes = (data, question) => {
+  return {
+    classes: question.classes,
+    idPrefix: question.yarKey,
+    name: question.yarKey,
+    fieldset: {
+      legend: {
+        text: question.title,
+        isPageHeading: true,
+        classes: 'govuk-fieldset__legend--l'
+      }
+    },
+    hint: {
+      text: 'Select one or two options'
+    },
+    items: setLabelData(data, question.answers.map(answer => answer.value))
+  }
 }
 const getOptions = (data, question) => {
   switch (question.type) {
