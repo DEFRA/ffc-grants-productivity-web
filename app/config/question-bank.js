@@ -26,7 +26,7 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
-          sidebar: { heading: '', para: '', items: [] },
+          sidebar: null,
           validations: [
             {
               type: '',
@@ -291,7 +291,11 @@ module.exports = {
           classes: 'govuk-radios govuk-radios--inline',
           ga: { dimension: '', value: '' },
           sidebar:
-            { heading: '', para: '', items: [] },
+          {
+            heading: 'Eligibility',
+            para: 'The land must be owned or have a tenancy in place until 2026 before starting the project.',
+            items: []
+          },
           validations: [
             {
               type: '',
