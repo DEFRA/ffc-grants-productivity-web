@@ -42,8 +42,6 @@ const radioButtons = (data, question) => {
   }
 }
 const checkBoxes = (data, question) => {
-  console.log('inside check boxes')
-
   return {
     classes: question.classes,
     idPrefix: question.yarKey,
