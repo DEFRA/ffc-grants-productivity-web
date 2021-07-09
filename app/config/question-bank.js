@@ -64,7 +64,11 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
-          sidebar: { heading: '', para: '', items: [] },
+          sidebar: {
+            heading: 'Eligibility',
+            para: 'Public organisations and local authorities cannot apply for this grant.',
+            items: []
+          },
           validations: [
             {
               type: '',
@@ -157,7 +161,11 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
-          sidebar: { heading: '', para: '', items: [] },
+          sidebar: {
+            heading: 'Eligibility',
+            para: 'This grant is only for projects in England. \n \n Scotland, Wales and Northern Ireland have other grants available.',
+            items: []
+          },
           validations: [
             {
               type: '',
@@ -196,7 +204,11 @@ module.exports = {
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
-            { heading: '', para: '', items: [] },
+            {
+              heading: 'Eligibility',
+              para: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
+              items: []
+            },
           validations: [
             {
               type: '',
@@ -245,7 +257,11 @@ module.exports = {
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
-            { heading: '', para: '', items: [] },
+            {
+              heading: 'Eligibility',
+              para: 'You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement.\n \n Before you start the project, you can:',
+              items: ['get quotes from suppliers', 'apply for planning permissions (this can take a long time)']
+            },
           validations: [
             {
               type: '',
@@ -335,7 +351,11 @@ module.exports = {
           classes: 'govuk-radios govuk-radios--inline',
           ga: { dimension: '', value: '' },
           sidebar:
-            { heading: '', para: '', items: [] },
+            {
+              heading: 'Eligibility',
+              para: 'The land must be owned or have a tenancy in place until 2026 before starting the project.',
+              items: []
+            },
           validations: [
             {
               type: '',
@@ -393,9 +413,8 @@ module.exports = {
           type: 'multi-answer',
           minAnswerCount: 1,
           maxAnswerCount: 3,
+          hint: 'The minimum grant you can apply for this project is £35,000 (40% of £87,500). The maximum grant is £1 million.',
           ga: { dimension: '', value: '' },
-          sidebar:
-            { heading: '', para: '', items: [] },
           validations: [
             {
               type: '',
@@ -408,11 +427,13 @@ module.exports = {
             {
               key: 'associated-works-A1',
               value: 'Mild acidification equipment',
+              hint: ['', ''],
               isCorrect: true
             },
             {
               key: 'associated-works-A2',
               value: 'Acidification infrastructure',
+              hint: '',
               isCorrect: true
             },
             {
@@ -438,7 +459,7 @@ module.exports = {
           type: 'input',
           ga: { dimension: '', value: '' },
           sidebar:
-            { heading: '', para: '', items: [] },
+            { heading: 'Items selected', para: '', items: [] },
           validations: [
             {
               type: '',
@@ -467,8 +488,6 @@ module.exports = {
           nextUrl: 'remaining-costs',
           type: 'single-answer',
           ga: { dimension: '', value: '' },
-          sidebar:
-            { heading: '', para: '', items: [] },
           answers: [
             {
               key: '',
@@ -496,7 +515,11 @@ module.exports = {
           classes: 'govuk-radios govuk-radios--inline',
           ga: { dimension: '', value: '' },
           sidebar:
-            { heading: '', para: '', items: [] },
+            {
+              heading: 'Eligibility',
+              para: 'You cannot use public money (for example grant funding from government or local authorities) towards the project costs. \n\n  You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.',
+              items: []
+            },
           validations: [
             {
               type: '',
@@ -536,8 +559,6 @@ module.exports = {
           maxAnswerCount: 1,
           classes: 'govuk-radios govuk-radios--inline',
           ga: { dimension: '', value: '' },
-          sidebar:
-            { heading: '', para: '', items: [] },
           validations: [
             {
               type: '',
@@ -577,7 +598,11 @@ module.exports = {
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
-            { heading: '', para: '', items: [] },
+            {
+              heading: 'Eligibility',
+              para: 'RPA wants to fund projects that:',
+              items: ['improve productivity', 'improve the environment', 'introduce innovation']
+            },
           validations: [
             {
               type: '',
@@ -617,7 +642,11 @@ module.exports = {
           type: 'input',
           ga: { dimension: '', value: '' },
           sidebar:
-            { heading: '', para: '', items: [] },
+          {
+            heading: 'Eligibility',
+            para: 'RPA wants to fund projects that:',
+            items: ['improve productivity', 'improve the environment']
+          },
           validations: [
             {
               type: '',
@@ -650,7 +679,11 @@ module.exports = {
           type: 'input',
           ga: { dimension: '', value: '' },
           sidebar:
-            { heading: '', para: '', items: [] },
+            {
+              heading: 'Eligibility',
+              para: 'RPA wants to fund projects that:',
+              items: ['improve productivity', 'improve the environment', 'introduce innovation ']
+            },
           validations: [
             {
               type: '',
@@ -684,8 +717,6 @@ module.exports = {
           minAnswerCount: '',
           maxAnswerCount: '',
           ga: { dimension: '', value: '' },
-          sidebar:
-            { heading: '', para: '', items: [] },
           validations: [
             {
               type: '',
@@ -733,8 +764,6 @@ module.exports = {
           minAnswerCount: '',
           maxAnswerCount: '',
           ga: { dimension: '', value: '' },
-          sidebar:
-            { heading: '', para: '', items: [] },
           validations: [
             {
               type: '',
@@ -783,8 +812,6 @@ module.exports = {
           maxAnswerCount: 1,
           classes: 'govuk-radios govuk-radios--inline',
           ga: { dimension: '', value: '' },
-          sidebar:
-            { heading: '', para: '', items: [] },
           validations: [
             {
               type: '',
@@ -823,8 +850,6 @@ module.exports = {
           minAnswerCount: '',
           maxAnswerCount: '',
           ga: { dimension: '', value: '' },
-          sidebar:
-            { heading: '', para: '', items: [] },
           validations: [
             {
               type: '',
@@ -873,8 +898,6 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
-          sidebar:
-            { heading: '', para: '', items: [] },
           validations: [
             {
               type: '',
@@ -923,8 +946,6 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
-          sidebar:
-            { heading: '', para: '', items: [] },
           validations: [
             {
               type: '',
@@ -958,8 +979,6 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
-          sidebar:
-            { heading: '', para: '', items: [] },
           validations: [
             {
               type: '',
