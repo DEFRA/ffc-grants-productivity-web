@@ -39,3 +39,24 @@
 
   </div>
 {% endmacro %}
+
+
+{% macro conditionalButtons (showSecondaryButton, buttonText = 'Back to score') %}
+  {{ govukButton({
+      text: "Continue",
+      attributes: {id: "btnContinue"}
+    })
+  }} &nbsp;
+
+  {% if showSecondaryButton %}
+    {{ govukButton({
+        classes: "govuk-button--secondary",
+        text: buttonText,
+        name: "results",
+        value: "results",
+        attributes: {id: buttonText.split(' ').join('-')}
+      })
+    }}
+  {% endif %} 
+
+{% endmacro %}
