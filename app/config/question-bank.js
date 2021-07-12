@@ -23,6 +23,7 @@ module.exports = {
           nextUrl: 'legal-status',
           url: 'project-subject',
           type: 'single-answer',
+          classes: 'govuk-radios govuk-!-margin-top-3',
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
@@ -61,6 +62,7 @@ module.exports = {
           ineligibleContent: { heading: '', message: '', link: '' },
           fundingPriorities: '',
           type: 'single-answer',
+          classes: 'govuk-radios govuk-!-margin-top-3',
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
@@ -158,6 +160,7 @@ module.exports = {
           ineligibleContent: { heading: '', message: '', link: '' },
           fundingPriorities: '',
           type: 'single-answer',
+          classes: 'govuk-radios govuk-!-margin-top-3',
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
@@ -200,6 +203,7 @@ module.exports = {
           ineligibleContent: { heading: '', message: '', link: '' },
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
+          classes: 'govuk-radios govuk-!-margin-top-3',
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
@@ -253,6 +257,7 @@ module.exports = {
           ineligibleContent: { heading: '', message: '', link: '' },
           fundingPriorities: '',
           type: 'single-answer',
+          classes: 'govuk-radios govuk-!-margin-top-3',
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
@@ -302,9 +307,9 @@ module.exports = {
           ineligibleContent: { heading: '', message: '', link: '' },
           fundingPriorities: '',
           type: 'single-answer',
+          classes: 'govuk-radios govuk-radios--inline govuk-!-margin-top-3',
           minAnswerCount: 1,
           maxAnswerCount: 1,
-          classes: 'govuk-radios govuk-radios--inline',
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -348,7 +353,7 @@ module.exports = {
           type: 'single-answer',
           minAnswerCount: 1,
           maxAnswerCount: 1,
-          classes: 'govuk-radios govuk-radios--inline',
+          classes: 'govuk-radios govuk-radios--inline govuk-!-margin-top-3',
           ga: { dimension: '', value: '' },
           sidebar:
             {
@@ -387,6 +392,7 @@ module.exports = {
           backLink: 'tenancy-length',
           nextUrl: 'associated-works',
           type: 'single-answer',
+          classes: 'govuk-radios govuk-!-margin-top-3',
           ga: { dimension: '', value: '' },
           answers: [
             {
@@ -487,6 +493,7 @@ module.exports = {
           backLink: 'project-cost',
           nextUrl: 'remaining-costs',
           type: 'single-answer',
+          lasses: 'govuk-radios',
           ga: { dimension: '', value: '' },
           answers: [
             {
@@ -510,9 +517,9 @@ module.exports = {
           ineligibleContent: { heading: '', message: '', link: '' },
           fundingPriorities: '',
           type: 'single-answer',
+          classes: 'govuk-radios govuk-radios--inline govuk-!-margin-top-3',
           minAnswerCount: 1,
           maxAnswerCount: 1,
-          classes: 'govuk-radios govuk-radios--inline',
           ga: { dimension: '', value: '' },
           sidebar:
             {
@@ -555,9 +562,9 @@ module.exports = {
           ineligibleContent: { heading: '', message: '', link: '' },
           fundingPriorities: '',
           type: 'single-answer',
+          classes: 'govuk-radios govuk-radios--inline  govuk-!-margin-top-3',
           minAnswerCount: 1,
           maxAnswerCount: 1,
-          classes: 'govuk-radios govuk-radios--inline',
           ga: { dimension: '', value: '' },
           validations: [
             {
@@ -594,6 +601,7 @@ module.exports = {
           ineligibleContent: { heading: '', message: '', link: '' },
           fundingPriorities: '',
           type: 'single-answer',
+          classes: 'govuk-radios govuk-!-margin-top-3',
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
@@ -808,9 +816,9 @@ module.exports = {
           ineligibleContent: { heading: '', message: '', link: '' },
           fundingPriorities: '',
           type: 'single-answer',
+          classes: 'govuk-radios govuk-radios--inline govuk-!-margin-top-3',
           minAnswerCount: 1,
           maxAnswerCount: 1,
-          classes: 'govuk-radios govuk-radios--inline',
           ga: { dimension: '', value: '' },
           validations: [
             {
@@ -943,6 +951,7 @@ module.exports = {
           ineligibleContent: { heading: '', message: '', link: '' },
           fundingPriorities: '',
           type: 'single-answer',
+          classes: 'govuk-radios govuk-!-margin-top-3',
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
@@ -976,6 +985,7 @@ module.exports = {
           ineligibleContent: { heading: '', message: '', link: '' },
           fundingPriorities: '',
           type: 'single-answer',
+          classes: 'govuk-radios govuk-!-margin-top-3',
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },

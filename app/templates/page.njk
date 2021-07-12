@@ -25,7 +25,7 @@
 
       <form method="POST" action="{{url}}" novalidate="novalidate">      
         {{ crumbToken(crumb)}}
-
+          
         {%if type ==='single-answer' %}
           {{ govukRadios(items) }}
         {%endif%}
@@ -38,9 +38,11 @@
         {{ govukInput(items) }}
         {%endif%}
         
+        <div class="govuk-!-padding-top-5">
         {{ govukButton({
           text: "Continue"
         }) }}
+        </div>
       </form>
     </div>
     {%if sideBarText %}
