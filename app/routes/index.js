@@ -83,6 +83,19 @@ const getModel = (data, question) => {
   }
   return model
 }
+
+function createModelNotEligible (backUrl, ineligibleContent) {
+  return {
+    backLink: backUrl,
+    messageContent: ineligibleContent.messageContent,
+    insertText: ineligibleContent.insertText,
+    messageLink: {
+      url: ineligibleContent.messageLink,
+      title: 'See other grants you may be eligible for.'
+    }
+  }
+}
+
 const getHandler = (question) => {
   return (request, h) => {
     const data = getYarValue(request, question.yarKey) || null
@@ -102,6 +115,9 @@ const getPostHandler = (currentQuestion, nextUrl) => {
   return (request, h) => {
     const value = request.payload[Object.keys(request.payload)[0]]
     setYarValue(request, currentQuestion.yarKey, value)
+    if (currentQuestion.answers.find(answer => answer.value === value && answer.isEligible === false)) {
+      return h.view('not-eligible', createModelNotEligible(currentQuestion.url, currentQuestion.ineligibleContent))
+    }
     return h.redirect(nextUrl)
   }
 }
