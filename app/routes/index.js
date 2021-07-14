@@ -93,6 +93,7 @@ function createModelNotEligible (backUrl, ineligibleContent) {
       url: ineligibleContent.messageLink.url,
       title: ineligibleContent.messageLink.title
     }
+
   }
 }
 
