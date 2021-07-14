@@ -218,6 +218,10 @@ module.exports = {
               title: 'See other grants you may be eligible for.'
             }
           },
+          maybeEligibleContent: {
+            messageHeader: 'You may be able to apply for a grant from this scheme',
+            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).'
+          },
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
           classes: '',
