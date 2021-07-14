@@ -61,7 +61,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -162,7 +164,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -208,7 +212,7 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: { url: '' }
           },
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
@@ -321,7 +325,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -369,7 +375,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -439,7 +447,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'multi-answer',
@@ -489,7 +499,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'input',
@@ -547,7 +559,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -596,7 +610,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -639,7 +655,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -690,7 +708,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'input',
@@ -731,7 +751,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'input',
@@ -772,7 +794,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'mullti-answer',
@@ -823,7 +847,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'multiinput',
@@ -874,7 +900,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -917,7 +945,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'multiinput',
@@ -969,7 +999,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'multi-answer',
@@ -1021,7 +1053,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -1059,7 +1093,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: ''
+            messageLink: {
+              url: ''
+            }
           },
           fundingPriorities: '',
           type: 'single-answer',
