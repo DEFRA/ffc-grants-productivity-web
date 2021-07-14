@@ -368,7 +368,7 @@ module.exports = {
             {
               key: 'tenancy-A2',
               value: 'No',
-              isEligible: false
+              isEligible: true
             }
           ],
           yarKey: 'tenancy'
@@ -389,6 +389,10 @@ module.exports = {
               url: '',
               title: ''
             }
+          },
+          maybeEligibleContent: {
+            messageHeader: 'You may be able to apply for a grant from this scheme',
+            messageContent: 'You will need to extend your tenancy agreement before you can complete a full application.'
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -419,7 +423,7 @@ module.exports = {
             {
               key: 'associated-works-A2',
               value: 'No',
-              isEligible: false
+              isEligible: 'maybe'
             }
           ],
           yarKey: 'tenancyLength'
