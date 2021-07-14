@@ -212,10 +212,10 @@ module.exports = {
           backLink: 'country',
           nextUrl: 'project-start',
           ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
+            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
             messageLink: {
-              url: '', title: ''
+              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              title: 'See other grants you may be eligible for.'
             }
           },
           fundingPriorities: 'Improving productivity',
