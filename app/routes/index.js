@@ -89,10 +89,7 @@ function createModelNotEligible (backUrl, ineligibleContent) {
     backLink: backUrl,
     messageContent: ineligibleContent.messageContent,
     insertText: ineligibleContent.insertText,
-    messageLink: {
-      url: ineligibleContent.messageLink.url,
-      title: ineligibleContent.messageLink.title
-    }
+    messageLink: ineligibleContent.messageLink
   }
 }
 
