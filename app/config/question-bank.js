@@ -265,7 +265,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
-            messageLink: 'https://www.gov.uk/government/collections/rural-payments-and-grants'
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants'
+            }
           },
           fundingPriorities: '',
           type: 'single-answer',
