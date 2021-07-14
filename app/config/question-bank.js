@@ -40,12 +40,12 @@ module.exports = {
             {
               key: 'project-subject-A1',
               value: 'Robotics and innovation',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'project-subject-A2',
               value: 'Slurry acidification',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'projectSubject'
@@ -58,8 +58,14 @@ module.exports = {
           backLink: 'project-subject',
           nextUrl: 'country',
           url: 'legal-status',
-          eliminationAnswerKeys: [''],
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'single-answer',
           classes: '',
@@ -83,67 +89,67 @@ module.exports = {
             {
               key: 'legal-status-A1',
               value: 'Sole trader',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'legal-status-A2',
               value: 'Partnership',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'legal-status-A3',
               value: 'Limited company',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'legal-status-A4',
               value: 'Ltd Company',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'legal-status-A5',
               value: 'Charity',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'legal-status-A6',
               value: 'Trust',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'legal-status-A7',
               value: 'Limited Liability Partnership',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'legal-status-A8',
               value: 'Community Interest Company',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'legal-status-A9',
               value: 'Limited Partnership',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'legal-status-A10',
               value: 'Industrial and Provident Society',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'legal-status-A11',
               value: 'Co-operative society (Co-Op)',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'legal-status-A12',
               value: 'Community benefit society (BenCom)',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'legal-status-A13',
               value: 'None of the above',
-              isCorrect: false
+              isEligible: false
             }
           ],
           yarKey: 'legalStatus'
@@ -156,8 +162,14 @@ module.exports = {
           backLink: 'legal-status',
           nextUrl: 'planning-permission',
           url: 'country',
-          eliminationAnswerKeys: [''],
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'single-answer',
           classes: '',
@@ -181,12 +193,12 @@ module.exports = {
             {
               key: 'country-A1',
               value: 'Yes',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'country-A2',
               value: 'No',
-              isCorrect: false
+              isEligible: false
             }
           ],
           yarKey: 'country'
@@ -199,8 +211,13 @@ module.exports = {
           url: 'planning-permission',
           backLink: 'country',
           nextUrl: 'project-start',
-          eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '', title: ''
+            }
+          },
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
           classes: '',
@@ -225,22 +242,22 @@ module.exports = {
             {
               key: 'planning-permission-A1',
               value: 'Not needed',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'planning-permission-A2',
               value: 'Secured',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'planning-permission-A2',
               value: 'Expected to have by 31 December 2021',
-              isCorrect: 'maybe'
+              isEligible: 'maybe'
             },
             {
               key: 'planning-permission-A2',
               value: 'Will not have by 31 December 2021',
-              isCorrect: false
+              isEligible: false
             }
           ],
           yarKey: 'planningPermission'
@@ -253,8 +270,14 @@ module.exports = {
           url: 'project-start',
           backLink: 'planning-permission',
           nextUrl: 'tenancy',
-          eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: 'You cannot apply for a grant if you have already started work on the project.',
+            insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
           fundingPriorities: '',
           type: 'single-answer',
           classes: '',
@@ -279,17 +302,17 @@ module.exports = {
             {
               key: 'project-start-A1',
               value: 'Yes, preparatory work',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'project-start-A2',
               value: 'Yes, we have begun project work',
-              isCorrect: false
+              isEligible: false
             },
             {
               key: 'project-start-A3',
               value: 'No, we have not done any work on this project yet',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'projectStart'
@@ -304,7 +327,14 @@ module.exports = {
           backLink: 'project-start',
           nextUrl: 'tenancy-length',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'single-answer',
           classes: 'govuk-radios--inline',
@@ -329,12 +359,12 @@ module.exports = {
             {
               key: 'tenancy-A1',
               value: 'Yes',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'tenancy-A2',
               value: 'No',
-              isCorrect: false
+              isEligible: false
             }
           ],
           yarKey: 'tenancy'
@@ -348,7 +378,14 @@ module.exports = {
           backLink: 'tenancy',
           nextUrl: 'associated-works',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -373,12 +410,12 @@ module.exports = {
             {
               key: 'associated-works-A1',
               value: 'Yes',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'associated-works-A2',
               value: 'No',
-              isCorrect: false
+              isEligible: false
             }
           ],
           yarKey: 'tenancyLength'
@@ -398,7 +435,7 @@ module.exports = {
             {
               key: 'tenancy-length-condition',
               value: 'You will need to extend your tenancy agreement before you can complete a full application.',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'tenancyLengthCondition'
@@ -414,7 +451,14 @@ module.exports = {
           backLink: 'tenancy-length',
           nextUrl: 'project-cost',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
@@ -434,18 +478,18 @@ module.exports = {
               key: 'associated-works-A1',
               value: 'Mild acidification equipment',
               hint: ['', ''],
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'associated-works-A2',
               value: 'Acidification infrastructure',
               hint: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'associated-works-A3',
               value: 'Slurry pipework',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'associatedWorks'
@@ -460,7 +504,14 @@ module.exports = {
           backLink: 'associated-works',
           nextUrl: 'grant',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'input',
           ga: { dimension: '', value: '' },
@@ -478,7 +529,7 @@ module.exports = {
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'projectCost'
@@ -499,7 +550,7 @@ module.exports = {
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'grant'
@@ -514,7 +565,14 @@ module.exports = {
           backLink: 'grant',
           nextUrl: 'water-SSSI',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'single-answer',
           classes: 'govuk-radios--inline',
@@ -539,12 +597,12 @@ module.exports = {
             {
               key: 'remaining-costs-A1',
               value: 'Yes',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'remaining-costs-A2',
               value: 'No',
-              isCorrect: false
+              isEligible: false
             }
           ],
           yarKey: 'remainingCosts'
@@ -559,7 +617,14 @@ module.exports = {
           backLink: 'remaining-costs',
           nextUrl: 'projects-impact',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'single-answer',
           classes: 'govuk-radios--inline',
@@ -578,12 +643,12 @@ module.exports = {
             {
               key: 'water-SSSI-A1',
               value: 'Yes',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'water-SSSI-A2',
               value: 'No',
-              isCorrect: false
+              isEligible: false
             }
           ],
           yarKey: 'waterSSSI'
@@ -598,7 +663,14 @@ module.exports = {
           backLink: 'water-SSSI',
           nextUrl: 'slurry-currently-treated',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'single-answer',
           classes: '',
@@ -624,13 +696,13 @@ module.exports = {
               key: 'projects-impact-A1',
               value: 'Increase acidification',
               nextUrl: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'projects-impact-A2',
               value: 'Introduce acidification',
               nextUrl: '',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'projectsImpact'
@@ -645,7 +717,14 @@ module.exports = {
           backLink: 'projects-impact',
           nextUrl: 'slurry-to-be-treated',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'input',
           ga: { dimension: '', value: '' },
@@ -667,7 +746,7 @@ module.exports = {
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'slurryCurrentlyTreated'
@@ -682,7 +761,14 @@ module.exports = {
           backLink: 'slurry-currently-treated',
           nextUrl: 'answers',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'input',
           ga: { dimension: '', value: '' },
@@ -704,7 +790,7 @@ module.exports = {
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'slurryToBeTreated'
@@ -719,7 +805,14 @@ module.exports = {
           backLink: 'slurry-to-be-treated',
           nextUrl: 'business',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'mullti-answer',
           minAnswerCount: '',
@@ -737,22 +830,22 @@ module.exports = {
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'answers'
@@ -766,7 +859,14 @@ module.exports = {
           backLink: 'answers',
           nextUrl: 'applying',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'multiinput',
           minAnswerCount: '',
@@ -784,22 +884,22 @@ module.exports = {
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'business'
@@ -813,7 +913,14 @@ module.exports = {
           backLink: 'business',
           nextUrl: 'farmer-details',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'single-answer',
           classes: 'govuk-radios--inline',
@@ -832,12 +939,12 @@ module.exports = {
             {
               key: 'applying-A1',
               value: 'farmer',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: 'applying-A2',
               value: 'agent',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'applying'
@@ -852,7 +959,14 @@ module.exports = {
           backLink: 'applying',
           nextUrl: 'check-details',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'multiinput',
           minAnswerCount: '',
@@ -870,22 +984,22 @@ module.exports = {
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'farmerDetails'
@@ -900,7 +1014,14 @@ module.exports = {
           backLink: 'farmer-details',
           nextUrl: 'consent',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
@@ -918,22 +1039,22 @@ module.exports = {
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             },
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'checkDetails'
@@ -948,7 +1069,14 @@ module.exports = {
           backLink: 'check-details',
           nextUrl: 'reference-number',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'single-answer',
           classes: '',
@@ -967,7 +1095,7 @@ module.exports = {
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'consent'
@@ -982,7 +1110,14 @@ module.exports = {
           backLink: 'consent',
           nextUrl: '',
           eliminationAnswerKeys: '',
-          ineligibleContent: { heading: '', message: '', link: '' },
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
           fundingPriorities: '',
           type: 'single-answer',
           classes: '',
@@ -1001,7 +1136,7 @@ module.exports = {
             {
               key: '',
               value: '',
-              isCorrect: true
+              isEligible: true
             }
           ],
           yarKey: 'referenceNumber'
