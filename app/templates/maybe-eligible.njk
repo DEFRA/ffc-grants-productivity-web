@@ -24,6 +24,7 @@
       <p class="govuk-body">{{ messageContent | safe}}</p>
       {{ govukButton({
           text: "Continue",
+          classes: "govuk-!-margin-top-5",
           attributes: {id: "btnContinue"},
           href: nextLink
         }) }}
