@@ -84,12 +84,21 @@ const getModel = (data, question) => {
   return model
 }
 
-function createModelNotEligible (backUrl, ineligibleContent) {
+const createModelNotEligible = (backUrl, ineligibleContent) => {
   return {
     backLink: backUrl,
     messageContent: ineligibleContent.messageContent,
     insertText: ineligibleContent.insertText,
     messageLink: ineligibleContent.messageLink
+  }
+}
+
+const MAYBE_ELIGIBLE = (backUrl, nextPath, maybeEligibleContent) => {
+  return {
+    backLink: backUrl,
+    nextLink: nextPath,
+    messageHeader: maybeEligibleContent.messageHeader,
+    messageContent: maybeEligibleContent.messageContent
   }
 }
 
@@ -114,6 +123,8 @@ const getPostHandler = (currentQuestion, nextUrl) => {
     setYarValue(request, currentQuestion.yarKey, value)
     if (currentQuestion.answers.find(answer => answer.value === value && answer.isEligible === false)) {
       return h.view('not-eligible', createModelNotEligible(currentQuestion.url, currentQuestion.ineligibleContent))
+    } else if (currentQuestion.answers.find(answer => answer.value === value && answer.isEligible === 'maybe')) {
+      return h.view('maybe-eligible', MAYBE_ELIGIBLE(currentQuestion.url, currentQuestion.nextUrl, currentQuestion.maybeEligibleContent))
     }
     return h.redirect(nextUrl)
   }
