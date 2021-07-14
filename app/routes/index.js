@@ -93,7 +93,7 @@ const createModelNotEligible = (backUrl, ineligibleContent) => {
   }
 }
 
-const MAYBE_ELIGIBLE = (backUrl, nextPath, maybeEligibleContent) => {
+const maybeEligible = (backUrl, nextPath, maybeEligibleContent) => {
   return {
     backLink: backUrl,
     nextLink: nextPath,
@@ -124,7 +124,7 @@ const getPostHandler = (currentQuestion, nextUrl) => {
     if (currentQuestion.answers.find(answer => answer.value === value && answer.isEligible === false)) {
       return h.view('not-eligible', createModelNotEligible(currentQuestion.url, currentQuestion.ineligibleContent))
     } else if (currentQuestion.answers.find(answer => answer.value === value && answer.isEligible === 'maybe')) {
-      return h.view('maybe-eligible', MAYBE_ELIGIBLE(currentQuestion.url, currentQuestion.nextUrl, currentQuestion.maybeEligibleContent))
+      return h.view('maybe-eligible', maybeEligible(currentQuestion.url, currentQuestion.nextUrl, currentQuestion.maybeEligibleContent))
     }
     return h.redirect(nextUrl)
   }
