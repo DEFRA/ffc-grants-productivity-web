@@ -91,7 +91,7 @@ function createModelNotEligible (backUrl, ineligibleContent) {
     insertText: ineligibleContent.insertText,
     messageLink: {
       url: ineligibleContent.messageLink.url,
-      title: 'See other grants you may be eligible for.'
+      title: ineligibleContent.messageLink.title
     }
   }
 }

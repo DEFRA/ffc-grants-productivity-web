@@ -62,7 +62,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -165,7 +166,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -212,7 +214,9 @@ module.exports = {
           ineligibleContent: {
             messageContent: '',
             insertText: { text: '' },
-            messageLink: { url: '' }
+            messageLink: {
+              url: '', title: ''
+            }
           },
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
@@ -270,7 +274,8 @@ module.exports = {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
             messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants'
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
             }
           },
           fundingPriorities: '',
@@ -326,7 +331,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -376,7 +382,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -448,7 +455,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -500,7 +508,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -560,7 +569,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -611,7 +621,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -656,7 +667,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -709,7 +721,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -752,7 +765,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -795,7 +809,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -848,7 +863,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -901,7 +917,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -946,7 +963,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -1000,7 +1018,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -1054,7 +1073,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
@@ -1094,7 +1114,8 @@ module.exports = {
             messageContent: '',
             insertText: { text: '' },
             messageLink: {
-              url: ''
+              url: '',
+              title: ''
             }
           },
           fundingPriorities: '',
