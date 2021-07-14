@@ -84,24 +84,6 @@ const getModel = (data, question) => {
   return model
 }
 
-const createModelNotEligible = (backLink, ineligibleContent) => {
-  const { messageContent, insertText, messageLink } = ineligibleContent
-  return {
-    backLink,
-    messageContent,
-    insertText,
-    messageLink
-  }
-}
-
-const maybeEligible = (backLink, nextLink, maybeEligibleContent) => {
-  return {
-    backLink,
-    nextLink,
-    mayBeEligible: maybeEligibleContent
-  }
-}
-
 const getHandler = (question) => {
   return (request, h) => {
     const data = getYarValue(request, question.yarKey) || null
@@ -121,13 +103,16 @@ const drawSectionGetRequests = (section) => {
 
 const getPostHandler = (currentQuestion) => {
   const { yarKey, answers, url, ineligibleContent, nextUrl, maybeEligibleContent } = currentQuestion
+  const MAYBE_ELIGIBLE = { url, nextUrl, maybeEligibleContent }
+  const NOT_ELIGIBLE = { url, ineligibleContent }
+
   return (request, h) => {
     const value = request.payload[Object.keys(request.payload)[0]]
     setYarValue(request, yarKey, value)
 
     if (answers.find(answer => answer.value === value && !answer.isEligible)) {
-      return h.view('not-eligible', createModelNotEligible(url, ineligibleContent))
-    } else if (answers.find(answer => answer.value === value && answer.isEligible === 'maybe')) return h.view('maybe-eligible', maybeEligible(url, nextUrl, maybeEligibleContent))
+      return h.view('not-eligible', NOT_ELIGIBLE)
+    } else if (answers.find(answer => answer.value === value && answer.isEligible === 'maybe')) return h.view('maybe-eligible', MAYBE_ELIGIBLE)
 
     return h.redirect(nextUrl)
   }

@@ -12,7 +12,7 @@
 
 {{ govukBackLink({
   text: "Back",
-  href: backLink,
+  href: url,
   attributes: {id: 'linkBack'}
 }) }}
 
@@ -27,20 +27,20 @@
         {{ messageContent | safe}}
       </p>
 
-      {% if insertText %} 
-        {{ govukInsetText(insertText) }}
+      {% if ineligibleContent.insertText %} 
+        {{ govukInsetText(ineligibleContent.insertText) }}
       {% endif %}
 
-      {% if details %} 
-        {{ govukDetails(details) }}
+      {% if ineligibleContent.details %} 
+        {{ govukDetails(ineligibleContent.details) }}
       {% endif %}
 
-      {% if warning %} 
-        {{ govukWarningText(warning) }}
+      {% if ineligibleContent.warning %} 
+        {{ govukWarningText(ineligibleContent.warning) }}
       {% endif %}
 
-      {% if messageLink %}
-        <p class="govuk-body"><a href="{{messageLink.url}}" class="govuk-link">{{messageLink.title}}</a></p>
+      {% if ineligibleContent.messageLink %}
+        <p class="govuk-body"><a href="{{ineligibleContent.messageLink.url}}" class="govuk-link">{{ineligibleContent.messageLink.title}}</a></p>
       {% endif %}
       
     </div>

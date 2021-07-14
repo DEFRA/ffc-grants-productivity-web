@@ -10,7 +10,7 @@
 {% block beforeContent %}
     {{ govukBackLink({
         text: "Back",
-        href: backLink,
+        href: url,
         attributes: {id: 'linkBack'}
     }) 
     }}
@@ -20,13 +20,13 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {{ crumbToken(crumb)}}
-      <h1 class="govuk-heading-l">{{mayBeEligible.messageHeader}}</h1>
-      <p class="govuk-body">{{ mayBeEligible.messageContent | safe}}</p>
+      <h1 class="govuk-heading-l">{{maybeEligibleContent.messageHeader}}</h1>
+      <p class="govuk-body">{{ maybeEligibleContent.messageContent | safe}}</p>
       {{ govukButton({
           text: "Continue",
           classes: "govuk-!-margin-top-5",
           attributes: {id: "btnContinue"},
-          href: nextLink
+          href: nextUrl
         }) }}
     </div>
   </div>
