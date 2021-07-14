@@ -84,19 +84,20 @@ const getModel = (data, question) => {
   return model
 }
 
-const createModelNotEligible = (backUrl, ineligibleContent) => {
+const createModelNotEligible = (backLink, ineligibleContent) => {
+  const { messageContent, insertText, messageLink } = ineligibleContent
   return {
-    backLink: backUrl,
-    messageContent: ineligibleContent.messageContent,
-    insertText: ineligibleContent.insertText,
-    messageLink: ineligibleContent.messageLink
+    backLink,
+    messageContent,
+    insertText,
+    messageLink
   }
 }
 
-const maybeEligible = (backUrl, nextUrl, maybeEligibleContent) => {
+const maybeEligible = (backLink, nextLink, maybeEligibleContent) => {
   return {
-    backLink: backUrl,
-    nextLink: nextUrl,
+    backLink,
+    nextLink,
     mayBeEligible: maybeEligibleContent
   }
 }
