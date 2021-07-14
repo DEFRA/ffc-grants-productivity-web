@@ -93,12 +93,11 @@ const createModelNotEligible = (backUrl, ineligibleContent) => {
   }
 }
 
-const maybeEligible = (backUrl, nextPath, maybeEligibleContent) => {
+const maybeEligible = (backUrl, nextUrl, maybeEligibleContent) => {
   return {
     backLink: backUrl,
-    nextLink: nextPath,
-    messageHeader: maybeEligibleContent.messageHeader,
-    messageContent: maybeEligibleContent.messageContent
+    nextLink: nextUrl,
+    mayBeEligible: maybeEligibleContent
   }
 }
 
@@ -108,6 +107,7 @@ const getHandler = (question) => {
     return h.view('page', getModel(data, question))
   }
 }
+
 const drawSectionGetRequests = (section) => {
   return section.questions.map(question => {
     return {
@@ -117,27 +117,31 @@ const drawSectionGetRequests = (section) => {
     }
   })
 }
-const getPostHandler = (currentQuestion, nextUrl) => {
+
+const getPostHandler = (currentQuestion) => {
+  const { yarKey, answers, url, ineligibleContent, nextUrl, maybeEligibleContent } = currentQuestion
   return (request, h) => {
     const value = request.payload[Object.keys(request.payload)[0]]
-    setYarValue(request, currentQuestion.yarKey, value)
-    if (currentQuestion.answers.find(answer => answer.value === value && answer.isEligible === false)) {
-      return h.view('not-eligible', createModelNotEligible(currentQuestion.url, currentQuestion.ineligibleContent))
-    } else if (currentQuestion.answers.find(answer => answer.value === value && answer.isEligible === 'maybe')) {
-      return h.view('maybe-eligible', maybeEligible(currentQuestion.url, currentQuestion.nextUrl, currentQuestion.maybeEligibleContent))
-    }
+    setYarValue(request, yarKey, value)
+
+    if (answers.find(answer => answer.value === value && !answer.isEligible)) {
+      return h.view('not-eligible', createModelNotEligible(url, ineligibleContent))
+    } else if (answers.find(answer => answer.value === value && answer.isEligible === 'maybe')) return h.view('maybe-eligible', maybeEligible(url, nextUrl, maybeEligibleContent))
+
     return h.redirect(nextUrl)
   }
 }
+
 const drawSectionPostRequests = (section) => {
   return section.questions.map((question) => {
     return {
       method: 'POST',
       path: `/productivity/${question.url}`,
-      handler: getPostHandler(question, question.nextUrl)
+      handler: getPostHandler(question)
     }
   })
 }
+
 let pages = questionBank.sections.map(section => drawSectionGetRequests(section))
 pages = [...pages, ...questionBank.sections.map(section => drawSectionPostRequests(section))]
 

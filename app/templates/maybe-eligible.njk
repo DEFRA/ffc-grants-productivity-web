@@ -20,8 +20,8 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       {{ crumbToken(crumb)}}
-      <h1 class="govuk-heading-l">{{messageHeader}}</h1>
-      <p class="govuk-body">{{ messageContent | safe}}</p>
+      <h1 class="govuk-heading-l">{{mayBeEligible.messageHeader}}</h1>
+      <p class="govuk-body">{{ mayBeEligible.messageContent | safe}}</p>
       {{ govukButton({
           text: "Continue",
           classes: "govuk-!-margin-top-5",
