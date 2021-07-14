@@ -163,8 +163,8 @@ module.exports = {
           nextUrl: 'planning-permission',
           url: 'country',
           ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
+            messageContent: 'This grant is only for projects in England.',
+            insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' },
             messageLink: {
               url: '',
               title: ''
