@@ -590,11 +590,11 @@ module.exports = {
           nextUrl: 'water-SSSI',
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
+            messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
+            insertText: { text: 'You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.' },
             messageLink: {
-              url: '',
-              title: ''
+              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              title: 'See other grants you may be eligible for.'
             }
           },
           fundingPriorities: '',
