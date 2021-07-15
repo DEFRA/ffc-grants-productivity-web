@@ -529,11 +529,11 @@ module.exports = {
           nextUrl: 'grant',
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
+            messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
+            insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £1 million.' },
             messageLink: {
-              url: '',
-              title: ''
+              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              title: 'See other grants you may be eligible for.'
             }
           },
           fundingPriorities: '',
