@@ -1,0 +1,33 @@
+{% extends '.layout.njk' %}
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "./components/macro.njk" import crumbToken %}
+
+{% block pageTitle %}
+  {{siteTitle}}
+{% endblock %}
+
+{% block beforeContent %}
+    {{ govukBackLink({
+        text: "Back",
+        href: url,
+        attributes: {id: 'linkBack'}
+    }) 
+    }}
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      {{ crumbToken(crumb)}}
+      <h1 class="govuk-heading-l">{{maybeEligibleContent.messageHeader}}</h1>
+      <p class="govuk-body">{{ maybeEligibleContent.messageContent | safe}}</p>
+      {{ govukButton({
+          text: "Continue",
+          classes: "govuk-!-margin-top-5",
+          attributes: {id: "btnContinue"},
+          href: nextUrl
+        }) }}
+    </div>
+  </div>
+{% endblock %}

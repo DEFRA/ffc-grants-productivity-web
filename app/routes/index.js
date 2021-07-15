@@ -84,21 +84,13 @@ const getModel = (data, question) => {
   return model
 }
 
-function createModelNotEligible (backUrl, ineligibleContent) {
-  return {
-    backLink: backUrl,
-    messageContent: ineligibleContent.messageContent,
-    insertText: ineligibleContent.insertText,
-    messageLink: ineligibleContent.messageLink
-  }
-}
-
 const getHandler = (question) => {
   return (request, h) => {
     const data = getYarValue(request, question.yarKey) || null
     return h.view('page', getModel(data, question))
   }
 }
+
 const drawSectionGetRequests = (section) => {
   return section.questions.map(question => {
     return {
@@ -108,25 +100,34 @@ const drawSectionGetRequests = (section) => {
     }
   })
 }
-const getPostHandler = (currentQuestion, nextUrl) => {
+
+const getPostHandler = (currentQuestion) => {
+  const { yarKey, answers, url, ineligibleContent, nextUrl, maybeEligibleContent } = currentQuestion
+  const MAYBE_ELIGIBLE = { url, nextUrl, maybeEligibleContent }
+  const NOT_ELIGIBLE = { url, ineligibleContent }
+
   return (request, h) => {
     const value = request.payload[Object.keys(request.payload)[0]]
-    setYarValue(request, currentQuestion.yarKey, value)
-    if (currentQuestion.answers.find(answer => answer.value === value && answer.isEligible === false)) {
-      return h.view('not-eligible', createModelNotEligible(currentQuestion.url, currentQuestion.ineligibleContent))
-    }
+    setYarValue(request, yarKey, value)
+
+    if (answers.find(answer => answer.value === value && !answer.isEligible)) {
+      return h.view('not-eligible', NOT_ELIGIBLE)
+    } else if (answers.find(answer => answer.value === value && answer.isEligible === 'maybe')) return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+
     return h.redirect(nextUrl)
   }
 }
+
 const drawSectionPostRequests = (section) => {
   return section.questions.map((question) => {
     return {
       method: 'POST',
       path: `/productivity/${question.url}`,
-      handler: getPostHandler(question, question.nextUrl)
+      handler: getPostHandler(question)
     }
   })
 }
+
 let pages = questionBank.sections.map(section => drawSectionGetRequests(section))
 pages = [...pages, ...questionBank.sections.map(section => drawSectionPostRequests(section))]
 
