@@ -159,6 +159,9 @@ module.exports = {
               isEligible: false
             }
           ],
+          errorMessage: {
+            text: ''
+          },
           yarKey: 'legalStatus'
         },
         {
@@ -313,11 +316,17 @@ module.exports = {
             {
               key: 'project-start-A1',
               value: 'Yes, preparatory work',
+              hint: {
+                text: 'For example, quotes from suppliers, applying for planning permission'
+              },
               isEligible: true
             },
             {
               key: 'project-start-A2',
               value: 'Yes, we have begun project work',
+              hint: {
+                text: 'For example, digging, signing contracts, placing orders'
+              },
               isEligible: false
             },
             {
