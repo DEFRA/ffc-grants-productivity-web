@@ -525,11 +525,25 @@ module.exports = {
         {
           key: 'project-cost',
           order: 90,
-          title: 'What is the estimated cost of the items?',
           pageTitle: '',
           url: 'project-cost',
           backLink: 'associated-works',
           nextUrl: 'grant',
+          classes: 'govuk-input--width-10',
+          id: 'projectCost',
+          name: 'projectCost',
+          prefix: { text: '£' },
+          label: {
+            text: 'What is the estimated cost of the items?',
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          hint: {
+            html: `
+              You can only apply for a grant of up to 40% of the estimated costs.
+              <br/>Do not include VAT.
+              <br/><br/>Enter amount, for example 95000`
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
@@ -539,9 +553,7 @@ module.exports = {
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
           type: 'input',
-          ga: { dimension: '', value: '' },
           sidebar:
             { heading: 'Items selected', para: '', items: [] },
           validations: [
