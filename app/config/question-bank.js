@@ -528,7 +528,7 @@ module.exports = {
           pageTitle: '',
           url: 'project-cost',
           backLink: 'associated-works',
-          nextUrl: 'grant',
+          nextUrl: 'remaining-costs',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',
@@ -553,6 +553,14 @@ module.exports = {
               title: 'See other grants you may be eligible for.'
             }
           },
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: 'You may be able to apply for a grant of up to £400,000, based on the estimated cost of £1,000,000.',
+            warning: {
+              text: 'The project is not guaranteed to receive a grant.',
+              iconFallbackText: 'Warning'
+            }
+          },
           type: 'input',
           sidebar:
             { heading: 'Items selected', para: '', items: [] },
@@ -575,33 +583,12 @@ module.exports = {
 
         },
         {
-          key: 'grant',
-          order: 100,
-          title: 'Potential grant funding',
-          pageTitle: 'Crops',
-          url: 'grant',
-          backLink: 'project-cost',
-          nextUrl: 'remaining-costs',
-          type: 'single-answer',
-          lasses: '',
-          ga: { dimension: '', value: '' },
-          answers: [
-            {
-              key: '',
-              value: '',
-              isEligible: true
-            }
-          ],
-          yarKey: 'grant'
-
-        },
-        {
           key: 'remaining-costs',
-          order: 110,
+          order: 100,
           title: 'Can you pay the remaining a costs? ',
           pageTitle: '',
           url: 'remaining-costs',
-          backLink: 'grant',
+          backLink: 'associated-works',
           nextUrl: 'water-SSSI',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -649,7 +636,7 @@ module.exports = {
         },
         {
           key: 'water-SSSI',
-          order: 120,
+          order: 110,
           title: 'Does the project directly impact a Site of Special Scientific Interest?',
           pageTitle: '',
           url: 'water-SSSI',
@@ -695,7 +682,7 @@ module.exports = {
         },
         {
           key: 'projects-impact',
-          order: 130,
+          order: 120,
           title: 'What impact will the project have?',
           pageTitle: '',
           url: 'projects-impact',
@@ -749,7 +736,7 @@ module.exports = {
         },
         {
           key: 'slurry-currently-treated',
-          order: 140,
+          order: 130,
           pageTitle: '',
           url: 'slurry-currently-treated',
           backLink: 'projects-impact',
@@ -798,7 +785,6 @@ module.exports = {
           answers: [
             {
               key: '',
-              value: '',
               isEligible: true
             }
           ],
@@ -807,7 +793,7 @@ module.exports = {
         },
         {
           key: 'slurry-to-be-treated',
-          order: 150,
+          order: 140,
           pageTitle: '',
           url: 'slurry-to-be-treated',
           backLink: 'slurry-currently-treated',
@@ -856,7 +842,6 @@ module.exports = {
           answers: [
             {
               key: '',
-              value: '',
               isEligible: true
             }
           ],
@@ -865,7 +850,7 @@ module.exports = {
         },
         {
           key: 'answers',
-          order: 160,
+          order: 150,
           title: 'Score results',
           pageTitle: 'Crops',
           url: 'answers',
@@ -919,7 +904,7 @@ module.exports = {
         },
         {
           key: 'business',
-          order: 170,
+          order: 160,
           title: 'Business details',
           pageTitle: 'Crops',
           url: 'business',
@@ -973,7 +958,7 @@ module.exports = {
         },
         {
           key: 'applying',
-          order: 180,
+          order: 170,
           title: 'Who is applying for this grant?',
           pageTitle: '',
           url: 'applying',
@@ -1019,7 +1004,7 @@ module.exports = {
         },
         {
           key: 'farmer-details',
-          order: 190,
+          order: 180,
           title: 'Farmer’s details',
           pageTitle: '',
           url: 'farmer-details',
@@ -1074,7 +1059,7 @@ module.exports = {
         },
         {
           key: 'check-details',
-          order: 200,
+          order: 190,
           title: 'Check your details',
           pageTitle: '',
           url: 'check-details',
@@ -1129,7 +1114,7 @@ module.exports = {
         },
         {
           key: 'consent',
-          order: 210,
+          order: 200,
           title: 'Confirm and send',
           pageTitle: 'Crops',
           url: 'consent',
@@ -1170,7 +1155,7 @@ module.exports = {
         },
         {
           key: 'reference-number',
-          order: 220,
+          order: 210,
           title: 'Details submitted',
           pageTitle: 'Crops',
           url: 'reference-number',
