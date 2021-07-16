@@ -65,12 +65,25 @@ const checkBoxes = (data, question) => {
   }
 }
 
+const inputBoxes = (question) => {
+  return {
+    id: question.id,
+    name: question.name,
+    classes: 'govuk-input--width-10',
+    prefix: question.prefix,
+    label: question.label,
+    hint: question.hint
+  }
+}
+
 const getOptions = (data, question) => {
   switch (question.type) {
     case 'single-answer':
       return radioButtons(data, question)
     case 'multi-answer':
       return checkBoxes(data, question)
+    case 'input':
+      return inputBoxes(question)
     default:
       return radioButtons(data, question)
   }
