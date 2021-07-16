@@ -71,6 +71,7 @@ const inputBoxes = (question) => {
     name: question.name,
     classes: 'govuk-input--width-10',
     prefix: question.prefix,
+    suffix: question.suffix,
     label: question.label,
     hint: question.hint
   }
