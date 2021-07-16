@@ -59,11 +59,18 @@ module.exports = {
           nextUrl: 'country',
           url: 'legal-status',
           ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
+            messageContent: 'Your business does not have an eligible legal status.',
+            details: {
+              summaryText: 'Who is eligible',
+              html: '<ul class="govuk-list govuk-list--bullet"><li>Sole trader</li><li>Partnership</li><li>Limited company</li><li>Charity</li><li>Trust</li><li>Limited liability partnership</li><li>Community interest company</li><li>Limited partnership</li><li>Industrial and provident society</li><li>Co-operative society (Co-Op)</li><li>Community benefit society (BenCom)</li></ul>'
+            },
             messageLink: {
-              url: '',
-              title: ''
+              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              title: 'See other grants you may be eligible for.'
+            },
+            warning: {
+              text: 'Other types of business may be supported in future schemes',
+              iconFallbackText: 'Warning'
             }
           },
           fundingPriorities: '',
@@ -152,6 +159,9 @@ module.exports = {
               isEligible: false
             }
           ],
+          errorMessage: {
+            text: ''
+          },
           yarKey: 'legalStatus'
         },
         {
@@ -306,11 +316,17 @@ module.exports = {
             {
               key: 'project-start-A1',
               value: 'Yes, preparatory work',
+              hint: {
+                text: 'For example, quotes from suppliers, applying for planning permission'
+              },
               isEligible: true
             },
             {
               key: 'project-start-A2',
               value: 'Yes, we have begun project work',
+              hint: {
+                text: 'For example, digging, signing contracts, placing orders'
+              },
               isEligible: false
             },
             {
@@ -513,11 +529,11 @@ module.exports = {
           nextUrl: 'grant',
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
+            messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
+            insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £1 million.' },
             messageLink: {
-              url: '',
-              title: ''
+              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              title: 'See other grants you may be eligible for.'
             }
           },
           fundingPriorities: '',
@@ -574,11 +590,11 @@ module.exports = {
           nextUrl: 'water-SSSI',
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
+            messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
+            insertText: { text: 'You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.' },
             messageLink: {
-              url: '',
-              title: ''
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
             }
           },
           fundingPriorities: '',
@@ -656,7 +672,7 @@ module.exports = {
             {
               key: 'water-SSSI-A2',
               value: 'No',
-              isEligible: false
+              isEligible: true
             }
           ],
           yarKey: 'waterSSSI'
