@@ -1,6 +1,7 @@
 {% extends '.layout.njk' %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
 {% from "./components/macro.njk" import crumbToken %}
 
 {% block pageTitle %}
@@ -22,6 +23,10 @@
       {{ crumbToken(crumb)}}
       <h1 class="govuk-heading-l">{{maybeEligibleContent.messageHeader}}</h1>
       <p class="govuk-body">{{ maybeEligibleContent.messageContent | safe}}</p>
+      {% if maybeEligibleContent.warning %} 
+        
+        {{ govukWarningText(maybeEligibleContent.warning) }}
+      {% endif %}
       {{ govukButton({
           text: "Continue",
           classes: "govuk-!-margin-top-5",
