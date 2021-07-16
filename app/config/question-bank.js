@@ -154,6 +154,9 @@ module.exports = {
               isEligible: true
             },
             {
+              value: 'divider'
+            },
+            {
               key: 'legal-status-A13',
               value: 'None of the above',
               isEligible: false
