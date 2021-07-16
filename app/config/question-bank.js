@@ -718,7 +718,7 @@ module.exports = {
           ga: { dimension: '', value: '' },
           sidebar:
             {
-              heading: 'Eligibility',
+              heading: 'Funding priorities',
               para: 'RPA wants to fund projects that:',
               items: ['improve productivity', 'improve the environment', 'introduce innovation']
             },
@@ -750,11 +750,25 @@ module.exports = {
         {
           key: 'slurry-currently-treated',
           order: 140,
-          title: 'What volume of digestate do you currently acidify per year?',
           pageTitle: '',
           url: 'slurry-currently-treated',
           backLink: 'projects-impact',
           nextUrl: 'slurry-to-be-treated',
+          classes: 'govuk-input--width-5',
+          id: 'slurryCurrentlyTreated',
+          name: 'slurryCurrentlyTreated',
+          suffix: {
+            html: 'm<sup>3</sup>'
+          },
+          label: {
+            text: 'What volume of digestate do you currently acidify per year?',
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          hint: {
+            html: `
+              <br>Enter figure in cubic metres, for example 1500`
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -769,7 +783,7 @@ module.exports = {
           ga: { dimension: '', value: '' },
           sidebar:
           {
-            heading: 'Eligibility',
+            heading: 'Funding priorities',
             para: 'RPA wants to fund projects that:',
             items: ['improve productivity', 'improve the environment']
           },
@@ -794,11 +808,25 @@ module.exports = {
         {
           key: 'slurry-to-be-treated',
           order: 150,
-          title: 'What volume of slurry or digestate will you acidify per year?',
           pageTitle: '',
           url: 'slurry-to-be-treated',
           backLink: 'slurry-currently-treated',
           nextUrl: 'answers',
+          classes: 'govuk-input--width-5',
+          id: 'slurryToBeTreated',
+          name: 'slurryToBeTreated',
+          suffix: {
+            html: 'm<sup>3</sup>'
+          },
+          label: {
+            text: 'What volume of slurry or digestate will you acidify per year?',
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          hint: {
+            html: `
+              <br>Enter figure in cubic metres, for example 1500`
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -813,7 +841,7 @@ module.exports = {
           ga: { dimension: '', value: '' },
           sidebar:
             {
-              heading: 'Eligibility',
+              heading: 'Funding priorities',
               para: 'RPA wants to fund projects that:',
               items: ['improve productivity', 'improve the environment', 'introduce innovation ']
             },
