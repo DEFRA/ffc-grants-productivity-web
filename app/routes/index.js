@@ -133,19 +133,27 @@ const getPostHandler = (currentQuestion) => {
   return (request, h) => {
     const value = request.payload[Object.keys(request.payload)[0]]
     const { calculatedGrant, remainingCost } = getGrantValues(value)
+    const checkNotEligible = (answer) => {
+      if (answer.value === value && !answer.isEligible) {
+        return true
+      } else if ((calculatedGrant < MIN_GRANT) || (calculatedGrant > MAX_GRANT)) {
+        return true
+      }
+    }
+    const checkMaybeEligible = (answer) => {
+      if (answer.value === value && answer.isEligible === 'maybe') {
+        return true
+      } else if ((calculatedGrant > MIN_GRANT) || (calculatedGrant < MAX_GRANT)) {
+        return true
+      }
+    }
     setYarValue(request, yarKey, value)
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
-    if (answers.find(answer => answer.value === value && !answer.isEligible)) {
+    if (answers.find(checkNotEligible)) {
       return h.view('not-eligible', NOT_ELIGIBLE)
-    } else if (answers.find(answer => answer.value === value && answer.isEligible === 'maybe')) return h.view('maybe-eligible', MAYBE_ELIGIBLE)
-    else if (yarKey === 'projectCost') {
-      if ((calculatedGrant < MIN_GRANT) || (calculatedGrant > MAX_GRANT)) {
-        return h.view('not-eligible', NOT_ELIGIBLE)
-      } else if ((calculatedGrant > MIN_GRANT) || (calculatedGrant < MAX_GRANT)) {
-        return h.view('maybe-eligible', MAYBE_ELIGIBLE)
-      }
-    } else {
+    } else if (answers.find(checkMaybeEligible)) return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+    else {
       return h.redirect(nextUrl)
     }
   }
