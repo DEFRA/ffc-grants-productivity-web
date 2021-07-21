@@ -1,8 +1,5 @@
 const questionBank = require('../config/question-bank')
 const { setYarValue, getYarValue } = require('../helpers/session')
-const MIN_GRANT = 35000
-const MAX_GRANT = 1000000
-const GRANT_PERCENTAGE = 40
 
 function isChecked (data, option) {
   return !!data && data.includes(option)
@@ -80,6 +77,17 @@ const inputBoxes = (question) => {
   }
 }
 
+const textPages = (question) => {
+  return {
+    header: question.header,
+    id: question.id,
+    name: question.name,
+    classes: question.classes,
+    content: question.content,
+    warning: question.warning
+  }
+}
+
 const getOptions = (data, question) => {
   switch (question.type) {
     case 'single-answer':
@@ -88,6 +96,8 @@ const getOptions = (data, question) => {
       return checkBoxes(data, question)
     case 'input':
       return inputBoxes(question)
+    case 'text':
+      return textPages(question)
     default:
       return radioButtons(data, question)
   }
@@ -120,38 +130,33 @@ const drawSectionGetRequests = (section) => {
   })
 }
 
-const getGrantValues = (projectCost) => {
-  const calculatedGrant = Number(GRANT_PERCENTAGE * projectCost / 100).toFixed(2)
-  const remainingCost = Number(projectCost - calculatedGrant).toFixed(2)
+const getGrantValues = (projectCostValue, grantPercentage) => {
+  const calculatedGrant = Number(grantPercentage * projectCostValue / 100).toFixed(2)
+  const remainingCost = Number(projectCostValue - calculatedGrant).toFixed(2)
   return { calculatedGrant, remainingCost }
+}
+
+const showNextPage = (answers, valeOfChosenAnswer, h, notEligible, maybeEligible, nextPageUrl, grant) => {
+  const { minGrant, maxGrant, grantPercentage } = grant
+  const { calculatedGrant } = getGrantValues(valeOfChosenAnswer, grantPercentage)
+  if (answers.find(answer => (answer.value === valeOfChosenAnswer && !answer.isEligible) || (calculatedGrant < minGrant) || (calculatedGrant > maxGrant))) {
+    return h.view('not-eligible', notEligible)
+  } else if (answers.find(answer => (answer.value === valeOfChosenAnswer && answer.isEligible === 'maybe'))) {
+    return h.view('maybe-eligible', maybeEligible)
+  } else {
+    return h.redirect(nextPageUrl)
+  }
 }
 
 const getPostHandler = (currentQuestion) => {
   const { yarKey, answers, url, ineligibleContent, nextUrl, maybeEligibleContent } = currentQuestion
+  const grant = currentQuestion.grant || ''
   const MAYBE_ELIGIBLE = { url, nextUrl, maybeEligibleContent }
   const NOT_ELIGIBLE = { url, ineligibleContent }
   return (request, h) => {
-    const value = request.payload[Object.keys(request.payload)[0]]
-    const { calculatedGrant, remainingCost } = getGrantValues(value)
-    const checkNotEligible = (answer) => {
-      if ((answer.value === value && !answer.isEligible) || (calculatedGrant < MIN_GRANT) || (calculatedGrant > MAX_GRANT)) {
-        return true
-      }
-    }
-    const checkMaybeEligible = (answer) => {
-      if ((answer.value === value && answer.isEligible === 'maybe') || (calculatedGrant > MIN_GRANT) || (calculatedGrant < MAX_GRANT)) {
-        return true
-      }
-    }
-    setYarValue(request, yarKey, value)
-    setYarValue(request, 'calculatedGrant', calculatedGrant)
-    setYarValue(request, 'remainingCost', remainingCost)
-    if (answers.find(checkNotEligible)) {
-      return h.view('not-eligible', NOT_ELIGIBLE)
-    } else if (answers.find(checkMaybeEligible)) return h.view('maybe-eligible', MAYBE_ELIGIBLE)
-    else {
-      return h.redirect(nextUrl)
-    }
+    const valueChosenAnswer = request.payload[Object.keys(request.payload)[0]]
+    setYarValue(request, yarKey, valueChosenAnswer)
+    return showNextPage(answers, valueChosenAnswer, h, NOT_ELIGIBLE, MAYBE_ELIGIBLE, nextUrl, grant)
   }
 }
 
