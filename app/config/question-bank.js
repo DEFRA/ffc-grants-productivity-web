@@ -528,9 +528,14 @@ module.exports = {
           pageTitle: '',
           url: 'project-cost',
           backLink: 'associated-works',
-          nextUrl: 'remaining-costs',
+          nextUrl: 'slurry/potential-amount',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
+          grant: {
+            minGrant: 35000,
+            maxGrant: 1000000,
+            grantPercentage: 40
+          },
           name: 'projectCost',
           prefix: { text: '£' },
           label: {
@@ -551,14 +556,6 @@ module.exports = {
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
-            }
-          },
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: 'You may be able to apply for a grant of up to £400,000, based on the estimated cost of £1,000,000.',
-            warning: {
-              text: 'The project is not guaranteed to receive a grant.',
-              iconFallbackText: 'Warning'
             }
           },
           type: 'input',
@@ -583,12 +580,30 @@ module.exports = {
 
         },
         {
-          key: 'remaining-costs',
+          key: 'potentialAmount',
           order: 100,
+          pageTitle: '',
+          url: 'slurry/potential-amount',
+          backLink: 'project-cost',
+          nextUrl: 'remaining-costs',
+          classes: 'govuk-grid-column-two-thirds',
+          id: 'potentialAmount',
+          header: 'Potential grant funding',
+          content: 'You may be able to apply for a grant of up to £400,000, based on the estimated cost of £1,000,000.',
+          warning: {
+            text: 'The project is not guaranteed to receive a grant.',
+            iconFallbackText: 'Warning'
+          },
+          type: 'text',
+          yarKey: 'potentialAmount'
+        },
+        {
+          key: 'remaining-costs',
+          order: 110,
           title: 'Can you pay the remaining a costs? ',
           pageTitle: '',
           url: 'remaining-costs',
-          backLink: 'associated-works',
+          backLink: 'slurry/potential-amount',
           nextUrl: 'water-SSSI',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -636,7 +651,7 @@ module.exports = {
         },
         {
           key: 'water-SSSI',
-          order: 110,
+          order: 120,
           title: 'Does the project directly impact a Site of Special Scientific Interest?',
           pageTitle: '',
           url: 'water-SSSI',
@@ -678,11 +693,10 @@ module.exports = {
             }
           ],
           yarKey: 'waterSSSI'
-
         },
         {
           key: 'projects-impact',
-          order: 120,
+          order: 130,
           title: 'What impact will the project have?',
           pageTitle: '',
           url: 'projects-impact',
@@ -736,7 +750,7 @@ module.exports = {
         },
         {
           key: 'slurry-currently-treated',
-          order: 130,
+          order: 140,
           pageTitle: '',
           url: 'slurry-currently-treated',
           backLink: 'projects-impact',
@@ -793,7 +807,7 @@ module.exports = {
         },
         {
           key: 'slurry-to-be-treated',
-          order: 140,
+          order: 150,
           pageTitle: '',
           url: 'slurry-to-be-treated',
           backLink: 'slurry-currently-treated',
@@ -850,7 +864,7 @@ module.exports = {
         },
         {
           key: 'answers',
-          order: 150,
+          order: 160,
           title: 'Score results',
           pageTitle: 'Crops',
           url: 'answers',
@@ -904,7 +918,7 @@ module.exports = {
         },
         {
           key: 'business',
-          order: 160,
+          order: 170,
           title: 'Business details',
           pageTitle: 'Crops',
           url: 'business',
@@ -958,7 +972,7 @@ module.exports = {
         },
         {
           key: 'applying',
-          order: 170,
+          order: 180,
           title: 'Who is applying for this grant?',
           pageTitle: '',
           url: 'applying',
@@ -1004,7 +1018,7 @@ module.exports = {
         },
         {
           key: 'farmer-details',
-          order: 180,
+          order: 190,
           title: 'Farmer’s details',
           pageTitle: '',
           url: 'farmer-details',
@@ -1059,7 +1073,7 @@ module.exports = {
         },
         {
           key: 'check-details',
-          order: 190,
+          order: 200,
           title: 'Check your details',
           pageTitle: '',
           url: 'check-details',
@@ -1114,7 +1128,7 @@ module.exports = {
         },
         {
           key: 'consent',
-          order: 200,
+          order: 210,
           title: 'Confirm and send',
           pageTitle: 'Crops',
           url: 'consent',
