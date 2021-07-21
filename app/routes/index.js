@@ -134,16 +134,12 @@ const getPostHandler = (currentQuestion) => {
     const value = request.payload[Object.keys(request.payload)[0]]
     const { calculatedGrant, remainingCost } = getGrantValues(value)
     const checkNotEligible = (answer) => {
-      if (answer.value === value && !answer.isEligible) {
-        return true
-      } else if ((calculatedGrant < MIN_GRANT) || (calculatedGrant > MAX_GRANT)) {
+      if ((answer.value === value && !answer.isEligible) || (calculatedGrant < MIN_GRANT) || (calculatedGrant > MAX_GRANT)) {
         return true
       }
     }
     const checkMaybeEligible = (answer) => {
-      if (answer.value === value && answer.isEligible === 'maybe') {
-        return true
-      } else if ((calculatedGrant > MIN_GRANT) || (calculatedGrant < MAX_GRANT)) {
+      if ((answer.value === value && answer.isEligible === 'maybe') || (calculatedGrant > MIN_GRANT) || (calculatedGrant < MAX_GRANT)) {
         return true
       }
     }
