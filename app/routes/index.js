@@ -109,12 +109,40 @@ const getPostHandler = (currentQuestion) => {
   const NOT_ELIGIBLE = { url, ineligibleContent }
 
   return (request, h) => {
-    const value = request.payload[Object.keys(request.payload)[0]]
+    const payload = request.payload
+    const value = payload[Object.keys(payload)[0]]
     setYarValue(request, yarKey, value)
 
     if (answers.find(answer => answer.value === value && !answer.isEligible)) {
       return h.view('not-eligible', NOT_ELIGIBLE)
-    } else if (answers.find(answer => answer.value === value && answer.isEligible === 'maybe')) return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+    } else if (answers.find(answer => answer.value === value && answer.isEligible === 'maybe')) {
+      return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+    }
+
+    const errorList = []
+
+    // error text if user selects nothing
+    // same error text for error message & error summary
+    if (
+      (currentQuestion.validate && currentQuestion.validate.errorEmptyField) &&
+      (payload === {} || !Object.keys(payload).includes(yarKey))
+    ) {
+      const errorTextNoSelection = currentQuestion.validate.errorEmptyField
+      const baseModel = getModel(value, currentQuestion)
+
+      baseModel.items = { ...baseModel.items, errorMessage: { text: errorTextNoSelection } }
+      errorList.push({
+        text: errorTextNoSelection,
+        href: `#${yarKey}`
+      })
+
+      const modelWithErrors = {
+        ...baseModel,
+        errorList
+      }
+
+      return h.view('page', modelWithErrors)
+    }
 
     return h.redirect(nextUrl)
   }

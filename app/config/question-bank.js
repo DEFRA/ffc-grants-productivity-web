@@ -28,6 +28,9 @@ module.exports = {
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: null,
+          validate: {
+            errorEmptyField: 'You must type in something'
+          },
           validations: [
             {
               type: '',
