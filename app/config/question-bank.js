@@ -271,12 +271,12 @@ module.exports = {
             },
             {
               key: 'planning-permission-A2',
-              value: 'Expected to have by 31 December 2021',
+              value: 'Expected to have by 31 March 2022',
               isEligible: 'maybe'
             },
             {
               key: 'planning-permission-A2',
-              value: 'Will not have by 31 December 2021',
+              value: 'Will not have by 31 March 2022',
               isEligible: false
             }
           ],
