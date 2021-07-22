@@ -127,7 +127,7 @@ const showNextPage = (currentQuestion, request, h) => {
   const { yarKey, answers, url, ineligibleContent, nextUrl, maybeEligibleContent, validate } = currentQuestion
   const grant = currentQuestion.grant || ''
   const MAYBE_ELIGIBLE = { url, nextUrl, maybeEligibleContent }
-  const NOT_ELIGIBLE = { url, ineligibleContent }
+  const NOT_ELIGIBLE = { ineligibleContent }
   const { minGrant, maxGrant, grantPercentage } = grant
   const payload = request.payload
   const value = payload[Object.keys(payload)[0]]
