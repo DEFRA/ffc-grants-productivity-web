@@ -113,46 +113,41 @@ module.exports = {
             },
             {
               key: 'legal-status-A4',
-              value: 'Ltd Company',
-              isEligible: true
-            },
-            {
-              key: 'legal-status-A5',
               value: 'Charity',
               isEligible: true
             },
             {
-              key: 'legal-status-A6',
+              key: 'legal-status-A5',
               value: 'Trust',
               isEligible: true
             },
             {
+              key: 'legal-status-A6',
+              value: 'Limited liability partnership',
+              isEligible: true
+            },
+            {
               key: 'legal-status-A7',
-              value: 'Limited Liability Partnership',
+              value: 'Community interest company',
               isEligible: true
             },
             {
               key: 'legal-status-A8',
-              value: 'Community Interest Company',
+              value: 'Limited partnership',
               isEligible: true
             },
             {
               key: 'legal-status-A9',
-              value: 'Limited Partnership',
+              value: 'Industrial and provident society',
               isEligible: true
             },
             {
               key: 'legal-status-A10',
-              value: 'Industrial and Provident Society',
-              isEligible: true
-            },
-            {
-              key: 'legal-status-A11',
               value: 'Co-operative society (Co-Op)',
               isEligible: true
             },
             {
-              key: 'legal-status-A12',
+              key: 'legal-status-A11',
               value: 'Community benefit society (BenCom)',
               isEligible: true
             },
@@ -160,7 +155,7 @@ module.exports = {
               value: 'divider'
             },
             {
-              key: 'legal-status-A13',
+              key: 'legal-status-A12',
               value: 'None of the above',
               isEligible: false
             }
