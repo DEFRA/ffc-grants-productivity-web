@@ -139,7 +139,7 @@ const showNextPage = (currentQuestion, request, h) => {
 
   if (answers.find(answer => (answer.value === value && !answer.isEligible) || (calculatedGrant < minGrant) || (calculatedGrant > maxGrant))) {
     return h.view('not-eligible', NOT_ELIGIBLE)
-  } else if (answers.find(answer => (answer.value === value && answer.isEligible === 'maybe'))) {
+  } else if (answers.find(answer => (answer.value === value && answer.isEligible === 'maybe') || (calculatedGrant > minGrant) || (calculatedGrant < maxGrant))) {
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
   }
 
