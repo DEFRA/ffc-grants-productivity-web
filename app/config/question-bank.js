@@ -528,11 +528,30 @@ module.exports = {
         {
           key: 'project-cost',
           order: 90,
-          title: 'What is the estimated cost of the items?',
           pageTitle: '',
           url: 'project-cost',
           backLink: 'associated-works',
-          nextUrl: 'grant',
+          nextUrl: 'remaining-costs',
+          classes: 'govuk-input--width-10',
+          id: 'projectCost',
+          grant: {
+            minGrant: 35000,
+            maxGrant: 1000000,
+            grantPercentage: 40
+          },
+          name: 'projectCost',
+          prefix: { text: '£' },
+          label: {
+            text: 'What is the estimated cost of the items?',
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          hint: {
+            html: `
+              You can only apply for a grant of up to 40% of the estimated costs.
+              <br/>Do not include VAT.
+              <br/><br/>Enter amount, for example 95000`
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
@@ -542,9 +561,15 @@ module.exports = {
               title: 'See other grants you may be eligible for.'
             }
           },
-          fundingPriorities: '',
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: 'You may be able to apply for a grant of up to £400,000, based on the estimated cost of £1,000,000.',
+            warning: {
+              text: 'The project is not guaranteed to receive a grant.',
+              iconFallbackText: 'Warning'
+            }
+          },
           type: 'input',
-          ga: { dimension: '', value: '' },
           sidebar:
             { heading: 'Items selected', para: '', items: [] },
           validations: [
@@ -566,33 +591,12 @@ module.exports = {
 
         },
         {
-          key: 'grant',
-          order: 100,
-          title: 'Potential grant funding',
-          pageTitle: 'Crops',
-          url: 'grant',
-          backLink: 'project-cost',
-          nextUrl: 'remaining-costs',
-          type: 'single-answer',
-          lasses: '',
-          ga: { dimension: '', value: '' },
-          answers: [
-            {
-              key: '',
-              value: '',
-              isEligible: true
-            }
-          ],
-          yarKey: 'grant'
-
-        },
-        {
           key: 'remaining-costs',
           order: 110,
           title: 'Can you pay the remaining a costs? ',
           pageTitle: '',
           url: 'remaining-costs',
-          backLink: 'grant',
+          backLink: 'project-cost',
           nextUrl: 'water-SSSI',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -682,7 +686,6 @@ module.exports = {
             }
           ],
           yarKey: 'waterSSSI'
-
         },
         {
           key: 'projects-impact',
@@ -709,7 +712,7 @@ module.exports = {
           ga: { dimension: '', value: '' },
           sidebar:
             {
-              heading: 'Eligibility',
+              heading: 'Funding priorities',
               para: 'RPA wants to fund projects that:',
               items: ['improve productivity', 'improve the environment', 'introduce innovation']
             },
@@ -741,11 +744,25 @@ module.exports = {
         {
           key: 'slurry-currently-treated',
           order: 140,
-          title: 'What volume of digestate do you currently acidify per year?',
           pageTitle: '',
           url: 'slurry-currently-treated',
           backLink: 'projects-impact',
           nextUrl: 'slurry-to-be-treated',
+          classes: 'govuk-input--width-5',
+          id: 'slurryCurrentlyTreated',
+          name: 'slurryCurrentlyTreated',
+          suffix: {
+            html: 'm<sup>3</sup>'
+          },
+          label: {
+            text: 'What volume of digestate do you currently acidify per year?',
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          hint: {
+            html: `
+              <br>Enter figure in cubic metres, for example 1500`
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -760,7 +777,7 @@ module.exports = {
           ga: { dimension: '', value: '' },
           sidebar:
           {
-            heading: 'Eligibility',
+            heading: 'Funding priorities',
             para: 'RPA wants to fund projects that:',
             items: ['improve productivity', 'improve the environment']
           },
@@ -775,7 +792,6 @@ module.exports = {
           answers: [
             {
               key: '',
-              value: '',
               isEligible: true
             }
           ],
@@ -785,11 +801,25 @@ module.exports = {
         {
           key: 'slurry-to-be-treated',
           order: 150,
-          title: 'What volume of slurry or digestate will you acidify per year?',
           pageTitle: '',
           url: 'slurry-to-be-treated',
           backLink: 'slurry-currently-treated',
           nextUrl: 'answers',
+          classes: 'govuk-input--width-5',
+          id: 'slurryToBeTreated',
+          name: 'slurryToBeTreated',
+          suffix: {
+            html: 'm<sup>3</sup>'
+          },
+          label: {
+            text: 'What volume of slurry or digestate will you acidify per year?',
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          hint: {
+            html: `
+              <br>Enter figure in cubic metres, for example 1500`
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -804,7 +834,7 @@ module.exports = {
           ga: { dimension: '', value: '' },
           sidebar:
             {
-              heading: 'Eligibility',
+              heading: 'Funding priorities',
               para: 'RPA wants to fund projects that:',
               items: ['improve productivity', 'improve the environment', 'introduce innovation ']
             },
@@ -819,7 +849,6 @@ module.exports = {
           answers: [
             {
               key: '',
-              value: '',
               isEligible: true
             }
           ],
@@ -1133,7 +1162,7 @@ module.exports = {
         },
         {
           key: 'reference-number',
-          order: 220,
+          order: 210,
           title: 'Details submitted',
           pageTitle: 'Crops',
           url: 'reference-number',

@@ -65,12 +65,26 @@ const checkBoxes = (data, question) => {
   }
 }
 
+const inputBoxes = (question) => {
+  return {
+    id: question.id,
+    name: question.name,
+    classes: 'govuk-input--width-10',
+    prefix: question.prefix,
+    suffix: question.suffix,
+    label: question.label,
+    hint: question.hint
+  }
+}
+
 const getOptions = (data, question) => {
   switch (question.type) {
     case 'single-answer':
       return radioButtons(data, question)
     case 'multi-answer':
       return checkBoxes(data, question)
+    case 'input':
+      return inputBoxes(question)
     default:
       return radioButtons(data, question)
   }
@@ -103,48 +117,63 @@ const drawSectionGetRequests = (section) => {
   })
 }
 
-const getPostHandler = (currentQuestion) => {
-  const { yarKey, answers, url, ineligibleContent, nextUrl, maybeEligibleContent } = currentQuestion
+const getGrantValues = (projectCostValue, grantPercentage) => {
+  const calculatedGrant = Number(grantPercentage * projectCostValue / 100).toFixed(2)
+  const remainingCost = Number(projectCostValue - calculatedGrant).toFixed(2)
+  return { calculatedGrant, remainingCost }
+}
+
+const showNextPage = (currentQuestion, request, h) => {
+  const { yarKey, answers, url, ineligibleContent, nextUrl, maybeEligibleContent, validate } = currentQuestion
+  const grant = currentQuestion.grant || ''
   const MAYBE_ELIGIBLE = { url, nextUrl, maybeEligibleContent }
   const NOT_ELIGIBLE = { url, ineligibleContent }
+  const { minGrant, maxGrant, grantPercentage } = grant
+  const payload = request.payload
+  const value = payload[Object.keys(payload)[0]]
+  const { calculatedGrant } = getGrantValues(value, grantPercentage)
 
-  return (request, h) => {
-    const payload = request.payload
-    const value = payload[Object.keys(payload)[0]]
-    setYarValue(request, yarKey, value)
+  setYarValue(request, yarKey, value)
 
-    if (answers.find(answer => answer.value === value && !answer.isEligible)) {
-      return h.view('not-eligible', NOT_ELIGIBLE)
-    } else if (answers.find(answer => answer.value === value && answer.isEligible === 'maybe')) {
-      return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+  // redirect to not eligible and maybe eligible pages
+
+  if (answers.find(answer => (answer.value === value && !answer.isEligible) || (calculatedGrant < minGrant) || (calculatedGrant > maxGrant))) {
+    return h.view('not-eligible', NOT_ELIGIBLE)
+  } else if (answers.find(answer => (answer.value === value && answer.isEligible === 'maybe') || (calculatedGrant > minGrant) || (calculatedGrant < maxGrant))) {
+    return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+  }
+
+  const errorList = []
+
+  // error text if user selects nothing
+  // same error text for error message & error summary
+
+  if (
+    (validate && validate.errorEmptyField) &&
+    (payload === {} || !Object.keys(payload).includes(yarKey))
+  ) {
+    const errorTextNoSelection = validate.errorEmptyField
+    const baseModel = getModel(value, currentQuestion)
+
+    baseModel.items = { ...baseModel.items, errorMessage: { text: errorTextNoSelection } }
+    errorList.push({
+      text: errorTextNoSelection,
+      href: `#${yarKey}`
+    })
+
+    const modelWithErrors = {
+      ...baseModel,
+      errorList
     }
-
-    const errorList = []
-
-    // error text if user selects nothing
-    // same error text for error message & error summary
-    if (
-      (currentQuestion.validate && currentQuestion.validate.errorEmptyField) &&
-      (payload === {} || !Object.keys(payload).includes(yarKey))
-    ) {
-      const errorTextNoSelection = currentQuestion.validate.errorEmptyField
-      const baseModel = getModel(value, currentQuestion)
-
-      baseModel.items = { ...baseModel.items, errorMessage: { text: errorTextNoSelection } }
-      errorList.push({
-        text: errorTextNoSelection,
-        href: `#${yarKey}`
-      })
-
-      const modelWithErrors = {
-        ...baseModel,
-        errorList
-      }
-
-      return h.view('page', modelWithErrors)
-    }
-
+    return h.view('page', modelWithErrors)
+  } else {
     return h.redirect(nextUrl)
+  }
+}
+
+const getPostHandler = (currentQuestion) => {
+  return (request, h) => {
+    return showNextPage(currentQuestion, request, h)
   }
 }
 
