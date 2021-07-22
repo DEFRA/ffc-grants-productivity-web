@@ -56,7 +56,7 @@ module.exports = {
         {
           key: 'legal-status',
           order: 20,
-          title: 'What is your project about?',
+          title: 'What is the legal status of the business?',
           pageTitle: '',
           backLink: 'project-subject',
           nextUrl: 'country',
