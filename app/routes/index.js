@@ -77,17 +77,6 @@ const inputBoxes = (question) => {
   }
 }
 
-const textPages = (question) => {
-  return {
-    header: question.header,
-    id: question.id,
-    name: question.name,
-    classes: question.classes,
-    content: question.content,
-    warning: question.warning
-  }
-}
-
 const getOptions = (data, question) => {
   switch (question.type) {
     case 'single-answer':
@@ -143,15 +132,22 @@ const showNextPage = (currentQuestion, request, h) => {
   const payload = request.payload
   const value = payload[Object.keys(payload)[0]]
   const { calculatedGrant } = getGrantValues(value, grantPercentage)
+
   setYarValue(request, yarKey, value)
-  const errorList = []
+
+  // redirect to not eligible and maybe eligible pages
+
   if (answers.find(answer => (answer.value === value && !answer.isEligible) || (calculatedGrant < minGrant) || (calculatedGrant > maxGrant))) {
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (answers.find(answer => (answer.value === value && answer.isEligible === 'maybe'))) {
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
   }
+
+  const errorList = []
+
   // error text if user selects nothing
   // same error text for error message & error summary
+
   if (
     (validate && validate.errorEmptyField) &&
     (payload === {} || !Object.keys(payload).includes(yarKey))
