@@ -28,6 +28,9 @@ module.exports = {
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: null,
+          validate: {
+            errorEmptyField: 'You must type in something'
+          },
           validations: [
             {
               type: '',
@@ -528,7 +531,7 @@ module.exports = {
           pageTitle: '',
           url: 'project-cost',
           backLink: 'associated-works',
-          nextUrl: 'slurry/potential-amount',
+          nextUrl: 'remaining-costs',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           grant: {
@@ -558,6 +561,14 @@ module.exports = {
               title: 'See other grants you may be eligible for.'
             }
           },
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: 'You may be able to apply for a grant of up to £400,000, based on the estimated cost of £1,000,000.',
+            warning: {
+              text: 'The project is not guaranteed to receive a grant.',
+              iconFallbackText: 'Warning'
+            }
+          },
           type: 'input',
           sidebar:
             { heading: 'Items selected', para: '', items: [] },
@@ -580,30 +591,12 @@ module.exports = {
 
         },
         {
-          key: 'potentialAmount',
-          order: 100,
-          pageTitle: '',
-          url: 'slurry/potential-amount',
-          backLink: 'project-cost',
-          nextUrl: 'remaining-costs',
-          classes: 'govuk-grid-column-two-thirds',
-          id: 'potentialAmount',
-          header: 'Potential grant funding',
-          content: 'You may be able to apply for a grant of up to £400,000, based on the estimated cost of £1,000,000.',
-          warning: {
-            text: 'The project is not guaranteed to receive a grant.',
-            iconFallbackText: 'Warning'
-          },
-          type: 'text',
-          yarKey: 'potentialAmount'
-        },
-        {
           key: 'remaining-costs',
           order: 110,
           title: 'Can you pay the remaining a costs? ',
           pageTitle: '',
           url: 'remaining-costs',
-          backLink: 'slurry/potential-amount',
+          backLink: 'project-cost',
           nextUrl: 'water-SSSI',
           eliminationAnswerKeys: '',
           ineligibleContent: {

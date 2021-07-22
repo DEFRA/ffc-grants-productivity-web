@@ -136,27 +136,50 @@ const getGrantValues = (projectCostValue, grantPercentage) => {
   return { calculatedGrant, remainingCost }
 }
 
-const showNextPage = (answers, valeOfChosenAnswer, h, notEligible, maybeEligible, nextPageUrl, grant) => {
+const showNextPage = (currentQuestion, request, h) => {
+  const { yarKey, answers, url, ineligibleContent, nextUrl, maybeEligibleContent, validate } = currentQuestion
+  const grant = currentQuestion.grant || ''
+  const MAYBE_ELIGIBLE = { url, nextUrl, maybeEligibleContent }
+  const NOT_ELIGIBLE = { url, ineligibleContent }
   const { minGrant, maxGrant, grantPercentage } = grant
-  const { calculatedGrant } = getGrantValues(valeOfChosenAnswer, grantPercentage)
-  if (answers.find(answer => (answer.value === valeOfChosenAnswer && !answer.isEligible) || (calculatedGrant < minGrant) || (calculatedGrant > maxGrant))) {
-    return h.view('not-eligible', notEligible)
-  } else if (answers.find(answer => (answer.value === valeOfChosenAnswer && answer.isEligible === 'maybe'))) {
-    return h.view('maybe-eligible', maybeEligible)
+  const payload = request.payload
+  const value = payload[Object.keys(payload)[0]]
+  const { calculatedGrant } = getGrantValues(value, grantPercentage)
+  setYarValue(request, yarKey, value)
+  const errorList = []
+  if (answers.find(answer => (answer.value === value && !answer.isEligible) || (calculatedGrant < minGrant) || (calculatedGrant > maxGrant))) {
+    return h.view('not-eligible', NOT_ELIGIBLE)
+  } else if (answers.find(answer => (answer.value === value && answer.isEligible === 'maybe'))) {
+    return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+  }
+  // error text if user selects nothing
+  // same error text for error message & error summary
+  if (
+    (validate && validate.errorEmptyField) &&
+    (payload === {} || !Object.keys(payload).includes(yarKey))
+  ) {
+    const errorTextNoSelection = validate.errorEmptyField
+    const baseModel = getModel(value, currentQuestion)
+
+    baseModel.items = { ...baseModel.items, errorMessage: { text: errorTextNoSelection } }
+    errorList.push({
+      text: errorTextNoSelection,
+      href: `#${yarKey}`
+    })
+
+    const modelWithErrors = {
+      ...baseModel,
+      errorList
+    }
+    return h.view('page', modelWithErrors)
   } else {
-    return h.redirect(nextPageUrl)
+    return h.redirect(nextUrl)
   }
 }
 
 const getPostHandler = (currentQuestion) => {
-  const { yarKey, answers, url, ineligibleContent, nextUrl, maybeEligibleContent } = currentQuestion
-  const grant = currentQuestion.grant || ''
-  const MAYBE_ELIGIBLE = { url, nextUrl, maybeEligibleContent }
-  const NOT_ELIGIBLE = { url, ineligibleContent }
   return (request, h) => {
-    const valueChosenAnswer = request.payload[Object.keys(request.payload)[0]]
-    setYarValue(request, yarKey, valueChosenAnswer)
-    return showNextPage(answers, valueChosenAnswer, h, NOT_ELIGIBLE, MAYBE_ELIGIBLE, nextUrl, grant)
+    return showNextPage(currentQuestion, request, h)
   }
 }
 
