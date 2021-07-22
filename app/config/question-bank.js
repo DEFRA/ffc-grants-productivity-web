@@ -610,7 +610,7 @@ module.exports = {
           order: 110,
           title: 'Can you pay the remaining a costs? ',
           pageTitle: '',
-          url: 'remaining-costs',
+          url: 'slurry/remaining-costs',
           backLink: 'project-cost',
           nextUrl: 'water-SSSI',
           eliminationAnswerKeys: '',
