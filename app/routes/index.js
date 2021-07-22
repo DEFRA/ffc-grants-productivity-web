@@ -96,8 +96,6 @@ const getOptions = (data, question) => {
       return checkBoxes(data, question)
     case 'input':
       return inputBoxes(question)
-    case 'text':
-      return textPages(question)
     default:
       return radioButtons(data, question)
   }
