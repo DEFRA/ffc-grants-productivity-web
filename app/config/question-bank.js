@@ -29,7 +29,7 @@ module.exports = {
           ga: { dimension: '', value: '' },
           sidebar: null,
           validate: {
-            errorEmptyField: 'You must type in something'
+            errorEmptyField: 'Select what your project is about'
           },
           validations: [
             {
@@ -437,6 +437,9 @@ module.exports = {
               para: 'The land must be owned or have a tenancy in place until 2026 before starting the project.',
               items: []
             },
+          validate: {
+            errorEmptyField: 'Select yes if the land has a tenancy agreement in place until 2026 or after'
+          },
           validations: [
             {
               type: '',
@@ -581,6 +584,9 @@ module.exports = {
           type: 'input',
           sidebar:
             { heading: 'Items selected', para: '', items: [] },
+          validate: {
+            errorEmptyField: 'Enter the estimated cost for the items'
+          },
           validations: [
             {
               type: '',
