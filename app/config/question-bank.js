@@ -29,7 +29,7 @@ module.exports = {
           ga: { dimension: '', value: '' },
           sidebar: null,
           validate: {
-            errorEmptyField: 'You must type in something'
+            errorEmptyField: 'Select what your project is about'
           },
           validations: [
             {
@@ -86,6 +86,9 @@ module.exports = {
             heading: 'Eligibility',
             para: 'Public organisations and local authorities cannot apply for this grant.',
             items: []
+          },
+          validate: {
+            errorEmptyField: 'Select the legal status of the farm business'
           },
           validations: [
             {
@@ -250,6 +253,9 @@ module.exports = {
               para: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
               items: []
             },
+          validate: {
+            errorEmptyField: 'Select when the project will have planning permission'
+          },
           validations: [
             {
               type: '',
@@ -373,6 +379,9 @@ module.exports = {
             para: 'The land must be owned or have a tenancy in place until 2026 before starting the project.',
             items: []
           },
+          validate: {
+            errorEmptyField: 'Select yes if the planned project is on land the farm business owns'
+          },
           validations: [
             {
               type: '',
@@ -428,6 +437,9 @@ module.exports = {
               para: 'The land must be owned or have a tenancy in place until 2026 before starting the project.',
               items: []
             },
+          validate: {
+            errorEmptyField: 'Select yes if the land has a tenancy agreement in place until 2026 or after'
+          },
           validations: [
             {
               type: '',
@@ -572,6 +584,9 @@ module.exports = {
           type: 'input',
           sidebar:
             { heading: 'Items selected', para: '', items: [] },
+          validate: {
+            errorEmptyField: 'Enter the estimated cost for the items'
+          },
           validations: [
             {
               type: '',
@@ -665,6 +680,9 @@ module.exports = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
+          validate: {
+            errorEmptyField: 'Select yes if the project directly impacts a Site of Special Scientific Interest'
+          },
           validations: [
             {
               type: '',
