@@ -63,6 +63,7 @@ module.exports = {
           url: 'legal-status',
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
+            backUrl: 'legal-status',
             details: {
               summaryText: 'Who is eligible',
               html: '<ul class="govuk-list govuk-list--bullet"><li>Sole trader</li><li>Partnership</li><li>Limited company</li><li>Charity</li><li>Trust</li><li>Limited liability partnership</li><li>Community interest company</li><li>Limited partnership</li><li>Industrial and provident society</li><li>Co-operative society (Co-Op)</li><li>Community benefit society (BenCom)</li></ul>'
@@ -178,6 +179,7 @@ module.exports = {
           url: 'country',
           ineligibleContent: {
             messageContent: 'This grant is only for projects in England.',
+            backUrl: 'country',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' },
             messageLink: {
               url: '',
@@ -227,6 +229,7 @@ module.exports = {
           nextUrl: 'project-start',
           ineligibleContent: {
             messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
+            backUrl: 'planning-permission',
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -293,6 +296,7 @@ module.exports = {
           nextUrl: 'tenancy',
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
+            backUrl: 'project-start',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
@@ -486,7 +490,7 @@ module.exports = {
           pageTitle: '',
           url: 'associated-works',
           backLink: 'tenancy-length',
-          nextUrl: 'project-cost',
+          nextUrl: 'slurry/project-cost',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -536,8 +540,8 @@ module.exports = {
           key: 'project-cost',
           order: 90,
           pageTitle: '',
-          url: 'project-cost',
-          backLink: 'associated-works',
+          url: 'slurry/project-cost',
+          backLink: '/productivity/associated-works',
           nextUrl: 'remaining-costs',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
@@ -563,6 +567,7 @@ module.exports = {
           ineligibleContent: {
             messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
             insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £1 million.' },
+            backUrl: 'project-cost',
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -605,12 +610,13 @@ module.exports = {
           order: 110,
           title: 'Can you pay the remaining a costs? ',
           pageTitle: '',
-          url: 'remaining-costs',
+          url: 'slurry/remaining-costs',
           backLink: 'project-cost',
-          nextUrl: 'water-SSSI',
+          nextUrl: 'SSSI',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
+            backUrl: 'remaining-costs',
             insertText: { text: 'You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.' },
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
@@ -653,11 +659,11 @@ module.exports = {
 
         },
         {
-          key: 'water-SSSI',
+          key: 'slurry-SSSI',
           order: 120,
           title: 'Does the project directly impact a Site of Special Scientific Interest?',
           pageTitle: '',
-          url: 'water-SSSI',
+          url: 'slurry/SSSI',
           backLink: 'remaining-costs',
           nextUrl: 'projects-impact',
           eliminationAnswerKeys: '',
@@ -688,25 +694,25 @@ module.exports = {
           ],
           answers: [
             {
-              key: 'water-SSSI-A1',
+              key: 'slurry-SSSI-A1',
               value: 'Yes',
               isEligible: true
             },
             {
-              key: 'water-SSSI-A2',
+              key: 'slurry-SSSI-A2',
               value: 'No',
               isEligible: true
             }
           ],
-          yarKey: 'waterSSSI'
+          yarKey: 'slurrySSSI'
         },
         {
           key: 'projects-impact',
           order: 130,
           title: 'What impact will the project have?',
           pageTitle: '',
-          url: 'projects-impact',
-          backLink: 'water-SSSI',
+          url: 'slurry/projects-impact',
+          backLink: 'SSSI',
           nextUrl: 'slurry-currently-treated',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -758,7 +764,7 @@ module.exports = {
           key: 'slurry-currently-treated',
           order: 140,
           pageTitle: '',
-          url: 'slurry-currently-treated',
+          url: 'slurry/slurry-currently-treated',
           backLink: 'projects-impact',
           nextUrl: 'slurry-to-be-treated',
           classes: 'govuk-input--width-5',
@@ -815,7 +821,7 @@ module.exports = {
           key: 'slurry-to-be-treated',
           order: 150,
           pageTitle: '',
-          url: 'slurry-to-be-treated',
+          url: 'slurry/slurry-to-be-treated',
           backLink: 'slurry-currently-treated',
           nextUrl: 'answers',
           classes: 'govuk-input--width-5',
@@ -873,7 +879,7 @@ module.exports = {
           order: 160,
           title: 'Score results',
           pageTitle: 'Crops',
-          url: 'answers',
+          url: 'slurry/answers',
           backLink: 'slurry-to-be-treated',
           nextUrl: 'business',
           eliminationAnswerKeys: '',
@@ -927,7 +933,7 @@ module.exports = {
           order: 170,
           title: 'Business details',
           pageTitle: 'Crops',
-          url: 'business',
+          url: 'slurry/business',
           backLink: 'answers',
           nextUrl: 'applying',
           eliminationAnswerKeys: '',
@@ -981,7 +987,7 @@ module.exports = {
           order: 180,
           title: 'Who is applying for this grant?',
           pageTitle: '',
-          url: 'applying',
+          url: 'slurry/applying',
           backLink: 'business',
           nextUrl: 'farmer-details',
           eliminationAnswerKeys: '',
@@ -1027,7 +1033,7 @@ module.exports = {
           order: 190,
           title: 'Farmer’s details',
           pageTitle: '',
-          url: 'farmer-details',
+          url: 'slurry/farmer-details',
           backLink: 'applying',
           nextUrl: 'check-details',
           eliminationAnswerKeys: '',
@@ -1082,7 +1088,7 @@ module.exports = {
           order: 200,
           title: 'Check your details',
           pageTitle: '',
-          url: 'check-details',
+          url: 'slurry/check-details',
           backLink: 'farmer-details',
           nextUrl: 'consent',
           eliminationAnswerKeys: '',
@@ -1137,7 +1143,7 @@ module.exports = {
           order: 210,
           title: 'Confirm and send',
           pageTitle: 'Crops',
-          url: 'consent',
+          url: 'slurry/consent',
           backLink: 'check-details',
           nextUrl: 'reference-number',
           eliminationAnswerKeys: '',
@@ -1178,7 +1184,7 @@ module.exports = {
           order: 210,
           title: 'Details submitted',
           pageTitle: 'Crops',
-          url: 'reference-number',
+          url: 'slurry/reference-number',
           backLink: 'consent',
           nextUrl: '',
           eliminationAnswerKeys: '',

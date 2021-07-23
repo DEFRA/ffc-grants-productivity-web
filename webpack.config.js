@@ -70,14 +70,15 @@ module.exports = {
     filename: 'js/bundle.[fullhash].js',
     path: path.resolve(__dirname, 'app/assets/dist'),
     clean: true,
-    publicPath: 'assets/'
+    publicPath: `${urlPrefix}/assets/`
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       inject: false,
       filename: '.layout.njk',
-      template: 'app/assets/src/layout.njk'
+      template: 'app/assets/src/layout.njk',
+      metadata: { urlPrefix }
     }),
     new MiniCssExtractPlugin({
       filename: 'css/application.[fullhash].css'
