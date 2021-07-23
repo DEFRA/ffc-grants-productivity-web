@@ -63,7 +63,6 @@ module.exports = {
           url: 'legal-status',
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
-            backUrl: 'legal-status',
             details: {
               summaryText: 'Who is eligible',
               html: '<ul class="govuk-list govuk-list--bullet"><li>Sole trader</li><li>Partnership</li><li>Limited company</li><li>Charity</li><li>Trust</li><li>Limited liability partnership</li><li>Community interest company</li><li>Limited partnership</li><li>Industrial and provident society</li><li>Co-operative society (Co-Op)</li><li>Community benefit society (BenCom)</li></ul>'
@@ -179,7 +178,6 @@ module.exports = {
           url: 'country',
           ineligibleContent: {
             messageContent: 'This grant is only for projects in England.',
-            backUrl: 'country',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' },
             messageLink: {
               url: '',
@@ -229,7 +227,6 @@ module.exports = {
           nextUrl: 'project-start',
           ineligibleContent: {
             messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
-            backUrl: 'planning-permission',
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -296,7 +293,6 @@ module.exports = {
           nextUrl: 'tenancy',
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
-            backUrl: 'project-start',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
@@ -545,11 +541,6 @@ module.exports = {
           nextUrl: 'remaining-costs',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
-          grant: {
-            minGrant: 35000,
-            maxGrant: 1000000,
-            grantPercentage: 40
-          },
           name: 'projectCost',
           prefix: { text: '£' },
           label: {
@@ -567,7 +558,6 @@ module.exports = {
           ineligibleContent: {
             messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
             insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £1 million.' },
-            backUrl: 'project-cost',
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -616,7 +606,6 @@ module.exports = {
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
-            backUrl: 'remaining-costs',
             insertText: { text: 'You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.' },
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
