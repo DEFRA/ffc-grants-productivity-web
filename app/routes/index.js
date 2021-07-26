@@ -66,15 +66,16 @@ const checkBoxes = (data, question) => {
   }
 }
 
-const inputBoxes = (question) => {
+const inputText = (data, question) => {
   return {
-    id: question.id,
-    name: question.name,
+    id: question.yarKey,
+    name: question.yarKey,
     classes: 'govuk-input--width-10',
     prefix: question.prefix,
     suffix: question.suffix,
     label: question.label,
-    hint: question.hint
+    hint: question.hint,
+    value: data || ''
   }
 }
 
@@ -85,7 +86,7 @@ const getOptions = (data, question) => {
     case 'multi-answer':
       return checkBoxes(data, question)
     case 'input':
-      return inputBoxes(question)
+      return inputText(data, question)
     default:
       return radioButtons(data, question)
   }
