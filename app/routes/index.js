@@ -32,49 +32,52 @@ function setLabelData (data, labelData) {
 }
 
 const radioButtons = (data, question) => {
+  const { classes, yarKey, title, answers } = question
   return {
-    classes: question.classes,
-    idPrefix: question.yarKey,
-    name: question.yarKey,
+    classes,
+    idPrefix: yarKey,
+    name: yarKey,
     fieldset: {
       legend: {
-        text: question.title,
+        text: title,
         isPageHeading: true,
         classes: 'govuk-fieldset__legend--l'
       }
     },
-    items: setLabelData(data, question.answers)
+    items: setLabelData(data, answers)
   }
 }
 
 const checkBoxes = (data, question) => {
+  const { classes, yarKey, title, hint, answers } = question
   return {
-    classes: question.classes,
-    idPrefix: question.yarKey,
-    name: question.yarKey,
+    classes,
+    idPrefix: yarKey,
+    name: yarKey,
     fieldset: {
       legend: {
-        text: question.title,
+        text: title,
         isPageHeading: true,
         classes: 'govuk-fieldset__legend--l'
       }
     },
     hint: {
-      text: question.hint
+      text: hint
     },
-    items: setLabelData(data, question.answers)
+    items: setLabelData(data, answers)
   }
 }
 
 const inputText = (data, question) => {
+  const { yarKey, prefix, suffix, label, hint } = question
   return {
-    id: question.yarKey,
-    name: question.yarKey,
+    id: yarKey,
+    name: yarKey,
     classes: 'govuk-input--width-10',
-    prefix: question.prefix,
-    suffix: question.suffix,
-    label: question.label,
-    hint: question.hint,
+    prefix,
+    suffix,
+    label,
+    hint,
     value: data || ''
   }
 }
