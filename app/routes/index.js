@@ -1,7 +1,6 @@
 const questionBank = require('../config/question-bank')
 const { setYarValue, getYarValue } = require('../helpers/session')
 const { getGrantValues } = require('../helpers/grants-info')
-const { getLastPathAddress } = require('../helpers/utils')
 
 function isChecked (data, option) {
   return !!data && data.includes(option)
@@ -120,9 +119,9 @@ const drawSectionGetRequests = (section) => {
 }
 
 const showNextPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, url, ineligibleContent, nextUrl, maybeEligibleContent, validate } = currentQuestion
-  const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl: getLastPathAddress(url) }
-  const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: getLastPathAddress(url) }
+  const { yarKey, answers, url, baseUrl, ineligibleContent, nextUrl, maybeEligibleContent, validate } = currentQuestion
+  const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl: baseUrl }
+  const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   const value = payload[Object.keys(payload)[0]]
 
