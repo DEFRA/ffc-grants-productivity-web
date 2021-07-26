@@ -1,5 +1,6 @@
 const questionBank = require('../config/question-bank')
 const { setYarValue, getYarValue } = require('../helpers/session')
+const { getGrantValues } = require('../helpers/grants-info')
 
 function isChecked (data, option) {
   return !!data && data.includes(option)
@@ -117,40 +118,30 @@ const drawSectionGetRequests = (section) => {
   })
 }
 
-const getGrantValues = (projectCostValue, grantPercentage) => {
-  const calculatedGrant = Number(grantPercentage * projectCostValue / 100).toFixed(2)
-  const remainingCost = Number(projectCostValue - calculatedGrant).toFixed(2)
-  return { calculatedGrant, remainingCost }
-}
-
 const showNextPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, url, ineligibleContent, nextUrl, maybeEligibleContent, validate } = currentQuestion
-  const grant = currentQuestion.grant || ''
-  const MAYBE_ELIGIBLE = { url, nextUrl, maybeEligibleContent }
-  const NOT_ELIGIBLE = { ineligibleContent }
-  const { minGrant, maxGrant, grantPercentage } = grant
+  const { yarKey, answers, url, baseUrl, ineligibleContent, nextUrl, maybeEligibleContent, validate } = currentQuestion
+  const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl: baseUrl }
+  const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   const value = payload[Object.keys(payload)[0]]
-  const { calculatedGrant } = getGrantValues(value, grantPercentage)
 
   setYarValue(request, yarKey, value)
 
-  // redirect to not eligible and maybe eligible pages
+  // based on answer -> redirect to pages [not eligible] or [maybe eligible]
 
-  if (answers.find(answer => (answer.value === value && !answer.isEligible) || (calculatedGrant < minGrant) || (calculatedGrant > maxGrant))) {
+  if (answers.find(answer => (answer.value === value && !answer.isEligible))) {
     return h.view('not-eligible', NOT_ELIGIBLE)
-  } else if (answers.find(answer => (answer.value === value && answer.isEligible === 'maybe') || (calculatedGrant > minGrant) || (calculatedGrant < maxGrant))) {
+  } else if (answers.find(answer => (answer.value === value && answer.isEligible === 'maybe'))) {
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
   }
 
   const errorList = []
 
-  // error text if user selects nothing
-  // same error text for error message & error summary
+  // no selection -> same error text for [error message] & [error summary]
 
   if (
     (validate && validate.errorEmptyField) &&
-    (payload === {} || !Object.keys(payload).includes(yarKey))
+    (payload === {} || !Object.keys(payload).includes(yarKey) || payload[yarKey] === '')
   ) {
     const errorTextNoSelection = validate.errorEmptyField
     const baseModel = getModel(value, currentQuestion)
@@ -166,9 +157,21 @@ const showNextPage = (currentQuestion, request, h) => {
       errorList
     }
     return h.view('page', modelWithErrors)
-  } else {
-    return h.redirect(nextUrl)
   }
+
+  // specific redirects to some pages
+  switch (yarKey) {
+    case 'projectCost': {
+      const { isEligible } = getGrantValues(value, currentQuestion.grantInfo)
+
+      return isEligible
+        ? h.view('maybe-eligible', MAYBE_ELIGIBLE)
+        : h.view('not-eligible', NOT_ELIGIBLE)
+    }
+  }
+
+  // no issues -> show nexturl
+  return h.redirect(nextUrl)
 }
 
 const getPostHandler = (currentQuestion) => {

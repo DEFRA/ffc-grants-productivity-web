@@ -12,7 +12,7 @@
 
 {{ govukBackLink({
   text: "Back",
-  href: ineligibleContent.backUrl,
+  href: backUrl,
   attributes: {id: 'linkBack'}
 }) }}
 
@@ -24,23 +24,23 @@
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-l">You cannot apply for a grant from this scheme</h1>
       <p class="govuk-body">
-        {{ ineligibleContent.messageContent | safe}}
+        {{ messageContent | safe}}
       </p>
 
-      {% if ineligibleContent.insertText %} 
-        {{ govukInsetText(ineligibleContent.insertText) }}
+      {% if insertText %} 
+        {{ govukInsetText(insertText) }}
       {% endif %}
 
-      {% if ineligibleContent.details %} 
-        {{ govukDetails(ineligibleContent.details) }}
+      {% if details %} 
+        {{ govukDetails(details) }}
       {% endif %}
 
-      {% if ineligibleContent.warning %} 
-        {{ govukWarningText(ineligibleContent.warning) }}
+      {% if warning %} 
+        {{ govukWarningText(warning) }}
       {% endif %}
 
-      {% if ineligibleContent.messageLink %}
-        <p class="govuk-body"><a href="{{ineligibleContent.messageLink.url}}" class="govuk-link">{{ineligibleContent.messageLink.title}}</a></p>
+      {% if messageLink %}
+        <p class="govuk-body"><a href="{{messageLink.url}}" class="govuk-link">{{messageLink.title}}</a></p>
       {% endif %}
       
     </div>
