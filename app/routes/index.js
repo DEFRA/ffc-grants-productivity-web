@@ -107,6 +107,12 @@ const getModel = (data, question) => {
 
 const getHandler = (question) => {
   return (request, h) => {
+    if (question.maybeEligibleContent) {
+      const { url, backLink, nextUrl, maybeEligibleContent } = question
+      const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl: backLink }
+      return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+    }
+
     const data = getYarValue(request, question.yarKey) || null
     return h.view('page', getModel(data, question))
   }
@@ -168,9 +174,9 @@ const showNextPage = (currentQuestion, request, h) => {
     case 'projectCost': {
       const { isEligible } = getGrantValues(value, currentQuestion.grantInfo)
 
-      return isEligible
-        ? h.view('maybe-eligible', MAYBE_ELIGIBLE)
-        : h.view('not-eligible', NOT_ELIGIBLE)
+      if (!isEligible) {
+        return h.view('not-eligible', NOT_ELIGIBLE)
+      }
     }
   }
 

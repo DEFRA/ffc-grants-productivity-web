@@ -547,7 +547,7 @@ module.exports = {
           url: 'slurry/project-cost',
           baseUrl: 'project-cost',
           backLink: '/productivity/associated-works',
-          nextUrl: 'remaining-costs',
+          nextUrl: 'project-cost-condition',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',
@@ -577,14 +577,6 @@ module.exports = {
               title: 'See other grants you may be eligible for.'
             }
           },
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: 'You may be able to apply for a grant of up to £400,000, based on the estimated cost of £1,000,000.',
-            warning: {
-              text: 'The project is not guaranteed to receive a grant.',
-              iconFallbackText: 'Warning'
-            }
-          },
           type: 'input',
           sidebar:
             { heading: 'Items selected', para: '', items: [] },
@@ -608,6 +600,21 @@ module.exports = {
           ],
           yarKey: 'projectCost'
 
+        },
+        {
+          key: 'project-cost-condition',
+          order: 91,
+          url: 'slurry/project-cost-condition',
+          backLink: 'project-cost',
+          nextUrl: 'remaining-costs',
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: 'You may be able to apply for a grant of up to £400,000, based on the estimated cost of £1,000,000.',
+            warning: {
+              text: 'The project is not guaranteed to receive a grant.',
+              iconFallbackText: 'Warning'
+            }
+          }
         },
         {
           key: 'remaining-costs',
