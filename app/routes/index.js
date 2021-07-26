@@ -162,7 +162,7 @@ const showNextPage = (currentQuestion, request, h) => {
   // specific redirects to some pages
   switch (yarKey) {
     case 'projectCost': {
-      const { isEligible } = getGrantValues(value)
+      const { isEligible } = getGrantValues(value, currentQuestion.grantInfo)
 
       return isEligible
         ? h.view('maybe-eligible', MAYBE_ELIGIBLE)

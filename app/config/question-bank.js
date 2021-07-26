@@ -552,6 +552,11 @@ module.exports = {
           id: 'projectCost',
           name: 'projectCost',
           prefix: { text: '£' },
+          grantInfo: {
+            minGrant: 35000,
+            maxGrant: 1000000,
+            grantPercentage: 40
+          },
           label: {
             text: 'What is the estimated cost of the items?',
             classes: 'govuk-label--l',
