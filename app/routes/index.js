@@ -148,8 +148,6 @@ const showPostPage = (currentQuestion, request, h) => {
 
   if (answers.find(answer => (answer.value === value && !answer.isEligible))) {
     return h.view('not-eligible', NOT_ELIGIBLE)
-  } else if (answers.find(answer => (answer.value === value && answer.isEligible === 'maybe'))) {
-    return h.view('maybe-eligible', MAYBE_ELIGIBLE)
   }
 
   const errorList = []

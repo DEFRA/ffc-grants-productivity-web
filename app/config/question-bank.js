@@ -228,17 +228,13 @@ module.exports = {
           url: 'planning-permission',
           baseUrl: 'planning-permission',
           backLink: 'country',
-          nextUrl: 'project-start',
+          nextUrl: 'planning-permission-condition',
           ineligibleContent: {
             messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
             }
-          },
-          maybeEligibleContent: {
-            messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).'
           },
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
@@ -286,6 +282,17 @@ module.exports = {
             }
           ],
           yarKey: 'planningPermission'
+        },
+        {
+          key: 'planning-permission-condition',
+          order: 41,
+          url: 'planning-permission-condition',
+          backLink: 'planning-permission',
+          nextUrl: 'project-start',
+          maybeEligibleContent: {
+            messageHeader: 'You may be able to apply for a grant from this scheme',
+            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).'
+          }
         },
         {
           key: 'project-start',
