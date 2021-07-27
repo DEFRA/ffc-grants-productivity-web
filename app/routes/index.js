@@ -6,8 +6,8 @@ function isChecked (data, option) {
   return !!data && data.includes(option)
 }
 
-function setLabelData (data, labelData) {
-  return labelData.map((label) => {
+function setAnswerOptions (data, answers) {
+  return answers.map((label) => {
     if (typeof (label.value) === 'string' && label.value !== 'divider') {
       return {
         value: label.value,
@@ -44,7 +44,7 @@ const radioButtons = (data, question) => {
         classes: 'govuk-fieldset__legend--l'
       }
     },
-    items: setLabelData(data, answers)
+    items: setAnswerOptions(data, answers)
   }
 }
 
@@ -64,7 +64,7 @@ const checkBoxes = (data, question) => {
     hint: {
       text: hint
     },
-    items: setLabelData(data, answers)
+    items: setAnswerOptions(data, answers)
   }
 }
 
