@@ -109,7 +109,7 @@ const getModel = (data, question) => {
 }
 
 const showGetPage = (question, request, h) => {
-  if (question.maybeEligibleContent) {
+  if (question.maybeEligible) {
     const { url, backLink, nextUrl, maybeEligibleContent } = question
     const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl: backLink }
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)

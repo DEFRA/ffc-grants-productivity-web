@@ -607,6 +607,7 @@ module.exports = {
           url: 'slurry/project-cost-condition',
           backLink: 'project-cost',
           nextUrl: 'remaining-costs',
+          maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
             messageContent: 'You may be able to apply for a grant of up to £400,000, based on the estimated cost of £1,000,000.',
