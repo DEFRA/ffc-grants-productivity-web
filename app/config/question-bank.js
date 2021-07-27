@@ -236,10 +236,6 @@ module.exports = {
               title: 'See other grants you may be eligible for.'
             }
           },
-          maybeEligibleContent: {
-            messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).'
-          },
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
           classes: '',
@@ -277,7 +273,8 @@ module.exports = {
             {
               key: 'planning-permission-A2',
               value: 'Expected to have by 31 March 2022',
-              isEligible: 'maybe'
+              isEligible: 'maybe',
+              maybeUrl: 'planning-permission-condition'
             },
             {
               key: 'planning-permission-A2',
@@ -286,6 +283,18 @@ module.exports = {
             }
           ],
           yarKey: 'planningPermission'
+        },
+        {
+          key: 'planning-permission-condition',
+          order: 91,
+          url: 'planning-permission-condition',
+          backUrl: 'planning-permission',
+          nextUrl: 'project-start',
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'You may be able to apply for a grant from this scheme',
+            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).'
+          }
         },
         {
           key: 'project-start',
@@ -423,10 +432,6 @@ module.exports = {
               title: ''
             }
           },
-          maybeEligibleContent: {
-            messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'You will need to extend your tenancy agreement before you can complete a full application.'
-          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -459,13 +464,26 @@ module.exports = {
             {
               key: 'associated-works-A2',
               value: 'No',
-              isEligible: 'maybe'
+              isEligible: 'maybe',
+              maybeUrl: 'tenancy-length-condition'
             }
           ],
           yarKey: 'tenancyLength'
         },
         {
           key: 'tenancy-length-condition',
+          order: 71,
+          url: 'tenancy-length-condition',
+          backUrl: 'tenancy-length',
+          nextUrl: 'associated-works',
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'You may be able to apply for a grant from this scheme',
+            messageContent: 'You will need to extend your tenancy agreement before you can complete a full application.'
+          }
+        },
+        {
+          key: '_tenancy-length-condition',
           order: 80,
           title: 'You may be able to apply for a grant from this scheme',
           pageTitle: '',

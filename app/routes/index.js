@@ -138,8 +138,7 @@ const drawSectionGetRequests = (section) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, url, baseUrl, ineligibleContent, nextUrl, maybeEligibleContent, validate } = currentQuestion
-  const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl: baseUrl }
+  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, validate } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   const value = payload[Object.keys(payload)[0]]
@@ -151,7 +150,8 @@ const showPostPage = (currentQuestion, request, h) => {
   if (answers.find(answer => (answer.value === value && !answer.isEligible))) {
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (answers.find(answer => (answer.value === value && answer.isEligible === 'maybe'))) {
-    return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+    const thisAnswer = answers.find(answer => (answer.value === value && answer.isEligible === 'maybe'))
+    return h.redirect(thisAnswer.maybeUrl)
   }
 
   const errorList = []
