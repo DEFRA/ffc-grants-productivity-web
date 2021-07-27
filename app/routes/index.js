@@ -105,16 +105,20 @@ const getModel = (data, question) => {
   return model
 }
 
+const showGetPage = (question, request, h) => {
+  if (question.maybeEligibleContent) {
+    const { url, backLink, nextUrl, maybeEligibleContent } = question
+    const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl: backLink }
+    return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+  }
+
+  const data = getYarValue(request, question.yarKey) || null
+  return h.view('page', getModel(data, question))
+}
+
 const getHandler = (question) => {
   return (request, h) => {
-    if (question.maybeEligibleContent) {
-      const { url, backLink, nextUrl, maybeEligibleContent } = question
-      const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl: backLink }
-      return h.view('maybe-eligible', MAYBE_ELIGIBLE)
-    }
-
-    const data = getYarValue(request, question.yarKey) || null
-    return h.view('page', getModel(data, question))
+    return showGetPage(question, request, h)
   }
 }
 
@@ -128,7 +132,7 @@ const drawSectionGetRequests = (section) => {
   })
 }
 
-const showNextPage = (currentQuestion, request, h) => {
+const showPostPage = (currentQuestion, request, h) => {
   const { yarKey, answers, url, baseUrl, ineligibleContent, nextUrl, maybeEligibleContent, validate } = currentQuestion
   const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl: baseUrl }
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
@@ -186,7 +190,7 @@ const showNextPage = (currentQuestion, request, h) => {
 
 const getPostHandler = (currentQuestion) => {
   return (request, h) => {
-    return showNextPage(currentQuestion, request, h)
+    return showPostPage(currentQuestion, request, h)
   }
 }
 
