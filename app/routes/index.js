@@ -99,9 +99,11 @@ const getOptions = (data, question) => {
 }
 
 const getModel = (data, question) => {
+  const { type, backUrl } = question
+
   const model = {
-    type: question.type,
-    backLink: question.backLink,
+    type,
+    backUrl,
     items: getOptions(data, question),
     sideBarText: question.sidebar
   }
@@ -110,8 +112,8 @@ const getModel = (data, question) => {
 
 const showGetPage = (question, request, h) => {
   if (question.maybeEligible) {
-    const { url, backLink, nextUrl, maybeEligibleContent } = question
-    const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl: backLink }
+    const { url, backUrl, nextUrl, maybeEligibleContent } = question
+    const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl }
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
   }
 
