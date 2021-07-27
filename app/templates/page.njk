@@ -16,7 +16,7 @@
 {% block beforeContent %}
   {{ govukBackLink({
     text: "Back",
-    href: backLink
+    href: backUrl
   }) }}
 
   {% if errorList %}
@@ -49,7 +49,7 @@
         {%endif%}
 
         <div class="govuk-!-padding-top-5">
-        {%if backLink !== 'slurry-currently-treated' %}
+        {%if backUrl !== 'slurry-currently-treated' %}
         {{ govukButton({
           text: "Continue"
         }) }}

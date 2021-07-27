@@ -19,7 +19,7 @@ module.exports = {
           order: 10,
           title: 'What is your project about?',
           pageTitle: '',
-          backLink: 'start',
+          backUrl: 'start',
           nextUrl: 'legal-status',
           url: 'project-subject',
           baseUrl: 'project-subject',
@@ -59,7 +59,7 @@ module.exports = {
           order: 20,
           title: 'What is the legal status of the business?',
           pageTitle: '',
-          backLink: 'project-subject',
+          backUrl: 'project-subject',
           nextUrl: 'country',
           url: 'legal-status',
           baseUrl: 'legal-status',
@@ -175,7 +175,7 @@ module.exports = {
           order: 30,
           title: 'Is the planned project in England?',
           pageTitle: '',
-          backLink: 'legal-status',
+          backUrl: 'legal-status',
           nextUrl: 'planning-permission',
           url: 'country',
           baseUrl: 'country',
@@ -227,7 +227,7 @@ module.exports = {
           pageTitle: '',
           url: 'planning-permission',
           baseUrl: 'planning-permission',
-          backLink: 'country',
+          backUrl: 'country',
           nextUrl: 'project-start',
           ineligibleContent: {
             messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
@@ -235,10 +235,6 @@ module.exports = {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
             }
-          },
-          maybeEligibleContent: {
-            messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).'
           },
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
@@ -277,7 +273,8 @@ module.exports = {
             {
               key: 'planning-permission-A2',
               value: 'Expected to have by 31 March 2022',
-              isEligible: 'maybe'
+              isEligible: 'maybe',
+              maybeUrl: 'planning-required-condition'
             },
             {
               key: 'planning-permission-A2',
@@ -288,13 +285,25 @@ module.exports = {
           yarKey: 'planningPermission'
         },
         {
+          key: 'planning-required-condition',
+          order: 91,
+          url: 'planning-required-condition',
+          backUrl: 'planning-permission',
+          nextUrl: 'project-start',
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'You may be able to apply for a grant from this scheme',
+            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).'
+          }
+        },
+        {
           key: 'project-start',
           order: 50,
           title: 'Have you already started work on the project?',
           pageTitle: '',
           url: 'project-start',
           baseUrl: 'project-start',
-          backLink: 'planning-permission',
+          backUrl: 'planning-permission',
           nextUrl: 'tenancy',
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
@@ -357,7 +366,7 @@ module.exports = {
           pageTitle: '',
           url: 'tenancy',
           baseUrl: 'tenancy',
-          backLink: 'project-start',
+          backUrl: 'project-start',
           nextUrl: 'tenancy-length',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -412,7 +421,7 @@ module.exports = {
           pageTitle: '',
           url: 'tenancy-length',
           baseUrl: 'tenancy-length',
-          backLink: 'tenancy',
+          backUrl: 'tenancy',
           nextUrl: 'associated-works',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -422,10 +431,6 @@ module.exports = {
               url: '',
               title: ''
             }
-          },
-          maybeEligibleContent: {
-            messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'You will need to extend your tenancy agreement before you can complete a full application.'
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -459,18 +464,31 @@ module.exports = {
             {
               key: 'associated-works-A2',
               value: 'No',
-              isEligible: 'maybe'
+              isEligible: 'maybe',
+              maybeUrl: 'tenancy-length-condition'
             }
           ],
           yarKey: 'tenancyLength'
         },
         {
           key: 'tenancy-length-condition',
+          order: 71,
+          url: 'tenancy-length-condition',
+          backUrl: 'tenancy-length',
+          nextUrl: 'associated-works',
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'You may be able to apply for a grant from this scheme',
+            messageContent: 'You will need to extend your tenancy agreement before you can complete a full application.'
+          }
+        },
+        {
+          key: '_tenancy-length-condition',
           order: 80,
           title: 'You may be able to apply for a grant from this scheme',
           pageTitle: '',
           url: 'enancy-length-condition',
-          backLink: 'tenancy-length',
+          backUrl: 'tenancy-length',
           nextUrl: 'associated-works',
           type: 'single-answer',
           classes: '',
@@ -493,7 +511,7 @@ module.exports = {
           pageTitle: '',
           url: 'associated-works',
           baseUrl: 'associated-works',
-          backLink: 'tenancy-length',
+          backUrl: 'tenancy-length',
           nextUrl: 'slurry/project-cost',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -546,8 +564,8 @@ module.exports = {
           pageTitle: '',
           url: 'slurry/project-cost',
           baseUrl: 'project-cost',
-          backLink: '/productivity/associated-works',
-          nextUrl: 'remaining-costs',
+          backUrl: '/productivity/associated-works',
+          nextUrl: 'potential-amount',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',
@@ -577,14 +595,6 @@ module.exports = {
               title: 'See other grants you may be eligible for.'
             }
           },
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: 'You may be able to apply for a grant of up to £400,000, based on the estimated cost of £1,000,000.',
-            warning: {
-              text: 'The project is not guaranteed to receive a grant.',
-              iconFallbackText: 'Warning'
-            }
-          },
           type: 'input',
           sidebar:
             { heading: 'Items selected', para: '', items: [] },
@@ -610,13 +620,29 @@ module.exports = {
 
         },
         {
+          key: 'potential-amount',
+          order: 91,
+          url: 'slurry/potential-amount',
+          backUrl: 'project-cost',
+          nextUrl: 'remaining-costs',
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: 'You may be able to apply for a grant of up to £400,000, based on the estimated cost of £1,000,000.',
+            warning: {
+              text: 'The project is not guaranteed to receive a grant.',
+              iconFallbackText: 'Warning'
+            }
+          }
+        },
+        {
           key: 'remaining-costs',
           order: 110,
           title: 'Can you pay the remaining a costs? ',
           pageTitle: '',
           url: 'slurry/remaining-costs',
           baseUrl: 'remaining-costs',
-          backLink: 'project-cost',
+          backUrl: 'project-cost',
           nextUrl: 'SSSI',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -669,7 +695,7 @@ module.exports = {
           pageTitle: '',
           url: 'slurry/SSSI',
           baseUrl: 'SSSI',
-          backLink: 'remaining-costs',
+          backUrl: 'remaining-costs',
           nextUrl: 'projects-impact',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -718,7 +744,7 @@ module.exports = {
           pageTitle: '',
           url: 'slurry/projects-impact',
           baseUrl: 'projects-impact',
-          backLink: 'SSSI',
+          backUrl: 'SSSI',
           nextUrl: 'slurry-currently-treated',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -772,7 +798,7 @@ module.exports = {
           pageTitle: '',
           url: 'slurry/slurry-currently-treated',
           baseUrl: 'slurry-currently-treated',
-          backLink: 'projects-impact',
+          backUrl: 'projects-impact',
           nextUrl: 'slurry-to-be-treated',
           classes: 'govuk-input--width-5',
           id: 'slurryCurrentlyTreated',
@@ -830,7 +856,7 @@ module.exports = {
           pageTitle: '',
           url: 'slurry/slurry-to-be-treated',
           baseUrl: 'slurry-to-be-treated',
-          backLink: 'slurry-currently-treated',
+          backUrl: 'slurry-currently-treated',
           nextUrl: 'answers',
           classes: 'govuk-input--width-5',
           id: 'slurryToBeTreated',
@@ -889,7 +915,7 @@ module.exports = {
           pageTitle: 'Crops',
           url: 'slurry/answers',
           baseUrl: 'answers',
-          backLink: 'slurry-to-be-treated',
+          backUrl: 'slurry-to-be-treated',
           nextUrl: 'business',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -944,7 +970,7 @@ module.exports = {
           pageTitle: 'Crops',
           url: 'slurry/business',
           baseUrl: 'business',
-          backLink: 'answers',
+          backUrl: 'answers',
           nextUrl: 'applying',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -999,7 +1025,7 @@ module.exports = {
           pageTitle: '',
           url: 'slurry/applying',
           baseUrl: 'applying',
-          backLink: 'business',
+          backUrl: 'business',
           nextUrl: 'farmer-details',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1046,7 +1072,7 @@ module.exports = {
           pageTitle: '',
           url: 'slurry/farmer-details',
           baseUrl: 'farmer-details',
-          backLink: 'applying',
+          backUrl: 'applying',
           nextUrl: 'check-details',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1102,7 +1128,7 @@ module.exports = {
           pageTitle: '',
           url: 'slurry/check-details',
           baseUrl: 'check-details',
-          backLink: 'farmer-details',
+          backUrl: 'farmer-details',
           nextUrl: 'consent',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1158,7 +1184,7 @@ module.exports = {
           pageTitle: 'Crops',
           url: 'slurry/consent',
           baseUrl: 'consent',
-          backLink: 'check-details',
+          backUrl: 'check-details',
           nextUrl: 'reference-number',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1200,7 +1226,7 @@ module.exports = {
           pageTitle: 'Crops',
           url: 'slurry/reference-number',
           baseUrl: 'reference-number',
-          backLink: 'consent',
+          backUrl: 'consent',
           nextUrl: '',
           eliminationAnswerKeys: '',
           ineligibleContent: {

@@ -6,21 +6,24 @@ function isChecked (data, option) {
   return !!data && data.includes(option)
 }
 
-function setLabelData (data, labelData) {
-  return labelData.map((label) => {
-    if (typeof (label.value) === 'string' && label.value !== 'divider') {
-      return {
-        value: label.value,
-        text: label.value,
-        hint: label.hint,
-        checked: isChecked(data, label.value),
-        selected: data === label.value
-      }
-    }
-    if (label.value === 'divider') {
+function setAnswerOptions (data, answers) {
+  return answers.map((answer) => {
+    const { value, hint, text } = answer
+
+    if (value === 'divider') {
       return { divider: 'or' }
     }
-    const { text, value, hint } = label
+
+    if (typeof (value) === 'string') {
+      return {
+        value,
+        text: value,
+        hint,
+        checked: isChecked(data, value),
+        selected: data === value
+      }
+    }
+
     return {
       value,
       text,
@@ -32,49 +35,53 @@ function setLabelData (data, labelData) {
 }
 
 const radioButtons = (data, question) => {
+  const { classes, yarKey, title, answers } = question
   return {
-    classes: question.classes,
-    idPrefix: question.yarKey,
-    name: question.yarKey,
+    classes,
+    idPrefix: yarKey,
+    name: yarKey,
     fieldset: {
       legend: {
-        text: question.title,
+        text: title,
         isPageHeading: true,
         classes: 'govuk-fieldset__legend--l'
       }
     },
-    items: setLabelData(data, question.answers)
+    items: setAnswerOptions(data, answers)
   }
 }
 
 const checkBoxes = (data, question) => {
+  const { classes, yarKey, title, hint, answers } = question
   return {
-    classes: question.classes,
-    idPrefix: question.yarKey,
-    name: question.yarKey,
+    classes,
+    idPrefix: yarKey,
+    name: yarKey,
     fieldset: {
       legend: {
-        text: question.title,
+        text: title,
         isPageHeading: true,
         classes: 'govuk-fieldset__legend--l'
       }
     },
     hint: {
-      text: question.hint
+      text: hint
     },
-    items: setLabelData(data, question.answers)
+    items: setAnswerOptions(data, answers)
   }
 }
 
-const inputBoxes = (question) => {
+const inputText = (data, question) => {
+  const { yarKey, prefix, suffix, label, hint } = question
   return {
-    id: question.id,
-    name: question.name,
+    id: yarKey,
+    name: yarKey,
     classes: 'govuk-input--width-10',
-    prefix: question.prefix,
-    suffix: question.suffix,
-    label: question.label,
-    hint: question.hint
+    prefix,
+    suffix,
+    label,
+    hint,
+    value: data || ''
   }
 }
 
@@ -85,26 +92,38 @@ const getOptions = (data, question) => {
     case 'multi-answer':
       return checkBoxes(data, question)
     case 'input':
-      return inputBoxes(question)
+      return inputText(data, question)
     default:
       return radioButtons(data, question)
   }
 }
 
 const getModel = (data, question) => {
+  const { type, backUrl } = question
+
   const model = {
-    type: question.type,
-    backLink: question.backLink,
+    type,
+    backUrl,
     items: getOptions(data, question),
     sideBarText: question.sidebar
   }
   return model
 }
 
+const showGetPage = (question, request, h) => {
+  if (question.maybeEligible) {
+    const { url, backUrl, nextUrl, maybeEligibleContent } = question
+    const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl }
+    return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+  }
+
+  const data = getYarValue(request, question.yarKey) || null
+  return h.view('page', getModel(data, question))
+}
+
 const getHandler = (question) => {
   return (request, h) => {
-    const data = getYarValue(request, question.yarKey) || null
-    return h.view('page', getModel(data, question))
+    return showGetPage(question, request, h)
   }
 }
 
@@ -118,9 +137,8 @@ const drawSectionGetRequests = (section) => {
   })
 }
 
-const showNextPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, url, baseUrl, ineligibleContent, nextUrl, maybeEligibleContent, validate } = currentQuestion
-  const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl: baseUrl }
+const showPostPage = (currentQuestion, request, h) => {
+  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, validate } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   const value = payload[Object.keys(payload)[0]]
@@ -132,7 +150,8 @@ const showNextPage = (currentQuestion, request, h) => {
   if (answers.find(answer => (answer.value === value && !answer.isEligible))) {
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (answers.find(answer => (answer.value === value && answer.isEligible === 'maybe'))) {
-    return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+    const thisAnswer = answers.find(answer => (answer.value === value && answer.isEligible === 'maybe'))
+    return h.redirect(thisAnswer.maybeUrl)
   }
 
   const errorList = []
@@ -164,9 +183,9 @@ const showNextPage = (currentQuestion, request, h) => {
     case 'projectCost': {
       const { isEligible } = getGrantValues(value, currentQuestion.grantInfo)
 
-      return isEligible
-        ? h.view('maybe-eligible', MAYBE_ELIGIBLE)
-        : h.view('not-eligible', NOT_ELIGIBLE)
+      if (!isEligible) {
+        return h.view('not-eligible', NOT_ELIGIBLE)
+      }
     }
   }
 
@@ -176,7 +195,7 @@ const showNextPage = (currentQuestion, request, h) => {
 
 const getPostHandler = (currentQuestion) => {
   return (request, h) => {
-    return showNextPage(currentQuestion, request, h)
+    return showPostPage(currentQuestion, request, h)
   }
 }
 
