@@ -19,8 +19,8 @@ function setAnswerOptions (data, answers) {
         value,
         text: value,
         hint,
-        checked: isChecked(data, answer.value),
-        selected: data === answer.value
+        checked: isChecked(data, value),
+        selected: data === value
       }
     }
 
