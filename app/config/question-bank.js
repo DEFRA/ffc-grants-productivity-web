@@ -274,7 +274,7 @@ module.exports = {
               key: 'planning-permission-A2',
               value: 'Expected to have by 31 March 2022',
               isEligible: 'maybe',
-              maybeUrl: 'planning-permission-condition'
+              maybeUrl: 'planning-required-condition'
             },
             {
               key: 'planning-permission-A2',
@@ -285,9 +285,9 @@ module.exports = {
           yarKey: 'planningPermission'
         },
         {
-          key: 'planning-permission-condition',
+          key: 'planning-required-condition',
           order: 91,
-          url: 'planning-permission-condition',
+          url: 'planning-required-condition',
           backUrl: 'planning-permission',
           nextUrl: 'project-start',
           maybeEligible: true,
@@ -565,7 +565,7 @@ module.exports = {
           url: 'slurry/project-cost',
           baseUrl: 'project-cost',
           backUrl: '/productivity/associated-works',
-          nextUrl: 'project-cost-condition',
+          nextUrl: 'potential-amount',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',
@@ -620,9 +620,9 @@ module.exports = {
 
         },
         {
-          key: 'project-cost-condition',
+          key: 'potential-amount',
           order: 91,
-          url: 'slurry/project-cost-condition',
+          url: 'slurry/potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
           maybeEligible: true,
