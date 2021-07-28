@@ -85,7 +85,7 @@ const inputText = (data, question) => {
   }
 }
 
-const getOptions = (data, question) => {
+const getCorrectInputType = (data, question) => {
   switch (question.type) {
     case 'single-answer':
       return radioButtons(data, question)
@@ -104,7 +104,7 @@ const getModel = (data, question) => {
   const model = {
     type,
     backUrl,
-    items: getOptions(data, question),
+    items: getCorrectInputType(data, question),
     sideBarText: question.sidebar
   }
   return model
