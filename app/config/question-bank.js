@@ -518,7 +518,7 @@ module.exports = {
           key: 'project-cost',
           order: 90,
           pageTitle: '',
-          url: 'project-cost',
+          url: 'slurry/project-cost',
           baseUrl: 'project-cost',
           backUrl: 'project-items',
           nextUrl: 'potential-amount',
