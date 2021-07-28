@@ -367,7 +367,7 @@ module.exports = {
           url: 'tenancy',
           baseUrl: 'tenancy',
           backUrl: 'project-start',
-          nextUrl: 'tenancy-length',
+          nextUrl: 'slurry/project-items',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -409,7 +409,8 @@ module.exports = {
             {
               key: 'tenancy-A2',
               value: 'No',
-              isEligible: true
+              isEligible: 'maybe',
+              maybeUrl: 'tenancy-length'
             }
           ],
           yarKey: 'tenancy'
@@ -422,7 +423,7 @@ module.exports = {
           url: 'tenancy-length',
           baseUrl: 'tenancy-length',
           backUrl: 'tenancy',
-          nextUrl: 'associated-works',
+          nextUrl: 'slurry/project-items',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -457,12 +458,12 @@ module.exports = {
           ],
           answers: [
             {
-              key: 'associated-works-A1',
+              key: 'tenancy-length-A1',
               value: 'Yes',
               isEligible: true
             },
             {
-              key: 'associated-works-A2',
+              key: 'tenancy-length-A2',
               value: 'No',
               isEligible: 'maybe',
               maybeUrl: 'tenancy-length-condition'
@@ -475,7 +476,7 @@ module.exports = {
           order: 71,
           url: 'tenancy-length-condition',
           backUrl: 'tenancy-length',
-          nextUrl: 'associated-works',
+          nextUrl: 'slurry/project-items',
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
@@ -483,36 +484,14 @@ module.exports = {
           }
         },
         {
-          key: '_tenancy-length-condition',
-          order: 80,
-          title: 'You may be able to apply for a grant from this scheme',
-          pageTitle: '',
-          url: 'enancy-length-condition',
-          backUrl: 'tenancy-length',
-          nextUrl: 'associated-works',
-          type: 'single-answer',
-          classes: '',
-          ga: { dimension: '', value: '' },
-          answers: [
-            {
-              key: 'tenancy-length-condition',
-              value: 'You will need to extend your tenancy agreement before you can complete a full application.',
-              isEligible: true
-            }
-          ],
-          yarKey: 'tenancyLengthCondition'
-
-        },
-
-        {
-          key: 'associated-works',
+          key: 'project-items',
           order: 80,
           title: 'Which eligible items does your project need?',
           pageTitle: '',
-          url: 'associated-works',
-          baseUrl: 'associated-works',
-          backUrl: 'tenancy-length',
-          nextUrl: 'slurry/project-cost',
+          url: 'slurry/project-items',
+          baseUrl: 'project-items',
+          backUrl: '/productivity/tenancy-length',
+          nextUrl: 'project-cost',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -538,33 +517,33 @@ module.exports = {
           ],
           answers: [
             {
-              key: 'associated-works-A1',
+              key: 'project-items-A1',
               value: 'Mild acidification equipment',
               hint: ['', ''],
               isEligible: true
             },
             {
-              key: 'associated-works-A2',
+              key: 'project-items-A2',
               value: 'Acidification infrastructure',
               hint: '',
               isEligible: true
             },
             {
-              key: 'associated-works-A3',
+              key: 'project-items-A3',
               value: 'Slurry pipework',
               isEligible: true
             }
           ],
-          yarKey: 'associatedWorks'
+          yarKey: 'projectItems'
 
         },
         {
           key: 'project-cost',
           order: 90,
           pageTitle: '',
-          url: 'slurry/project-cost',
+          url: 'project-cost',
           baseUrl: 'project-cost',
-          backUrl: '/productivity/associated-works',
+          backUrl: 'project-items',
           nextUrl: 'potential-amount',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
