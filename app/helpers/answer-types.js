@@ -4,7 +4,7 @@ function isChecked (data, option) {
 
 function setAnswerOptions (data, answers) {
   return answers.map((answer) => {
-    const { value, hint, text } = answer
+    const { value, hint, text, conditional } = answer
 
     if (value === 'divider') {
       return { divider: 'or' }
@@ -14,6 +14,7 @@ function setAnswerOptions (data, answers) {
       return {
         value,
         text: value,
+        conditional,
         hint,
         checked: isChecked(data, value),
         selected: data === value
@@ -23,6 +24,7 @@ function setAnswerOptions (data, answers) {
     return {
       value,
       text,
+      conditional,
       hint,
       checked: isChecked(data, value),
       selected: data === value
