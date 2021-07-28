@@ -28,6 +28,22 @@ const getModel = (data, question) => {
   return model
 }
 
+const customiseErrorText = (value, currentQuestion, errorList, errorText, yarKey, h) => {
+  const baseModel = getModel(value, currentQuestion)
+
+  baseModel.items = { ...baseModel.items, errorMessage: { text: errorText } }
+  errorList.push({
+    text: errorText,
+    href: `#${yarKey}`
+  })
+
+  const modelWithErrors = {
+    ...baseModel,
+    errorList
+  }
+  return h.view('page', modelWithErrors)
+}
+
 const showGetPage = (question, request, h) => {
   if (question.maybeEligible) {
     const { url, backUrl, nextUrl, maybeEligibleContent } = question
@@ -63,8 +79,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
   setYarValue(request, yarKey, value)
 
-  // based on answer -> redirect to pages [not eligible] or [maybe eligible]
-
+  // either [ineligible] or [redirection]
   const thisAnswer = answers.find(answer => (answer.value === value))
 
   if (thisAnswer) {
@@ -77,48 +92,24 @@ const showPostPage = (currentQuestion, request, h) => {
 
   const errorList = []
 
-  const requiredAnswer = answers.find(answer => (answer.mustSelect))
-
-  if ((!!requiredAnswer) && (!value || !value.includes(requiredAnswer.value))) {
-    const errorMustSelect = requiredAnswer.errorMustSelect
-    const baseModel = getModel(value, currentQuestion)
-
-    baseModel.items = { ...baseModel.items, errorMessage: { text: errorMustSelect } }
-    errorList.push({
-      text: errorMustSelect,
-      href: `#${yarKey}`
-    })
-
-    const modelWithErrors = {
-      ...baseModel,
-      errorList
-    }
-    return h.view('page', modelWithErrors)
-  }
-
-  // no selection -> same error text for [error message] & [error summary]
-
+  // ERROR: no selection
   if (
     (validate && validate.errorEmptyField) &&
     (payload === {} || !Object.keys(payload).includes(yarKey) || payload[yarKey] === '')
   ) {
     const errorTextNoSelection = validate.errorEmptyField
-    const baseModel = getModel(value, currentQuestion)
-
-    baseModel.items = { ...baseModel.items, errorMessage: { text: errorTextNoSelection } }
-    errorList.push({
-      text: errorTextNoSelection,
-      href: `#${yarKey}`
-    })
-
-    const modelWithErrors = {
-      ...baseModel,
-      errorList
-    }
-    return h.view('page', modelWithErrors)
+    return customiseErrorText(value, currentQuestion, errorList, errorTextNoSelection, yarKey, h)
   }
 
-  // specific redirects to some pages
+  // ERROR: mandatory checkbox / radiobutton not selected
+  const requiredAnswer = answers.find(answer => (answer.mustSelect))
+
+  if ((!!requiredAnswer) && (!value || !value.includes(requiredAnswer.value))) {
+    const errorMustSelect = requiredAnswer.errorMustSelect
+    return customiseErrorText(value, currentQuestion, errorList, errorMustSelect, yarKey, h)
+  }
+
+  // pages with further checks
   switch (yarKey) {
     case 'projectCost': {
       const { isEligible } = getGrantValues(value, currentQuestion.grantInfo)
@@ -129,7 +120,7 @@ const showPostPage = (currentQuestion, request, h) => {
     }
   }
 
-  // no issues -> show nexturl
+  // ALL GOOD -> show nexturl
   return h.redirect(nextUrl)
 }
 
