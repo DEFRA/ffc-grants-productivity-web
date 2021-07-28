@@ -148,7 +148,8 @@ module.exports = {
             },
             {
               key: 'legal-status-A12',
-              value: 'None of the above'
+              value: 'None of the above',
+              notEligible: true
             }
           ],
           errorMessage: {
@@ -195,11 +196,15 @@ module.exports = {
           answers: [
             {
               key: 'country-A1',
+              conditional: {
+                html: ''
+              },
               value: 'Yes'
             },
             {
               key: 'country-A2',
-              value: 'No'
+              value: 'No',
+              notEligible: true
             }
           ],
           yarKey: 'country'
@@ -726,13 +731,11 @@ module.exports = {
           answers: [
             {
               key: 'projects-impact-A1',
-              value: 'Increase acidification',
-              nextUrl: ''
+              value: 'Increase acidification'
             },
             {
               key: 'projects-impact-A2',
-              value: 'Introduce acidification',
-              nextUrl: ''
+              value: 'Introduce acidification'
             }
           ],
           yarKey: 'projectsImpact'
