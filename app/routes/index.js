@@ -77,6 +77,25 @@ const showPostPage = (currentQuestion, request, h) => {
 
   const errorList = []
 
+  const requiredAnswer = answers.find(answer => (answer.mustSelect))
+
+  if ((!!requiredAnswer) && (!value || !value.includes(requiredAnswer.value))) {
+    const errorMustSelect = requiredAnswer.errorMustSelect
+    const baseModel = getModel(value, currentQuestion)
+
+    baseModel.items = { ...baseModel.items, errorMessage: { text: errorMustSelect } }
+    errorList.push({
+      text: errorMustSelect,
+      href: `#${yarKey}`
+    })
+
+    const modelWithErrors = {
+      ...baseModel,
+      errorList
+    }
+    return h.view('page', modelWithErrors)
+  }
+
   // no selection -> same error text for [error message] & [error summary]
 
   if (
