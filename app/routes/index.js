@@ -3,7 +3,7 @@ const { setYarValue, getYarValue } = require('../helpers/session')
 const { getGrantValues } = require('../helpers/grants-info')
 const { radioButtons, checkBoxes, inputText } = require('../helpers/input-functions')
 
-const getCorrectInputType = (data, question) => {
+const getCorrectAnswerType = (data, question) => {
   switch (question.type) {
     case 'single-answer':
       return radioButtons(data, question)
@@ -22,7 +22,7 @@ const getModel = (data, question) => {
   const model = {
     type,
     backUrl,
-    items: getCorrectInputType(data, question),
+    items: getCorrectAnswerType(data, question),
     sideBarText: question.sidebar
   }
   return model
