@@ -147,11 +147,14 @@ const showPostPage = (currentQuestion, request, h) => {
 
   // based on answer -> redirect to pages [not eligible] or [maybe eligible]
 
-  if (answers.find(answer => (answer.value === value && !answer.isEligible))) {
-    return h.view('not-eligible', NOT_ELIGIBLE)
-  } else if (answers.find(answer => (answer.value === value && answer.isEligible === 'maybe'))) {
-    const thisAnswer = answers.find(answer => (answer.value === value && answer.isEligible === 'maybe'))
-    return h.redirect(thisAnswer.maybeUrl)
+  const thisAnswer = answers.find(answer => (answer.value === value))
+
+  if (thisAnswer) {
+    if (thisAnswer.notEligible) {
+      return h.view('not-eligible', NOT_ELIGIBLE)
+    } else if (thisAnswer.redirectUrl) {
+      return h.redirect(thisAnswer.redirectUrl)
+    }
   }
 
   const errorList = []
