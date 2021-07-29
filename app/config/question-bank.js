@@ -471,6 +471,14 @@ module.exports = {
           url: 'slurry/project-items',
           baseUrl: 'project-items',
           backUrl: '/productivity/tenancy-length',
+          backUrlObject: {
+            dependentQuestionYarKey: 'tenancy',
+            dependentAnswerKeysArray: ['tenancy-A1'],
+            backUrlOptions: {
+              thenUrl: '/productivity/tenancy',
+              elseUrl: '/productivity/tenancy-length'
+            }
+          },
           nextUrl: 'project-cost',
           eliminationAnswerKeys: '',
           ineligibleContent: {

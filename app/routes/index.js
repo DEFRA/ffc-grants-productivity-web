@@ -3,6 +3,11 @@ const { setYarValue, getYarValue } = require('../helpers/session')
 const { getGrantValues } = require('../helpers/grants-info')
 const { radioButtons, checkBoxes, inputText } = require('../helpers/answer-types')
 
+const ALL_QUESTIONS = []
+questionBank.sections.forEach(({ questions }) => {
+  ALL_QUESTIONS.push(...questions)
+})
+
 const getCorrectAnswerType = (data, question) => {
   switch (question.type) {
     case 'single-answer':
@@ -16,20 +21,41 @@ const getCorrectAnswerType = (data, question) => {
   }
 }
 
-const getModel = (data, question) => {
+const resolveBackUrl = (backUrlObject, request) => {
+  const { dependentQuestionYarKey, dependentAnswerKeysArray, backUrlOptions } = backUrlObject
+  const { thenUrl, elseUrl } = backUrlOptions
+
+  const dependentAnswer = getYarValue(request, dependentQuestionYarKey)
+
+  const selectThenUrl = ALL_QUESTIONS.find(thisQuestion => (
+    thisQuestion.yarKey === dependentQuestionYarKey &&
+    thisQuestion.answers &&
+    thisQuestion.answers.some(answer => (
+      dependentAnswerKeysArray.includes(answer.key) && dependentAnswer.includes(answer.value)
+    ))
+  ))
+
+  return selectThenUrl ? thenUrl : elseUrl
+}
+
+const getModel = (data, question, request) => {
   const { type, backUrl } = question
+
+  const resolvedBackUrl = question.backUrlObject
+    ? resolveBackUrl(question.backUrlObject, request)
+    : backUrl
 
   const model = {
     type,
-    backUrl,
+    backUrl: resolvedBackUrl,
     items: getCorrectAnswerType(data, question),
     sideBarText: question.sidebar
   }
   return model
 }
 
-const customiseErrorText = (value, currentQuestion, errorList, errorText, yarKey, h) => {
-  const baseModel = getModel(value, currentQuestion)
+const customiseErrorText = (value, currentQuestion, errorList, errorText, yarKey, h, request) => {
+  const baseModel = getModel(value, currentQuestion, request)
 
   baseModel.items = { ...baseModel.items, errorMessage: { text: errorText } }
   errorList.push({
@@ -52,7 +78,7 @@ const showGetPage = (question, request, h) => {
   }
 
   const data = getYarValue(request, question.yarKey) || null
-  return h.view('page', getModel(data, question))
+  return h.view('page', getModel(data, question, request))
 }
 
 const getHandler = (question) => {
@@ -98,7 +124,7 @@ const showPostPage = (currentQuestion, request, h) => {
     (payload === {} || !Object.keys(payload).includes(yarKey) || payload[yarKey] === '')
   ) {
     const errorTextNoSelection = validate.errorEmptyField
-    return customiseErrorText(value, currentQuestion, errorList, errorTextNoSelection, yarKey, h)
+    return customiseErrorText(value, currentQuestion, errorList, errorTextNoSelection, yarKey, h, request)
   }
 
   // ERROR: mandatory checkbox / radiobutton not selected
@@ -106,7 +132,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
   if ((!!requiredAnswer) && (!value || !value.includes(requiredAnswer.value))) {
     const errorMustSelect = requiredAnswer.errorMustSelect
-    return customiseErrorText(value, currentQuestion, errorList, errorMustSelect, yarKey, h)
+    return customiseErrorText(value, currentQuestion, errorList, errorMustSelect, yarKey, h, request)
   }
 
   // pages with further checks
