@@ -485,8 +485,15 @@ module.exports = {
           type: 'multi-answer',
           minAnswerCount: 1,
           maxAnswerCount: 3,
-          hint: 'The minimum grant you can apply for this project is £35,000 (40% of £87,500). The maximum grant is £1 million.',
+          hint: {
+            html: `
+              The minimum grant you can claim is £35,000 (40% of £87,500). The maximum grant is £1 million.
+              <br/><br/>Select all that apply.`
+          },
           ga: { dimension: '', value: '' },
+          validate: {
+            errorEmptyField: 'Select all the items your project needs'
+          },
           validations: [
             {
               type: '',
@@ -499,18 +506,25 @@ module.exports = {
             {
               key: 'project-items-A1',
               value: 'Mild acidification equipment',
-              hint: ['', ''],
+              hint: {
+                html: `<span>You must buy all 4 of the following items:</span>
+                <ul>
+                  <li>acid storage</li>
+                  <li>dosing equipment</li>
+                  <li>mixing tank</li>
+                  <li>pump</li>
+                </ul>
+                `
+              },
               mustSelect: true,
-              errorMustSelect: 'This option must be selected -- !!'
+              errorMustSelect: 'You must select mild acidification equipment'
             },
             {
               key: 'project-items-A2',
               value: 'Acidification infrastructure',
-              hint: ''
-            },
-            {
-              key: 'project-items-A3',
-              value: 'Slurry pipework'
+              hint: {
+                text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
+              }
             }
           ],
           yarKey: 'projectItems'
