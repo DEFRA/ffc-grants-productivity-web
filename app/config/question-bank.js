@@ -4,7 +4,7 @@
  *
  */
 
-module.exports = {
+const questionBank = {
   grantScheme: {
     key: 'FFC002',
     name: 'Productivity'
@@ -1215,4 +1215,14 @@ module.exports = {
       ]
     }
   ]
+}
+
+const ALL_QUESTIONS = []
+questionBank.sections.forEach(({ questions }) => {
+  ALL_QUESTIONS.push(...questions)
+})
+
+module.exports = {
+  questionBank,
+  ALL_QUESTIONS
 }

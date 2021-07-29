@@ -1,12 +1,7 @@
-const questionBank = require('../config/question-bank')
+const { questionBank, ALL_QUESTIONS } = require('../config/question-bank')
 const { setYarValue, getYarValue } = require('../helpers/session')
 const { getGrantValues } = require('../helpers/grants-info')
 const { radioButtons, checkBoxes, inputText } = require('../helpers/answer-types')
-
-const ALL_QUESTIONS = []
-questionBank.sections.forEach(({ questions }) => {
-  ALL_QUESTIONS.push(...questions)
-})
 
 const getCorrectAnswerType = (data, question) => {
   switch (question.type) {
