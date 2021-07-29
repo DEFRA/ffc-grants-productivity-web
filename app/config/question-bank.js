@@ -43,13 +43,11 @@ module.exports = {
           answers: [
             {
               key: 'project-subject-A1',
-              value: 'Robotics and innovation',
-              isEligible: true
+              value: 'Robotics and innovation'
             },
             {
               key: 'project-subject-A2',
-              value: 'Slurry acidification',
-              isEligible: true
+              value: 'Slurry acidification'
             }
           ],
           yarKey: 'projectSubject'
@@ -103,58 +101,47 @@ module.exports = {
           answers: [
             {
               key: 'legal-status-A1',
-              value: 'Sole trader',
-              isEligible: true
+              value: 'Sole trader'
             },
             {
               key: 'legal-status-A2',
-              value: 'Partnership',
-              isEligible: true
+              value: 'Partnership'
             },
             {
               key: 'legal-status-A3',
-              value: 'Limited company',
-              isEligible: true
+              value: 'Limited company'
             },
             {
               key: 'legal-status-A4',
-              value: 'Charity',
-              isEligible: true
+              value: 'Charity'
             },
             {
               key: 'legal-status-A5',
-              value: 'Trust',
-              isEligible: true
+              value: 'Trust'
             },
             {
               key: 'legal-status-A6',
-              value: 'Limited liability partnership',
-              isEligible: true
+              value: 'Limited liability partnership'
             },
             {
               key: 'legal-status-A7',
-              value: 'Community interest company',
-              isEligible: true
+              value: 'Community interest company'
             },
             {
               key: 'legal-status-A8',
-              value: 'Limited partnership',
-              isEligible: true
+              value: 'Limited partnership'
             },
             {
               key: 'legal-status-A9',
-              value: 'Industrial and provident society',
-              isEligible: true
+              value: 'Industrial and provident society'
             },
             {
               key: 'legal-status-A10',
-              value: 'Co-operative society (Co-Op)',
-              isEligible: true
+              value: 'Co-operative society (Co-Op)'
             },
             {
               key: 'legal-status-A11',
-              value: 'Community benefit society (BenCom)',
-              isEligible: true
+              value: 'Community benefit society (BenCom)'
             },
             {
               value: 'divider'
@@ -162,7 +149,7 @@ module.exports = {
             {
               key: 'legal-status-A12',
               value: 'None of the above',
-              isEligible: false
+              notEligible: true
             }
           ],
           errorMessage: {
@@ -209,13 +196,15 @@ module.exports = {
           answers: [
             {
               key: 'country-A1',
-              value: 'Yes',
-              isEligible: true
+              conditional: {
+                html: ''
+              },
+              value: 'Yes'
             },
             {
               key: 'country-A2',
               value: 'No',
-              isEligible: false
+              notEligible: true
             }
           ],
           yarKey: 'country'
@@ -262,24 +251,21 @@ module.exports = {
           answers: [
             {
               key: 'planning-permission-A1',
-              value: 'Not needed',
-              isEligible: true
+              value: 'Not needed'
             },
             {
               key: 'planning-permission-A2',
-              value: 'Secured',
-              isEligible: true
+              value: 'Secured'
             },
             {
               key: 'planning-permission-A2',
               value: 'Expected to have by 31 March 2022',
-              isEligible: 'maybe',
-              maybeUrl: 'planning-required-condition'
+              redirectUrl: 'planning-required-condition'
             },
             {
               key: 'planning-permission-A2',
               value: 'Will not have by 31 March 2022',
-              isEligible: false
+              notEligible: true
             }
           ],
           yarKey: 'planningPermission'
@@ -339,8 +325,7 @@ module.exports = {
               value: 'Yes, preparatory work',
               hint: {
                 text: 'For example, quotes from suppliers, applying for planning permission'
-              },
-              isEligible: true
+              }
             },
             {
               key: 'project-start-A2',
@@ -348,12 +333,11 @@ module.exports = {
               hint: {
                 text: 'For example, digging, signing contracts, placing orders'
               },
-              isEligible: false
+              notEligible: true
             },
             {
               key: 'project-start-A3',
-              value: 'No, we have not done any work on this project yet',
-              isEligible: true
+              value: 'No, we have not done any work on this project yet'
             }
           ],
           yarKey: 'projectStart'
@@ -367,7 +351,7 @@ module.exports = {
           url: 'tenancy',
           baseUrl: 'tenancy',
           backUrl: 'project-start',
-          nextUrl: 'tenancy-length',
+          nextUrl: 'slurry/project-items',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -403,13 +387,12 @@ module.exports = {
           answers: [
             {
               key: 'tenancy-A1',
-              value: 'Yes',
-              isEligible: true
+              value: 'Yes'
             },
             {
               key: 'tenancy-A2',
               value: 'No',
-              isEligible: true
+              redirectUrl: 'tenancy-length'
             }
           ],
           yarKey: 'tenancy'
@@ -422,7 +405,7 @@ module.exports = {
           url: 'tenancy-length',
           baseUrl: 'tenancy-length',
           backUrl: 'tenancy',
-          nextUrl: 'associated-works',
+          nextUrl: 'slurry/project-items',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -457,15 +440,13 @@ module.exports = {
           ],
           answers: [
             {
-              key: 'associated-works-A1',
-              value: 'Yes',
-              isEligible: true
+              key: 'tenancy-length-A1',
+              value: 'Yes'
             },
             {
-              key: 'associated-works-A2',
+              key: 'tenancy-length-A2',
               value: 'No',
-              isEligible: 'maybe',
-              maybeUrl: 'tenancy-length-condition'
+              redirectUrl: 'tenancy-length-condition'
             }
           ],
           yarKey: 'tenancyLength'
@@ -475,7 +456,7 @@ module.exports = {
           order: 71,
           url: 'tenancy-length-condition',
           backUrl: 'tenancy-length',
-          nextUrl: 'associated-works',
+          nextUrl: 'slurry/project-items',
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
@@ -483,36 +464,14 @@ module.exports = {
           }
         },
         {
-          key: '_tenancy-length-condition',
-          order: 80,
-          title: 'You may be able to apply for a grant from this scheme',
-          pageTitle: '',
-          url: 'enancy-length-condition',
-          backUrl: 'tenancy-length',
-          nextUrl: 'associated-works',
-          type: 'single-answer',
-          classes: '',
-          ga: { dimension: '', value: '' },
-          answers: [
-            {
-              key: 'tenancy-length-condition',
-              value: 'You will need to extend your tenancy agreement before you can complete a full application.',
-              isEligible: true
-            }
-          ],
-          yarKey: 'tenancyLengthCondition'
-
-        },
-
-        {
-          key: 'associated-works',
+          key: 'project-items',
           order: 80,
           title: 'Which eligible items does your project need?',
           pageTitle: '',
-          url: 'associated-works',
-          baseUrl: 'associated-works',
-          backUrl: 'tenancy-length',
-          nextUrl: 'slurry/project-cost',
+          url: 'slurry/project-items',
+          baseUrl: 'project-items',
+          backUrl: '/productivity/tenancy-length',
+          nextUrl: 'project-cost',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -538,24 +497,23 @@ module.exports = {
           ],
           answers: [
             {
-              key: 'associated-works-A1',
+              key: 'project-items-A1',
               value: 'Mild acidification equipment',
               hint: ['', ''],
-              isEligible: true
+              mustSelect: true,
+              errorMustSelect: 'This option must be selected -- !!'
             },
             {
-              key: 'associated-works-A2',
+              key: 'project-items-A2',
               value: 'Acidification infrastructure',
-              hint: '',
-              isEligible: true
+              hint: ''
             },
             {
-              key: 'associated-works-A3',
-              value: 'Slurry pipework',
-              isEligible: true
+              key: 'project-items-A3',
+              value: 'Slurry pipework'
             }
           ],
-          yarKey: 'associatedWorks'
+          yarKey: 'projectItems'
 
         },
         {
@@ -564,7 +522,7 @@ module.exports = {
           pageTitle: '',
           url: 'slurry/project-cost',
           baseUrl: 'project-cost',
-          backUrl: '/productivity/associated-works',
+          backUrl: 'project-items',
           nextUrl: 'potential-amount',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
@@ -612,8 +570,7 @@ module.exports = {
           answers: [
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             }
           ],
           yarKey: 'projectCost'
@@ -676,13 +633,13 @@ module.exports = {
           answers: [
             {
               key: 'remaining-costs-A1',
-              value: 'Yes',
-              isEligible: true
+              value: 'Yes'
+
             },
             {
               key: 'remaining-costs-A2',
               value: 'No',
-              isEligible: false
+              notEligible: true
             }
           ],
           yarKey: 'remainingCosts'
@@ -726,13 +683,11 @@ module.exports = {
           answers: [
             {
               key: 'slurry-SSSI-A1',
-              value: 'Yes',
-              isEligible: true
+              value: 'Yes'
             },
             {
               key: 'slurry-SSSI-A2',
-              value: 'No',
-              isEligible: true
+              value: 'No'
             }
           ],
           yarKey: 'slurrySSSI'
@@ -778,15 +733,11 @@ module.exports = {
           answers: [
             {
               key: 'projects-impact-A1',
-              value: 'Increase acidification',
-              nextUrl: '',
-              isEligible: true
+              value: 'Increase acidification'
             },
             {
               key: 'projects-impact-A2',
-              value: 'Introduce acidification',
-              nextUrl: '',
-              isEligible: true
+              value: 'Introduce acidification'
             }
           ],
           yarKey: 'projectsImpact'
@@ -843,8 +794,7 @@ module.exports = {
           ],
           answers: [
             {
-              key: '',
-              isEligible: true
+              key: ''
             }
           ],
           yarKey: 'slurryCurrentlyTreated'
@@ -901,8 +851,7 @@ module.exports = {
           ],
           answers: [
             {
-              key: '',
-              isEligible: true
+              key: ''
             }
           ],
           yarKey: 'slurryToBeTreated'
@@ -942,23 +891,19 @@ module.exports = {
           answers: [
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             },
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             },
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             },
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             }
           ],
           yarKey: 'answers'
@@ -997,23 +942,19 @@ module.exports = {
           answers: [
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             },
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             },
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             },
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             }
           ],
           yarKey: 'business'
@@ -1053,13 +994,11 @@ module.exports = {
           answers: [
             {
               key: 'applying-A1',
-              value: 'farmer',
-              isEligible: true
+              value: 'farmer'
             },
             {
               key: 'applying-A2',
-              value: 'agent',
-              isEligible: true
+              value: 'agent'
             }
           ],
           yarKey: 'applying'
@@ -1099,23 +1038,19 @@ module.exports = {
           answers: [
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             },
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             },
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             },
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             }
           ],
           yarKey: 'farmerDetails'
@@ -1155,23 +1090,19 @@ module.exports = {
           answers: [
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             },
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             },
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             },
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             }
           ],
           yarKey: 'checkDetails'
@@ -1212,8 +1143,7 @@ module.exports = {
           answers: [
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             }
           ],
           yarKey: 'consent'
@@ -1254,8 +1184,7 @@ module.exports = {
           answers: [
             {
               key: '',
-              value: '',
-              isEligible: true
+              value: ''
             }
           ],
           yarKey: 'referenceNumber'

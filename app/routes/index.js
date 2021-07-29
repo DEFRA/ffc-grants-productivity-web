@@ -2,91 +2,9 @@ const questionBank = require('../config/question-bank')
 const urlPrefix = require('../config/server').urlPrefix
 const { setYarValue, getYarValue } = require('../helpers/session')
 const { getGrantValues } = require('../helpers/grants-info')
+const { radioButtons, checkBoxes, inputText } = require('../helpers/answer-types')
 
-function isChecked (data, option) {
-  return !!data && data.includes(option)
-}
-
-function setAnswerOptions (data, answers) {
-  return answers.map((answer) => {
-    const { value, hint, text } = answer
-
-    if (value === 'divider') {
-      return { divider: 'or' }
-    }
-
-    if (typeof (value) === 'string') {
-      return {
-        value,
-        text: value,
-        hint,
-        checked: isChecked(data, value),
-        selected: data === value
-      }
-    }
-
-    return {
-      value,
-      text,
-      hint,
-      checked: isChecked(data, value),
-      selected: data === value
-    }
-  })
-}
-
-const radioButtons = (data, question) => {
-  const { classes, yarKey, title, answers } = question
-  return {
-    classes,
-    idPrefix: yarKey,
-    name: yarKey,
-    fieldset: {
-      legend: {
-        text: title,
-        isPageHeading: true,
-        classes: 'govuk-fieldset__legend--l'
-      }
-    },
-    items: setAnswerOptions(data, answers)
-  }
-}
-
-const checkBoxes = (data, question) => {
-  const { classes, yarKey, title, hint, answers } = question
-  return {
-    classes,
-    idPrefix: yarKey,
-    name: yarKey,
-    fieldset: {
-      legend: {
-        text: title,
-        isPageHeading: true,
-        classes: 'govuk-fieldset__legend--l'
-      }
-    },
-    hint: {
-      text: hint
-    },
-    items: setAnswerOptions(data, answers)
-  }
-}
-
-const inputText = (data, question) => {
-  const { yarKey, prefix, suffix, label, hint } = question
-  return {
-    id: yarKey,
-    name: yarKey,
-    classes: 'govuk-input--width-10',
-    prefix,
-    suffix,
-    label,
-    hint,
-    value: data || ''
-  }
-}
-
-const getOptions = (data, question) => {
+const getCorrectAnswerType = (data, question) => {
   switch (question.type) {
     case 'single-answer':
       return radioButtons(data, question)
@@ -105,10 +23,26 @@ const getModel = (data, question) => {
   const model = {
     type,
     backUrl,
-    items: getOptions(data, question),
+    items: getCorrectAnswerType(data, question),
     sideBarText: question.sidebar
   }
   return model
+}
+
+const customiseErrorText = (value, currentQuestion, errorList, errorText, yarKey, h) => {
+  const baseModel = getModel(value, currentQuestion)
+
+  baseModel.items = { ...baseModel.items, errorMessage: { text: errorText } }
+  errorList.push({
+    text: errorText,
+    href: `#${yarKey}`
+  })
+
+  const modelWithErrors = {
+    ...baseModel,
+    errorList
+  }
+  return h.view('page', modelWithErrors)
 }
 
 const showGetPage = (question, request, h) => {
@@ -146,40 +80,37 @@ const showPostPage = (currentQuestion, request, h) => {
 
   setYarValue(request, yarKey, value)
 
-  // based on answer -> redirect to pages [not eligible] or [maybe eligible]
+  // either [ineligible] or [redirection]
+  const thisAnswer = answers.find(answer => (answer.value === value))
 
-  if (answers.find(answer => (answer.value === value && !answer.isEligible))) {
-    return h.view('not-eligible', NOT_ELIGIBLE)
-  } else if (answers.find(answer => (answer.value === value && answer.isEligible === 'maybe'))) {
-    const thisAnswer = answers.find(answer => (answer.value === value && answer.isEligible === 'maybe'))
-    return h.redirect(thisAnswer.maybeUrl)
+  if (thisAnswer) {
+    if (thisAnswer.notEligible) {
+      return h.view('not-eligible', NOT_ELIGIBLE)
+    } else if (thisAnswer.redirectUrl) {
+      return h.redirect(thisAnswer.redirectUrl)
+    }
   }
 
   const errorList = []
 
-  // no selection -> same error text for [error message] & [error summary]
-
+  // ERROR: no selection
   if (
     (validate && validate.errorEmptyField) &&
     (payload === {} || !Object.keys(payload).includes(yarKey) || payload[yarKey] === '')
   ) {
     const errorTextNoSelection = validate.errorEmptyField
-    const baseModel = getModel(value, currentQuestion)
-
-    baseModel.items = { ...baseModel.items, errorMessage: { text: errorTextNoSelection } }
-    errorList.push({
-      text: errorTextNoSelection,
-      href: `#${yarKey}`
-    })
-
-    const modelWithErrors = {
-      ...baseModel,
-      errorList
-    }
-    return h.view('page', modelWithErrors)
+    return customiseErrorText(value, currentQuestion, errorList, errorTextNoSelection, yarKey, h)
   }
 
-  // specific redirects to some pages
+  // ERROR: mandatory checkbox / radiobutton not selected
+  const requiredAnswer = answers.find(answer => (answer.mustSelect))
+
+  if ((!!requiredAnswer) && (!value || !value.includes(requiredAnswer.value))) {
+    const errorMustSelect = requiredAnswer.errorMustSelect
+    return customiseErrorText(value, currentQuestion, errorList, errorMustSelect, yarKey, h)
+  }
+
+  // pages with further checks
   switch (yarKey) {
     case 'projectCost': {
       const { isEligible } = getGrantValues(value, currentQuestion.grantInfo)
@@ -190,7 +121,7 @@ const showPostPage = (currentQuestion, request, h) => {
     }
   }
 
-  // no issues -> show nexturl
+  // ALL GOOD -> show nexturl
   return h.redirect(nextUrl)
 }
 
