@@ -13,7 +13,7 @@ function setAnswerOptions (data, answers) {
     <label class="govuk-label" for="projectPostcode">
       What is the site postcode?<br/><br/> Postcode
     </label>
-    <input class="govuk-input govuk-!-width-one-third" id="projectPostcode" name="projectPostcode" value="${value}">
+    <input class="govuk-input govuk-!-width-one-third" id="projectPostcode" name="projectPostcode">
   </div>`
     }
 
