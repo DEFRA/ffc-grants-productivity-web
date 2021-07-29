@@ -479,7 +479,7 @@ const questionBank = {
               elseUrl: '/productivity/tenancy-length'
             }
           },
-          nextUrl: 'project-cost',
+          nextUrl: 'slurry-application',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -539,12 +539,77 @@ const questionBank = {
 
         },
         {
+          key: 'slurry-application',
+          order: 81,
+          title: 'Slurry application - title',
+          pageTitle: '',
+          url: 'slurry/slurry-application',
+          baseUrl: 'slurry-application',
+          backUrl: 'project-items',
+          nextUrl: 'project-cost',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
+          fundingPriorities: '',
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 3,
+          hint: {
+            html: `
+              Slurry Application - hint`
+          },
+          ga: { dimension: '', value: '' },
+          validate: {
+            errorEmptyField: 'Select all the items your project needs'
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'project-items-A1',
+              value: 'Mild acidification equipment',
+              hint: {
+                html: `<span>You must buy all 4 of the following items:</span>
+                <ul>
+                  <li>acid storage</li>
+                  <li>dosing equipment</li>
+                  <li>mixing tank</li>
+                  <li>pump</li>
+                </ul>
+                `
+              },
+              mustSelect: true,
+              errorMustSelect: 'You must select mild acidification equipment'
+            },
+            {
+              key: 'project-items-A2',
+              value: 'Acidification infrastructure',
+              hint: {
+                text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
+              }
+            }
+          ],
+          yarKey: 'slurryApplication'
+        },
+        {
           key: 'project-cost',
           order: 90,
           pageTitle: '',
           url: 'slurry/project-cost',
           baseUrl: 'project-cost',
-          backUrl: 'project-items',
+          backUrl: 'slurry-application',
           nextUrl: 'potential-amount',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
