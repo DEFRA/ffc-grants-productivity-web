@@ -1,4 +1,4 @@
-const getHtml = require('../helpers/helper-functions')
+// const getHtml = require('../helpers/helper-functions')
 
 function isChecked (data, option) {
   return !!data && data.includes(option)
@@ -6,30 +6,45 @@ function isChecked (data, option) {
 
 function setAnswerOptions (data, answers) {
   return answers.map((answer) => {
-    const { value, hint, text, conditional } = answer
+    const { value, hint, text, isConditional } = answer
+
+    const conditional = answer.conditional = {
+      html: `<div>
+    <label class="govuk-label" for="projectPostcode">
+      What is the site postcode?<br/><br/> Postcode
+    </label>
+    <input class="govuk-input govuk-!-width-one-third" id="projectPostcode" name="projectPostcode" value="${value}">
+  </div>`
+    }
 
     if (value === 'divider') {
       return { divider: 'or' }
     }
 
     if (typeof (value) === 'string') {
-      return {
-        value,
-        text: value,
-        hint,
-        checked: isChecked(data, value),
-        selected: data === value
+      if (isConditional === true) {
+        return {
+          value,
+          text: value,
+          conditional: conditional,
+          checked: isChecked(data, value),
+          selected: data === value
+        }
+      } else {
+        return {
+          value,
+          text: value,
+          hint,
+          checked: isChecked(data, value),
+          selected: data === value
+        }
       }
-    }
-    if (conditional !== undefined) {
-      conditional = getHtml()
     }
 
     return {
       value,
       text,
       hint,
-      conditional,
       checked: isChecked(data, value),
       selected: data === value
     }

@@ -196,7 +196,9 @@ module.exports = {
           answers: [
             {
               key: 'country-A1',
-              value: 'Yes'
+              value: 'Yes',
+              conditional: '',
+              isConditional: true
             },
             {
               key: 'country-A2',

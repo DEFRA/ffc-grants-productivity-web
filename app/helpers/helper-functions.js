@@ -1,10 +1,8 @@
+const { func } = require('joi')
 
-const getHtml = () => {
-  return {
-
-  }
+function getHtml (value) {
+  return 
 }
-
 module.exports = {
   getHtml
 }
