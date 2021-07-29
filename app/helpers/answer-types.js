@@ -1,3 +1,5 @@
+const getHtml = require('../helpers/helper-functions')
+
 function isChecked (data, option) {
   return !!data && data.includes(option)
 }
@@ -14,18 +16,20 @@ function setAnswerOptions (data, answers) {
       return {
         value,
         text: value,
-        conditional,
         hint,
         checked: isChecked(data, value),
         selected: data === value
       }
     }
+    if (conditional !== undefined) {
+      conditional = getHtml()
+    }
 
     return {
       value,
       text,
-      conditional,
       hint,
+      conditional,
       checked: isChecked(data, value),
       selected: data === value
     }

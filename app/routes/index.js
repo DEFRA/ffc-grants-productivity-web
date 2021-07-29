@@ -132,5 +132,6 @@ const drawSectionPostRequests = (section) => {
 
 let pages = questionBank.sections.map(section => drawSectionGetRequests(section))
 pages = [...pages, ...questionBank.sections.map(section => drawSectionPostRequests(section))]
+console.log('Pages', pages)
 
 module.exports = pages

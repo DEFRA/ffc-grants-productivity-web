@@ -196,9 +196,6 @@ module.exports = {
           answers: [
             {
               key: 'country-A1',
-              conditional: {
-                html: ''
-              },
               value: 'Yes'
             },
             {
