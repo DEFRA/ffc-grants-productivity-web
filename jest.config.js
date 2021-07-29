@@ -33,5 +33,8 @@ module.exports = {
   testEnvironment: 'node',
   testPathIgnorePatterns: [],
   verbose: true,
-  setupFilesAfterEnv: ['<rootDir>/test/integration/narrow/setup.js', '<rootDir>/test/integration/narrow/teardown.js']
+  setupFilesAfterEnv: [
+    '<rootDir>/test/setup.js',
+    '<rootDir>/test/teardown.js'
+  ]
 }

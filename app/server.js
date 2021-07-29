@@ -82,6 +82,8 @@ async function createServer () {
     require('./routes/healthz'),
     require('./routes/start'),
     require('./routes/assets'),
+    require('./routes/cookies'),
+    require('./routes/accessibility'),
     ...require('./routes')
   )
   console.log('[SERVER][GET ALL ROUTES]')
