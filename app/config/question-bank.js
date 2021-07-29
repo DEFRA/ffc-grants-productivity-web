@@ -499,7 +499,9 @@ module.exports = {
             {
               key: 'project-items-A1',
               value: 'Mild acidification equipment',
-              hint: ['', '']
+              hint: ['', ''],
+              mustSelect: true,
+              errorMustSelect: 'This option must be selected -- !!'
             },
             {
               key: 'project-items-A2',
