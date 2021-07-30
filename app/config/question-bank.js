@@ -4,7 +4,7 @@
  *
  */
 
-module.exports = {
+const questionBank = {
   grantScheme: {
     key: 'FFC002',
     name: 'Productivity'
@@ -471,7 +471,15 @@ module.exports = {
           url: 'slurry/project-items',
           baseUrl: 'project-items',
           backUrl: '/productivity/tenancy-length',
-          nextUrl: 'project-cost',
+          backUrlObject: {
+            dependentQuestionYarKey: 'tenancy',
+            dependentAnswerKeysArray: ['tenancy-A2'],
+            backUrlOptions: {
+              thenUrl: '/productivity/tenancy-length',
+              elseUrl: '/productivity/tenancy'
+            }
+          },
+          nextUrl: 'slurry-application',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -485,8 +493,15 @@ module.exports = {
           type: 'multi-answer',
           minAnswerCount: 1,
           maxAnswerCount: 3,
-          hint: 'The minimum grant you can apply for this project is £35,000 (40% of £87,500). The maximum grant is £1 million.',
+          hint: {
+            html: `
+              The minimum grant you can claim is £35,000 (40% of £87,500). The maximum grant is £1 million.
+              <br/><br/>Select all that apply.`
+          },
           ga: { dimension: '', value: '' },
+          validate: {
+            errorEmptyField: 'Select all the items your project needs'
+          },
           validations: [
             {
               type: '',
@@ -499,22 +514,90 @@ module.exports = {
             {
               key: 'project-items-A1',
               value: 'Mild acidification equipment',
-              hint: ['', ''],
+              hint: {
+                html: `<span>You must buy all 4 of the following items:</span>
+                <ul>
+                  <li>acid storage</li>
+                  <li>dosing equipment</li>
+                  <li>mixing tank</li>
+                  <li>pump</li>
+                </ul>
+                `
+              },
               mustSelect: true,
-              errorMustSelect: 'This option must be selected -- !!'
+              errorMustSelect: 'You must select mild acidification equipment'
             },
             {
               key: 'project-items-A2',
               value: 'Acidification infrastructure',
-              hint: ''
-            },
-            {
-              key: 'project-items-A3',
-              value: 'Slurry pipework'
+              hint: {
+                text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
+              }
             }
           ],
           yarKey: 'projectItems'
 
+        },
+        {
+          key: 'slurry-application',
+          order: 81,
+          title: 'Will you be using low-emission precision application equipment?',
+          pageTitle: '',
+          url: 'slurry/slurry-application',
+          baseUrl: 'slurry-application',
+          backUrl: 'project-items',
+          nextUrl: 'project-cost',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: 'You cannot apply for a grant if you will not be using low emission precision application equipment.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 3,
+          hint: {
+            text: 'For example, shallow injection, trailing shoe or dribble bar'
+          },
+          ga: { dimension: '', value: '' },
+          validate: {
+            errorEmptyField: 'Select the option that describes your use of low-emission precision equipment'
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'slurry-application-A1',
+              value: 'Yes, I already have the equipment'
+            },
+            {
+              key: 'slurry-application-A2',
+              value: 'Yes, I will be purchasing the equipment as part of the project'
+            },
+            {
+              key: 'slurry-application-A3',
+              value: 'Yes, I will be using a contractor'
+            },
+
+            {
+              value: 'divider'
+            },
+            {
+              key: 'slurry-application-A4',
+              value: 'No. I won’t be using the equipment',
+              notEligible: true
+            }
+          ],
+          yarKey: 'slurryApplication'
         },
         {
           key: 'project-cost',
@@ -522,7 +605,7 @@ module.exports = {
           pageTitle: '',
           url: 'slurry/project-cost',
           baseUrl: 'project-cost',
-          backUrl: 'project-items',
+          backUrl: 'slurry-application',
           nextUrl: 'potential-amount',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
@@ -1193,4 +1276,14 @@ module.exports = {
       ]
     }
   ]
+}
+
+const ALL_QUESTIONS = []
+questionBank.sections.forEach(({ questions }) => {
+  ALL_QUESTIONS.push(...questions)
+})
+
+module.exports = {
+  questionBank,
+  ALL_QUESTIONS
 }
