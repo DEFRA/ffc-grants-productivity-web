@@ -473,10 +473,10 @@ const questionBank = {
           backUrl: '/productivity/tenancy-length',
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
-            dependentAnswerKeysArray: ['tenancy-A1'],
+            dependentAnswerKeysArray: ['tenancy-A2'],
             backUrlOptions: {
-              thenUrl: '/productivity/tenancy',
-              elseUrl: '/productivity/tenancy-length'
+              thenUrl: '/productivity/tenancy-length',
+              elseUrl: '/productivity/tenancy'
             }
           },
           nextUrl: 'slurry-application',
