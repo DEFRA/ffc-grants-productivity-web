@@ -26,7 +26,9 @@ const resolveBackUrl = (backUrlObject, request) => {
     thisQuestion.yarKey === dependentQuestionYarKey &&
     thisQuestion.answers &&
     thisQuestion.answers.some(answer => (
-      dependentAnswerKeysArray.includes(answer.key) && dependentAnswer.includes(answer.value)
+      !!dependentAnswer &&
+      dependentAnswerKeysArray.includes(answer.key) &&
+      dependentAnswer.includes(answer.value)
     ))
   ))
 
