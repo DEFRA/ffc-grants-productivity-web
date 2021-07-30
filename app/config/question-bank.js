@@ -566,7 +566,7 @@ const questionBank = {
           },
           ga: { dimension: '', value: '' },
           validate: {
-            errorEmptyField: 'Select all the items your project needs'
+            errorEmptyField: 'Slurry Application - validation'
           },
           validations: [
             {
@@ -581,23 +581,16 @@ const questionBank = {
               key: 'project-items-A1',
               value: 'Mild acidification equipment',
               hint: {
-                html: `<span>You must buy all 4 of the following items:</span>
-                <ul>
-                  <li>acid storage</li>
-                  <li>dosing equipment</li>
-                  <li>mixing tank</li>
-                  <li>pump</li>
-                </ul>
-                `
+                html: ''
               },
               mustSelect: true,
-              errorMustSelect: 'You must select mild acidification equipment'
+              errorMustSelect: ''
             },
             {
               key: 'project-items-A2',
               value: 'Acidification infrastructure',
               hint: {
-                text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
+                text: ''
               }
             }
           ],
