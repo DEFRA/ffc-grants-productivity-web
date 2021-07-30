@@ -62,9 +62,7 @@ const checkBoxes = (data, question) => {
         classes: 'govuk-fieldset__legend--l'
       }
     },
-    hint: {
-      text: hint
-    },
+    hint,
     items: setAnswerOptions(data, answers)
   }
 }

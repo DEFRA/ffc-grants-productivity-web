@@ -4,7 +4,7 @@
  *
  */
 
-module.exports = {
+const questionBank = {
   grantScheme: {
     key: 'FFC002',
     name: 'Productivity'
@@ -471,6 +471,81 @@ module.exports = {
           url: 'slurry/project-items',
           baseUrl: 'project-items',
           backUrl: '/productivity/tenancy-length',
+          backUrlObject: {
+            dependentQuestionYarKey: 'tenancy',
+            dependentAnswerKeysArray: ['tenancy-A1'],
+            backUrlOptions: {
+              thenUrl: '/productivity/tenancy',
+              elseUrl: '/productivity/tenancy-length'
+            }
+          },
+          nextUrl: 'slurry-application',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
+          fundingPriorities: '',
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 3,
+          hint: {
+            html: `
+              The minimum grant you can claim is £35,000 (40% of £87,500). The maximum grant is £1 million.
+              <br/><br/>Select all that apply.`
+          },
+          ga: { dimension: '', value: '' },
+          validate: {
+            errorEmptyField: 'Select all the items your project needs'
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'project-items-A1',
+              value: 'Mild acidification equipment',
+              hint: {
+                html: `<span>You must buy all 4 of the following items:</span>
+                <ul>
+                  <li>acid storage</li>
+                  <li>dosing equipment</li>
+                  <li>mixing tank</li>
+                  <li>pump</li>
+                </ul>
+                `
+              },
+              mustSelect: true,
+              errorMustSelect: 'You must select mild acidification equipment'
+            },
+            {
+              key: 'project-items-A2',
+              value: 'Acidification infrastructure',
+              hint: {
+                text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
+              }
+            }
+          ],
+          yarKey: 'projectItems'
+
+        },
+        {
+          key: 'slurry-application',
+          order: 81,
+          title: 'Slurry application - title',
+          pageTitle: '',
+          url: 'slurry/slurry-application',
+          baseUrl: 'slurry-application',
+          backUrl: 'project-items',
           nextUrl: 'project-cost',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -485,8 +560,14 @@ module.exports = {
           type: 'multi-answer',
           minAnswerCount: 1,
           maxAnswerCount: 3,
-          hint: 'The minimum grant you can apply for this project is £35,000 (40% of £87,500). The maximum grant is £1 million.',
+          hint: {
+            html: `
+              Slurry Application - hint`
+          },
           ga: { dimension: '', value: '' },
+          validate: {
+            errorEmptyField: 'Slurry Application - validation'
+          },
           validations: [
             {
               type: '',
@@ -499,22 +580,21 @@ module.exports = {
             {
               key: 'project-items-A1',
               value: 'Mild acidification equipment',
-              hint: ['', ''],
+              hint: {
+                html: ''
+              },
               mustSelect: true,
-              errorMustSelect: 'This option must be selected -- !!'
+              errorMustSelect: ''
             },
             {
               key: 'project-items-A2',
               value: 'Acidification infrastructure',
-              hint: ''
-            },
-            {
-              key: 'project-items-A3',
-              value: 'Slurry pipework'
+              hint: {
+                text: ''
+              }
             }
           ],
-          yarKey: 'projectItems'
-
+          yarKey: 'slurryApplication'
         },
         {
           key: 'project-cost',
@@ -522,7 +602,7 @@ module.exports = {
           pageTitle: '',
           url: 'slurry/project-cost',
           baseUrl: 'project-cost',
-          backUrl: 'project-items',
+          backUrl: 'slurry-application',
           nextUrl: 'potential-amount',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
@@ -1193,4 +1273,14 @@ module.exports = {
       ]
     }
   ]
+}
+
+const ALL_QUESTIONS = []
+questionBank.sections.forEach(({ questions }) => {
+  ALL_QUESTIONS.push(...questions)
+})
+
+module.exports = {
+  questionBank,
+  ALL_QUESTIONS
 }
