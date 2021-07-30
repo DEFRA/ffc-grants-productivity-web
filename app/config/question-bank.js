@@ -736,7 +736,7 @@ const questionBank = {
           url: 'slurry/SSSI',
           baseUrl: 'SSSI',
           backUrl: 'remaining-costs',
-          nextUrl: 'projects-impact',
+          nextUrl: 'project-impacts',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -776,14 +776,19 @@ const questionBank = {
           yarKey: 'slurrySSSI'
         },
         {
-          key: 'projects-impact',
+          key: 'project-impacts',
           order: 130,
           title: 'What impact will the project have?',
           pageTitle: '',
-          url: 'slurry/projects-impact',
-          baseUrl: 'projects-impact',
+          url: 'slurry/project-impacts',
+          baseUrl: 'project-impacts',
           backUrl: 'SSSI',
-          nextUrl: 'slurry-currently-treated',
+          hint: {
+            html: '<br>Select one option<br>'
+          },
+          validate: {
+            errorEmptyField: 'Select one option to describe the project impact'
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -815,15 +820,17 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'projects-impact-A1',
-              value: 'Increase acidification'
+              key: 'project-impacts-A1',
+              value: 'Increase acidification',
+              redirectUrl: 'slurry-currently-treated'
             },
             {
-              key: 'projects-impact-A2',
-              value: 'Introduce acidification'
+              key: 'project-impacts-A2',
+              value: 'Introduce acidification',
+              redirectUrl: 'slurry-to-be-treated'
             }
           ],
-          yarKey: 'projectsImpact'
+          yarKey: 'projectImpacts'
 
         },
         {
@@ -832,7 +839,7 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/slurry-currently-treated',
           baseUrl: 'slurry-currently-treated',
-          backUrl: 'projects-impact',
+          backUrl: 'project-impacts',
           nextUrl: 'slurry-to-be-treated',
           classes: 'govuk-input--width-5',
           id: 'slurryCurrentlyTreated',
@@ -889,7 +896,7 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/slurry-to-be-treated',
           baseUrl: 'slurry-to-be-treated',
-          backUrl: 'slurry-currently-treated',
+          backUrl: 'project-impacts',
           nextUrl: 'answers',
           classes: 'govuk-input--width-5',
           id: 'slurryToBeTreated',
