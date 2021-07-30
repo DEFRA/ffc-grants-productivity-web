@@ -4,9 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const isDev = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
-
 console.log(`Running webpack in ${isDev ? 'development' : 'production'} mode`)
+
 const urlPrefix = '/productivity'
+
 module.exports = {
   entry: './app/assets/src/index.js',
   mode: isDev ? 'development' : 'production',
@@ -67,9 +68,8 @@ module.exports = {
     ]
   },
   output: {
-    filename: 'js/bundle.[fullhash].js',
+    filename: 'js/bundle.[hash].js',
     path: path.resolve(__dirname, 'app/assets/dist'),
-    clean: true,
     publicPath: `${urlPrefix}/assets/`
   },
   plugins: [
@@ -81,7 +81,7 @@ module.exports = {
       metadata: { urlPrefix }
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/application.[fullhash].css'
+      filename: 'css/application.[hash].css'
     })
   ]
 }
