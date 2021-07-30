@@ -1,4 +1,3 @@
-
 const urlPrefix = require('../config/server').urlPrefix
 const { questionBank, ALL_QUESTIONS } = require('../config/question-bank')
 const { setYarValue, getYarValue } = require('../helpers/session')
