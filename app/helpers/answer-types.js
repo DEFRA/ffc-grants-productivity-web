@@ -33,7 +33,7 @@ function setAnswerOptions (data, answers) {
 }
 
 const radioButtons = (data, question) => {
-  const { classes, yarKey, title, answers } = question
+  const { classes, yarKey, title, hint, answers } = question
   return {
     classes,
     idPrefix: yarKey,
@@ -45,6 +45,7 @@ const radioButtons = (data, question) => {
         classes: 'govuk-fieldset__legend--l'
       }
     },
+    hint,
     items: setAnswerOptions(data, answers)
   }
 }

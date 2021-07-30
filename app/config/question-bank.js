@@ -541,7 +541,7 @@ const questionBank = {
         {
           key: 'slurry-application',
           order: 81,
-          title: 'Slurry application - title',
+          title: 'Will you be using low-emission precision application equipment?',
           pageTitle: '',
           url: 'slurry/slurry-application',
           baseUrl: 'slurry-application',
@@ -549,24 +549,22 @@ const questionBank = {
           nextUrl: 'project-cost',
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
+            messageContent: 'You cannot apply for a grant if you will not be using low emission precision application equipment.',
             messageLink: {
-              url: '',
-              title: ''
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
             }
           },
           fundingPriorities: '',
-          type: 'multi-answer',
+          type: 'single-answer',
           minAnswerCount: 1,
           maxAnswerCount: 3,
           hint: {
-            html: `
-              Slurry Application - hint`
+            text: 'For example, shallow injection, trailing shoe or dribble bar'
           },
           ga: { dimension: '', value: '' },
           validate: {
-            errorEmptyField: 'Slurry Application - validation'
+            errorEmptyField: 'Select the option that describes your use of low-emission precision equipment'
           },
           validations: [
             {
@@ -578,20 +576,25 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'project-items-A1',
-              value: 'Mild acidification equipment',
-              hint: {
-                html: ''
-              },
-              mustSelect: true,
-              errorMustSelect: ''
+              key: 'slurry-application-A1',
+              value: 'Yes, I already have the equipment'
             },
             {
-              key: 'project-items-A2',
-              value: 'Acidification infrastructure',
-              hint: {
-                text: ''
-              }
+              key: 'slurry-application-A2',
+              value: 'Yes, I will be purchasing the equipment as part of the project'
+            },
+            {
+              key: 'slurry-application-A3',
+              value: 'Yes, I will be using a contractor'
+            },
+
+            {
+              value: 'divider'
+            },
+            {
+              key: 'slurry-application-A4',
+              value: 'No. I won’t be using the equipment',
+              notEligible: true
             }
           ],
           yarKey: 'slurryApplication'
