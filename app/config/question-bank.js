@@ -636,7 +636,7 @@ const questionBank = {
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
+            messageContent: 'You can only apply for a grant of up to <b>40%</b> of the estimated costs.',
             insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £500,000.' },
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
