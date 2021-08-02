@@ -642,8 +642,12 @@ const questionBank = {
             }
           },
           type: 'input',
-          sidebar:
-            { heading: 'Items selected', para: '', items: [] },
+          sidebar: {
+            heading: 'Items selected',
+            para: '',
+            items: [],
+            dependentYarKey: 'projectItems'
+          },
           validate: {
             errorEmptyField: 'Enter the estimated cost for the items'
           },

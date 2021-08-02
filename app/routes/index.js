@@ -42,11 +42,26 @@ const getModel = (data, question, request) => {
     ? resolveBackUrl(question.backUrlObject, request)
     : backUrl
 
-  const model = {
+  let model = {
     type,
     backUrl: resolvedBackUrl,
     items: getCorrectAnswerType(data, question),
     sideBarText: question.sidebar
+  }
+
+  // sidebar contains values of a previous page
+  if (question.sidebar && question.sidebar.dependentYarKey) {
+    const rawSidebarValues = getYarValue(request, question.sidebar.dependentYarKey) || []
+    const formattedSidebarValues = [].concat(rawSidebarValues)
+    const valuesCount = formattedSidebarValues.length
+    model = {
+      ...model,
+      sideBarText: {
+        heading: (valuesCount < 2) ? '1 item selected' : `${valuesCount} items selected`,
+        para: '',
+        items: formattedSidebarValues
+      }
+    }
   }
   return model
 }
