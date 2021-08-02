@@ -1003,8 +1003,8 @@ const questionBank = {
           order: 170,
           title: 'Business details',
           pageTitle: 'Crops',
-          url: 'slurry/business',
-          baseUrl: 'business',
+          url: 'slurry/business-details',
+          baseUrl: 'business-details',
           backUrl: 'answers',
           nextUrl: 'applying',
           eliminationAnswerKeys: '',
@@ -1056,8 +1056,7 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/applying',
           baseUrl: 'applying',
-          backUrl: 'business',
-          nextUrl: 'farmer-details',
+          backUrl: 'business-details',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -1073,6 +1072,9 @@ const questionBank = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
+          validate: {
+            errorEmptyField: 'Select who is applying for this grant'
+          },
           validations: [
             {
               type: '',
@@ -1084,11 +1086,13 @@ const questionBank = {
           answers: [
             {
               key: 'applying-A1',
-              value: 'farmer'
+              value: 'farmer',
+              redirectUrl: 'farmers-details'
             },
             {
               key: 'applying-A2',
-              value: 'agent'
+              value: 'agent',
+              redirectUrl: 'agents-details'
             }
           ],
           yarKey: 'applying'
@@ -1099,7 +1103,7 @@ const questionBank = {
           order: 190,
           title: 'Farmer’s details',
           pageTitle: '',
-          url: 'slurry/farmer-details',
+          url: 'slurry/farmers-details',
           baseUrl: 'farmer-details',
           backUrl: 'applying',
           nextUrl: 'check-details',
@@ -1144,6 +1148,58 @@ const questionBank = {
             }
           ],
           yarKey: 'farmerDetails'
+
+        },
+        {
+          key: 'agents-details',
+          order: 191,
+          title: 'Agents’s details',
+          pageTitle: '',
+          url: 'slurry/agents-details',
+          baseUrl: 'agents-details',
+          backUrl: 'applying',
+          nextUrl: 'check-details',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
+          fundingPriorities: '',
+          type: 'multiinput',
+          minAnswerCount: '',
+          maxAnswerCount: '',
+          ga: { dimension: '', value: '' },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: '',
+              value: ''
+            },
+            {
+              key: '',
+              value: ''
+            },
+            {
+              key: '',
+              value: ''
+            },
+            {
+              key: '',
+              value: ''
+            }
+          ],
+          yarKey: 'agentsDetails'
 
         },
         {
