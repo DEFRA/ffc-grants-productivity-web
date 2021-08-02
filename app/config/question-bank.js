@@ -566,6 +566,11 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Select the option that describes your use of low-emission precision equipment'
           },
+          sidebar: {
+            heading: 'Eligibility',
+            para: 'You must use low-emission precision application equipment.',
+            items: []
+          },
           validations: [
             {
               type: '',
