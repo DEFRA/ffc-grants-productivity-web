@@ -955,7 +955,7 @@ const questionBank = {
           url: 'slurry/answers',
           baseUrl: 'answers',
           backUrl: 'slurry-to-be-treated',
-          nextUrl: 'business',
+          nextUrl: 'business-details',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -999,7 +999,7 @@ const questionBank = {
           yarKey: 'answers'
         },
         {
-          key: 'business',
+          key: 'business-details',
           order: 170,
           title: 'Business details',
           pageTitle: 'Crops',
@@ -1047,7 +1047,7 @@ const questionBank = {
               value: ''
             }
           ],
-          yarKey: 'business'
+          yarKey: 'businessDetails'
         },
         {
           key: 'applying',
