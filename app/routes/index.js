@@ -147,6 +147,12 @@ const showPostPage = (currentQuestion, request, h) => {
     return customiseErrorText(value, currentQuestion, errorList, errorMustSelect, yarKey, h, request)
   }
 
+  // ERROR: regex validation
+  if (validate && validate.checkRegex && !validate.checkRegex.regex.test(value)) {
+    const errorRegex = validate.checkRegex.error
+    return customiseErrorText(value, currentQuestion, errorList, errorRegex, yarKey, h, request)
+  }
+
   // pages with further checks
   switch (yarKey) {
     case 'projectCost': {

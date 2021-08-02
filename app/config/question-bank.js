@@ -1,3 +1,5 @@
+const { DIGITS_MAX_7 } = require('../helpers/regex')
+
 /**
  * question type = single-answer, boolean ,input, multiinput, mullti-answer
  *
@@ -649,7 +651,11 @@ const questionBank = {
             dependentYarKey: 'projectItems'
           },
           validate: {
-            errorEmptyField: 'Enter the estimated cost for the items'
+            errorEmptyField: 'Enter the estimated cost for the items',
+            checkRegex: {
+              regex: DIGITS_MAX_7,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            }
           },
           validations: [
             {
