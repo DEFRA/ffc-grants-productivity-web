@@ -821,12 +821,12 @@ const questionBank = {
           answers: [
             {
               key: 'project-impacts-A1',
-              value: 'Increase acidification',
+              value: 'Introduce acidification for the first time',
               redirectUrl: 'slurry-currently-treated'
             },
             {
               key: 'project-impacts-A2',
-              value: 'Introduce acidification',
+              value: 'Add additional acidification installations',
               redirectUrl: 'slurry-to-be-treated'
             }
           ],
