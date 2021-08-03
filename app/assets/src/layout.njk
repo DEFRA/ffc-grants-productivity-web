@@ -2,7 +2,12 @@
 {% from "govuk/components/header/macro.njk" import govukHeader %}
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
 
-{% set assetPath = "assets" %}
+
+{% set urlPrefix = "<%= htmlWebpackPlugin.options.metadata.urlPrefix %>" %}
+{% set assetPath = urlPrefix + "/assets" %}
+{% set timeoutPath = urlPrefix + "/session-timeout" %}
+
+{# {% set assetPath = "assets" %} #}
 {% set siteTitle = "Check if you can apply for a Farming Transformation Fund water grant" %}
 {% block pageTitle %}
   {{siteTitle}}
@@ -18,9 +23,9 @@
 
 {% block header %}
   {{ govukHeader({
-    homepageUrl: "./start",
+    homepageUrl: urlPrefix + "/start",
     serviceName: "Check if you can apply for a Farming Transformation Fund water management grant",
-    serviceUrl: "./start"
+    serviceUrl: urlPrefix + "/start"
   }) }}
   <div class="govuk-grid-row govuk-width-container">
     {{ govukPhaseBanner({
@@ -36,9 +41,11 @@
   {% if not cookiesPolicy.confirmed %}
     {% include "cookies/cookie-banner.njk" %}
   {% endif %}
+
   {% if cookiesPolicy.analytics %}
     {% include "tag-manager/body-content.njk" %}
   {% endif %}
+  
 {% endblock %}
 
 {% block footer %}
@@ -47,13 +54,13 @@
   html: '<h2 class="govuk-visually-hidden">Support links</h2>
           <ul class="govuk-footer__inline-list">
             <li class="govuk-footer__inline-list-item">
-              <a class="govuk-footer__link" href="productivity/accessibility" target="_blank" rel="noopener noreferrer">
+              <a class="govuk-footer__link" href="<%= htmlWebpackPlugin.options.metadata.urlPrefix %>/accessibility" rel="noopener noreferrer">
                 Accessibility
               </a>
             </li>
 
             <li class="govuk-footer__inline-list-item">
-              <a class="govuk-footer__link" href="productivity/cookies" target="_blank" rel="noopener noreferrer">
+              <a class="govuk-footer__link" href="<%= htmlWebpackPlugin.options.metadata.urlPrefix %>/cookies" rel="noopener noreferrer">
                 Cookies
               </a>
             </li>

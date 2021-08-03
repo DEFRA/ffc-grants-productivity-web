@@ -1,3 +1,4 @@
+const urlPrefix = require('../config/server').urlPrefix
 const { questionBank, ALL_QUESTIONS } = require('../config/question-bank')
 const { setYarValue, getYarValue } = require('../helpers/session')
 const { getGrantValues } = require('../helpers/grants-info')
@@ -103,7 +104,7 @@ const drawSectionGetRequests = (section) => {
   return section.questions.map(question => {
     return {
       method: 'GET',
-      path: `/productivity/${question.url}`,
+      path: `${urlPrefix}/${question.url}`,
       handler: getHandler(question)
     }
   })
@@ -178,7 +179,7 @@ const drawSectionPostRequests = (section) => {
   return section.questions.map((question) => {
     return {
       method: 'POST',
-      path: `/productivity/${question.url}`,
+      path: `${urlPrefix}/${question.url}`,
       handler: getPostHandler(question)
     }
   })

@@ -25,6 +25,7 @@ async function createServer () {
 
   await server.register(inert)
   await server.register(vision)
+  await server.register(require('./plugins/cookies'))
   await server.register(require('./plugins/error-pages'))
 
   await server.register({
@@ -82,6 +83,8 @@ async function createServer () {
     require('./routes/healthz'),
     require('./routes/start'),
     require('./routes/assets'),
+    require('./routes/cookies'),
+    require('./routes/accessibility'),
     ...require('./routes')
   )
   console.log('[SERVER][GET ALL ROUTES]')

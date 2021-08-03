@@ -1,6 +1,9 @@
+const urlPrefix = require('../config/server').urlPrefix
+const expiresIn = require('../config/cache').expiresIn
+
 module.exports = {
   method: 'GET',
-  path: '/productivity/assets/{path*}',
+  path: `${urlPrefix}/assets/{path*}`,
   options: {
     handler: {
       directory: {
@@ -8,6 +11,7 @@ module.exports = {
       }
     },
     cache: {
+      expiresIn: expiresIn,
       privacy: 'private'
     }
   }
