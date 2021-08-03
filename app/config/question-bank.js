@@ -736,7 +736,7 @@ const questionBank = {
           url: 'slurry/SSSI',
           baseUrl: 'SSSI',
           backUrl: 'remaining-costs',
-          nextUrl: 'projects-impact',
+          nextUrl: 'project-impacts',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -776,14 +776,19 @@ const questionBank = {
           yarKey: 'slurrySSSI'
         },
         {
-          key: 'projects-impact',
+          key: 'project-impacts',
           order: 130,
           title: 'What impact will the project have?',
           pageTitle: '',
-          url: 'slurry/projects-impact',
-          baseUrl: 'projects-impact',
+          url: 'slurry/project-impacts',
+          baseUrl: 'project-impacts',
           backUrl: 'SSSI',
-          nextUrl: 'slurry-currently-treated',
+          hint: {
+            html: '<br>Select one option<br>'
+          },
+          validate: {
+            errorEmptyField: 'Select one option to describe the project impact'
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -815,15 +820,17 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'projects-impact-A1',
-              value: 'Increase acidification'
+              key: 'project-impacts-A1',
+              value: 'Introduce acidification for the first time',
+              redirectUrl: 'slurry-currently-treated'
             },
             {
-              key: 'projects-impact-A2',
-              value: 'Introduce acidification'
+              key: 'project-impacts-A2',
+              value: 'Add additional acidification installations',
+              redirectUrl: 'slurry-to-be-treated'
             }
           ],
-          yarKey: 'projectsImpact'
+          yarKey: 'projectImpacts'
 
         },
         {
@@ -832,7 +839,7 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/slurry-currently-treated',
           baseUrl: 'slurry-currently-treated',
-          backUrl: 'projects-impact',
+          backUrl: 'project-impacts',
           nextUrl: 'slurry-to-be-treated',
           classes: 'govuk-input--width-5',
           id: 'slurryCurrentlyTreated',
@@ -889,7 +896,7 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/slurry-to-be-treated',
           baseUrl: 'slurry-to-be-treated',
-          backUrl: 'slurry-currently-treated',
+          backUrl: 'project-impacts',
           nextUrl: 'answers',
           classes: 'govuk-input--width-5',
           id: 'slurryToBeTreated',
@@ -948,7 +955,7 @@ const questionBank = {
           url: 'slurry/answers',
           baseUrl: 'answers',
           backUrl: 'slurry-to-be-treated',
-          nextUrl: 'business',
+          nextUrl: 'business-details',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -992,12 +999,12 @@ const questionBank = {
           yarKey: 'answers'
         },
         {
-          key: 'business',
+          key: 'business-details',
           order: 170,
           title: 'Business details',
           pageTitle: 'Crops',
-          url: 'slurry/business',
-          baseUrl: 'business',
+          url: 'slurry/business-details',
+          baseUrl: 'business-details',
           backUrl: 'answers',
           nextUrl: 'applying',
           eliminationAnswerKeys: '',
@@ -1040,7 +1047,7 @@ const questionBank = {
               value: ''
             }
           ],
-          yarKey: 'business'
+          yarKey: 'businessDetails'
         },
         {
           key: 'applying',
@@ -1049,8 +1056,7 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/applying',
           baseUrl: 'applying',
-          backUrl: 'business',
-          nextUrl: 'farmer-details',
+          backUrl: 'business-details',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -1066,6 +1072,9 @@ const questionBank = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
+          validate: {
+            errorEmptyField: 'Select who is applying for this grant'
+          },
           validations: [
             {
               type: '',
@@ -1077,11 +1086,13 @@ const questionBank = {
           answers: [
             {
               key: 'applying-A1',
-              value: 'farmer'
+              value: 'farmer',
+              redirectUrl: 'farmers-details'
             },
             {
               key: 'applying-A2',
-              value: 'agent'
+              value: 'agent',
+              redirectUrl: 'agents-details'
             }
           ],
           yarKey: 'applying'
@@ -1092,7 +1103,7 @@ const questionBank = {
           order: 190,
           title: 'Farmer’s details',
           pageTitle: '',
-          url: 'slurry/farmer-details',
+          url: 'slurry/farmers-details',
           baseUrl: 'farmer-details',
           backUrl: 'applying',
           nextUrl: 'check-details',
@@ -1137,6 +1148,58 @@ const questionBank = {
             }
           ],
           yarKey: 'farmerDetails'
+
+        },
+        {
+          key: 'agents-details',
+          order: 191,
+          title: 'Agents’s details',
+          pageTitle: '',
+          url: 'slurry/agents-details',
+          baseUrl: 'agents-details',
+          backUrl: 'applying',
+          nextUrl: 'check-details',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
+          fundingPriorities: '',
+          type: 'multiinput',
+          minAnswerCount: '',
+          maxAnswerCount: '',
+          ga: { dimension: '', value: '' },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: '',
+              value: ''
+            },
+            {
+              key: '',
+              value: ''
+            },
+            {
+              key: '',
+              value: ''
+            },
+            {
+              key: '',
+              value: ''
+            }
+          ],
+          yarKey: 'agentsDetails'
 
         },
         {
