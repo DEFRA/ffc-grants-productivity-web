@@ -1021,7 +1021,7 @@ const questionBank = {
           url: 'slurry/business-details',
           baseUrl: 'business-details',
           backUrl: 'answers',
-          nextUrl: 'applying',
+          nextUrl: '/productivity/applying',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -1069,9 +1069,9 @@ const questionBank = {
           order: 180,
           title: 'Who is applying for this grant?',
           pageTitle: '',
-          url: 'slurry/applying',
+          url: 'applying',
           baseUrl: 'applying',
-          backUrl: 'business-details',
+          backUrl: 'slurry/business-details',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -1102,12 +1102,12 @@ const questionBank = {
             {
               key: 'applying-A1',
               value: 'farmer',
-              redirectUrl: 'farmers-details'
+              redirectUrl: '/productivity/farmers-details'
             },
             {
               key: 'applying-A2',
               value: 'agent',
-              redirectUrl: 'agents-details'
+              redirectUrl: '/productivity/agents-details'
             }
           ],
           yarKey: 'applying'
@@ -1118,9 +1118,9 @@ const questionBank = {
           order: 190,
           title: 'Farmer’s details',
           pageTitle: '',
-          url: 'slurry/farmers-details',
+          url: 'farmers-details',
           baseUrl: 'farmer-details',
-          backUrl: 'applying',
+          backUrl: '/productivity/applying',
           nextUrl: 'check-details',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1170,7 +1170,7 @@ const questionBank = {
           order: 191,
           title: 'Agents’s details',
           pageTitle: '',
-          url: 'slurry/agents-details',
+          url: 'agents-details',
           baseUrl: 'agents-details',
           backUrl: 'applying',
           nextUrl: 'check-details',
@@ -1222,7 +1222,7 @@ const questionBank = {
           order: 200,
           title: 'Check your details',
           pageTitle: '',
-          url: 'slurry/check-details',
+          url: 'check-details',
           baseUrl: 'check-details',
           backUrl: 'farmer-details',
           nextUrl: 'consent',
@@ -1233,6 +1233,14 @@ const questionBank = {
             messageLink: {
               url: '',
               title: ''
+            }
+          },
+          backUrlObject: {
+            dependentQuestionYarKey: 'applying',
+            dependentAnswerKeysArray: ['applying-A1'],
+            backUrlOptions: {
+              thenUrl: '/productivity/farmers-details',
+              elseUrl: '/productivity/agents-details'
             }
           },
           fundingPriorities: '',
