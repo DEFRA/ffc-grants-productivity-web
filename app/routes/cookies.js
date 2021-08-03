@@ -3,7 +3,7 @@ const Joi = require('joi')
 const urlPrefix = require('../config/server').urlPrefix
 const viewTemplate = 'cookies/cookie-policy'
 const currentPath = `${urlPrefix}/cookies`
-// const authConfig = require('../config/auth')
+
 function createModel (cookiesPolicy = {}, updated = false) {
   return {
     analytics: {
@@ -20,13 +20,6 @@ function createModel (cookiesPolicy = {}, updated = false) {
           text: 'Do not use cookies that measure my website use',
           checked: !cookiesPolicy.analytics
         }
-        //  ...(authConfig.enabled
-        //   ? [[
-        //       { text: 'session-auth' },
-        //       { text: 'Saves authentication for your session' },
-        //       { text: '1 year' }
-        //     ]]
-        //   : [])
       ]
     },
     updated
