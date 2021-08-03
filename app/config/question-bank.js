@@ -1,3 +1,5 @@
+const { DIGITS_MAX_7 } = require('../helpers/regex')
+
 /**
  * question type = single-answer, boolean ,input, multiinput, mullti-answer
  *
@@ -495,7 +497,7 @@ const questionBank = {
           maxAnswerCount: 3,
           hint: {
             html: `
-              The minimum grant you can claim is £35,000 (40% of £87,500). The maximum grant is £1 million.
+              The minimum grant you can claim is £35,000 (40% of £87,500). The maximum grant is £500,000.
               <br/><br/>Select all that apply.`
           },
           ga: { dimension: '', value: '' },
@@ -566,6 +568,11 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Select the option that describes your use of low-emission precision equipment'
           },
+          sidebar: {
+            heading: 'Eligibility',
+            para: 'You must use low-emission precision application equipment.',
+            items: []
+          },
           validations: [
             {
               type: '',
@@ -613,7 +620,7 @@ const questionBank = {
           prefix: { text: '£' },
           grantInfo: {
             minGrant: 35000,
-            maxGrant: 1000000,
+            maxGrant: 500000,
             grantPercentage: 40
           },
           label: {
@@ -629,18 +636,26 @@ const questionBank = {
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
-            insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £1 million.' },
+            messageContent: 'You can only apply for a grant of up to <b>40%</b> of the estimated costs.',
+            insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £500,000.' },
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
             }
           },
           type: 'input',
-          sidebar:
-            { heading: 'Items selected', para: '', items: [] },
+          sidebar: {
+            heading: 'Items selected',
+            para: '',
+            items: [],
+            dependentYarKey: 'projectItems'
+          },
           validate: {
-            errorEmptyField: 'Enter the estimated cost for the items'
+            errorEmptyField: 'Enter the estimated cost for the items',
+            checkRegex: {
+              regex: DIGITS_MAX_7,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            }
           },
           validations: [
             {
