@@ -26,7 +26,7 @@ const getModel = (data, question, request) => {
     items: getOptions(data, question),
     sideBarText: question.sidebar
   }
-  return (question.sidebar && question.sidebar.dependentYarKey) ? getDependentSideBarModel(question, model, request) : model
+  return (question.sidebar?.dependentYarKey) ? getDependentSideBarModel(question, model, request) : model
 }
 
 module.exports = {
