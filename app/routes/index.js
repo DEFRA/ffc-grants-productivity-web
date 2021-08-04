@@ -78,11 +78,13 @@ const showPostPage = (currentQuestion, request, h) => {
   // pages with further checks
   switch (yarKey) {
     case 'projectCost': {
-      const { isEligible } = getGrantValues(value, currentQuestion.grantInfo)
+      const { calculatedGrant, remainingCost, isEligible } = getGrantValues(value, currentQuestion.grantInfo)
 
       if (!isEligible) {
         return h.view('not-eligible', NOT_ELIGIBLE)
       }
+      setYarValue(request, 'calculatedGrant', calculatedGrant)
+      setYarValue(request, 'remainingCost', remainingCost)
     }
   }
 

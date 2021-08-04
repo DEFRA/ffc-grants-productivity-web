@@ -1,9 +1,23 @@
 const { DIGITS_MAX_7 } = require('../helpers/regex')
 
 /**
+ * ----------------------------------------------------------------
+ * list of yarKeys not bound to an answer, calculated separately
+ * -  calculatedGrant
+ * -  remainingCost
+ *
+ * Mainly to replace the value of a previously stored input
+ * Format: {{_VALUE_}}
+ * eg: question.title: 'Can you pay £{{_storedYarKey_}}'
+ * ----------------------------------------------------------------
+ */
+
+/**
+ * ----------------------------------------------------------------
  * question type = single-answer, boolean ,input, multiinput, mullti-answer
  *
  *
+ * ----------------------------------------------------------------
  */
 
 const questionBank = {
@@ -693,7 +707,8 @@ const questionBank = {
         {
           key: 'remaining-costs',
           order: 110,
-          title: 'Can you pay the remaining a costs? ',
+          title: 'Can you pay the remaining costs of £{{_remainingCost_}}? ',
+          replaceTitle: true,
           pageTitle: '',
           url: 'slurry/remaining-costs',
           baseUrl: 'remaining-costs',
