@@ -2,7 +2,7 @@ function isChecked (data, option) {
   return !!data && data.includes(option)
 }
 
-function setAnswerOptions (data, answers) {
+function setOptionsLabel (data, answers) {
   return answers.map((answer) => {
     const { value, hint, text, conditional } = answer
 
@@ -32,7 +32,7 @@ function setAnswerOptions (data, answers) {
   })
 }
 
-const radioButtons = (data, question) => {
+const inputOptions = (data, question) => {
   const { classes, yarKey, title, hint, answers } = question
   return {
     classes,
@@ -46,29 +46,11 @@ const radioButtons = (data, question) => {
       }
     },
     hint,
-    items: setAnswerOptions(data, answers)
+    items: setOptionsLabel(data, answers)
   }
 }
 
-const checkBoxes = (data, question) => {
-  const { classes, yarKey, title, hint, answers } = question
-  return {
-    classes,
-    idPrefix: yarKey,
-    name: yarKey,
-    fieldset: {
-      legend: {
-        text: title,
-        isPageHeading: true,
-        classes: 'govuk-fieldset__legend--l'
-      }
-    },
-    hint,
-    items: setAnswerOptions(data, answers)
-  }
-}
-
-const inputText = (data, question) => {
+const textField = (data, question) => {
   const { yarKey, prefix, suffix, label, hint } = question
   return {
     id: yarKey,
@@ -82,8 +64,15 @@ const inputText = (data, question) => {
   }
 }
 
+const getOptions = (data, question) => {
+  switch (question.type) {
+    case 'input':
+      return textField(data, question)
+    default:
+      return inputOptions(data, question)
+  }
+}
+
 module.exports = {
-  radioButtons,
-  checkBoxes,
-  inputText
+  getOptions
 }
