@@ -1,10 +1,9 @@
 const urlPrefix = require('../config/server').urlPrefix
-const { questionBank, ALL_QUESTIONS } = require('../config/question-bank')
+const { questionBank } = require('../config/question-bank')
 const { setYarValue } = require('../helpers/session')
 const { getGrantValues } = require('../helpers/grants-info')
 const { getHandler } = require('../helpers/handlers')
 const { getModel } = require('../helpers/models')
-
 
 const customiseErrorText = (value, currentQuestion, errorList, errorText, yarKey, h, request) => {
   const baseModel = getModel(value, currentQuestion, request)
