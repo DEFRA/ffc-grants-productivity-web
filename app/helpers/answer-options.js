@@ -82,8 +82,19 @@ const inputText = (data, question) => {
   }
 }
 
+const getOptions = (data, question) => {
+  switch (question.type) {
+    case 'single-answer':
+      return radioButtons(data, question)
+    case 'multi-answer':
+      return checkBoxes(data, question)
+    case 'input':
+      return inputText(data, question)
+    default:
+      return radioButtons(data, question)
+  }
+}
+
 module.exports = {
-  radioButtons,
-  checkBoxes,
-  inputText
+  getOptions
 }

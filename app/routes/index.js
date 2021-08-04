@@ -1,71 +1,10 @@
 const urlPrefix = require('../config/server').urlPrefix
 const { questionBank, ALL_QUESTIONS } = require('../config/question-bank')
-const { setYarValue, getYarValue } = require('../helpers/session')
+const { setYarValue } = require('../helpers/session')
 const { getGrantValues } = require('../helpers/grants-info')
-const { radioButtons, checkBoxes, inputText } = require('../helpers/answer-types')
+const { getHandler } = require('../helpers/handlers')
+const { getModel } = require('../helpers/models')
 
-const getCorrectAnswerType = (data, question) => {
-  switch (question.type) {
-    case 'single-answer':
-      return radioButtons(data, question)
-    case 'multi-answer':
-      return checkBoxes(data, question)
-    case 'input':
-      return inputText(data, question)
-    default:
-      return radioButtons(data, question)
-  }
-}
-
-const resolveBackUrl = (backUrlObject, request) => {
-  const { dependentQuestionYarKey, dependentAnswerKeysArray, backUrlOptions } = backUrlObject
-  const { thenUrl, elseUrl } = backUrlOptions
-
-  const dependentAnswer = getYarValue(request, dependentQuestionYarKey)
-
-  const selectThenUrl = ALL_QUESTIONS.find(thisQuestion => (
-    thisQuestion.yarKey === dependentQuestionYarKey &&
-    thisQuestion.answers &&
-    thisQuestion.answers.some(answer => (
-      !!dependentAnswer &&
-      dependentAnswerKeysArray.includes(answer.key) &&
-      dependentAnswer.includes(answer.value)
-    ))
-  ))
-
-  return selectThenUrl ? thenUrl : elseUrl
-}
-
-const getModel = (data, question, request) => {
-  const { type, backUrl } = question
-
-  const resolvedBackUrl = question.backUrlObject
-    ? resolveBackUrl(question.backUrlObject, request)
-    : backUrl
-
-  let model = {
-    type,
-    backUrl: resolvedBackUrl,
-    items: getCorrectAnswerType(data, question),
-    sideBarText: question.sidebar
-  }
-
-  // sidebar contains values of a previous page
-  if (question.sidebar && question.sidebar.dependentYarKey) {
-    const rawSidebarValues = getYarValue(request, question.sidebar.dependentYarKey) || []
-    const formattedSidebarValues = [].concat(rawSidebarValues)
-    const valuesCount = formattedSidebarValues.length
-    model = {
-      ...model,
-      sideBarText: {
-        heading: (valuesCount < 2) ? '1 item selected' : `${valuesCount} items selected`,
-        para: '',
-        items: formattedSidebarValues
-      }
-    }
-  }
-  return model
-}
 
 const customiseErrorText = (value, currentQuestion, errorList, errorText, yarKey, h, request) => {
   const baseModel = getModel(value, currentQuestion, request)
@@ -81,23 +20,6 @@ const customiseErrorText = (value, currentQuestion, errorList, errorText, yarKey
     errorList
   }
   return h.view('page', modelWithErrors)
-}
-
-const showGetPage = (question, request, h) => {
-  if (question.maybeEligible) {
-    const { url, backUrl, nextUrl, maybeEligibleContent } = question
-    const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl }
-    return h.view('maybe-eligible', MAYBE_ELIGIBLE)
-  }
-
-  const data = getYarValue(request, question.yarKey) || null
-  return h.view('page', getModel(data, question, request))
-}
-
-const getHandler = (question) => {
-  return (request, h) => {
-    return showGetPage(question, request, h)
-  }
 }
 
 const drawSectionGetRequests = (section) => {
