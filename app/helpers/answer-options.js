@@ -65,12 +65,10 @@ const textField = (data, question) => {
 }
 
 const getOptions = (data, question) => {
-  switch (question.type) {
-    case 'input':
-      return textField(data, question)
-    default:
-      return inputOptions(data, question)
+  if (question.type === 'input') {
+    return textField(data, question)
   }
+  return inputOptions(data, question)
 }
 
 module.exports = {
