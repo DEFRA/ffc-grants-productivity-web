@@ -714,12 +714,17 @@ const questionBank = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
-          sidebar:
-            {
-              heading: 'Eligibility',
-              para: 'You cannot use public money (for example grant funding from government or local authorities) towards the project costs. \n\n  You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.',
-              items: []
-            },
+          sidebar: {
+            heading: 'Eligibility',
+            para: `
+              You cannot use any grant funding from government or local authorities.
+              \n\nYou can use money from the Basic Payment Scheme or agri-environment schemes such as Countryside Stewardship Scheme.
+            `,
+            items: []
+          },
+          validate: {
+            errorEmptyField: 'Select yes if you can pay the remaining costs without using any other grant money'
+          },
           validations: [
             {
               type: '',
