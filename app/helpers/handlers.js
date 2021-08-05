@@ -5,9 +5,29 @@ const { getGrantValues } = require('../helpers/grants-info')
 
 const getPage = (question, request, h) => {
   if (question.maybeEligible) {
-    const { url, backUrl, nextUrl, maybeEligibleContent } = question
+    const { url, backUrl, nextUrl } = question
+    let { maybeEligibleContent } = question
+
+    maybeEligibleContent = {
+      ...maybeEligibleContent,
+      messageContent: maybeEligibleContent.messageContent.replace(
+        /{{_(.+?)_}}/ig, (_, yarKeyTitleDependency) => (
+          (getYarValue(request, yarKeyTitleDependency) || 0)
+        )
+      )
+    }
+
     const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl }
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+  }
+
+  if (question.title) {
+    question = {
+      ...question,
+      title: question.title.replace(/{{_(.+?)_}}/ig, (_, yarKeyTitleDependency) => (
+        (getYarValue(request, yarKeyTitleDependency) || 0)
+      ))
+    }
   }
 
   const data = getYarValue(request, question.yarKey) || null
@@ -31,6 +51,14 @@ const showPostPage = (currentQuestion, request, h) => {
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
+  }
+
+  // extra actions for specific pages
+  if (yarKey === 'projectCost') {
+    const { calculatedGrant, remainingCost } = getGrantValues(value, currentQuestion.grantInfo)
+
+    setYarValue(request, 'calculatedGrant', calculatedGrant)
+    setYarValue(request, 'remainingCost', remainingCost)
   }
 
   return h.redirect(nextUrl)
