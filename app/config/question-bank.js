@@ -697,7 +697,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
-            messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
+            messageContent: 'You may be able to apply for a grant of up to <b>£{{_calculatedGrant_}}</b>, based on the estimated cost of <b>£{{_projectCost_}}</b>.',
             warning: {
               text: 'The project is not guaranteed to receive a grant.',
               iconFallbackText: 'Warning'
