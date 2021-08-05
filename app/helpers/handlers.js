@@ -3,7 +3,7 @@ const { getModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
 const { getGrantValues } = require('../helpers/grants-info')
 const { formatUKCurrency } = require('../helpers/data-formats')
-const { TEMPLATE_YAR_KEY } = require('../helpers/regex')
+const { SELECT_ADDITIONAL_YAR_KEY } = require('../helpers/regex')
 
 const getPage = (question, request, h) => {
   if (question.maybeEligible) {
@@ -13,8 +13,8 @@ const getPage = (question, request, h) => {
     maybeEligibleContent = {
       ...maybeEligibleContent,
       messageContent: maybeEligibleContent.messageContent.replace(
-        TEMPLATE_YAR_KEY, (_, yarKeyTitleDependency) => (
-          formatUKCurrency(getYarValue(request, yarKeyTitleDependency) || 0)
+        SELECT_ADDITIONAL_YAR_KEY, (_ignore, additionalYarKeyName) => (
+          formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
         )
       )
     }
@@ -26,8 +26,8 @@ const getPage = (question, request, h) => {
   if (question.title) {
     question = {
       ...question,
-      title: question.title.replace(TEMPLATE_YAR_KEY, (_, yarKeyTitleDependency) => (
-        formatUKCurrency(getYarValue(request, yarKeyTitleDependency) || 0)
+      title: question.title.replace(SELECT_ADDITIONAL_YAR_KEY, (_ignore, additionalYarKeyName) => (
+        formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }
   }
