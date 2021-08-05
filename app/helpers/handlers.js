@@ -14,7 +14,6 @@ const getPage = (question, request, h) => {
   return h.view('page', getModel(data, question, request))
 }
 
-
 const showPostPage = (currentQuestion, request, h) => {
   const { yarKey, answers, baseUrl, ineligibleContent, nextUrl } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
@@ -23,6 +22,7 @@ const showPostPage = (currentQuestion, request, h) => {
   const thisAnswer = answers.find(answer => (answer.value === value))
 
   setYarValue(request, yarKey, value)
+
   // either [ineligible] or [redirection]
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
