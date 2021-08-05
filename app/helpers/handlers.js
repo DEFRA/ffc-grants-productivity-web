@@ -2,6 +2,7 @@ const { getYarValue, setYarValue } = require('../helpers/session')
 const { getModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
 const { getGrantValues } = require('../helpers/grants-info')
+const { TEMPLATE_YAR_KEY } = require('../helpers/regex')
 
 const getPage = (question, request, h) => {
   if (question.maybeEligible) {
@@ -11,7 +12,7 @@ const getPage = (question, request, h) => {
     maybeEligibleContent = {
       ...maybeEligibleContent,
       messageContent: maybeEligibleContent.messageContent.replace(
-        /{{_(.+?)_}}/ig, (_, yarKeyTitleDependency) => (
+        TEMPLATE_YAR_KEY, (_, yarKeyTitleDependency) => (
           (getYarValue(request, yarKeyTitleDependency) || 0)
         )
       )
@@ -24,7 +25,7 @@ const getPage = (question, request, h) => {
   if (question.title) {
     question = {
       ...question,
-      title: question.title.replace(/{{_(.+?)_}}/ig, (_, yarKeyTitleDependency) => (
+      title: question.title.replace(TEMPLATE_YAR_KEY, (_, yarKeyTitleDependency) => (
         (getYarValue(request, yarKeyTitleDependency) || 0)
       ))
     }
