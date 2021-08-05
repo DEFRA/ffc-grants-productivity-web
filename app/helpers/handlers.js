@@ -3,18 +3,27 @@ const { getModel } = require('../helpers/models')
 
 const getPage = (question, request, h) => {
   if (question.maybeEligible) {
-    const { url, backUrl, nextUrl, maybeEligibleContent } = question
+    const { url, backUrl, nextUrl } = question
+
+    let { maybeEligibleContent } = question
+
+    maybeEligibleContent = {
+      ...maybeEligibleContent,
+      messageContent: maybeEligibleContent.messageContent.replace(
+        /{{_(.+?)_}}/ig, (_, yarKeyTitleDependency) => (
+          (getYarValue(request, yarKeyTitleDependency) || 0)
+        )
+      )
+    }
+
     const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl }
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
   }
 
-  if (question.replaceTitle) {
-    question = {
-      ...question,
-      title: question.title.replace(/{{_(.+?)_}}/ig, (_, yarKeyTitleDependency) => {
-        return (getYarValue(request, yarKeyTitleDependency) || 0)
-      })
-    }
+  if (question.title) {
+    question.title = question.title.replace(/{{_(.+?)_}}/ig, (_, yarKeyTitleDependency) => (
+      (getYarValue(request, yarKeyTitleDependency) || 0)
+    ))
   }
 
   const data = getYarValue(request, question.yarKey) || null

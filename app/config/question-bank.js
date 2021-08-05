@@ -697,7 +697,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
-            messageContent: 'You may be able to apply for a grant of up to £400,000, based on the estimated cost of £1,000,000.',
+            messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
             warning: {
               text: 'The project is not guaranteed to receive a grant.',
               iconFallbackText: 'Warning'
@@ -708,7 +708,6 @@ const questionBank = {
           key: 'remaining-costs',
           order: 110,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}? ',
-          replaceTitle: true,
           pageTitle: '',
           url: 'slurry/remaining-costs',
           baseUrl: 'remaining-costs',
