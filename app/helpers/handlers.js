@@ -21,7 +21,7 @@ const showPostPage = (currentQuestion, request, h) => {
   const payload = request.payload
   const value = payload[Object.keys(payload)[0]]
   const thisAnswer = answers.find(answer => (answer.value === value))
-
+console.log(value,'this is answer value')
   setYarValue(request, yarKey, value)
   // either [ineligible] or [redirection]
   const errors = checkErrors(payload, currentQuestion, h, request)

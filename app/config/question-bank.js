@@ -187,6 +187,9 @@ const questionBank = {
             para: 'This grant is only for projects in England. \n \n Scotland, Wales and Northern Ireland have other grants available.',
             items: []
           },
+          validate: {
+            errorEmptyField: 'Select yes if the project is in England'
+          },
           validations: [
             {
               type: '',
@@ -198,9 +201,7 @@ const questionBank = {
           answers: [
             {
               key: 'country-A1',
-              conditional: {
-                html: ''
-              },
+              conditional: true,
               value: 'Yes'
             },
             {

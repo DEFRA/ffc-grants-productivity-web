@@ -2,6 +2,15 @@ function isChecked (data, option) {
   return !!data && data.includes(option)
 }
 
+const getHtml = () => {
+  return `<div>
+  <label class="govuk-label" for="projectPostcode">
+  In which postcode will the project take place?<br/><br/> Postcode
+  </label>
+  <input class="govuk-input govuk-!-width-one-third" id="projectPostcode" name="projectPostcode" value="postcode">
+</div>`
+}
+
 function setOptionsLabel (data, answers) {
   return answers.map((answer) => {
     const { value, hint, text, conditional } = answer
@@ -14,7 +23,7 @@ function setOptionsLabel (data, answers) {
       return {
         value,
         text: value,
-        conditional,
+        ...conditional ? { conditional: { html: getHtml() } } : {},
         hint,
         checked: isChecked(data, value),
         selected: data === value
