@@ -21,6 +21,7 @@ const checkErrors = (payload, currentQuestion, h, request) => {
   const errorList = []
   const value = payload[Object.keys(payload)[0]]
 
+  // ERROR: no input is selected / typed in
   if (validate?.errorEmptyField && (payload === {} || !Object.keys(payload).includes(yarKey) || payload[yarKey] === '')) {
     const errorTextNoSelection = validate.errorEmptyField
     return customiseErrorText(value, currentQuestion, errorList, errorTextNoSelection, yarKey, h, request)
