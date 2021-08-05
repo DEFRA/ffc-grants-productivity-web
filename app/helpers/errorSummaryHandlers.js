@@ -1,5 +1,21 @@
 const { getModel } = require('../helpers/models')
 
+const customiseErrorText = (value, currentQuestion, errorList, errorText, yarKey, h, request) => {
+  const baseModel = getModel(value, currentQuestion, request)
+
+  baseModel.items = { ...baseModel.items, errorMessage: { text: errorText } }
+  errorList.push({
+    text: errorText,
+    href: `#${yarKey}`
+  })
+
+  const modelWithErrors = {
+    ...baseModel,
+    errorList
+  }
+  return h.view('page', modelWithErrors)
+}
+
 const checkErrors = (payload, currentQuestion, h, request) => {
   const { yarKey, answers, validate } = currentQuestion
   const errorList = []
@@ -22,22 +38,6 @@ const checkErrors = (payload, currentQuestion, h, request) => {
     const errorRegex = validate.checkRegex.error
     return customiseErrorText(value, currentQuestion, errorList, errorRegex, yarKey, h, request)
   }
-}
-
-const customiseErrorText = (value, currentQuestion, errorList, errorText, yarKey, h, request) => {
-  const baseModel = getModel(value, currentQuestion, request)
-
-  baseModel.items = { ...baseModel.items, errorMessage: { text: errorText } }
-  errorList.push({
-    text: errorText,
-    href: `#${yarKey}`
-  })
-
-  const modelWithErrors = {
-    ...baseModel,
-    errorList
-  }
-  return h.view('page', modelWithErrors)
 }
 
 module.exports = {
