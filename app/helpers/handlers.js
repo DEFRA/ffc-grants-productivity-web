@@ -2,18 +2,39 @@ const { getYarValue, setYarValue } = require('../helpers/session')
 const { getModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
 const { getGrantValues } = require('../helpers/grants-info')
+const { formatUKCurrency } = require('../helpers/data-formats')
+const { SELECT_ADDITIONAL_YAR_KEY } = require('../helpers/regex')
 
 const getPage = (question, request, h) => {
   if (question.maybeEligible) {
-    const { url, backUrl, nextUrl, maybeEligibleContent } = question
+    const { url, backUrl, nextUrl } = question
+    let { maybeEligibleContent } = question
+
+    maybeEligibleContent = {
+      ...maybeEligibleContent,
+      messageContent: maybeEligibleContent.messageContent.replace(
+        SELECT_ADDITIONAL_YAR_KEY, (_ignore, additionalYarKeyName) => (
+          formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
+        )
+      )
+    }
+
     const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl }
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+  }
+
+  if (question.title) {
+    question = {
+      ...question,
+      title: question.title.replace(SELECT_ADDITIONAL_YAR_KEY, (_ignore, additionalYarKeyName) => (
+        formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
+      ))
+    }
   }
 
   const data = getYarValue(request, question.yarKey) || null
   return h.view('page', getModel(data, question, request))
 }
-
 
 const showPostPage = (currentQuestion, request, h) => {
   const { yarKey, answers, baseUrl, ineligibleContent, nextUrl } = currentQuestion
@@ -23,6 +44,7 @@ const showPostPage = (currentQuestion, request, h) => {
   const thisAnswer = answers.find(answer => (answer.value === value))
 console.log(value,'this is answer value')
   setYarValue(request, yarKey, value)
+
   // either [ineligible] or [redirection]
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
@@ -31,6 +53,14 @@ console.log(value,'this is answer value')
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
+  }
+
+  // extra actions for specific pages
+  if (yarKey === 'projectCost') {
+    const { calculatedGrant, remainingCost } = getGrantValues(value, currentQuestion.grantInfo)
+
+    setYarValue(request, 'calculatedGrant', calculatedGrant)
+    setYarValue(request, 'remainingCost', remainingCost)
   }
 
   return h.redirect(nextUrl)

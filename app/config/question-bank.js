@@ -1,9 +1,23 @@
 const { DIGITS_MAX_7 } = require('../helpers/regex')
 
 /**
+ * ----------------------------------------------------------------
+ * list of yarKeys not bound to an answer, calculated separately
+ * -  calculatedGrant
+ * -  remainingCost
+ *
+ * Mainly to replace the value of a previously stored input
+ * Format: {{_VALUE_}}
+ * eg: question.title: 'Can you pay £{{_storedYarKey_}}'
+ * ----------------------------------------------------------------
+ */
+
+/**
+ * ----------------------------------------------------------------
  * question type = single-answer, boolean ,input, multiinput, mullti-answer
  *
  *
+ * ----------------------------------------------------------------
  */
 
 const questionBank = {
@@ -684,7 +698,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
-            messageContent: 'You may be able to apply for a grant of up to £400,000, based on the estimated cost of £1,000,000.',
+            messageContent: 'You may be able to apply for a grant of up to <b>£{{_calculatedGrant_}}</b>, based on the estimated cost of <b>£{{_projectCost_}}</b>.',
             warning: {
               text: 'The project is not guaranteed to receive a grant.',
               iconFallbackText: 'Warning'
@@ -694,7 +708,7 @@ const questionBank = {
         {
           key: 'remaining-costs',
           order: 110,
-          title: 'Can you pay the remaining a costs? ',
+          title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
           pageTitle: '',
           url: 'slurry/remaining-costs',
           baseUrl: 'remaining-costs',
@@ -715,12 +729,17 @@ const questionBank = {
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
-          sidebar:
-            {
-              heading: 'Eligibility',
-              para: 'You cannot use public money (for example grant funding from government or local authorities) towards the project costs. \n\n  You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.',
-              items: []
-            },
+          sidebar: {
+            heading: 'Eligibility',
+            para: `
+              You cannot use any grant funding from government or local authorities.
+              \n\nYou can use money from the Basic Payment Scheme or agri-environment schemes such as Countryside Stewardship Scheme.
+            `,
+            items: []
+          },
+          validate: {
+            errorEmptyField: 'Select yes if you can pay the remaining costs without using any other grant money'
+          },
           validations: [
             {
               type: '',
@@ -741,7 +760,7 @@ const questionBank = {
               notEligible: true
             }
           ],
-          yarKey: 'remainingCosts'
+          yarKey: 'canPayRemainingCost'
 
         },
         {
