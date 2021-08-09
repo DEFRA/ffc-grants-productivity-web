@@ -40,16 +40,17 @@ const showPostPage = (currentQuestion, request, h) => {
   const { yarKey, answers, baseUrl, ineligibleContent, nextUrl } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
-  const value = payload[Object.keys(payload)[0]]
-  const thisAnswer = answers.find(answer => (answer.value === value))
-console.log(value,'this is answer value')
-  setYarValue(request, yarKey, value)
+  let thisAnswer
 
+  for (const [key, value] of Object.entries(payload)) {
+    thisAnswer = answers.find(answer => (answer.value === value))
+    setYarValue(request, key, value)
+  }
   // either [ineligible] or [redirection]
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
     return errors
-  } else if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(value, currentQuestion?.grantInfo).isEligible : null)) {
+  } else if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion?.grantInfo).isEligible : null)) {
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
@@ -57,7 +58,7 @@ console.log(value,'this is answer value')
 
   // extra actions for specific pages
   if (yarKey === 'projectCost') {
-    const { calculatedGrant, remainingCost } = getGrantValues(value, currentQuestion.grantInfo)
+    const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
 
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
