@@ -3,7 +3,8 @@ const { getModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
 const { getGrantValues } = require('../helpers/grants-info')
 const { formatUKCurrency } = require('../helpers/data-formats')
-const { SELECT_ADDITIONAL_YAR_KEY } = require('../helpers/regex')
+const { SELECT_ADDITIONAL_YAR_KEY, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
+const { getHtml } = require('../helpers/conditionalHTML')
 
 const getPage = (question, request, h) => {
   if (question.maybeEligible) {
@@ -33,7 +34,11 @@ const getPage = (question, request, h) => {
   }
 
   const data = getYarValue(request, question.yarKey) || null
-  return h.view('page', getModel(data, question, request))
+  let conditionalHtml
+  if (question.yarKey === 'inEngland') {
+    conditionalHtml = getHtml(getYarValue(request, 'projectPostcode'))
+  }
+  return h.view('page', getModel(data, question, request, conditionalHtml))
 }
 
 const showPostPage = (currentQuestion, request, h) => {
@@ -42,15 +47,23 @@ const showPostPage = (currentQuestion, request, h) => {
   const payload = request.payload
   let thisAnswer
 
-  for (const [key, value] of Object.entries(payload)) {
+  for (let [key, value] of Object.entries(payload)) {
     thisAnswer = answers.find(answer => (answer.value === value))
+
+    if (key === 'projectPostcode') {
+      value = value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
+    }
     setYarValue(request, key, value)
   }
-  // either [ineligible] or [redirection]
+
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
     return errors
-  } else if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion?.grantInfo).isEligible : null)) {
+  }
+
+  // either [ineligible] or [redirection]
+
+  if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion?.grantInfo).isEligible : null)) {
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)

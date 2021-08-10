@@ -1,12 +1,19 @@
 const { getModel } = require('../helpers/models')
+const { getHtml } = require('../helpers/conditionalHTML')
+const { getYarValue } = require('../helpers/session')
 
-const customiseErrorText = (value, currentQuestion, errorList, errorText, yarKey, h, request) => {
-  const baseModel = getModel(value, currentQuestion, request)
+const customiseErrorText = (value, currentQuestion, errorList, errorText, h, request) => {
+  let conditionalHtml
+  if (currentQuestion.conditionalKey) {
+    conditionalHtml = getHtml(getYarValue(request, currentQuestion.conditionalKey), errorText.includes('postcode') ? errorText : null)
+  }
+  const baseModel = getModel(value, currentQuestion, request, conditionalHtml)
+  const href = errorText.includes('postcode') ? currentQuestion.conditionalKey : currentQuestion.yarKey
 
-  baseModel.items = { ...baseModel.items, errorMessage: { text: errorText } }
+  baseModel.items = { ...baseModel.items, ...(!errorText.includes('postcode') ? { errorMessage: { text: errorText } } : {}) }
   errorList.push({
     text: errorText,
-    href: `#${yarKey}`
+    href: `#${href}`
   })
 
   const modelWithErrors = {
@@ -17,27 +24,36 @@ const customiseErrorText = (value, currentQuestion, errorList, errorText, yarKey
 }
 
 const checkErrors = (payload, currentQuestion, h, request) => {
-  const { yarKey, answers, validate } = currentQuestion
+  const { yarKey, conditionalKey, answers, validate } = currentQuestion
   const errorList = []
-  const value = payload[Object.keys(payload)[0]]
+  const conditionalAnswer = answers.find(answer => answer.conditional)
 
-  // ERROR: no input is selected / typed in
-  if (validate?.errorEmptyField && (payload === {} || !Object.keys(payload).includes(yarKey) || payload[yarKey] === '')) {
-    const errorTextNoSelection = validate.errorEmptyField
-    return customiseErrorText(value, currentQuestion, errorList, errorTextNoSelection, yarKey, h, request)
-  }
-  // ERROR: mandatory checkbox / radiobutton not selected
-  const requiredAnswer = answers.find(answer => (answer.mustSelect))
-
-  if ((!!requiredAnswer) && (!value || !value.includes(requiredAnswer.value))) {
-    const errorMustSelect = requiredAnswer.errorMustSelect
-    return customiseErrorText(value, currentQuestion, errorList, errorMustSelect, yarKey, h, request)
+  if (Object.keys(payload).length === 0) {
+    const errorTextNoSelection = validate?.errorEmptyField
+    return customiseErrorText('', currentQuestion, errorList, errorTextNoSelection, h, request)
   }
 
-  // ERROR: regex validation
-  if (validate?.checkRegex && !validate.checkRegex.regex.test(value)) {
-    const errorRegex = validate.checkRegex.error
-    return customiseErrorText(value, currentQuestion, errorList, errorRegex, yarKey, h, request)
+  for (let [key, value] of Object.entries(payload)) {
+    const noOptionSelected = ((validate?.errorEmptyField && !Object.keys(payload).includes(yarKey)) || payload[yarKey] === '')
+    const hasSelectionError = (value.includes(conditionalAnswer?.value) && validate?.conditionalValidate?.errorEmptyField && payload[conditionalKey] === '') || noOptionSelected
+    const regexError = (validate?.checkRegex && !validate.checkRegex.regex.test(value))
+    const hasRegexValidationError = (payload[yarKey]?.includes(conditionalAnswer?.value) && key === conditionalKey && !validate.conditionalValidate?.checkRegex.regex.test(value)) || regexError
+
+    if (hasSelectionError || hasRegexValidationError) {
+      const errorTextNoSelection = hasSelectionError && noOptionSelected ? validate?.errorEmptyField : validate?.conditionalValidate?.errorEmptyField
+      const errorTextRegex = regexError ? validate.checkRegex.error : validate.conditionalValidate?.checkRegex?.error
+      const errorText = hasSelectionError ? errorTextNoSelection : errorTextRegex
+      value = key === conditionalKey ? payload[yarKey] : value
+      return customiseErrorText(value, currentQuestion, errorList, errorText, h, request)
+    }
+
+    // ERROR: mandatory checkbox / radiobutton not selected
+    const requiredAnswer = answers.find(answer => (answer.mustSelect))
+
+    if ((!!requiredAnswer) && (!value || !value.includes(requiredAnswer.value))) {
+      const errorMustSelect = requiredAnswer.errorMustSelect
+      return customiseErrorText(value, currentQuestion, errorList, errorMustSelect, h, request)
+    }
   }
 }
 

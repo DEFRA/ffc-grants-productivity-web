@@ -1,4 +1,4 @@
-const { DIGITS_MAX_7 } = require('../helpers/regex')
+const { DIGITS_MAX_7, POSTCODE_REGEX } = require('../helpers/regex')
 
 /**
  * ----------------------------------------------------------------
@@ -202,7 +202,14 @@ const questionBank = {
             items: []
           },
           validate: {
-            errorEmptyField: 'Select yes if the project is in England'
+            errorEmptyField: 'Select yes if the project is in England',
+            conditionalValidate: {
+              errorEmptyField: 'Enter a postcode, like AA1 1AA',
+              checkRegex: {
+                regex: POSTCODE_REGEX,
+                error: 'Enter a postcode, like AA1 1AA'
+              }
+            }
           },
           validations: [
             {
@@ -224,7 +231,8 @@ const questionBank = {
               notEligible: true
             }
           ],
-          yarKey: 'inEngland'
+          yarKey: 'inEngland',
+          conditionalKey: 'projectPostcode'
         },
         {
           key: 'planning-permission',
