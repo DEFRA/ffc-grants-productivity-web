@@ -974,6 +974,9 @@ const questionBank = {
               para: 'RPA wants to fund projects that:',
               items: ['improve productivity', 'improve the environment', 'introduce innovation ']
             },
+          validate: {
+            errorEmptyField: 'Enter the volume of digestate you will acidify after the project'
+          },
           validations: [
             {
               type: '',
