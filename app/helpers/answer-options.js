@@ -1,8 +1,9 @@
+
 function isChecked (data, option) {
   return !!data && data.includes(option)
 }
 
-function setOptionsLabel (data, answers) {
+function setOptionsLabel (data, answers, conditionalHtml) {
   return answers.map((answer) => {
     const { value, hint, text, conditional } = answer
 
@@ -14,7 +15,7 @@ function setOptionsLabel (data, answers) {
       return {
         value,
         text: value,
-        conditional,
+        ...conditional ? { conditional: { html: conditionalHtml } } : {},
         hint,
         checked: isChecked(data, value),
         selected: data === value
@@ -32,7 +33,7 @@ function setOptionsLabel (data, answers) {
   })
 }
 
-const inputOptions = (data, question) => {
+const inputOptions = (data, question, conditionalHtml) => {
   const { classes, yarKey, title, hint, answers } = question
   return {
     classes,
@@ -46,7 +47,7 @@ const inputOptions = (data, question) => {
       }
     },
     hint,
-    items: setOptionsLabel(data, answers)
+    items: setOptionsLabel(data, answers, conditionalHtml)
   }
 }
 
@@ -64,11 +65,11 @@ const textField = (data, question) => {
   }
 }
 
-const getOptions = (data, question) => {
+const getOptions = (data, question, conditionalHtml) => {
   if (question.type === 'input') {
     return textField(data, question)
   }
-  return inputOptions(data, question)
+  return inputOptions(data, question, conditionalHtml)
 }
 
 module.exports = {

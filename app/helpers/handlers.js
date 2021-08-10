@@ -3,7 +3,8 @@ const { getModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
 const { getGrantValues } = require('../helpers/grants-info')
 const { formatUKCurrency } = require('../helpers/data-formats')
-const { SELECT_ADDITIONAL_YAR_KEY } = require('../helpers/regex')
+const { SELECT_ADDITIONAL_YAR_KEY, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
+const { getHtml } = require('../helpers/conditionalHTML')
 
 const getPage = (question, request, h) => {
   if (question.maybeEligible) {
@@ -33,23 +34,36 @@ const getPage = (question, request, h) => {
   }
 
   const data = getYarValue(request, question.yarKey) || null
-  return h.view('page', getModel(data, question, request))
+  let conditionalHtml
+  if (question.yarKey === 'inEngland') {
+    conditionalHtml = getHtml(getYarValue(request, 'projectPostcode'))
+  }
+  return h.view('page', getModel(data, question, request, conditionalHtml))
 }
 
 const showPostPage = (currentQuestion, request, h) => {
   const { yarKey, answers, baseUrl, ineligibleContent, nextUrl } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
-  const value = payload[Object.keys(payload)[0]]
-  const thisAnswer = answers.find(answer => (answer.value === value))
+  let thisAnswer
 
-  setYarValue(request, yarKey, value)
+  for (let [key, value] of Object.entries(payload)) {
+    thisAnswer = answers.find(answer => (answer.value === value))
 
-  // either [ineligible] or [redirection]
+    if (key === 'projectPostcode') {
+      value = value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
+    }
+    setYarValue(request, key, value)
+  }
+
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
     return errors
-  } else if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(value, currentQuestion?.grantInfo).isEligible : null)) {
+  }
+
+  // either [ineligible] or [redirection]
+
+  if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion?.grantInfo).isEligible : null)) {
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
@@ -57,7 +71,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
   // extra actions for specific pages
   if (yarKey === 'projectCost') {
-    const { calculatedGrant, remainingCost } = getGrantValues(value, currentQuestion.grantInfo)
+    const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
 
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
