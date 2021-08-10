@@ -1,4 +1,4 @@
-const { DIGITS_MAX_7, JUST_DIGITS } = require('../helpers/regex')
+const { DIGITS_MAX_7, JUST_DIGITS, POSTCODE_REGEX } = require('../helpers/regex')
 
 /**
  * ----------------------------------------------------------------
@@ -201,6 +201,16 @@ const questionBank = {
             para: 'This grant is only for projects in England. \n \n Scotland, Wales and Northern Ireland have other grants available.',
             items: []
           },
+          validate: {
+            errorEmptyField: 'Select yes if the project is in England',
+            conditionalValidate: {
+              errorEmptyField: 'Enter a postcode, like AA1 1AA',
+              checkRegex: {
+                regex: POSTCODE_REGEX,
+                error: 'Enter a postcode, like AA1 1AA'
+              }
+            }
+          },
           validations: [
             {
               type: '',
@@ -212,9 +222,7 @@ const questionBank = {
           answers: [
             {
               key: 'country-A1',
-              conditional: {
-                html: ''
-              },
+              conditional: true,
               value: 'Yes'
             },
             {
@@ -223,7 +231,8 @@ const questionBank = {
               notEligible: true
             }
           ],
-          yarKey: 'country'
+          yarKey: 'inEngland',
+          conditionalKey: 'projectPostcode'
         },
         {
           key: 'planning-permission',
