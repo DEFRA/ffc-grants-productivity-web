@@ -283,12 +283,12 @@ const questionBank = {
               value: 'Secured'
             },
             {
-              key: 'planning-permission-A2',
+              key: 'planning-permission-A3',
               value: 'Expected to have by 31 March 2022',
               redirectUrl: 'planning-required-condition'
             },
             {
-              key: 'planning-permission-A2',
+              key: 'planning-permission-A4',
               value: 'Will not have by 31 March 2022',
               notEligible: true
             }
@@ -315,6 +315,14 @@ const questionBank = {
           url: 'project-start',
           baseUrl: 'project-start',
           backUrl: 'planning-permission',
+          backUrlObject: {
+            dependentQuestionYarKey: 'planningPermission',
+            dependentAnswerKeysArray: ['planning-permission-A3'],
+            backUrlOptions: {
+              thenUrl: '/productivity/planning-required-condition',
+              elseUrl: '/productivity/planning-permission'
+            }
+          },
           nextUrl: 'tenancy',
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
@@ -336,6 +344,9 @@ const questionBank = {
               para: 'You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement.\n \n Before you start the project, you can:',
               items: ['get quotes from suppliers', 'apply for planning permissions (this can take a long time)']
             },
+          validate: {
+            errorEmptyField: 'Select the option that applies to your project'
+          },
           validations: [
             {
               type: '',
