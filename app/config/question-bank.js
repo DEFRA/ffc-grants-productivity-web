@@ -897,7 +897,7 @@ const questionBank = {
           },
           hint: {
             html: `
-              <br>Enter figure in cubic metres, for example 1500`
+              <br>Enter figure in cubic metres (m3), for example 15,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -968,7 +968,7 @@ const questionBank = {
           },
           hint: {
             html: `
-              <br>Enter figure in cubic metres, for example 1500`
+              <br>Enter figure in cubic metres (m3), for example 15,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
