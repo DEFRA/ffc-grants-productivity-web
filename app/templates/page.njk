@@ -22,7 +22,7 @@
     {{ govukErrorSummary ({
         "titleText": "There is a problem",
         "errorList": errorList
-       })
+      })
     }}
   {% endif %}
 
@@ -48,7 +48,7 @@
         {%endif%}
 
         <div class="govuk-!-padding-top-5">
-        {%if backUrl !== 'slurry-currently-treated' %}
+        {%if key !== 'slurry-to-be-treated' %}
         {{ govukButton({
           text: "Continue"
         }) }}

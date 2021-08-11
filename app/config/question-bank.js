@@ -1,4 +1,4 @@
-const { DIGITS_MAX_7, JUST_DIGITS, POSTCODE_REGEX } = require('../helpers/regex')
+const { DIGITS_MAX_7, POSTCODE_REGEX, NUMBER_REGEX } = require('../helpers/regex')
 
 /**
  * ----------------------------------------------------------------
@@ -865,12 +865,12 @@ const questionBank = {
             {
               key: 'project-impacts-A1',
               value: 'Introduce acidification for the first time',
-              redirectUrl: 'slurry-currently-treated'
+              redirectUrl: 'slurry-to-be-treated'
             },
             {
               key: 'project-impacts-A2',
               value: 'Add additional acidification installations',
-              redirectUrl: 'slurry-to-be-treated'
+              redirectUrl: 'slurry-currently-treated'
             }
           ],
           yarKey: 'projectImpacts'
@@ -920,7 +920,7 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Enter the volume of slurry or digestate you currently acidify',
             checkRegex: {
-              regex: JUST_DIGITS,
+              regex: NUMBER_REGEX,
               error: 'Volume must be a whole number'
             }
           },
@@ -946,7 +946,14 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/slurry-to-be-treated',
           baseUrl: 'slurry-to-be-treated',
-          backUrl: 'project-impacts',
+          backUrlObject: {
+            dependentQuestionYarKey: 'projectImpacts',
+            dependentAnswerKeysArray: ['project-impacts-A2'],
+            backUrlOptions: {
+              thenUrl: '/productivity/slurry/slurry-currently-treated',
+              elseUrl: '/productivity/slurry/project-impacts'
+            }
+          },
           nextUrl: 'answers',
           classes: 'govuk-input--width-5',
           id: 'slurryToBeTreated',
@@ -981,6 +988,13 @@ const questionBank = {
               para: 'RPA wants to fund projects that:',
               items: ['improve productivity', 'improve the environment', 'introduce innovation ']
             },
+          validate: {
+            errorEmptyField: 'Enter the volume of digestate you will acidify after the project',
+            checkRegex: {
+              regex: NUMBER_REGEX,
+              error: 'Volume must be a number'
+            }
+          },
           validations: [
             {
               type: '',
@@ -989,11 +1003,7 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
-          answers: [
-            {
-              key: ''
-            }
-          ],
+          answers: [],
           yarKey: 'slurryToBeTreated'
 
         },
