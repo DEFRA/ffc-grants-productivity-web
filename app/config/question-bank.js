@@ -491,7 +491,7 @@ const questionBank = {
         {
           key: 'project-items',
           order: 80,
-          title: 'Which eligible items does your project need?',
+          title: 'Which eligible items do you need for your project?',
           pageTitle: '',
           url: 'slurry/project-items',
           baseUrl: 'project-items',
