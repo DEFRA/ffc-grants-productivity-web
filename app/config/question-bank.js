@@ -1,4 +1,4 @@
-const { DIGITS_MAX_7, POSTCODE_REGEX } = require('../helpers/regex')
+const { DIGITS_MAX_7, JUST_DIGITS, POSTCODE_REGEX } = require('../helpers/regex')
 
 /**
  * ----------------------------------------------------------------
@@ -891,7 +891,7 @@ const questionBank = {
             html: 'm<sup>3</sup>'
           },
           label: {
-            text: 'What volume of digestate do you currently acidify per year?',
+            text: 'What volume of slurry or digestate do you currently acidify per year?',
             classes: 'govuk-label--l',
             isPageHeading: true
           },
@@ -916,6 +916,13 @@ const questionBank = {
             heading: 'Funding priorities',
             para: 'RPA wants to fund projects that:',
             items: ['improve productivity', 'improve the environment']
+          },
+          validate: {
+            errorEmptyField: 'Enter the volume of slurry or digestate you currently acidify',
+            checkRegex: {
+              regex: JUST_DIGITS,
+              error: 'Volume must be a whole number'
+            }
           },
           validations: [
             {
