@@ -284,12 +284,12 @@ const questionBank = {
             },
             {
               key: 'planning-permission-A2',
-              value: 'Expected to have by 31 March 2022',
+              value: 'Should be in place by 31 March 2022',
               redirectUrl: 'planning-required-condition'
             },
             {
               key: 'planning-permission-A2',
-              value: 'Will not have by 31 March 2022',
+              value: 'Will not be in place by 31 March 2022',
               notEligible: true
             }
           ],
