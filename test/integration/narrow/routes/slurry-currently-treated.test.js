@@ -1,11 +1,11 @@
 const { crumbToken } = require('./test-helper')
 
 describe('slurry-to-be-treated page', () => {
-  it('should returns error message if no option is selected', async () => {
+  it('should returns error message if nothing entered in the input', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/slurry/slurry-to-be-treated`,
-      payload: { projectPostcode: '', crumb: crumbToken },
+      url: `${global.__URLPREFIX__}/slurry/slurry-currently-treated`,
+      payload: { slurryCurrentlyTreated: '', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
@@ -13,14 +13,14 @@ describe('slurry-to-be-treated page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter the volume of digestate you will acidify after the project')
+    expect(postResponse.payload).toContain('Enter the volume of slurry or digestate you currently acidify')
   })
 
-  it('should returns error message if the user do not eneter a whole number ', async () => {
+  it('should returns error message if the user writes decimals ', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/slurry/slurry-to-be-treated`,
-      payload: { slurryToBeTreated: '20.78', crumb: crumbToken },
+      url: `${global.__URLPREFIX__}/slurry/slurry-currently-treated`,
+      payload: { slurryCurrentlyTreated: '100.18', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
@@ -28,14 +28,14 @@ describe('slurry-to-be-treated page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Volume must be a number')
+    expect(postResponse.payload).toContain('Volume must be a whole number')
   })
 
-  it('should returns error message if volume is contains letters or other charachters ', async () => {
+  it('should returns error message if the user writes alphabets', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/slurry/slurry-to-be-treated`,
-      payload: { slurryToBeTreated: '23rep +&', crumb: crumbToken },
+      url: `${global.__URLPREFIX__}/slurry/slurry-currently-treated`,
+      payload: { slurryCurrentlyTreated: 'currently123', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
@@ -43,21 +43,24 @@ describe('slurry-to-be-treated page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Volume must be a number')
+    expect(postResponse.payload).toContain('Volume must be a whole number')
   })
 
-  it('should store user response and redirects to planning permission page', async () => {
+
+
+  it('should returns error message if the user writes  specific characters', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/slurry/slurry-to-be-treated`,
-      payload: { slurryToBeTreated: '560', crumb: crumbToken },
+      url: `${global.__URLPREFIX__}/slurry/slurry-currently-treated`,
+      payload: { slurryCurrentlyTreated: '$&12', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('answers')
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Volume must be a whole number')
   })
+
 })
