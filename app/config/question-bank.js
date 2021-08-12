@@ -284,12 +284,12 @@ const questionBank = {
             },
             {
               key: 'planning-permission-A2',
-              value: 'Expected to have by 31 March 2022',
+              value: 'Should be in place by 31 March 2022',
               redirectUrl: 'planning-required-condition'
             },
             {
               key: 'planning-permission-A2',
-              value: 'Will not have by 31 March 2022',
+              value: 'Will not be in place by 31 March 2022',
               notEligible: true
             }
           ],
@@ -491,7 +491,7 @@ const questionBank = {
         {
           key: 'project-items',
           order: 80,
-          title: 'Which eligible items does your project need?',
+          title: 'Which eligible items do you need for your project?',
           pageTitle: '',
           url: 'slurry/project-items',
           baseUrl: 'project-items',
@@ -655,11 +655,11 @@ const questionBank = {
             html: `
               You can only apply for a grant of up to 40% of the estimated costs.
               <br/>Do not include VAT.
-              <br/><br/>Enter amount, for example 95000`
+              <br/><br/>Enter amount, for example 95,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: 'You can only apply for a grant of up to <b>40%</b> of the estimated costs.',
+            messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
             insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £500,000.' },
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
@@ -706,7 +706,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
-            messageContent: 'You may be able to apply for a grant of up to <b>£{{_calculatedGrant_}}</b>, based on the estimated cost of <b>£{{_projectCost_}}</b>.',
+            messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
             warning: {
               text: 'The project is not guaranteed to receive a grant.',
               iconFallbackText: 'Warning'
@@ -897,7 +897,7 @@ const questionBank = {
           },
           hint: {
             html: `
-              <br>Enter figure in cubic metres, for example 1500`
+              <br>Enter figure in cubic metres (m3), for example 15,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -968,7 +968,7 @@ const questionBank = {
           },
           hint: {
             html: `
-              <br>Enter figure in cubic metres, for example 1500`
+              <br>Enter figure in cubic metres (m3), for example 15,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
