@@ -52,7 +52,7 @@ describe('slurry-to-be-treated page', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/slurry/slurry-currently-treated`,
-      payload: { slurryCurrentlyTreated: '$&12', crumb: crumbToken },
+      payload: { slurryCurrentlyTreated: '$&£12', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
