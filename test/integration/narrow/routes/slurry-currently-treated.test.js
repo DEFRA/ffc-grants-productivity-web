@@ -1,6 +1,6 @@
 const { crumbToken } = require('./test-helper')
 
-describe('slurry-to-be-treated page', () => {
+describe('tests for slurry-currently-treated page', () => {
   it('should returns error message if nothing entered in the input', async () => {
     const postOptions = {
       method: 'POST',
