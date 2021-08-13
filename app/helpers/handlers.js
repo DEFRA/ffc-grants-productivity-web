@@ -56,6 +56,15 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, key, value)
   }
 
+  if (currentQuestion.title) {
+    currentQuestion = {
+      ...currentQuestion,
+      title: currentQuestion.title.replace(SELECT_ADDITIONAL_YAR_KEY, (_ignore, additionalYarKeyName) => (
+        formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
+      ))
+    }
+  }
+
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
     return errors
