@@ -1,4 +1,4 @@
-const { getBackUrl } = require('../helpers/urls')
+const { getUrl } = require('../helpers/urls')
 const { getOptions } = require('../helpers/answer-options')
 const { getYarValue } = require('../helpers/session')
 
@@ -19,15 +19,15 @@ const getDependentSideBarModel = (question, model, request) => {
 }
 
 const getModel = (data, question, request, conditionalHtml = '') => {
-  const { type, backUrl, key } = question
+  const { type, backUrl, key, backUrlObject, sidebar } = question
   const model = {
     type,
     key,
-    backUrl: getBackUrl(question.backUrlObject, backUrl, request),
+    backUrl: getUrl(backUrlObject, backUrl, request),
     items: getOptions(data, question, conditionalHtml),
-    sideBarText: question.sidebar
+    sideBarText: sidebar
   }
-  return (question.sidebar?.dependentYarKey) ? getDependentSideBarModel(question, model, request) : model
+  return (sidebar?.dependentYarKey) ? getDependentSideBarModel(question, model, request) : model
 }
 
 module.exports = {

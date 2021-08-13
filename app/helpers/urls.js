@@ -1,11 +1,11 @@
 const { getYarValue } = require('../helpers/session')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
-const getBackUrl = (backUrlObject, backUrl, request) => {
-  if (!backUrlObject) {
-    return backUrl
+const getUrl = (urlObject, url, request) => {
+  if (!urlObject) {
+    return url
   }
-  const { dependentQuestionYarKey, dependentAnswerKeysArray, backUrlOptions } = backUrlObject
+  const { dependentQuestionYarKey, dependentAnswerKeysArray, backUrlOptions } = urlObject
   const { thenUrl, elseUrl } = backUrlOptions
 
   const dependentAnswer = getYarValue(request, dependentQuestionYarKey)
@@ -24,5 +24,5 @@ const getBackUrl = (backUrlObject, backUrl, request) => {
 }
 
 module.exports = {
-  getBackUrl
+  getUrl
 }

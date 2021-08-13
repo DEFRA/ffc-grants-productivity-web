@@ -28,7 +28,7 @@ const checkErrors = (payload, currentQuestion, h, request) => {
   const errorList = []
   const conditionalAnswer = answers.find(answer => answer.conditional)
 
-  if (Object.keys(payload).length === 0) {
+  if (Object.keys(payload).length === 0 && currentQuestion.type) {
     const errorTextNoSelection = validate?.errorEmptyField
     return customiseErrorText('', currentQuestion, errorList, errorTextNoSelection, h, request)
   }

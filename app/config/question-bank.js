@@ -257,11 +257,11 @@ const questionBank = {
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
-            {
-              heading: 'Eligibility',
-              para: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
-              items: []
-            },
+          {
+            heading: 'Eligibility',
+            para: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
+            items: []
+          },
           validate: {
             errorEmptyField: 'Select when the project will have planning permission'
           },
@@ -387,16 +387,16 @@ const questionBank = {
           url: 'tenancy',
           baseUrl: 'tenancy',
           backUrl: 'project-start',
-          nextUrl: 'slurry/project-items',
-          eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectSubject',
+            dependentAnswerKeysArray: ['project-subject-A1'],
+            backUrlOptions: {
+              thenUrl: 'robotics/project-items ',
+              elseUrl: 'slurry/project-items'
             }
           },
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
           fundingPriorities: '',
           type: 'single-answer',
           classes: 'govuk-radios--inline',
@@ -441,7 +441,14 @@ const questionBank = {
           url: 'tenancy-length',
           baseUrl: 'tenancy-length',
           backUrl: 'tenancy',
-          nextUrl: 'slurry/project-items',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectSubject',
+            dependentAnswerKeysArray: ['project-subject-A1'],
+            backUrlOptions: {
+              thenUrl: 'robotics/project-items ',
+              elseUrl: 'slurry/project-items'
+            }
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -458,11 +465,11 @@ const questionBank = {
           classes: 'govuk-radios--inline',
           ga: { dimension: '', value: '' },
           sidebar:
-            {
-              heading: 'Eligibility',
-              para: 'The land must be owned or have a tenancy in place until 2026 before starting the project.',
-              items: []
-            },
+          {
+            heading: 'Eligibility',
+            para: 'The land must be owned or have a tenancy in place until 2026 before starting the project.',
+            items: []
+          },
           validate: {
             errorEmptyField: 'Select yes if the land has a tenancy agreement in place until 2026 or after'
           },
@@ -492,7 +499,14 @@ const questionBank = {
           order: 71,
           url: 'tenancy-length-condition',
           backUrl: 'tenancy-length',
-          nextUrl: 'slurry/project-items',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectSubject',
+            dependentAnswerKeysArray: ['project-subject-A1'],
+            backUrlOptions: {
+              thenUrl: 'robotics/project-items ',
+              elseUrl: 'slurry/project-items'
+            }
+          },
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
@@ -859,11 +873,11 @@ const questionBank = {
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
-            {
-              heading: 'Funding priorities',
-              para: 'RPA wants to fund projects that:',
-              items: ['improve productivity', 'improve the environment', 'introduce innovation']
-            },
+          {
+            heading: 'Funding priorities',
+            para: 'RPA wants to fund projects that:',
+            items: ['improve productivity', 'improve the environment', 'introduce innovation']
+          },
           validations: [
             {
               type: '',
@@ -965,7 +979,7 @@ const questionBank = {
               elseUrl: '/productivity/slurry/project-impacts'
             }
           },
-          nextUrl: 'answers',
+          nextUrl: '/productivity/answers',
           classes: 'govuk-input--width-5',
           id: 'slurryToBeTreated',
           name: 'slurryToBeTreated',
@@ -994,11 +1008,11 @@ const questionBank = {
           type: 'input',
           ga: { dimension: '', value: '' },
           sidebar:
-            {
-              heading: 'Funding priorities',
-              para: 'RPA wants to fund projects that:',
-              items: ['improve productivity', 'improve the environment', 'introduce innovation ']
-            },
+          {
+            heading: 'Funding priorities',
+            para: 'RPA wants to fund projects that:',
+            items: ['improve productivity', 'improve the environment', 'introduce innovation ']
+          },
           validate: {
             errorEmptyField: 'Enter the volume of digestate you will acidify after the project',
             checkRegex: {
@@ -1018,14 +1032,263 @@ const questionBank = {
           yarKey: 'slurryToBeTreated'
 
         },
+        /// ////// ***************** ROBOTICS ************************************/////////////////////
+        {
+          key: 'robotics-project-items',
+          order: 300,
+          title: 'Which eligible items do you need for your project?',
+          pageTitle: '',
+          url: 'robotics/project-items',
+          baseUrl: 'robotics-project-items',
+          // backUrl: '/productivity/tenancy',
+          backUrlObject: {
+            dependentQuestionYarKey: 'tenancy',
+            dependentAnswerKeysArray: ['tenancy-A2'],
+            backUrlOptions: {
+              thenUrl: '/productivity/tenancy-length',
+              elseUrl: '/productivity/tenancy'
+            }
+          },
+          nextUrl: 'project-cost',
+          classes: '',
+          id: 'roboticsProjectItems',
+          name: 'roboticsProjectItems',
+          hint: {},
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: '',
+            insertText: { text: '' },
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
+          fundingPriorities: '',
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 3,
+          ga: { dimension: '', value: '' },
+          sidebar:
+          {
+            heading: 'Funding priorities',
+            para: 'RPA wants to fund projects that:',
+            items: ['improve productivity', 'improve the environment', 'introduce innovation ']
+          },
+          validate: {
+            errorEmptyField: 'Enter the volume of digestate you will acidify after the project'
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'robotics-project-items-A1',
+              value: 'Robotic harvesting'
+            },
+            {
+              key: 'robotics-project-items-A2',
+              value: 'Automatic harvesting'
+            },
+            {
+              key: 'robotics-project-items-A3',
+              value: 'Advanced ventilation controls'
+            },
+            {
+              key: 'robotics-project-items-A4',
+              value: 'Robotic weeding'
+            },
+            {
+              key: 'robotics-project-items-A5',
+              value: 'Robotic milking'
+            },
+            {
+              key: 'robotics-project-items-A6',
+              value: 'Robotic spraying'
+            },
+            {
+              key: 'robotics-project-items-A7',
+              value: 'Robotic egg stacking'
+            },
+            {
+              key: 'robotics-project-items-A8',
+              value: 'Feeding systems'
+            },
+            {
+              key: 'robotics-project-items-A9',
+              value: 'Plant spacing robots'
+            },
+            {
+              key: 'robotics-project-items-A10',
+              value: 'Fertilizer precision application system'
+            },
+            {
+              key: 'robotics-project-items-A11',
+              value: 'Wavelength controlled LED lighting'
+            }
+          ],
+          yarKey: 'projectItems'
+
+        },
+        {
+          key: 'robotics-project-cost',
+          order: 310,
+          pageTitle: '',
+          url: 'robotics/project-cost',
+          baseUrl: 'robotics-project-cost',
+          backUrl: 'project-items',
+          nextUrl: 'potential-amount',
+          classes: 'govuk-input--width-10',
+          id: 'projectCost',
+          name: 'projectCost',
+          prefix: { text: '£' },
+          grantInfo: {
+            minGrant: 35000,
+            maxGrant: 500000,
+            grantPercentage: 40
+          },
+          label: {
+            text: 'What is the estimated cost of the items?',
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          hint: {
+            html: `
+              You can only apply for a grant of up to 40% of the estimated costs.
+              <br/>Do not include VAT.
+              <br/><br/>Enter amount, for example 95000`
+          },
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: 'You can only apply for a grant of up to <b>40%</b> of the estimated costs.',
+            insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £500,000.' },
+            messageLink: {
+              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'input',
+          sidebar: {
+            heading: 'Items selected',
+            para: '',
+            items: [],
+            dependentYarKey: 'projectItems'
+          },
+          validate: {
+            errorEmptyField: 'Enter the estimated cost for the items',
+            checkRegex: {
+              regex: DIGITS_MAX_7,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            }
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [],
+          yarKey: 'projectCost'
+
+        },
+        {
+          key: 'robotics-potential-amount',
+          order: 320,
+          url: 'robotics/potential-amount',
+          backUrl: 'project-cost',
+          nextUrl: 'remaining-costs',
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: 'You may be able to apply for a grant of up to <b>£{{_calculatedGrant_}}</b>, based on the estimated cost of <b>£{{_projectCost_}}</b>.',
+            warning: {
+              text: 'The project is not guaranteed to receive a grant.',
+              iconFallbackText: 'Warning'
+            }
+          }
+        },
+        {
+          key: 'remaining-costs',
+          order: 330,
+          title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
+          pageTitle: '',
+          url: 'robotics/remaining-costs',
+          baseUrl: 'remaining-costs',
+          backUrl: 'project-cost',
+          nextUrl: '/productivity/answers',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
+            insertText: { text: 'You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.' },
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: 'govuk-radios--inline',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          ga: { dimension: '', value: '' },
+          sidebar: {
+            heading: 'Eligibility',
+            para: `
+              You cannot use any grant funding from government or local authorities.
+              \n\nYou can use money from the Basic Payment Scheme or agri-environment schemes such as Countryside Stewardship Scheme.
+            `,
+            items: []
+          },
+          validate: {
+            errorEmptyField: 'Select yes if you can pay the remaining costs without using any other grant money'
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'robotics-remaining-costs-A1',
+              value: 'Yes'
+
+            },
+            {
+              key: 'robotics-remaining-costs-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'canPayRemainingCost'
+
+        },
+
+        /// ////// ***************** ROBOTICS END  ************************************/////////////////////
         {
           key: 'answers',
           order: 160,
           title: 'Score results',
           pageTitle: 'Crops',
-          url: 'slurry/answers',
+          url: 'answers',
           baseUrl: 'answers',
           backUrl: 'slurry-to-be-treated',
+          backUrlObject: {
+            dependentQuestionYarKey: 'projectSubject',
+            dependentAnswerKeysArray: ['project-subject-A1'],
+            backUrlOptions: {
+              thenUrl: 'robotics/remaining-costs',
+              elseUrl: 'slurry/slurry-to-be-treated'
+            }
+          },
           nextUrl: 'business-details',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1037,9 +1300,6 @@ const questionBank = {
             }
           },
           fundingPriorities: '',
-          type: 'mullti-answer',
-          minAnswerCount: '',
-          maxAnswerCount: '',
           ga: { dimension: '', value: '' },
           validations: [
             {
@@ -1074,7 +1334,7 @@ const questionBank = {
           order: 170,
           title: 'Business details',
           pageTitle: 'Crops',
-          url: 'slurry/business-details',
+          url: 'business-details',
           baseUrl: 'business-details',
           backUrl: 'answers',
           nextUrl: '/productivity/applying',
@@ -1088,7 +1348,7 @@ const questionBank = {
             }
           },
           fundingPriorities: '',
-          type: 'multiinput',
+          type: '',
           minAnswerCount: '',
           maxAnswerCount: '',
           ga: { dimension: '', value: '' },
@@ -1127,7 +1387,7 @@ const questionBank = {
           pageTitle: '',
           url: 'applying',
           baseUrl: 'applying',
-          backUrl: 'slurry/business-details',
+          backUrl: 'business-details',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -1188,7 +1448,7 @@ const questionBank = {
             }
           },
           fundingPriorities: '',
-          type: 'multiinput',
+          type: '',
           minAnswerCount: '',
           maxAnswerCount: '',
           ga: { dimension: '', value: '' },
@@ -1240,7 +1500,7 @@ const questionBank = {
             }
           },
           fundingPriorities: '',
-          type: 'multiinput',
+          type: '',
           minAnswerCount: '',
           maxAnswerCount: '',
           ga: { dimension: '', value: '' },
@@ -1300,7 +1560,7 @@ const questionBank = {
             }
           },
           fundingPriorities: '',
-          type: 'multi-answer',
+          type: '',
           minAnswerCount: 1,
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
@@ -1338,7 +1598,7 @@ const questionBank = {
           order: 210,
           title: 'Confirm and send',
           pageTitle: 'Crops',
-          url: 'slurry/consent',
+          url: 'consent',
           baseUrl: 'consent',
           backUrl: 'check-details',
           nextUrl: 'reference-number',
@@ -1352,7 +1612,7 @@ const questionBank = {
             }
           },
           fundingPriorities: '',
-          type: 'single-answer',
+          type: '',
           classes: '',
           minAnswerCount: 1,
           maxAnswerCount: 1,
@@ -1379,7 +1639,7 @@ const questionBank = {
           order: 210,
           title: 'Details submitted',
           pageTitle: 'Crops',
-          url: 'slurry/reference-number',
+          url: 'reference-number',
           baseUrl: 'reference-number',
           backUrl: 'consent',
           nextUrl: '',
@@ -1393,7 +1653,7 @@ const questionBank = {
             }
           },
           fundingPriorities: '',
-          type: 'single-answer',
+          type: '',
           classes: '',
           minAnswerCount: 1,
           maxAnswerCount: 1,
