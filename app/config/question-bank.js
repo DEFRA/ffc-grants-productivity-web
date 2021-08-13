@@ -1131,7 +1131,7 @@ const questionBank = {
               value: 'Wavelength controlled LED lighting'
             }
           ],
-          yarKey: 'ProjectItems'
+          yarKey: 'projectItems'
 
         },
         {
@@ -1194,7 +1194,7 @@ const questionBank = {
             }
           ],
           answers: [],
-          yarKey: 'ProjectCost'
+          yarKey: 'projectCost'
 
         },
         {
