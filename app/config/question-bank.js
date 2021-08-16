@@ -1139,7 +1139,7 @@ const questionBank = {
           order: 310,
           pageTitle: '',
           url: 'robotics/project-cost',
-          baseUrl: 'robotics-project-cost',
+          baseUrl: 'project-cost',
           backUrl: 'project-items',
           nextUrl: 'potential-amount',
           classes: 'govuk-input--width-10',
@@ -1160,11 +1160,11 @@ const questionBank = {
             html: `
               You can only apply for a grant of up to 40% of the estimated costs.
               <br/>Do not include VAT.
-              <br/><br/>Enter amount, for example 95000`
+              <br/><br/>Enter amount, for example 95,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: 'You can only apply for a grant of up to <b>40%</b> of the estimated costs.',
+            messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
             insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £500,000.' },
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
@@ -1206,7 +1206,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
-            messageContent: 'You may be able to apply for a grant of up to <b>£{{_calculatedGrant_}}</b>, based on the estimated cost of <b>£{{_projectCost_}}</b>.',
+            messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
             warning: {
               text: 'The project is not guaranteed to receive a grant.',
               iconFallbackText: 'Warning'
@@ -1239,10 +1239,9 @@ const questionBank = {
           ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Eligibility',
-            para: `
-              You cannot use any grant funding from government or local authorities.
-              \n\nYou can use money from the Basic Payment Scheme or agri-environment schemes such as Countryside Stewardship Scheme.
-            `,
+            para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.\n\n
+
+            You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.`,
             items: []
           },
           validate: {
