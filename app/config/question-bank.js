@@ -1288,7 +1288,7 @@ const questionBank = {
               elseUrl: 'slurry/slurry-to-be-treated'
             }
           },
-          nextUrl: 'business-details',
+          nextUrl: 'confirm',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -1329,8 +1329,35 @@ const questionBank = {
           yarKey: 'answers'
         },
         {
-          key: 'business-details',
+          key: 'confirm',
           order: 170,
+          url: 'confirm',
+          type: 'consent',
+          backUrl: 'answers',
+          nextUrl: 'business-details',
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Confirm and send',
+            messageContent: `<br>I confirm that, to the best of my knowledge, the details I have provided are correct.<br>
+            <br> I understand the score was based on the answers I provided.<br>
+            <br> I am aware the information I submit will be checked.<br>
+            <br> I am happy to be contacted by Defra and RPA (or a third-party on their behalf) about my application.<br>`,
+            consentOptionalData: {
+            idPrefix: 'consentOptional',
+            name: 'consentOptional',
+            items: setLabelData(
+              consentOptional,
+              [{
+                value: CONSENT_OPTIONAL,
+                text: '(Optional) So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party working for us, to contact you.'
+              }]
+            )
+          }
+          }
+        },
+        {
+          key: 'business-details',
+          order: 180,
           title: 'Business details',
           pageTitle: 'Crops',
           url: 'business-details',
@@ -1381,7 +1408,7 @@ const questionBank = {
         },
         {
           key: 'applying',
-          order: 180,
+          order: 190,
           title: 'Who is applying for this grant?',
           pageTitle: '',
           url: 'applying',
@@ -1430,7 +1457,7 @@ const questionBank = {
         },
         {
           key: 'farmer-details',
-          order: 190,
+          order: 200,
           title: 'Farmer’s details',
           pageTitle: '',
           url: 'farmers-details',
@@ -1482,7 +1509,7 @@ const questionBank = {
         },
         {
           key: 'agents-details',
-          order: 191,
+          order: 201,
           title: 'Agents’s details',
           pageTitle: '',
           url: 'agents-details',
@@ -1534,7 +1561,7 @@ const questionBank = {
         },
         {
           key: 'check-details',
-          order: 200,
+          order: 210,
           title: 'Check your details',
           pageTitle: '',
           url: 'check-details',
@@ -1594,7 +1621,7 @@ const questionBank = {
         },
         {
           key: 'consent',
-          order: 210,
+          order: 220,
           title: 'Confirm and send',
           pageTitle: 'Crops',
           url: 'consent',
@@ -1635,7 +1662,7 @@ const questionBank = {
         },
         {
           key: 'reference-number',
-          order: 210,
+          order: 230,
           title: 'Details submitted',
           pageTitle: 'Crops',
           url: 'reference-number',
