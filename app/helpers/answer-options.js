@@ -11,7 +11,7 @@ function setOptionsLabel (data, answers, conditionalHtml) {
       return { divider: 'or' }
     }
 
-    if (typeof (value) === 'string') {
+    if (!answer.text) {
       return {
         value,
         text: value,
@@ -73,5 +73,6 @@ const getOptions = (data, question, conditionalHtml) => {
 }
 
 module.exports = {
-  getOptions
+  getOptions,
+  setOptionsLabel
 }

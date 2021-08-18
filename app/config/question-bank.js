@@ -1288,7 +1288,7 @@ const questionBank = {
               elseUrl: 'slurry/slurry-to-be-treated'
             }
           },
-          nextUrl: 'confirm',
+          nextUrl: 'business-details',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -1327,33 +1327,6 @@ const questionBank = {
             }
           ],
           yarKey: 'answers'
-        },
-        {
-          key: 'confirm',
-          order: 170,
-          url: 'confirm',
-          type: 'consent',
-          backUrl: 'answers',
-          nextUrl: 'business-details',
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Confirm and send',
-            messageContent: `<br>I confirm that, to the best of my knowledge, the details I have provided are correct.<br>
-            <br> I understand the score was based on the answers I provided.<br>
-            <br> I am aware the information I submit will be checked.<br>
-            <br> I am happy to be contacted by Defra and RPA (or a third-party on their behalf) about my application.<br>`,
-            consentOptionalData: {
-            idPrefix: 'consentOptional',
-            name: 'consentOptional',
-            items: setLabelData(
-              consentOptional,
-              [{
-                value: CONSENT_OPTIONAL,
-                text: '(Optional) So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party working for us, to contact you.'
-              }]
-            )
-          }
-          }
         },
         {
           key: 'business-details',
@@ -1567,7 +1540,7 @@ const questionBank = {
           url: 'check-details',
           baseUrl: 'check-details',
           backUrl: 'farmer-details',
-          nextUrl: 'consent',
+          nextUrl: 'confirm',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -1620,45 +1593,27 @@ const questionBank = {
 
         },
         {
-          key: 'consent',
+          key: 'confirm',
           order: 220,
-          title: 'Confirm and send',
-          pageTitle: 'Crops',
-          url: 'consent',
-          baseUrl: 'consent',
+          url: 'confirm',
+          type: '',
           backUrl: 'check-details',
           nextUrl: 'reference-number',
-          eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Confirm and send',
+            messageContent: `<ul class="govuk-list"> <li>I confirm that, to the best of my knowledge, the details I have provided are correct.</li>
+            <li> I understand the score was based on the answers I provided.</li>
+            <li> I am aware the information I submit will be checked.</li>
+            <li> I am happy to be contacted by Defra and RPA (or a third-party on their behalf) about my application.</li></ul>`
           },
-          fundingPriorities: '',
-          type: '',
-          classes: '',
-          minAnswerCount: 1,
-          maxAnswerCount: 1,
-          ga: { dimension: '', value: '' },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
           answers: [
             {
-              key: '',
-              value: ''
+              key: 'consentOptional',
+              value: 'CONSENT_OPTIONAL'
             }
           ],
-          yarKey: 'consent'
-
+          yarKey: 'consentOptional'
         },
         {
           key: 'reference-number',
@@ -1667,7 +1622,7 @@ const questionBank = {
           pageTitle: 'Crops',
           url: 'reference-number',
           baseUrl: 'reference-number',
-          backUrl: 'consent',
+          backUrl: 'confirm',
           nextUrl: '',
           eliminationAnswerKeys: '',
           ineligibleContent: {
