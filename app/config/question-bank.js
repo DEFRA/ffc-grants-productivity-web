@@ -1330,7 +1330,7 @@ const questionBank = {
         },
         {
           key: 'business-details',
-          order: 170,
+          order: 180,
           title: 'Business details',
           pageTitle: 'Crops',
           url: 'business-details',
@@ -1381,7 +1381,7 @@ const questionBank = {
         },
         {
           key: 'applying',
-          order: 180,
+          order: 190,
           title: 'Who is applying for this grant?',
           pageTitle: '',
           url: 'applying',
@@ -1430,7 +1430,7 @@ const questionBank = {
         },
         {
           key: 'farmer-details',
-          order: 190,
+          order: 200,
           title: 'Farmer’s details',
           pageTitle: '',
           url: 'farmers-details',
@@ -1482,7 +1482,7 @@ const questionBank = {
         },
         {
           key: 'agents-details',
-          order: 191,
+          order: 201,
           title: 'Agents’s details',
           pageTitle: '',
           url: 'agents-details',
@@ -1534,13 +1534,13 @@ const questionBank = {
         },
         {
           key: 'check-details',
-          order: 200,
+          order: 210,
           title: 'Check your details',
           pageTitle: '',
           url: 'check-details',
           baseUrl: 'check-details',
           backUrl: 'farmer-details',
-          nextUrl: 'consent',
+          nextUrl: 'confirm',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -1593,54 +1593,36 @@ const questionBank = {
 
         },
         {
-          key: 'consent',
-          order: 210,
-          title: 'Confirm and send',
-          pageTitle: 'Crops',
-          url: 'consent',
-          baseUrl: 'consent',
+          key: 'confirm',
+          order: 220,
+          url: 'confirm',
+          type: '',
           backUrl: 'check-details',
           nextUrl: 'reference-number',
-          eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Confirm and send',
+            messageContent: `<ul class="govuk-list"> <li>I confirm that, to the best of my knowledge, the details I have provided are correct.</li>
+            <li> I understand the score was based on the answers I provided.</li>
+            <li> I am aware the information I submit will be checked.</li>
+            <li> I am happy to be contacted by Defra and RPA (or a third-party on their behalf) about my application.</li></ul>`
           },
-          fundingPriorities: '',
-          type: '',
-          classes: '',
-          minAnswerCount: 1,
-          maxAnswerCount: 1,
-          ga: { dimension: '', value: '' },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
           answers: [
             {
-              key: '',
-              value: ''
+              key: 'consentOptional',
+              value: 'CONSENT_OPTIONAL'
             }
           ],
-          yarKey: 'consent'
-
+          yarKey: 'consentOptional'
         },
         {
           key: 'reference-number',
-          order: 210,
+          order: 230,
           title: 'Details submitted',
           pageTitle: 'Crops',
           url: 'reference-number',
           baseUrl: 'reference-number',
-          backUrl: 'consent',
+          backUrl: 'confirm',
           nextUrl: '',
           eliminationAnswerKeys: '',
           ineligibleContent: {

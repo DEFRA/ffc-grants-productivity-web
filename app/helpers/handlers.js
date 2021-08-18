@@ -6,12 +6,14 @@ const { formatUKCurrency } = require('../helpers/data-formats')
 const { SELECT_ADDITIONAL_YAR_KEY, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
 const { getHtml } = require('../helpers/conditionalHTML')
 const { getUrl } = require('../helpers/urls')
+const { setOptionsLabel } = require('../helpers/answer-options')
 
 const getPage = (question, request, h) => {
   if (question.maybeEligible) {
     const { url, backUrl, dependantNextUrl } = question
     const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
     let { maybeEligibleContent } = question
+    let consentOptionalData
 
     maybeEligibleContent = {
       ...maybeEligibleContent,
@@ -21,8 +23,21 @@ const getPage = (question, request, h) => {
         )
       )
     }
+    if (url === 'confirm') {
+      const consentOptional = getYarValue(request, 'consentOptional')
+      consentOptionalData = {
+        idPrefix: 'consentOptional',
+        name: 'consentOptional',
+        items: setOptionsLabel(consentOptional,
+          [{
+            value: 'CONSENT_OPTIONAL',
+            text: '(Optional) So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party working for us, to contact you.'
+          }]
+        )
+      }
+    }
 
-    const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl }
+    const MAYBE_ELIGIBLE = { ...maybeEligibleContent, consentOptionalData, url, nextUrl, backUrl }
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
   }
 
@@ -48,6 +63,10 @@ const showPostPage = (currentQuestion, request, h) => {
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   let thisAnswer
+
+  if (Object.keys(payload).length === 0 && yarKey === 'consentOptional') {
+    setYarValue(request, yarKey, '')
+  }
 
   for (let [key, value] of Object.entries(payload)) {
     thisAnswer = answers.find(answer => (answer.value === value))
