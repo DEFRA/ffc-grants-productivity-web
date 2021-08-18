@@ -1126,11 +1126,13 @@ const questionBank = {
           classes: '',
           id: 'roboticsProjectItems',
           name: 'roboticsProjectItems',
-          hint: {},
+          hint: {
+            html: `The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £500,000.
+            <br/> Select all the items your project needs.`
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
-            insertText: { text: '' },
             messageLink: {
               url: '',
               title: ''
@@ -1141,14 +1143,8 @@ const questionBank = {
           minAnswerCount: 1,
           maxAnswerCount: 3,
           ga: { dimension: '', value: '' },
-          sidebar:
-          {
-            heading: 'Funding priorities',
-            para: 'RPA wants to fund projects that:',
-            items: ['improve productivity', 'improve the environment', 'introduce innovation ']
-          },
           validate: {
-            errorEmptyField: 'Enter the volume of digestate you will acidify after the project'
+            errorEmptyField: 'Select all the items your project needs'
           },
           validations: [
             {
@@ -1161,47 +1157,35 @@ const questionBank = {
           answers: [
             {
               key: 'robotics-project-items-A1',
-              value: 'Robotic harvesting'
+              value: 'Robotic or automatic harvesting equipment'
             },
             {
               key: 'robotics-project-items-A2',
-              value: 'Automatic harvesting'
+              value: 'Advanced ventilation control units'
             },
             {
               key: 'robotics-project-items-A3',
-              value: 'Advanced ventilation controls'
+              value: 'Robotic weeding equipment'
             },
             {
               key: 'robotics-project-items-A4',
-              value: 'Robotic weeding'
+              value: 'Robotic milking equipment'
             },
             {
               key: 'robotics-project-items-A5',
-              value: 'Robotic milking'
+              value: 'Robotic spraying equipment'
             },
             {
               key: 'robotics-project-items-A6',
-              value: 'Robotic spraying'
+              value: 'Robotic sowing/planting equipment'
             },
             {
               key: 'robotics-project-items-A7',
-              value: 'Robotic egg stacking'
+              value: 'Automated feeding systems'
             },
             {
               key: 'robotics-project-items-A8',
-              value: 'Feeding systems'
-            },
-            {
-              key: 'robotics-project-items-A9',
-              value: 'Plant spacing robots'
-            },
-            {
-              key: 'robotics-project-items-A10',
-              value: 'Fertilizer precision application system'
-            },
-            {
-              key: 'robotics-project-items-A11',
-              value: 'Wavelength controlled LED lighting'
+              value: 'Wavelength-controlled LED lighting'
             }
           ],
           yarKey: 'projectItems'

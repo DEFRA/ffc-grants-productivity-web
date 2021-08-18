@@ -16,7 +16,7 @@ describe('project purchase page', () => {
     expect(postResponse.payload).toContain('Select the type of new technology your project needs')
   })
 
-  it('should store user response and redirects to planning permission page', async () => {
+  it('should store user response and redirects to project items page', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/project-purchase`,
