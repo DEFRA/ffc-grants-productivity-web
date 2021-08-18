@@ -318,7 +318,7 @@ const questionBank = {
           backUrlObject: {
             dependentQuestionYarKey: 'planningPermission',
             dependentAnswerKeysArray: ['planning-permission-A3'],
-            backUrlOptions: {
+            urlOptions: {
               thenUrl: '/productivity/planning-required-condition',
               elseUrl: '/productivity/planning-permission'
             }
@@ -339,11 +339,11 @@ const questionBank = {
           maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
-            {
-              heading: 'Eligibility',
-              para: 'You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement.\n \n Before you start the project, you can:',
-              items: ['get quotes from suppliers', 'apply for planning permissions (this can take a long time)']
-            },
+          {
+            heading: 'Eligibility',
+            para: 'You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement.\n \n Before you start the project, you can:',
+            items: ['get quotes from suppliers', 'apply for planning permissions (this can take a long time)']
+          },
           validate: {
             errorEmptyField: 'Select the option that applies to your project'
           },
@@ -390,8 +390,8 @@ const questionBank = {
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
-            backUrlOptions: {
-              thenUrl: 'robotics/project-items ',
+            urlOptions: {
+              thenUrl: 'robotics/project-purchase',
               elseUrl: 'slurry/project-items'
             }
           },
@@ -444,8 +444,8 @@ const questionBank = {
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
-            backUrlOptions: {
-              thenUrl: 'robotics/project-items ',
+            urlOptions: {
+              thenUrl: 'robotics/project-purchase',
               elseUrl: 'slurry/project-items'
             }
           },
@@ -502,8 +502,8 @@ const questionBank = {
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
-            backUrlOptions: {
-              thenUrl: 'robotics/project-items ',
+            urlOptions: {
+              thenUrl: 'robotics/project-purchase',
               elseUrl: 'slurry/project-items'
             }
           },
@@ -524,7 +524,7 @@ const questionBank = {
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
             dependentAnswerKeysArray: ['tenancy-A2'],
-            backUrlOptions: {
+            urlOptions: {
               thenUrl: '/productivity/tenancy-length',
               elseUrl: '/productivity/tenancy'
             }
@@ -974,7 +974,7 @@ const questionBank = {
           backUrlObject: {
             dependentQuestionYarKey: 'projectImpacts',
             dependentAnswerKeysArray: ['project-impacts-A2'],
-            backUrlOptions: {
+            urlOptions: {
               thenUrl: '/productivity/slurry/slurry-currently-treated',
               elseUrl: '/productivity/slurry/project-impacts'
             }
@@ -1034,21 +1034,94 @@ const questionBank = {
         },
         /// ////// ***************** ROBOTICS ************************************/////////////////////
         {
+          key: 'project-purchase',
+          order: 290,
+          title: 'What type of new technology does your project need?',
+          pageTitle: '',
+          url: 'robotics/project-purchase',
+          baseUrl: 'project-purchase',
+          backUrlObject: {
+            dependentQuestionYarKey: 'tenancy',
+            dependentAnswerKeysArray: ['tenancy-A2'],
+            urlOptions: {
+              thenUrl: '/productivity/tenancy-length',
+              elseUrl: '/productivity/tenancy'
+            }
+          },
+          nextUrl: 'project-items',
+          classes: '',
+          id: 'projectPurchase',
+          name: 'projectPurchase',
+          hint: {
+            text: 'Equipment must be for activities in the crop-growing cycle or livestock husbandry'
+          },
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: 'Your cannot apply for a grant if your project does not include the purchase of robotic or innovative technology.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          ga: { dimension: '', value: '' },
+          sidebar:
+          {
+            heading: 'Eligibility',
+            para: `Equipment must increase the productivity of primary agricultural or horticultural practices.\n\n
+            Your project’s positive environmental benefit and the increase to productivity will be assessed at full application stage.`,
+            items: []
+          },
+          validate: {
+            errorEmptyField: 'Select the type of new technology your project needs'
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'project-purchase-A1',
+              value: 'Robotic equipment'
+            },
+            {
+              key: 'project-purchase-A2',
+              value: ' Enhanced automation equipment'
+            },
+            {
+              key: 'project-purchase-A3',
+              value: 'Wavelength-controlled LED lighting',
+              hint: {
+                text: 'Wavelength-specific LED lighting to help crop growth, pest control and animal welfare'
+              }
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'project-purchase-A4',
+              value: 'None of the above',
+              notEligible: true
+            }
+          ],
+          yarKey: 'projectPurchase'
+
+        },
+        {
           key: 'robotics-project-items',
           order: 300,
           title: 'Which eligible items do you need for your project?',
           pageTitle: '',
           url: 'robotics/project-items',
           baseUrl: 'robotics-project-items',
-          // backUrl: '/productivity/tenancy',
-          backUrlObject: {
-            dependentQuestionYarKey: 'tenancy',
-            dependentAnswerKeysArray: ['tenancy-A2'],
-            backUrlOptions: {
-              thenUrl: '/productivity/tenancy-length',
-              elseUrl: '/productivity/tenancy'
-            }
-          },
+          backUrl: 'project-purchase',
           nextUrl: 'project-cost',
           classes: '',
           id: 'roboticsProjectItems',
@@ -1283,7 +1356,7 @@ const questionBank = {
           backUrlObject: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
-            backUrlOptions: {
+            urlOptions: {
               thenUrl: 'robotics/remaining-costs',
               elseUrl: 'slurry/slurry-to-be-treated'
             }
@@ -1553,7 +1626,7 @@ const questionBank = {
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
             dependentAnswerKeysArray: ['applying-A1'],
-            backUrlOptions: {
+            urlOptions: {
               thenUrl: '/productivity/farmers-details',
               elseUrl: '/productivity/agents-details'
             }
