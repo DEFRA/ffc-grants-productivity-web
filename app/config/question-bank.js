@@ -1128,7 +1128,8 @@ const questionBank = {
             },
             {
               key: 'robotics-project-items-A11',
-              value: 'Wavelength controlled LED lighting'
+              value: 'Wavelength controlled LED lighting',
+              text: 'Wavelength Controlled LED Lighting'
             }
           ],
           yarKey: 'projectItems'

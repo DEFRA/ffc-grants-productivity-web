@@ -1,55 +1,46 @@
 {% extends "govuk/template.njk" %}
 {% from "govuk/components/header/macro.njk" import govukHeader %}
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
-
-
 {% set urlPrefix = "<%= htmlWebpackPlugin.options.metadata.urlPrefix %>" %}
 {% set assetPath = urlPrefix + "/assets" %}
 {% set timeoutPath = urlPrefix + "/session-timeout" %}
-
 {# {% set assetPath = "assets" %} #}
 {% set siteTitle = "Check if you can apply for a Farming Transformation Fund water grant" %}
 {% block pageTitle %}
-  {{siteTitle}}
+  {{ siteTitle }}
 {% endblock %}
-
 {% block head %}
   <meta name="robots" content="noindex, nofollow">
-  <%= htmlWebpackPlugin.tags.headTags %>
-  {% if cookiesPolicy.analytics %}
-    {% include "tag-manager/head-content.njk" %}
-  {% endif %}
-{% endblock %}
-
-{% block header %}
-  {{ govukHeader({
+    <%= htmlWebpackPlugin.tags.headTags %>
+    {% if cookiesPolicy.analytics %}
+      {% include "tag-manager/head-content.njk" %}
+    {% endif %}
+  {% endblock %}
+  {% block header %}
+    {{ govukHeader({
     homepageUrl: urlPrefix + "/start",
-    serviceName: "Check if you can apply for a Farming Transformation Fund water management grant",
+    serviceName: "Check if you can apply for a Farming Transformation Fund Improving Farm Productivity Grant",
     serviceUrl: urlPrefix + "/start"
   }) }}
-  <div class="govuk-grid-row govuk-width-container">
-    {{ govukPhaseBanner({
+    <div class="govuk-grid-row govuk-width-container">
+      {{ govukPhaseBanner({
       tag: {
       text: "beta"
     },
     html: 'This is a new service – your <a class="govuk-link" href=" https://defragroup.eu.qualtrics.com/jfe/form/SV_e9fFpJ6tySfdHYa" target="_blank" rel="noopener noreferrer">feedback</a> will help us to improve it.'
     }) }}
-  </div>
-{% endblock %}
-
-{% block bodyStart %}
-  {% if not cookiesPolicy.confirmed %}
-    {% include "cookies/cookie-banner.njk" %}
-  {% endif %}
-
-  {% if cookiesPolicy.analytics %}
-    {% include "tag-manager/body-content.njk" %}
-  {% endif %}
-  
-{% endblock %}
-
-{% block footer %}
-  {{ govukFooter({
+    </div>
+  {% endblock %}
+  {% block bodyStart %}
+    {% if not cookiesPolicy.confirmed %}
+      {% include "cookies/cookie-banner.njk" %}
+    {% endif %}
+    {% if cookiesPolicy.analytics %}
+      {% include "tag-manager/body-content.njk" %}
+    {% endif %}
+  {% endblock %}
+  {% block footer %}
+    {{ govukFooter({
   meta: {
   html: '<h2 class="govuk-visually-hidden">Support links</h2>
           <ul class="govuk-footer__inline-list">
@@ -78,8 +69,7 @@
           </ul>'
     }
 }) }}
-{% endblock %}
-
-{% block bodyEnd %}
-  <%= htmlWebpackPlugin.tags.bodyTags %>
-{% endblock %}
+  {% endblock %}
+  {% block bodyEnd %}
+    <%= htmlWebpackPlugin.tags.bodyTags %>
+  {% endblock %}
