@@ -52,6 +52,6 @@ service:
 
 ingress:
   class: nginx
-  endpoint: ffc-grants-frontend
+  endpoint: ffc-grants-productivity-web
   server: example.com
   path: /productivity
