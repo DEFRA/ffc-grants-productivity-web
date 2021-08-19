@@ -1271,14 +1271,14 @@ const questionBank = {
           }
         },
         {
-          key: 'remaining-costs',
+          key: 'robotics-remaining-costs',
           order: 330,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
           pageTitle: '',
           url: 'robotics/remaining-costs',
           baseUrl: 'remaining-costs',
           backUrl: 'project-cost',
-          nextUrl: '/productivity/answers',
+          nextUrl: 'project-impact',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
@@ -1326,6 +1326,168 @@ const questionBank = {
           ],
           yarKey: 'canPayRemainingCost'
 
+        },
+        {
+          key: 'robotics-project-impact',
+          order: 340,
+          title: 'Will the project improve the productivity and profitability of your business?',
+          pageTitle: '',
+          url: 'robotics/project-impact',
+          baseUrl: 'project-impact',
+          backUrl: 'remaining-costs',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectItems',
+            dependentAnswerKeysArray: ['robotics-project-items-A1', 'robotics-project-items-A4', 'robotics-project-items-A5', 'robotics-project-items-A6', 'robotics-project-items-A7'],
+            urlOptions: {
+              thenUrl: 'data-analytics',
+              elseUrl: 'energy-source'
+            }
+          },
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: 'Your project must improve the productivity and profitability of your main agricultural or horticultural business.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: 'govuk-radios--inline',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          ga: { dimension: '', value: '' },
+          sidebar: {
+            heading: 'Eligibility',
+            para: `Your project must improve the productivity and profitability of your main agricultural or horticultural business.
+            \n\n Your project’s positive environmental benefit will be assessed full application stage.`,
+            items: []
+          },
+          validate: {
+            errorEmptyField: 'Select yes if the project will improve the productivity and profitability of your business'
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'robotics-project-impact-A1',
+              value: 'Yes'
+
+            },
+            {
+              key: 'robotics-project-impact-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'projectImpact'
+        },
+        {
+          key: 'robotics-data-analytics',
+          order: 350,
+          title: 'Will your project use data analytics to improve productivity on the farm?',
+          pageTitle: '',
+          url: 'robotics/data-analytics',
+          baseUrl: 'data-analytics',
+          backUrl: 'project-impact',
+          nextUrl: 'energy-source',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: '',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          ga: { dimension: '', value: '' },
+          sidebar: {
+            heading: 'Funding priorities',
+            para: 'RPA wants to fund projects that:',
+            items: ['improve productivity', 'introduce innovation']
+          },
+          validate: {
+            errorEmptyField: 'Select whether your project will use data analytics to improve farm productivity'
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'robotics-data-analytics-A1',
+              value: 'Yes, we have the technology already'
+            },
+            {
+              key: 'robotics-data-analytics-A2',
+              value: 'Yes, we’ll buy the technology as part of the project',
+              hint: {
+                text: 'Software licences cannot be paid for by the grant'
+              }
+            },
+            {
+              key: 'robotics-data-analytics-A3',
+              value: 'No, we will not use any data analytics'
+            }
+          ],
+          yarKey: 'dataAnalytics'
+        },
+        {
+          key: 'robotics-energy-source',
+          order: 360,
+          title: 'Energy question?',
+          pageTitle: '',
+          url: 'robotics/energy-source',
+          baseUrl: 'energy-source',
+          backUrl: 'data-analytics',
+          nextUrl: '/productivity/answers',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'multi-answer',
+          classes: '',
+          minAnswerCount: 1,
+          maxAnswerCount: 1,
+          ga: { dimension: '', value: '' },
+          sidebar: {
+            heading: 'Funding priorities',
+            para: 'RPA wants to fund projects that:',
+            items: ['improve productivity', 'introduce innovation']
+          },
+          validate: {
+            errorEmptyField: 'Select whether your project will use data analytics to improve farm productivity'
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'robotics-energy-source-A1',
+              value: 'Mains electricity'
+            },
+            {
+              key: 'robotics-energy-source-A2',
+              value: 'Renewable electricity generated on the farm'
+            },
+            {
+              key: 'robotics-energy-source-A3',
+              value: ''
+            }
+          ],
+          yarKey: 'energySource'
         },
 
         /// ////// ***************** ROBOTICS END  ************************************/////////////////////
