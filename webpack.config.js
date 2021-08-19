@@ -69,7 +69,7 @@ module.exports = {
     ]
   },
   output: {
-    filename: 'js/bundle.[hash].js',
+    filename: 'js/bundle.[fullhash].js',
     path: path.resolve(__dirname, 'app/assets/dist'),
     publicPath: `${urlPrefix}/assets/`
   },
@@ -82,7 +82,7 @@ module.exports = {
       metadata: { urlPrefix }
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/application.[hash].css'
+      filename: 'css/application.[fullhash].css'
     })
   ]
 }
