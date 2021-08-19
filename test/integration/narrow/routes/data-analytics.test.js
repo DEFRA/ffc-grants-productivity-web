@@ -20,7 +20,7 @@ describe('robotics data analytics page', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/data-analytics`,
-      payload: { canPayRemainingCost: 'Yes', crumb: crumbToken },
+      payload: { dataAnalytics: 'some fake answer', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
