@@ -5,8 +5,8 @@ const getUrl = (urlObject, url, request) => {
   if (!urlObject) {
     return url
   }
-  const { dependentQuestionYarKey, dependentAnswerKeysArray, backUrlOptions } = urlObject
-  const { thenUrl, elseUrl } = backUrlOptions
+  const { dependentQuestionYarKey, dependentAnswerKeysArray, urlOptions } = urlObject
+  const { thenUrl, elseUrl } = urlOptions
 
   const dependentAnswer = getYarValue(request, dependentQuestionYarKey)
 
