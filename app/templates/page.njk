@@ -44,22 +44,23 @@
         {%endif%}
 
         {%if type ==='input' %}
-        {{ govukInput(items) }}
+          {{ govukInput(items) }}
         {%endif%}
 
         <div class="govuk-!-padding-top-5">
-        {%if key !== 'slurry-to-be-treated' %}
-        {{ govukButton({
-          text: "Continue"
-        }) }}
-        {% else %}
-        {{ govukButton({
-          text: "Get your score"
-        }) }}
-        {% endif %}
+          {%if key !== 'slurry-to-be-treated' %}
+            {{ govukButton({
+              text: "Continue"
+            }) }}
+          {% else %}
+            {{ govukButton({
+              text: "Get your score"
+            }) }}
+          {% endif %}
         </div>
       </form>
     </div>
+
     {%if sideBarText %}
       {{ sideBar(sideBarText) }}
     {%endif%}
