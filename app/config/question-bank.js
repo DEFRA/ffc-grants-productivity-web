@@ -1537,7 +1537,7 @@ const questionBank = {
               value: 'No, we will not use any data analytics'
             }
           ],
-          yarKey: 'dataAnalytics'
+          yarKey: ''
         },
 
         /// ////// ***************** ROBOTICS END  ************************************/////////////////////

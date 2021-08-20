@@ -47,7 +47,7 @@ const checkErrors = (payload, currentQuestion, h, request) => {
       return customiseErrorText(value, currentQuestion, errorList, errorText, h, request)
     }
 
-    if (maxAnswerCount && payload[yarKey].length > maxAnswerCount) {
+    if (maxAnswerCount && typeof payload[yarKey] !== 'string' && payload[yarKey].length > maxAnswerCount) {
       return customiseErrorText(value, currentQuestion, errorList, validate.errorMaxSelect, h, request)
     }
     // ERROR: mandatory checkbox / radiobutton not selected
