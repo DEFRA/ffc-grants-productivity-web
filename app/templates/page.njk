@@ -48,14 +48,14 @@
         {%endif%}
 
         <div class="govuk-!-padding-top-5">
-        {%if key !== 'slurry-to-be-treated' %}
-        {{ govukButton({
+        {%if key !== 'slurry-to-be-treated'  and key !== 'robotics-technology' %}
+          {{ govukButton({
           text: "Continue"
-        }) }}
+          }) }}
         {% else %}
-        {{ govukButton({
-          text: "Get your score"
-        }) }}
+          {{ govukButton({
+            text: "Get your score"
+          }) }}
         {% endif %}
         </div>
       </form>

@@ -1491,12 +1491,12 @@ const questionBank = {
         {
           key: 'robotics-agricultural-sector',
           order: 370,
-          title: 'Agreculture question',
+          title: 'Which agricultural sector is your project in?',
           pageTitle: '',
           url: 'robotics/agricultural-sector',
           baseUrl: 'agricultural-sector',
           backUrl: 'energy-source',
-          nextUrl: '/productivity/answers',
+          nextUrl: 'technology',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -1507,10 +1507,10 @@ const questionBank = {
           sidebar: {
             heading: 'Funding priorities',
             para: 'RPA wants to fund projects that:',
-            items: ['improve productivity', 'introduce innovation']
+            items: ['improve productivity', 'improve the environment', 'introduce innovation']
           },
           validate: {
-            errorEmptyField: 'Select whether your project will use data analytics to improve farm productivity'
+            errorEmptyField: 'Select the agricultural sector your project is in'
           },
           validations: [
             {
@@ -1523,21 +1523,70 @@ const questionBank = {
           answers: [
             {
               key: 'robotics-agricultural-sector-A1',
-              value: 'Yes, we have the technology already'
+              value: 'Horticulture'
             },
             {
               key: 'robotics-agricultural-sector-A2',
-              value: 'Yes, we’ll buy the technology as part of the project',
-              hint: {
-                text: 'Software licences cannot be paid for by the grant'
-              }
+              value: 'Arable'
             },
             {
               key: 'robotics-agricultural-sector-A3',
-              value: 'No, we will not use any data analytics'
+              value: 'Dairy livestock'
+            },
+            {
+              key: 'robotics-agricultural-sector-A4',
+              value: 'Non-dairy livestock'
             }
           ],
-          yarKey: ''
+          yarKey: 'agriculturalSector'
+        },
+        {
+          key: 'robotics-technology',
+          order: 380,
+          title: 'Are you using this technology on your farm?',
+          pageTitle: '',
+          url: 'robotics/technology',
+          baseUrl: 'technology',
+          backUrl: 'agricultural-sector',
+          nextUrl: '/productivity/answers',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: '',
+          minAnswerCount: 1,
+          ga: { dimension: '', value: '' },
+          sidebar: {
+            heading: 'Funding priorities',
+            para: 'RPA wants to fund projects that:',
+            items: ['introduce innovation']
+          },
+          validate: {
+            errorEmptyField: 'Select yes if you have used this technology on your farm'
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'robotics-technology-A1',
+              value: 'Yes, we’re using it now'
+            },
+            {
+              key: 'robotics-technology-A2',
+              value: 'Yes, as a pilot, demonstration or trial'
+            },
+            {
+              key: 'robotics-technology-A3',
+              value: 'No, we haven’t used it yet'
+            }
+          ],
+          yarKey: 'technology'
         },
 
         /// ////// ***************** ROBOTICS END  ************************************/////////////////////
@@ -1553,7 +1602,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
-              thenUrl: 'robotics/remaining-costs',
+              thenUrl: 'robotics/technology',
               elseUrl: 'slurry/slurry-to-be-treated'
             }
           },
