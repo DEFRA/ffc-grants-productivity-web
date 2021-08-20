@@ -1483,7 +1483,7 @@ const questionBank = {
             },
             {
               key: 'robotics-energy-source-A4',
-              value: 'introduce innovation'
+              value: 'Fossil fuels'
             }
           ],
           yarKey: 'energySource'
