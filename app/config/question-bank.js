@@ -42,7 +42,6 @@ const questionBank = {
           type: 'single-answer',
           classes: '',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: null,
           validate: {
@@ -96,7 +95,6 @@ const questionBank = {
           type: 'single-answer',
           classes: '',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Eligibility',
@@ -194,7 +192,6 @@ const questionBank = {
           type: 'single-answer',
           classes: '',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Eligibility',
@@ -254,7 +251,6 @@ const questionBank = {
           type: 'single-answer',
           classes: '',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -336,7 +332,6 @@ const questionBank = {
           type: 'single-answer',
           classes: '',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -401,7 +396,6 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -461,7 +455,6 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           classes: 'govuk-radios--inline',
           ga: { dimension: '', value: '' },
           sidebar:
@@ -542,7 +535,6 @@ const questionBank = {
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
-          maxAnswerCount: 3,
           hint: {
             html: `
               The minimum grant you can claim is £35,000 (40% of £87,500). The maximum grant is £500,000.
@@ -760,7 +752,6 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Eligibility',
@@ -818,7 +809,6 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           validate: {
             errorEmptyField: 'Select yes if the project directly impacts a Site of Special Scientific Interest'
@@ -870,7 +860,6 @@ const questionBank = {
           type: 'single-answer',
           classes: '',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -1066,7 +1055,6 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -1141,7 +1129,6 @@ const questionBank = {
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
-          maxAnswerCount: 3,
           ga: { dimension: '', value: '' },
           validate: {
             errorEmptyField: 'Select all the items your project needs'
@@ -1292,7 +1279,6 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Eligibility',
@@ -1355,7 +1341,6 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Eligibility',
@@ -1403,7 +1388,6 @@ const questionBank = {
           type: 'single-answer',
           classes: '',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Funding priorities',
@@ -1443,27 +1427,38 @@ const questionBank = {
         {
           key: 'robotics-energy-source',
           order: 360,
-          title: 'Energy question?',
+          title: 'What type of energy will you use?',
           pageTitle: '',
           url: 'robotics/energy-source',
           baseUrl: 'energy-source',
-          backUrl: 'data-analytics',
-          nextUrl: '/productivity/answers',
+          backUrlObject: {
+            dependentQuestionYarKey: 'projectItems',
+            dependentAnswerKeysArray: ['robotics-project-items-A1', 'robotics-project-items-A4', 'robotics-project-items-A5', 'robotics-project-items-A6', 'robotics-project-items-A7'],
+            urlOptions: {
+              thenUrl: 'data-analytics',
+              elseUrl: 'project-impact'
+            }
+          },
+          nextUrl: 'agricultural-sector',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-answer',
           classes: '',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
+          maxAnswerCount: 2,
           ga: { dimension: '', value: '' },
+          hint: {
+            text: 'Select up to 2 options'
+          },
           sidebar: {
             heading: 'Funding priorities',
             para: 'RPA wants to fund projects that:',
-            items: ['improve productivity', 'introduce innovation']
+            items: ['improve the environment', 'introduce innovation']
           },
           validate: {
-            errorEmptyField: 'Select whether your project will use data analytics to improve farm productivity'
+            errorEmptyField: 'Select up to 2 types of energy your project will use',
+            errorMaxSelect: 'Select up to 2 types of energy your project will use'
           },
           validations: [
             {
@@ -1484,10 +1479,65 @@ const questionBank = {
             },
             {
               key: 'robotics-energy-source-A3',
-              value: ''
+              value: 'Biofuels'
+            },
+            {
+              key: 'robotics-energy-source-A4',
+              value: 'Fossil fuels'
             }
           ],
           yarKey: 'energySource'
+        },
+        {
+          key: 'robotics-agricultural-sector',
+          order: 370,
+          title: 'Agreculture question',
+          pageTitle: '',
+          url: 'robotics/agricultural-sector',
+          baseUrl: 'agricultural-sector',
+          backUrl: 'energy-source',
+          nextUrl: '/productivity/answers',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: '',
+          minAnswerCount: 1,
+          ga: { dimension: '', value: '' },
+          sidebar: {
+            heading: 'Funding priorities',
+            para: 'RPA wants to fund projects that:',
+            items: ['improve productivity', 'introduce innovation']
+          },
+          validate: {
+            errorEmptyField: 'Select whether your project will use data analytics to improve farm productivity'
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'robotics-agricultural-sector-A1',
+              value: 'Yes, we have the technology already'
+            },
+            {
+              key: 'robotics-agricultural-sector-A2',
+              value: 'Yes, we’ll buy the technology as part of the project',
+              hint: {
+                text: 'Software licences cannot be paid for by the grant'
+              }
+            },
+            {
+              key: 'robotics-agricultural-sector-A3',
+              value: 'No, we will not use any data analytics'
+            }
+          ],
+          yarKey: ''
         },
 
         /// ////// ***************** ROBOTICS END  ************************************/////////////////////
@@ -1619,7 +1669,6 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           validate: {
             errorEmptyField: 'Select who is applying for this grant'
@@ -1780,7 +1829,6 @@ const questionBank = {
           fundingPriorities: '',
           type: '',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           validations: [
             {
@@ -1856,7 +1904,6 @@ const questionBank = {
           type: '',
           classes: '',
           minAnswerCount: 1,
-          maxAnswerCount: 1,
           ga: { dimension: '', value: '' },
           validations: [
             {

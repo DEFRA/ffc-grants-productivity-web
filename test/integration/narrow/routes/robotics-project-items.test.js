@@ -5,7 +5,7 @@ describe('Robotics project items page', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/project-items`,
-      payload: { projectPurchase: '', crumb: crumbToken },
+      payload: { crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
