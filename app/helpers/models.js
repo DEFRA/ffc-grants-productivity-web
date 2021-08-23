@@ -18,7 +18,7 @@ const getDependentSideBarModel = (question, model, request) => {
   return model
 }
 
-const getModel = (data, question, request, conditionalHtml = '') => {
+const getDefaultPageModel = (data, question, request, conditionalHtml = '') => {
   const { type, backUrl, key, backUrlObject, sidebar } = question
   const model = {
     type,
@@ -31,5 +31,5 @@ const getModel = (data, question, request, conditionalHtml = '') => {
 }
 
 module.exports = {
-  getModel
+  getDefaultPageModel
 }

@@ -1,5 +1,5 @@
 const { getYarValue, setYarValue } = require('../helpers/session')
-const { getModel } = require('../helpers/models')
+const { getDefaultPageModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
 const { getGrantValues } = require('../helpers/grants-info')
 const { formatUKCurrency } = require('../helpers/data-formats')
@@ -55,7 +55,7 @@ const getGetPage = (question, request, h) => {
   if (question.yarKey === 'inEngland') {
     conditionalHtml = getHtml(getYarValue(request, 'projectPostcode'))
   }
-  return h.view('page', getModel(data, question, request, conditionalHtml))
+  return h.view('page', getDefaultPageModel(data, question, request, conditionalHtml))
 }
 
 const showPostPage = (currentQuestion, request, h) => {

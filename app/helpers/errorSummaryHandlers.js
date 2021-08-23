@@ -1,4 +1,4 @@
-const { getModel } = require('../helpers/models')
+const { getDefaultPageModel } = require('../helpers/models')
 const { getHtml } = require('../helpers/conditionalHTML')
 const { getYarValue } = require('../helpers/session')
 
@@ -7,7 +7,7 @@ const customiseErrorText = (value, currentQuestion, errorList, errorText, h, req
   if (currentQuestion.conditionalKey) {
     conditionalHtml = getHtml(getYarValue(request, currentQuestion.conditionalKey), errorText.includes('postcode') ? errorText : null)
   }
-  const baseModel = getModel(value, currentQuestion, request, conditionalHtml)
+  const baseModel = getDefaultPageModel(value, currentQuestion, request, conditionalHtml)
   const href = errorText.includes('postcode') ? currentQuestion.conditionalKey : currentQuestion.yarKey
 
   baseModel.items = { ...baseModel.items, ...(!errorText.includes('postcode') ? { errorMessage: { text: errorText } } : {}) }
