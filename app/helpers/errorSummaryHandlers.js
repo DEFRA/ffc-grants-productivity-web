@@ -61,6 +61,5 @@ const checkErrors = (payload, currentQuestion, h, request) => {
 }
 
 module.exports = {
-  customiseErrorText,
   checkErrors
 }
