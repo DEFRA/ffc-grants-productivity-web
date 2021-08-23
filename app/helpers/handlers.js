@@ -3,10 +3,15 @@ const { getDefaultPageModel } = require('../helpers/models')
 const { checkErrors } = require('../helpers/errorSummaryHandlers')
 const { getGrantValues } = require('../helpers/grants-info')
 const { formatUKCurrency } = require('../helpers/data-formats')
-const { SELECT_ADDITIONAL_YAR_KEY, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
+const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
 const { getHtml } = require('../helpers/conditionalHTML')
 const { getUrl } = require('../helpers/urls')
 const { setOptionsLabel } = require('../helpers/answer-options')
+
+const getConfirmationId = (guid, journey) => {
+  const prefix = journey === 'Slurry acidification' ? 'SL' : 'RI'
+  return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
+}
 
 const getGetPage = (question, request, h) => {
   if (question.maybeEligible) {
@@ -15,17 +20,42 @@ const getGetPage = (question, request, h) => {
     let { maybeEligibleContent } = question
     let consentOptionalData
 
+    if (maybeEligibleContent.reference) {
+      if (!getYarValue(request, 'consentMain')) {
+        return h.redirect('/productivity/start')
+      }
+      maybeEligibleContent = {
+        ...maybeEligibleContent,
+        reference: {
+          ...maybeEligibleContent.reference,
+          html: maybeEligibleContent.reference.html.replace(
+            SELECT_VARIABLE_TO_REPLACE, (_ignore, confirmationId) => (
+              getConfirmationId(request.yar.id, getYarValue(request, 'projectSubject'))
+            )
+          )
+        }
+      }
+      request.yar.reset()
+    }
+
     maybeEligibleContent = {
       ...maybeEligibleContent,
       messageContent: maybeEligibleContent.messageContent.replace(
-        SELECT_ADDITIONAL_YAR_KEY, (_ignore, additionalYarKeyName) => (
+        SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
           formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
         )
       )
     }
+
     if (url === 'confirm') {
       const consentOptional = getYarValue(request, 'consentOptional')
       consentOptionalData = {
+        hiddenInput: {
+          id: 'consentMain',
+          name: 'consentMain',
+          value: 'true',
+          type: 'hidden'
+        },
         idPrefix: 'consentOptional',
         name: 'consentOptional',
         items: setOptionsLabel(consentOptional,
@@ -44,7 +74,7 @@ const getGetPage = (question, request, h) => {
   if (question.title) {
     question = {
       ...question,
-      title: question.title.replace(SELECT_ADDITIONAL_YAR_KEY, (_ignore, additionalYarKeyName) => (
+      title: question.title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }
@@ -63,8 +93,7 @@ const showPostPage = (currentQuestion, request, h) => {
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   let thisAnswer
-
-  if (Object.keys(payload).length === 0 && yarKey === 'consentOptional') {
+  if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
 
@@ -80,7 +109,7 @@ const showPostPage = (currentQuestion, request, h) => {
   if (currentQuestion.title) {
     currentQuestion = {
       ...currentQuestion,
-      title: currentQuestion.title.replace(SELECT_ADDITIONAL_YAR_KEY, (_ignore, additionalYarKeyName) => (
+      title: currentQuestion.title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }

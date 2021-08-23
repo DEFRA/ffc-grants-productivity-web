@@ -3,19 +3,23 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/panel/macro.njk" import govukPanel %}
 {% from "./components/macro.njk" import crumbToken %}
 
 {% block pageTitle %}
   {{siteTitle}}
 {% endblock %}
 
-{% block beforeContent %}
+{% block beforeContent %}  
+  {% if backUrl %}
     {{ govukBackLink({
         text: "Back",
         href: backUrl,
         attributes: {id: 'linkBack'}
       })
     }}
+  {% endif %}
 {% endblock %}
 
 {% set checkboxConfirmOptional = {
@@ -32,16 +36,25 @@
 
 
 {% block content %}
+  {% if reference %}
+    {{ govukPanel(reference) }}
+  {% endif%}
+
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds govuk-body">
       {{ crumbToken(crumb)}}
       <h1 class="govuk-heading-l">{{messageHeader}}</h1>
       <p class="govuk-body">{{ messageContent | safe}}</p>
+
       {% if warning %} 
         {{ govukWarningText(warning) }}
       {% endif %}
 
-      {% if not consentOptionalData %}
+      {% if extraMessageContent %}
+        <p class="govuk-body">{{ extraMessageContent | safe}}</p>
+      {% endif %}
+
+      {% if not consentOptionalData and not reference %}
             {{ govukButton({
                 text: 'Continue' ,
                 classes: "govuk-!-margin-top-5",
@@ -49,15 +62,16 @@
                 href: nextUrl
               })}}
         {% endif %}
-
     </div>
   </div>
+
 
   {%if url === 'confirm' %}
     <div class="govuk-grid-column-two-thirds">
       <form method="POST" action="{{ url }}" autocomplete="off" novalidate="novalidate">
         {{ crumbToken(crumb)}}
         {{ govukCheckboxes(checkboxConfirmOptional) }}
+          {{ govukInput(consentOptionalData.hiddenInput) }}
         {{ govukButton({
           text: "Confirm and send",
           attributes: {id: "btnConfirmSend"}

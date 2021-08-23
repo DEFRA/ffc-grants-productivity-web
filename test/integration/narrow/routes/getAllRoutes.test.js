@@ -8,7 +8,11 @@ describe('All default GET routes', () => {
         url: `${global.__URLPREFIX__}/${question.url}`
       }
       const response = await global.__SERVER__.inject(options)
-      expect(response.statusCode).toBe(200)
+      if (question.url === 'reference-number') {
+        expect(response.statusCode).toBe(302)
+      } else {
+        expect(response.statusCode).toBe(200)
+      }
     })
   })
 })
