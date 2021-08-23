@@ -8,7 +8,7 @@ const { getHtml } = require('../helpers/conditionalHTML')
 const { getUrl } = require('../helpers/urls')
 const { setOptionsLabel } = require('../helpers/answer-options')
 
-const getPage = (question, request, h) => {
+const getGetPage = (question, request, h) => {
   if (question.maybeEligible) {
     const { url, backUrl, dependantNextUrl } = question
     const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
@@ -91,14 +91,23 @@ const showPostPage = (currentQuestion, request, h) => {
     return errors
   }
 
-  if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
+  if (
+    thisAnswer?.notEligible || (
+      yarKey === 'projectCost'
+        ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible
+        : null
+    )
+  ) {
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }
 
   if (yarKey === 'projectCost') {
-    const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+    const { calculatedGrant, remainingCost } = getGrantValues(
+      payload[Object.keys(payload)[0]],
+      currentQuestion.grantInfo
+    )
 
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
@@ -109,7 +118,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
 const getHandler = (question) => {
   return (request, h) => {
-    return getPage(question, request, h)
+    return getGetPage(question, request, h)
   }
 }
 
