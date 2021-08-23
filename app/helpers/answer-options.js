@@ -65,9 +65,30 @@ const textField = (data, question) => {
   }
 }
 
+const textFieldList = (data, answers) => {
+  const content = answers.map(
+    ({ key, prefix, suffix, label, hint, classes }) => ({
+      id: key,
+      name: key,
+      classes,
+      prefix,
+      suffix,
+      label,
+      hint,
+      value: (!!data && data.key) || ''
+    })
+  )
+
+  return { content }
+}
+
 const getModelItems = (data, question, conditionalHtml) => {
   if (question.type === 'input') {
     return textField(data, question)
+  }
+
+  if (question.type === 'inputList') {
+    return textFieldList(data, question.answers)
   }
   return inputOptions(data, question, conditionalHtml)
 }

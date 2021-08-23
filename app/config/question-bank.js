@@ -654,26 +654,11 @@ const questionBank = {
           baseUrl: 'project-cost',
           backUrl: 'slurry-application',
           nextUrl: 'potential-amount',
-          classes: 'govuk-input--width-10',
-          id: 'projectCost',
-          name: 'projectCost',
-          prefix: { text: '£' },
-          type: 'input',
+          type: 'inputList',
           grantInfo: {
             minGrant: 35000,
             maxGrant: 500000,
             grantPercentage: 40
-          },
-          label: {
-            text: 'What is the estimated cost of the items?',
-            classes: 'govuk-label--l',
-            isPageHeading: true
-          },
-          hint: {
-            html: `
-              You can only apply for a grant of up to 40% of the estimated costs.
-              <br/>Do not include VAT.
-              <br/><br/>Enter amount, for example 95,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -707,8 +692,48 @@ const questionBank = {
           ],
           answers: [
             {
-              key: '',
-              value: ''
+              key: 'pCost',
+              prefix: { text: '£' },
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'What is the estimated cost of the items?',
+                classes: 'govuk-label--l',
+                isPageHeading: true
+              },
+              hint: {
+                html: `
+                  You can only apply for a grant of up to 40% of the estimated costs.
+                  <br/>Do not include VAT.
+                  <br/><br/>Enter amount, for example 95,000`
+              },
+              validateInput: [
+                {
+                  callback: (a) => (a === 2),
+                  error: 'ERROR 2: efgh'
+                }
+              ]
+            },
+            {
+              key: 'pCost-2',
+              suffix: { text: '£' },
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'What is the estimated cost of the items?',
+                classes: 'govuk-label--l',
+                isPageHeading: true
+              },
+              hint: {
+                html: `
+                  You can only apply for a grant of up to 40% of the estimated costs.
+                  <br/>Do not include VAT.
+                  <br/><br/>Enter amount, for example 95,000`
+              },
+              validateInput: [
+                {
+                  callback: (a) => (a === 2),
+                  error: 'ERROR 2: efgh'
+                }
+              ]
             }
           ],
           yarKey: 'projectCost'

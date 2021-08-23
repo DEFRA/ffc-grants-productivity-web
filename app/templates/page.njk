@@ -48,6 +48,12 @@
           {{ govukInput(items) }}
         {%endif%}
 
+        {%if type ==='inputList' %}
+          {% for item in items.content %}
+            {{ govukInput(item) }}
+          {% endfor %}
+        {%endif%}
+
         <div class="govuk-!-padding-top-5">
           {% if key !== 'slurry-to-be-treated'  and key !== 'robotics-technology' %}
             {{ govukButton({

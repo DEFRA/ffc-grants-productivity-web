@@ -2,8 +2,10 @@ const { getDefaultPageModel } = require('../helpers/models')
 const { getHtml } = require('../helpers/conditionalHTML')
 const { getYarValue } = require('../helpers/session')
 
-const customiseErrorText = (value, currentQuestion, errorList, errorText, h, request) => {
+const customiseErrorText = (value, currentQuestion, errorList, errorText, h, request, customHref) => {
+  let href = customHref || currentQuestion.yarKey
   let conditionalHtml
+
   if (currentQuestion.conditionalKey) {
     conditionalHtml = getHtml(
       getYarValue(request, currentQuestion.conditionalKey),
@@ -13,7 +15,7 @@ const customiseErrorText = (value, currentQuestion, errorList, errorText, h, req
     )
   }
   const baseModel = getDefaultPageModel(value, currentQuestion, request, conditionalHtml)
-  const href = errorText.includes('postcode') ? currentQuestion.conditionalKey : currentQuestion.yarKey
+  href = errorText.includes('postcode') ? currentQuestion.conditionalKey : href
 
   baseModel.items = {
     ...baseModel.items,
@@ -45,6 +47,23 @@ const checkErrors = (payload, currentQuestion, h, request) => {
   }
 
   for (let [payloadKey, payloadValue] of PAYLOAD_ENTRIES) {
+    if (currentQuestion.type === 'inputList') {
+      let customHref = ''
+
+      const firstInvalidAnswer = answers.map(
+        ({ key, validateInput }) => {
+          customHref = key
+          return validateInput.find(
+            (thisValidation) => (thisValidation.callback(2) === true)
+          )
+        }
+      )
+
+      if (firstInvalidAnswer.length > 0) {
+        return customiseErrorText(payload, currentQuestion, errorList, firstInvalidAnswer[0].error, h, request, customHref)
+      }
+    }
+
     const noOptionSelected = (
       (validate?.errorEmptyField && !PAYLOAD_KEYS.includes(yarKey)) ||
       payload[yarKey] === ''
