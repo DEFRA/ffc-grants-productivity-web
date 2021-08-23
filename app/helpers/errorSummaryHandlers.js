@@ -48,11 +48,16 @@ const checkErrors = (payload, currentQuestion, h, request) => {
 
   for (let [payloadKey, payloadValue] of PAYLOAD_ENTRIES) {
     if (currentQuestion.type === 'inputList') {
-      let customHref = ''
+      const customHrefList = []
 
       const firstInvalidAnswer = answers.map(
         ({ key, validateInput }) => {
-          customHref = key
+          if (validateInput.some(
+            (thisValidation) => (thisValidation.callback(2) === true)
+          )) {
+            customHrefList.push(key)
+          }
+
           return validateInput.find(
             (thisValidation) => (thisValidation.callback(2) === true)
           )
@@ -60,7 +65,7 @@ const checkErrors = (payload, currentQuestion, h, request) => {
       )
 
       if (firstInvalidAnswer.length > 0) {
-        return customiseErrorText(payload, currentQuestion, errorList, firstInvalidAnswer[0].error, h, request, customHref)
+        return customiseErrorText(payload, currentQuestion, errorList, firstInvalidAnswer[0].error, h, request, customHrefList[0])
       }
     }
 

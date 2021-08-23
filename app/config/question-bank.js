@@ -709,7 +709,7 @@ const questionBank = {
               validateInput: [
                 {
                   callback: (a) => (a === 2),
-                  error: 'ERROR 2: efgh'
+                  error: 'ERROR 1: abcd'
                 }
               ]
             },
