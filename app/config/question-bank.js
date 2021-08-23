@@ -658,6 +658,7 @@ const questionBank = {
           id: 'projectCost',
           name: 'projectCost',
           prefix: { text: '£' },
+          type: 'input',
           grantInfo: {
             minGrant: 35000,
             maxGrant: 500000,
@@ -683,7 +684,6 @@ const questionBank = {
               title: 'See other grants you may be eligible for.'
             }
           },
-          type: 'input',
           sidebar: {
             heading: 'Items selected',
             para: '',
@@ -904,6 +904,7 @@ const questionBank = {
           suffix: {
             html: 'm<sup>3</sup>'
           },
+          type: 'input',
           label: {
             text: 'What volume of slurry or digestate do you currently acidify per year?',
             classes: 'govuk-label--l',
@@ -923,7 +924,6 @@ const questionBank = {
             }
           },
           fundingPriorities: '',
-          type: 'input',
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -975,6 +975,7 @@ const questionBank = {
           suffix: {
             html: 'm<sup>3</sup>'
           },
+          type: 'input',
           label: {
             text: 'What volume of slurry or digestate will you acidify per year?',
             classes: 'govuk-label--l',
@@ -994,7 +995,6 @@ const questionBank = {
             }
           },
           fundingPriorities: '',
-          type: 'input',
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -1190,6 +1190,7 @@ const questionBank = {
           id: 'projectCost',
           name: 'projectCost',
           prefix: { text: '£' },
+          type: 'input',
           grantInfo: {
             minGrant: 35000,
             maxGrant: 500000,
@@ -1215,7 +1216,6 @@ const questionBank = {
               title: 'See other grants you may be eligible for.'
             }
           },
-          type: 'input',
           sidebar: {
             heading: 'Items selected',
             para: '',
@@ -1912,7 +1912,6 @@ const questionBank = {
           key: 'confirm',
           order: 220,
           url: 'confirm',
-          type: '',
           backUrl: 'check-details',
           nextUrl: 'reference-number',
           maybeEligible: true,
@@ -1935,40 +1934,44 @@ const questionBank = {
           key: 'reference-number',
           order: 230,
           title: 'Details submitted',
-          pageTitle: 'Crops',
+          pageTitle: '',
           url: 'reference-number',
           baseUrl: 'reference-number',
-          backUrl: 'confirm',
-          nextUrl: '',
-          eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
+          maybeEligible: true,
+          maybeEligibleContent: {
+            reference: {
+              titleText: 'Details submitted',
+              html: 'Your reference number<br><strong>{{_confirmationId_}}</strong>',
+              surveyLink: 'https://defragroup.eu.qualtrics.com/jfe/form/SV_26sUm6qNA26AoK2'
+            },
+            messageContent: `You will get an email with a record of your answers.<br/><br/>
+            If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Transformation Fund scheme:<br/><br/>
+            Telephone: 03000 200 301<br/>
+            <br/>Monday to Friday, 9am to 5pm (except public holidays)<br/>
+            <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges">Find out about call charges (opens in a new tab)</a></p>
+            
+            Email: <a class="govuk-link" target="_blank" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a>
+            
+            <p>RPA will be in touch when the full application period opens. They'll tell you about the application form and any guidance you need to submit a full application.</p>`,
+            warning: {
+              text: 'You must not start the project'
+            },
+            extraMessageContent: `<p>Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement will invalidate your application.</p> 
+            <p>Before you start the project, you can:</p>
+            <ul>
+              <li>get quotes from suppliers</li>
+              <li>apply for planning permission or an abstraction licence</li>
+            </ul>
+            <p><b>You will not automatically get a grant.</b> The grant is expected to be highly competitive and you are competing against other projects.</p>`
           },
           fundingPriorities: '',
           type: '',
           classes: '',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
-          answers: [
-            {
-              key: '',
-              value: ''
-            }
-          ],
-          yarKey: 'referenceNumber'
+          validations: [],
+          answers: [],
+          yarKey: ''
 
         }
       ]
