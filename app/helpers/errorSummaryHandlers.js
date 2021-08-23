@@ -5,12 +5,20 @@ const { getYarValue } = require('../helpers/session')
 const customiseErrorText = (value, currentQuestion, errorList, errorText, h, request) => {
   let conditionalHtml
   if (currentQuestion.conditionalKey) {
-    conditionalHtml = getHtml(getYarValue(request, currentQuestion.conditionalKey), errorText.includes('postcode') ? errorText : null)
+    conditionalHtml = getHtml(
+      getYarValue(request, currentQuestion.conditionalKey),
+      errorText.includes('postcode')
+        ? errorText
+        : null
+    )
   }
   const baseModel = getDefaultPageModel(value, currentQuestion, request, conditionalHtml)
   const href = errorText.includes('postcode') ? currentQuestion.conditionalKey : currentQuestion.yarKey
 
-  baseModel.items = { ...baseModel.items, ...(!errorText.includes('postcode') ? { errorMessage: { text: errorText } } : {}) }
+  baseModel.items = {
+    ...baseModel.items,
+    ...(!errorText.includes('postcode') ? { errorMessage: { text: errorText } } : {})
+  }
   errorList.push({
     text: errorText,
     href: `#${href}`
