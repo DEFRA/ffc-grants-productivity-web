@@ -65,7 +65,7 @@ const textField = (data, question) => {
   }
 }
 
-const getOptions = (data, question, conditionalHtml) => {
+const getModelItems = (data, question, conditionalHtml) => {
   if (question.type === 'input') {
     return textField(data, question)
   }
@@ -73,6 +73,6 @@ const getOptions = (data, question, conditionalHtml) => {
 }
 
 module.exports = {
-  getOptions,
+  getModelItems,
   setOptionsLabel
 }
