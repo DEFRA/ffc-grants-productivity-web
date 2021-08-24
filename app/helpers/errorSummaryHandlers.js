@@ -17,9 +17,26 @@ const customiseErrorText = (value, currentQuestion, errorList, errorText, h, req
   const baseModel = getDefaultPageModel(value, currentQuestion, request, conditionalHtml)
   href = errorText.includes('postcode') ? currentQuestion.conditionalKey : href
 
-  baseModel.items = {
-    ...baseModel.items,
-    ...(!errorText.includes('postcode') ? { errorMessage: { text: errorText } } : {})
+  if (customHref) {
+    const baseModelItemsContent = baseModel.items.content.map(thisContent => {
+      if (thisContent.id === customHref) {
+        return {
+          ...thisContent,
+          errorMessage: { text: errorText }
+        }
+      }
+      return thisContent
+    })
+
+    baseModel.items = {
+      ...baseModel.items,
+      content: baseModelItemsContent
+    }
+  } else {
+    baseModel.items = {
+      ...baseModel.items,
+      ...(!errorText.includes('postcode') ? { errorMessage: { text: errorText } } : {})
+    }
   }
   errorList.push({
     text: errorText,
@@ -40,11 +57,6 @@ const checkErrors = (payload, currentQuestion, h, request) => {
 
   const PAYLOAD_KEYS = Object.keys(payload)
   const PAYLOAD_ENTRIES = Object.entries(payload)
-
-  if (PAYLOAD_KEYS.length === 0 && currentQuestion.type) {
-    const errorTextNoSelection = validate?.errorEmptyField
-    return customiseErrorText('', currentQuestion, errorList, errorTextNoSelection, h, request)
-  }
 
   if (currentQuestion.type === 'inputList') {
     const customHrefList = []
@@ -68,6 +80,11 @@ const checkErrors = (payload, currentQuestion, h, request) => {
       return customiseErrorText(payload, currentQuestion, errorList, invalidAnswers[0].error, h, request, customHrefList[0])
     }
   } else {
+    if (PAYLOAD_KEYS.length === 0 && currentQuestion.type) {
+      const errorTextNoSelection = validate?.errorEmptyField
+      return customiseErrorText('', currentQuestion, errorList, errorTextNoSelection, h, request)
+    }
+
     for (let [payloadKey, payloadValue] of PAYLOAD_ENTRIES) {
       const noOptionSelected = (
         (validate?.errorEmptyField && !PAYLOAD_KEYS.includes(yarKey)) ||
