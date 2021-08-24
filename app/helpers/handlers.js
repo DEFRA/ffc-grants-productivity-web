@@ -122,9 +122,11 @@ const showPostPage = (currentQuestion, request, h) => {
 
   if (
     thisAnswer?.notEligible || (
-      yarKey === 'projectCost'
-        ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible
-        : null
+      yarKey === 'projectCost' &&
+      !getGrantValues(
+        payload[Object.keys(payload)[0]],
+        currentQuestion.grantInfo
+      ).isEligible
     )
   ) {
     return h.view('not-eligible', NOT_ELIGIBLE)
