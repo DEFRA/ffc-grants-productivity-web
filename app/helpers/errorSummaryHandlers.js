@@ -2,8 +2,8 @@ const { getDefaultPageModel } = require('../helpers/models')
 const { getHtml } = require('../helpers/conditionalHTML')
 const { getYarValue } = require('../helpers/session')
 
-const customiseErrorText = (value, currentQuestion, errorList, errorText, h, request, customHref) => {
-  let href = customHref || currentQuestion.yarKey
+const customiseErrorText = (value, currentQuestion, errorList, errorText, h, request, errorHrefList) => {
+  let yarkeyHref = currentQuestion.yarKey
   let conditionalHtml
 
   if (currentQuestion.conditionalKey) {
@@ -15,16 +15,24 @@ const customiseErrorText = (value, currentQuestion, errorList, errorText, h, req
     )
   }
   const baseModel = getDefaultPageModel(value, currentQuestion, request, conditionalHtml)
-  href = errorText.includes('postcode') ? currentQuestion.conditionalKey : href
+  yarkeyHref = errorText.includes('postcode') ? currentQuestion.conditionalKey : yarkeyHref
 
-  if (customHref) {
+  if (errorHrefList) {
     const baseModelItemsContent = baseModel.items.content.map(thisContent => {
-      if (thisContent.id === customHref) {
+      const matchingErrorHref = errorHrefList.find(thisErrorHref => (thisErrorHref.href === thisContent.id))
+
+      if (matchingErrorHref) {
+        errorList.push({
+          text: matchingErrorHref.text,
+          href: `#${matchingErrorHref.href}`
+        })
+
         return {
           ...thisContent,
-          errorMessage: { text: errorText }
+          errorMessage: { text: matchingErrorHref.text }
         }
       }
+
       return thisContent
     })
 
@@ -37,16 +45,18 @@ const customiseErrorText = (value, currentQuestion, errorList, errorText, h, req
       ...baseModel.items,
       ...(!errorText.includes('postcode') ? { errorMessage: { text: errorText } } : {})
     }
+
+    errorList.push({
+      text: errorText,
+      href: `#${yarkeyHref}`
+    })
   }
-  errorList.push({
-    text: errorText,
-    href: `#${href}`
-  })
 
   const modelWithErrors = {
     ...baseModel,
     errorList
   }
+
   return h.view('page', modelWithErrors)
 }
 
@@ -59,8 +69,7 @@ const checkErrors = (payload, currentQuestion, h, request) => {
   const PAYLOAD_ENTRIES = Object.entries(payload)
 
   if (currentQuestion.type === 'inputList') {
-    const customHrefList = []
-    const invalidAnswers = []
+    const errorHrefList = []
     let placeholderValidateInput
 
     answers.forEach(
@@ -70,14 +79,16 @@ const checkErrors = (payload, currentQuestion, h, request) => {
         )
 
         if (placeholderValidateInput) {
-          customHrefList.push(key)
-          invalidAnswers.push(placeholderValidateInput)
+          errorHrefList.push({
+            text: placeholderValidateInput.error,
+            href: key
+          })
         }
       }
     )
 
-    if (invalidAnswers.length > 0) {
-      return customiseErrorText(payload, currentQuestion, errorList, invalidAnswers[0].error, h, request, customHrefList[0])
+    if (errorHrefList.length > 0) {
+      return customiseErrorText(payload, currentQuestion, errorList, '', h, request, errorHrefList)
     }
   } else {
     if (PAYLOAD_KEYS.length === 0 && currentQuestion.type) {
