@@ -1186,26 +1186,11 @@ const questionBank = {
           baseUrl: 'project-cost',
           backUrl: 'project-items',
           nextUrl: 'potential-amount',
-          classes: 'govuk-input--width-10',
-          id: 'projectCost',
-          name: 'projectCost',
-          prefix: { text: '£' },
-          type: 'input',
+          type: 'inputList',
           grantInfo: {
             minGrant: 35000,
             maxGrant: 500000,
             grantPercentage: 40
-          },
-          label: {
-            text: 'What is the estimated cost of the items?',
-            classes: 'govuk-label--l',
-            isPageHeading: true
-          },
-          hint: {
-            html: `
-              You can only apply for a grant of up to 40% of the estimated costs.
-              <br/>Do not include VAT.
-              <br/><br/>Enter amount, for example 95,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1222,13 +1207,6 @@ const questionBank = {
             items: [],
             dependentYarKey: 'projectItems'
           },
-          validate: {
-            errorEmptyField: 'Enter the estimated cost for the items',
-            checkRegex: {
-              regex: DIGITS_MAX_7,
-              error: 'Enter a whole number with a maximum of 7 digits'
-            }
-          },
           validations: [
             {
               type: '',
@@ -1237,7 +1215,34 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
-          answers: [],
+          answers: [
+            {
+              key: 'pCost',
+              prefix: { text: '£' },
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'What is the estimated cost of the items?',
+                classes: 'govuk-label--l',
+                isPageHeading: true
+              },
+              hint: {
+                html: `
+                  You can only apply for a grant of up to 40% of the estimated costs.
+                  <br/>Do not include VAT.
+                  <br/><br/>Enter amount, for example 95,000`
+              },
+              validateInput: [
+                {
+                  callback: (a) => (a !== ''),
+                  error: 'Enter the estimated cost for the items'
+                },
+                {
+                  callback: (a) => (DIGITS_MAX_7.test(a)),
+                  error: 'Enter a whole number with a maximum of 7 digits'
+                }
+              ]
+            }
+          ],
           yarKey: 'projectCost'
 
         },
