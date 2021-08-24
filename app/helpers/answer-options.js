@@ -75,7 +75,7 @@ const textFieldList = (data, answers) => {
       suffix,
       label,
       hint,
-      value: (!!data && data.key) || ''
+      value: (!!data && data[key]) || ''
     })
   )
 

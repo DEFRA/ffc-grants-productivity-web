@@ -97,6 +97,8 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, yarKey, '')
   }
 
+  setYarValue(request, yarKey, payload)
+
   for (let [key, value] of Object.entries(payload)) {
     thisAnswer = answers.find(answer => (answer.value === value))
 
