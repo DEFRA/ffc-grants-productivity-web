@@ -13,6 +13,13 @@ const getConfirmationId = (guid, journey) => {
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
 }
 
+const handleConditinalHtmlData = (question, request) => {
+  const inEngland = question.yarKey === 'inEngland'
+  const label = inEngland ? 'projectPostcode' : 'sbi'
+  const fieldValue = inEngland ? getYarValue(request, 'projectPostcode') : getYarValue(request, 'sbi')
+  return getHtml(label, fieldValue)
+}
+
 const getPage = (question, request, h) => {
   if (question.maybeEligible) {
     const { url, backUrl, dependantNextUrl } = question
@@ -82,8 +89,8 @@ const getPage = (question, request, h) => {
 
   const data = getYarValue(request, question.yarKey) || null
   let conditionalHtml
-  if (question.yarKey === 'inEngland') {
-    conditionalHtml = getHtml(getYarValue(request, 'projectPostcode'))
+  if (question.yarKey === 'inEngland' || question.yarKey === 'businessDetails') {
+    conditionalHtml = handleConditinalHtmlData(question, request)
   }
   return h.view('page', getModel(data, question, request, conditionalHtml))
 }
