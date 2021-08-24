@@ -708,8 +708,8 @@ const questionBank = {
               },
               validateInput: [
                 {
-                  callback: (a) => (a === 2),
-                  error: 'ERROR 1: abcd'
+                  callback: (a) => (DIGITS_MAX_7.test(a)),
+                  error: 'Enter a whole number with a maximum of 7 digits'
                 }
               ]
             },
@@ -730,7 +730,7 @@ const questionBank = {
               },
               validateInput: [
                 {
-                  callback: (a) => (a === 2),
+                  callback: (a) => (DIGITS_MAX_7.test(a)),
                   error: 'ERROR 2: efgh'
                 }
               ]

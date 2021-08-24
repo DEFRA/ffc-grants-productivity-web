@@ -46,70 +46,71 @@ const checkErrors = (payload, currentQuestion, h, request) => {
     return customiseErrorText('', currentQuestion, errorList, errorTextNoSelection, h, request)
   }
 
-  for (let [payloadKey, payloadValue] of PAYLOAD_ENTRIES) {
-    if (currentQuestion.type === 'inputList') {
-      const customHrefList = []
+  if (currentQuestion.type === 'inputList') {
+    const customHrefList = []
+    const invalidAnswers = []
+    let placeholderValidateInput
 
-      const firstInvalidAnswer = answers.map(
-        ({ key, validateInput }) => {
-          if (validateInput.some(
-            (thisValidation) => (thisValidation.callback(2) === true)
-          )) {
-            customHrefList.push(key)
-          }
+    answers.forEach(
+      ({ key, validateInput }) => {
+        placeholderValidateInput = validateInput.find(
+          (thisValidation) => (thisValidation.callback(payload[key]) === false)
+        )
 
-          return validateInput.find(
-            (thisValidation) => (thisValidation.callback(2) === true)
-          )
+        if (placeholderValidateInput) {
+          customHrefList.push(key)
+          invalidAnswers.push(placeholderValidateInput)
         }
-      )
-
-      if (firstInvalidAnswer.length > 0) {
-        return customiseErrorText(payload, currentQuestion, errorList, firstInvalidAnswer[0].error, h, request, customHrefList[0])
       }
+    )
+
+    if (invalidAnswers.length > 0) {
+      return customiseErrorText(payload, currentQuestion, errorList, invalidAnswers[0].error, h, request, customHrefList[0])
     }
-
-    const noOptionSelected = (
-      (validate?.errorEmptyField && !PAYLOAD_KEYS.includes(yarKey)) ||
-      payload[yarKey] === ''
-    )
-
-    const hasSelectionError = (
-      payloadValue.includes(conditionalAnswer?.value) &&
-      validate?.conditionalValidate?.errorEmptyField &&
-      payload[conditionalKey] === ''
-    ) || noOptionSelected
-
-    const regexError = (
-      validate?.checkRegex && !validate.checkRegex.regex.test(payloadValue)
-    )
-
-    const hasRegexValidationError = (
-      payload[yarKey]?.includes(conditionalAnswer?.value) &&
-      payloadKey === conditionalKey &&
-      !validate.conditionalValidate?.checkRegex.regex.test(payloadValue)
-    ) || regexError
-
-    if (hasSelectionError || hasRegexValidationError) {
-      const errorTextNoSelection = hasSelectionError && (
-        noOptionSelected ? validate?.errorEmptyField : validate?.conditionalValidate?.errorEmptyField
+  } else {
+    for (let [payloadKey, payloadValue] of PAYLOAD_ENTRIES) {
+      const noOptionSelected = (
+        (validate?.errorEmptyField && !PAYLOAD_KEYS.includes(yarKey)) ||
+        payload[yarKey] === ''
       )
 
-      const errorTextRegex = regexError ? validate.checkRegex.error : validate.conditionalValidate?.checkRegex?.error
-      const errorText = hasSelectionError ? errorTextNoSelection : errorTextRegex
-      payloadValue = payloadKey === conditionalKey ? payload[yarKey] : payloadValue
-      return customiseErrorText(payloadValue, currentQuestion, errorList, errorText, h, request)
-    }
+      const hasSelectionError = (
+        payloadValue.includes(conditionalAnswer?.value) &&
+        validate?.conditionalValidate?.errorEmptyField &&
+        payload[conditionalKey] === ''
+      ) || noOptionSelected
 
-    if (maxAnswerCount && typeof payload[yarKey] !== 'string' && payload[yarKey].length > maxAnswerCount) {
-      return customiseErrorText(payloadValue, currentQuestion, errorList, validate.errorMaxSelect, h, request)
-    }
-    // ERROR: mandatory checkbox / radiobutton not selected
-    const requiredAnswer = answers.find(answer => (answer.mustSelect))
+      const regexError = (
+        validate?.checkRegex && !validate.checkRegex.regex.test(payloadValue)
+      )
 
-    if ((!!requiredAnswer) && (!payloadValue || !payloadValue.includes(requiredAnswer.value))) {
-      const errorMustSelect = requiredAnswer.errorMustSelect
-      return customiseErrorText(payloadValue, currentQuestion, errorList, errorMustSelect, h, request)
+      const hasRegexValidationError = (
+        payload[yarKey]?.includes(conditionalAnswer?.value) &&
+        payloadKey === conditionalKey &&
+        !validate.conditionalValidate?.checkRegex.regex.test(payloadValue)
+      ) || regexError
+
+      if (hasSelectionError || hasRegexValidationError) {
+        const errorTextNoSelection = hasSelectionError && (
+          noOptionSelected ? validate?.errorEmptyField : validate?.conditionalValidate?.errorEmptyField
+        )
+
+        const errorTextRegex = regexError ? validate.checkRegex.error : validate.conditionalValidate?.checkRegex?.error
+        const errorText = hasSelectionError ? errorTextNoSelection : errorTextRegex
+        payloadValue = payloadKey === conditionalKey ? payload[yarKey] : payloadValue
+        return customiseErrorText(payloadValue, currentQuestion, errorList, errorText, h, request)
+      }
+
+      if (maxAnswerCount && typeof payload[yarKey] !== 'string' && payload[yarKey].length > maxAnswerCount) {
+        return customiseErrorText(payloadValue, currentQuestion, errorList, validate.errorMaxSelect, h, request)
+      }
+      // ERROR: mandatory checkbox / radiobutton not selected
+      const requiredAnswer = answers.find(answer => (answer.mustSelect))
+
+      if ((!!requiredAnswer) && (!payloadValue || !payloadValue.includes(requiredAnswer.value))) {
+        const errorMustSelect = requiredAnswer.errorMustSelect
+        return customiseErrorText(payloadValue, currentQuestion, errorList, errorMustSelect, h, request)
+      }
     }
   }
 }
