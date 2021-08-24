@@ -66,14 +66,13 @@ const textField = (data, question) => {
 }
 
 const getAllInputs = (data, question, conditionalHtml) => {
-  const { answers } = question
-  return answers.map((answer) => {
-    console.log('HI I am in inputs ')
-    const { type } = answer
+  const { allFields } = question
+  return allFields.map((field) => {
+    const { type } = field
     if (type === 'input') {
-      return textField(data, answer)
+      return textField(data, field)
     }
-    return inputOptions(data, answer, conditionalHtml)
+    return inputOptions(data, field, conditionalHtml)
   })
 }
 
@@ -82,7 +81,6 @@ const getOptions = (data, question, conditionalHtml) => {
     case 'input':
       return textField(data, question)
     case 'multi-input':
-      console.log(getAllInputs(data, question, conditionalHtml), 'innnnnnnnnnn')
       return getAllInputs(data, question, conditionalHtml)
     default:
       return inputOptions(data, question, conditionalHtml)

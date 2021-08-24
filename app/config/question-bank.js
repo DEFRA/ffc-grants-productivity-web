@@ -1657,7 +1657,7 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
-          answers: [
+          allFields: [
             {
               yarKey: 'projectName',
               type: 'input',
