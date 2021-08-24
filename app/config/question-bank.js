@@ -708,6 +708,10 @@ const questionBank = {
               },
               validateInput: [
                 {
+                  callback: (a) => (a !== ''),
+                  error: 'Enter the estimated cost for the items'
+                },
+                {
                   callback: (a) => (DIGITS_MAX_7.test(a)),
                   error: 'Enter a whole number with a maximum of 7 digits'
                 }
@@ -730,8 +734,12 @@ const questionBank = {
               },
               validateInput: [
                 {
+                  callback: (a) => (a !== ''),
+                  error: 'ERROR 2: Enter the estimated cost for the items'
+                },
+                {
                   callback: (a) => (DIGITS_MAX_7.test(a)),
-                  error: 'ERROR 2: efgh'
+                  error: 'ERROR 2: Regex validation error'
                 }
               ]
             }
