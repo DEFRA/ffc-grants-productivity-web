@@ -19,10 +19,11 @@ const getDependentSideBarModel = (question, model, request) => {
 }
 
 const getModel = (data, question, request, conditionalHtml = '') => {
-  const { type, backUrl, key, backUrlObject, sidebar } = question
+  const { type, backUrl, key, backUrlObject, sidebar, title } = question
   const model = {
     type,
     key,
+    title,
     backUrl: getUrl(backUrlObject, backUrl, request),
     items: getOptions(data, question, conditionalHtml),
     sideBarText: sidebar

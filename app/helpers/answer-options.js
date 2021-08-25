@@ -34,7 +34,7 @@ function setOptionsLabel (data, answers, conditionalHtml) {
 }
 
 const inputOptions = (data, question, conditionalHtml) => {
-  const { classes, yarKey, title, hint, answers } = question
+  const { yarKey, title, hint, answers, classes = 'govuk-fieldset__legend--l' } = question
   return {
     classes,
     idPrefix: yarKey,
@@ -43,7 +43,7 @@ const inputOptions = (data, question, conditionalHtml) => {
       legend: {
         text: title,
         isPageHeading: true,
-        classes: 'govuk-fieldset__legend--l'
+        classes
       }
     },
     hint,
@@ -52,11 +52,11 @@ const inputOptions = (data, question, conditionalHtml) => {
 }
 
 const textField = (data, question) => {
-  const { yarKey, prefix, suffix, label, hint } = question
+  const { yarKey, prefix, suffix, label, hint, classes } = question
   return {
     id: yarKey,
     name: yarKey,
-    classes: 'govuk-input--width-10',
+    classes,
     prefix,
     suffix,
     label,
@@ -65,11 +65,36 @@ const textField = (data, question) => {
   }
 }
 
-const getOptions = (data, question, conditionalHtml) => {
-  if (question.type === 'input') {
-    return textField(data, question)
+const getAllInputs = (data, question, conditionalHtml) => {
+  const { allFields } = question
+  let dataObject
+  if (!data) {
+    allFields.forEach(field => {
+      dataObject = {
+        ...dataObject,
+        [field.yarKey]: ''
+      }
+    })
+    data = dataObject
   }
-  return inputOptions(data, question, conditionalHtml)
+  return allFields.map((field) => {
+    const { type } = field
+    if (type === 'input') {
+      return textField(data[field.yarKey], field)
+    }
+    return inputOptions(data[field.yarKey], field, conditionalHtml)
+  })
+}
+
+const getOptions = (data, question, conditionalHtml) => {
+  switch (question.type) {
+    case 'input':
+      return textField(data, question)
+    case 'multi-input':
+      return getAllInputs(data, question, conditionalHtml)
+    default:
+      return inputOptions(data, question, conditionalHtml)
+  }
 }
 
 module.exports = {

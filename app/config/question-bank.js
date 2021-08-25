@@ -40,7 +40,6 @@ const questionBank = {
           url: 'project-subject',
           baseUrl: 'project-subject',
           type: 'single-answer',
-          classes: '',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: null,
@@ -93,7 +92,6 @@ const questionBank = {
           },
           fundingPriorities: '',
           type: 'single-answer',
-          classes: '',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
@@ -190,7 +188,6 @@ const questionBank = {
           },
           fundingPriorities: '',
           type: 'single-answer',
-          classes: '',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
@@ -249,7 +246,6 @@ const questionBank = {
           },
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
-          classes: '',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
@@ -329,7 +325,6 @@ const questionBank = {
           },
           fundingPriorities: '',
           type: 'single-answer',
-          classes: '',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
@@ -393,7 +388,7 @@ const questionBank = {
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'single-answer',
-          classes: 'govuk-radios--inline',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
@@ -454,7 +449,7 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          classes: 'govuk-radios--inline',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -749,7 +744,7 @@ const questionBank = {
           },
           fundingPriorities: '',
           type: 'single-answer',
-          classes: 'govuk-radios--inline',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
@@ -806,7 +801,7 @@ const questionBank = {
           },
           fundingPriorities: '',
           type: 'single-answer',
-          classes: 'govuk-radios--inline',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           validate: {
@@ -857,7 +852,6 @@ const questionBank = {
           },
           fundingPriorities: '',
           type: 'single-answer',
-          classes: '',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar:
@@ -897,7 +891,7 @@ const questionBank = {
           baseUrl: 'slurry-currently-treated',
           backUrl: 'project-impacts',
           nextUrl: 'slurry-to-be-treated',
-          classes: 'govuk-input--width-5',
+          classes: 'govuk-input--width-10',
           id: 'slurryCurrentlyTreated',
           name: 'slurryCurrentlyTreated',
           suffix: {
@@ -968,7 +962,7 @@ const questionBank = {
             }
           },
           nextUrl: '/productivity/answers',
-          classes: 'govuk-input--width-5',
+          classes: 'govuk-input--width-10',
           id: 'slurryToBeTreated',
           name: 'slurryToBeTreated',
           suffix: {
@@ -1037,7 +1031,6 @@ const questionBank = {
             }
           },
           nextUrl: 'project-items',
-          classes: '',
           id: 'projectPurchase',
           name: 'projectPurchase',
           hint: {
@@ -1110,7 +1103,6 @@ const questionBank = {
           baseUrl: 'robotics-project-items',
           backUrl: 'project-purchase',
           nextUrl: 'project-cost',
-          classes: '',
           id: 'roboticsProjectItems',
           name: 'roboticsProjectItems',
           hint: {
@@ -1276,7 +1268,7 @@ const questionBank = {
           },
           fundingPriorities: '',
           type: 'single-answer',
-          classes: 'govuk-radios--inline',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
@@ -1338,7 +1330,7 @@ const questionBank = {
           },
           fundingPriorities: '',
           type: 'single-answer',
-          classes: 'govuk-radios--inline',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
@@ -1385,7 +1377,6 @@ const questionBank = {
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'single-answer',
-          classes: '',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
@@ -1443,7 +1434,6 @@ const questionBank = {
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-answer',
-          classes: '',
           minAnswerCount: 1,
           maxAnswerCount: 2,
           ga: { dimension: '', value: '' },
@@ -1500,7 +1490,6 @@ const questionBank = {
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'single-answer',
-          classes: '',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
@@ -1552,7 +1541,6 @@ const questionBank = {
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'single-answer',
-          classes: '',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           sidebar: {
@@ -1655,16 +1643,9 @@ const questionBank = {
           backUrl: 'answers',
           nextUrl: '/productivity/applying',
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
+          ineligibleContent: {},
           fundingPriorities: '',
-          type: '',
+          type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
           ga: { dimension: '', value: '' },
@@ -1676,22 +1657,76 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
-          answers: [
+          allFields: [
             {
-              key: '',
-              value: ''
+              yarKey: 'projectName',
+              type: 'input',
+              label: {
+                text: 'Project name',
+                classes: 'govuk-label'
+              },
+              hint: {
+                text: 'For example, Brown Hill Farm reservoir'
+              },
+              validate: {
+                errorEmptyField: 'Select who is applying for this grant'
+              }
             },
             {
-              key: '',
-              value: ''
+              yarKey: 'businessName',
+              type: 'input',
+              label: {
+                text: 'Business name',
+                classes: 'govuk-label'
+              },
+              hint: {
+                text: 'If you’re registered on the Rural Payments system, enter business name as registered'
+              }
             },
             {
-              key: '',
-              value: ''
+              yarKey: 'numberEmployees',
+              type: 'input',
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'Number of employees',
+                classes: 'govuk-label'
+              },
+              hint: {
+                text: 'Full-time employees, including the owner'
+              }
             },
             {
-              key: '',
-              value: ''
+              yarKey: 'businessTurnover',
+              type: 'input',
+              classes: 'govuk-input--width-10',
+              prefix: {
+                text: '£'
+              },
+              label: {
+                text: 'Business turnover (£)',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'inSbi',
+              conditionalKey: 'sbi',
+              type: 'single-answer',
+              title: 'Single Business Identifier (SBI)',
+              classes: 'govuk-fieldset__legend--s',
+              hint: {
+                text: 'Select one option'
+              },
+              answers: [
+                {
+                  key: 'inSbi-A1',
+                  conditional: true,
+                  value: 'Yes'
+                },
+                {
+                  key: 'inSbi-A2',
+                  value: 'No'
+                }
+              ]
             }
           ],
           yarKey: 'businessDetails'
@@ -1715,7 +1750,7 @@ const questionBank = {
           },
           fundingPriorities: '',
           type: 'single-answer',
-          classes: 'govuk-radios--inline',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           validate: {
@@ -1965,7 +2000,6 @@ const questionBank = {
           },
           fundingPriorities: '',
           type: '',
-          classes: '',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           validations: [],

@@ -5,7 +5,7 @@ const { getYarValue } = require('../helpers/session')
 const customiseErrorText = (value, currentQuestion, errorList, errorText, h, request) => {
   let conditionalHtml
   if (currentQuestion.conditionalKey) {
-    conditionalHtml = getHtml(getYarValue(request, currentQuestion.conditionalKey), errorText.includes('postcode') ? errorText : null)
+    conditionalHtml = getHtml(currentQuestion.conditionalKey, getYarValue(request, currentQuestion.conditionalKey), errorText.includes('postcode') ? errorText : null)
   }
   const baseModel = getModel(value, currentQuestion, request, conditionalHtml)
   const href = errorText.includes('postcode') ? currentQuestion.conditionalKey : currentQuestion.yarKey
@@ -26,7 +26,7 @@ const customiseErrorText = (value, currentQuestion, errorList, errorText, h, req
 const checkErrors = (payload, currentQuestion, h, request) => {
   const { yarKey, conditionalKey, answers, validate, maxAnswerCount } = currentQuestion
   const errorList = []
-  const conditionalAnswer = answers.find(answer => answer.conditional)
+  const conditionalAnswer = answers?.find(answer => answer.conditional)
 
   if (Object.keys(payload).length === 0 && currentQuestion.type) {
     const errorTextNoSelection = validate?.errorEmptyField
@@ -51,7 +51,7 @@ const checkErrors = (payload, currentQuestion, h, request) => {
       return customiseErrorText(value, currentQuestion, errorList, validate.errorMaxSelect, h, request)
     }
     // ERROR: mandatory checkbox / radiobutton not selected
-    const requiredAnswer = answers.find(answer => (answer.mustSelect))
+    const requiredAnswer = answers?.find(answer => (answer.mustSelect))
 
     if ((!!requiredAnswer) && (!value || !value.includes(requiredAnswer.value))) {
       const errorMustSelect = requiredAnswer.errorMustSelect
