@@ -1,14 +1,17 @@
 {% extends "govuk/template.njk" %}
 {% from "govuk/components/header/macro.njk" import govukHeader %}
 {% from "govuk/components/phase-banner/macro.njk" import govukPhaseBanner %}
+{% from "../../templates/components/timeout-warning/macro.njk" import govukTimeoutWarning %}
+
 {% set urlPrefix = "<%= htmlWebpackPlugin.options.metadata.urlPrefix %>" %}
 {% set assetPath = urlPrefix + "/assets" %}
 {% set timeoutPath = urlPrefix + "/session-timeout" %}
-{# {% set assetPath = "assets" %} #}
 {% set siteTitle = "Check if you can apply for a Farming Transformation Fund water grant" %}
+
 {% block pageTitle %}
   {{ siteTitle }}
 {% endblock %}
+
 {% block head %}
   <meta name="robots" content="noindex, nofollow">
     <%= htmlWebpackPlugin.tags.headTags %>
@@ -16,6 +19,7 @@
       {% include "tag-manager/head-content.njk" %}
     {% endif %}
   {% endblock %}
+
   {% block header %}
     {{ govukHeader({
     homepageUrl: urlPrefix + "/start",
@@ -30,15 +34,26 @@
     html: 'This is a new service – your <a class="govuk-link" href=" https://defragroup.eu.qualtrics.com/jfe/form/SV_e9fFpJ6tySfdHYa" target="_blank" rel="noopener noreferrer">feedback</a> will help us to improve it.'
     }) }}
     </div>
-  {% endblock %}
+
+    {% if showTimeout %}  
+    {{govukTimeoutWarning({
+      "modalIdleTime":sessionTimeoutInMin,
+      "modalVisibleTime":10,
+      "redirectUrl":timeoutPath
+    })}}
+  {% endif %}
+{% endblock %}
+
   {% block bodyStart %}
     {% if not cookiesPolicy.confirmed %}
       {% include "cookies/cookie-banner.njk" %}
     {% endif %}
+
     {% if cookiesPolicy.analytics %}
       {% include "tag-manager/body-content.njk" %}
     {% endif %}
   {% endblock %}
+
   {% block footer %}
     {{ govukFooter({
   meta: {

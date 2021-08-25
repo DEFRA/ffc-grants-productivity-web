@@ -84,6 +84,7 @@ async function createServer () {
     require('./routes/assets'),
     require('./routes/cookies'),
     require('./routes/accessibility'),
+    require('./routes/session-timeout'),
     ...require('./routes')
   )
   console.log('[SERVER][GET ALL ROUTES]')
