@@ -1746,7 +1746,7 @@ const questionBank = {
           },
           fundingPriorities: '',
           type: 'single-answer',
-          classes: 'govuk-radios--inline',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           validate: {

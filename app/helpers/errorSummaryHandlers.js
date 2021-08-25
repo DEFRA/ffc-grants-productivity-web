@@ -27,7 +27,7 @@ const customiseErrorText = (value, currentQuestion, errorList, errorText, h, req
 const checkErrors = (payload, currentQuestion, h, request) => {
   const { yarKey, conditionalKey, answers, validate, maxAnswerCount } = currentQuestion
   const errorList = []
-  const conditionalAnswer = answers.find(answer => answer.conditional)
+  const conditionalAnswer = answers?.find(answer => answer.conditional)
 
   if (Object.keys(payload).length === 0 && currentQuestion.type) {
     const errorTextNoSelection = validate?.errorEmptyField
@@ -52,7 +52,7 @@ const checkErrors = (payload, currentQuestion, h, request) => {
       return customiseErrorText(value, currentQuestion, errorList, validate.errorMaxSelect, h, request)
     }
     // ERROR: mandatory checkbox / radiobutton not selected
-    const requiredAnswer = answers.find(answer => (answer.mustSelect))
+    const requiredAnswer = answers?.find(answer => (answer.mustSelect))
 
     if ((!!requiredAnswer) && (!value || !value.includes(requiredAnswer.value))) {
       const errorMustSelect = requiredAnswer.errorMustSelect

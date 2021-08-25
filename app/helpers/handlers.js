@@ -99,18 +99,20 @@ const showPostPage = (currentQuestion, request, h) => {
   const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
+  console.log(payload)
   let thisAnswer
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
 
   for (let [key, value] of Object.entries(payload)) {
-    thisAnswer = answers.find(answer => (answer.value === value))
+    thisAnswer = answers?.find(answer => (answer.value === value))
 
     if (key === 'projectPostcode') {
       value = value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
     }
     setYarValue(request, key, value)
+    console.log(`saved ${value} for ${key}`)
   }
 
   if (currentQuestion.title) {
