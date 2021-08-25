@@ -6,8 +6,6 @@ const questionBanner = document.querySelector('.js-question-banner')
 const cookieBanner = document.querySelector('.js-cookies-banner')
 const cookieContainer = document.querySelector('.js-cookies-container')
 
-console.log('I am inside cookie script ')
-
 if (cookieContainer && cookieContainer.style) {
   cookieContainer.style.display = 'block'
 

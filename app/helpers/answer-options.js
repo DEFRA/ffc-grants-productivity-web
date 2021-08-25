@@ -67,12 +67,22 @@ const textField = (data, question) => {
 
 const getAllInputs = (data, question, conditionalHtml) => {
   const { allFields } = question
+  let dataObject
+  if (!data) {
+    allFields.forEach(field => {
+      dataObject = {
+        ...dataObject,
+        [field.yarKey]: ''
+      }
+    })
+    data = dataObject
+  }
   return allFields.map((field) => {
     const { type } = field
     if (type === 'input') {
-      return textField(data, field)
+      return textField(data[field.yarKey], field)
     }
-    return inputOptions(data, field, conditionalHtml)
+    return inputOptions(data[field.yarKey], field, conditionalHtml)
   })
 }
 

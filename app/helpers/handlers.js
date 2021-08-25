@@ -13,17 +13,18 @@ const getConfirmationId = (guid, journey) => {
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
 }
 
-const handleConditinalHtmlData = (question, request) => {
-  const inEngland = question.yarKey === 'inEngland'
-  const label = inEngland ? 'projectPostcode' : 'sbi'
-  const fieldValue = inEngland ? getYarValue(request, 'projectPostcode') : getYarValue(request, 'sbi')
+const handleConditinalHtmlData = (type, yarKey, request) => {
+  const isMultiInput = type === 'multi-input'
+  const label = isMultiInput ? 'sbi' : yarKey
+  const fieldValue = isMultiInput ? getYarValue(request, yarKey).sbi : getYarValue(request, yarKey)
   return getHtml(label, fieldValue)
 }
 
 const getPage = (question, request, h) => {
+  const { url, backUrl, dependantNextUrl, type, title, yarKey } = question
+  const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
+
   if (question.maybeEligible) {
-    const { url, backUrl, dependantNextUrl } = question
-    const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
     let { maybeEligibleContent } = question
     let consentOptionalData
 
@@ -78,29 +79,30 @@ const getPage = (question, request, h) => {
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
   }
 
-  if (question.title) {
+  if (title) {
     question = {
       ...question,
-      title: question.title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+      title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }
   }
 
-  const data = getYarValue(request, question.yarKey) || null
+  const data = getYarValue(request, yarKey) || null
   let conditionalHtml
-  if (question.yarKey === 'inEngland' || question.yarKey === 'businessDetails') {
-    conditionalHtml = handleConditinalHtmlData(question, request)
+  if (yarKey === 'inEngland' || yarKey === 'businessDetails') {
+    const conditional = yarKey === 'inEngland' ? question.conditionalKey : yarKey
+    conditionalHtml = handleConditinalHtmlData(type, conditional, request)
   }
   return h.view('page', getModel(data, question, request, conditionalHtml))
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl } = currentQuestion
+  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
-  console.log(payload)
   let thisAnswer
+  let dataObject
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
@@ -111,14 +113,25 @@ const showPostPage = (currentQuestion, request, h) => {
     if (key === 'projectPostcode') {
       value = value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
     }
-    setYarValue(request, key, value)
-    console.log(`saved ${value} for ${key}`)
+
+    (type !== 'multi-input') && setYarValue(request, key, value)
   }
 
-  if (currentQuestion.title) {
+  if (type === 'multi-input') {
+    allFields.forEach(field => {
+      dataObject = {
+        ...dataObject,
+        [field.yarKey]: payload[field.yarKey] || '',
+        ...field.conditionalKey ? { [field.conditionalKey]: payload[field.conditionalKey] } : {}
+      }
+    })
+    setYarValue(request, yarKey, dataObject)
+  }
+
+  if (title) {
     currentQuestion = {
       ...currentQuestion,
-      title: currentQuestion.title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+      title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }

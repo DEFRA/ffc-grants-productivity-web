@@ -449,7 +449,7 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          classes: 'govuk-radios--inline',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -891,7 +891,7 @@ const questionBank = {
           baseUrl: 'slurry-currently-treated',
           backUrl: 'project-impacts',
           nextUrl: 'slurry-to-be-treated',
-          classes: 'govuk-input--width-5',
+          classes: 'govuk-input--width-10',
           id: 'slurryCurrentlyTreated',
           name: 'slurryCurrentlyTreated',
           suffix: {
@@ -1667,6 +1667,9 @@ const questionBank = {
               },
               hint: {
                 text: 'For example, Brown Hill Farm reservoir'
+              },
+              validate: {
+                errorEmptyField: 'Select who is applying for this grant'
               }
             },
             {
@@ -1706,6 +1709,7 @@ const questionBank = {
             },
             {
               yarKey: 'inSbi',
+              conditionalKey: 'sbi',
               type: 'single-answer',
               title: 'Single Business Identifier (SBI)',
               classes: 'govuk-fieldset__legend--s',

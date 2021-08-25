@@ -5,8 +5,8 @@ const { getYarValue } = require('../helpers/session')
 const customiseErrorText = (value, currentQuestion, errorList, errorText, h, request) => {
   let conditionalHtml
   if (currentQuestion.conditionalKey) {
-    const label = 'projectPostcode'
-    conditionalHtml = getHtml(label, getYarValue(request, currentQuestion.conditionalKey), errorText.includes('postcode') ? errorText : null)
+    // const label = 'projectPostcode'
+    conditionalHtml = getHtml(currentQuestion.conditionalKey, getYarValue(request, currentQuestion.conditionalKey), errorText.includes('postcode') ? errorText : null)
   }
   const baseModel = getModel(value, currentQuestion, request, conditionalHtml)
   const href = errorText.includes('postcode') ? currentQuestion.conditionalKey : currentQuestion.yarKey
