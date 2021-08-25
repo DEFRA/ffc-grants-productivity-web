@@ -16,7 +16,7 @@ const getConfirmationId = (guid, journey) => {
 const handleConditinalHtmlData = (type, yarKey, request) => {
   const isMultiInput = type === 'multi-input'
   const label = isMultiInput ? 'sbi' : yarKey
-  const fieldValue = isMultiInput ? getYarValue(request, yarKey).sbi : getYarValue(request, yarKey)
+  const fieldValue = isMultiInput ? getYarValue(request, yarKey)?.sbi : getYarValue(request, yarKey)
   return getHtml(label, fieldValue)
 }
 
