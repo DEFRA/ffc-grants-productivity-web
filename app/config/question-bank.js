@@ -1,4 +1,4 @@
-const { DIGITS_MAX_7, POSTCODE_REGEX, NUMBER_REGEX } = require('../helpers/regex')
+const { DIGITS_MAX_7, POSTCODE_REGEX, NUMBER_REGEX, NAME_ONLY_REGEX } = require('../helpers/regex')
 
 /**
  * ----------------------------------------------------------------
@@ -1902,12 +1902,12 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Empty field 1'
+                  error: 'Enter your first name'
                 },
                 {
                   type: 'REGEX',
-                  regex: /^d$/,
-                  error: 'Regex 1'
+                  regex: NAME_ONLY_REGEX,
+                  error: 'Name must only include letters, hyphens and apostrophes'
                 }
               ]
             },
@@ -1922,12 +1922,12 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Empty field 2'
+                  error: 'Enter your last name'
                 },
                 {
                   type: 'REGEX',
-                  regex: /^d$/,
-                  error: 'Regex 2'
+                  regex: NAME_ONLY_REGEX,
+                  error: 'Name must only include letters, hyphens and apostrophes'
                 }
               ]
             },
