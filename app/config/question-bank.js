@@ -1850,7 +1850,7 @@ const questionBank = {
             }
           },
           fundingPriorities: '',
-          type: '',
+          type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
           ga: { dimension: '', value: '' },
@@ -1862,22 +1862,111 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
-          answers: [
+          allFields: [
             {
-              key: '',
-              value: ''
+              yarKey: 'firstName',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'First name',
+                classes: 'govuk-label'
+              },
+              validate: {
+                errorEmptyField: 'Select who is applying for this grant'
+              }
             },
             {
-              key: '',
-              value: ''
+              yarKey: 'lastName',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Last name',
+                classes: 'govuk-label'
+              }
             },
             {
-              key: '',
-              value: ''
+              yarKey: 'emailAddress',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Email address',
+                classes: 'govuk-label'
+              },
+              hint: {
+                text: 'We\'ll only use this to send you a confirmation'
+              }
             },
             {
-              key: '',
-              value: ''
+              yarKey: 'mobileNumber',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Mobile number',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'landlineNumber',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Landline number',
+                classes: 'govuk-label'
+              },
+              validate: {
+                errorEmptyField: 'Select who is applying for this grant'
+              }
+            },
+            {
+              yarKey: 'address1',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Address 1',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'address2',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Address 2 (optional)',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'town',
+              type: 'input',
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'Town (optional)',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'county',
+              type: 'input',
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'County',
+                classes: 'govuk-label'
+              },
+              validate: {
+                errorEmptyField: 'Select who is applying for this grant'
+              }
+            },
+            {
+              yarKey: 'postcode',
+              type: 'input',
+              classes: 'govuk-input--width-5',
+              label: {
+                text: 'Postcode',
+                classes: 'govuk-label'
+              },
+              hint: {
+                text: 'If you’re registered on the Rural Payments system, enter business name as registered'
+              }
             }
           ],
           yarKey: 'agentsDetails'
