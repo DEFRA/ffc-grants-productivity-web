@@ -20,6 +20,34 @@ const { DIGITS_MAX_7, POSTCODE_REGEX, NUMBER_REGEX } = require('../helpers/regex
  * ----------------------------------------------------------------
  */
 
+/**
+ * multi-input validation schema
+ *
+ *  type: 'multi-input',
+    allFields: [
+      {
+        ...
+        validate: [
+          {
+            type: 'NOT_EMPTY',
+            error: 'Error message'
+          },
+          {
+            type: 'REGEX',
+            error: 'Error message',
+            regex: SAVED_REGEX
+          },
+          {
+            type: 'MIN_MAX',
+            error: 'Error message',
+            min: MINIMUM,
+            max: MAXIMUM
+          }
+        ]
+      }
+    ]
+ */
+
 const questionBank = {
   grantScheme: {
     key: 'FFC002',
@@ -1871,9 +1899,17 @@ const questionBank = {
                 text: 'First name',
                 classes: 'govuk-label'
               },
-              validate: {
-                errorEmptyField: 'Select who is applying for this grant'
-              }
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Empty field 1'
+                },
+                {
+                  type: 'REGEX',
+                  regex: /^d$/,
+                  error: 'Regex 1'
+                }
+              ]
             },
             {
               yarKey: 'lastName',
@@ -1882,7 +1918,18 @@ const questionBank = {
               label: {
                 text: 'Last name',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Empty field 2'
+                },
+                {
+                  type: 'REGEX',
+                  regex: /^d$/,
+                  error: 'Regex 2'
+                }
+              ]
             },
             {
               yarKey: 'emailAddress',
@@ -1912,9 +1959,6 @@ const questionBank = {
               label: {
                 text: 'Landline number',
                 classes: 'govuk-label'
-              },
-              validate: {
-                errorEmptyField: 'Select who is applying for this grant'
               }
             },
             {
@@ -1951,9 +1995,6 @@ const questionBank = {
               label: {
                 text: 'County',
                 classes: 'govuk-label'
-              },
-              validate: {
-                errorEmptyField: 'Select who is applying for this grant'
               }
             },
             {
