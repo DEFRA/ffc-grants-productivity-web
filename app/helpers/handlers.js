@@ -107,14 +107,14 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, yarKey, '')
   }
 
-  for (let [key, value] of Object.entries(payload)) {
+  for (const [key, value] of Object.entries(payload)) {
     thisAnswer = answers?.find(answer => (answer.value === value))
-
+    let regVal = value
     if (key === 'projectPostcode') {
-      value = value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
+      regVal = value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
     }
 
-    (type !== 'multi-input') && setYarValue(request, key, value)
+    (type !== 'multi-input') && setYarValue(request, key, regVal)
   }
 
   if (type === 'multi-input') {

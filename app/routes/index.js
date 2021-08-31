@@ -24,5 +24,5 @@ const drawSectionPostRequests = (section) => {
 
 let pages = questionBank.sections.map(section => drawSectionGetRequests(section))
 pages = [...pages, ...questionBank.sections.map(section => drawSectionPostRequests(section))]
-
+pages.push(require('./score'))
 module.exports = pages

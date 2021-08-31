@@ -2147,7 +2147,10 @@ questionBank.sections.forEach(({ questions }) => {
   ALL_QUESTIONS.push(...questions)
 })
 
+const YAR_KEYS = []
+ALL_QUESTIONS.forEach(item => YAR_KEYS.push(item.yarKey))
 module.exports = {
   questionBank,
-  ALL_QUESTIONS
+  ALL_QUESTIONS,
+  YAR_KEYS
 }
