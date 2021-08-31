@@ -1,4 +1,4 @@
-const { DIGITS_MAX_7, POSTCODE_REGEX, NUMBER_REGEX } = require('../helpers/regex')
+const { DIGITS_MAX_7, POSTCODE_REGEX, NUMBER_REGEX, NAME_ONLY_REGEX } = require('../helpers/regex')
 
 /**
  * ----------------------------------------------------------------
@@ -18,6 +18,34 @@ const { DIGITS_MAX_7, POSTCODE_REGEX, NUMBER_REGEX } = require('../helpers/regex
  *
  *
  * ----------------------------------------------------------------
+ */
+
+/**
+ * multi-input validation schema
+ *
+ *  type: 'multi-input',
+    allFields: [
+      {
+        ...
+        validate: [
+          {
+            type: 'NOT_EMPTY',
+            error: 'Error message'
+          },
+          {
+            type: 'REGEX',
+            error: 'Error message',
+            regex: SAVED_REGEX
+          },
+          {
+            type: 'MIN_MAX',
+            error: 'Error message',
+            min: MINIMUM,
+            max: MAXIMUM
+          }
+        ]
+      }
+    ]
  */
 
 const questionBank = {
@@ -1850,7 +1878,7 @@ const questionBank = {
             }
           },
           fundingPriorities: '',
-          type: '',
+          type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
           ga: { dimension: '', value: '' },
@@ -1862,22 +1890,124 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
-          answers: [
+          allFields: [
             {
-              key: '',
-              value: ''
+              yarKey: 'firstName',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'First name',
+                classes: 'govuk-label'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your first name'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NAME_ONLY_REGEX,
+                  error: 'Name must only include letters, hyphens and apostrophes'
+                }
+              ]
             },
             {
-              key: '',
-              value: ''
+              yarKey: 'lastName',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Last name',
+                classes: 'govuk-label'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your last name'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NAME_ONLY_REGEX,
+                  error: 'Name must only include letters, hyphens and apostrophes'
+                }
+              ]
             },
             {
-              key: '',
-              value: ''
+              yarKey: 'emailAddress',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Email address',
+                classes: 'govuk-label'
+              },
+              hint: {
+                text: 'We\'ll only use this to send you a confirmation'
+              }
             },
             {
-              key: '',
-              value: ''
+              yarKey: 'mobileNumber',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Mobile number',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'landlineNumber',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Landline number',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'address1',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Address 1',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'address2',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Address 2 (optional)',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'town',
+              type: 'input',
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'Town (optional)',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'county',
+              type: 'input',
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'County',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'postcode',
+              type: 'input',
+              classes: 'govuk-input--width-5',
+              label: {
+                text: 'Postcode',
+                classes: 'govuk-label'
+              },
+              hint: {
+                text: 'If you’re registered on the Rural Payments system, enter business name as registered'
+              }
             }
           ],
           yarKey: 'agentsDetails'
