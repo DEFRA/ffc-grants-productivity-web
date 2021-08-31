@@ -25,7 +25,7 @@ describe('Reference number page', () => {
   it('load page successfully with the Reference ID', async () => {
     const getOtions = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/reference-number`
+      url: `${global.__URLPREFIX__}/confirmation`
     }
     const getResponse = await global.__SERVER__.inject(getOtions)
     expect(getResponse.statusCode).toBe(200)
@@ -36,7 +36,7 @@ describe('Reference number page', () => {
     varList.consentMain = null
     const getOtions = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/reference-number`
+      url: `${global.__URLPREFIX__}/confirmation`
     }
     const getResponse = await global.__SERVER__.inject(getOtions)
     expect(getResponse.statusCode).toBe(302)
