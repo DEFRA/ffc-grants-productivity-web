@@ -1,4 +1,5 @@
 const { DIGITS_MAX_7, POSTCODE_REGEX, NUMBER_REGEX, NAME_ONLY_REGEX } = require('../helpers/regex')
+const { LIST_COUNTIES } = require('../helpers/all-counties')
 
 /**
  * ----------------------------------------------------------------
@@ -1990,12 +1991,15 @@ const questionBank = {
             },
             {
               yarKey: 'county',
-              type: 'input',
+              type: 'select',
               classes: 'govuk-input--width-10',
               label: {
                 text: 'County',
                 classes: 'govuk-label'
-              }
+              },
+              answers: [
+                ...LIST_COUNTIES
+              ]
             },
             {
               yarKey: 'postcode',

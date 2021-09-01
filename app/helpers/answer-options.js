@@ -33,6 +33,16 @@ function setOptionsLabel (data, answers, conditionalHtml) {
   })
 }
 
+function setSelectLabels (data, selectList) {
+  return selectList.map((selectValue) => {
+    return {
+      value: selectValue,
+      text: selectValue,
+      selected: data === selectValue
+    }
+  })
+}
+
 const inputOptions = (data, question, conditionalHtml) => {
   const { yarKey, title, hint, answers, classes = 'govuk-fieldset__legend--l' } = question
   return {
@@ -48,6 +58,21 @@ const inputOptions = (data, question, conditionalHtml) => {
     },
     hint,
     items: setOptionsLabel(data, answers, conditionalHtml)
+  }
+}
+
+const selectField = (data, question) => {
+  const { yarKey, title, hint, answers, classes = 'govuk-fieldset__legend--l' } = question
+
+  return {
+    classes,
+    id: yarKey,
+    name: yarKey,
+    label: {
+      text: title
+    },
+    hint,
+    items: setSelectLabels(data, answers)
   }
 }
 
@@ -79,10 +104,20 @@ const getAllInputs = (data, question, conditionalHtml) => {
   }
   return allFields.map((field) => {
     const { type } = field
+    let fieldItems
+
     if (type === 'input') {
-      return textField(data[field.yarKey], field)
+      fieldItems = textField(data[field.yarKey], field)
+    } else if (type === 'select') {
+      fieldItems = selectField(data[field.yarKey], field)
+    } else {
+      fieldItems = inputOptions(data[field.yarKey], field, conditionalHtml)
     }
-    return inputOptions(data[field.yarKey], field, conditionalHtml)
+
+    return {
+      type,
+      ...fieldItems
+    }
   })
 }
 
@@ -92,6 +127,8 @@ const getOptions = (data, question, conditionalHtml) => {
       return textField(data, question)
     case 'multi-input':
       return getAllInputs(data, question, conditionalHtml)
+    case 'select':
+      return selectField(data, question)
     default:
       return inputOptions(data, question, conditionalHtml)
   }
