@@ -34,13 +34,17 @@ function setOptionsLabel (data, answers, conditionalHtml) {
 }
 
 function setSelectLabels (data, selectList) {
-  return selectList.map((selectValue) => {
-    return {
-      value: selectValue,
-      text: selectValue,
-      selected: data === selectValue
-    }
-  })
+  return [
+    { text: 'Please select a value', value: '' },
+    ...selectList.map((selectValue) => {
+      return {
+        value: selectValue,
+        text: selectValue,
+        selected: data === selectValue
+      }
+    })
+
+  ]
 }
 
 const inputOptions = (data, question, conditionalHtml) => {
@@ -62,15 +66,13 @@ const inputOptions = (data, question, conditionalHtml) => {
 }
 
 const selectField = (data, question) => {
-  const { yarKey, title, hint, answers, classes = 'govuk-fieldset__legend--l' } = question
+  const { yarKey, label, hint, answers, classes = 'govuk-fieldset__legend--l' } = question
 
   return {
     classes,
     id: yarKey,
     name: yarKey,
-    label: {
-      text: title
-    },
+    label,
     hint,
     items: setSelectLabels(data, answers)
   }
