@@ -2017,7 +2017,18 @@ const questionBank = {
               },
               hint: {
                 text: 'If you’re registered on the Rural Payments system, enter business name as registered'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your postcode, like AA1 1AA'
+                },
+                {
+                  type: 'REGEX',
+                  regex: POSTCODE_REGEX,
+                  error: 'Enter a postcode, like AA1 1AA'
+                }
+              ]
             }
           ],
           yarKey: 'agentsDetails'
