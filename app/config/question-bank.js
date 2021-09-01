@@ -1697,9 +1697,12 @@ const questionBank = {
               hint: {
                 text: 'For example, Brown Hill Farm reservoir'
               },
-              validate: {
-                errorEmptyField: 'Select who is applying for this grant'
-              }
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter a project name'
+                }
+              ]
             },
             {
               yarKey: 'businessName',
@@ -1870,14 +1873,7 @@ const questionBank = {
           backUrl: 'applying',
           nextUrl: 'check-details',
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
+          ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',
@@ -2098,7 +2094,7 @@ const questionBank = {
           order: 220,
           url: 'confirm',
           backUrl: 'check-details',
-          nextUrl: 'reference-number',
+          nextUrl: 'confirmation',
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -2120,8 +2116,8 @@ const questionBank = {
           order: 230,
           title: 'Details submitted',
           pageTitle: '',
-          url: 'reference-number',
-          baseUrl: 'reference-number',
+          url: 'confirmation',
+          baseUrl: 'confirmation',
           maybeEligible: true,
           maybeEligibleContent: {
             reference: {
