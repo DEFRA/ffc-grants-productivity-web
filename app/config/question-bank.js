@@ -1999,6 +1999,12 @@ const questionBank = {
               },
               answers: [
                 ...LIST_COUNTIES
+              ],
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Select your county'
+                }
               ]
             },
             {
