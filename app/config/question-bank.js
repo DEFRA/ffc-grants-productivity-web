@@ -1,4 +1,4 @@
-const { DIGITS_MAX_7, POSTCODE_REGEX, NUMBER_REGEX, NAME_ONLY_REGEX } = require('../helpers/regex')
+const { DIGITS_MAX_7, POSTCODE_REGEX, NUMBER_REGEX, NAME_ONLY_REGEX, PHONE_REGEX, EMAIL_REGEX } = require('../helpers/regex')
 const { LIST_COUNTIES } = require('../helpers/all-counties')
 
 /**
@@ -1938,7 +1938,18 @@ const questionBank = {
               },
               hint: {
                 text: 'We\'ll only use this to send you a confirmation'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your email address'
+                },
+                {
+                  type: 'REGEX',
+                  regex: EMAIL_REGEX,
+                  error: 'Enter an email address in the correct format, like name@example.com'
+                }
+              ]
             },
             {
               yarKey: 'mobileNumber',
@@ -1947,7 +1958,18 @@ const questionBank = {
               label: {
                 text: 'Mobile number',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your mobile number'
+                },
+                {
+                  type: 'REGEX',
+                  regex: PHONE_REGEX,
+                  error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
+                }
+              ]
             },
             {
               yarKey: 'landlineNumber',
@@ -1956,7 +1978,14 @@ const questionBank = {
               label: {
                 text: 'Landline number',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'REGEX',
+                  regex: PHONE_REGEX,
+                  error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
+                }
+              ]
             },
             {
               yarKey: 'address1',
@@ -1965,7 +1994,13 @@ const questionBank = {
               label: {
                 text: 'Address 1',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter line 1 of your address'
+                }
+              ]
             },
             {
               yarKey: 'address2',
@@ -1983,7 +2018,13 @@ const questionBank = {
               label: {
                 text: 'Town (optional)',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your town'
+                }
+              ]
             },
             {
               yarKey: 'county',
