@@ -74,7 +74,7 @@ const checkErrors = (payload, currentQuestion, h, request) => {
 
     allFields.forEach(
       ({ yarKey: inputYarKey, validate: inputValidate, answers: inputAnswers }) => {
-        const isconditionalAnswer = inputAnswers?.find(answer => answer.conditional).value === payload[inputYarKey]
+        const isconditionalAnswer = inputAnswers?.find(answer => answer.conditional)?.value === payload[inputYarKey]
 
         if (inputValidate) {
           placeholderInputError = inputValidate.find(
