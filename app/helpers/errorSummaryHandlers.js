@@ -15,7 +15,7 @@ const validateAnswerField = (value, validationType, details) => {
 
     case 'MIN_MAX': {
       const { min, max } = details
-      return (value.length >= min && value.length <= max)
+      return (value >= min && value <= max)
     }
 
     default:
