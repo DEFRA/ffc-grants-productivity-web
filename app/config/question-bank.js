@@ -1613,7 +1613,6 @@ const questionBank = {
           pageTitle: 'Crops',
           url: 'answers',
           baseUrl: 'answers',
-          backUrl: 'slurry-to-be-treated',
           backUrlObject: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
@@ -1624,24 +1623,10 @@ const questionBank = {
           },
           nextUrl: 'business-details',
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
+          ineligibleContent: {},
           fundingPriorities: '',
           ga: { dimension: '', value: '' },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
+          validations: [],
           answers: [
             {
               key: '',
@@ -1713,7 +1698,19 @@ const questionBank = {
               },
               hint: {
                 text: 'If you’re registered on the Rural Payments system, enter business name as registered'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter a business name'
+                },
+                {
+                  type: 'MIN_MAX',
+                  min: 5,
+                  max: 100,
+                  error: 'Name must be 100 characters or fewer'
+                }
+              ]
             },
             {
               yarKey: 'numberEmployees',
@@ -1725,7 +1722,24 @@ const questionBank = {
               },
               hint: {
                 text: 'Full-time employees, including the owner'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter the number of employees'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NUMBER_REGEX,
+                  error: 'Employee number must be 7 digits or fewer'
+                },
+                {
+                  type: 'MIN_MAX',
+                  min: 1,
+                  max: 7,
+                  error: 'Employee number must be 7 digits or fewer'
+                }
+              ]
             },
             {
               yarKey: 'businessTurnover',
@@ -1737,7 +1751,24 @@ const questionBank = {
               label: {
                 text: 'Business turnover (£)',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter the business turnover'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NUMBER_REGEX,
+                  error: 'Business turnover must be 9 digits or fewer'
+                },
+                {
+                  type: 'MIN_MAX',
+                  min: 1,
+                  max: 9,
+                  error: 'Business turnover must be 9 digits or fewer'
+                }
+              ]
             },
             {
               yarKey: 'inSbi',
@@ -1748,6 +1779,30 @@ const questionBank = {
               hint: {
                 text: 'Select one option'
               },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Select if you have SBI number'
+                },
+                {
+                  dependentKey: 'sbi',
+                  type: 'NOT_EMPTY',
+                  error: 'SBI number must have 9 characters, like 011115678'
+                },
+                {
+                  dependentKey: 'sbi',
+                  type: 'REGEX',
+                  regex: NUMBER_REGEX,
+                  error: 'SBI number must have 9 characters, like 011115678'
+                },
+                {
+                  dependentKey: 'sbi',
+                  type: 'MIN_MAX',
+                  min: 9,
+                  max: 9,
+                  error: 'SBI number must have 9 characters, like 011115678'
+                }
+              ],
               answers: [
                 {
                   key: 'inSbi-A1',
@@ -1761,7 +1816,8 @@ const questionBank = {
               ]
             }
           ],
-          yarKey: 'businessDetails'
+          yarKey: 'businessDetails',
+          conditionalKey: 'sbi'
         },
         {
           key: 'applying',
@@ -1830,34 +1886,126 @@ const questionBank = {
             }
           },
           fundingPriorities: '',
-          type: '',
+          type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
           ga: { dimension: '', value: '' },
-          validations: [
+          validations: [],
+          allFields: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
-          answers: [
-            {
-              key: '',
-              value: ''
+              yarKey: 'firstName',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'First name',
+                classes: 'govuk-label'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your first name'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NAME_ONLY_REGEX,
+                  error: 'Name must only include letters, hyphens and apostrophes'
+                }
+              ]
             },
             {
-              key: '',
-              value: ''
+              yarKey: 'lastName',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Last name',
+                classes: 'govuk-label'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your last name'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NAME_ONLY_REGEX,
+                  error: 'Name must only include letters, hyphens and apostrophes'
+                }
+              ]
             },
             {
-              key: '',
-              value: ''
+              yarKey: 'emailAddress',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Email address',
+                classes: 'govuk-label'
+              },
+              hint: {
+                text: 'We\'ll only use this to send you a confirmation'
+              }
             },
             {
-              key: '',
-              value: ''
+              yarKey: 'mobileNumber',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Mobile number',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'landlineNumber',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Landline number',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'address1',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Address 1',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'address2',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Address 2 (optional)',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'town',
+              type: 'input',
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'Town (optional)',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'county',
+              type: 'input',
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'County',
+                classes: 'govuk-label'
+              }
+            },
+            {
+              yarKey: 'postcode',
+              type: 'input',
+              classes: 'govuk-input--width-5',
+              label: {
+                text: 'Postcode',
+                classes: 'govuk-label'
+              }
             }
           ],
           yarKey: 'farmerDetails'
@@ -1871,7 +2019,7 @@ const questionBank = {
           url: 'agents-details',
           baseUrl: 'agents-details',
           backUrl: 'applying',
-          nextUrl: 'check-details',
+          nextUrl: 'farmers-details',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -2052,9 +2200,6 @@ const questionBank = {
                 text: 'Postcode',
                 classes: 'govuk-label'
               },
-              hint: {
-                text: 'If you’re registered on the Rural Payments system, enter business name as registered'
-              },
               validate: [
                 {
                   type: 'NOT_EMPTY',
@@ -2075,20 +2220,13 @@ const questionBank = {
           key: 'check-details',
           order: 210,
           title: 'Check your details',
-          pageTitle: '',
+          pageTitle: 'Check details',
           url: 'check-details',
           baseUrl: 'check-details',
-          backUrl: 'farmer-details',
+          backUrl: 'farmers-details',
           nextUrl: 'confirm',
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
+          ineligibleContent: {},
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
             dependentAnswerKeysArray: ['applying-A1'],
@@ -2096,6 +2234,11 @@ const questionBank = {
               thenUrl: '/productivity/farmers-details',
               elseUrl: '/productivity/agents-details'
             }
+          },
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Check details',
+            messageContent: ''
           },
           fundingPriorities: '',
           type: '',
@@ -2109,24 +2252,7 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
-          answers: [
-            {
-              key: '',
-              value: ''
-            },
-            {
-              key: '',
-              value: ''
-            },
-            {
-              key: '',
-              value: ''
-            },
-            {
-              key: '',
-              value: ''
-            }
-          ],
+          answers: [],
           yarKey: 'checkDetails'
 
         },
