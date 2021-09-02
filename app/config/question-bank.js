@@ -2041,7 +2041,9 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'First name',
+                html: `
+                  <span class="govuk-heading-m">Name</span><span>First name</span>
+                `,
                 classes: 'govuk-label'
               },
               validate: [
@@ -2081,7 +2083,10 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'Email address',
+                text: '',
+                html: `
+                  <span class="govuk-heading-m">Contact details</span><span>Email address</span>
+                `,
                 classes: 'govuk-label'
               },
               hint: {
@@ -2141,7 +2146,9 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'Address 1',
+                html: `
+                  <span class="govuk-heading-m">Address</span><span>Address 1</span>
+                `,
                 classes: 'govuk-label'
               },
               validate: [
