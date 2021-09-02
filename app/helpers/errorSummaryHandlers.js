@@ -21,7 +21,7 @@ const validateAnswerField = (value, validationType, details, payload) => {
 
     case 'REGEX': {
       const { regex } = details
-      return (regex.test(value))
+      return (!value || regex.test(value))
     }
 
     case 'MIN_MAX': {
