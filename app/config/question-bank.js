@@ -2164,7 +2164,7 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-10',
               label: {
-                text: 'Town (optional)',
+                text: 'Town',
                 classes: 'govuk-label'
               },
               validate: [
