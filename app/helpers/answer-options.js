@@ -37,7 +37,7 @@ const inputOptions = (data, question, conditionalHtml) => {
   const { yarKey, title, hint, answers, classes = 'govuk-fieldset__legend--l' } = question
   return {
     classes,
-    idPrefix: yarKey,
+    id: yarKey,
     name: yarKey,
     fieldset: {
       legend: {
