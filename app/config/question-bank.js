@@ -2109,8 +2109,9 @@ const questionBank = {
               },
               validate: [
                 {
-                  type: 'NOT_EMPTY',
-                  error: 'Enter your mobile number'
+                  type: 'NOT_EMPTY_EXTRA',
+                  error: 'Enter your mobile number',
+                  extraFieldsToCheck: ['landlineNumber']
                 },
                 {
                   type: 'REGEX',

@@ -2,10 +2,21 @@ const { getModel } = require('../helpers/models')
 const { getHtml } = require('../helpers/conditionalHTML')
 const { getYarValue } = require('../helpers/session')
 
-const validateAnswerField = (value, validationType, details) => {
+const validateAnswerField = (value, validationType, details, payload) => {
   switch (validationType) {
     case 'NOT_EMPTY': {
       return (!!value)
+    }
+
+    case 'NOT_EMPTY_EXTRA': {
+      if (value) {
+        return true
+      }
+
+      const { extraFieldsToCheck } = details
+      return extraFieldsToCheck.some(extraField => (
+        !!payload[extraField]
+      ))
     }
 
     case 'REGEX': {
@@ -78,7 +89,9 @@ const checkErrors = (payload, currentQuestion, h, request) => {
 
         if (inputValidate) {
           placeholderInputError = inputValidate.find(
-            ({ type, dependentKey, ...details }) => (isconditionalAnswer && dependentKey) ? (validateAnswerField(payload[dependentKey], type, details) === false) : !dependentKey && (validateAnswerField(payload[inputYarKey], type, details) === false)
+            ({ type, dependentKey, ...details }) => (isconditionalAnswer && dependentKey)
+              ? (validateAnswerField(payload[dependentKey], type, details, payload) === false)
+              : !dependentKey && (validateAnswerField(payload[inputYarKey], type, details, payload) === false)
           )
 
           if (placeholderInputError) {
