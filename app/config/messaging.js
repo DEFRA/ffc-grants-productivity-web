@@ -46,10 +46,10 @@ const config = {
     type: 'queue',
     ...sharedConfig
   },
-  eligibilityAnswersMsgType: `${msgTypePrefix}.eligibility.details`,
-  projectDetailsMsgType: `${msgTypePrefix}.project.details`,
-  contactDetailsMsgType: `${msgTypePrefix}.contact.details`,
-  msgSrc: 'ffc-grants-frontend'
+  eligibilityAnswersMsgType: `${msgTypePrefix}.prod.eligibility.details`,
+  projectDetailsMsgType: `${msgTypePrefix}.prod.project.details`,
+  contactDetailsMsgType: `${msgTypePrefix}.prod.contact.details`,
+  msgSrc: 'ffc-grants-prod-web'
 }
 
 // Validate config

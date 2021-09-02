@@ -1,4 +1,4 @@
-const { senders, createMsg } = require('../messaging/senders')
+const { senders, getDesirabilityAnswers } = require('../messaging')
 const Wreck = require('@hapi/wreck')
 const questionBank = require('../config/question-bank')
 const pollingConfig = require('../config/polling')
@@ -21,7 +21,7 @@ function createModel (data) {
 
 async function getResult (correlationId) {
   const url = `${pollingConfig.host}/desirability-score?correlationId=${correlationId}`
-
+  console.log('polling Url: ', url)
   for (let i = 0; i < pollingConfig.retries; i++) {
     await new Promise(resolve => setTimeout(resolve, pollingConfig.interval))
     try {
@@ -59,7 +59,9 @@ module.exports = [{
   },
   handler: async (request, h, err) => {
     try {
-      const msgDataToSend = createMsg.getDesirabilityAnswers(request)
+      console.log('Scoring...1')
+      const msgDataToSend = getDesirabilityAnswers(request)
+      console.log('Scoring...2')
       // Always re-calculate our score before rendering this page
       await senders.sendProjectDetails(msgDataToSend, request.yar.id)
 

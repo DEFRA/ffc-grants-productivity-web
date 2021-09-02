@@ -103,7 +103,7 @@ const showPostPage = (currentQuestion, request, h) => {
   const payload = request.payload
   let thisAnswer
   let dataObject
-  if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
+  if (yarKey !== 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
 

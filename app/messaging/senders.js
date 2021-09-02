@@ -20,16 +20,18 @@ process.on('SIGINT', async () => {
 })
 
 async function sendMsg (sender, msgData, msgType, correlationId) {
-  const msg = {
-    body: msgData,
-    type: msgType,
-    source: msgCfg.msgSrc,
-    correlationId
+  try {
+    const msg = {
+      body: msgData,
+      type: msgType,
+      source: msgCfg.msgSrc,
+      correlationId
+    }
+    await sender.sendMessage(msg)
+    console.log('sending message', msg)
+  } catch (e) {
+    console.log('message', e)
   }
-
-  console.log('sending message', msg)
-
-  await sender.sendMessage(msg)
 }
 
 module.exports = {

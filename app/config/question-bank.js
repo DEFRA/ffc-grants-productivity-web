@@ -989,7 +989,7 @@ const questionBank = {
               elseUrl: '/productivity/slurry/project-impacts'
             }
           },
-          nextUrl: '/productivity/answers',
+          nextUrl: '/productivity/score',
           classes: 'govuk-input--width-10',
           id: 'slurryToBeTreated',
           name: 'slurryToBeTreated',
@@ -1564,7 +1564,7 @@ const questionBank = {
           url: 'robotics/technology',
           baseUrl: 'technology',
           backUrl: 'agricultural-sector',
-          nextUrl: '/productivity/answers',
+          nextUrl: '/productivity/score',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
