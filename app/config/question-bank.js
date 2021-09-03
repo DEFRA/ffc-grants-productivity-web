@@ -695,6 +695,7 @@ const questionBank = {
             html: `
               You can only apply for a grant of up to 40% of the estimated costs.
               <br/>Do not include VAT.
+              <br/>The minimum grant you can apply for this project is £35,000 (40% of £87,500). The maximum grant is £500,000.
               <br/><br/>Enter amount, for example 95,000`
           },
           eliminationAnswerKeys: '',
@@ -933,7 +934,7 @@ const questionBank = {
           },
           hint: {
             html: `
-              <br>Enter figure in cubic metres, for example 1500`
+              <br>Enter figure in cubic metres, for example 18,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1004,7 +1005,7 @@ const questionBank = {
           },
           hint: {
             html: `
-              <br>Enter figure in cubic metres, for example 1500`
+              <br>Enter figure in cubic metres, for example 18,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1097,17 +1098,23 @@ const questionBank = {
           answers: [
             {
               key: 'project-purchase-A1',
-              value: 'Robotic equipment'
+              value: 'Robotic equipment',
+              hint: {
+                text: 'Autonomous farming equipment capable of sensing its environment, making decisions and performing actions'
+              }
             },
             {
               key: 'project-purchase-A2',
-              value: ' Enhanced automation equipment'
+              value: 'Advanced ventilation control units',
+              hint: {
+                text: 'System to control ventilation of existing horticultural and livestock buildings to reduce greenhouse gas emissions'
+              }
             },
             {
               key: 'project-purchase-A3',
-              value: 'Wavelength-controlled LED lighting',
+              value: 'Wavelength Specific LED lighting',
               hint: {
-                text: 'Wavelength-specific LED lighting to help crop growth, pest control and animal welfare'
+                text: 'Wavelength specific LED lighting to aid plant growth'
               }
             },
             {
@@ -1271,7 +1278,7 @@ const questionBank = {
             messageHeader: 'Potential grant funding',
             messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
             warning: {
-              text: 'The project is not guaranteed to receive a grant.',
+              text: 'There’s no guarantee the project will receive a grant.',
               iconFallbackText: 'Warning'
             }
           }
@@ -1396,6 +1403,9 @@ const questionBank = {
           key: 'robotics-data-analytics',
           order: 350,
           title: 'Will your project use data analytics to improve productivity on the farm?',
+          hint: {
+            text: 'Software automating data analysis to improve efficiency'
+          },
           pageTitle: '',
           url: 'robotics/data-analytics',
           baseUrl: 'data-analytics',
@@ -1471,7 +1481,7 @@ const questionBank = {
           sidebar: {
             heading: 'Funding priorities',
             para: 'RPA wants to fund projects that:',
-            items: ['improve the environment', 'introduce innovation']
+            items: ['improve the environment']
           },
           validate: {
             errorEmptyField: 'Select up to 2 types of energy your project will use',
@@ -1781,7 +1791,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Select if you have SBI number'
+                  error: 'Select if you have an SBI number'
                 },
                 {
                   dependentKey: 'sbi',
@@ -2234,7 +2244,7 @@ const questionBank = {
             If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Transformation Fund scheme:<br/><br/>
             Telephone: 03000 200 301<br/>
             <br/>Monday to Friday, 9am to 5pm (except public holidays)<br/>
-            <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges">Find out about call charges (opens in a new tab)</a></p>
+            <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges">Find out about call charges (opens in new tab)</a></p>
             
             Email: <a class="govuk-link" target="_blank" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a>
             
