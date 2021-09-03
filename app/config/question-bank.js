@@ -1855,12 +1855,12 @@ const questionBank = {
           answers: [
             {
               key: 'applying-A1',
-              value: 'farmer',
+              value: 'Farmer',
               redirectUrl: '/productivity/farmers-details'
             },
             {
               key: 'applying-A2',
-              value: 'agent',
+              value: 'Agent',
               redirectUrl: '/productivity/agents-details'
             }
           ],
@@ -2083,7 +2083,7 @@ const questionBank = {
         {
           key: 'agents-details',
           order: 201,
-          title: 'Agents’s details',
+          title: 'Agent’s details',
           pageTitle: '',
           url: 'agents-details',
           baseUrl: 'agents-details',
