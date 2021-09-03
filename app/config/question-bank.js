@@ -1954,7 +1954,7 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               hint: {
-                text: 'We\'ll only use this to send you a confirmation'
+                text: 'We will only use this to send you a confirmation'
               },
               validate: [
                 {
@@ -1975,6 +1975,9 @@ const questionBank = {
               label: {
                 text: 'Mobile number',
                 classes: 'govuk-label'
+              },
+              hint: {
+                text: 'We will only use this to contact you about your application'
               },
               validate: [
                 {
@@ -1997,6 +2000,9 @@ const questionBank = {
                 text: 'Landline number',
                 classes: 'govuk-label'
               },
+              hint: {
+                text: 'We will only use this to contact you about your application'
+              },
               validate: [
                 {
                   type: 'REGEX',
@@ -2011,25 +2017,21 @@ const questionBank = {
               classes: 'govuk-input--width-20',
               label: {
                 html: `
-                  <span class="govuk-heading-m">Address</span><span>Address 1</span>
+                  <span class="govuk-heading-m">Address</span><span>Building and street</span>
                 `,
                 classes: 'govuk-label'
               },
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter line 1 of your address'
+                  error: 'Enter your building and street details'
                 }
               ]
             },
             {
               yarKey: 'address2',
               type: 'input',
-              classes: 'govuk-input--width-20',
-              label: {
-                text: 'Address 2 (optional)',
-                classes: 'govuk-label'
-              }
+              classes: 'govuk-input--width-20'
             },
             {
               yarKey: 'town',
@@ -2160,7 +2162,7 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               hint: {
-                text: 'We\'ll only use this to send you a confirmation'
+                text: 'We will only use this to send you a confirmation'
               },
               validate: [
                 {
@@ -2181,6 +2183,9 @@ const questionBank = {
               label: {
                 text: 'Mobile number',
                 classes: 'govuk-label'
+              },
+              hint: {
+                text: 'We will only use this to contact you about your application'
               },
               validate: [
                 {
@@ -2203,6 +2208,9 @@ const questionBank = {
                 text: 'Landline number',
                 classes: 'govuk-label'
               },
+              hint: {
+                text: 'We will only use this to contact you about your application'
+              },
               validate: [
                 {
                   type: 'REGEX',
@@ -2217,25 +2225,21 @@ const questionBank = {
               classes: 'govuk-input--width-20',
               label: {
                 html: `
-                  <span class="govuk-heading-m">Address</span><span>Address 1</span>
+                  <span class="govuk-heading-m">Address</span><span>Building and street</span>
                 `,
                 classes: 'govuk-label'
               },
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter line 1 of your address'
+                  error: 'Enter your building and street details'
                 }
               ]
             },
             {
               yarKey: 'address2',
               type: 'input',
-              classes: 'govuk-input--width-20',
-              label: {
-                text: 'Address 2 (optional)',
-                classes: 'govuk-label'
-              }
+              classes: 'govuk-input--width-20'
             },
             {
               yarKey: 'town',
