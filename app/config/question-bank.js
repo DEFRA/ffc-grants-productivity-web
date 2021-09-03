@@ -1,4 +1,14 @@
-const { DIGITS_MAX_7, POSTCODE_REGEX, NUMBER_REGEX, NAME_ONLY_REGEX } = require('../helpers/regex')
+const {
+  DIGITS_MAX_7,
+  CHARS_MIN_10,
+  POSTCODE_REGEX,
+  NUMBER_REGEX,
+  NAME_ONLY_REGEX,
+  PHONE_REGEX,
+  EMAIL_REGEX
+} = require('../helpers/regex')
+
+const { LIST_COUNTIES } = require('../helpers/all-counties')
 
 /**
  * ----------------------------------------------------------------
@@ -1906,12 +1916,12 @@ const questionBank = {
           answers: [
             {
               key: 'applying-A1',
-              value: 'farmer',
+              value: 'Farmer',
               redirectUrl: '/productivity/farmers-details'
             },
             {
               key: 'applying-A2',
-              value: 'agent',
+              value: 'Agent',
               redirectUrl: '/productivity/agents-details'
             }
           ],
@@ -1936,6 +1946,14 @@ const questionBank = {
               title: ''
             }
           },
+          backUrlObject: {
+            dependentQuestionYarKey: 'applying',
+            dependentAnswerKeysArray: ['applying-A1'],
+            urlOptions: {
+              thenUrl: '/productivity/applying',
+              elseUrl: '/productivity/agents-details'
+            }
+          },
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',
@@ -1948,7 +1966,9 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'First name',
+                html: `
+                  <span class="govuk-heading-m">Name</span><span>First name</span>
+                `,
                 classes: 'govuk-label'
               },
               validate: [
@@ -1988,12 +2008,26 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'Email address',
+                text: '',
+                html: `
+                  <span class="govuk-heading-m">Contact details</span><span>Email address</span>
+                `,
                 classes: 'govuk-label'
               },
               hint: {
-                text: 'We\'ll only use this to send you a confirmation'
-              }
+                text: 'We will only use this to send you a confirmation'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your email address'
+                },
+                {
+                  type: 'REGEX',
+                  regex: EMAIL_REGEX,
+                  error: 'Enter an email address in the correct format, like name@example.com'
+                }
+              ]
             },
             {
               yarKey: 'mobileNumber',
@@ -2002,7 +2036,27 @@ const questionBank = {
               label: {
                 text: 'Mobile number',
                 classes: 'govuk-label'
-              }
+              },
+              hint: {
+                text: 'We will only use this to contact you about your application'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY_EXTRA',
+                  error: 'Enter your mobile number',
+                  extraFieldsToCheck: ['landlineNumber']
+                },
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Your mobile number must have at least 10 characters'
+                },
+                {
+                  type: 'REGEX',
+                  regex: PHONE_REGEX,
+                  error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
+                }
+              ]
             },
             {
               yarKey: 'landlineNumber',
@@ -2011,43 +2065,77 @@ const questionBank = {
               label: {
                 text: 'Landline number',
                 classes: 'govuk-label'
-              }
+              },
+              hint: {
+                text: 'We will only use this to contact you about your application'
+              },
+              validate: [
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Your landline number must have at least 10 characters'
+                },
+                {
+                  type: 'REGEX',
+                  regex: PHONE_REGEX,
+                  error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
+                }
+              ]
             },
             {
               yarKey: 'address1',
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'Address 1',
+                html: `
+                  <span class="govuk-heading-m">Address</span><span>Building and street</span>
+                `,
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your building and street details'
+                }
+              ]
             },
             {
               yarKey: 'address2',
               type: 'input',
-              classes: 'govuk-input--width-20',
-              label: {
-                text: 'Address 2 (optional)',
-                classes: 'govuk-label'
-              }
+              classes: 'govuk-input--width-20'
             },
             {
               yarKey: 'town',
               type: 'input',
               classes: 'govuk-input--width-10',
               label: {
-                text: 'Town (optional)',
+                text: 'Town',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your town'
+                }
+              ]
             },
             {
               yarKey: 'county',
-              type: 'input',
+              type: 'select',
               classes: 'govuk-input--width-10',
               label: {
                 text: 'County',
                 classes: 'govuk-label'
-              }
+              },
+              answers: [
+                ...LIST_COUNTIES
+              ],
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Select your county'
+                }
+              ]
             },
             {
               yarKey: 'postcode',
@@ -2056,7 +2144,18 @@ const questionBank = {
               label: {
                 text: 'Postcode',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your postcode, like AA1 1AA'
+                },
+                {
+                  type: 'REGEX',
+                  regex: POSTCODE_REGEX,
+                  error: 'Enter a postcode, like AA1 1AA'
+                }
+              ]
             }
           ],
           yarKey: 'farmerDetails'
@@ -2065,7 +2164,7 @@ const questionBank = {
         {
           key: 'agents-details',
           order: 201,
-          title: 'Agents’s details',
+          title: 'Agent’s details',
           pageTitle: '',
           url: 'agents-details',
           baseUrl: 'agents-details',
@@ -2078,21 +2177,16 @@ const questionBank = {
           minAnswerCount: '',
           maxAnswerCount: '',
           ga: { dimension: '', value: '' },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
+          validations: [],
           allFields: [
             {
               yarKey: 'firstName',
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'First name',
+                html: `
+                  <span class="govuk-heading-m">Name</span><span>First name</span>
+                `,
                 classes: 'govuk-label'
               },
               validate: [
@@ -2132,12 +2226,26 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'Email address',
+                text: '',
+                html: `
+                  <span class="govuk-heading-m">Contact details</span><span>Email address</span>
+                `,
                 classes: 'govuk-label'
               },
               hint: {
-                text: 'We\'ll only use this to send you a confirmation'
-              }
+                text: 'We will only use this to send you a confirmation'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your email address'
+                },
+                {
+                  type: 'REGEX',
+                  regex: EMAIL_REGEX,
+                  error: 'Enter an email address in the correct format, like name@example.com'
+                }
+              ]
             },
             {
               yarKey: 'mobileNumber',
@@ -2146,7 +2254,27 @@ const questionBank = {
               label: {
                 text: 'Mobile number',
                 classes: 'govuk-label'
-              }
+              },
+              hint: {
+                text: 'We will only use this to contact you about your application'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY_EXTRA',
+                  error: 'Enter your mobile number',
+                  extraFieldsToCheck: ['landlineNumber']
+                },
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Your mobile number must have at least 10 characters'
+                },
+                {
+                  type: 'REGEX',
+                  regex: PHONE_REGEX,
+                  error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
+                }
+              ]
             },
             {
               yarKey: 'landlineNumber',
@@ -2155,43 +2283,77 @@ const questionBank = {
               label: {
                 text: 'Landline number',
                 classes: 'govuk-label'
-              }
+              },
+              hint: {
+                text: 'We will only use this to contact you about your application'
+              },
+              validate: [
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Your landline number must have at least 10 characters'
+                },
+                {
+                  type: 'REGEX',
+                  regex: PHONE_REGEX,
+                  error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
+                }
+              ]
             },
             {
               yarKey: 'address1',
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'Address 1',
+                html: `
+                  <span class="govuk-heading-m">Address</span><span>Building and street</span>
+                `,
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your building and street details'
+                }
+              ]
             },
             {
               yarKey: 'address2',
               type: 'input',
-              classes: 'govuk-input--width-20',
-              label: {
-                text: 'Address 2 (optional)',
-                classes: 'govuk-label'
-              }
+              classes: 'govuk-input--width-20'
             },
             {
               yarKey: 'town',
               type: 'input',
               classes: 'govuk-input--width-10',
               label: {
-                text: 'Town (optional)',
+                text: 'Town',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your town'
+                }
+              ]
             },
             {
               yarKey: 'county',
-              type: 'input',
+              type: 'select',
               classes: 'govuk-input--width-10',
               label: {
                 text: 'County',
                 classes: 'govuk-label'
-              }
+              },
+              answers: [
+                ...LIST_COUNTIES
+              ],
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Select your county'
+                }
+              ]
             },
             {
               yarKey: 'postcode',
@@ -2200,7 +2362,18 @@ const questionBank = {
               label: {
                 text: 'Postcode',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your postcode, like AA1 1AA'
+                },
+                {
+                  type: 'REGEX',
+                  regex: POSTCODE_REGEX,
+                  error: 'Enter a postcode, like AA1 1AA'
+                }
+              ]
             }
           ],
           yarKey: 'agentsDetails'
