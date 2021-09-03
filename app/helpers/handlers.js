@@ -114,14 +114,24 @@ const showPostPage = (currentQuestion, request, h) => {
       value = value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
     }
 
-    (type !== 'multi-input') && setYarValue(request, key, value)
+    if (type !== 'multi-input') {
+      setYarValue(request, key, value)
+    }
   }
 
   if (type === 'multi-input') {
     allFields.forEach(field => {
       dataObject = {
         ...dataObject,
-        [field.yarKey]: payload[field.yarKey] || '',
+        [field.yarKey]: (
+          field.yarKey === 'postcode'
+            ? (
+                payload[field.yarKey]
+                  ? payload[field.yarKey].split(/(?=.{3}$)/).join(' ').toUpperCase()
+                  : ''
+              )
+            : payload[field.yarKey] || ''
+        ),
         ...field.conditionalKey ? { [field.conditionalKey]: payload[field.conditionalKey] } : {}
       }
     })
