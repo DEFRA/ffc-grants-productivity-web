@@ -544,7 +544,7 @@ const questionBank = {
               elseUrl: '/productivity/tenancy'
             }
           },
-          nextUrl: 'acididication-infrastructure',
+          nextUrl: 'acidification-infrastructure',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -603,15 +603,15 @@ const questionBank = {
 
         },
         {
-          key: 'acididication-infrastructure',
+          key: 'acidification-infrastructure',
           order: 81,
           title: 'Does your project also need  acidification infrastructure?',
           hint: {
             text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
           },
           pageTitle: '',
-          url: 'slurry/acididication-infrastructure',
-          baseUrl: 'acididication-infrastructure',
+          url: 'slurry/acidification-infrastructure',
+          baseUrl: 'acidification-infrastructure',
           backUrl: 'project-items',
           nextUrl: 'slurry-application',
           eliminationAnswerKeys: '',
@@ -634,15 +634,15 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'acididication-infrastructure-A1',
+              key: 'acidification-infrastructure-A1',
               value: 'Yes, we will buy acidification infrastructure'
             },
             {
-              key: 'acididication-infrastructure-A2',
+              key: 'acidification-infrastructure-A2',
               value: 'Select yes if you need acidification infrastructure'
             }
           ],
-          yarKey: 'acididicationInfrastructure'
+          yarKey: 'acidificationInfrastructure'
         },
         {
           key: 'slurry-application',
@@ -651,7 +651,7 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/slurry-application',
           baseUrl: 'slurry-application',
-          backUrl: 'acididication-infrastructure',
+          backUrl: 'acidification-infrastructure',
           nextUrl: 'project-cost',
           eliminationAnswerKeys: '',
           ineligibleContent: {
