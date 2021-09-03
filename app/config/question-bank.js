@@ -1885,6 +1885,14 @@ const questionBank = {
               title: ''
             }
           },
+          backUrlObject: {
+            dependentQuestionYarKey: 'applying',
+            dependentAnswerKeysArray: ['applying-A1'],
+            urlOptions: {
+              thenUrl: '/productivity/applying',
+              elseUrl: '/productivity/agents-details'
+            }
+          },
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',
