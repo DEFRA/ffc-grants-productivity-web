@@ -1,4 +1,13 @@
-const { DIGITS_MAX_7, POSTCODE_REGEX, NUMBER_REGEX, NAME_ONLY_REGEX, PHONE_REGEX, EMAIL_REGEX } = require('../helpers/regex')
+const {
+  DIGITS_MAX_7,
+  CHARS_MIN_10,
+  POSTCODE_REGEX,
+  NUMBER_REGEX,
+  NAME_ONLY_REGEX,
+  PHONE_REGEX,
+  EMAIL_REGEX
+} = require('../helpers/regex')
+
 const { LIST_COUNTIES } = require('../helpers/all-counties')
 
 /**
@@ -2039,6 +2048,11 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Your mobile number must have at least 10 characters'
+                },
+                {
+                  type: 'REGEX',
                   regex: PHONE_REGEX,
                   error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
                 }
@@ -2056,6 +2070,11 @@ const questionBank = {
                 text: 'We will only use this to contact you about your application'
               },
               validate: [
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Your landline number must have at least 10 characters'
+                },
                 {
                   type: 'REGEX',
                   regex: PHONE_REGEX,
@@ -2247,6 +2266,11 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Your mobile number must have at least 10 characters'
+                },
+                {
+                  type: 'REGEX',
                   regex: PHONE_REGEX,
                   error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
                 }
@@ -2264,6 +2288,11 @@ const questionBank = {
                 text: 'We will only use this to contact you about your application'
               },
               validate: [
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Your landline number must have at least 10 characters'
+                },
                 {
                   type: 'REGEX',
                   regex: PHONE_REGEX,

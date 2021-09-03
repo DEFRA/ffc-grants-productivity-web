@@ -1,4 +1,5 @@
 const DIGITS_MAX_7 = /^\d{0,7}$/
+const CHARS_MIN_10 = /^.{10,}$/
 const NUMBER_REGEX = /^\d+$/
 const SELECT_VARIABLE_TO_REPLACE = /{{_(.+?)_}}/ig
 const DELETE_POSTCODE_CHARS_REGEX = /[)(.\s-]*/g
@@ -9,6 +10,7 @@ const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/
 
 module.exports = {
   DIGITS_MAX_7,
+  CHARS_MIN_10,
   SELECT_VARIABLE_TO_REPLACE,
   DELETE_POSTCODE_CHARS_REGEX,
   POSTCODE_REGEX,
