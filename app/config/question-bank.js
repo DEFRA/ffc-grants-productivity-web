@@ -531,7 +531,7 @@ const questionBank = {
         {
           key: 'project-items',
           order: 80,
-          title: 'Which eligible items do you need for your project?',
+          title: 'Will your project buy mild acidification equipment?',
           pageTitle: '',
           url: 'slurry/project-items',
           baseUrl: 'project-items',
@@ -548,23 +548,29 @@ const questionBank = {
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
-            insertText: { text: '' },
+            insertText: {
+              html: 'This mild acidification equipment is required for:  •introducing acidification the first time  •adding additional acidification installations'
+            },
             messageLink: {
               url: '',
               title: ''
             }
           },
           fundingPriorities: '',
-          type: 'multi-answer',
+          type: 'single-answer',
           minAnswerCount: 1,
           hint: {
-            html: `
-              The minimum grant you can claim is £35,000 (40% of £87,500). The maximum grant is £500,000.
-              <br/><br/>Select all that apply.`
+            html: `<span>Your project must buy all 4 of the following mild acidification equipment:</span>
+            <ul>
+              <li>acid storage</li>
+              <li>dosing equipment</li>
+              <li>mixing tank</li>
+              <li>pump</li>
+            </ul>`
           },
           ga: { dimension: '', value: '' },
           validate: {
-            errorEmptyField: 'Select all the items your project needs'
+            errorEmptyField: 'Select yes if you will be buying mild acidification equipment'
           },
           validations: [
             {
@@ -577,26 +583,12 @@ const questionBank = {
           answers: [
             {
               key: 'project-items-A1',
-              value: 'Mild acidification equipment',
-              hint: {
-                html: `<span>You must buy all 4 of the following items:</span>
-                <ul>
-                  <li>acid storage</li>
-                  <li>dosing equipment</li>
-                  <li>mixing tank</li>
-                  <li>pump</li>
-                </ul>
-                `
-              },
-              mustSelect: true,
-              errorMustSelect: 'You must select mild acidification equipment'
+              value: 'Yes, we will buy all 4 items'
             },
             {
               key: 'project-items-A2',
-              value: 'Acidification infrastructure',
-              hint: {
-                text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
-              }
+              value: 'No, we will not buy all 4 items',
+              notEligible: true
             }
           ],
           yarKey: 'projectItems'
@@ -639,7 +631,7 @@ const questionBank = {
             },
             {
               key: 'acidification-infrastructure-A2',
-              value: 'Select yes if you need acidification infrastructure'
+              value: 'No, we don’t need it'
             }
           ],
           yarKey: 'acidificationInfrastructure'
@@ -664,7 +656,6 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          maxAnswerCount: 3,
           hint: {
             text: 'For example, shallow injection, trailing shoe or dribble bar'
           },
