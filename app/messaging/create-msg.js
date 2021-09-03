@@ -24,11 +24,15 @@ const desirabilityAnswersSchema = Joi.object({
 function getDesirabilityAnswers (request) {
   try {
     console.log('in getDisirability')
+    const energySource = []
+    if (!Array.isArray(getYarValue(request, 'energySource'))) {
+      energySource.push(getYarValue(request, 'energySource'))
+    }
     const val = {
       projectSubject: getYarValue(request, 'projectSubject'),
       projectImpacts: getYarValue(request, 'projectImpacts'),
       dataAnalytics: getYarValue(request, 'dataAnalytics'),
-      energySource: getYarValue(request, 'energySource'),
+      energySource: energySource.length > 0 ? energySource : getYarValue(request, 'energySource'),
       agriculturalSector: getYarValue(request, 'agriculturalSector'),
       roboticProjectImpacts: getYarValue(request, 'technology')
     }
