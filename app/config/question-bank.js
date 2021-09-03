@@ -544,7 +544,7 @@ const questionBank = {
               elseUrl: '/productivity/tenancy'
             }
           },
-          nextUrl: 'slurry-application',
+          nextUrl: 'acidification-infrastructure',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -603,13 +603,55 @@ const questionBank = {
 
         },
         {
-          key: 'slurry-application',
+          key: 'acidification-infrastructure',
           order: 81,
+          title: 'Does your project also need  acidification infrastructure?',
+          hint: {
+            text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
+          },
+          pageTitle: '',
+          url: 'slurry/acidification-infrastructure',
+          baseUrl: 'acidification-infrastructure',
+          backUrl: 'project-items',
+          nextUrl: 'slurry-application',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 3,
+          ga: { dimension: '', value: '' },
+          validate: {
+            errorEmptyField: 'Select yes if you need acidification infrastructure'
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'acidification-infrastructure-A1',
+              value: 'Yes, we will buy acidification infrastructure'
+            },
+            {
+              key: 'acidification-infrastructure-A2',
+              value: 'Select yes if you need acidification infrastructure'
+            }
+          ],
+          yarKey: 'acidificationInfrastructure'
+        },
+        {
+          key: 'slurry-application',
+          order: 82,
           title: 'Will you be using low-emission precision application equipment?',
           pageTitle: '',
           url: 'slurry/slurry-application',
           baseUrl: 'slurry-application',
-          backUrl: 'project-items',
+          backUrl: 'acidification-infrastructure',
           nextUrl: 'project-cost',
           eliminationAnswerKeys: '',
           ineligibleContent: {
