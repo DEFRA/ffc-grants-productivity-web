@@ -1,17 +1,18 @@
 const { senders, getDesirabilityAnswers } = require('../messaging')
 const Wreck = require('@hapi/wreck')
-const questionBank = require('../config/question-bank')
+const { ALL_QUESTIONS } = require('../config/question-bank')
 const pollingConfig = require('../config/polling')
-const { setYarValue } = require('../helpers/session')
+const { setYarValue, getYarValue } = require('../helpers/session')
 
 const urlPrefix = require('../config/server').urlPrefix
 
 const viewTemplate = 'score'
 const currentPath = `${urlPrefix}/${viewTemplate}`
-const previousPath = `${urlPrefix}/collaboration`
 const nextPath = `${urlPrefix}/business-details`
 
-function createModel (data) {
+function createModel (data, request) {
+  const previousPath = `${urlPrefix}/${getYarValue(request,'projectSubject') === 'Robotics and innovation' ? 'robotics/technology' : 'slurry/slurry-to-be-treated'}`
+
   return {
     backLink: previousPath,
     formActionPage: currentPath,
@@ -68,9 +69,11 @@ module.exports = [{
       // Poll for backend for results from scoring algorithm
       // If msgData is null then 500 page will be triggered when trying to access object below
       const msgData = await getResult(request.yar.id)
+      console.log('msgData', msgData)
       if (msgData) {
         const questions = msgData.desirability.questions.map(desirabilityQuestion => {
-          const bankQuestion = questionBank.questions.filter(bankQuestionD => bankQuestionD.key === desirabilityQuestion.key)[0]
+          const bankQuestion = ALL_QUESTIONS.filter(bankQuestionD => bankQuestionD.key === desirabilityQuestion.key)[0]
+          console.log(bankQuestion, 'bankQuestion')
           desirabilityQuestion.title = bankQuestion.title
           desirabilityQuestion.desc = bankQuestion.desc ?? ''
           desirabilityQuestion.url = `${urlPrefix}/${bankQuestion.url}`
@@ -80,6 +83,7 @@ module.exports = [{
           desirabilityQuestion.fundingPriorities = bankQuestion.fundingPriorities
           return desirabilityQuestion
         })
+        console.log('questions', questions)
         let scoreChance
         switch (msgData.desirability.overallRating.band.toLowerCase()) {
           case 'strong':
@@ -98,7 +102,7 @@ module.exports = [{
           scoreData: msgData,
           questions: questions.sort((a, b) => a.order - b.order),
           scoreChance: scoreChance
-        }))
+        }, request))
       } else {
         throw new Error('Score not received.')
       }
