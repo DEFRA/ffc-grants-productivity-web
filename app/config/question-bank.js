@@ -545,15 +545,34 @@ const questionBank = {
             }
           },
           nextUrl: 'acidification-infrastructure',
-          eliminationAnswerKeys: '',
+          sidebar: {
+            heading: 'Eligibility',
+            para: 'Your project must buy the mild acidification equipment required for:',
+            items: ['introducing acidification the first time ', 'adding additional acidification installations'],
+            details: {
+              summaryText: 'Items included as mild acidification equipment',
+              html: '<ul class="govuk-list govuk-list--bullet"><li>acid storage</li><li>dosing equipment</li><li>mixing tank</li><li>pump</li></ul>'
+            }
+          },
           ineligibleContent: {
-            messageContent: '',
+            messageContent: `
+              <span>Your project must buy all 4 of the following mild acidification equipment: </span>
+              <ul class="govuk-body">
+                <li>acid storage </li>
+                <li>dosing equipment </li>
+                <li>mixing tank </li>
+                <li>pump</li>
+              </ul>`,
             insertText: {
-              html: 'This mild acidification equipment is required for:  •introducing acidification the first time  •adding additional acidification installations'
+              html: `<span>This mild acidification equipment is required for:</span>
+              <ul>
+                <li>introducing acidification the first time </li>
+                <li>adding additional acidification installations</li>
+                </ul>`
             },
             messageLink: {
-              url: '',
-              title: ''
+              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
