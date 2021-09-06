@@ -23,7 +23,6 @@ const desirabilityAnswersSchema = Joi.object({
 
 function getDesirabilityAnswers (request) {
   try {
-    console.log('in getDisirability')
     let val = {}
     const projectSubject = getYarValue(request, 'projectSubject')
     if (projectSubject === 'Robotics and innovation') {
@@ -49,7 +48,6 @@ function getDesirabilityAnswers (request) {
         projectImpacts: getYarValue(request, 'projectImpacts')
       }
     }
-    console.log(val)
     const result = desirabilityAnswersSchema.validate(val, {
       abortEarly: false
     })
