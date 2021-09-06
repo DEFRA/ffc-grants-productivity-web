@@ -716,7 +716,7 @@ const questionBank = {
             },
             {
               key: 'slurry-application-A3',
-              value: 'Yes, I will be using a contractor'
+              value: 'Yes, I will be using a contractor with low-emissions precision application equipment'
             },
 
             {
@@ -724,7 +724,7 @@ const questionBank = {
             },
             {
               key: 'slurry-application-A4',
-              value: 'No. I won’t be using the equipment',
+              value: 'No, I won’t be using the equipment',
               notEligible: true
             }
           ],
