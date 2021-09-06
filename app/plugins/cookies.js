@@ -22,7 +22,7 @@ module.exports = {
           const cookiesPolicy = getCurrentPolicy(request, h)
           request.response.source.manager._context.cookiesPolicy = cookiesPolicy
           request.response.source.manager._context.showTimeout = showTimeout
-          request.response.source.manager._context.sessionTimeoutInMin = ((cacheConfig.expiresIn * 60) / (3600 * 1000)) - 10
+          request.response.source.manager._context.sessionTimeoutInMin = ((cacheConfig.expiresIn * 60) / (1200 * 1000)) - 5
         }
 
         return h.continue

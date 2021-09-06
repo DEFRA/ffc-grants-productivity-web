@@ -17,24 +17,37 @@ const desirabilityAnswersSchema = Joi.object({
   projectImpacts: Joi.string().allow(null),
   dataAnalytics: Joi.string().allow(null),
   energySource: Joi.array().allow(null).items(Joi.string()),
-  agriculturalSector: Joi.string().allow(null),
+  agriculturalSector: Joi.array().allow(null).items(Joi.string()),
   roboticProjectImpacts: Joi.string().allow(null)
 })
 
 function getDesirabilityAnswers (request) {
   try {
     console.log('in getDisirability')
-    const energySource = []
-    if (!Array.isArray(getYarValue(request, 'energySource'))) {
-      energySource.push(getYarValue(request, 'energySource'))
-    }
-    const val = {
-      projectSubject: getYarValue(request, 'projectSubject'),
-      projectImpacts: getYarValue(request, 'projectImpacts'),
-      dataAnalytics: getYarValue(request, 'dataAnalytics'),
-      energySource: energySource.length > 0 ? energySource : getYarValue(request, 'energySource'),
-      agriculturalSector: getYarValue(request, 'agriculturalSector'),
-      roboticProjectImpacts: getYarValue(request, 'technology')
+    let val = {}
+    const projectSubject = getYarValue(request, 'projectSubject')
+    if (projectSubject === 'Robotics and innovation') {
+      const energySource = []
+      if (!Array.isArray(getYarValue(request, 'energySource'))) {
+        energySource.push(getYarValue(request, 'energySource'))
+      }
+      const agriculturalSector = []
+      if (!Array.isArray(getYarValue(request, 'agriculturalSector'))) {
+        agriculturalSector.push(getYarValue(request, 'agriculturalSector'))
+      }
+      val = {
+        projectSubject: getYarValue(request, 'projectSubject'),
+        projectImpacts: getYarValue(request, 'projectImpacts'),
+        dataAnalytics: getYarValue(request, 'dataAnalytics'),
+        energySource: energySource.length > 0 ? energySource : getYarValue(request, 'energySource'),
+        agriculturalSector: agriculturalSector.length > 0 ? agriculturalSector : getYarValue(request, 'agriculturalSector'),
+        roboticProjectImpacts: getYarValue(request, 'technology')
+      }
+    } else {
+      val = {
+        projectSubject: getYarValue(request, 'projectSubject'),
+        projectImpacts: getYarValue(request, 'projectImpacts')
+      }
     }
     console.log(val)
     const result = desirabilityAnswersSchema.validate(val, {
