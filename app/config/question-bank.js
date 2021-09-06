@@ -1,4 +1,14 @@
-const { DIGITS_MAX_7, POSTCODE_REGEX, NUMBER_REGEX, NAME_ONLY_REGEX } = require('../helpers/regex')
+const {
+  DIGITS_MAX_7,
+  CHARS_MIN_10,
+  POSTCODE_REGEX,
+  NUMBER_REGEX,
+  NAME_ONLY_REGEX,
+  PHONE_REGEX,
+  EMAIL_REGEX
+} = require('../helpers/regex')
+
+const { LIST_COUNTIES } = require('../helpers/all-counties')
 
 /**
  * ----------------------------------------------------------------
@@ -531,7 +541,7 @@ const questionBank = {
         {
           key: 'project-items',
           order: 80,
-          title: 'Which eligible items do you need for your project?',
+          title: 'Will your project buy mild acidification equipment?',
           pageTitle: '',
           url: 'slurry/project-items',
           baseUrl: 'project-items',
@@ -544,27 +554,52 @@ const questionBank = {
               elseUrl: '/productivity/tenancy'
             }
           },
-          nextUrl: 'slurry-application',
-          eliminationAnswerKeys: '',
+          nextUrl: 'acidification-infrastructure',
+          sidebar: {
+            heading: 'Eligibility',
+            para: 'Your project must buy the mild acidification equipment required for:',
+            items: ['introducing acidification the first time ', 'adding additional acidification installations'],
+            details: {
+              summaryText: 'Items included as mild acidification equipment',
+              html: '<ul class="govuk-list govuk-list--bullet"><li>acid storage</li><li>dosing equipment</li><li>mixing tank</li><li>pump</li></ul>'
+            }
+          },
           ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
+            messageContent: `
+              <span>Your project must buy all 4 of the following mild acidification equipment: </span>
+              <ul class="govuk-body">
+                <li>acid storage </li>
+                <li>dosing equipment </li>
+                <li>mixing tank </li>
+                <li>pump</li>
+              </ul>`,
+            insertText: {
+              html: `<span>This mild acidification equipment is required for:</span>
+              <ul>
+                <li>introducing acidification the first time </li>
+                <li>adding additional acidification installations</li>
+                </ul>`
+            },
             messageLink: {
-              url: '',
-              title: ''
+              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              title: 'See other grants you may be eligible for'
             }
           },
           fundingPriorities: '',
-          type: 'multi-answer',
+          type: 'single-answer',
           minAnswerCount: 1,
           hint: {
-            html: `
-              The minimum grant you can claim is £35,000 (40% of £87,500). The maximum grant is £500,000.
-              <br/><br/>Select all that apply.`
+            html: `<span>Your project must buy all 4 of the following mild acidification equipment:</span>
+            <ul>
+              <li>acid storage</li>
+              <li>dosing equipment</li>
+              <li>mixing tank</li>
+              <li>pump</li>
+            </ul>`
           },
           ga: { dimension: '', value: '' },
           validate: {
-            errorEmptyField: 'Select all the items your project needs'
+            errorEmptyField: 'Select yes if you will be buying mild acidification equipment'
           },
           validations: [
             {
@@ -577,39 +612,67 @@ const questionBank = {
           answers: [
             {
               key: 'project-items-A1',
-              value: 'Mild acidification equipment',
-              hint: {
-                html: `<span>You must buy all 4 of the following items:</span>
-                <ul>
-                  <li>acid storage</li>
-                  <li>dosing equipment</li>
-                  <li>mixing tank</li>
-                  <li>pump</li>
-                </ul>
-                `
-              },
-              mustSelect: true,
-              errorMustSelect: 'You must select mild acidification equipment'
+              value: 'Yes, we will buy all 4 items'
             },
             {
               key: 'project-items-A2',
-              value: 'Acidification infrastructure',
-              hint: {
-                text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
-              }
+              value: 'No, we will not buy all 4 items',
+              notEligible: true
             }
           ],
           yarKey: 'projectItems'
 
         },
         {
-          key: 'slurry-application',
+          key: 'acidification-infrastructure',
           order: 81,
+          title: 'Does your project also need  acidification infrastructure?',
+          hint: {
+            text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
+          },
+          pageTitle: '',
+          url: 'slurry/acidification-infrastructure',
+          baseUrl: 'acidification-infrastructure',
+          backUrl: 'project-items',
+          nextUrl: 'slurry-application',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          maxAnswerCount: 3,
+          ga: { dimension: '', value: '' },
+          validate: {
+            errorEmptyField: 'Select yes if you need acidification infrastructure'
+          },
+          validations: [
+            {
+              type: '',
+              error: '',
+              regEx: '',
+              dependentAnswerKey: ''
+            }
+          ],
+          answers: [
+            {
+              key: 'acidification-infrastructure-A1',
+              value: 'Yes, we will buy acidification infrastructure'
+            },
+            {
+              key: 'acidification-infrastructure-A2',
+              value: 'No, we don’t need it'
+            }
+          ],
+          yarKey: 'acidificationInfrastructure'
+        },
+        {
+          key: 'slurry-application',
+          order: 82,
           title: 'Will you be using low-emission precision application equipment?',
           pageTitle: '',
           url: 'slurry/slurry-application',
           baseUrl: 'slurry-application',
-          backUrl: 'project-items',
+          backUrl: 'acidification-infrastructure',
           nextUrl: 'project-cost',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -622,7 +685,6 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          maxAnswerCount: 3,
           hint: {
             text: 'For example, shallow injection, trailing shoe or dribble bar'
           },
@@ -654,7 +716,7 @@ const questionBank = {
             },
             {
               key: 'slurry-application-A3',
-              value: 'Yes, I will be using a contractor'
+              value: 'Yes, I will be using a contractor with low-emissions precision application equipment'
             },
 
             {
@@ -662,7 +724,7 @@ const questionBank = {
             },
             {
               key: 'slurry-application-A4',
-              value: 'No. I won’t be using the equipment',
+              value: 'No, I won’t be using the equipment',
               notEligible: true
             }
           ],
@@ -695,6 +757,7 @@ const questionBank = {
             html: `
               You can only apply for a grant of up to 40% of the estimated costs.
               <br/>Do not include VAT.
+              <br/>The minimum grant you can apply for this project is £35,000 (40% of £87,500). The maximum grant is £500,000.
               <br/><br/>Enter amount, for example 95,000`
           },
           eliminationAnswerKeys: '',
@@ -933,7 +996,7 @@ const questionBank = {
           },
           hint: {
             html: `
-              <br>Enter figure in cubic metres, for example 1500`
+              <br>Enter figure in cubic metres, for example 18,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1004,7 +1067,7 @@ const questionBank = {
           },
           hint: {
             html: `
-              <br>Enter figure in cubic metres, for example 1500`
+              <br>Enter figure in cubic metres, for example 18,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1097,17 +1160,23 @@ const questionBank = {
           answers: [
             {
               key: 'project-purchase-A1',
-              value: 'Robotic equipment'
+              value: 'Robotic equipment',
+              hint: {
+                text: 'Autonomous farming equipment capable of sensing its environment, making decisions and performing actions'
+              }
             },
             {
               key: 'project-purchase-A2',
-              value: ' Enhanced automation equipment'
+              value: 'Advanced ventilation control units',
+              hint: {
+                text: 'System to control ventilation of existing horticultural and livestock buildings to reduce greenhouse gas emissions'
+              }
             },
             {
               key: 'project-purchase-A3',
-              value: 'Wavelength-controlled LED lighting',
+              value: 'Wavelength Specific LED lighting',
               hint: {
-                text: 'Wavelength-specific LED lighting to help crop growth, pest control and animal welfare'
+                text: 'Wavelength specific LED lighting to aid plant growth'
               }
             },
             {
@@ -1271,7 +1340,7 @@ const questionBank = {
             messageHeader: 'Potential grant funding',
             messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
             warning: {
-              text: 'The project is not guaranteed to receive a grant.',
+              text: 'There’s no guarantee the project will receive a grant.',
               iconFallbackText: 'Warning'
             }
           }
@@ -1396,6 +1465,9 @@ const questionBank = {
           key: 'robotics-data-analytics',
           order: 350,
           title: 'Will your project use data analytics to improve productivity on the farm?',
+          hint: {
+            text: 'Software automating data analysis to improve efficiency'
+          },
           pageTitle: '',
           url: 'robotics/data-analytics',
           baseUrl: 'data-analytics',
@@ -1471,7 +1543,7 @@ const questionBank = {
           sidebar: {
             heading: 'Funding priorities',
             para: 'RPA wants to fund projects that:',
-            items: ['improve the environment', 'introduce innovation']
+            items: ['improve the environment']
           },
           validate: {
             errorEmptyField: 'Select up to 2 types of energy your project will use',
@@ -1612,7 +1684,6 @@ const questionBank = {
           pageTitle: 'Crops',
           url: 'answers',
           baseUrl: 'answers',
-          backUrl: 'slurry-to-be-treated',
           backUrlObject: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
@@ -1623,24 +1694,10 @@ const questionBank = {
           },
           nextUrl: 'business-details',
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
+          ineligibleContent: {},
           fundingPriorities: '',
           ga: { dimension: '', value: '' },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
+          validations: [],
           answers: [
             {
               key: '',
@@ -1712,7 +1769,19 @@ const questionBank = {
               },
               hint: {
                 text: 'If you’re registered on the Rural Payments system, enter business name as registered'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter a business name'
+                },
+                {
+                  type: 'MIN_MAX',
+                  min: 5,
+                  max: 100,
+                  error: 'Name must be 100 characters or fewer'
+                }
+              ]
             },
             {
               yarKey: 'numberEmployees',
@@ -1724,7 +1793,24 @@ const questionBank = {
               },
               hint: {
                 text: 'Full-time employees, including the owner'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter the number of employees'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NUMBER_REGEX,
+                  error: 'Employee number must be 7 digits or fewer'
+                },
+                {
+                  type: 'MIN_MAX',
+                  min: 1,
+                  max: 7,
+                  error: 'Employee number must be 7 digits or fewer'
+                }
+              ]
             },
             {
               yarKey: 'businessTurnover',
@@ -1736,7 +1822,24 @@ const questionBank = {
               label: {
                 text: 'Business turnover (£)',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter the business turnover'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NUMBER_REGEX,
+                  error: 'Business turnover must be 9 digits or fewer'
+                },
+                {
+                  type: 'MIN_MAX',
+                  min: 1,
+                  max: 9,
+                  error: 'Business turnover must be 9 digits or fewer'
+                }
+              ]
             },
             {
               yarKey: 'inSbi',
@@ -1747,6 +1850,30 @@ const questionBank = {
               hint: {
                 text: 'Select one option'
               },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Select if you have an SBI number'
+                },
+                {
+                  dependentKey: 'sbi',
+                  type: 'NOT_EMPTY',
+                  error: 'SBI number must have 9 characters, like 011115678'
+                },
+                {
+                  dependentKey: 'sbi',
+                  type: 'REGEX',
+                  regex: NUMBER_REGEX,
+                  error: 'SBI number must have 9 characters, like 011115678'
+                },
+                {
+                  dependentKey: 'sbi',
+                  type: 'MIN_MAX',
+                  min: 9,
+                  max: 9,
+                  error: 'SBI number must have 9 characters, like 011115678'
+                }
+              ],
               answers: [
                 {
                   key: 'inSbi-A1',
@@ -1760,7 +1887,8 @@ const questionBank = {
               ]
             }
           ],
-          yarKey: 'businessDetails'
+          yarKey: 'businessDetails',
+          conditionalKey: 'sbi'
         },
         {
           key: 'applying',
@@ -1798,12 +1926,12 @@ const questionBank = {
           answers: [
             {
               key: 'applying-A1',
-              value: 'farmer',
+              value: 'Farmer',
               redirectUrl: '/productivity/farmers-details'
             },
             {
               key: 'applying-A2',
-              value: 'agent',
+              value: 'Agent',
               redirectUrl: '/productivity/agents-details'
             }
           ],
@@ -1828,71 +1956,29 @@ const questionBank = {
               title: ''
             }
           },
-          fundingPriorities: '',
-          type: '',
-          minAnswerCount: '',
-          maxAnswerCount: '',
-          ga: { dimension: '', value: '' },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+          backUrlObject: {
+            dependentQuestionYarKey: 'applying',
+            dependentAnswerKeysArray: ['applying-A1'],
+            urlOptions: {
+              thenUrl: '/productivity/applying',
+              elseUrl: '/productivity/agents-details'
             }
-          ],
-          answers: [
-            {
-              key: '',
-              value: ''
-            },
-            {
-              key: '',
-              value: ''
-            },
-            {
-              key: '',
-              value: ''
-            },
-            {
-              key: '',
-              value: ''
-            }
-          ],
-          yarKey: 'farmerDetails'
-
-        },
-        {
-          key: 'agents-details',
-          order: 201,
-          title: 'Agents’s details',
-          pageTitle: '',
-          url: 'agents-details',
-          baseUrl: 'agents-details',
-          backUrl: 'applying',
-          nextUrl: 'check-details',
-          eliminationAnswerKeys: '',
-          ineligibleContent: {},
+          },
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
           ga: { dimension: '', value: '' },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
+          validations: [],
           allFields: [
             {
               yarKey: 'firstName',
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'First name',
+                html: `
+                  <span class="govuk-heading-m">Name</span><span>First name</span>
+                `,
                 classes: 'govuk-label'
               },
               validate: [
@@ -1932,12 +2018,26 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'Email address',
+                text: '',
+                html: `
+                  <span class="govuk-heading-m">Contact details</span><span>Email address</span>
+                `,
                 classes: 'govuk-label'
               },
               hint: {
-                text: 'We\'ll only use this to send you a confirmation'
-              }
+                text: 'We will only use this to send you a confirmation'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your email address'
+                },
+                {
+                  type: 'REGEX',
+                  regex: EMAIL_REGEX,
+                  error: 'Enter an email address in the correct format, like name@example.com'
+                }
+              ]
             },
             {
               yarKey: 'mobileNumber',
@@ -1946,7 +2046,27 @@ const questionBank = {
               label: {
                 text: 'Mobile number',
                 classes: 'govuk-label'
-              }
+              },
+              hint: {
+                text: 'We will only use this to contact you about your application'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY_EXTRA',
+                  error: 'Enter your mobile number',
+                  extraFieldsToCheck: ['landlineNumber']
+                },
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Your mobile number must have at least 10 characters'
+                },
+                {
+                  type: 'REGEX',
+                  regex: PHONE_REGEX,
+                  error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
+                }
+              ]
             },
             {
               yarKey: 'landlineNumber',
@@ -1955,43 +2075,77 @@ const questionBank = {
               label: {
                 text: 'Landline number',
                 classes: 'govuk-label'
-              }
+              },
+              hint: {
+                text: 'We will only use this to contact you about your application'
+              },
+              validate: [
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Your landline number must have at least 10 characters'
+                },
+                {
+                  type: 'REGEX',
+                  regex: PHONE_REGEX,
+                  error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
+                }
+              ]
             },
             {
               yarKey: 'address1',
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'Address 1',
+                html: `
+                  <span class="govuk-heading-m">Address</span><span>Building and street</span>
+                `,
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your building and street details'
+                }
+              ]
             },
             {
               yarKey: 'address2',
               type: 'input',
-              classes: 'govuk-input--width-20',
-              label: {
-                text: 'Address 2 (optional)',
-                classes: 'govuk-label'
-              }
+              classes: 'govuk-input--width-20'
             },
             {
               yarKey: 'town',
               type: 'input',
               classes: 'govuk-input--width-10',
               label: {
-                text: 'Town (optional)',
+                text: 'Town',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your town'
+                }
+              ]
             },
             {
               yarKey: 'county',
-              type: 'input',
+              type: 'select',
               classes: 'govuk-input--width-10',
               label: {
                 text: 'County',
                 classes: 'govuk-label'
-              }
+              },
+              answers: [
+                ...LIST_COUNTIES
+              ],
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Select your county'
+                }
+              ]
             },
             {
               yarKey: 'postcode',
@@ -2001,9 +2155,235 @@ const questionBank = {
                 text: 'Postcode',
                 classes: 'govuk-label'
               },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your postcode, like AA1 1AA'
+                },
+                {
+                  type: 'REGEX',
+                  regex: POSTCODE_REGEX,
+                  error: 'Enter a postcode, like AA1 1AA'
+                }
+              ]
+            }
+          ],
+          yarKey: 'farmerDetails'
+
+        },
+        {
+          key: 'agents-details',
+          order: 201,
+          title: 'Agent’s details',
+          pageTitle: '',
+          url: 'agents-details',
+          baseUrl: 'agents-details',
+          backUrl: 'applying',
+          nextUrl: 'farmers-details',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'multi-input',
+          minAnswerCount: '',
+          maxAnswerCount: '',
+          ga: { dimension: '', value: '' },
+          validations: [],
+          allFields: [
+            {
+              yarKey: 'firstName',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                html: `
+                  <span class="govuk-heading-m">Name</span><span>First name</span>
+                `,
+                classes: 'govuk-label'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your first name'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NAME_ONLY_REGEX,
+                  error: 'Name must only include letters, hyphens and apostrophes'
+                }
+              ]
+            },
+            {
+              yarKey: 'lastName',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Last name',
+                classes: 'govuk-label'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your last name'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NAME_ONLY_REGEX,
+                  error: 'Name must only include letters, hyphens and apostrophes'
+                }
+              ]
+            },
+            {
+              yarKey: 'emailAddress',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: '',
+                html: `
+                  <span class="govuk-heading-m">Contact details</span><span>Email address</span>
+                `,
+                classes: 'govuk-label'
+              },
               hint: {
-                text: 'If you’re registered on the Rural Payments system, enter business name as registered'
-              }
+                text: 'We will only use this to send you a confirmation'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your email address'
+                },
+                {
+                  type: 'REGEX',
+                  regex: EMAIL_REGEX,
+                  error: 'Enter an email address in the correct format, like name@example.com'
+                }
+              ]
+            },
+            {
+              yarKey: 'mobileNumber',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Mobile number',
+                classes: 'govuk-label'
+              },
+              hint: {
+                text: 'We will only use this to contact you about your application'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY_EXTRA',
+                  error: 'Enter your mobile number',
+                  extraFieldsToCheck: ['landlineNumber']
+                },
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Your mobile number must have at least 10 characters'
+                },
+                {
+                  type: 'REGEX',
+                  regex: PHONE_REGEX,
+                  error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
+                }
+              ]
+            },
+            {
+              yarKey: 'landlineNumber',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Landline number',
+                classes: 'govuk-label'
+              },
+              hint: {
+                text: 'We will only use this to contact you about your application'
+              },
+              validate: [
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Your landline number must have at least 10 characters'
+                },
+                {
+                  type: 'REGEX',
+                  regex: PHONE_REGEX,
+                  error: 'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
+                }
+              ]
+            },
+            {
+              yarKey: 'address1',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                html: `
+                  <span class="govuk-heading-m">Address</span><span>Building and street</span>
+                `,
+                classes: 'govuk-label'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your building and street details'
+                }
+              ]
+            },
+            {
+              yarKey: 'address2',
+              type: 'input',
+              classes: 'govuk-input--width-20'
+            },
+            {
+              yarKey: 'town',
+              type: 'input',
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'Town',
+                classes: 'govuk-label'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your town'
+                }
+              ]
+            },
+            {
+              yarKey: 'county',
+              type: 'select',
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'County',
+                classes: 'govuk-label'
+              },
+              answers: [
+                ...LIST_COUNTIES
+              ],
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Select your county'
+                }
+              ]
+            },
+            {
+              yarKey: 'postcode',
+              type: 'input',
+              classes: 'govuk-input--width-5',
+              label: {
+                text: 'Postcode',
+                classes: 'govuk-label'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your postcode, like AA1 1AA'
+                },
+                {
+                  type: 'REGEX',
+                  regex: POSTCODE_REGEX,
+                  error: 'Enter a postcode, like AA1 1AA'
+                }
+              ]
             }
           ],
           yarKey: 'agentsDetails'
@@ -2013,20 +2393,13 @@ const questionBank = {
           key: 'check-details',
           order: 210,
           title: 'Check your details',
-          pageTitle: '',
+          pageTitle: 'Check details',
           url: 'check-details',
           baseUrl: 'check-details',
-          backUrl: 'farmer-details',
+          backUrl: 'farmers-details',
           nextUrl: 'confirm',
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
+          ineligibleContent: {},
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
             dependentAnswerKeysArray: ['applying-A1'],
@@ -2034,6 +2407,11 @@ const questionBank = {
               thenUrl: '/productivity/farmers-details',
               elseUrl: '/productivity/agents-details'
             }
+          },
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Check details',
+            messageContent: ''
           },
           fundingPriorities: '',
           type: '',
@@ -2047,24 +2425,7 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
-          answers: [
-            {
-              key: '',
-              value: ''
-            },
-            {
-              key: '',
-              value: ''
-            },
-            {
-              key: '',
-              value: ''
-            },
-            {
-              key: '',
-              value: ''
-            }
-          ],
+          answers: [],
           yarKey: 'checkDetails'
 
         },
@@ -2108,7 +2469,7 @@ const questionBank = {
             If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Transformation Fund scheme:<br/><br/>
             Telephone: 03000 200 301<br/>
             <br/>Monday to Friday, 9am to 5pm (except public holidays)<br/>
-            <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges">Find out about call charges (opens in a new tab)</a></p>
+            <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges">Find out about call charges (opens in new tab)</a></p>
             
             Email: <a class="govuk-link" target="_blank" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a>
             

@@ -5,6 +5,7 @@
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
+{% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "./components/macro.njk" import crumbToken, sideBar %}
 
@@ -44,17 +45,33 @@
         {%endif%}
 
         {%if type ==='input' %}
-        {{ govukInput(items) }}
+          {{ govukInput(items) }}
+        {%endif%}
+
+        {%if type ==='select' %}
+          {{ govukSelect(items) }}
         {%endif%}
 
         {%if type === 'multi-input' %}
           <h1 class="govuk-heading-l">{{title}}</h1>
           {% for item in items %}
-            {% if item.fieldset %}
+
+            {% if item.type ==='single-answer' %}
               {{ govukRadios(item) }}
-            {%else%}
+            {%endif%}
+
+            {%if item.type ==='multi-answer' %}
+              {{ govukCheckboxes(item) }}
+            {%endif%}
+
+            {%if item.type ==='input' %}
               {{ govukInput(item) }}
-            {% endif %}
+            {%endif%}
+
+            {%if item.type ==='select' %}
+              {{ govukSelect(item) }}
+            {%endif%}
+
           {% endfor %}
         {%endif%}
 

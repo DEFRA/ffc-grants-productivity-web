@@ -1,4 +1,6 @@
 {% macro crumbToken(crumb) %}
+{% from "govuk/components/details/macro.njk" import govukDetails %}
+
   <input type="hidden" name="crumb" id="crumb"
     value="{{ crumb }}"  autocomplete="off" />
 {% endmacro %}
@@ -15,6 +17,9 @@
         <li>{{ item }}</li>
       {% endfor %}
     </ul>
+    {% if content.details %} 
+        {{ govukDetails(content.details) }}
+      {% endif %}
   </div>
 {% endmacro %}
 
