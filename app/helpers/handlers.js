@@ -103,25 +103,35 @@ const showPostPage = (currentQuestion, request, h) => {
   const payload = request.payload
   let thisAnswer
   let dataObject
-  if (yarKey !== 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
+  if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
 
-  for (const [key, value] of Object.entries(payload)) {
+  for (let [key, value] of Object.entries(payload)) {
     thisAnswer = answers?.find(answer => (answer.value === value))
-    let regVal = value
+
     if (key === 'projectPostcode') {
-      regVal = value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
+      value = value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
     }
 
-    (type !== 'multi-input') && setYarValue(request, key, regVal)
+    if (type !== 'multi-input') {
+      setYarValue(request, key, value)
+    }
   }
 
   if (type === 'multi-input') {
     allFields.forEach(field => {
       dataObject = {
         ...dataObject,
-        [field.yarKey]: payload[field.yarKey] || '',
+        [field.yarKey]: (
+          field.yarKey === 'postcode'
+            ? (
+                payload[field.yarKey]
+                  ? payload[field.yarKey].split(/(?=.{3}$)/).join(' ').toUpperCase()
+                  : ''
+              )
+            : payload[field.yarKey] || ''
+        ),
         ...field.conditionalKey ? { [field.conditionalKey]: payload[field.conditionalKey] } : {}
       }
     })

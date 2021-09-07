@@ -8,7 +8,8 @@ services:
     image: ffc-grants-productivity-web    
     environment:     
       NODE_ENV: production
-      SITE_URL: localhost:3500
+      PORT: ${PORT:-3000}
+      SITE_URL: localhost:3000
       LOGIN_REQUIRED: ${LOGIN_REQUIRED:-false}
       AUTH_USERNAME: ${AUTH_USERNAME:-grants}
       AUTH_PASSWORD_HASH: ${AUTH_PASSWORD_HASH:-grants}
@@ -27,7 +28,6 @@ services:
       APPINSIGHTS_INSTRUMENTATIONKEY: ${APPINSIGHTS_INSTRUMENTATIONKEY:-notset}
       REDIS_HOSTNAME: redis
       REDIS_PORT: 6379
-      REDIS_PARTITION: ffc-grants-frontend
+      REDIS_PARTITION: ffc-grants-productivity-web
       REDIS_PASSWORD: ""
       SESSION_CACHE_TTL: 3600000
-      START_PAGE_URL: ${START_PAGE_URL:-/water/start}

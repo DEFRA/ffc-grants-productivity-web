@@ -2503,11 +2503,14 @@ const ALL_QUESTIONS = []
 questionBank.sections.forEach(({ questions }) => {
   ALL_QUESTIONS.push(...questions)
 })
+const ALL_URLS = []
+ALL_QUESTIONS.forEach(item => ALL_URLS.push(item.url))
 
 const YAR_KEYS = []
 ALL_QUESTIONS.forEach(item => YAR_KEYS.push(item.yarKey))
 module.exports = {
   questionBank,
   ALL_QUESTIONS,
-  YAR_KEYS
+  YAR_KEYS,
+  ALL_URLS
 }
