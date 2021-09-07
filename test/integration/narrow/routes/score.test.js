@@ -14,6 +14,7 @@ describe('Score page', () => {
     jest.mock('../../../../app/messaging/senders')
     jest.mock('ffc-messaging')
     senders.sendProjectDetails = jest.fn(async function (message, id) {
+      return null
     })
     createMsg.getDesirabilityAnswers = jest.fn((request) => {
       return ''

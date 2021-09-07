@@ -107,29 +107,24 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, yarKey, '')
   }
 
-  for (let [key, value] of Object.entries(payload)) {
+  for (const [key, value] of Object.entries(payload)) {
     thisAnswer = answers?.find(answer => (answer.value === value))
 
-    if (key === 'projectPostcode') {
-      value = value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
-    }
-
     if (type !== 'multi-input') {
-      setYarValue(request, key, value)
+      setYarValue(request, key, key === 'projectPostcode' ? value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
     }
   }
 
   if (type === 'multi-input') {
     allFields.forEach(field => {
+      const payloadYarVal = payload[field.yarKey]
+        ? payload[field.yarKey].split(/(?=.{3}$)/).join(' ').toUpperCase()
+        : ''
       dataObject = {
         ...dataObject,
         [field.yarKey]: (
           field.yarKey === 'postcode'
-            ? (
-                payload[field.yarKey]
-                  ? payload[field.yarKey].split(/(?=.{3}$)/).join(' ').toUpperCase()
-                  : ''
-              )
+            ? payloadYarVal
             : payload[field.yarKey] || ''
         ),
         ...field.conditionalKey ? { [field.conditionalKey]: payload[field.conditionalKey] } : {}
