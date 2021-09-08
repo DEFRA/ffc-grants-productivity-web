@@ -941,7 +941,7 @@ const questionBank = {
               title: ''
             }
           },
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li><li>introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
@@ -1052,7 +1052,7 @@ const questionBank = {
               elseUrl: '/productivity/slurry/project-impacts'
             }
           },
-          nextUrl: '/productivity/answers',
+          nextUrl: '/productivity/score',
           classes: 'govuk-input--width-10',
           id: 'slurryToBeTreated',
           name: 'slurryToBeTreated',
@@ -1475,7 +1475,7 @@ const questionBank = {
           nextUrl: 'energy-source',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>improve productivity</li><li>introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
@@ -1532,7 +1532,7 @@ const questionBank = {
           nextUrl: 'agricultural-sector',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>improve the environment</li></ul>',
           type: 'multi-answer',
           minAnswerCount: 1,
           maxAnswerCount: 2,
@@ -1636,10 +1636,10 @@ const questionBank = {
           url: 'robotics/technology',
           baseUrl: 'technology',
           backUrl: 'agricultural-sector',
-          nextUrl: '/productivity/answers',
+          nextUrl: '/productivity/score',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
@@ -1725,7 +1725,7 @@ const questionBank = {
           pageTitle: 'Crops',
           url: 'business-details',
           baseUrl: 'business-details',
-          backUrl: 'answers',
+          backUrl: 'score',
           nextUrl: '/productivity/applying',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -2503,8 +2503,14 @@ const ALL_QUESTIONS = []
 questionBank.sections.forEach(({ questions }) => {
   ALL_QUESTIONS.push(...questions)
 })
+const ALL_URLS = []
+ALL_QUESTIONS.forEach(item => ALL_URLS.push(item.url))
 
+const YAR_KEYS = []
+ALL_QUESTIONS.forEach(item => YAR_KEYS.push(item.yarKey))
 module.exports = {
   questionBank,
-  ALL_QUESTIONS
+  ALL_QUESTIONS,
+  YAR_KEYS,
+  ALL_URLS
 }

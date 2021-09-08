@@ -1,5 +1,5 @@
 const { cookieOptions, urlPrefix } = require('../config/server')
-
+const { ALL_URLS } = require('../config/question-bank')
 const { getCurrentPolicy, validSession, sessionIgnorePaths } = require('../cookies')
 const cacheConfig = require('../config/cache')
 
@@ -13,7 +13,7 @@ module.exports = {
         let showTimeout = false
         if (!sessionIgnorePaths.find(path => request.path.startsWith(path)) && request.path !== '/') {
           showTimeout = true
-          if (!validSession(request) && server.table().filter(route => request.path.toLowerCase() === route.path.toLowerCase()).length > 0) {
+          if (!validSession(request) && ALL_URLS.filter(route => request.path.toLowerCase() === `${urlPrefix}/${route.toLowerCase()}`).length > 0) {
             return h.redirect(`${urlPrefix}/session-timeout`)
           }
         }
@@ -23,7 +23,7 @@ module.exports = {
           const cookiesPolicy = getCurrentPolicy(request, h)
           request.response.source.manager._context.cookiesPolicy = cookiesPolicy
           request.response.source.manager._context.showTimeout = showTimeout
-          request.response.source.manager._context.sessionTimeoutInMin = ((cacheConfig.expiresIn * 60) / (3600 * 1000)) - 10
+          request.response.source.manager._context.sessionTimeoutInMin = ((cacheConfig.expiresIn * 60) / (1200 * 1000)) - 5
         }
 
         return h.continue

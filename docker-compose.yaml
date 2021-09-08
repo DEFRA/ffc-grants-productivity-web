@@ -6,11 +6,28 @@ services:
       context: .
       target: production
     image: ffc-grants-productivity-web    
-    environment: 
+    environment:     
       NODE_ENV: production
+      PORT: ${PORT:-3000}
+      SITE_URL: localhost:3000
+      LOGIN_REQUIRED: ${LOGIN_REQUIRED:-false}
+      AUTH_USERNAME: ${AUTH_USERNAME:-grants}
+      AUTH_PASSWORD_HASH: ${AUTH_PASSWORD_HASH:-grants}
+      GOOGLE_TAG_MANAGER_KEY: 'GTM-WJ5C78H'
+      GOOGLE_TAG_MANAGER_SERVER_KEY: 'UA-179628664-4'
+      COOKIE_PASSWORD: thisistestcookiepasswordthisistestcookiepasswordthisistestcookiepassword
+      SERVICE_BUS_HOST: ${SERVICE_BUS_HOST:-notset}
+      SERVICE_BUS_PASSWORD: ${SERVICE_BUS_PASSWORD:-notset}
+      SERVICE_BUS_USER: ${SERVICE_BUS_USER:-notset}
+      PROJECT_DETAILS_QUEUE_ADDRESS: ${PROJECT_DETAILS_QUEUE_ADDRESS:-notset}
+      CONTACT_DETAILS_QUEUE_ADDRESS: ${CONTACT_DETAILS_QUEUE_ADDRESS:-notset}
+      BACKEND_POLLING_HOST: http://host.docker.internal:3011
+      POLLING_INTERVAL: 200
+      POLLING_RETRIES: 20
+      APPINSIGHTS_CLOUDROLE: ffc-grants-productivity
+      APPINSIGHTS_INSTRUMENTATIONKEY: ${APPINSIGHTS_INSTRUMENTATIONKEY:-notset}
       REDIS_HOSTNAME: redis
       REDIS_PORT: 6379
-      REDIS_PARTITION: ffc-grants-productivity
+      REDIS_PARTITION: ffc-grants-productivity-web
       REDIS_PASSWORD: ""
-      SESSION_CACHE_TTL: 3600000      
-      COOKIE_PASSWORD: thisistestcookiepasswordthisistestcookiepasswordthisistestcookiepassword
+      SESSION_CACHE_TTL: 3600000
