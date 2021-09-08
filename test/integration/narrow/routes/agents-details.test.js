@@ -24,7 +24,7 @@ describe('Agent details page', () => {
     expect(postResponse.payload).toContain('Enter your first name')
     expect(postResponse.payload).toContain('Enter your last name')
     expect(postResponse.payload).toContain('Enter your email address')
-    expect(postResponse.payload).toContain('Enter your mobile number')
+    expect(postResponse.payload).toContain('Enter a landline or mobile number')
     expect(postResponse.payload).toContain('Enter your building and street details')
     expect(postResponse.payload).toContain('Enter your town')
     expect(postResponse.payload).toContain('Select your county')
@@ -219,6 +219,6 @@ describe('Agent details page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter your mobile number')
+    expect(postResponse.payload).toContain('Enter a landline or mobile number')
   })
 })
