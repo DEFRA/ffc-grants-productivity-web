@@ -7,6 +7,10 @@ const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('../
 const { getHtml } = require('../helpers/conditionalHTML')
 const { getUrl } = require('../helpers/urls')
 const { setOptionsLabel } = require('../helpers/answer-options')
+const senders = require('../messaging/senders')
+const createMsg = require('../messaging/create-msg')
+
+
 
 const getConfirmationId = (guid, journey) => {
   const prefix = journey === 'Slurry acidification' ? 'SL' : 'RI'
@@ -20,7 +24,7 @@ const handleConditinalHtmlData = (type, yarKey, request) => {
   return getHtml(label, fieldValue)
 }
 
-const getPage = (question, request, h) => {
+const getPage = async(question, request, h) => {
   const { url, backUrl, dependantNextUrl, type, title, yarKey } = question
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
 
@@ -32,18 +36,24 @@ const getPage = (question, request, h) => {
       if (!getYarValue(request, 'consentMain')) {
         return h.redirect('/productivity/start')
       }
+      const confirmationId = getConfirmationId(request.yar.id, getYarValue(request, 'projectSubject'))
+      try {
+        await senders.sendContactDetails(createMsg.getAllDetails(request, confirmationId), request.yar.id)
+      } catch (err) {
+        console.log('ERROR: ', err)
+      }
       maybeEligibleContent = {
         ...maybeEligibleContent,
         reference: {
           ...maybeEligibleContent.reference,
           html: maybeEligibleContent.reference.html.replace(
-            SELECT_VARIABLE_TO_REPLACE, (_ignore, confirmationId) => (
-              getConfirmationId(request.yar.id, getYarValue(request, 'projectSubject'))
+            SELECT_VARIABLE_TO_REPLACE, (_ignore, confirmation_Id) => (
+              confirmationId
             )
           )
         }
       }
-      request.yar.reset()
+      //request.yar.reset()
     }
 
     maybeEligibleContent = {

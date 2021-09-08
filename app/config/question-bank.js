@@ -1698,25 +1698,7 @@ const questionBank = {
           fundingPriorities: '',
           ga: { dimension: '', value: '' },
           validations: [],
-          answers: [
-            {
-              key: '',
-              value: ''
-            },
-            {
-              key: '',
-              value: ''
-            },
-            {
-              key: '',
-              value: ''
-            },
-            {
-              key: '',
-              value: ''
-            }
-          ],
-          yarKey: 'answers'
+          answers: []
         },
         {
           key: 'business-details',
@@ -2425,9 +2407,7 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
-          answers: [],
-          yarKey: 'checkDetails'
-
+          answers: []
         },
         {
           key: 'confirm',
@@ -2490,9 +2470,7 @@ const questionBank = {
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
           validations: [],
-          answers: [],
-          yarKey: ''
-
+          answers: []
         }
       ]
     }
@@ -2504,10 +2482,10 @@ questionBank.sections.forEach(({ questions }) => {
   ALL_QUESTIONS.push(...questions)
 })
 const ALL_URLS = []
-ALL_QUESTIONS.forEach(item => ALL_URLS.push(item.url))
+ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
 const YAR_KEYS = []
-ALL_QUESTIONS.forEach(item => YAR_KEYS.push(item.yarKey))
+ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,
   ALL_QUESTIONS,
