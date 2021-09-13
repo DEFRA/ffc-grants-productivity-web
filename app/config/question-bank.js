@@ -813,7 +813,8 @@ const questionBank = {
               text: 'There’s no guarantee the project will receive a grant.',
               iconFallbackText: 'Warning'
             }
-          }
+          },
+          yarKey: 'calculatedGrant'
         },
         {
           key: 'remaining-costs',
@@ -916,7 +917,7 @@ const questionBank = {
               value: 'No'
             }
           ],
-          yarKey: 'slurrySSSI'
+          yarKey: 'sSSI'
         },
         {
           key: 'project-impacts',
@@ -2484,7 +2485,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = []
+const YAR_KEYS = ['projectPostcode', 'remainingCost']
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,
