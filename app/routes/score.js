@@ -76,9 +76,7 @@ module.exports = [{
       if (msgData) {
         const scheme = getYarValue(request, 'projectSubject') === 'Robotics and innovation' ? 'robotics' : 'slurry'
         let questions = msgData.desirability.questions.map(desirabilityQuestion => {
-          console.log('desirabilityQuestion', desirabilityQuestion)
           const bankQuestion = ALL_QUESTIONS.filter(bankQuestionD => bankQuestionD.score && bankQuestionD.score.isDisplay === true && bankQuestionD.key === desirabilityQuestion.key)[0]
-          console.log(bankQuestion, 'bankQuestion')
           if (bankQuestion) {
             desirabilityQuestion.title = bankQuestion.title
             desirabilityQuestion.desc = bankQuestion.desc ?? ''
@@ -104,7 +102,7 @@ module.exports = [{
             displayQuestion.desc = bankQuestion.desc ?? ''
             displayQuestion.url = `${urlPrefix}/${bankQuestion.url}`
             displayQuestion.order = bankQuestion.order
-            displayQuestion.unit = bankQuestion?.unit
+            displayQuestion.unit = unit
             displayQuestion.pageTitle = bankQuestion.pageTitle
             displayQuestion.fundingPriorities = bankQuestion.fundingPriorities
             questions.push(displayQuestion)

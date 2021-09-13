@@ -46,7 +46,7 @@ const msgData = {
       }
     ],
     overallRating: {
-      score: 76.5,
+      score: 100,
       band: 'Strong'
     }
   },
@@ -56,7 +56,7 @@ const msgData = {
     dataAnalytics: 'robotics-data-analytics',
     energySource: 'robotics-energy-source',
     agriculturalSector: 'robotics-agricultural-sector',
-    roboticProjectImpacts: 'robotics-technology'
+    projectImpact: 'robotics-project-impact'
   }
 }
 module.exports = msgData

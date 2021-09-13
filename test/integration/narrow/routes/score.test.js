@@ -9,12 +9,14 @@ describe('Score page', () => {
   const senders = require('../../../../app/messaging/senders')
   const createMsg = require('../../../../app/messaging/create-msg')
   const varList = {
-    projectSubject: 'Robotics and innovation'
+    projectSubject: 'Robotics and innovation',
+    slurryToBeTreated: 12
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
+      console.log(key, 'key')
       if (Object.keys(varList).includes(key)) return varList[key]
       else return 'Error'
     }
@@ -33,6 +35,34 @@ describe('Score page', () => {
     })
     server = await createServer()
     await server.start()
+  })
+  it('should load page with error score can not get desirability answers', async () => {
+    jest.mock('@hapi/wreck')
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/score`,
+      headers: {
+        referer: `${global.__URLPREFIX__}/robotics/technology`
+      }
+    }
+    createMsg.getDesirabilityAnswers = jest.fn((request) => {
+      return null
+    })
+    const wreckResponse = {
+      payload: null,
+      res: {
+        statusCode: 202
+      }
+    }
+    Wreck.get = jest.fn(async function (url, type) {
+      return wreckResponse
+    })
+    const response = await server.inject(options)
+    expect(response.statusCode).toBe(200)
+    const header = getCookieHeader(response)
+    expect(header.length).toBe(2)
+    crumCookie = getCrumbCookie(response)
+    expect(response.result).toContain(crumCookie[1])
   })
   it('should load page with error score not received after polling scroing service', async () => {
     jest.mock('@hapi/wreck')
