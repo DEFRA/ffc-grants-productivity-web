@@ -6,6 +6,9 @@ image: ffc-grants-productivity-web
 
 labels: {}
 
+appInsights:
+  key: not-a-real-key
+  
 containerConfigMap:
   name: ffc-grants-productivity-web-config-map
 
