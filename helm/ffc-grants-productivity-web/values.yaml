@@ -8,6 +8,10 @@ labels: {}
 
 appInsights:
   key: not-a-real-key
+
+azureIdentity:
+  clientID: not-a-real-clientID
+  resourceID: not-a-real-resourceID
   
 containerConfigMap:
   name: ffc-grants-productivity-web-config-map
@@ -18,9 +22,16 @@ containerSecret:
 
 deployment:
   restartPolicy: Always
-  priorityClassName: default
-  replicas: 1
-  minReadySeconds: 0
+  priorityClassName: high
+  minReadySeconds: 2
+  redeployOnChange: update this field to force a change
+  runAsNonRoot: true
+  runAsUser: 30303
+  replicas: 2
+  minReplicas: 2
+  maxReplicas: 4
+  cpuThreshold: 80
+  memoryThreshold: 80
 
 container:
   imagePullPolicy: IfNotPresent
