@@ -62,6 +62,9 @@ module.exports = [{
     try {
       console.log('Scoring...1')
       const msgDataToSend = getDesirabilityAnswers(request)
+      if (!msgDataToSend) {
+        throw new Error('no data available for score.')
+      }
       console.log('Scoring...2')
       // Always re-calculate our score before rendering this page
       await senders.sendProjectDetails(msgDataToSend, request.yar.id)

@@ -32,6 +32,19 @@ container:
   redisPort: 6379
   redisPartition: ffc-grants-productivity-web
   sessionCacheTTL: 3600000
+  messageQueueHost: dummy
+  projectDetailsQueueAddress: project-details
+  contactDetailsQueueAddress: contact-details
+  loginRequired: false
+  authUsername: grants
+  authPasswordHash: dummy
+  backendPollingHost: http://ffc-grants-eligibility
+  pollingInterval: 200
+  pollingRetries: 20
+  protectiveMonitoringUrl:
+  googleTagManagerKey: dummy
+  googleTagManagerServerKey: dummy
+  startPageUrl: dummy
 
 livenessProbe:
   path: /healthz

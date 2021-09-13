@@ -33,8 +33,8 @@ const msgData = {
             title: 'Robotics Technology',
             input: [
               {
-                "key": "robotics-technology-A1",
-                "value": "Yes, we’re using it now"
+                key: 'robotics-technology-A1',
+                value: 'Yes, we’re using it now'
               }
             ]
           }
