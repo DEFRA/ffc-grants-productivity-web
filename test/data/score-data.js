@@ -132,7 +132,7 @@ const msgData = {
     dataAnalytics: 'robotics-data-analytics',
     energySource: 'robotics-energy-source',
     agriculturalSector: 'robotics-agricultural-sector',
-    roboticProjectImpacts: 'waterSourcePlanned'
+    roboticProjectImpacts: 'robotics-technology'
   }
 }
 module.exports = msgData

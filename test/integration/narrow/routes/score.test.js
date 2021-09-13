@@ -8,6 +8,18 @@ describe('Score page', () => {
   const Wreck = require('@hapi/wreck')
   const senders = require('../../../../app/messaging/senders')
   const createMsg = require('../../../../app/messaging/create-msg')
+  const varList = {
+    projectSubject: 'Robotics and innovation'
+  }
+
+  jest.mock('../../../../app/helpers/session', () => ({
+    setYarValue: (request, key, value) => null,
+    getYarValue: (request, key) => {
+      if (Object.keys(varList).includes(key)) return varList[key]
+      else return 'Error'
+    }
+  }))
+
   beforeEach(async () => {
     global.__SERVER__.stop()
     jest.mock('../../../../app/messaging')
@@ -164,6 +176,8 @@ describe('Score page', () => {
     const responseScoreMessage = 'This means your project seems likely to be successful.'
     expect(response.payload).toContain(responseScoreMessage)
   })
+
+  
   it('should load page with success Average', async () => {
     jest.mock('@hapi/wreck')
     const options = {

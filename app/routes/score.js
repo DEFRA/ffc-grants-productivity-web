@@ -61,12 +61,14 @@ module.exports = [{
   handler: async (request, h, err) => {
     try {
       const msgDataToSend = getDesirabilityAnswers(request)
+      console.log('msgDataToSend', msgDataToSend)
       if (!msgDataToSend) {
         throw new Error('no data available for score.')
       }
       // Always re-calculate our score before rendering this page
       await senders.sendProjectDetails(msgDataToSend, request.yar.id)
 
+      console.log('msgData Sent')
       // Poll for backend for results from scoring algorithm
       // If msgData is null then 500 page will be triggered when trying to access object below
       const msgData = await getResult(request.yar.id)

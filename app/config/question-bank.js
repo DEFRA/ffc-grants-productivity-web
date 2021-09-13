@@ -1021,7 +1021,7 @@ const questionBank = {
               title: ''
             }
           },
-          fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li><li>introduce innovation</li></ul>',
+          fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li></ul>',
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -1098,7 +1098,7 @@ const questionBank = {
               title: ''
             }
           },
-          fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li><li>introduce innovation</li></ul>',
+          fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li></ul>',
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -1121,7 +1121,7 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
-          answers: [{ title: 'Current volume treated' }],
+          answers: [{ title: 'Future volume treated' }],
           yarKey: 'slurryToBeTreated'
 
         },
