@@ -1,6 +1,47 @@
 const { crumbToken } = require('./test-helper')
+const varListTemplate = {
+  projectSubject: 'Slurry acidification'
+}
 
+let varList
+const mockSession = {
+  setYarValue: (request, key, value) => null,
+  getYarValue: (request, key) => {
+    if (Object.keys(varList).includes(key)) return varList[key]
+    else return 'Error'
+  }
+}
+
+jest.mock('../../../../app/helpers/session', () => mockSession)
 describe('Project and business details page', () => {
+  beforeEach(() => {
+    varList = { ...varListTemplate }
+  })
+
+  afterAll(() => {
+    jest.resetAllMocks()
+  })
+
+  it('should diaplay correct hint text for project name, in case of slurry journey ', async () => {
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/business-details`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Browns Hill Farm slurry acidification')
+  })
+
+  it('should diaplay correct hint text for project name, in case of robotics journey ', async () => {
+    varList.projectSubject = 'Robotics and innovation'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/business-details`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Browns Hill Farm robotic milking')
+  })
   it('should return various error messages if no data is entered', async () => {
     const postOptions = {
       method: 'POST',
