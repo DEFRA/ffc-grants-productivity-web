@@ -1,5 +1,5 @@
-const scoreData = require('../../../data/score-data')
-
+const scoreDataRobotics = require('../../../data/score-data')
+const scoreDataSlurry = require('../../../data/score-data-slurry')
 describe('Score page', () => {
   let crumCookie
   let server
@@ -8,6 +8,20 @@ describe('Score page', () => {
   const Wreck = require('@hapi/wreck')
   const senders = require('../../../../app/messaging/senders')
   const createMsg = require('../../../../app/messaging/create-msg')
+  const varList = {
+    projectSubject: 'Robotics and innovation',
+    slurryToBeTreated: 12
+  }
+
+  jest.mock('../../../../app/helpers/session', () => ({
+    setYarValue: (request, key, value) => null,
+    getYarValue: (request, key) => {
+      console.log(key, 'key')
+      if (Object.keys(varList).includes(key)) return varList[key]
+      else return 'Error'
+    }
+  }))
+
   beforeEach(async () => {
     global.__SERVER__.stop()
     jest.mock('../../../../app/messaging')
@@ -21,6 +35,34 @@ describe('Score page', () => {
     })
     server = await createServer()
     await server.start()
+  })
+  it('should load page with error score can not get desirability answers', async () => {
+    jest.mock('@hapi/wreck')
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/score`,
+      headers: {
+        referer: `${global.__URLPREFIX__}/robotics/technology`
+      }
+    }
+    createMsg.getDesirabilityAnswers = jest.fn((request) => {
+      return null
+    })
+    const wreckResponse = {
+      payload: null,
+      res: {
+        statusCode: 202
+      }
+    }
+    Wreck.get = jest.fn(async function (url, type) {
+      return wreckResponse
+    })
+    const response = await server.inject(options)
+    expect(response.statusCode).toBe(200)
+    const header = getCookieHeader(response)
+    expect(header.length).toBe(2)
+    crumCookie = getCrumbCookie(response)
+    expect(response.result).toContain(crumCookie[1])
   })
   it('should load page with error score not received after polling scroing service', async () => {
     jest.mock('@hapi/wreck')
@@ -137,7 +179,7 @@ describe('Score page', () => {
     crumCookie = getCrumbCookie(response)
     expect(response.result).toContain(crumCookie[1])
   })
-  it('should load page with success Strong', async () => {
+  it('should load page with success Robotics Strong', async () => {
     jest.mock('@hapi/wreck')
     const options = {
       method: 'GET',
@@ -147,7 +189,7 @@ describe('Score page', () => {
       }
     }
     const wreckResponse = {
-      payload: scoreData,
+      payload: scoreDataRobotics,
       res: {
         statusCode: 200
       }
@@ -164,7 +206,7 @@ describe('Score page', () => {
     const responseScoreMessage = 'This means your project seems likely to be successful.'
     expect(response.payload).toContain(responseScoreMessage)
   })
-  it('should load page with success Average', async () => {
+  it('should load page with success Robotics Average', async () => {
     jest.mock('@hapi/wreck')
     const options = {
       method: 'GET',
@@ -173,9 +215,9 @@ describe('Score page', () => {
         referer: `${global.__URLPREFIX__}/robotics/technology`
       }
     }
-    scoreData.desirability.overallRating.band = 'Average'
+    scoreDataRobotics.desirability.overallRating.band = 'Average'
     const wreckResponse = {
-      payload: scoreData,
+      payload: scoreDataRobotics,
       res: {
         statusCode: 200
       }
@@ -192,7 +234,7 @@ describe('Score page', () => {
     const responseScoreMessage = 'This means your project might be successful.'
     expect(response.payload).toContain(responseScoreMessage)
   })
-  it('should load page with sucess Weak', async () => {
+  it('should load page with sucess Robotics Weak', async () => {
     jest.mock('@hapi/wreck')
     const options = {
       method: 'GET',
@@ -201,9 +243,9 @@ describe('Score page', () => {
         referer: `${global.__URLPREFIX__}/robotics/technology`
       }
     }
-    scoreData.desirability.overallRating.band = 'Weak'
+    scoreDataRobotics.desirability.overallRating.band = 'Weak'
     const wreckResponse = {
-      payload: scoreData,
+      payload: scoreDataRobotics,
       res: {
         statusCode: 200
       }
@@ -218,6 +260,33 @@ describe('Score page', () => {
     crumCookie = getCrumbCookie(response)
     expect(response.result).toContain(crumCookie[1])
     const responseScoreMessage = 'This means your project seems unlikely to be successful.'
+    expect(response.payload).toContain(responseScoreMessage)
+  })
+  it('should load page with success Slurry Strong', async () => {
+    jest.mock('@hapi/wreck')
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/score`,
+      headers: {
+        referer: `${global.__URLPREFIX__}/slurry/slurry-to-be-treated`
+      }
+    }
+    const wreckResponse = {
+      payload: scoreDataSlurry,
+      res: {
+        statusCode: 200
+      }
+    }
+    Wreck.get = jest.fn(async function (url, type) {
+      return wreckResponse
+    })
+    const response = await server.inject(options)
+    expect(response.statusCode).toBe(200)
+    const header = getCookieHeader(response)
+    expect(header.length).toBe(2)
+    crumCookie = getCrumbCookie(response)
+    expect(response.result).toContain(crumCookie[1])
+    const responseScoreMessage = 'This means your project seems likely to be successful.'
     expect(response.payload).toContain(responseScoreMessage)
   })
   it('redirects to project business details page', async () => {
