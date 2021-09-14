@@ -82,7 +82,7 @@
               {{answer.title}}
               <ul class="govuk-list govuk-list--bullet govuk-!-font-size-16">
                 {% for selectedAns in answer.input %}
-                <li>{{selectedAns.value}} {{question.unit}}</li>
+                <li>{{selectedAns.value}} {{question.unit | safe}}</li>
                 {% endfor %}
               </ul>
             {% endfor %}

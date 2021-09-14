@@ -70,6 +70,10 @@ const questionBank = {
       questions: [
         {
           key: 'project-subject',
+          score: {
+            isScore: true,
+            isDisplay: false
+          },
           order: 10,
           title: 'What is your project about?',
           pageTitle: '',
@@ -921,6 +925,11 @@ const questionBank = {
         },
         {
           key: 'project-impacts',
+          scheme: 'slurry',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           order: 130,
           title: 'What impact will the project have?',
           pageTitle: '',
@@ -977,6 +986,11 @@ const questionBank = {
         },
         {
           key: 'slurry-currently-treated',
+          scheme: 'slurry',
+          score: {
+            isScore: false,
+            isDisplay: true
+          },
           order: 140,
           pageTitle: '',
           url: 'slurry/slurry-currently-treated',
@@ -1008,7 +1022,7 @@ const questionBank = {
               title: ''
             }
           },
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li></ul>',
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -1033,6 +1047,7 @@ const questionBank = {
           ],
           answers: [
             {
+              title: 'Current volume treated',
               key: ''
             }
           ],
@@ -1041,6 +1056,11 @@ const questionBank = {
         },
         {
           key: 'slurry-to-be-treated',
+          scheme: 'slurry',
+          score: {
+            isScore: false,
+            isDisplay: true
+          },
           order: 150,
           pageTitle: '',
           url: 'slurry/slurry-to-be-treated',
@@ -1079,7 +1099,7 @@ const questionBank = {
               title: ''
             }
           },
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li></ul>',
           ga: { dimension: '', value: '' },
           sidebar:
           {
@@ -1102,7 +1122,7 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
-          answers: [],
+          answers: [{ title: 'Future volume treated' }],
           yarKey: 'slurryToBeTreated'
 
         },
@@ -1464,6 +1484,11 @@ const questionBank = {
         },
         {
           key: 'robotics-data-analytics',
+          scheme: 'robotics',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           order: 350,
           title: 'Will your project use data analytics to improve productivity on the farm?',
           hint: {
@@ -1517,6 +1542,11 @@ const questionBank = {
         },
         {
           key: 'robotics-energy-source',
+          scheme: 'robotics',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           order: 360,
           title: 'What type of energy will you use?',
           pageTitle: '',
@@ -1580,6 +1610,11 @@ const questionBank = {
         },
         {
           key: 'robotics-agricultural-sector',
+          scheme: 'robotics',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           order: 370,
           title: 'Which agricultural sector is your project in?',
           pageTitle: '',
@@ -1631,6 +1666,11 @@ const questionBank = {
         },
         {
           key: 'robotics-technology',
+          scheme: 'robotics',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           order: 380,
           title: 'Are you using this technology on your farm?',
           pageTitle: '',

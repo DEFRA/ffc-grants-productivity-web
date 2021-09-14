@@ -6,6 +6,13 @@ image: ffc-grants-productivity-web
 
 labels: {}
 
+appInsights:
+  key: not-a-real-key
+
+azureIdentity:
+  clientID: not-a-real-clientID
+  resourceID: not-a-real-resourceID
+  
 containerConfigMap:
   name: ffc-grants-productivity-web-config-map
 
@@ -15,9 +22,16 @@ containerSecret:
 
 deployment:
   restartPolicy: Always
-  priorityClassName: default
-  replicas: 1
-  minReadySeconds: 0
+  priorityClassName: high
+  minReadySeconds: 2
+  redeployOnChange: update this field to force a change
+  runAsNonRoot: true
+  runAsUser: 30303
+  replicas: 2
+  minReplicas: 2
+  maxReplicas: 4
+  cpuThreshold: 80
+  memoryThreshold: 80
 
 container:
   imagePullPolicy: IfNotPresent
@@ -32,6 +46,19 @@ container:
   redisPort: 6379
   redisPartition: ffc-grants-productivity-web
   sessionCacheTTL: 3600000
+  messageQueueHost: dummy
+  projectDetailsQueueAddress: project-details
+  contactDetailsQueueAddress: contact-details
+  loginRequired: false
+  authUsername: grants
+  authPasswordHash: dummy
+  backendPollingHost: http://ffc-grants-eligibility
+  pollingInterval: 200
+  pollingRetries: 20
+  protectiveMonitoringUrl:
+  googleTagManagerKey: dummy
+  googleTagManagerServerKey: dummy
+  startPageUrl: dummy
 
 livenessProbe:
   path: /healthz

@@ -60,30 +60,54 @@ module.exports = [{
   },
   handler: async (request, h, err) => {
     try {
-      console.log('Scoring...1')
       const msgDataToSend = getDesirabilityAnswers(request)
-      console.log('Scoring...2')
+      console.log('msgDataToSend', msgDataToSend)
+      if (!msgDataToSend) {
+        throw new Error('no data available for score.')
+      }
       // Always re-calculate our score before rendering this page
       await senders.sendProjectDetails(msgDataToSend, request.yar.id)
 
+      console.log('msgData Sent')
       // Poll for backend for results from scoring algorithm
       // If msgData is null then 500 page will be triggered when trying to access object below
       const msgData = await getResult(request.yar.id)
       console.log('msgData', msgData)
       if (msgData) {
-        const questions = msgData.desirability.questions.map(desirabilityQuestion => {
-          const bankQuestion = ALL_QUESTIONS.filter(bankQuestionD => bankQuestionD.key === desirabilityQuestion.key)[0]
-          console.log(bankQuestion, 'bankQuestion')
-          desirabilityQuestion.title = bankQuestion.title
-          desirabilityQuestion.desc = bankQuestion.desc ?? ''
-          desirabilityQuestion.url = `${urlPrefix}/${bankQuestion.url}`
-          desirabilityQuestion.order = bankQuestion.order
-          desirabilityQuestion.unit = bankQuestion?.unit
-          desirabilityQuestion.pageTitle = bankQuestion.pageTitle
-          desirabilityQuestion.fundingPriorities = bankQuestion.fundingPriorities
-          return desirabilityQuestion
+        const scheme = getYarValue(request, 'projectSubject') === 'Robotics and innovation' ? 'robotics' : 'slurry'
+        let questions = msgData.desirability.questions.map(desirabilityQuestion => {
+          const bankQuestion = ALL_QUESTIONS.filter(bankQuestionD => bankQuestionD.score && bankQuestionD.score.isDisplay === true && bankQuestionD.key === desirabilityQuestion.key)[0]
+          if (bankQuestion) {
+            desirabilityQuestion.title = bankQuestion.title
+            desirabilityQuestion.desc = bankQuestion.desc ?? ''
+            desirabilityQuestion.url = `${urlPrefix}/${bankQuestion.url}`
+            desirabilityQuestion.order = bankQuestion.order
+            desirabilityQuestion.unit = bankQuestion?.unit
+            desirabilityQuestion.pageTitle = bankQuestion.pageTitle
+            desirabilityQuestion.fundingPriorities = bankQuestion.fundingPriorities
+            return desirabilityQuestion
+          }
+          return null
         })
-        console.log('questions', questions)
+        questions = questions.filter(a => a !== null)
+        // Add extra questions
+        ALL_QUESTIONS.filter(q => q.score && q.score.isDisplay === true && q.scheme === scheme && scheme === 'slurry').forEach(bankQuestion => {
+          if (questions.filter(qD => qD.key !== bankQuestion.key).length > 0 && getYarValue(request, bankQuestion.yarKey) !== null) { // Add extra question in result
+            const displayQuestion = {}
+            displayQuestion.key = bankQuestion.key
+            displayQuestion.answers = []
+            displayQuestion.title = bankQuestion.title ?? bankQuestion.answers[0].title
+            const unit = bankQuestion.suffix ? bankQuestion.suffix.html : ''
+            displayQuestion.answers.push({ title: displayQuestion.title, input: [{ value: getYarValue(request, bankQuestion.yarKey), unit: unit }] })
+            displayQuestion.desc = bankQuestion.desc ?? ''
+            displayQuestion.url = `${urlPrefix}/${bankQuestion.url}`
+            displayQuestion.order = bankQuestion.order
+            displayQuestion.unit = unit
+            displayQuestion.pageTitle = bankQuestion.pageTitle
+            displayQuestion.fundingPriorities = bankQuestion.fundingPriorities
+            questions.push(displayQuestion)
+          }
+        })
         let scoreChance
         switch (msgData.desirability.overallRating.band.toLowerCase()) {
           case 'strong':
