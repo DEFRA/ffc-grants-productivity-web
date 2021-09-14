@@ -52,7 +52,7 @@ container:
   loginRequired: false
   authUsername: grants
   authPasswordHash: dummy
-  backendPollingHost: http://ffc-grants-eligibility
+  backendPollingHost: http://ffc-grants-prod-eligibility
   pollingInterval: 200
   pollingRetries: 20
   protectiveMonitoringUrl:
