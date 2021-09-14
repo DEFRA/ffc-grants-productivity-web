@@ -53,7 +53,7 @@ const getPage = async(question, request, h) => {
           )
         }
       }
-      //request.yar.reset()
+      request.yar.reset()
     }
 
     maybeEligibleContent = {
