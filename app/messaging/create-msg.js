@@ -2,10 +2,10 @@ const { YAR_KEYS } = require('../config/question-bank')
 const Joi = require('joi')
 const { getYarValue } = require('../helpers/session')
 
-function getAllDetails (request, confirmationId) {
+function getAllDetails(request, confirmationId) {
   return YAR_KEYS.reduce(
     (allDetails, key) => {
-      allDetails[key] = getYarValue(key)
+      allDetails[key] = getYarValue(request,key)
       return allDetails
     },
     { confirmationId }
