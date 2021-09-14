@@ -11,7 +11,7 @@ beforeEach(async () => {
   }
 
   jest.mock('../app/cookies/index', () => mockSession)
-
+  jest.setTimeout(10000)
   const server = await createServer()
   await server.start()
   global.__SERVER__ = server
