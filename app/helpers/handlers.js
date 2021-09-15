@@ -10,8 +10,6 @@ const { setOptionsLabel } = require('../helpers/answer-options')
 const senders = require('../messaging/senders')
 const createMsg = require('../messaging/create-msg')
 
-
-
 const getConfirmationId = (guid, journey) => {
   const prefix = journey === 'Slurry acidification' ? 'SL' : 'RI'
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
@@ -24,7 +22,7 @@ const handleConditinalHtmlData = (type, yarKey, request) => {
   return getHtml(label, fieldValue)
 }
 
-const getPage = async(question, request, h) => {
+const getPage = async (question, request, h) => {
   const { url, backUrl, dependantNextUrl, type, title, yarKey } = question
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
 
@@ -103,6 +101,10 @@ const getPage = async(question, request, h) => {
   if (yarKey === 'inEngland' || yarKey === 'businessDetails') {
     const conditional = yarKey === 'inEngland' ? question.conditionalKey : yarKey
     conditionalHtml = handleConditinalHtmlData(type, conditional, request)
+  }
+
+  if (question.url === 'check-details') {
+    return h.view('check-details', question.pageData)
   }
   return h.view('page', getModel(data, question, request, conditionalHtml))
 }

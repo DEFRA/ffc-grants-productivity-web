@@ -2423,18 +2423,10 @@ const questionBank = {
           nextUrl: 'confirm',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          backUrlObject: {
-            dependentQuestionYarKey: 'applying',
-            dependentAnswerKeysArray: ['applying-A1'],
-            urlOptions: {
-              thenUrl: '/productivity/farmers-details',
-              elseUrl: '/productivity/agents-details'
-            }
-          },
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Check details',
-            messageContent: ''
+          pageData: {
+            businessDetailsLink: 'business-details',
+            agentDetailsLink: 'agents-details',
+            farmerDetailsLink: 'farmers-details'
           },
           fundingPriorities: '',
           type: '',
