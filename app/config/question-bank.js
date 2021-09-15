@@ -2255,6 +2255,26 @@ const questionBank = {
               ]
             },
             {
+              yarKey: 'businessName',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Business name',
+                classes: 'govuk-label'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your business name'
+                },
+                {
+                  type: 'REGEX',
+                  regex: NAME_ONLY_REGEX,
+                  error: 'Name must only include letters, hyphens and apostrophes'
+                }
+              ]
+            },
+            {
               yarKey: 'emailAddress',
               type: 'input',
               classes: 'govuk-input--width-20',
