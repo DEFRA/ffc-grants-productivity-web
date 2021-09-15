@@ -104,26 +104,22 @@ const getPage = async (question, request, h) => {
   }
 
   if (question.url === 'check-details') {
+    const applying = getYarValue(request, 'applying')
     const businessDetails = getYarValue(request, 'businessDetails')
     const agentDetails = getYarValue(request, 'agentsDetails')
     const farmerDetails = getYarValue(request, 'farmerDetails')
 
-    let MODEL = {
+    const MODEL = {
       ...question.pageData,
+      applying,
       businessDetails,
       farmerDetails: {
         ...farmerDetails,
-        name: `${farmerDetails.firstName} ${farmerDetails.lastName}`
-      }
-    }
-
-    if (agentDetails) {
-      MODEL = {
-        ...MODEL,
-        agentDetails: {
-          ...agentDetails,
-          name: `${agentDetails.firstName} ${agentDetails.lastName}`
-        }
+        ...(farmerDetails ? { name: `${farmerDetails.firstName} ${farmerDetails.lastName}` } : {})
+      },
+      agentDetails: {
+        ...agentDetails,
+        ...(agentDetails ? { name: `${agentDetails.firstName} ${agentDetails.lastName}` } : {})
       }
     }
 

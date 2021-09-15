@@ -75,7 +75,7 @@
           })
         }}
         
-        {% if agentDetails %}
+        {% if applying == 'Agent' %}
 
           <div>
             <h2 class="govuk-heading-m check-detail-heading">Agent's details</h2>
@@ -98,7 +98,7 @@
                   text: "Business name"
                 },
                 value: {
-                  html: agentBusinessName
+                  html: agentDetails.businessName
                 }
               },
               {
