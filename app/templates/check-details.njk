@@ -106,7 +106,7 @@
                   text: "Contact details"
                 },
                 value: {
-                  html: agentContactDetails
+                  html: agentDetails.contact.join('<br/>')
                 }
               },
               {
@@ -114,7 +114,7 @@
                   text: "Address"
                 },
                 value: {
-                  html: agentAddressDetails
+                  html: agentDetails.address.join('<br/>')
                 }
               }
             ]
@@ -137,7 +137,7 @@
                 text: "Contact details"
               },
               value: {
-                html: farmerContactDetails
+                html: farmerDetails.contact.join('<br/>')
               }
             },
             {
@@ -145,7 +145,7 @@
                 text: "Address"
               },
               value: {
-                html: farmerAddressDetails
+                html: farmerDetails.address.join('<br/>')
               }
             }
           ]

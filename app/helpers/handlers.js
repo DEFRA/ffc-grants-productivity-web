@@ -22,6 +22,20 @@ const handleConditinalHtmlData = (type, yarKey, request) => {
   return getHtml(label, fieldValue)
 }
 
+const saveValuesToArray = (yarKey, fields) => {
+  const result = []
+
+  if (yarKey) {
+    fields.forEach(field => {
+      if (yarKey[field]) {
+        result.push(yarKey[field])
+      }
+    })
+  }
+
+  return result
+}
+
 const getPage = async (question, request, h) => {
   const { url, backUrl, dependantNextUrl, type, title, yarKey } = question
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
@@ -109,6 +123,12 @@ const getPage = async (question, request, h) => {
     const agentDetails = getYarValue(request, 'agentsDetails')
     const farmerDetails = getYarValue(request, 'farmerDetails')
 
+    const agentContact = saveValuesToArray(agentDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
+    const agentAddress = saveValuesToArray(agentDetails, ['address1', 'address2', 'county', 'postcode'])
+
+    const farmerContact = saveValuesToArray(farmerDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
+    const farmerAddress = saveValuesToArray(farmerDetails, ['address1', 'address2', 'county', 'postcode'])
+
     const MODEL = {
       ...question.pageData,
       backUrl,
@@ -117,12 +137,27 @@ const getPage = async (question, request, h) => {
       businessDetails,
       farmerDetails: {
         ...farmerDetails,
-        ...(farmerDetails ? { name: `${farmerDetails.firstName} ${farmerDetails.lastName}` } : {})
+        ...(farmerDetails
+          ? {
+              name: `${farmerDetails.firstName} ${farmerDetails.lastName}`,
+              contact: farmerContact,
+              address: farmerAddress
+            }
+          : {}
+        )
       },
       agentDetails: {
         ...agentDetails,
-        ...(agentDetails ? { name: `${agentDetails.firstName} ${agentDetails.lastName}` } : {})
+        ...(agentDetails
+          ? {
+              name: `${agentDetails.firstName} ${agentDetails.lastName}`,
+              contact: agentContact,
+              address: agentAddress
+            }
+          : {}
+        )
       }
+
     }
 
     return h.view('check-details', MODEL)
