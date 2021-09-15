@@ -1774,7 +1774,7 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               hint: {
-                text: 'For example, Brown Hill Farm reservoir'
+                text: ''
               },
               validate: [
                 {
