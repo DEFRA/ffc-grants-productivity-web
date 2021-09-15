@@ -104,7 +104,30 @@ const getPage = async (question, request, h) => {
   }
 
   if (question.url === 'check-details') {
-    return h.view('check-details', question.pageData)
+    const businessDetails = getYarValue(request, 'businessDetails')
+    const agentDetails = getYarValue(request, 'agentsDetails')
+    const farmerDetails = getYarValue(request, 'farmerDetails')
+
+    let MODEL = {
+      ...question.pageData,
+      businessDetails,
+      farmerDetails: {
+        ...farmerDetails,
+        name: `${farmerDetails.firstName} ${farmerDetails.lastName}`
+      }
+    }
+
+    if (agentDetails) {
+      MODEL = {
+        ...MODEL,
+        agentDetails: {
+          ...agentDetails,
+          name: `${agentDetails.firstName} ${agentDetails.lastName}`
+        }
+      }
+    }
+
+    return h.view('check-details', MODEL)
   }
   return h.view('page', getModel(data, question, request, conditionalHtml))
 }
