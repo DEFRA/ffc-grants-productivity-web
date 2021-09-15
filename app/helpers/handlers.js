@@ -140,8 +140,8 @@ const getPage = async (question, request, h) => {
         ...(farmerDetails
           ? {
               name: `${farmerDetails.firstName} ${farmerDetails.lastName}`,
-              contact: farmerContact,
-              address: farmerAddress
+              contact: farmerContact.join('<br/>'),
+              address: farmerAddress.join('<br/>')
             }
           : {}
         )
@@ -151,8 +151,8 @@ const getPage = async (question, request, h) => {
         ...(agentDetails
           ? {
               name: `${agentDetails.firstName} ${agentDetails.lastName}`,
-              contact: agentContact,
-              address: agentAddress
+              contact: agentContact.join('<br/>'),
+              address: agentAddress.join('<br/>')
             }
           : {}
         )
