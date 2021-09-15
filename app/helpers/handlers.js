@@ -111,6 +111,8 @@ const getPage = async (question, request, h) => {
 
     const MODEL = {
       ...question.pageData,
+      backUrl,
+      nextUrl,
       applying,
       businessDetails,
       farmerDetails: {
