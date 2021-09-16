@@ -1,3 +1,4 @@
+const { getYarValue } = require('../helpers/session')
 
 function isChecked (data, option) {
   return !!data && data.includes(option)
@@ -78,8 +79,13 @@ const selectField = (data, question) => {
   }
 }
 
-const textField = (data, question) => {
-  const { yarKey, prefix, suffix, label, hint, classes } = question
+const textField = (data, question, request = null) => {
+  const { yarKey, prefix, suffix, label, classes } = question
+  
+  const project = request ? getYarValue(request, 'projectSubject') : null
+  if ( yarKey === 'projectName' ) {
+    question.hint.text = project === 'Slurry acidification' ? 'Browns Hill Farm slurry acidification' : 'Browns Hill Farm robotic milking'
+  }
   return {
     id: yarKey,
     name: yarKey,
@@ -87,12 +93,12 @@ const textField = (data, question) => {
     prefix,
     suffix,
     label,
-    hint,
+    hint: question.hint,
     value: data || ''
   }
 }
 
-const getAllInputs = (data, question, conditionalHtml) => {
+const getAllInputs = (data, question, conditionalHtml, request) => {
   const { allFields } = question
   let dataObject
   if (!data) {
@@ -109,7 +115,7 @@ const getAllInputs = (data, question, conditionalHtml) => {
     let fieldItems
 
     if (type === 'input') {
-      fieldItems = textField(data[field.yarKey], field)
+      fieldItems = textField(data[field.yarKey], field, request)
     } else if (type === 'select') {
       fieldItems = selectField(data[field.yarKey], field)
     } else {
@@ -123,12 +129,12 @@ const getAllInputs = (data, question, conditionalHtml) => {
   })
 }
 
-const getOptions = (data, question, conditionalHtml) => {
+const getOptions = (data, question, conditionalHtml, request) => {
   switch (question.type) {
     case 'input':
       return textField(data, question)
     case 'multi-input':
-      return getAllInputs(data, question, conditionalHtml)
+      return getAllInputs(data, question, conditionalHtml, request)
     case 'select':
       return selectField(data, question)
     default:
