@@ -23,6 +23,7 @@ describe('Agent details page', () => {
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Enter your first name')
     expect(postResponse.payload).toContain('Enter your last name')
+    expect(postResponse.payload).toContain('Enter your business name')
     expect(postResponse.payload).toContain('Enter your email address')
     expect(postResponse.payload).toContain('Enter a landline or mobile number')
     expect(postResponse.payload).toContain('Enter your building and street details')
@@ -134,6 +135,7 @@ describe('Agent details page', () => {
       payload: {
         firstName: 'First Name',
         lastName: 'Last Name',
+        businessName: 'Business Name',
         emailAddress: 'my@name.com',
         mobileNumber: '07700 900 982',
         address1: 'Address 1',
@@ -157,6 +159,7 @@ describe('Agent details page', () => {
       payload: {
         firstName: 'First Name',
         lastName: 'Last Name',
+        businessName: 'Business Name',
         emailAddress: 'my@name.com',
         landlineNumber: '07700 900 982',
         address1: 'Address 1',
@@ -181,6 +184,7 @@ describe('Agent details page', () => {
       payload: {
         firstName: 'First Name',
         lastName: 'Last Name',
+        businessName: 'Business Name',
         emailAddress: 'my@name.com',
         landlineNumber: '44 0808 157 0192',
         mobileNumber: '07700 900 982',
@@ -206,6 +210,7 @@ describe('Agent details page', () => {
       payload: {
         firstName: 'First Name',
         lastName: 'Last Name',
+        businessName: 'Business Name',
         emailAddress: 'my@name.com',
         address1: 'Address 1',
         address2: 'Address 2',

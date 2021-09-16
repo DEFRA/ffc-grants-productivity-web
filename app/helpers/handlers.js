@@ -10,8 +10,6 @@ const { setOptionsLabel } = require('../helpers/answer-options')
 const senders = require('../messaging/senders')
 const createMsg = require('../messaging/create-msg')
 
-
-
 const getConfirmationId = (guid, journey) => {
   const prefix = journey === 'Slurry acidification' ? 'SL' : 'RI'
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
@@ -24,7 +22,21 @@ const handleConditinalHtmlData = (type, yarKey, request) => {
   return getHtml(label, fieldValue)
 }
 
-const getPage = async(question, request, h) => {
+const saveValuesToArray = (yarKey, fields) => {
+  const result = []
+
+  if (yarKey) {
+    fields.forEach(field => {
+      if (yarKey[field]) {
+        result.push(yarKey[field])
+      }
+    })
+  }
+
+  return result
+}
+
+const getPage = async (question, request, h) => {
   const { url, backUrl, dependantNextUrl, type, title, yarKey } = question
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
 
@@ -104,6 +116,76 @@ const getPage = async(question, request, h) => {
     const conditional = yarKey === 'inEngland' ? question.conditionalKey : yarKey
     conditionalHtml = handleConditinalHtmlData(type, conditional, request)
   }
+
+  if (url === 'check-details') {
+    setYarValue(request, 'reachedCheckDetails', true)
+
+    const applying = getYarValue(request, 'applying')
+    const businessDetails = getYarValue(request, 'businessDetails')
+    const agentDetails = getYarValue(request, 'agentsDetails')
+    const farmerDetails = getYarValue(request, 'farmerDetails')
+
+    const agentContact = saveValuesToArray(agentDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
+    const agentAddress = saveValuesToArray(agentDetails, ['address1', 'address2', 'county', 'postcode'])
+
+    const farmerContact = saveValuesToArray(farmerDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
+    const farmerAddress = saveValuesToArray(farmerDetails, ['address1', 'address2', 'county', 'postcode'])
+
+    const MODEL = {
+      ...question.pageData,
+      backUrl,
+      nextUrl,
+      applying,
+      businessDetails,
+      farmerDetails: {
+        ...farmerDetails,
+        ...(farmerDetails
+          ? {
+              name: `${farmerDetails.firstName} ${farmerDetails.lastName}`,
+              contact: farmerContact.join('<br/>'),
+              address: farmerAddress.join('<br/>')
+            }
+          : {}
+        )
+      },
+      agentDetails: {
+        ...agentDetails,
+        ...(agentDetails
+          ? {
+              name: `${agentDetails.firstName} ${agentDetails.lastName}`,
+              contact: agentContact.join('<br/>'),
+              address: agentAddress.join('<br/>')
+            }
+          : {}
+        )
+      }
+
+    }
+
+    return h.view('check-details', MODEL)
+  }
+
+  switch (url) {
+    case 'score':
+    case 'business-details':
+    case 'agents-details':
+    case 'farmers-details': {
+      let MODEL = getModel(data, question, request, conditionalHtml)
+      const reachedCheckDetails = getYarValue(request, 'reachedCheckDetails')
+
+      if (reachedCheckDetails) {
+        MODEL = {
+          ...MODEL,
+          reachedCheckDetails
+        }
+      }
+
+      return h.view('page', MODEL)
+    }
+    default:
+      break
+  }
+
   return h.view('page', getModel(data, question, request, conditionalHtml))
 }
 
@@ -168,6 +250,12 @@ const showPostPage = (currentQuestion, request, h) => {
 
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
+  }
+
+  const redirectToPage = request?.payload?.redirectToPage
+
+  if (redirectToPage) {
+    return h.redirect(redirectToPage)
   }
 
   return h.redirect(getUrl(dependantNextUrl, nextUrl, request))
