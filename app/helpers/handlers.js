@@ -117,7 +117,9 @@ const getPage = async (question, request, h) => {
     conditionalHtml = handleConditinalHtmlData(type, conditional, request)
   }
 
-  if (question.url === 'check-details') {
+  if (url === 'check-details') {
+    setYarValue(request, 'reachedCheckDetails', true)
+
     const applying = getYarValue(request, 'applying')
     const businessDetails = getYarValue(request, 'businessDetails')
     const agentDetails = getYarValue(request, 'agentsDetails')
@@ -162,6 +164,22 @@ const getPage = async (question, request, h) => {
 
     return h.view('check-details', MODEL)
   }
+
+  if (url === 'business-details' || url === 'agents-details' || url === 'farmers-details') {
+    let MODEL = getModel(data, question, request, conditionalHtml)
+    const reachedCheckDetails = getYarValue(request, 'reachedCheckDetails')
+
+    if (reachedCheckDetails) {
+      MODEL = {
+        ...MODEL,
+        reachedCheckDetails,
+        jumpLink: 'check-details'
+      }
+    }
+
+    return h.view('page', MODEL)
+  }
+
   return h.view('page', getModel(data, question, request, conditionalHtml))
 }
 
@@ -226,6 +244,12 @@ const showPostPage = (currentQuestion, request, h) => {
 
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
+  }
+
+  const redirectToPage = request?.payload?.redirectToPage
+
+  if (redirectToPage) {
+    return h.redirect(redirectToPage)
   }
 
   return h.redirect(getUrl(dependantNextUrl, nextUrl, request))
