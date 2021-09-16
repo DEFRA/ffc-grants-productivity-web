@@ -165,19 +165,25 @@ const getPage = async (question, request, h) => {
     return h.view('check-details', MODEL)
   }
 
-  if (url === 'business-details' || url === 'agents-details' || url === 'farmers-details') {
-    let MODEL = getModel(data, question, request, conditionalHtml)
-    const reachedCheckDetails = getYarValue(request, 'reachedCheckDetails')
+  switch (url) {
+    case 'score':
+    case 'business-details':
+    case 'agents-details':
+    case 'farmers-details': {
+      let MODEL = getModel(data, question, request, conditionalHtml)
+      const reachedCheckDetails = getYarValue(request, 'reachedCheckDetails')
 
-    if (reachedCheckDetails) {
-      MODEL = {
-        ...MODEL,
-        reachedCheckDetails,
-        jumpLink: 'check-details'
+      if (reachedCheckDetails) {
+        MODEL = {
+          ...MODEL,
+          reachedCheckDetails
+        }
       }
-    }
 
-    return h.view('page', MODEL)
+      return h.view('page', MODEL)
+    }
+    default:
+      break
   }
 
   return h.view('page', getModel(data, question, request, conditionalHtml))
