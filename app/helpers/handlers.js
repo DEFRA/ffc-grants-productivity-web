@@ -42,6 +42,7 @@ const getPage = async (question, request, h) => {
 
   if (question.maybeEligible) {
     let { maybeEligibleContent } = question
+    maybeEligibleContent.title = question.title
     let consentOptionalData
 
     if (maybeEligibleContent.reference) {

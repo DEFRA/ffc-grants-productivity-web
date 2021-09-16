@@ -332,6 +332,7 @@ const questionBank = {
         },
         {
           key: 'planning-required-condition',
+          title: 'You may be able to apply for a grant from this scheme',
           order: 91,
           url: 'planning-required-condition',
           backUrl: 'planning-permission',
@@ -526,6 +527,7 @@ const questionBank = {
         },
         {
           key: 'tenancy-length-condition',
+          title: 'You may be able to apply for a grant from this scheme',
           order: 71,
           url: 'tenancy-length-condition',
           backUrl: 'tenancy-length',
@@ -631,7 +633,7 @@ const questionBank = {
         {
           key: 'acidification-infrastructure',
           order: 81,
-          title: 'Does your project also need  acidification infrastructure?',
+          title: 'Does your project also need acidification infrastructure?',
           hint: {
             text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
           },
@@ -806,6 +808,7 @@ const questionBank = {
         },
         {
           key: 'potential-amount',
+          title: 'Potential grant funding',
           order: 91,
           url: 'slurry/potential-amount',
           backUrl: 'project-cost',
@@ -1353,6 +1356,7 @@ const questionBank = {
         },
         {
           key: 'robotics-potential-amount',
+          title: 'Potential grant funding',
           order: 320,
           url: 'robotics/potential-amount',
           backUrl: 'project-cost',
@@ -2465,6 +2469,7 @@ const questionBank = {
         },
         {
           key: 'confirm',
+          title: 'Confirm and send',
           order: 220,
           url: 'confirm',
           backUrl: 'check-details',

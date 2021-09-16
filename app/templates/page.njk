@@ -9,8 +9,10 @@
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "./components/macro.njk" import crumbToken, sideBar %}
 
-{% block pageTitle %}
-  {{siteTitle}} - {{title}}
+{% block pageTitle %}   
+  {% if errorList %}
+    Error: 
+  {% endif %} {{title}} - {{siteTitle}}
 {% endblock %}
 
 {% block beforeContent %}
@@ -78,9 +80,15 @@
 
         <div class="govuk-!-padding-top-5">
           {% if key !== 'slurry-to-be-treated'  and key !== 'robotics-technology' %}
-            {{ govukButton({ text: "Continue" }) }}
+            {{ govukButton({ 
+              text: "Continue",
+              attributes: {id: "btnContinue"} 
+              }) }}
           {% else %}
-            {{ govukButton({ text: "Get your score" }) }}
+            {{ govukButton({ 
+              text: "Get your score",
+              attributes: {id: "btnGetScore"} 
+            }) }}
           {% endif %}
 
           {% if reachedCheckDetails %}
@@ -93,7 +101,7 @@
                   newInput.setAttribute('value', 'check-details');
                   newInput.setAttribute('type', 'hidden');
                   document.getElementById('pageFormId').appendChild(newInput);
-                "}
+                ",id: "btnBackToDetails"}
               })
             }}
           {% endif %}

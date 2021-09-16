@@ -7,8 +7,10 @@
 {% from "govuk/components/panel/macro.njk" import govukPanel %}
 {% from "./components/macro.njk" import crumbToken %}
 
-{% block pageTitle %}
-  {{siteTitle}}
+{% block pageTitle %}   
+  {% if errorList %}
+    Error: 
+  {% endif %} {{siteTitle}} - {{title}}
 {% endblock %}
 
 {% block beforeContent %}  
