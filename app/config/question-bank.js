@@ -1,6 +1,7 @@
 const {
   DIGITS_MAX_7,
   CHARS_MIN_10,
+  CHARS_MAX_100,
   POSTCODE_REGEX,
   NUMBER_REGEX,
   NAME_ONLY_REGEX,
@@ -2269,8 +2270,8 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: NAME_ONLY_REGEX,
-                  error: 'Name must only include letters, hyphens and apostrophes'
+                  regex: CHARS_MAX_100,
+                  error: 'Name must be 100 characters or fewer'
                 }
               ]
             },
