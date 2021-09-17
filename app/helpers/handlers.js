@@ -60,7 +60,7 @@ const getPage = async (question, request, h) => {
         reference: {
           ...maybeEligibleContent.reference,
           html: maybeEligibleContent.reference.html.replace(
-            SELECT_VARIABLE_TO_REPLACE, (_ignore, confirmation_Id) => (
+            SELECT_VARIABLE_TO_REPLACE, (_ignore, confirmatnId) => (
               confirmationId
             )
           )

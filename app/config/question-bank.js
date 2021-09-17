@@ -1015,7 +1015,7 @@ const questionBank = {
           },
           hint: {
             html: `
-              <br>Enter figure in cubic metres, for example 18,000`
+              <br>Enter figure in cubic metres (m<sup>3</sup>), for example 18,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1092,7 +1092,7 @@ const questionBank = {
           },
           hint: {
             html: `
-              <br>Enter figure in cubic metres, for example 18,000`
+              <br>Enter figure in cubic metres(m<sup>3</sup>), for example 18,000`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -2043,7 +2043,7 @@ const questionBank = {
             },
             {
               yarKey: 'emailAddress',
-              type: 'input',
+              type: 'email',
               classes: 'govuk-input--width-20',
               label: {
                 text: '',
@@ -2069,7 +2069,7 @@ const questionBank = {
             },
             {
               yarKey: 'mobileNumber',
-              type: 'input',
+              type: 'tel',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Mobile number',
@@ -2098,7 +2098,7 @@ const questionBank = {
             },
             {
               yarKey: 'landlineNumber',
-              type: 'input',
+              type: 'tel',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Landline number',
@@ -2281,7 +2281,7 @@ const questionBank = {
             },
             {
               yarKey: 'emailAddress',
-              type: 'input',
+              type: 'email',
               classes: 'govuk-input--width-20',
               label: {
                 text: '',
@@ -2307,7 +2307,7 @@ const questionBank = {
             },
             {
               yarKey: 'mobileNumber',
-              type: 'input',
+              type: 'tel',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Mobile number',
@@ -2336,7 +2336,7 @@ const questionBank = {
             },
             {
               yarKey: 'landlineNumber',
-              type: 'input',
+              type: 'tel',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Landline number',
