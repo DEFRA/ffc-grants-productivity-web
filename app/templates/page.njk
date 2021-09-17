@@ -10,8 +10,10 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 
 
-{% block pageTitle %}
-  {{siteTitle}} - {{title}}
+{% block pageTitle %}   
+  {% if errorList %}
+    Error: 
+  {% endif %} {{title}} - {{siteTitle}}
 {% endblock %}
 
 {% block beforeContent %}
@@ -46,7 +48,7 @@
           {{ govukCheckboxes(items) }}
         {%endif%}
 
-        {%if type ==='input' %}
+        {%if type ==='input' or type ==='email' or type ==='tel' %}
           {{ govukInput(items) }}
         {%endif%}
 
@@ -66,7 +68,7 @@
               {{ govukCheckboxes(item) }}
             {%endif%}
 
-            {%if item.type ==='input' %}
+            {%if item.type ==='input' or item.type ==='email' or item.type ==='tel' %}
               {{ govukInput(item) }}
             {%endif%}
 
