@@ -993,7 +993,11 @@ const questionBank = {
           scheme: 'slurry',
           score: {
             isScore: false,
-            isDisplay: true
+            isDisplay: true,
+            dependentAnswerKey:{
+              yarkey: 'projectImpacts',
+              value: 'Add additional acidification installations'
+            }
           },
           order: 140,
           pageTitle: '',
