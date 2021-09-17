@@ -7,13 +7,14 @@
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "./components/macro.njk" import crumbToken, sideBar, conditionalButtons %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
 
 {% block pageTitle %}
   {{siteTitle}} - {{title}}
 {% endblock %}
 
 {% block beforeContent %}
- {# {% if backUrl and key !== 'project-impacts' or diaplaySecondryBtn === false %} #}
   {% if backUrl %}
     {{ govukBackLink({
       text: "Back",
@@ -78,16 +79,16 @@
 
 
         <div class="govuk-!-padding-top-5">
-          {# {%if key === 'slurry-to-be-treated' or key === 'robotics-technology' %}
+          {%if key === 'slurry-to-be-treated' or key === 'robotics-technology' %}
             {% set buttonText = "Get your score" %}
             {% set diaplaySecondryBtn = false %}
           {% else %}
             {% set buttonText = "Continue" %}
           {% endif %}
 
-        {{ conditionalButtons(diaplaySecondryBtn, buttonText) }} #}
-        
-          {% if key !== 'slurry-to-be-treated'  and key !== 'robotics-technology' %}
+        {{ conditionalButtons(diaplaySecondryBtn, buttonText) }}
+
+          {# {% if key !== 'slurry-to-be-treated'  and key !== 'robotics-technology' %}
             {{ govukButton({ text: "Continue" }) }}
           {% else %}
             {{ govukButton({ text: "Get your score" }) }}
@@ -106,7 +107,7 @@
                 "}
               })
             }}
-          {% endif %}
+          {% endif %} #}
         </div>
 
       </form>

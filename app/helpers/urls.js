@@ -2,7 +2,7 @@ const urlPrefix = require('../config/server').urlPrefix
 const { getYarValue } = require('../helpers/session')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
-const getUrl = (urlObject, url, request, results,) => {
+const getUrl = (urlObject, url, request, results) => {
   const scorePath = `${urlPrefix}/score`
   if (!urlObject) {
     return results ? scorePath : url

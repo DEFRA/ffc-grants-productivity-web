@@ -251,17 +251,17 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
   }
-//   console.log(!!payload['results'],'KKKKKKKK')
-//   return h.redirect(getUrl(dependantNextUrl, nextUrl, request, !!payload['results']))
+  return h.redirect(getUrl(dependantNextUrl, nextUrl, request, !!payload['results']))
+  
 // =======
 
-  const redirectToPage = request?.payload?.redirectToPage
+  // const redirectToPage = request?.payload?.redirectToPage
 
-  if (redirectToPage) {
-    return h.redirect(redirectToPage)
-  }
+  // if (redirectToPage) {
+  //   return h.redirect(redirectToPage)
+  // }
 
-  return h.redirect(getUrl(dependantNextUrl, nextUrl, request))
+  // return h.redirect(getUrl(dependantNextUrl, nextUrl, request))
 }
 
 const getHandler = (question) => {

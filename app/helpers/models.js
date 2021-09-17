@@ -18,15 +18,20 @@ const getDependentSideBarModel = (question, model, request) => {
   return model
 }
 
+const getBackUrl = (hasScore, backUrlObject, backUrl,request) => {
+
+  const url = getUrl(backUrlObject, backUrl, request)
+  return hasScore && url === 'project-impact' || url === 'SSSI' ? null : url
+}
+
 const getModel = (data, question, request, conditionalHtml = '') => {
   const { type, backUrl, key, backUrlObject, sidebar, title, score } = question
   const hasScore = !!getYarValue(request, 'current-score')
-  console.log( (key === 'project-impacts' || key === 'robotics-data-analytics'), 'kkkkk= ', key, hasScore)
   const model = {
     type,
     key,
     title,
-    backUrl: hasScore && (key === 'project-impacts' || key === 'data-analytics') ? undefined : getUrl(backUrlObject, backUrl, request) ,
+    backUrl: getBackUrl(hasScore, backUrlObject, backUrl, request) ,
     items: getOptions(data, question, conditionalHtml, request),
     sideBarText: sidebar,
     diaplaySecondryBtn: hasScore && score?.isDisplay
