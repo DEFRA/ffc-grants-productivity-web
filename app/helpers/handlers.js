@@ -253,13 +253,7 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'remainingCost', remainingCost)
   }
 
-  const redirectToPage = request?.payload?.redirectToPage
-
-  if (redirectToPage) {
-    return h.redirect(redirectToPage)
-  }
-
-  return h.redirect(getUrl(dependantNextUrl, nextUrl, request))
+  return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload['secBtn']))
 }
 
 const getHandler = (question) => {

@@ -18,16 +18,25 @@ const getDependentSideBarModel = (question, model, request) => {
   return model
 }
 
+const getBackUrl = (hasScore, backUrlObject, backUrl,request) => {
+
+  const url = getUrl(backUrlObject, backUrl, request)
+  return hasScore && url === 'project-impact' || url === 'SSSI' ? null : url
+}
+
 const getModel = (data, question, request, conditionalHtml = '') => {
-  let { type, backUrl, key, backUrlObject, sidebar, title, label } = question
+let { type, backUrl, key, backUrlObject, sidebar, title, score, label } = question
+const hasScore = !!getYarValue(request, 'current-score')
   title = title ?? label?.text
+
   const model = {
     type,
     key,
     title,
-    backUrl: getUrl(backUrlObject, backUrl, request),
+    backUrl: getBackUrl(hasScore, backUrlObject, backUrl, request) ,
     items: getOptions(data, question, conditionalHtml, request),
-    sideBarText: sidebar
+    sideBarText: sidebar,
+    diaplaySecondryBtn: hasScore && score?.isDisplay
   }
   return (sidebar?.dependentYarKey) ? getDependentSideBarModel(question, model, request) : model
 }

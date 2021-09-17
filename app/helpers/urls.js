@@ -1,9 +1,14 @@
+const urlPrefix = require('../config/server').urlPrefix
 const { getYarValue } = require('../helpers/session')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
-const getUrl = (urlObject, url, request) => {
+const getUrl = (urlObject, url, request, secBtn) => {
+  const scorePath = `${urlPrefix}/score`
+  const chekDetailsPath = `${urlPrefix}/check-details`
+  const secBtnPath = secBtn === 'Back to score' ? scorePath : chekDetailsPath
+
   if (!urlObject) {
-    return url
+    return secBtn ? secBtnPath : url
   }
   const { dependentQuestionYarKey, dependentAnswerKeysArray, urlOptions } = urlObject
   const { thenUrl, elseUrl } = urlOptions

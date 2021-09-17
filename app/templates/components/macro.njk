@@ -1,5 +1,7 @@
 {% macro crumbToken(crumb) %}
 {% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
 
   <input type="hidden" name="crumb" id="crumb"
     value="{{ crumb }}"  autocomplete="off" />
@@ -46,20 +48,20 @@
 {% endmacro %}
 
 
-{% macro conditionalButtons (showSecondaryButton, buttonText = 'Back to score') %}
+{% macro conditionalButtons (showSecondaryButton, contBtnText, secButtonText ) %}
   {{ govukButton({
-      text: "Continue",
-      attributes: {id: "btnContinue"}
+      text: contBtnText,
+      attributes: {id: contBtnText.split(' ').join('-')}
     })
   }} &nbsp;
 
   {% if showSecondaryButton %}
     {{ govukButton({
         classes: "govuk-button--secondary",
-        text: buttonText,
-        name: "results",
-        value: "results",
-        attributes: {id: buttonText.split(' ').join('-')}
+        text: secButtonText,
+        name: "secBtn",
+        value: secButtonText,
+        attributes: {id: secButtonText.split(' ').join('-')}
       })
     }}
   {% endif %} 

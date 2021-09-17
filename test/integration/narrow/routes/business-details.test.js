@@ -42,6 +42,18 @@ describe('Project and business details page', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Browns Hill Farm robotic milking')
   })
+
+  it('should diaplay Back to details buton if the user came from check details page ', async () => {
+    varList.reachedCheckDetails = true
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/business-details`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Back to details')
+  })
+
   it('should return various error messages if no data is entered', async () => {
     const postOptions = {
       method: 'POST',
