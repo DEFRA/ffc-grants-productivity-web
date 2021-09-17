@@ -1,6 +1,7 @@
 const {
   DIGITS_MAX_7,
   CHARS_MIN_10,
+  CHARS_MAX_100,
   POSTCODE_REGEX,
   NUMBER_REGEX,
   NAME_ONLY_REGEX,
@@ -2255,6 +2256,26 @@ const questionBank = {
               ]
             },
             {
+              yarKey: 'businessName',
+              type: 'input',
+              classes: 'govuk-input--width-20',
+              label: {
+                text: 'Business name',
+                classes: 'govuk-label'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter your business name'
+                },
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MAX_100,
+                  error: 'Name must be 100 characters or fewer'
+                }
+              ]
+            },
+            {
               yarKey: 'emailAddress',
               type: 'input',
               classes: 'govuk-input--width-20',
@@ -2423,18 +2444,10 @@ const questionBank = {
           nextUrl: 'confirm',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          backUrlObject: {
-            dependentQuestionYarKey: 'applying',
-            dependentAnswerKeysArray: ['applying-A1'],
-            urlOptions: {
-              thenUrl: '/productivity/farmers-details',
-              elseUrl: '/productivity/agents-details'
-            }
-          },
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Check details',
-            messageContent: ''
+          pageData: {
+            businessDetailsLink: 'business-details',
+            agentDetailsLink: 'agents-details',
+            farmerDetailsLink: 'farmers-details'
           },
           fundingPriorities: '',
           type: '',
