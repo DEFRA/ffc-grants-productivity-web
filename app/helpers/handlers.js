@@ -42,6 +42,7 @@ const getPage = async (question, request, h) => {
 
   if (question.maybeEligible) {
     let { maybeEligibleContent } = question
+    maybeEligibleContent.title = question.title
     let consentOptionalData
 
     if (maybeEligibleContent.reference) {
@@ -59,7 +60,7 @@ const getPage = async (question, request, h) => {
         reference: {
           ...maybeEligibleContent.reference,
           html: maybeEligibleContent.reference.html.replace(
-            SELECT_VARIABLE_TO_REPLACE, (_ignore, confirmation_Id) => (
+            SELECT_VARIABLE_TO_REPLACE, (_ignore, confirmatnId) => (
               confirmationId
             )
           )
