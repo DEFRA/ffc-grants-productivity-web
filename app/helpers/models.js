@@ -25,7 +25,7 @@ const getBackUrl = (hasScore, backUrlObject, backUrl,request) => {
 }
 
 const getModel = (data, question, request, conditionalHtml = '') => {
-let { type, backUrl, key, backUrlObject, sidebar, title, label } = question
+let { type, backUrl, key, backUrlObject, sidebar, title, score, label } = question
 const hasScore = !!getYarValue(request, 'current-score')
   title = title ?? label?.text
 
