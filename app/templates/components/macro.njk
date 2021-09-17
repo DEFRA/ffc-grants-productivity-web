@@ -51,7 +51,7 @@
 {% macro conditionalButtons (showSecondaryButton, contBtnText, secButtonText ) %}
   {{ govukButton({
       text: contBtnText,
-      attributes: {id: "btnContinue"}
+      attributes: {id: contBtnText.split(' ').join('-')}
     })
   }} &nbsp;
 
