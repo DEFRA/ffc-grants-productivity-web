@@ -19,14 +19,17 @@ const getDependentSideBarModel = (question, model, request) => {
 }
 
 const getModel = (data, question, request, conditionalHtml = '') => {
-  const { type, backUrl, key, backUrlObject, sidebar, title } = question
+  const { type, backUrl, key, backUrlObject, sidebar, title, score } = question
+  const hasScore = !!getYarValue(request, 'current-score')
+  console.log( (key === 'project-impacts' || key === 'robotics-data-analytics'), 'kkkkk= ', key, hasScore)
   const model = {
     type,
     key,
     title,
-    backUrl: getUrl(backUrlObject, backUrl, request),
+    backUrl: hasScore && (key === 'project-impacts' || key === 'data-analytics') ? undefined : getUrl(backUrlObject, backUrl, request) ,
     items: getOptions(data, question, conditionalHtml, request),
-    sideBarText: sidebar
+    sideBarText: sidebar,
+    diaplaySecondryBtn: hasScore && score?.isDisplay
   }
   return (sidebar?.dependentYarKey) ? getDependentSideBarModel(question, model, request) : model
 }

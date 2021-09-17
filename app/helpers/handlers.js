@@ -169,8 +169,8 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
   }
-
-  return h.redirect(getUrl(dependantNextUrl, nextUrl, request))
+  console.log(!!payload['results'],'KKKKKKKK')
+  return h.redirect(getUrl(dependantNextUrl, nextUrl, request, !!payload['results']))
 }
 
 const getHandler = (question) => {

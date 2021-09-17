@@ -1,5 +1,7 @@
 {% macro crumbToken(crumb) %}
 {% from "govuk/components/details/macro.njk" import govukDetails %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
 
   <input type="hidden" name="crumb" id="crumb"
     value="{{ crumb }}"  autocomplete="off" />
@@ -46,9 +48,9 @@
 {% endmacro %}
 
 
-{% macro conditionalButtons (showSecondaryButton, buttonText = 'Back to score') %}
+{% macro conditionalButtons (showSecondaryButton, contBtnText = 'Continue', buttonText = 'Back to score') %}
   {{ govukButton({
-      text: "Continue",
+      text: contBtnText,
       attributes: {id: "btnContinue"}
     })
   }} &nbsp;
