@@ -424,7 +424,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
-              thenUrl: 'robotics/project-purchase',
+              thenUrl: 'robotics/project-items',
               elseUrl: 'slurry/project-items'
             }
           },
@@ -477,7 +477,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
-              thenUrl: 'robotics/project-purchase',
+              thenUrl: 'robotics/project-items',
               elseUrl: 'slurry/project-items'
             }
           },
@@ -535,7 +535,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
-              thenUrl: 'robotics/project-purchase',
+              thenUrl: 'robotics/project-items',
               elseUrl: 'slurry/project-items'
             }
           },
@@ -1136,12 +1136,12 @@ const questionBank = {
         },
         /// ////// ***************** ROBOTICS ************************************/////////////////////
         {
-          key: 'project-purchase',
-          order: 290,
-          title: 'What type of new technology does your project need?',
+          key: 'robotics-project-items',
+          order: 300,
+          title: 'Which eligible items do you need for your project?',
           pageTitle: '',
-          url: 'robotics/project-purchase',
-          baseUrl: 'project-purchase',
+          url: 'robotics/project-items',
+          baseUrl: 'robotics-project-items',
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
             dependentAnswerKeysArray: ['tenancy-A2'],
@@ -1150,84 +1150,6 @@ const questionBank = {
               elseUrl: '/productivity/tenancy'
             }
           },
-          nextUrl: 'project-items',
-          id: 'projectPurchase',
-          name: 'projectPurchase',
-          hint: {
-            text: 'Equipment must be for activities in the crop-growing cycle or livestock husbandry'
-          },
-          eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: 'Your cannot apply for a grant if your project does not include the purchase of robotic or innovative technology.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
-          sidebar:
-          {
-            heading: 'Eligibility',
-            para: `Equipment must increase the productivity of primary agricultural or horticultural practices.\n\n
-            Your project’s positive environmental benefit and the increase to productivity will be assessed at full application stage.`,
-            items: []
-          },
-          validate: {
-            errorEmptyField: 'Select the type of new technology your project needs'
-          },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
-          answers: [
-            {
-              key: 'project-purchase-A1',
-              value: 'Robotic equipment',
-              hint: {
-                text: 'Autonomous farming equipment capable of sensing its environment, making decisions and performing actions'
-              }
-            },
-            {
-              key: 'project-purchase-A2',
-              value: 'Advanced ventilation control units',
-              hint: {
-                text: 'System to control ventilation of existing horticultural and livestock buildings to reduce greenhouse gas emissions'
-              }
-            },
-            {
-              key: 'project-purchase-A3',
-              value: 'Wavelength Specific LED lighting',
-              hint: {
-                text: 'Wavelength specific LED lighting to aid plant growth'
-              }
-            },
-            {
-              value: 'divider'
-            },
-            {
-              key: 'project-purchase-A4',
-              value: 'None of the above',
-              notEligible: true
-            }
-          ],
-          yarKey: 'projectPurchase'
-
-        },
-        {
-          key: 'robotics-project-items',
-          order: 300,
-          title: 'Which eligible items do you need for your project?',
-          pageTitle: '',
-          url: 'robotics/project-items',
-          baseUrl: 'robotics-project-items',
-          backUrl: 'project-purchase',
           nextUrl: 'project-cost',
           id: 'roboticsProjectItems',
           name: 'roboticsProjectItems',
@@ -1250,14 +1172,7 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Select all the items your project needs'
           },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
+          validations: [],
           answers: [
             {
               key: 'robotics-project-items-A1',
