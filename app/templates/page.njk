@@ -79,37 +79,19 @@
 
 
         <div class="govuk-!-padding-top-5">
+          {% set buttonText = 'Continue' %}
+          {% set secButtonText = 'Back to score' %}
+
           {%if key === 'slurry-to-be-treated' or key === 'robotics-technology' %}
-            {% set buttonText = "Get your score" %}
+            {% set buttonText = 'Get your score' %}
             {% set diaplaySecondryBtn = false %}
-          {% else %}
-            {% set buttonText = "Continue" %}
+          {% elif reachedCheckDetails %}
+            {% set diaplaySecondryBtn = true %}
+            {% set secButtonText = 'Back to details' %}
           {% endif %}
 
-        {{ conditionalButtons(diaplaySecondryBtn, buttonText) }}
-
-          {# {% if key !== 'slurry-to-be-treated'  and key !== 'robotics-technology' %}
-            {{ govukButton({ text: "Continue" }) }}
-          {% else %}
-            {{ govukButton({ text: "Get your score" }) }}
-          {% endif %}
-
-          {% if reachedCheckDetails %}
-            {{ govukButton({
-                text: "Back to details",
-                classes: "govuk-button--secondary",
-                attributes: {onclick: "
-                  var newInput = document.createElement('input');
-                  newInput.setAttribute('name', 'redirectToPage');
-                  newInput.setAttribute('value', 'check-details');
-                  newInput.setAttribute('type', 'hidden');
-                  document.getElementById('pageFormId').appendChild(newInput);
-                "}
-              })
-            }}
-          {% endif %} #}
+        {{ conditionalButtons(diaplaySecondryBtn, buttonText, secButtonText) }}
         </div>
-
       </form>
     </div>
     {%if sideBarText %}

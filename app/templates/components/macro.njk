@@ -48,7 +48,7 @@
 {% endmacro %}
 
 
-{% macro conditionalButtons (showSecondaryButton, contBtnText = 'Continue', buttonText = 'Back to score') %}
+{% macro conditionalButtons (showSecondaryButton, contBtnText, secButtonText ) %}
   {{ govukButton({
       text: contBtnText,
       attributes: {id: "btnContinue"}
@@ -58,10 +58,10 @@
   {% if showSecondaryButton %}
     {{ govukButton({
         classes: "govuk-button--secondary",
-        text: buttonText,
-        name: "results",
-        value: "results",
-        attributes: {id: buttonText.split(' ').join('-')}
+        text: secButtonText,
+        name: "secBtn",
+        value: secButtonText,
+        attributes: {id: secButtonText.split(' ').join('-')}
       })
     }}
   {% endif %} 
