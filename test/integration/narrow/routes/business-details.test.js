@@ -87,7 +87,7 @@ describe('Project and business details page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Employee number must be 7 digits or fewer')
+    expect(postResponse.payload).toContain('Number of employees must be a whole number like, like 305')
   })
 
   it('should validate number of employees - no spaces', async () => {
@@ -105,7 +105,7 @@ describe('Project and business details page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Employee number must be 7 digits or fewer')
+    expect(postResponse.payload).toContain('Number of employees must be a whole number like, like 305')
   })
 
   it('should validate number of employees - character limit is 7', async () => {
@@ -123,7 +123,7 @@ describe('Project and business details page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Employee number must be 7 digits or fewer')
+    expect(postResponse.payload).toContain('Number must be between 1-9999999')
   })
 
   it('should validate business turnover - only digits', async () => {
@@ -141,7 +141,7 @@ describe('Project and business details page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Business turnover must be 9 digits or fewer')
+    expect(postResponse.payload).toContain('Business turnover must be a whole number, like 100000')
   })
 
   it('should validate business turnover - no spaces', async () => {
@@ -159,7 +159,7 @@ describe('Project and business details page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Business turnover must be 9 digits or fewer')
+    expect(postResponse.payload).toContain('Business turnover must be a whole number, like 100000')
   })
 
   it('should validate business turnover - character limit is 9', async () => {
@@ -177,7 +177,7 @@ describe('Project and business details page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Business turnover must be 9 digits or fewer')
+    expect(postResponse.payload).toContain('Number must be between 1-999999999')
   })
 
   it('should validate SBI - only digits', async () => {
