@@ -1186,8 +1186,8 @@ const questionBank = {
               value: 'Wavelength-specific LED lighting',
               hint: {
                 html: `Wavelength-specific LED lighting to help crop growth, pest control and animal welfare 
-                  <br/><br/><span class="govuk-heading-s" style="margin-left: -53px; margin-bottom: 0px;">Robotic equipment</span>
-                  <div style="margin-left: -53px; margin-bottom: 20px;">Autonomous farming equipment capable of sensing its environment, making decisions and performing actions </div>`
+                  <br/><br/><span class="govuk-heading-s govuk-!-margin-bottom-0 checkBoxMargin">Robotic equipment</span>
+                  <div class="govuk-!-margin-bottom-4 checkBoxMargin">Autonomous farming equipment capable of sensing its environment, making decisions and performing actions </div>`
               }
             },
             {
