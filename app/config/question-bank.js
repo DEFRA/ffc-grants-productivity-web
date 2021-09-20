@@ -444,14 +444,7 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Select yes if the planned project is on land the farm business owns'
           },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
+          validations: [],
           answers: [
             {
               key: 'tenancy-A1',
@@ -994,7 +987,7 @@ const questionBank = {
           score: {
             isScore: false,
             isDisplay: true,
-            dependentAnswerKey:{
+            dependentAnswerKey: {
               yarkey: 'projectImpacts',
               value: 'Add additional acidification installations'
             }
@@ -1150,12 +1143,19 @@ const questionBank = {
               elseUrl: '/productivity/tenancy'
             }
           },
-          nextUrl: 'project-cost',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectItems',
+            dependentAnswerKeysArray: ['robotics-project-items-A10'],
+            urlOptions: {
+              thenUrl: 'other-robotic-equipment',
+              elseUrl: 'project-cost'
+            }
+          },
           id: 'roboticsProjectItems',
           name: 'roboticsProjectItems',
           hint: {
-            html: `The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £500,000.
-            <br/> Select all the items your project needs.`
+            html: `Select all the items your project needs 
+              <br/><br/><span class="govuk-heading-s">Non-robotic equipment</span>`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1176,39 +1176,106 @@ const questionBank = {
           answers: [
             {
               key: 'robotics-project-items-A1',
-              value: 'Robotic or automatic harvesting equipment'
+              value: 'Advanced ventilation control units',
+              hint: {
+                text: 'System to control ventilation of existing horticultural and livestock buildings to reduce greenhouse gas emissions '
+              }
             },
             {
               key: 'robotics-project-items-A2',
-              value: 'Advanced ventilation control units'
+              value: 'Wavelength-specific LED lighting',
+              hint: {
+                html: `Wavelength-specific LED lighting to help crop growth, pest control and animal welfare 
+                  <br/><br/><span class="govuk-heading-s" style="margin-left: -53px; margin-bottom: 0px;">Robotic equipment</span>
+                  <div style="margin-left: -53px; margin-bottom: 20px;">Autonomous farming equipment capable of sensing its environment, making decisions and performing actions </div>`
+              }
             },
             {
               key: 'robotics-project-items-A3',
-              value: 'Robotic weeding equipment'
+              value: ' Robotic sowing/planting equipment'
             },
             {
               key: 'robotics-project-items-A4',
-              value: 'Robotic milking equipment'
-            },
-            {
-              key: 'robotics-project-items-A5',
               value: 'Robotic spraying equipment'
             },
             {
+              key: 'robotics-project-items-A5',
+              value: 'Robotic milking equipment'
+            },
+            {
               key: 'robotics-project-items-A6',
-              value: 'Robotic sowing/planting equipment'
+              value: 'Robotic weeding equipment'
             },
             {
               key: 'robotics-project-items-A7',
-              value: 'Automated feeding systems'
+              value: 'Robotic or automatic harvesting equipment'
             },
             {
               key: 'robotics-project-items-A8',
-              value: 'Wavelength-controlled LED lighting'
+              value: 'Robotic tractor'
+            },
+            {
+              key: 'robotics-project-items-A9',
+              value: 'Automated feeding systems'
+            },
+            {
+              key: 'robotics-project-items-A10',
+              value: 'Other robotic equipment'
             }
           ],
           yarKey: 'projectItems'
 
+        },
+        {
+          key: 'other-robotic-equipment',
+          order: 305,
+          title: 'Does your other robotic equipment fit the eligibility criteria?',
+          pageTitle: '',
+          backUrl: 'project-items',
+          nextUrl: 'project-cost',
+          url: 'robotics/other-robotic-equipment',
+          baseUrl: 'other-robotic-equipment',
+          ineligibleContent: {
+            messageContent: 'This grant is only for projects in England.',
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          ga: { dimension: '', value: '' },
+          sidebar: {
+            heading: 'Eligibility',
+            para: 'RPA will consider items that:',
+            items: ['have a sensing system', 'have a decision-making capability', 'use actuators']
+          },
+          validate: {
+            errorEmptyField: 'Select yes if your other robotic equipment meets the eligibility criteria',
+            conditionalValidate: {
+              errorEmptyField: 'Enter a postcode, like AA1 1AA',
+              checkRegex: {
+                regex: POSTCODE_REGEX,
+                error: 'Enter a postcode, like AA1 1AA'
+              }
+            }
+          },
+          validations: [],
+          answers: [
+            {
+              key: 'other-robotic-equipment-A1',
+              conditional: true,
+              value: 'Yes'
+            },
+            {
+              key: 'other-robotic-equipment-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'otherRoboticEquipment',
+          conditionalKey: 'roboticEquipment'
         },
         {
           key: 'robotics-project-cost',
@@ -1216,7 +1283,14 @@ const questionBank = {
           pageTitle: '',
           url: 'robotics/project-cost',
           baseUrl: 'project-cost',
-          backUrl: 'project-items',
+          backUrlObject: {
+            dependentQuestionYarKey: 'projectItems',
+            dependentAnswerKeysArray: ['robotics-project-items-A10'],
+            urlOptions: {
+              thenUrl: 'other-robotic-equipment',
+              elseUrl: 'project-items'
+            }
+          },
           nextUrl: 'potential-amount',
           classes: 'govuk-input--width-10',
           id: 'projectCost',
@@ -1723,8 +1797,8 @@ const questionBank = {
                   error: 'Enter a business name'
                 },
                 {
-                  type: 'MIN_MAX',
-                  min: 5,
+                  type: 'MIN_MAX_CHARS',
+                  min: 2,
                   max: 100,
                   error: 'Name must be 100 characters or fewer'
                 }
@@ -1749,13 +1823,13 @@ const questionBank = {
                 {
                   type: 'REGEX',
                   regex: NUMBER_REGEX,
-                  error: 'Employee number must be 7 digits or fewer'
+                  error: 'Number of employees must be a whole number like, like 305.'
                 },
                 {
                   type: 'MIN_MAX',
                   min: 1,
-                  max: 7,
-                  error: 'Employee number must be 7 digits or fewer'
+                  max: 9999999,
+                  error: 'Number must be between 1-9999999'
                 }
               ]
             },
@@ -1778,13 +1852,13 @@ const questionBank = {
                 {
                   type: 'REGEX',
                   regex: NUMBER_REGEX,
-                  error: 'Business turnover must be 9 digits or fewer'
+                  error: 'Business turnover must be a whole number, like 100000'
                 },
                 {
                   type: 'MIN_MAX',
                   min: 1,
-                  max: 9,
-                  error: 'Business turnover must be 9 digits or fewer'
+                  max: 999999999,
+                  error: 'Number must be between 1-999999999'
                 }
               ]
             },
@@ -1815,7 +1889,7 @@ const questionBank = {
                 },
                 {
                   dependentKey: 'sbi',
-                  type: 'MIN_MAX',
+                  type: 'MIN_MAX_CHARS',
                   min: 9,
                   max: 9,
                   error: 'SBI number must have 9 characters, like 011115678'
