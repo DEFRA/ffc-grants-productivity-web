@@ -1192,7 +1192,7 @@ const questionBank = {
             },
             {
               key: 'robotics-project-items-A3',
-              value: ' Robotic sowing/planting equipment'
+              value: 'Robotic sowing/planting equipment'
             },
             {
               key: 'robotics-project-items-A4',
@@ -1430,7 +1430,7 @@ const questionBank = {
           backUrl: 'remaining-costs',
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['robotics-project-items-A1', 'robotics-project-items-A4', 'robotics-project-items-A5', 'robotics-project-items-A6', 'robotics-project-items-A7'],
+            dependentAnswerKeysArray: ['robotics-project-items-A7', 'robotics-project-items-A5', 'robotics-project-items-A4', 'robotics-project-items-A3', 'robotics-project-items-A9'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'energy-source'
