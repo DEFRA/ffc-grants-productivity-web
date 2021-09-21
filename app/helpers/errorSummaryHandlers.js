@@ -24,11 +24,15 @@ const validateAnswerField = (value, validationType, details, payload) => {
       return (!value || regex.test(value))
     }
 
-    case 'MIN_MAX': {
+    case 'MIN_MAX_CHARS': {
       const { min, max } = details
       return (value.length >= min && value.length <= max)
     }
 
+    case 'MIN_MAX': {
+      const { min, max } = details
+      return (value >= min && value <= max)
+    }
     default:
       return false
   }
