@@ -151,7 +151,7 @@ const questionBank = {
             items: []
           },
           validate: {
-            errorEmptyField: 'Select the legal status of the farm business'
+            errorEmptyField: 'Select the legal status of the business'
           },
           validations: [
             {
