@@ -85,6 +85,14 @@ const questionBank = {
           type: 'single-answer',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
+          hint: {
+            html: `
+              If you want to apply for both a slurry project and a robotics project, 
+              you must submit 2 separate applications.
+              The maximum grant amount for both projects together is £500,000.
+              <br/><br/>Select one option
+            `
+          },
           sidebar: null,
           validate: {
             errorEmptyField: 'Select what your project is about'
