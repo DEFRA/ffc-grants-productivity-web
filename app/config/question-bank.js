@@ -1623,16 +1623,19 @@ const questionBank = {
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
-          type: 'single-answer',
+          type: 'multi-answer',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
+          hint: {
+            text: 'Select up to 2 options'
+          },
           sidebar: {
             heading: 'Funding priorities',
             para: 'RPA wants to fund projects that:',
-            items: ['improve productivity', 'improve the environment', 'introduce innovation']
+            items: ['have significant labour shortages', 'have not received many grants in the past']
           },
           validate: {
-            errorEmptyField: 'Select the agricultural sector your project is in'
+            errorEmptyField: 'Select up to 2 sectors your project is in'
           },
           validations: [
             {

@@ -13,7 +13,7 @@ describe('robotics agricultural sector page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select the agricultural sector your project is in')
+    expect(postResponse.payload).toContain('Select up to 2 sectors your project is in')
   })
 
   it('store user response and redirect to energy source page', async () => {
