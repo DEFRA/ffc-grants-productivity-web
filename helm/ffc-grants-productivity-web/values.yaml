@@ -45,7 +45,7 @@ container:
   cookiePassword: thisisnotarealpasswordthisisnotarealpassword
   redisPort: 6379
   redisPartition: ffc-grants-productivity-web
-  sessionCacheTTL: 3600000
+  sessionCacheTTL: 1200000
   messageQueueHost: dummy
   projectDetailsQueueAddress: project-details
   contactDetailsQueueAddress: contact-details
