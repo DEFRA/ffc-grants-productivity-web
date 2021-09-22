@@ -281,7 +281,7 @@ const questionBank = {
           backUrl: 'country',
           nextUrl: 'project-start',
           ineligibleContent: {
-            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
+            messageContent: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).',
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -294,7 +294,7 @@ const questionBank = {
           sidebar:
           {
             heading: 'Eligibility',
-            para: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
+            para: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).',
             items: []
           },
           validate: {
@@ -319,12 +319,12 @@ const questionBank = {
             },
             {
               key: 'planning-permission-A3',
-              value: 'Should be in place by 31 March 2022',
+              value: 'Should be in place by 31 May 2022',
               redirectUrl: 'planning-required-condition'
             },
             {
               key: 'planning-permission-A4',
-              value: 'Will not be in place by 31 March 2022',
+              value: 'Will not be in place by 31 May 2022',
               notEligible: true
             }
           ],
@@ -340,7 +340,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).'
+            messageContent: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).'
           }
         },
         {
