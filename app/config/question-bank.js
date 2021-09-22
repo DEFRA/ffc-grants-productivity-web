@@ -1635,7 +1635,11 @@ const questionBank = {
             items: ['have significant labour shortages', 'have not received many grants in the past']
           },
           validate: {
-            errorEmptyField: 'Select up to 2 sectors your project is in'
+            errorEmptyField: 'Select up to 2 sectors your project is in',
+            maxAnswers: {
+              count: 2,
+              error: 'Select up to 2 sectors your project is in'
+            }
           },
           validations: [
             {
