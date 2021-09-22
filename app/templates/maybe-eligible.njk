@@ -67,11 +67,17 @@
 
 
   {%if url === 'confirm' %}
-    <div class="govuk-grid-column-two-thirds">
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds govuk-body">
       <form method="POST" action="{{ url }}" autocomplete="off" novalidate="novalidate">
         {{ crumbToken(crumb)}}
         {{ govukCheckboxes(checkboxConfirmOptional) }}
-          {{ govukInput(consentOptionalData.hiddenInput) }}
+        {{ govukInput(consentOptionalData.hiddenInput) }}
+        {{ govukWarningText({
+            text: 'You can only submit your details once',
+            iconFallbackText: 'Warning'
+          })
+        }}
         {{ govukButton({
           text: "Confirm and send",
           attributes: {id: "btnConfirmSend"}
@@ -87,5 +93,6 @@
         </p>
       </div>
     </div>
+  </div>
   {% endif %}
 {% endblock %}
