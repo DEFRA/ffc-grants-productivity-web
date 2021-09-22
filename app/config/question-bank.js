@@ -3,6 +3,7 @@ const {
   CHARS_MIN_10,
   CHARS_MAX_100,
   POSTCODE_REGEX,
+  WHOLE_NUMBER_REGEX,
   NUMBER_REGEX,
   NAME_ONLY_REGEX,
   PHONE_REGEX,
@@ -545,7 +546,6 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/project-items',
           baseUrl: 'project-items',
-          backUrl: '/productivity/tenancy-length',
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
             dependentAnswerKeysArray: ['tenancy-A2'],
@@ -601,18 +601,12 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Select yes if you will be buying mild acidification equipment'
           },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
+          validations: [],
           answers: [
             {
               key: 'project-items-A1',
-              value: 'Yes, we will buy all 4 items'
+              text: 'Yes, we will buy all 4 items',
+              value: ['acid storage', 'dosing equipment', 'mixing tank', 'pump']
             },
             {
               key: 'project-items-A2',
@@ -626,7 +620,7 @@ const questionBank = {
         {
           key: 'acidification-infrastructure',
           order: 81,
-          title: 'Does your project also need acidification infrastructure?',
+          title: 'Does your project also need  acidification infrastructure?',
           hint: {
             text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
           },
@@ -645,18 +639,12 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Select yes if you need acidification infrastructure'
           },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
+          validations: [],
           answers: [
             {
               key: 'acidification-infrastructure-A1',
-              value: 'Yes, we will buy acidification infrastructure'
+              text: 'Yes, we will buy acidification infrastructure',
+              value: 'acidification infrastructure'
             },
             {
               key: 'acidification-infrastructure-A2',
@@ -1670,7 +1658,7 @@ const questionBank = {
             isDisplay: true
           },
           order: 380,
-          title: 'Are you using this technology on your farm?',
+          title: 'Are you already using this technology?',
           pageTitle: '',
           url: 'robotics/technology',
           baseUrl: 'technology',
@@ -1822,8 +1810,8 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: NUMBER_REGEX,
-                  error: 'Number of employees must be a whole number like, like 305.'
+                  regex: WHOLE_NUMBER_REGEX,
+                  error: 'Number of employees must be a whole number, like 305.'
                 },
                 {
                   type: 'MIN_MAX',
@@ -1851,7 +1839,7 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: NUMBER_REGEX,
+                  regex: WHOLE_NUMBER_REGEX,
                   error: 'Business turnover must be a whole number, like 100000'
                 },
                 {
@@ -1947,7 +1935,7 @@ const questionBank = {
           answers: [
             {
               key: 'applying-A1',
-              value: 'Farmer',
+              value: 'Farmer or contractor',
               redirectUrl: '/productivity/farmers-details'
             },
             {
@@ -1962,7 +1950,7 @@ const questionBank = {
         {
           key: 'farmer-details',
           order: 200,
-          title: 'Farmer’s details',
+          title: 'Farmer or contractor’s details',
           pageTitle: '',
           url: 'farmers-details',
           baseUrl: 'farmer-details',
