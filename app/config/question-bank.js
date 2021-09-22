@@ -1811,7 +1811,7 @@ const questionBank = {
                 {
                   type: 'REGEX',
                   regex: WHOLE_NUMBER_REGEX,
-                  error: 'Number of employees must be a whole number, like 305.'
+                  error: 'Number of employees must be a whole number, like 305'
                 },
                 {
                   type: 'MIN_MAX',
