@@ -433,7 +433,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/project-items'
+              elseUrl: 'slurry/mild-acidification-infrastructure'
             }
           },
           eliminationAnswerKeys: '',
@@ -479,7 +479,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/project-items'
+              elseUrl: 'slurry/mild-acidification-infrastructure'
             }
           },
           eliminationAnswerKeys: '',
@@ -537,7 +537,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/project-items'
+              elseUrl: 'slurry/mild-acidification-infrastructure'
             }
           },
           maybeEligible: true,
@@ -547,12 +547,12 @@ const questionBank = {
           }
         },
         {
-          key: 'project-items',
+          key: 'mild-acidification-infrastructure',
           order: 80,
           title: 'Will your project buy mild acidification equipment?',
           pageTitle: '',
-          url: 'slurry/project-items',
-          baseUrl: 'project-items',
+          url: 'slurry/mild-acidification-infrastructure',
+          baseUrl: 'mild-acidification-infrastructure',
           backUrl: '/productivity/tenancy-length',
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
@@ -619,16 +619,16 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'project-items-A1',
+              key: 'mild-acidification-infrastructure-A1',
               value: 'Yes, we will buy all 4 items'
             },
             {
-              key: 'project-items-A2',
+              key: 'mild-acidification-infrastructure-A2',
               value: 'No, we will not buy all 4 items',
               notEligible: true
             }
           ],
-          yarKey: 'projectItems'
+          yarKey: 'mildAcidificationInfrastructure'
 
         },
         {
@@ -641,7 +641,7 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/acidification-infrastructure',
           baseUrl: 'acidification-infrastructure',
-          backUrl: 'project-items',
+          backUrl: 'mild-acidification-infrastructure',
           nextUrl: 'slurry-application',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
