@@ -221,7 +221,7 @@ const questionBank = {
           nextUrl: 'planning-permission',
           url: 'country',
           baseUrl: 'country',
-          preValidationKeys: ['projectSubject', 'legalStatus'],
+          preValidationKeys: ['legalStatus'],
           ineligibleContent: {
             messageContent: 'This grant is only for projects in England.',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' },
@@ -280,7 +280,7 @@ const questionBank = {
           baseUrl: 'planning-permission',
           backUrl: 'country',
           nextUrl: 'project-start',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland'],
+          preValidationKeys: ['inEngland'],
           ineligibleContent: {
             messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
             messageLink: {
@@ -337,7 +337,7 @@ const questionBank = {
           url: 'planning-required-condition',
           backUrl: 'planning-permission',
           nextUrl: 'project-start',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission'],
+          preValidationKeys: ['planningPermission'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
@@ -351,7 +351,7 @@ const questionBank = {
           pageTitle: '',
           url: 'project-start',
           baseUrl: 'project-start',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission'],
+          preValidationKeys: ['planningPermission'],
           backUrlObject: {
             dependentQuestionYarKey: 'planningPermission',
             dependentAnswerKeysArray: ['planning-permission-A3'],
@@ -421,7 +421,7 @@ const questionBank = {
           url: 'tenancy',
           baseUrl: 'tenancy',
           backUrl: 'project-start',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart'],
+          preValidationKeys: ['projectStart'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
@@ -474,7 +474,7 @@ const questionBank = {
           url: 'tenancy-length',
           baseUrl: 'tenancy-length',
           backUrl: 'tenancy',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'tenancy'],
+          preValidationKeys: ['tenancy'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
@@ -532,7 +532,7 @@ const questionBank = {
           order: 71,
           url: 'tenancy-length-condition',
           backUrl: 'tenancy-length',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'tenancy', 'tenancyLength'],
+          preValidationKeys: ['tenancyLength'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
@@ -555,7 +555,7 @@ const questionBank = {
           url: 'slurry/project-items',
           baseUrl: 'project-items',
           backUrl: '/productivity/tenancy-length',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart'],
+          preValidationKeys: ['projectStart'],
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
             dependentAnswerKeysArray: ['tenancy-A2'],
@@ -644,7 +644,7 @@ const questionBank = {
           baseUrl: 'acidification-infrastructure',
           backUrl: 'project-items',
           nextUrl: 'slurry-application',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectItems'],
+          preValidationKeys: ['projectItems'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -683,7 +683,7 @@ const questionBank = {
           baseUrl: 'slurry-application',
           backUrl: 'acidification-infrastructure',
           nextUrl: 'project-cost',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectItems', 'acidificationInfrastructure'],
+          preValidationKeys: ['acidificationInfrastructure'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you will not be using low emission precision application equipment.',
@@ -747,7 +747,7 @@ const questionBank = {
           baseUrl: 'project-cost',
           backUrl: 'slurry-application',
           nextUrl: 'potential-amount',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectItems', 'acidificationInfrastructure', 'slurryApplication'],
+          preValidationKeys: ['slurryApplication'],
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',
@@ -815,7 +815,7 @@ const questionBank = {
           url: 'slurry/potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectItems', 'acidificationInfrastructure', 'slurryApplication', 'projectCost'],
+          preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -836,7 +836,7 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'project-cost',
           nextUrl: 'SSSI',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectItems', 'acidificationInfrastructure', 'slurryApplication', 'projectCost', 'calculatedGrant'],
+          preValidationKeys: ['projectCost', 'calculatedGrant'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
@@ -893,7 +893,7 @@ const questionBank = {
           baseUrl: 'SSSI',
           backUrl: 'remaining-costs',
           nextUrl: 'project-impacts',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectItems', 'acidificationInfrastructure', 'slurryApplication', 'projectCost', 'calculatedGrant', 'canPayRemainingCost'],
+          preValidationKeys: ['canPayRemainingCost'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -943,7 +943,7 @@ const questionBank = {
           url: 'slurry/project-impacts',
           baseUrl: 'project-impacts',
           backUrl: 'SSSI',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectItems', 'acidificationInfrastructure', 'slurryApplication', 'projectCost', 'calculatedGrant', 'canPayRemainingCost', 'sSSI'],
+          preValidationKeys: ['sSSI'],
           hint: {
             html: '<br>Select one option<br>'
           },
@@ -1007,7 +1007,7 @@ const questionBank = {
           baseUrl: 'slurry-currently-treated',
           backUrl: 'project-impacts',
           nextUrl: 'slurry-to-be-treated',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectItems', 'acidificationInfrastructure', 'slurryApplication', 'projectCost', 'calculatedGrant', 'canPayRemainingCost', 'sSSI', 'projectImpacts'],
+          preValidationKeys: ['projectImpacts'],
           classes: 'govuk-input--width-10',
           id: 'slurryCurrentlyTreated',
           name: 'slurryCurrentlyTreated',
@@ -1074,7 +1074,7 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/slurry-to-be-treated',
           baseUrl: 'slurry-to-be-treated',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectItems', 'acidificationInfrastructure', 'slurryApplication', 'projectCost', 'calculatedGrant', 'canPayRemainingCost', 'sSSI', 'projectImpacts', 'slurryCurrentlyTreated'],
+          preValidationKeys: ['slurryCurrentlyTreated'],
           backUrlObject: {
             dependentQuestionYarKey: 'projectImpacts',
             dependentAnswerKeysArray: ['project-impacts-A2'],
@@ -1151,7 +1151,7 @@ const questionBank = {
             }
           },
           nextUrl: 'project-items',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart'],
+          preValidationKeys: ['projectStart'],
           id: 'projectPurchase',
           name: 'projectPurchase',
           hint: {
@@ -1228,7 +1228,7 @@ const questionBank = {
           baseUrl: 'robotics-project-items',
           backUrl: 'project-purchase',
           nextUrl: 'project-cost',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectPurchase'],
+          preValidationKeys: ['projectPurchase'],
           id: 'roboticsProjectItems',
           name: 'roboticsProjectItems',
           hint: {
@@ -1301,7 +1301,7 @@ const questionBank = {
           baseUrl: 'project-cost',
           backUrl: 'project-items',
           nextUrl: 'potential-amount',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectPurchase', 'projectItems'],
+          preValidationKeys: ['projectItems'],
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',
@@ -1363,7 +1363,7 @@ const questionBank = {
           url: 'robotics/potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectPurchase', 'projectItems', 'projectCost'],
+          preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -1383,7 +1383,7 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'project-cost',
           nextUrl: 'project-impact',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectPurchase', 'projectItems', 'projectCost'],
+          preValidationKeys: ['projectCost'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
@@ -1437,7 +1437,7 @@ const questionBank = {
           url: 'robotics/project-impact',
           baseUrl: 'project-impact',
           backUrl: 'remaining-costs',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectPurchase', 'projectItems', 'projectCost', 'canPayRemainingCost'],
+          preValidationKeys: ['canPayRemainingCost'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
             dependentAnswerKeysArray: ['robotics-project-items-A1', 'robotics-project-items-A4', 'robotics-project-items-A5', 'robotics-project-items-A6', 'robotics-project-items-A7'],
@@ -1506,7 +1506,7 @@ const questionBank = {
           baseUrl: 'data-analytics',
           backUrl: 'project-impact',
           nextUrl: 'energy-source',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectPurchase', 'projectItems', 'projectCost', 'canPayRemainingCost', 'projectImpact'],
+          preValidationKeys: ['projectImpact'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul><li>improve productivity</li><li>introduce innovation</li></ul>',
@@ -1559,7 +1559,7 @@ const questionBank = {
           pageTitle: '',
           url: 'robotics/energy-source',
           baseUrl: 'energy-source',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectPurchase', 'projectItems', 'projectCost', 'canPayRemainingCost', 'projectImpact', 'dataAnalytics'],
+          preValidationKeys: ['dataAnalytics'],
           backUrlObject: {
             dependentQuestionYarKey: 'projectItems',
             dependentAnswerKeysArray: ['robotics-project-items-A1', 'robotics-project-items-A4', 'robotics-project-items-A5', 'robotics-project-items-A6', 'robotics-project-items-A7'],
@@ -1629,7 +1629,7 @@ const questionBank = {
           baseUrl: 'agricultural-sector',
           backUrl: 'energy-source',
           nextUrl: 'technology',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectPurchase', 'projectItems', 'projectCost', 'canPayRemainingCost', 'projectImpact', 'dataAnalytics', 'energySource'],
+          preValidationKeys: ['energySource'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -1685,7 +1685,7 @@ const questionBank = {
           baseUrl: 'technology',
           backUrl: 'agricultural-sector',
           nextUrl: '/productivity/score',
-          preValidationKeys: ['projectSubject', 'legalStatus', 'inEngland', 'planningPermission', 'projectStart', 'projectPurchase', 'projectItems', 'projectCost', 'canPayRemainingCost', 'projectImpact', 'dataAnalytics', 'energySource', 'agriculturalSector'],
+          preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul><li>introduce innovation</li></ul>',
@@ -1756,6 +1756,7 @@ const questionBank = {
           baseUrl: 'business-details',
           backUrl: 'score',
           nextUrl: '/productivity/applying',
+          preValidationKeys: ['current-score'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -1926,6 +1927,7 @@ const questionBank = {
           url: 'applying',
           baseUrl: 'applying',
           backUrl: 'business-details',
+          preValidationKeys: ['projectName'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -1973,6 +1975,7 @@ const questionBank = {
           baseUrl: 'farmer-details',
           backUrl: '/productivity/applying',
           nextUrl: 'check-details',
+          preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -2206,6 +2209,7 @@ const questionBank = {
           baseUrl: 'agents-details',
           backUrl: 'applying',
           nextUrl: 'farmers-details',
+          preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -2443,6 +2447,7 @@ const questionBank = {
           baseUrl: 'check-details',
           backUrl: 'farmers-details',
           nextUrl: 'confirm',
+          preValidationKeys: ['farmerDetails'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           pageData: {
@@ -2470,6 +2475,7 @@ const questionBank = {
           url: 'confirm',
           backUrl: 'check-details',
           nextUrl: 'confirmation',
+          preValidationKeys: ['farmerDetails'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -2493,6 +2499,7 @@ const questionBank = {
           pageTitle: '',
           url: 'confirmation',
           baseUrl: 'confirmation',
+          preValidationKeys: ['consentOptional'],
           ga: [
             { dimension: 'cd2', value: { type: 'score' } },
             { dimension: 'cd5', value: { type: 'confirmationId' } },
