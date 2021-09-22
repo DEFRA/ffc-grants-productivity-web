@@ -1869,7 +1869,7 @@ const questionBank = {
               title: 'Single Business Identifier (SBI)',
               classes: 'govuk-fieldset__legend--s',
               hint: {
-                text: 'Select one option'
+                html: 'If you don\'t have an SBI, you can still apply.<br/>Select one option'
               },
               validate: [
                 {
