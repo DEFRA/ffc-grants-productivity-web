@@ -2528,7 +2528,7 @@ const questionBank = {
             <p>Before you start the project, you can:</p>
             <ul>
               <li>get quotes from suppliers</li>
-              <li>apply for planning permission or an abstraction licence</li>
+              <li>apply for planning permission</li>
             </ul>
             <p><b>You will not automatically get a grant.</b> The grant is expected to be highly competitive and you are competing against other projects.</p>`
           },
