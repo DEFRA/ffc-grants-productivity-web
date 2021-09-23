@@ -1806,7 +1806,7 @@ const questionBank = {
                 },
                 {
                   type: 'MIN_MAX',
-                  min: 5,
+                  min: 0,
                   max: 100,
                   error: 'Name must be 100 characters or fewer'
                 }
