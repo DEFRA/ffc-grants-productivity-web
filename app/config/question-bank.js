@@ -3,6 +3,7 @@ const {
   CHARS_MIN_10,
   CHARS_MAX_100,
   POSTCODE_REGEX,
+  WHOLE_NUMBER_REGEX,
   NUMBER_REGEX,
   NAME_ONLY_REGEX,
   PHONE_REGEX,
@@ -85,6 +86,14 @@ const questionBank = {
           type: 'single-answer',
           minAnswerCount: 1,
           ga: [{ journeyStart: true }],
+          hint: {
+            html: `
+              If you want to apply for both a slurry project and a robotics project, 
+              you must submit 2 separate applications.
+              The maximum grant amount for both projects together is £500,000.
+              <br/><br/>Select one option
+            `
+          },
           sidebar: null,
           validate: {
             errorEmptyField: 'Select what your project is about'
@@ -143,7 +152,7 @@ const questionBank = {
             items: []
           },
           validate: {
-            errorEmptyField: 'Select the legal status of the farm business'
+            errorEmptyField: 'Select the legal status of the business'
           },
           validations: [
             {
@@ -282,7 +291,7 @@ const questionBank = {
           nextUrl: 'project-start',
           preValidationKeys: ['inEngland'],
           ineligibleContent: {
-            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
+            messageContent: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).',
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -294,7 +303,7 @@ const questionBank = {
           sidebar:
           {
             heading: 'Eligibility',
-            para: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
+            para: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).',
             items: []
           },
           validate: {
@@ -319,12 +328,12 @@ const questionBank = {
             },
             {
               key: 'planning-permission-A3',
-              value: 'Should be in place by 31 March 2022',
+              value: 'Should be in place by 31 May 2022',
               redirectUrl: 'planning-required-condition'
             },
             {
               key: 'planning-permission-A4',
-              value: 'Will not be in place by 31 March 2022',
+              value: 'Will not be in place by 31 May 2022',
               notEligible: true
             }
           ],
@@ -341,7 +350,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).'
+            messageContent: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).'
           }
         },
         {
@@ -426,8 +435,8 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
-              thenUrl: 'robotics/project-purchase',
-              elseUrl: 'slurry/project-items'
+              thenUrl: 'robotics/project-items',
+              elseUrl: 'slurry/mild-acidification-infrastructure'
             }
           },
           eliminationAnswerKeys: '',
@@ -445,14 +454,7 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Select yes if the planned project is on land the farm business owns'
           },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
+          validations: [],
           answers: [
             {
               key: 'tenancy-A1',
@@ -479,8 +481,8 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
-              thenUrl: 'robotics/project-purchase',
-              elseUrl: 'slurry/project-items'
+              thenUrl: 'robotics/project-items',
+              elseUrl: 'slurry/mild-acidification-infrastructure'
             }
           },
           eliminationAnswerKeys: '',
@@ -537,8 +539,8 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
-              thenUrl: 'robotics/project-purchase',
-              elseUrl: 'slurry/project-items'
+              thenUrl: 'robotics/project-items',
+              elseUrl: 'slurry/mild-acidification-infrastructure'
             }
           },
           maybeEligible: true,
@@ -548,13 +550,12 @@ const questionBank = {
           }
         },
         {
-          key: 'project-items',
+          key: 'mild-acidification-infrastructure',
           order: 80,
           title: 'Will your project buy mild acidification equipment?',
           pageTitle: '',
-          url: 'slurry/project-items',
-          baseUrl: 'project-items',
-          backUrl: '/productivity/tenancy-length',
+          url: 'slurry/mild-acidification-infrastructure',
+          baseUrl: 'mild-acidification-infrastructure',
           preValidationKeys: ['projectStart'],
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
@@ -610,21 +611,15 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Select yes if you will be buying mild acidification equipment'
           },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
+          validations: [],
           answers: [
             {
-              key: 'project-items-A1',
-              value: 'Yes, we will buy all 4 items'
+              key: 'mild-acidification-infrastructure-A1',
+              text: 'Yes, we will buy all 4 items',
+              value: ['acid storage', 'dosing equipment', 'mixing tank', 'pump']
             },
             {
-              key: 'project-items-A2',
+              key: 'mild-acidification-infrastructure-A2',
               value: 'No, we will not buy all 4 items',
               notEligible: true
             }
@@ -635,14 +630,14 @@ const questionBank = {
         {
           key: 'acidification-infrastructure',
           order: 81,
-          title: 'Does you project also need acidification infrastructure',
+          title: 'Does you project also need acidification infrastructure?',
           hint: {
             text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
           },
           pageTitle: '',
           url: 'slurry/acidification-infrastructure',
           baseUrl: 'acidification-infrastructure',
-          backUrl: 'project-items',
+          backUrl: 'mild-acidification-infrastructure',
           nextUrl: 'slurry-application',
           preValidationKeys: ['projectItems'],
           eliminationAnswerKeys: '',
@@ -654,18 +649,12 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Select yes if you need acidification infrastructure'
           },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
+          validations: [],
           answers: [
             {
               key: 'acidification-infrastructure-A1',
-              value: 'Yes, we will buy acidification infrastructure'
+              text: 'Yes, we will buy acidification infrastructure',
+              value: 'acidification infrastructure'
             },
             {
               key: 'acidification-infrastructure-A2',
@@ -1136,12 +1125,12 @@ const questionBank = {
         },
         /// ////// ***************** ROBOTICS ************************************/////////////////////
         {
-          key: 'project-purchase',
-          order: 290,
-          title: 'What type of new technology does your project need?',
+          key: 'robotics-project-items',
+          order: 300,
+          title: 'Which eligible items do you need for your project?',
           pageTitle: '',
-          url: 'robotics/project-purchase',
-          baseUrl: 'project-purchase',
+          url: 'robotics/project-items',
+          baseUrl: 'robotics-project-items',
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
             dependentAnswerKeysArray: ['tenancy-A2'],
@@ -1150,90 +1139,20 @@ const questionBank = {
               elseUrl: '/productivity/tenancy'
             }
           },
-          nextUrl: 'project-items',
           preValidationKeys: ['projectStart'],
-          id: 'projectPurchase',
-          name: 'projectPurchase',
-          hint: {
-            text: 'Equipment must be for activities in the crop-growing cycle or livestock husbandry'
-          },
-          eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: 'Your cannot apply for a grant if your project does not include the purchase of robotic or innovative technology.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectItems',
+            dependentAnswerKeysArray: ['robotics-project-items-A10'],
+            urlOptions: {
+              thenUrl: 'other-robotic-equipment',
+              elseUrl: 'project-cost'
             }
           },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          sidebar:
-          {
-            heading: 'Eligibility',
-            para: `Equipment must increase the productivity of primary agricultural or horticultural practices.\n\n
-            Your project’s positive environmental benefit and the increase to productivity will be assessed at full application stage.`,
-            items: []
-          },
-          validate: {
-            errorEmptyField: 'Select the type of new technology your project needs'
-          },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
-          answers: [
-            {
-              key: 'project-purchase-A1',
-              value: 'Robotic equipment',
-              hint: {
-                text: 'Autonomous farming equipment capable of sensing its environment, making decisions and performing actions'
-              }
-            },
-            {
-              key: 'project-purchase-A2',
-              value: 'Advanced ventilation control units',
-              hint: {
-                text: 'System to control ventilation of existing horticultural and livestock buildings to reduce greenhouse gas emissions'
-              }
-            },
-            {
-              key: 'project-purchase-A3',
-              value: 'Wavelength Specific LED lighting',
-              hint: {
-                text: 'Wavelength specific LED lighting to aid plant growth'
-              }
-            },
-            {
-              value: 'divider'
-            },
-            {
-              key: 'project-purchase-A4',
-              value: 'None of the above',
-              notEligible: true
-            }
-          ],
-          yarKey: 'projectPurchase'
-        },
-        {
-          key: 'robotics-project-items',
-          order: 300,
-          title: 'Which eligible items do you need for your project?',
-          pageTitle: '',
-          url: 'robotics/project-items',
-          baseUrl: 'robotics-project-items',
-          backUrl: 'project-purchase',
-          nextUrl: 'project-cost',
-          preValidationKeys: ['projectPurchase'],
           id: 'roboticsProjectItems',
           name: 'roboticsProjectItems',
           hint: {
-            html: `The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £500,000.
-            <br/> Select all the items your project needs.`
+            html: `Select all the items your project needs 
+              <br/><br/><span class="govuk-heading-s">Non-robotic equipment</span>`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -1249,49 +1168,109 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Select all the items your project needs'
           },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
+          validations: [],
           answers: [
             {
               key: 'robotics-project-items-A1',
-              value: 'Robotic or automatic harvesting equipment'
+              value: 'Advanced ventilation control units',
+              hint: {
+                text: 'System to control ventilation of existing horticultural and livestock buildings to reduce greenhouse gas emissions '
+              }
             },
             {
               key: 'robotics-project-items-A2',
-              value: 'Advanced ventilation control units'
+              value: 'Wavelength-specific LED lighting',
+              hint: {
+                html: `Wavelength-specific LED lighting to help crop growth, pest control and animal welfare 
+                  <br/><br/><span class="govuk-heading-s govuk-!-margin-bottom-0 checkBoxMargin">Robotic equipment</span>
+                  <div class="govuk-!-margin-bottom-4 checkBoxMargin">Autonomous farming equipment capable of sensing its environment, making decisions and performing actions </div>`
+              }
             },
             {
               key: 'robotics-project-items-A3',
-              value: 'Robotic weeding equipment'
-            },
-            {
-              key: 'robotics-project-items-A4',
-              value: 'Robotic milking equipment'
-            },
-            {
-              key: 'robotics-project-items-A5',
-              value: 'Robotic spraying equipment'
-            },
-            {
-              key: 'robotics-project-items-A6',
               value: 'Robotic sowing/planting equipment'
             },
             {
+              key: 'robotics-project-items-A4',
+              value: 'Robotic spraying equipment'
+            },
+            {
+              key: 'robotics-project-items-A5',
+              value: 'Robotic milking equipment'
+            },
+            {
+              key: 'robotics-project-items-A6',
+              value: 'Robotic weeding equipment'
+            },
+            {
               key: 'robotics-project-items-A7',
-              value: 'Automated feeding systems'
+              value: 'Robotic or automatic harvesting equipment'
             },
             {
               key: 'robotics-project-items-A8',
-              value: 'Wavelength-controlled LED lighting'
+              value: 'Robotic tractor'
+            },
+            {
+              key: 'robotics-project-items-A9',
+              value: 'Automated feeding systems'
+            },
+            {
+              key: 'robotics-project-items-A10',
+              value: 'Other robotic equipment'
             }
           ],
           yarKey: 'projectItems'
+        },
+        {
+          key: 'other-robotic-equipment',
+          order: 305,
+          title: 'Does your other robotic equipment fit the eligibility criteria?',
+          pageTitle: '',
+          backUrl: 'project-items',
+          nextUrl: 'project-cost',
+          url: 'robotics/other-robotic-equipment',
+          baseUrl: 'other-robotic-equipment',
+		      preValidationKeys: ['projectPurchase'],
+          ineligibleContent: {
+            messageContent: 'This grant is only for projects in England.',
+            messageLink: {
+              url: '',
+              title: ''
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          sidebar: {
+            heading: 'Eligibility',
+            para: 'RPA will consider items that:',
+            items: ['have a sensing system', 'have a decision-making capability', 'use actuators']
+          },
+          validate: {
+            errorEmptyField: 'Select yes if your other robotic equipment meets the eligibility criteria',
+            conditionalValidate: {
+              errorEmptyField: 'Enter a postcode, like AA1 1AA',
+              checkRegex: {
+                regex: POSTCODE_REGEX,
+                error: 'Enter a postcode, like AA1 1AA'
+              }
+            }
+          },
+          validations: [],
+          answers: [
+            {
+              key: 'other-robotic-equipment-A1',
+              conditional: true,
+              value: 'Yes'
+            },
+            {
+              key: 'other-robotic-equipment-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'otherRoboticEquipment',
+          conditionalKey: 'roboticEquipment'
         },
         {
           key: 'robotics-project-cost',
@@ -1299,7 +1278,14 @@ const questionBank = {
           pageTitle: '',
           url: 'robotics/project-cost',
           baseUrl: 'project-cost',
-          backUrl: 'project-items',
+          backUrlObject: {
+            dependentQuestionYarKey: 'projectItems',
+            dependentAnswerKeysArray: ['robotics-project-items-A10'],
+            urlOptions: {
+              thenUrl: 'other-robotic-equipment',
+              elseUrl: 'project-items'
+            }
+          },
           nextUrl: 'potential-amount',
           preValidationKeys: ['projectItems'],
           classes: 'govuk-input--width-10',
@@ -1441,7 +1427,7 @@ const questionBank = {
           preValidationKeys: ['canPayRemainingCost'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['robotics-project-items-A1', 'robotics-project-items-A4', 'robotics-project-items-A5', 'robotics-project-items-A6', 'robotics-project-items-A7'],
+            dependentAnswerKeysArray: ['robotics-project-items-A7', 'robotics-project-items-A5', 'robotics-project-items-A4', 'robotics-project-items-A3', 'robotics-project-items-A9'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'energy-source'
@@ -1560,10 +1546,10 @@ const questionBank = {
           pageTitle: '',
           url: 'robotics/energy-source',
           baseUrl: 'energy-source',
-          preValidationKeys: ['dataAnalytics'],
+          preValidationKeys: ['projectImpact'],
           backUrlObject: {
             dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['robotics-project-items-A1', 'robotics-project-items-A4', 'robotics-project-items-A5', 'robotics-project-items-A6', 'robotics-project-items-A7'],
+            dependentAnswerKeysArray: ['robotics-project-items-A7', 'robotics-project-items-A5', 'robotics-project-items-A4', 'robotics-project-items-A3', 'robotics-project-items-A9'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'project-impact'
@@ -1634,15 +1620,22 @@ const questionBank = {
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
-          type: 'single-answer',
+          type: 'multi-answer',
           minAnswerCount: 1,
+          hint: {
+            text: 'Select up to 2 options'
+          },
           sidebar: {
             heading: 'Funding priorities',
             para: 'RPA wants to fund projects that:',
-            items: ['improve productivity', 'improve the environment', 'introduce innovation']
+            items: ['have significant labour shortages', 'have not received many grants in the past']
           },
           validate: {
-            errorEmptyField: 'Select the agricultural sector your project is in'
+            errorEmptyField: 'Select up to 2 sectors your project is in',
+            maxAnswers: {
+              count: 2,
+              error: 'Select up to 2 sectors your project is in'
+            }
           },
           validations: [
             {
@@ -1680,7 +1673,7 @@ const questionBank = {
             isDisplay: true
           },
           order: 380,
-          title: 'Are you using this technology on your farm?',
+          title: 'Are you already using this technology?',
           pageTitle: '',
           url: 'robotics/technology',
           baseUrl: 'technology',
@@ -1806,7 +1799,7 @@ const questionBank = {
                   error: 'Enter a business name'
                 },
                 {
-                  type: 'MIN_MAX',
+                  type: 'MIN_MAX_CHARS',
                   min: 0,
                   max: 100,
                   error: 'Name must be 100 characters or fewer'
@@ -1831,14 +1824,14 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: NUMBER_REGEX,
-                  error: 'Employee number must be 7 digits or fewer'
+                  regex: WHOLE_NUMBER_REGEX,
+                  error: 'Number of employees must be a whole number, like 305'
                 },
                 {
                   type: 'MIN_MAX',
                   min: 1,
-                  max: 7,
-                  error: 'Employee number must be 7 digits or fewer'
+                  max: 9999999,
+                  error: 'Number must be between 1-9999999'
                 }
               ]
             },
@@ -1860,14 +1853,14 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: NUMBER_REGEX,
-                  error: 'Business turnover must be 9 digits or fewer'
+                  regex: WHOLE_NUMBER_REGEX,
+                  error: 'Business turnover must be a whole number, like 100000'
                 },
                 {
                   type: 'MIN_MAX',
                   min: 1,
-                  max: 9,
-                  error: 'Business turnover must be 9 digits or fewer'
+                  max: 999999999,
+                  error: 'Number must be between 1-999999999'
                 }
               ]
             },
@@ -1878,7 +1871,7 @@ const questionBank = {
               title: 'Single Business Identifier (SBI)',
               classes: 'govuk-fieldset__legend--s',
               hint: {
-                text: 'Select one option'
+                html: 'If you don\'t have an SBI, you can still apply.<br/>Select one option'
               },
               validate: [
                 {
@@ -1898,7 +1891,7 @@ const questionBank = {
                 },
                 {
                   dependentKey: 'sbi',
-                  type: 'MIN_MAX',
+                  type: 'MIN_MAX_CHARS',
                   min: 9,
                   max: 9,
                   error: 'SBI number must have 9 characters, like 011115678'
@@ -1928,7 +1921,7 @@ const questionBank = {
           url: 'applying',
           baseUrl: 'applying',
           backUrl: 'business-details',
-          preValidationKeys: ['projectName'],
+          preValidationKeys: ['businessDetails'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -1956,7 +1949,7 @@ const questionBank = {
           answers: [
             {
               key: 'applying-A1',
-              value: 'Farmer',
+              value: 'Farmer or contractor',
               redirectUrl: '/productivity/farmers-details'
             },
             {
@@ -1970,7 +1963,7 @@ const questionBank = {
         {
           key: 'farmer-details',
           order: 200,
-          title: 'Farmer’s details',
+          title: 'Farmer or contractor’s details',
           pageTitle: '',
           url: 'farmers-details',
           baseUrl: 'farmer-details',
@@ -2529,7 +2522,7 @@ const questionBank = {
             <p>Before you start the project, you can:</p>
             <ul>
               <li>get quotes from suppliers</li>
-              <li>apply for planning permission or an abstraction licence</li>
+              <li>apply for planning permission</li>
             </ul>
             <p><b>You will not automatically get a grant.</b> The grant is expected to be highly competitive and you are competing against other projects.</p>`
           },

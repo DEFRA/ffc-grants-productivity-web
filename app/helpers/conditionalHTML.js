@@ -1,6 +1,6 @@
 const getHtml = (label, fieldValueData, error) => {
   const fieldValue = fieldValueData || ''
-  const labelData = label === 'sbi' ? 'SBI number' : 'In which postcode will the project take place?<br/><br/> Postcode'
+  const labelData = label === 'sbi' ? 'SBI number' : 'What is the site postcode?<br/><br/> Postcode'
 
   return !error
     ? `<div>

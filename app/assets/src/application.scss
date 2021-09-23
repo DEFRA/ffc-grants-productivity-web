@@ -122,7 +122,7 @@ $govuk-assets-path: "~govuk-frontend/govuk/assets/";
 .timeoutDiv {
   opacity: 0;  
   animation: fadeIn 6s;
-  animation-delay: 3s;
+  animation-delay: 600s;
   animation-fill-mode: forwards;
   height: 0px;
 }
@@ -130,4 +130,8 @@ $govuk-assets-path: "~govuk-frontend/govuk/assets/";
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; height: 280px;}
+}
+
+.checkBoxMargin {
+  margin-left: -53px;
 }

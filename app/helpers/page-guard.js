@@ -6,6 +6,7 @@ const guardPage = (request, guardData) => {
     guardData.forEach(dependcyKey => {
     // check yar session value for each key exists
       if (result === false && getYarValue(request, dependcyKey) === null) {
+        console.log('missing key', dependcyKey, getYarValue(request, dependcyKey))
         result = true
       }
     })

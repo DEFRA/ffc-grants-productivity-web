@@ -24,11 +24,15 @@ const validateAnswerField = (value, validationType, details, payload) => {
       return (!value || regex.test(value))
     }
 
-    case 'MIN_MAX': {
+    case 'MIN_MAX_CHARS': {
       const { min, max } = details
       return (value.length >= min && value.length <= max)
     }
 
+    case 'MIN_MAX': {
+      const { min, max } = details
+      return (value >= min && value <= max)
+    }
     default:
       return false
   }
@@ -112,6 +116,18 @@ const checkErrors = (payload, currentQuestion, h, request) => {
       const errorTextNoSelection = validate?.errorEmptyField
       errorList.push({
         text: errorTextNoSelection,
+        href: `#${yarKey}`
+      })
+      return customiseErrorText('', currentQuestion, errorList, h, request)
+    } else if (
+      Object.keys(payload).length > 0 &&
+      validate?.maxAnswers?.count &&
+      typeof (payload[yarKey]) === 'object' &&
+      (payload[yarKey].length > validate?.maxAnswers?.count)
+    ) {
+      const errorExcessSelection = validate.maxAnswers.error
+      errorList.push({
+        text: errorExcessSelection,
         href: `#${yarKey}`
       })
       return customiseErrorText('', currentQuestion, errorList, h, request)

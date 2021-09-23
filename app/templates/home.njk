@@ -3,9 +3,12 @@
 {% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
+
 {% block pageTitle %}
   {{ siteTitle }} - Start
 {% endblock %}
+
 {% block beforeContent %}
   {{ govukBreadcrumbs({
     items: [
@@ -20,6 +23,7 @@
     ]
   }) }}
 {% endblock %}
+
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds govuk-body">
@@ -29,33 +33,49 @@
         <li>check if you can apply for a grant for your project (takes about 5 minutes)</li>
         <li>check how well your project fits the funding priorities (takes about 15 minutes if you have all the project details)</li>
       </ul>
+
+      <h2 class="govuk-heading-m">Who can apply</h2>
       <span>You can apply if you:</span>
       <ul>
         <li>are in England</li>
         <li>own the land the project will be on or have a tenancy for at least 5 years</li>
         <li>estimate the project costs are over £87,500</li>
       </ul>
-      <p>If your project is eligible, you can submit your answers to the Rural Payments Agency (RPA) to request the full application form.</p>
-        {{ govukButton({
-        classes: "govuk-!-margin-top-2 govuk-!-margin-bottom-8",
-        href: button.nextLink,
-        isStartButton: true,
-        text: button.text
-      }) }}
-      <h2 class="govuk-heading-m">What you need</h2>
+      <p>
+      
+      {{ govukInsetText({
+          text: 'If your project is eligible, you can submit your answers to the Rural Payments Agency (RPA) to request the full application form.'
+        })
+      }}
+
+      {{ govukButton({
+          classes: "govuk-!-margin-top-2 govuk-!-margin-bottom-8",
+          href: button.nextLink,
+          isStartButton: true,
+          text: button.text
+        })
+      }}
+
+      <h2 class="govuk-heading-m">Before you start</h2>
       <p>To use the checker, you need:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>information about your business (for example, number of employees, SBI number and turnover)</li>
-        <li>information about the project (for example, irrigated land in hectares, the irrigation systems you will use and the water source, the impact the project will have)</li>
-        <li>an estimated total cost of the items you need</li>
+        <li>information about your business (for example, number of employees and turnover)</li>
+        <li>information about the project (for example, volume of slurry or digestate, the impact the project will have)</li>
+        <li>a list of the items you’d like to buy for the project</li>
+        <li>an estimate of the total cost of the items</li>
       </ul>
-      <p>If you do not enter any information for more than 60 minutes, your application will time out and you will have to start again.</p>
-      <h2 class="govuk-heading-s">Problems  using  the  online  service</h2>
-      <span>If you have any problems using the online service, contact the RPA.</span>
+      <p>If you do not enter any information for more than 20 minutes, your application will time out and you will have to start again.</p>
+
+      <h2 class="govuk-heading-m">Problems using the online service</h2>
+      <span>If you have any problems using the online service, contact the RPA.</span><br/><br/>
+
+      <h2 class="govuk-heading-s">Telephone</h2>
       <p>Telephone: <b><a href="tel:03000200301"> 03000 200 301 </a></b></p>
       <span>Monday to Friday, 9am to 5pm (except public holidays) </span><br/>
-      <a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges">Find out about call charges (opens in new tab)</a><br/>
-      <p>Email: <a class="govuk-link" href="mailto:FTF@rpa.gov.uk">FTF@rpa.gov.uk</a></p>
+      <a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges">Find out about call charges</a><br/><br/>
+
+      <h2 class="govuk-heading-s">Email</h2>
+      <p><a class="govuk-link" href="mailto:FTF@rpa.gov.uk">FTF@rpa.gov.uk</a></p>
     </div>
   </div>
 {% endblock %}
