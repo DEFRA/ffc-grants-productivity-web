@@ -86,6 +86,14 @@ const questionBank = {
           type: 'single-answer',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
+          hint: {
+            html: `
+              If you want to apply for both a slurry project and a robotics project, 
+              you must submit 2 separate applications.
+              The maximum grant amount for both projects together is £500,000.
+              <br/><br/>Select one option
+            `
+          },
           sidebar: null,
           validate: {
             errorEmptyField: 'Select what your project is about'
@@ -144,7 +152,7 @@ const questionBank = {
             items: []
           },
           validate: {
-            errorEmptyField: 'Select the legal status of the farm business'
+            errorEmptyField: 'Select the legal status of the business'
           },
           validations: [
             {
@@ -282,7 +290,7 @@ const questionBank = {
           backUrl: 'country',
           nextUrl: 'project-start',
           ineligibleContent: {
-            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
+            messageContent: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).',
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -295,7 +303,7 @@ const questionBank = {
           sidebar:
           {
             heading: 'Eligibility',
-            para: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).',
+            para: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).',
             items: []
           },
           validate: {
@@ -320,12 +328,12 @@ const questionBank = {
             },
             {
               key: 'planning-permission-A3',
-              value: 'Should be in place by 31 March 2022',
+              value: 'Should be in place by 31 May 2022',
               redirectUrl: 'planning-required-condition'
             },
             {
               key: 'planning-permission-A4',
-              value: 'Will not be in place by 31 March 2022',
+              value: 'Will not be in place by 31 May 2022',
               notEligible: true
             }
           ],
@@ -341,7 +349,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place by 31 March 2022 (the end of the application window).'
+            messageContent: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).'
           }
         },
         {
@@ -426,7 +434,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/project-items'
+              elseUrl: 'slurry/mild-acidification-infrastructure'
             }
           },
           eliminationAnswerKeys: '',
@@ -472,7 +480,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/project-items'
+              elseUrl: 'slurry/mild-acidification-infrastructure'
             }
           },
           eliminationAnswerKeys: '',
@@ -530,7 +538,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/project-items'
+              elseUrl: 'slurry/mild-acidification-infrastructure'
             }
           },
           maybeEligible: true,
@@ -540,12 +548,12 @@ const questionBank = {
           }
         },
         {
-          key: 'project-items',
+          key: 'mild-acidification-infrastructure',
           order: 80,
           title: 'Will your project buy mild acidification equipment?',
           pageTitle: '',
-          url: 'slurry/project-items',
-          baseUrl: 'project-items',
+          url: 'slurry/mild-acidification-infrastructure',
+          baseUrl: 'mild-acidification-infrastructure',
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
             dependentAnswerKeysArray: ['tenancy-A2'],
@@ -604,12 +612,12 @@ const questionBank = {
           validations: [],
           answers: [
             {
-              key: 'project-items-A1',
+              key: 'mild-acidification-infrastructure-A1',
               text: 'Yes, we will buy all 4 items',
               value: ['acid storage', 'dosing equipment', 'mixing tank', 'pump']
             },
             {
-              key: 'project-items-A2',
+              key: 'mild-acidification-infrastructure-A2',
               value: 'No, we will not buy all 4 items',
               notEligible: true
             }
@@ -627,7 +635,7 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/acidification-infrastructure',
           baseUrl: 'acidification-infrastructure',
-          backUrl: 'project-items',
+          backUrl: 'mild-acidification-infrastructure',
           nextUrl: 'slurry-application',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -1611,16 +1619,23 @@ const questionBank = {
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
-          type: 'single-answer',
+          type: 'multi-answer',
           minAnswerCount: 1,
           ga: { dimension: '', value: '' },
+          hint: {
+            text: 'Select up to 2 options'
+          },
           sidebar: {
             heading: 'Funding priorities',
             para: 'RPA wants to fund projects that:',
-            items: ['improve productivity', 'improve the environment', 'introduce innovation']
+            items: ['have significant labour shortages', 'have not received many grants in the past']
           },
           validate: {
-            errorEmptyField: 'Select the agricultural sector your project is in'
+            errorEmptyField: 'Select up to 2 sectors your project is in',
+            maxAnswers: {
+              count: 2,
+              error: 'Select up to 2 sectors your project is in'
+            }
           },
           validations: [
             {
@@ -1857,7 +1872,7 @@ const questionBank = {
               title: 'Single Business Identifier (SBI)',
               classes: 'govuk-fieldset__legend--s',
               hint: {
-                text: 'Select one option'
+                html: 'If you don\'t have an SBI, you can still apply.<br/>Select one option'
               },
               validate: [
                 {
@@ -2501,7 +2516,7 @@ const questionBank = {
             <p>Before you start the project, you can:</p>
             <ul>
               <li>get quotes from suppliers</li>
-              <li>apply for planning permission or an abstraction licence</li>
+              <li>apply for planning permission</li>
             </ul>
             <p><b>You will not automatically get a grant.</b> The grant is expected to be highly competitive and you are competing against other projects.</p>`
           },
