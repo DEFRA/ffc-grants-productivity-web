@@ -1,5 +1,5 @@
 
-export function assessibility () {
+export function accessibility () {
   const elements = document.querySelectorAll('input[type="checkbox"]')
   if (elements) {
     elements.forEach(function (checkBox) {
