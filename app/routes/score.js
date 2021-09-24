@@ -3,6 +3,7 @@ const Wreck = require('@hapi/wreck')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 const pollingConfig = require('../config/polling')
 const { setYarValue, getYarValue } = require('../helpers/session')
+const gapiService = require('../services/gapi-service')
 
 const urlPrefix = require('../config/server').urlPrefix
 
@@ -127,6 +128,14 @@ module.exports = [{
             break
         }
         setYarValue(request, 'current-score', msgData.desirability.overallRating.band)
+        await gapiService.sendDimensionOrMetrics(request, [{
+          dimensionOrMetric: gapiService.dimensions.SCORE,
+          value: msgData.desirability.overallRating.band
+        },
+        {
+          dimensionOrMetric: gapiService.metrics.SCORE,
+          value: 'TIME'
+        }])
         return h.view(viewTemplate, createModel({
           titleText: msgData.desirability.overallRating.band,
           scoreData: msgData,
@@ -134,6 +143,7 @@ module.exports = [{
           scoreChance: scoreChance
         }, request))
       } else {
+        await gapiService.sendEvent(request, gapiService.categories.EXCEPTION, 'Error')
         throw new Error('Score not received.')
       }
     } catch (error) {

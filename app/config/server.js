@@ -1,5 +1,6 @@
 const Joi = require('joi')
 const urlPrefix = '/productivity'
+const startPageUrl = '/start'
 
 // Define config schema
 const schema = Joi.object({
@@ -8,6 +9,7 @@ const schema = Joi.object({
   googleTagManagerKey: Joi.string().default('GTM-WJ5C78H'),
   googleTagManagerServerKey: Joi.string().default('UA-179628664-4'),
   protectiveMonitoringUrl: Joi.string().allow(''),
+  startPageUrl: Joi.string().default(`${urlPrefix}${startPageUrl}`),
   cookieOptions: Joi.object({
     ttl: Joi.number().default(1000 * 60 * 60 * 24 * 365),
     encoding: Joi.string().valid('base64json').default('base64json'),
@@ -29,6 +31,7 @@ const config = {
   googleTagManagerKey: process.env.GOOGLE_TAG_MANAGER_KEY,
   googleTagManagerServerKey: process.env.GOOGLE_TAG_MANAGER_SERVER_KEY,
   protectiveMonitoringUrl: process.env.PROTECTIVE_MONITORING_URL,
+  startPageUrl: process.env.START_PAGE_URL,
   cookieOptions: {
     ttl: process.env.COOKIE_TTL_IN_MILLIS,
     encoding: 'base64json',

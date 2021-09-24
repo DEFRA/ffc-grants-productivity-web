@@ -6,11 +6,10 @@ const getDependentSideBarModel = (question, model, request) => {
   // sidebar contains values of a previous page
   const rawSidebarValues = getYarValue(request, question.sidebar.dependentYarKey) || []
   const formattedSidebarValues = [].concat(rawSidebarValues)
-  const valuesCount = formattedSidebarValues.length
   model = {
     ...model,
     sideBarText: {
-      heading: (valuesCount < 2) ? '1 item selected' : `${valuesCount} items selected`,
+      heading: question.sidebar.heading,
       para: '',
       items: formattedSidebarValues
     }
@@ -32,7 +31,7 @@ const getModel = (data, question, request, conditionalHtml = '') => {
     type,
     key,
     title,
-    backUrl: getBackUrl(hasScore, backUrlObject, backUrl, request) ,
+    backUrl: getBackUrl(hasScore, backUrlObject, backUrl, request),
     items: getOptions(data, question, conditionalHtml, request),
     sideBarText: sidebar,
     diaplaySecondryBtn: hasScore && score?.isDisplay
