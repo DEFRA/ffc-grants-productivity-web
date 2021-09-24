@@ -6,10 +6,12 @@ const { formatUKCurrency } = require('../helpers/data-formats')
 const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
 const { getHtml } = require('../helpers/conditionalHTML')
 const { getUrl } = require('../helpers/urls')
+const { guardPage } = require('../helpers/page-guard')
 const { setOptionsLabel } = require('../helpers/answer-options')
 const senders = require('../messaging/senders')
 const createMsg = require('../messaging/create-msg')
-
+const gapiService = require('../services/gapi-service')
+const { startPageUrl } = require('../config/server')
 const getConfirmationId = (guid, journey) => {
   const prefix = journey === 'Slurry acidification' ? 'SL' : 'RI'
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
@@ -37,9 +39,13 @@ const saveValuesToArray = (yarKey, fields) => {
 }
 
 const getPage = async (question, request, h) => {
-  const { url, backUrl, dependantNextUrl, type, title, yarKey } = question
+  const { url, backUrl, dependantNextUrl, type, title, yarKey, preValidationKeys } = question
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
-
+  const isRedirect = guardPage(request, preValidationKeys)
+  if (isRedirect) {
+    return h.redirect(startPageUrl)
+  }
+  let confirmationId = ''
   if (question.maybeEligible) {
     let { maybeEligibleContent } = question
     maybeEligibleContent.title = question.title
@@ -47,9 +53,9 @@ const getPage = async (question, request, h) => {
 
     if (maybeEligibleContent.reference) {
       if (!getYarValue(request, 'consentMain')) {
-        return h.redirect('/productivity/start')
+        return h.redirect(startPageUrl)
       }
-      const confirmationId = getConfirmationId(request.yar.id, getYarValue(request, 'projectSubject'))
+      confirmationId = getConfirmationId(request.yar.id, getYarValue(request, 'projectSubject'))
       try {
         await senders.sendContactDetails(createMsg.getAllDetails(request, confirmationId), request.yar.id)
       } catch (err) {
@@ -117,7 +123,9 @@ const getPage = async (question, request, h) => {
     const conditional = yarKey === 'inEngland' ? question.conditionalKey : yarKey
     conditionalHtml = handleConditinalHtmlData(type, conditional, request)
   }
-
+  if (question.ga) {
+    await gapiService.processGA(request, question.ga, confirmationId)
+  }
   if (url === 'check-details') {
     setYarValue(request, 'reachedCheckDetails', true)
 
@@ -199,7 +207,6 @@ const showPostPage = (currentQuestion, request, h) => {
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
-
   for (const [key, value] of Object.entries(payload)) {
     thisAnswer = answers?.find(answer => (answer.value === value))
 
@@ -242,6 +249,7 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
+    gapiService.sendEligibilityEvent(request)
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
@@ -254,7 +262,7 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'remainingCost', remainingCost)
   }
 
-  return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload['secBtn']))
+  return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.secBtn))
 }
 
 const getHandler = (question) => {

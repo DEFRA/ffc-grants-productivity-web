@@ -85,7 +85,7 @@ const questionBank = {
           baseUrl: 'project-subject',
           type: 'single-answer',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
+          ga: [{ journeyStart: true }],
           hint: {
             html: `
               If you want to apply for both a slurry project and a robotics project, 
@@ -127,6 +127,7 @@ const questionBank = {
           nextUrl: 'country',
           url: 'legal-status',
           baseUrl: 'legal-status',
+          preValidationKeys: ['projectSubject'],
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -145,7 +146,6 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Eligibility',
             para: 'Public organisations and local authorities cannot apply for this grant.',
@@ -230,6 +230,7 @@ const questionBank = {
           nextUrl: 'planning-permission',
           url: 'country',
           baseUrl: 'country',
+          preValidationKeys: ['legalStatus'],
           ineligibleContent: {
             messageContent: 'This grant is only for projects in England.',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' },
@@ -241,7 +242,6 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Eligibility',
             para: 'This grant is only for projects in England. \n \n Scotland, Wales and Northern Ireland have other grants available.',
@@ -289,6 +289,7 @@ const questionBank = {
           baseUrl: 'planning-permission',
           backUrl: 'country',
           nextUrl: 'project-start',
+          preValidationKeys: ['inEngland'],
           ineligibleContent: {
             messageContent: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).',
             messageLink: {
@@ -299,7 +300,6 @@ const questionBank = {
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           sidebar:
           {
             heading: 'Eligibility',
@@ -346,6 +346,7 @@ const questionBank = {
           url: 'planning-required-condition',
           backUrl: 'planning-permission',
           nextUrl: 'project-start',
+          preValidationKeys: ['planningPermission'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
@@ -359,6 +360,7 @@ const questionBank = {
           pageTitle: '',
           url: 'project-start',
           baseUrl: 'project-start',
+          preValidationKeys: ['planningPermission'],
           backUrlObject: {
             dependentQuestionYarKey: 'planningPermission',
             dependentAnswerKeysArray: ['planning-permission-A3'],
@@ -379,7 +381,6 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           sidebar:
           {
             heading: 'Eligibility',
@@ -429,6 +430,7 @@ const questionBank = {
           url: 'tenancy',
           baseUrl: 'tenancy',
           backUrl: 'project-start',
+          preValidationKeys: ['projectStart'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
@@ -443,7 +445,6 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           sidebar:
           {
             heading: 'Eligibility',
@@ -475,6 +476,7 @@ const questionBank = {
           url: 'tenancy-length',
           baseUrl: 'tenancy-length',
           backUrl: 'tenancy',
+          preValidationKeys: ['tenancy'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
@@ -496,7 +498,6 @@ const questionBank = {
           type: 'single-answer',
           minAnswerCount: 1,
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          ga: { dimension: '', value: '' },
           sidebar:
           {
             heading: 'Eligibility',
@@ -533,6 +534,7 @@ const questionBank = {
           order: 71,
           url: 'tenancy-length-condition',
           backUrl: 'tenancy-length',
+          preValidationKeys: ['tenancyLength'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
@@ -554,6 +556,7 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/mild-acidification-infrastructure',
           baseUrl: 'mild-acidification-infrastructure',
+          preValidationKeys: ['projectStart'],
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
             dependentAnswerKeysArray: ['tenancy-A2'],
@@ -605,7 +608,6 @@ const questionBank = {
               <li>pump</li>
             </ul>`
           },
-          ga: { dimension: '', value: '' },
           validate: {
             errorEmptyField: 'Select yes if you will be buying mild acidification equipment'
           },
@@ -628,7 +630,7 @@ const questionBank = {
         {
           key: 'acidification-infrastructure',
           order: 81,
-          title: 'Does your project also need  acidification infrastructure?',
+          title: 'Does you project also need acidification infrastructure?',
           hint: {
             text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
           },
@@ -637,13 +639,13 @@ const questionBank = {
           baseUrl: 'acidification-infrastructure',
           backUrl: 'mild-acidification-infrastructure',
           nextUrl: 'slurry-application',
+          preValidationKeys: ['projectItems'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
           maxAnswerCount: 3,
-          ga: { dimension: '', value: '' },
           validate: {
             errorEmptyField: 'Select yes if you need acidification infrastructure'
           },
@@ -670,6 +672,7 @@ const questionBank = {
           baseUrl: 'slurry-application',
           backUrl: 'acidification-infrastructure',
           nextUrl: 'project-cost',
+          preValidationKeys: ['acidificationInfrastructure'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you will not be using low emission precision application equipment.',
@@ -684,7 +687,6 @@ const questionBank = {
           hint: {
             text: 'For example, shallow injection, trailing shoe or dribble bar'
           },
-          ga: { dimension: '', value: '' },
           validate: {
             errorEmptyField: 'Select the option that describes your use of low-emission precision equipment'
           },
@@ -734,6 +736,7 @@ const questionBank = {
           baseUrl: 'project-cost',
           backUrl: 'slurry-application',
           nextUrl: 'potential-amount',
+          preValidationKeys: ['slurryApplication'],
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',
@@ -793,7 +796,6 @@ const questionBank = {
             }
           ],
           yarKey: 'projectCost'
-
         },
         {
           key: 'potential-amount',
@@ -802,6 +804,7 @@ const questionBank = {
           url: 'slurry/potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
+          preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -822,6 +825,7 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'project-cost',
           nextUrl: 'SSSI',
+          preValidationKeys: ['projectCost', 'calculatedGrant'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
@@ -835,7 +839,6 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Eligibility',
             para: `
@@ -879,6 +882,7 @@ const questionBank = {
           baseUrl: 'SSSI',
           backUrl: 'remaining-costs',
           nextUrl: 'project-impacts',
+          preValidationKeys: ['canPayRemainingCost'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -892,7 +896,6 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           validate: {
             errorEmptyField: 'Select yes if the project directly impacts a Site of Special Scientific Interest'
           },
@@ -929,6 +932,7 @@ const questionBank = {
           url: 'slurry/project-impacts',
           baseUrl: 'project-impacts',
           backUrl: 'SSSI',
+          preValidationKeys: ['sSSI'],
           hint: {
             html: '<br>Select one option<br>'
           },
@@ -947,7 +951,6 @@ const questionBank = {
           fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li><li>introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           sidebar:
           {
             heading: 'Funding priorities',
@@ -975,7 +978,6 @@ const questionBank = {
             }
           ],
           yarKey: 'projectImpacts'
-
         },
         {
           key: 'slurry-currently-treated',
@@ -994,6 +996,7 @@ const questionBank = {
           baseUrl: 'slurry-currently-treated',
           backUrl: 'project-impacts',
           nextUrl: 'slurry-to-be-treated',
+          preValidationKeys: ['projectImpacts'],
           classes: 'govuk-input--width-10',
           id: 'slurryCurrentlyTreated',
           name: 'slurryCurrentlyTreated',
@@ -1020,7 +1023,6 @@ const questionBank = {
             }
           },
           fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li></ul>',
-          ga: { dimension: '', value: '' },
           sidebar:
           {
             heading: 'Funding priorities',
@@ -1049,7 +1051,6 @@ const questionBank = {
             }
           ],
           yarKey: 'slurryCurrentlyTreated'
-
         },
         {
           key: 'slurry-to-be-treated',
@@ -1062,6 +1063,7 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/slurry-to-be-treated',
           baseUrl: 'slurry-to-be-treated',
+          preValidationKeys: ['projectImpacts'],
           backUrlObject: {
             dependentQuestionYarKey: 'projectImpacts',
             dependentAnswerKeysArray: ['project-impacts-A2'],
@@ -1097,7 +1099,6 @@ const questionBank = {
             }
           },
           fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li></ul>',
-          ga: { dimension: '', value: '' },
           sidebar:
           {
             heading: 'Funding priorities',
@@ -1121,7 +1122,6 @@ const questionBank = {
           ],
           answers: [{ title: 'Future volume treated' }],
           yarKey: 'slurryToBeTreated'
-
         },
         /// ////// ***************** ROBOTICS ************************************/////////////////////
         {
@@ -1139,6 +1139,7 @@ const questionBank = {
               elseUrl: '/productivity/tenancy'
             }
           },
+          preValidationKeys: ['projectStart'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
             dependentAnswerKeysArray: ['robotics-project-items-A10'],
@@ -1164,7 +1165,6 @@ const questionBank = {
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           validate: {
             errorEmptyField: 'Select all the items your project needs'
           },
@@ -1220,7 +1220,6 @@ const questionBank = {
             }
           ],
           yarKey: 'projectItems'
-
         },
         {
           key: 'other-robotic-equipment',
@@ -1231,6 +1230,7 @@ const questionBank = {
           nextUrl: 'project-cost',
           url: 'robotics/other-robotic-equipment',
           baseUrl: 'other-robotic-equipment',
+		      preValidationKeys: ['projectPurchase'],
           ineligibleContent: {
             messageContent: 'This grant is only for projects in England.',
             messageLink: {
@@ -1241,7 +1241,6 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Eligibility',
             para: 'RPA will consider items that:',
@@ -1288,6 +1287,7 @@ const questionBank = {
             }
           },
           nextUrl: 'potential-amount',
+          preValidationKeys: ['projectItems'],
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',
@@ -1307,6 +1307,7 @@ const questionBank = {
             html: `
               You can only apply for a grant of up to 40% of the estimated costs.
               <br/>Do not include VAT.
+              <br/>The minimum grant you can apply for this project is £35,000 (40% of £87,500). The maximum grant is £500,000.
               <br/><br/>Enter amount, for example 95,000`
           },
           eliminationAnswerKeys: '',
@@ -1341,7 +1342,6 @@ const questionBank = {
           ],
           answers: [],
           yarKey: 'projectCost'
-
         },
         {
           key: 'robotics-potential-amount',
@@ -1350,6 +1350,7 @@ const questionBank = {
           url: 'robotics/potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
+          preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -1369,6 +1370,7 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'project-cost',
           nextUrl: 'project-impact',
+          preValidationKeys: ['projectCost'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
@@ -1382,7 +1384,6 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Eligibility',
             para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.\n\n
@@ -1414,7 +1415,6 @@ const questionBank = {
             }
           ],
           yarKey: 'canPayRemainingCost'
-
         },
         {
           key: 'robotics-project-impact',
@@ -1424,6 +1424,7 @@ const questionBank = {
           url: 'robotics/project-impact',
           baseUrl: 'project-impact',
           backUrl: 'remaining-costs',
+          preValidationKeys: ['canPayRemainingCost'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
             dependentAnswerKeysArray: ['robotics-project-items-A7', 'robotics-project-items-A5', 'robotics-project-items-A4', 'robotics-project-items-A3', 'robotics-project-items-A9'],
@@ -1444,7 +1445,6 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Eligibility',
             para: `Your project must improve the productivity and profitability of your main agricultural or horticultural business.
@@ -1493,12 +1493,12 @@ const questionBank = {
           baseUrl: 'data-analytics',
           backUrl: 'project-impact',
           nextUrl: 'energy-source',
+          preValidationKeys: ['projectImpact'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul><li>improve productivity</li><li>introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Funding priorities',
             para: 'RPA wants to fund projects that:',
@@ -1546,6 +1546,7 @@ const questionBank = {
           pageTitle: '',
           url: 'robotics/energy-source',
           baseUrl: 'energy-source',
+          preValidationKeys: ['projectImpact'],
           backUrlObject: {
             dependentQuestionYarKey: 'projectItems',
             dependentAnswerKeysArray: ['robotics-project-items-A7', 'robotics-project-items-A5', 'robotics-project-items-A4', 'robotics-project-items-A3', 'robotics-project-items-A9'],
@@ -1561,7 +1562,6 @@ const questionBank = {
           type: 'multi-answer',
           minAnswerCount: 1,
           maxAnswerCount: 2,
-          ga: { dimension: '', value: '' },
           hint: {
             text: 'Select up to 2 options'
           },
@@ -1616,12 +1616,12 @@ const questionBank = {
           baseUrl: 'agricultural-sector',
           backUrl: 'energy-source',
           nextUrl: 'technology',
+          preValidationKeys: ['energySource'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           hint: {
             text: 'Select up to 2 options'
           },
@@ -1679,12 +1679,12 @@ const questionBank = {
           baseUrl: 'technology',
           backUrl: 'agricultural-sector',
           nextUrl: '/productivity/score',
+          preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul><li>introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           sidebar: {
             heading: 'Funding priorities',
             para: 'RPA wants to fund projects that:',
@@ -1738,7 +1738,6 @@ const questionBank = {
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
-          ga: { dimension: '', value: '' },
           validations: [],
           answers: []
         },
@@ -1751,13 +1750,13 @@ const questionBank = {
           baseUrl: 'business-details',
           backUrl: 'score',
           nextUrl: '/productivity/applying',
+          preValidationKeys: ['current-score'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
-          ga: { dimension: '', value: '' },
           validations: [
             {
               type: '',
@@ -1801,7 +1800,7 @@ const questionBank = {
                 },
                 {
                   type: 'MIN_MAX_CHARS',
-                  min: 2,
+                  min: 0,
                   max: 100,
                   error: 'Name must be 100 characters or fewer'
                 }
@@ -1922,6 +1921,7 @@ const questionBank = {
           url: 'applying',
           baseUrl: 'applying',
           backUrl: 'business-details',
+          preValidationKeys: ['businessDetails'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -1935,7 +1935,6 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           validate: {
             errorEmptyField: 'Select who is applying for this grant'
           },
@@ -1960,7 +1959,6 @@ const questionBank = {
             }
           ],
           yarKey: 'applying'
-
         },
         {
           key: 'farmer-details',
@@ -1971,6 +1969,7 @@ const questionBank = {
           baseUrl: 'farmer-details',
           backUrl: '/productivity/applying',
           nextUrl: 'check-details',
+          preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '',
@@ -1992,7 +1991,7 @@ const questionBank = {
           type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
-          ga: { dimension: '', value: '' },
+          ga: [{ dimension: 'cd3', value: { type: 'yar', key: 'applying' } }],
           validations: [],
           allFields: [
             {
@@ -2204,13 +2203,13 @@ const questionBank = {
           baseUrl: 'agents-details',
           backUrl: 'applying',
           nextUrl: 'farmers-details',
+          preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
-          ga: { dimension: '', value: '' },
           validations: [],
           allFields: [
             {
@@ -2442,6 +2441,7 @@ const questionBank = {
           baseUrl: 'check-details',
           backUrl: 'farmers-details',
           nextUrl: 'confirm',
+          preValidationKeys: ['farmerDetails'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           pageData: {
@@ -2452,7 +2452,6 @@ const questionBank = {
           fundingPriorities: '',
           type: '',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           validations: [
             {
               type: '',
@@ -2470,6 +2469,7 @@ const questionBank = {
           url: 'confirm',
           backUrl: 'check-details',
           nextUrl: 'confirmation',
+          preValidationKeys: ['farmerDetails'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -2493,6 +2493,12 @@ const questionBank = {
           pageTitle: '',
           url: 'confirmation',
           baseUrl: 'confirmation',
+          preValidationKeys: ['consentOptional'],
+          ga: [
+            { dimension: 'cd2', value: { type: 'score' } },
+            { dimension: 'cd5', value: { type: 'confirmationId' } },
+            { dimension: 'cm1', value: { type: 'journey-time' } }
+          ],
           maybeEligible: true,
           maybeEligibleContent: {
             reference: {
@@ -2523,7 +2529,6 @@ const questionBank = {
           fundingPriorities: '',
           type: '',
           minAnswerCount: 1,
-          ga: { dimension: '', value: '' },
           validations: [],
           answers: []
         }

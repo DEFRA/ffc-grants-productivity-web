@@ -27,6 +27,7 @@ async function createServer () {
   await server.register(vision)
   await server.register(require('./plugins/cookies'))
   await server.register(require('./plugins/error-pages'))
+  await server.register(require('./plugins/gapi'))
   await server.register({
     plugin: require('./plugins/header'),
     options: {
@@ -113,7 +114,7 @@ async function createServer () {
       assetpath: '/assets',
       govukAssetpath: '/assets',
       serviceName: 'FFC Grants Service',
-      pageTitle: 'FFC Grants Service - GOV.UK'
+      pageTitle: 'FFC Grants Service'
     }
   })
 
