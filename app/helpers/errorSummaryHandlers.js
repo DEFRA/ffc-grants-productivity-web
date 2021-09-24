@@ -119,18 +119,6 @@ const checkErrors = (payload, currentQuestion, h, request) => {
         href: `#${yarKey}`
       })
       return customiseErrorText('', currentQuestion, errorList, h, request)
-    } else if (
-      Object.keys(payload).length > 0 &&
-      validate?.maxAnswers?.count &&
-      typeof (payload[yarKey]) === 'object' &&
-      (payload[yarKey].length > validate?.maxAnswers?.count)
-    ) {
-      const errorExcessSelection = validate.maxAnswers.error
-      errorList.push({
-        text: errorExcessSelection,
-        href: `#${yarKey}`
-      })
-      return customiseErrorText('', currentQuestion, errorList, h, request)
     }
     //* ** This loop needs refactoring *** */
     for (let [key, value] of Object.entries(payload)) {

@@ -1622,6 +1622,7 @@ const questionBank = {
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
+          maxAnswerCount: 2,
           hint: {
             text: 'Select up to 2 options'
           },
@@ -1632,10 +1633,8 @@ const questionBank = {
           },
           validate: {
             errorEmptyField: 'Select up to 2 sectors your project is in',
-            maxAnswers: {
-              count: 2,
-              error: 'Select up to 2 sectors your project is in'
-            }
+            errorMaxSelect: 'Select up to 2 sectors your project is in'
+
           },
           validations: [
             {
