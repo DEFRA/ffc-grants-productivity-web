@@ -210,7 +210,8 @@ const showPostPage = (currentQuestion, request, h) => {
   for (const [key, value] of Object.entries(payload)) {
     thisAnswer = answers?.find(answer => (answer.value === value))
 
-    if (type !== 'multi-input') {
+    if (type !== 'multi-input' && key !== 'secBtn') {
+      payload.projectImpacts === 'Introduce acidification for the first time' && setYarValue(request, 'slurryCurrentlyTreated', 0)
       setYarValue(request, key, key === 'projectPostcode' ? value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
     }
   }

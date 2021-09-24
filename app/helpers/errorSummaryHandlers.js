@@ -134,40 +134,42 @@ const checkErrors = (payload, currentQuestion, h, request) => {
     }
     //* ** This loop needs refactoring *** */
     for (let [key, value] of Object.entries(payload)) {
-      const noOptionSelected = ((validate?.errorEmptyField && !Object.keys(payload).includes(yarKey)) || payload[yarKey] === '')
-      const hasSelectionError = (value.includes(conditionalAnswer?.value) && validate?.conditionalValidate?.errorEmptyField && payload[conditionalKey] === '') || noOptionSelected
-      const regexError = (validate?.checkRegex && !validate.checkRegex.regex.test(value))
-      const hasRegexValidationError = (payload[yarKey]?.includes(conditionalAnswer?.value) && key === conditionalKey && !validate.conditionalValidate?.checkRegex.regex.test(value)) || regexError
+      if (key !== 'secBtn') {
+        const noOptionSelected = ((validate?.errorEmptyField && !Object.keys(payload).includes(yarKey)) || payload[yarKey] === '')
+        const hasSelectionError = (value.includes(conditionalAnswer?.value) && validate?.conditionalValidate?.errorEmptyField && payload[conditionalKey] === '') || noOptionSelected
+        const regexError = (validate?.checkRegex && !validate.checkRegex.regex.test(value))
+        const hasRegexValidationError = (payload[yarKey]?.includes(conditionalAnswer?.value) && key === conditionalKey && !validate.conditionalValidate?.checkRegex.regex.test(value)) || regexError
 
-      if (hasSelectionError || hasRegexValidationError) {
-        const errorTextNoSelection = hasSelectionError && noOptionSelected ? validate?.errorEmptyField : validate?.conditionalValidate?.errorEmptyField
-        const errorTextRegex = regexError ? validate.checkRegex.error : validate.conditionalValidate?.checkRegex?.error
-        const errorText = hasSelectionError ? errorTextNoSelection : errorTextRegex
-        const href = errorText && !noOptionSelected && !regexError ? conditionalKey : yarKey
-        errorList.push({
-          text: errorText,
-          href: `#${href}`
-        })
-        value = key === conditionalKey ? payload[yarKey] : value
-        return customiseErrorText(value, currentQuestion, errorList, h, request)
-      }
+        if (hasSelectionError || hasRegexValidationError) {
+          const errorTextNoSelection = hasSelectionError && noOptionSelected ? validate?.errorEmptyField : validate?.conditionalValidate?.errorEmptyField
+          const errorTextRegex = regexError ? validate.checkRegex.error : validate.conditionalValidate?.checkRegex?.error
+          const errorText = hasSelectionError ? errorTextNoSelection : errorTextRegex
+          const href = errorText && !noOptionSelected && !regexError ? conditionalKey : yarKey
+          errorList.push({
+            text: errorText,
+            href: `#${href}`
+          })
+          value = key === conditionalKey ? payload[yarKey] : value
+          return customiseErrorText(value, currentQuestion, errorList, h, request)
+        }
 
-      if (maxAnswerCount && typeof payload[yarKey] !== 'string' && payload[yarKey].length > maxAnswerCount) {
-        errorList.push({
-          text: validate.errorMaxSelect,
-          href: `#${yarKey}`
-        })
-        return customiseErrorText(value, currentQuestion, errorList, h, request)
-      }
-      // ERROR: mandatory checkbox / radiobutton not selected
-      const requiredAnswer = answers?.find(answer => (answer.mustSelect))
+        if (maxAnswerCount && typeof payload[yarKey] !== 'string' && payload[yarKey].length > maxAnswerCount) {
+          errorList.push({
+            text: validate.errorMaxSelect,
+            href: `#${yarKey}`
+          })
+          return customiseErrorText(value, currentQuestion, errorList, h, request)
+        }
+        // ERROR: mandatory checkbox / radiobutton not selected
+        const requiredAnswer = answers?.find(answer => (answer.mustSelect))
 
-      if ((!!requiredAnswer) && (!value || !value.includes(requiredAnswer.value))) {
-        errorList.push({
-          text: requiredAnswer.errorMustSelect,
-          href: `#${yarKey}`
-        })
-        return customiseErrorText(value, currentQuestion, errorList, h, request)
+        if ((!!requiredAnswer) && (!value || !value.includes(requiredAnswer.value))) {
+          errorList.push({
+            text: requiredAnswer.errorMustSelect,
+            href: `#${yarKey}`
+          })
+          return customiseErrorText(value, currentQuestion, errorList, h, request)
+        }
       }
     }
   }
