@@ -12,6 +12,7 @@ const senders = require('../messaging/senders')
 const createMsg = require('../messaging/create-msg')
 const gapiService = require('../services/gapi-service')
 const { startPageUrl } = require('../config/server')
+const { ALL_QUESTIONS } = require('../config/question-bank')
 const getConfirmationId = (guid, journey) => {
   const prefix = journey === 'Slurry acidification' ? 'SL' : 'RI'
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
@@ -253,8 +254,61 @@ const showPostPage = (currentQuestion, request, h) => {
     return errors
   }
 
-  if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
+  if (thisAnswer?.notEligible ||
+      (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)
+  ) {
     gapiService.sendEligibilityEvent(request)
+
+    if (thisAnswer?.alsoMaybeEligible) {
+      const {
+        dependentQuestionKey,
+        dependentQuestionYarKey,
+        uniqueAnswer,
+        notUniqueAnswer,
+        maybeEligibleContent
+      } = thisAnswer.alsoMaybeEligible
+
+      const prevAnswer = getYarValue(request, dependentQuestionYarKey)
+
+      const dependentQuestion = ALL_QUESTIONS.find(thisQuestion => (
+        thisQuestion.key === dependentQuestionKey &&
+        thisQuestion.yarKey === dependentQuestionYarKey
+      ))
+
+      let dependentAnswer
+      let openMaybeEligible
+
+      if (notUniqueAnswer) {
+        dependentAnswer = dependentQuestion.answers.find(({ key }) => (key === notUniqueAnswer)).value
+
+        if (
+          prevAnswer?.includes(dependentAnswer) &&
+          typeof (prevAnswer) === 'object' &&
+          prevAnswer.length > 1
+        ) {
+          openMaybeEligible = true
+        }
+      } else if (uniqueAnswer) {
+        dependentAnswer = dependentQuestion.answers.find(({ key }) => (key === uniqueAnswer)).value
+
+        if (
+          prevAnswer?.includes(dependentAnswer) &&
+          (typeof (prevAnswer) === 'string' ||
+            (typeof (prevAnswer === 'object') && prevAnswer.length === 1)
+          )
+        ) {
+          openMaybeEligible = true
+        }
+      }
+
+      if (openMaybeEligible) {
+        maybeEligibleContent.title = currentQuestion.title
+        const { url, backUrl } = currentQuestion
+        const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl }
+        return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+      }
+    }
+
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)

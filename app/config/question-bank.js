@@ -1234,10 +1234,15 @@ const questionBank = {
           baseUrl: 'other-robotic-equipment',
 		      preValidationKeys: ['projectPurchase'],
           ineligibleContent: {
-            messageContent: 'This grant is only for projects in England.',
+            messageContent: 'RPA will only fund items that:',
+            messageContentList: [
+              'have a sensing system',
+              'have a decision-making capability',
+              'use actuators'
+            ],
             messageLink: {
-              url: '',
-              title: ''
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
             }
           },
           fundingPriorities: '',
@@ -1274,7 +1279,22 @@ const questionBank = {
             {
               key: 'other-robotic-equipment-A2',
               value: 'No',
-              notEligible: true
+              notEligible: true,
+              alsoMaybeEligible: {
+                dependentQuestionKey: 'robotics-project-items',
+                dependentQuestionYarKey: 'projectItems',
+                notUniqueAnswer: 'robotics-project-items-A10',
+                maybeEligibleContent: {
+                  messageHeader: 'Your equipment is not eligible for a grant from this scheme',
+                  messageContent: `RPA will only fund items that:
+                  <ul> <li>have a sensing system</li>
+                  <li>have a decision-making capability</li>
+                  <li>use actuators</li></ul>`,
+                  customButtonText: 'Continue with eligible items'
+                }
+
+              }
+
             }
           ],
           yarKey: 'otherRoboticEquipment',

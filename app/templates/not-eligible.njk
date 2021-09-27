@@ -27,6 +27,15 @@
         {{ messageContent | safe}}
       </p>
 
+      {% if messageContentList %}
+        <ul class="govuk-body">
+          {% for item in messageContentList %}
+            <li> {{item}}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+
       {% if insertText %} 
         {{ govukInsetText(insertText) }}
       {% endif %}
