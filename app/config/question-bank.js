@@ -1229,7 +1229,7 @@ const questionBank = {
           title: 'Does your other robotic equipment fit the eligibility criteria?',
           pageTitle: '',
           backUrl: 'project-items',
-          nextUrl: 'project-cost',
+          nextUrl: 'other-robotics-conditional',
           url: 'robotics/other-robotic-equipment',
           baseUrl: 'other-robotic-equipment',
 		      preValidationKeys: ['projectPurchase'],
@@ -1285,6 +1285,7 @@ const questionBank = {
                 dependentQuestionYarKey: 'projectItems',
                 notUniqueAnswer: 'robotics-project-items-A10',
                 maybeEligibleContent: {
+                  nextUrl: 'project-cost',
                   messageHeader: 'Your equipment is not eligible for a grant from this scheme',
                   messageContent: `RPA will only fund items that:
                   <ul> <li>have a sensing system</li>
@@ -1300,6 +1301,26 @@ const questionBank = {
           yarKey: 'otherRoboticEquipment',
           conditionalKey: 'roboticEquipment',
           conditionalLabelData: 'Enter your item, including the name, a brief description and benefit to the farm'
+        },
+        {
+          key: 'other-robotics-conditional',
+          title: 'Your other robotic equipment might get a grant from this scheme',
+          order: 307,
+          url: 'robotics/other-robotics-conditional',
+          backUrl: 'other-robotic-equipment',
+          nextUrl: 'project-cost',
+          preValidationKeys: ['otherRoboticEquipment'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Your other robotic equipment might get a grant from this scheme',
+            messageContent: `RPA will assess your item and whether they can fund it.
+            <br/>They will let you know if the item is eligible before the application window opens and projects are invited to apply.`,
+            warning: {
+              text: 'There’s no guarantee your item will be funded.',
+              iconFallbackText: 'Warning'
+            }
+          },
+          yarKey: 'otherRoboticsConditional'
         },
         {
           key: 'robotics-project-cost',
