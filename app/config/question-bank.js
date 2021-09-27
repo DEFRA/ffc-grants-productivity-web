@@ -1229,7 +1229,7 @@ const questionBank = {
           title: 'Does your other robotic equipment fit the eligibility criteria?',
           pageTitle: '',
           backUrl: 'project-items',
-          nextUrl: 'other-robotics-conditional',
+          nextUrl: 'other-robotic-conditional',
           url: 'robotics/other-robotic-equipment',
           baseUrl: 'other-robotic-equipment',
 		      preValidationKeys: ['projectPurchase'],
@@ -1303,10 +1303,10 @@ const questionBank = {
           conditionalLabelData: 'Enter your item, including the name, a brief description and benefit to the farm'
         },
         {
-          key: 'other-robotics-conditional',
+          key: 'other-robotic-conditional',
           title: 'Your other robotic equipment might get a grant from this scheme',
           order: 307,
-          url: 'robotics/other-robotics-conditional',
+          url: 'robotics/other-robotic-conditional',
           backUrl: 'other-robotic-equipment',
           nextUrl: 'project-cost',
           preValidationKeys: ['otherRoboticEquipment'],
