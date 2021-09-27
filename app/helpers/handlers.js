@@ -303,8 +303,8 @@ const showPostPage = (currentQuestion, request, h) => {
 
       if (openMaybeEligible) {
         maybeEligibleContent.title = currentQuestion.title
-        const { url, backUrl } = currentQuestion
-        const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl }
+        const { url } = currentQuestion
+        const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, nextUrl, backUrl: baseUrl }
         return h.view('maybe-eligible', MAYBE_ELIGIBLE)
       }
     }
