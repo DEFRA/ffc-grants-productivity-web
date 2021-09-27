@@ -1,6 +1,5 @@
-const getHtml = (label, fieldValueData, error) => {
+const getHtml = (label, labelData, fieldValueData, error) => {
   const fieldValue = fieldValueData || ''
-  const labelData = label === 'sbi' ? 'SBI number' : 'What is the site postcode?<br/><br/> Postcode'
 
   return !error
     ? `<div>

@@ -17,11 +17,11 @@ const getConfirmationId = (guid, journey) => {
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
 }
 
-const handleConditinalHtmlData = (type, yarKey, request) => {
+const handleConditinalHtmlData = (type, labelData, yarKey, request) => {
   const isMultiInput = type === 'multi-input'
   const label = isMultiInput ? 'sbi' : yarKey
   const fieldValue = isMultiInput ? getYarValue(request, yarKey)?.sbi : getYarValue(request, yarKey)
-  return getHtml(label, fieldValue)
+  return getHtml(label, labelData, fieldValue)
 }
 
 const saveValuesToArray = (yarKey, fields) => {
@@ -119,9 +119,14 @@ const getPage = async (question, request, h) => {
 
   const data = getYarValue(request, yarKey) || null
   let conditionalHtml
-  if (yarKey === 'inEngland' || yarKey === 'businessDetails') {
+  if (question?.conditionalKey && question?.conditionalLabelData) {
     const conditional = yarKey === 'inEngland' ? question.conditionalKey : yarKey
-    conditionalHtml = handleConditinalHtmlData(type, conditional, request)
+    conditionalHtml = handleConditinalHtmlData(
+      type,
+      question.conditionalLabelData,
+      conditional,
+      request
+    )
   }
   if (question.ga) {
     await gapiService.processGA(request, question.ga, confirmationId)

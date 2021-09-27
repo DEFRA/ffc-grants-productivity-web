@@ -278,7 +278,8 @@ const questionBank = {
             }
           ],
           yarKey: 'inEngland',
-          conditionalKey: 'projectPostcode'
+          conditionalKey: 'projectPostcode',
+          conditionalLabelData: 'What is the site postcode?<br/><br/> Postcode'
         },
         {
           key: 'planning-permission',
@@ -1910,7 +1911,8 @@ const questionBank = {
             }
           ],
           yarKey: 'businessDetails',
-          conditionalKey: 'sbi'
+          conditionalKey: 'sbi',
+          conditionalLabelData: 'SBI number'
         },
         {
           key: 'applying',

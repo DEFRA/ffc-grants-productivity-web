@@ -39,13 +39,13 @@ const validateAnswerField = (value, validationType, details, payload) => {
 }
 
 const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
-  const { yarKey, type, conditionalKey } = currentQuestion
+  const { yarKey, type, conditionalKey, conditionalLabelData } = currentQuestion
   let conditionalHtml
 
   if (conditionalKey) {
     const conditionalFieldError = errorList.find(thisErrorHref => thisErrorHref.href.includes(conditionalKey))?.text
     const conditionalFieldValue = (type === 'multi-input') ? getYarValue(request, yarKey)[conditionalKey] : getYarValue(request, conditionalKey)
-    conditionalHtml = getHtml(conditionalKey, conditionalFieldValue, conditionalFieldError)
+    conditionalHtml = getHtml(conditionalKey, conditionalLabelData, conditionalFieldValue, conditionalFieldError)
   }
   const baseModel = getModel(value, currentQuestion, request, conditionalHtml)
 
