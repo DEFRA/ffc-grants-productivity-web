@@ -2,6 +2,7 @@ const {
   DIGITS_MAX_7,
   CHARS_MIN_10,
   CHARS_MAX_100,
+  CHARS_MAX_60,
   POSTCODE_REGEX,
   WHOLE_NUMBER_REGEX,
   NUMBER_REGEX,
@@ -1242,6 +1243,12 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
+          hint: {
+            html: `All items must
+            <ul><li>have a sensing system</li>
+            <li>have a decision-making capability</li>
+            <li>use actuators</li></ul>`
+          },
           sidebar: {
             heading: 'Eligibility',
             para: 'RPA will consider items that:',
@@ -1250,10 +1257,10 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Select yes if your other robotic equipment meets the eligibility criteria',
             conditionalValidate: {
-              errorEmptyField: 'Enter a postcode, like AA1 1AA',
+              errorEmptyField: 'Describe your other robotic equipment',
               checkRegex: {
-                regex: POSTCODE_REGEX,
-                error: 'Enter a postcode, like AA1 1AA'
+                regex: CHARS_MAX_60,
+                error: 'You have a maximum of 60 words'
               }
             }
           },
@@ -1271,7 +1278,8 @@ const questionBank = {
             }
           ],
           yarKey: 'otherRoboticEquipment',
-          conditionalKey: 'roboticEquipment'
+          conditionalKey: 'roboticEquipment',
+          conditionalLabelData: 'Enter your item, including the name, a brief description and benefit to the farm'
         },
         {
           key: 'robotics-project-cost',
