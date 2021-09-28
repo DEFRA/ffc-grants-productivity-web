@@ -7,7 +7,7 @@ const getHtml = (label, labelData, fieldValueData, error) => {
         <label class="govuk-label" for="${label}">
         ${labelData}
         </label>
-        <textarea class="govuk-textarea" rows="5" id="${label}" name="${label}" value="${fieldValue}"></textarea>
+        <textarea class="govuk-textarea" rows="5" id="${label}" name="${label}">${fieldValue}</textarea>
       </div>`
       : `<div class="govuk-form-group--error">
         <label class="govuk-label" for="${label}">
@@ -19,7 +19,7 @@ const getHtml = (label, labelData, fieldValueData, error) => {
           </span>
           ${error}
         </span>
-        <textarea class="govuk-textarea govuk-input--error" rows="5" autocomplete="off" id="${label}" name="${label}" value="${fieldValue}"></textarea>
+        <textarea class="govuk-textarea govuk-input--error" rows="5" autocomplete="off" id="${label}" name="${label}">${fieldValue}</textarea>
       </div>`
   }
 
