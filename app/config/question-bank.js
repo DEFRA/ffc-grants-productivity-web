@@ -1679,7 +1679,7 @@ const questionBank = {
           },
           sidebar: {
             heading: 'Funding priorities',
-            para: 'RPA wants to fund projects that:',
+            para: 'RPA wants to fund sectors that:',
             items: ['have significant labour shortages', 'have not received many grants in the past']
           },
           validate: {
