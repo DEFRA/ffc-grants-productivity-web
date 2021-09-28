@@ -2,6 +2,7 @@ const {
   DIGITS_MAX_7,
   CHARS_MIN_10,
   CHARS_MAX_100,
+  CHARS_MAX_60,
   POSTCODE_REGEX,
   WHOLE_NUMBER_REGEX,
   NUMBER_REGEX,
@@ -278,7 +279,8 @@ const questionBank = {
             }
           ],
           yarKey: 'inEngland',
-          conditionalKey: 'projectPostcode'
+          conditionalKey: 'projectPostcode',
+          conditionalLabelData: 'What is the site postcode?<br/><br/> Postcode'
         },
         {
           key: 'planning-permission',
@@ -1227,20 +1229,31 @@ const questionBank = {
           title: 'Does your other robotic equipment fit the eligibility criteria?',
           pageTitle: '',
           backUrl: 'project-items',
-          nextUrl: 'project-cost',
+          nextUrl: 'other-robotic-conditional',
           url: 'robotics/other-robotic-equipment',
           baseUrl: 'other-robotic-equipment',
 		      preValidationKeys: ['projectPurchase'],
           ineligibleContent: {
-            messageContent: 'This grant is only for projects in England.',
+            messageContent: 'RPA will only fund items that:',
+            messageContentList: [
+              'have a sensing system',
+              'have a decision-making capability',
+              'use actuators'
+            ],
             messageLink: {
-              url: '',
-              title: ''
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
             }
           },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
+          hint: {
+            html: `All items must
+            <ul><li>have a sensing system</li>
+            <li>have a decision-making capability</li>
+            <li>use actuators</li></ul>`
+          },
           sidebar: {
             heading: 'Eligibility',
             para: 'RPA will consider items that:',
@@ -1249,10 +1262,10 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Select yes if your other robotic equipment meets the eligibility criteria',
             conditionalValidate: {
-              errorEmptyField: 'Enter a postcode, like AA1 1AA',
+              errorEmptyField: 'Describe your other robotic equipment',
               checkRegex: {
-                regex: POSTCODE_REGEX,
-                error: 'Enter a postcode, like AA1 1AA'
+                regex: CHARS_MAX_60,
+                error: 'You have a maximum of 60 words'
               }
             }
           },
@@ -1266,11 +1279,48 @@ const questionBank = {
             {
               key: 'other-robotic-equipment-A2',
               value: 'No',
-              notEligible: true
+              notEligible: true,
+              alsoMaybeEligible: {
+                dependentQuestionKey: 'robotics-project-items',
+                dependentQuestionYarKey: 'projectItems',
+                notUniqueAnswer: 'robotics-project-items-A10',
+                maybeEligibleContent: {
+                  nextUrl: 'project-cost',
+                  messageHeader: 'Your equipment is not eligible for a grant from this scheme',
+                  messageContent: `RPA will only fund items that:
+                  <ul> <li>have a sensing system</li>
+                  <li>have a decision-making capability</li>
+                  <li>use actuators</li></ul>`,
+                  customButtonText: 'Continue with eligible items'
+                }
+
+              }
+
             }
           ],
           yarKey: 'otherRoboticEquipment',
-          conditionalKey: 'roboticEquipment'
+          conditionalKey: 'roboticEquipment',
+          conditionalLabelData: 'Enter your item, including the name, a brief description and benefit to the farm'
+        },
+        {
+          key: 'other-robotic-conditional',
+          title: 'Your other robotic equipment might get a grant from this scheme',
+          order: 307,
+          url: 'robotics/other-robotic-conditional',
+          backUrl: 'other-robotic-equipment',
+          nextUrl: 'project-cost',
+          preValidationKeys: ['otherRoboticEquipment'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Your other robotic equipment might get a grant from this scheme',
+            messageContent: `RPA will assess your item and whether they can fund it.
+            <br/>They will let you know if the item is eligible before the application window opens and projects are invited to apply.`,
+            warning: {
+              text: 'There’s no guarantee your item will be funded.',
+              iconFallbackText: 'Warning'
+            }
+          },
+          yarKey: 'otherRoboticsConditional'
         },
         {
           key: 'robotics-project-cost',
@@ -1299,15 +1349,16 @@ const questionBank = {
             grantPercentage: 40
           },
           label: {
-            text: 'What is the estimated cost of the items?',
+            text: 'What is the total estimated cost of the items?',
             classes: 'govuk-label--l',
             isPageHeading: true
           },
           hint: {
             html: `
               You can only apply for a grant of up to 40% of the estimated costs.
-              <br/>Do not include VAT.
-              <br/>The minimum grant you can apply for this project is £35,000 (40% of £87,500). The maximum grant is £500,000.
+              <br/>The minimum grant you can apply for this project is £35,000 (40% of £87,500).
+              <br/>The maximum grant is £500,000.
+              <br/><br/>Do not include VAT.
               <br/><br/>Enter amount, for example 95,000`
           },
           eliminationAnswerKeys: '',
@@ -1910,7 +1961,8 @@ const questionBank = {
             }
           ],
           yarKey: 'businessDetails',
-          conditionalKey: 'sbi'
+          conditionalKey: 'sbi',
+          conditionalLabelData: 'SBI number'
         },
         {
           key: 'applying',

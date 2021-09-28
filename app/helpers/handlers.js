@@ -8,20 +8,22 @@ const { getHtml } = require('../helpers/conditionalHTML')
 const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
 const { setOptionsLabel } = require('../helpers/answer-options')
+const { notUniqueSelection, uniqueSelection } = require('../helpers/utils')
 const senders = require('../messaging/senders')
 const createMsg = require('../messaging/create-msg')
 const gapiService = require('../services/gapi-service')
 const { startPageUrl } = require('../config/server')
+const { ALL_QUESTIONS } = require('../config/question-bank')
 const getConfirmationId = (guid, journey) => {
   const prefix = journey === 'Slurry acidification' ? 'SL' : 'RI'
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
 }
 
-const handleConditinalHtmlData = (type, yarKey, request) => {
+const handleConditinalHtmlData = (type, labelData, yarKey, request) => {
   const isMultiInput = type === 'multi-input'
   const label = isMultiInput ? 'sbi' : yarKey
   const fieldValue = isMultiInput ? getYarValue(request, yarKey)?.sbi : getYarValue(request, yarKey)
-  return getHtml(label, fieldValue)
+  return getHtml(label, labelData, fieldValue)
 }
 
 const saveValuesToArray = (yarKey, fields) => {
@@ -119,9 +121,14 @@ const getPage = async (question, request, h) => {
 
   const data = getYarValue(request, yarKey) || null
   let conditionalHtml
-  if (yarKey === 'inEngland' || yarKey === 'businessDetails') {
-    const conditional = yarKey === 'inEngland' ? question.conditionalKey : yarKey
-    conditionalHtml = handleConditinalHtmlData(type, conditional, request)
+  if (question?.conditionalKey && question?.conditionalLabelData) {
+    const conditional = yarKey === 'businessDetails' ? yarKey : question.conditionalKey
+    conditionalHtml = handleConditinalHtmlData(
+      type,
+      question.conditionalLabelData,
+      conditional,
+      request
+    )
   }
   if (question.ga) {
     await gapiService.processGA(request, question.ga, confirmationId)
@@ -195,7 +202,28 @@ const getPage = async (question, request, h) => {
       break
   }
 
-  return h.view('page', getModel(data, question, request, conditionalHtml))
+  let PAGE_MODEL = getModel(data, question, request, conditionalHtml)
+
+  if (url === 'robotics/project-cost') {
+    const roboticsProjectItems = getYarValue(request, 'projectItems')
+    const otherRoboticsEquipment = getYarValue(request, 'otherRoboticEquipment')
+    let projectCostBackUrl
+
+    if (!roboticsProjectItems.includes('Other robotic equipment')) {
+      projectCostBackUrl = 'project-items'
+    } else if (otherRoboticsEquipment === 'Yes') {
+      projectCostBackUrl = 'other-robotic-conditional'
+    } else {
+      projectCostBackUrl = 'other-robotic-equipment'
+    }
+
+    PAGE_MODEL = {
+      ...PAGE_MODEL,
+      backUrl: projectCostBackUrl
+    }
+  }
+
+  return h.view('page', PAGE_MODEL)
 }
 
 const showPostPage = (currentQuestion, request, h) => {
@@ -248,8 +276,46 @@ const showPostPage = (currentQuestion, request, h) => {
     return errors
   }
 
-  if (thisAnswer?.notEligible || (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)) {
+  if (thisAnswer?.notEligible ||
+      (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)
+  ) {
     gapiService.sendEligibilityEvent(request)
+
+    if (thisAnswer?.alsoMaybeEligible) {
+      const {
+        dependentQuestionKey,
+        dependentQuestionYarKey,
+        uniqueAnswer,
+        notUniqueAnswer,
+        maybeEligibleContent
+      } = thisAnswer.alsoMaybeEligible
+
+      const prevAnswer = getYarValue(request, dependentQuestionYarKey)
+
+      const dependentQuestion = ALL_QUESTIONS.find(thisQuestion => (
+        thisQuestion.key === dependentQuestionKey &&
+        thisQuestion.yarKey === dependentQuestionYarKey
+      ))
+
+      let dependentAnswer
+      let openMaybeEligible
+
+      if (notUniqueAnswer) {
+        dependentAnswer = dependentQuestion.answers.find(({ key }) => (key === notUniqueAnswer)).value
+        openMaybeEligible = notUniqueSelection(prevAnswer, dependentAnswer)
+      } else if (uniqueAnswer) {
+        dependentAnswer = dependentQuestion.answers.find(({ key }) => (key === uniqueAnswer)).value
+        openMaybeEligible = uniqueSelection(prevAnswer, dependentAnswer)
+      }
+
+      if (openMaybeEligible) {
+        maybeEligibleContent.title = currentQuestion.title
+        const { url } = currentQuestion
+        const MAYBE_ELIGIBLE = { ...maybeEligibleContent, url, backUrl: baseUrl }
+        return h.view('maybe-eligible', MAYBE_ELIGIBLE)
+      }
+    }
+
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
