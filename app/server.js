@@ -10,6 +10,7 @@ const Uuid = require('uuid')
 const protectiveMonitoringServiceSendEvent = require('./services/protective-monitoring-service')
 const cacheConfig = require('./config/cache')
 const catbox = cacheConfig.useRedis ? require('@hapi/catbox-redis') : require('@hapi/catbox-memory')
+const authConfig = require('./config/auth')
 
 async function createServer () {
   const server = Hapi.server({
@@ -23,11 +24,14 @@ async function createServer () {
     }]
   })
 
+  if (authConfig.enabled) {
+    await server.register(require('./plugins/auth'))
+  }
+
   await server.register(inert)
   await server.register(vision)
   await server.register(require('./plugins/cookies'))
   await server.register(require('./plugins/error-pages'))
-  await server.register(require('./plugins/gapi'))
   await server.register({
     plugin: require('./plugins/header'),
     options: {
@@ -44,8 +48,24 @@ async function createServer () {
       ]
     }
   })
+  // GTM Server side
+  await server.register({
+    plugin: require('./plugins/gapi'),
+    options: {
+      propertySettings: [
+        {
+          id: config.googleTagManagerServerKey,
+          hitTypes: ['pageview']
+        }
+      ],
+      sessionIdProducer: async request => {
+        return request.yar ? request.yar.id : Uuid.v4()
+      },
+      batchSize: 20,
+      batchInterval: 15000
+    }
+  })
   // Session cache redis with yar
-
   await server.register([
     {
       plugin: require('@hapi/yar'),
@@ -82,6 +102,7 @@ async function createServer () {
     require('./routes/healthy'),
     require('./routes/healthz'),
     require('./routes/start'),
+    require('./routes/login'),
     require('./routes/assets'),
     require('./routes/cookies'),
     require('./routes/accessibility'),
