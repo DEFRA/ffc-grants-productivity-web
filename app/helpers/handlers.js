@@ -201,7 +201,28 @@ const getPage = async (question, request, h) => {
       break
   }
 
-  return h.view('page', getModel(data, question, request, conditionalHtml))
+  let PAGE_MODEL = getModel(data, question, request, conditionalHtml)
+
+  if (url === 'robotics/project-cost') {
+    const roboticsProjectItems = getYarValue(request, 'projectItems')
+    const otherRoboticsEquipment = getYarValue(request, 'otherRoboticEquipment')
+    let projectCostBackUrl
+
+    if (!roboticsProjectItems.includes('Other robotic equipment')) {
+      projectCostBackUrl = 'project-items'
+    } else if (otherRoboticsEquipment === 'Yes') {
+      projectCostBackUrl = 'other-robotic-conditional'
+    } else {
+      projectCostBackUrl = 'other-robotic-equipment'
+    }
+
+    PAGE_MODEL = {
+      ...PAGE_MODEL,
+      backUrl: projectCostBackUrl
+    }
+  }
+
+  return h.view('page', PAGE_MODEL)
 }
 
 const showPostPage = (currentQuestion, request, h) => {
