@@ -8,6 +8,7 @@ const { getHtml } = require('../helpers/conditionalHTML')
 const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
 const { setOptionsLabel } = require('../helpers/answer-options')
+const { notUniqueSelection, uniqueSelection } = require('../helpers/utils')
 const senders = require('../messaging/senders')
 const createMsg = require('../messaging/create-msg')
 const gapiService = require('../services/gapi-service')
@@ -301,25 +302,10 @@ const showPostPage = (currentQuestion, request, h) => {
 
       if (notUniqueAnswer) {
         dependentAnswer = dependentQuestion.answers.find(({ key }) => (key === notUniqueAnswer)).value
-
-        if (
-          prevAnswer?.includes(dependentAnswer) &&
-          typeof (prevAnswer) === 'object' &&
-          prevAnswer.length > 1
-        ) {
-          openMaybeEligible = true
-        }
+        openMaybeEligible = notUniqueSelection(prevAnswer, dependentAnswer)
       } else if (uniqueAnswer) {
         dependentAnswer = dependentQuestion.answers.find(({ key }) => (key === uniqueAnswer)).value
-
-        if (
-          prevAnswer?.includes(dependentAnswer) &&
-          (typeof (prevAnswer) === 'string' ||
-            (typeof (prevAnswer === 'object') && prevAnswer.length === 1)
-          )
-        ) {
-          openMaybeEligible = true
-        }
+        openMaybeEligible = uniqueSelection(prevAnswer, dependentAnswer)
       }
 
       if (openMaybeEligible) {
