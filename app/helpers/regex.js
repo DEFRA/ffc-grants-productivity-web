@@ -1,6 +1,7 @@
 const DIGITS_MAX_7 = /^\d{0,7}$/
 const CHARS_MIN_10 = /^.{10,}$/
 const CHARS_MAX_100 = /^.{0,100}$/
+const CHARS_MAX_60 = /^.{0,60}$/
 const WHOLE_NUMBER_REGEX = /^[1-9]\d*/
 const NUMBER_REGEX = /^\d+$/
 const SELECT_VARIABLE_TO_REPLACE = /{{_(.+?)_}}/ig
@@ -14,6 +15,7 @@ module.exports = {
   DIGITS_MAX_7,
   CHARS_MIN_10,
   CHARS_MAX_100,
+  CHARS_MAX_60,
   SELECT_VARIABLE_TO_REPLACE,
   DELETE_POSTCODE_CHARS_REGEX,
   POSTCODE_REGEX,
