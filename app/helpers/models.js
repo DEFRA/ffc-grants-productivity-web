@@ -2,19 +2,25 @@ const { getUrl } = require('../helpers/urls')
 const { getOptions } = require('../helpers/answer-options')
 const { getYarValue } = require('../helpers/session')
 
-const getDependentSideBarModel = (question, model, request) => {
+const getDependentSideBar = (question, sidebar, request) => {
   // sidebar contains values of a previous page
-  const rawSidebarValues = getYarValue(request, question.sidebar.dependentYarKey) || []
-  const formattedSidebarValues = [].concat(rawSidebarValues)
-  model = {
-    ...model,
-    sideBarText: {
-      heading: question.sidebar.heading,
-      para: '',
+
+  const { dependentYarKey, content } = sidebar
+
+  let rawSidebarValues
+  let formattedSidebarValues
+
+  const updatedSidebarContent = content.map(thisContent => {
+    rawSidebarValues = getYarValue(request, dependentYarKey) || []
+    formattedSidebarValues = [].concat(rawSidebarValues)
+
+    return {
+      ...thisContent,
       items: formattedSidebarValues
     }
-  }
-  return model
+  })
+
+  return updatedSidebarContent
 }
 
 const getBackUrl = (hasScore, backUrlObject, backUrl, request) => {
@@ -27,16 +33,20 @@ const getModel = (data, question, request, conditionalHtml = '') => {
   const hasScore = !!getYarValue(request, 'current-score')
   title = title ?? label?.text
 
+  const sideBarText = (sidebar?.dependentYarKey)
+    ? getDependentSideBar(question, sidebar, request)
+    : sidebar
+
   const model = {
     type,
     key,
     title,
     backUrl: getBackUrl(hasScore, backUrlObject, backUrl, request),
     items: getOptions(data, question, conditionalHtml, request),
-    sideBarText: sidebar,
+    sideBarText,
     diaplaySecondryBtn: hasScore && score?.isDisplay
   }
-  return (sidebar?.dependentYarKey) ? getDependentSideBarModel(question, model, request) : model
+  return model
 }
 
 module.exports = {

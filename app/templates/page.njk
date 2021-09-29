@@ -6,7 +6,7 @@
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
-{% from "./components/macro.njk" import crumbToken, sideBar, conditionalButtons %}
+{% from "./components/macro.njk" import crumbToken, multiSideBar, conditionalButtons %}
 
 
 {% block pageTitle %}   
@@ -96,7 +96,7 @@
       </form>
     </div>
     {%if sideBarText %}
-      {{ sideBar(sideBarText) }}
+      {{ multiSideBar(sideBarText) }}
     {%endif%}
   </div>
 {% endblock %}

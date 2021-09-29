@@ -29,7 +29,7 @@
   <div class="govuk-grid-column-one-third  govuk-!-padding-top-4 govuk-body">
     <hr class="sideBarColor"/>
 
-    {% for sidebar in sideBars %}
+    {% for sidebar in sideBars.values %}
       <h2 class="govuk-heading-m" id="subsection-title">
         {{ sidebar.heading }}
       </h2>
@@ -43,6 +43,10 @@
         </ul>
       {% endfor %}
     {% endfor %}
+
+    {% if sideBars.details %} 
+      {{ govukDetails(sideBars.details) }}
+    {% endif %}
 
   </div>
 {% endmacro %}
