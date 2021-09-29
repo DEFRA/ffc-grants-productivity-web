@@ -29,6 +29,9 @@ function createModel (cookiesPolicy = {}, updated = false) {
 module.exports = [{
   method: 'GET',
   path: currentPath,
+  options: {
+    auth: false
+  },
   handler: (request, h) => {
     return h.view(viewTemplate, createModel(request.state.cookies_policy, request.query.updated))
   }
@@ -36,6 +39,7 @@ module.exports = [{
   method: 'POST',
   path: currentPath,
   options: {
+    auth: false,
     validate: {
       payload: Joi.object({
         analytics: Joi.boolean(),
