@@ -1277,7 +1277,7 @@ const questionBank = {
           nextUrl: 'other-robotic-conditional',
           url: 'robotics/other-robotic-equipment',
           baseUrl: 'other-robotic-equipment',
-		      preValidationKeys: ['projectPurchase'],
+          preValidationKeys: ['projectPurchase'],
           ineligibleContent: {
             messageContent: 'RPA will only fund items that:',
             messageContentList: [
@@ -2231,6 +2231,11 @@ const questionBank = {
                 text: 'We will only use this to contact you about your application'
               },
               validate: [
+                {
+                  type: 'NOT_EMPTY_EXTRA',
+                  error: 'Enter a landline or mobile number',
+                  extraFieldsToCheck: ['mobileNumber']
+                },
                 {
                   type: 'REGEX',
                   regex: CHARS_MIN_10,
