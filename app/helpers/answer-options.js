@@ -36,7 +36,7 @@ function setOptionsLabel (data, answers, conditionalHtml) {
 
 function setSelectLabels (data, selectList) {
   return [
-    { text: 'Please select a value', value: '' },
+    { text: 'Select an option', value: '' },
     ...selectList.map((selectValue) => {
       return {
         value: selectValue,
