@@ -5,22 +5,32 @@ const { getYarValue } = require('../helpers/session')
 const getDependentSideBar = (question, sidebar, request) => {
   // sidebar contains values of a previous page
 
-  const { dependentYarKey, content } = sidebar
+  const { values, dependentYarKey } = sidebar
 
   let rawSidebarValues
   let formattedSidebarValues
 
-  const updatedSidebarContent = content.map(thisContent => {
-    rawSidebarValues = getYarValue(request, dependentYarKey) || []
-    formattedSidebarValues = [].concat(rawSidebarValues)
+  const updatedValues = values.map(({ heading, content }) => {
+    const updatedContent = content.map(thisContent => {
+      rawSidebarValues = getYarValue(request, dependentYarKey) || []
+      formattedSidebarValues = [].concat(rawSidebarValues)
+
+      return {
+        ...thisContent,
+        items: formattedSidebarValues
+      }
+    })
 
     return {
-      ...thisContent,
-      items: formattedSidebarValues
+      heading,
+      content: updatedContent
     }
   })
 
-  return updatedSidebarContent
+  return {
+    ...sidebar,
+    values: updatedValues
+  }
 }
 
 const getBackUrl = (hasScore, backUrlObject, backUrl, request) => {
