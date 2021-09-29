@@ -47,7 +47,7 @@ const getModel = (data, question, request, conditionalHtml = '') => {
     ? getDependentSideBar(question, sidebar, request)
     : sidebar
 
-  const model = {
+  return {
     type,
     key,
     title,
@@ -56,7 +56,6 @@ const getModel = (data, question, request, conditionalHtml = '') => {
     sideBarText,
     diaplaySecondryBtn: hasScore && score?.isDisplay
   }
-  return model
 }
 
 module.exports = {
