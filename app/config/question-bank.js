@@ -465,7 +465,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The land must be owned or have a tenancy in place until 2026 before starting the project.',
+                para: 'The land must be owned or have a tenancy in place until 2027 before starting the project.',
                 items: []
               }]
             }]
@@ -490,7 +490,7 @@ const questionBank = {
         {
           key: 'tenancy-length',
           order: 70,
-          title: 'Do you have a tenancy agreement until 2026 or after?',
+          title: 'Do you have a tenancy agreement until 2027 or after?',
           pageTitle: '',
           url: 'tenancy-length',
           baseUrl: 'tenancy-length',
@@ -521,7 +521,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The land must be owned or have a tenancy in place until 2026 before starting the project.',
+                para: 'The land must be owned or have a tenancy in place until 2027 before starting the project.',
                 items: []
               }]
             }]
@@ -1278,7 +1278,7 @@ const questionBank = {
           nextUrl: 'other-robotic-conditional',
           url: 'robotics/other-robotic-equipment',
           baseUrl: 'other-robotic-equipment',
-          preValidationKeys: ['projectPurchase'],
+          preValidationKeys: ['projectItems'],
           ineligibleContent: {
             messageContent: 'RPA will only fund items that:',
             messageContentList: [
@@ -1298,14 +1298,14 @@ const questionBank = {
             html: `All items must
             <ul><li>have a sensing system</li>
             <li>have a decision-making capability</li>
-            <li>use actuators</li></ul>`
+            <li>use actuators (the devices that move robot joints)</li></ul>`
           },
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
                 para: 'RPA will consider items that:',
-                items: ['have a sensing system', 'have a decision-making capability', 'use actuators']
+                items: ['have a sensing system', 'have a decision-making capability', 'use actuators (the devices that move robot joints)']
               }]
             }]
           },
@@ -1612,7 +1612,7 @@ const questionBank = {
           order: 350,
           title: 'Will your project use data analytics to improve productivity on the farm?',
           hint: {
-            text: 'Software automating data analysis to improve efficiency'
+            text: 'Software automating data analysis to improve efficiency (for example, analysing white blood cell counts in dairy)'
           },
           pageTitle: '',
           url: 'robotics/data-analytics',
@@ -1765,7 +1765,7 @@ const questionBank = {
               heading: 'Funding priorities',
               content: [{
                 para: 'RPA wants to fund sectors that:',
-                items: ['have significant labour shortages', 'have not received many grants in the past']
+                items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
               }]
             }]
           },
@@ -2489,6 +2489,11 @@ const questionBank = {
               },
               validate: [
                 {
+                  type: 'NOT_EMPTY_EXTRA',
+                  error: 'Enter a landline or mobile number',
+                  extraFieldsToCheck: ['mobileNumber']
+                },
+                {
                   type: 'REGEX',
                   regex: CHARS_MIN_10,
                   error: 'Your landline number must have at least 10 characters'
@@ -2651,7 +2656,7 @@ const questionBank = {
             reference: {
               titleText: 'Details submitted',
               html: 'Your reference number<br><strong>{{_confirmationId_}}</strong>',
-              surveyLink: 'https://defragroup.eu.qualtrics.com/jfe/form/SV_26sUm6qNA26AoK2'
+              surveyLink: 'https://defragroup.eu.qualtrics.com/jfe/form/SV_9ugumqZO9w4M20e'
             },
             messageContent: `You will get an email with a record of your answers.<br/><br/>
             If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Transformation Fund scheme:<br/><br/>
