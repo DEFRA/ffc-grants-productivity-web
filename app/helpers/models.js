@@ -23,7 +23,7 @@ const getDependentSideBar = (sidebar, request) => {
         const avoidThese = thisContent.dependentAnswerExceptThese
 
         questionAnswers.forEach(({ key, value }) => {
-          if (!avoidThese.includes(key) && yarValue.includes(value)) {
+          if (!avoidThese.includes(key) && yarValue?.includes(value)) {
             addUpdatedValue = true
             formattedSidebarValues.push(value)
           }
@@ -32,7 +32,7 @@ const getDependentSideBar = (sidebar, request) => {
         const addThese = thisContent.dependentAnswerOnlyThese
 
         questionAnswers.forEach(({ key, value }) => {
-          if (addThese.includes(key) && yarValue.includes(value)) {
+          if (addThese.includes(key) && yarValue?.includes(value)) {
             addUpdatedValue = true
             formattedSidebarValues.push(value)
           }
