@@ -473,7 +473,7 @@ const questionBank = {
         {
           key: 'tenancy-length',
           order: 70,
-          title: 'Do you have a tenancy agreement until 2026 or after?',
+          title: 'Do you have a tenancy agreement until 2027 or after?',
           pageTitle: '',
           url: 'tenancy-length',
           baseUrl: 'tenancy-length',
@@ -1232,7 +1232,7 @@ const questionBank = {
           nextUrl: 'other-robotic-conditional',
           url: 'robotics/other-robotic-equipment',
           baseUrl: 'other-robotic-equipment',
-          preValidationKeys: ['projectPurchase'],
+          preValidationKeys: ['projectItems'],
           ineligibleContent: {
             messageContent: 'RPA will only fund items that:',
             messageContentList: [
