@@ -2,7 +2,7 @@ const {
   DIGITS_MAX_7,
   CHARS_MIN_10,
   CHARS_MAX_100,
-  CHARS_MAX_60,
+  WORDS_MAX_60,
   POSTCODE_REGEX,
   WHOLE_NUMBER_REGEX,
   NUMBER_REGEX,
@@ -1264,7 +1264,7 @@ const questionBank = {
             conditionalValidate: {
               errorEmptyField: 'Describe your other robotic equipment',
               checkRegex: {
-                regex: CHARS_MAX_60,
+                regex: WORDS_MAX_60,
                 error: 'You have a maximum of 60 words'
               }
             }
@@ -1313,7 +1313,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Your other robotic equipment might get a grant from this scheme',
-            messageContent: `RPA will assess your item and whether they can fund it.
+            messageContent: `RPA will assess your item and whether they will fund it.
             <br/>They will let you know if the item is eligible before the application window opens and projects are invited to apply.`,
             warning: {
               text: 'There’s no guarantee your item will be funded.',
