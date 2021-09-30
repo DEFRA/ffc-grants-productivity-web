@@ -806,7 +806,8 @@ const questionBank = {
                 items: []
               }]
             }],
-            dependentYarKey: 'projectItems'
+            dependentYarKey: 'projectItems',
+            dependentQuestionKey: 'mild-acidification-infrastructure'
           },
           validate: {
             errorEmptyField: 'Enter the estimated cost for the items',
@@ -1420,14 +1421,27 @@ const questionBank = {
             }
           },
           sidebar: {
-            values: [{
-              heading: 'Items selected',
-              content: [{
-                para: '',
-                items: []
-              }]
-            }],
-            dependentYarKey: 'projectItems'
+            values: [
+              {
+                heading: 'Eligible items selected',
+                content: [{
+                  para: '',
+                  items: [],
+                  dependentAnswerExceptThese: ['robotics-project-items-A10']
+                }]
+              },
+              {
+                heading: 'Not yet eligible items',
+                content: [{
+                  para: '',
+                  items: [],
+                  dependentAnswerOnlyThese: ['robotics-project-items-A10']
+                }]
+              }
+            ],
+            dependentYarKey: 'projectItems',
+            dependentQuestionKey: 'robotics-project-items'
+
           },
           validate: {
             errorEmptyField: 'Enter the estimated cost for the items',

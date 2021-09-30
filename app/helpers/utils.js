@@ -1,3 +1,5 @@
+const { ALL_QUESTIONS } = require('../config/question-bank')
+
 const notUniqueSelection = (answers, option) => (
   answers?.includes(option) &&
     typeof (answers) === 'object' &&
@@ -11,7 +13,16 @@ const uniqueSelection = (answers, option) => (
     )
 )
 
+const getQuestionByKey = (questionKey) => ALL_QUESTIONS.find(({ key }) => (key === questionKey))
+
+const getQuestionAnswer = (questionKey, answerKey) => {
+  const question = getQuestionByKey(questionKey)
+  return (question.answers.find(({ key }) => (key === answerKey)).value)
+}
+
 module.exports = {
   notUniqueSelection,
-  uniqueSelection
+  uniqueSelection,
+  getQuestionByKey,
+  getQuestionAnswer
 }
