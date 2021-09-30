@@ -450,7 +450,7 @@ const questionBank = {
           sidebar:
           {
             heading: 'Eligibility',
-            para: 'The land must be owned or have a tenancy in place until 2026 before starting the project.',
+            para: 'The land must be owned or have a tenancy in place until 2027 before starting the project.',
             items: []
           },
           validate: {
@@ -503,7 +503,7 @@ const questionBank = {
           sidebar:
           {
             heading: 'Eligibility',
-            para: 'The land must be owned or have a tenancy in place until 2026 before starting the project.',
+            para: 'The land must be owned or have a tenancy in place until 2027 before starting the project.',
             items: []
           },
           validate: {
@@ -1252,12 +1252,12 @@ const questionBank = {
             html: `All items must
             <ul><li>have a sensing system</li>
             <li>have a decision-making capability</li>
-            <li>use actuators</li></ul>`
+            <li>use actuators (the devices that move robot joints)</li></ul>`
           },
           sidebar: {
             heading: 'Eligibility',
             para: 'RPA will consider items that:',
-            items: ['have a sensing system', 'have a decision-making capability', 'use actuators']
+            items: ['have a sensing system', 'have a decision-making capability', 'use actuators (the devices that move robot joints)']
           },
           validate: {
             errorEmptyField: 'Select yes if your other robotic equipment meets the eligibility criteria',
@@ -1537,7 +1537,7 @@ const questionBank = {
           order: 350,
           title: 'Will your project use data analytics to improve productivity on the farm?',
           hint: {
-            text: 'Software automating data analysis to improve efficiency'
+            text: 'Software automating data analysis to improve efficiency (for example, analysing white blood cell counts in dairy)'
           },
           pageTitle: '',
           url: 'robotics/data-analytics',
@@ -1680,7 +1680,7 @@ const questionBank = {
           sidebar: {
             heading: 'Funding priorities',
             para: 'RPA wants to fund sectors that:',
-            items: ['have significant labour shortages', 'have not received many grants in the past']
+            items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
           },
           validate: {
             errorEmptyField: 'Select up to 2 sectors your project is in',
@@ -2397,6 +2397,11 @@ const questionBank = {
                 text: 'We will only use this to contact you about your application'
               },
               validate: [
+                {
+                  type: 'NOT_EMPTY_EXTRA',
+                  error: 'Enter a landline or mobile number',
+                  extraFieldsToCheck: ['mobileNumber']
+                },
                 {
                   type: 'REGEX',
                   regex: CHARS_MIN_10,
