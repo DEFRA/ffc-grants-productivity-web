@@ -110,6 +110,6 @@ describe('other Robotics Equipment', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.payload).toContain('Your equipment is not eligible for a grant from this scheme')
+    expect(postResponse.payload).toContain('Your other robotic equipment is not eligible for a grant from this scheme')
   })
 })
