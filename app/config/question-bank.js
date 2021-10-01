@@ -1265,7 +1265,7 @@ const questionBank = {
               errorEmptyField: 'Describe your other robotic equipment',
               checkRegex: {
                 regex: WORDS_MAX_60,
-                error: 'You have a maximum of 60 words'
+                error: 'Description must be 60 words or fewer and use letters, numbers, apostrophes, commas or fullstops'
               }
             }
           },
