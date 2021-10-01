@@ -1459,6 +1459,14 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
+          warningCondition: {
+            dependentWarningQuestionKey: 'robotics-project-items',
+            dependentWarningAnswerKeysArray: ['robotics-project-items-A10'],
+            warning: {
+              text: 'RPA will assess your other robotic equipment and whether they can fund it. There’s no guarantee your item will be funded',
+              iconFallbackText: 'Warning'
+            }
+          },
           answers: [],
           yarKey: 'projectCost'
         },
