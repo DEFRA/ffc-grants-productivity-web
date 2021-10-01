@@ -1286,7 +1286,7 @@ const questionBank = {
                 notUniqueAnswer: 'robotics-project-items-A10',
                 maybeEligibleContent: {
                   nextUrl: 'project-cost',
-                  messageHeader: 'Your equipment is not eligible for a grant from this scheme',
+                  messageHeader: 'Your other robotic equipment is not eligible for a grant from this scheme',
                   messageContent: `RPA will only fund items that:
                   <ul> <li>have a sensing system</li>
                   <li>have a decision-making capability</li>
