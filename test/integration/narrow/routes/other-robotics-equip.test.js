@@ -66,7 +66,22 @@ describe('other Robotics Equipment', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('You have a maximum of 60 words')
+    expect(postResponse.payload).toContain('Description must be 60 words or fewer and use letters, numbers, apostrophes, commas or fullstops')
+  })
+
+  it('should returns error message if description has special charcters thats not allowed', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/robotics/other-robotic-equipment`,
+      payload: { otherRoboticEquipment: 'Yes', roboticEquipment: 'some fake description &^*<', crumb: crumbToken },
+      headers: {
+        cookie: 'crumb=' + crumbToken
+      }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Description must be 60 words or fewer and use letters, numbers, apostrophes, commas or fullstops')
   })
 
   it('should store user response and redirects to robotics conditional page', async () => {
