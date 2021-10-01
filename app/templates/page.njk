@@ -3,10 +3,11 @@
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/radios/macro.njk" import govukRadios %}
+{% from "govuk/components/warning-text/macro.njk" import govukWarningText %}
 {% from "govuk/components/checkboxes/macro.njk" import govukCheckboxes %}
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
-{% from "./components/macro.njk" import crumbToken, sideBar, conditionalButtons %}
+{% from "./components/macro.njk" import crumbToken, multiSideBar, conditionalButtons %}
 
 
 {% block pageTitle %}   
@@ -78,6 +79,11 @@
           {% endfor %}
         {%endif%}
 
+        {% if warning %} 
+          <br/>
+          {{ govukWarningText(warning) }}
+        {% endif %}
+
 
         <div class="govuk-!-padding-top-5">
           {% set buttonText = 'Continue' %}
@@ -96,7 +102,7 @@
       </form>
     </div>
     {%if sideBarText %}
-      {{ sideBar(sideBarText) }}
+      {{ multiSideBar(sideBarText) }}
     {%endif%}
   </div>
 {% endblock %}

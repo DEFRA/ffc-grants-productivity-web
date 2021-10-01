@@ -148,9 +148,13 @@ const questionBank = {
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
-            heading: 'Eligibility',
-            para: 'Public organisations and local authorities cannot apply for this grant.',
-            items: []
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'Public organisations and local authorities cannot apply for this grant.',
+                items: []
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select the legal status of the business'
@@ -244,9 +248,13 @@ const questionBank = {
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
-            heading: 'Eligibility',
-            para: 'This grant is only for projects in England. \n \n Scotland, Wales and Northern Ireland have other grants available.',
-            items: []
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'This grant is only for projects in England. \n \n Scotland, Wales and Northern Ireland have other grants available.',
+                items: []
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select yes if the project is in England',
@@ -302,11 +310,14 @@ const questionBank = {
           fundingPriorities: 'Improving productivity',
           type: 'single-answer',
           minAnswerCount: 1,
-          sidebar:
-          {
-            heading: 'Eligibility',
-            para: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).',
-            items: []
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).',
+                items: []
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select when the project will have planning permission'
@@ -383,11 +394,14 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          sidebar:
-          {
-            heading: 'Eligibility',
-            para: 'You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement.\n \n Before you start the project, you can:',
-            items: ['get quotes from suppliers', 'apply for planning permission (this can take a long time)']
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement.\n \n Before you start the project, you can:',
+                items: ['get quotes from suppliers', 'apply for planning permission (this can take a long time)']
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select the option that applies to your project'
@@ -447,11 +461,14 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
-          sidebar:
-          {
-            heading: 'Eligibility',
-            para: 'The land must be owned or have a tenancy in place until 2027 before starting the project.',
-            items: []
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The land must be owned or have a tenancy in place until 2027 before starting the project.',
+                items: []
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select yes if the planned project is on land the farm business owns'
@@ -500,11 +517,14 @@ const questionBank = {
           type: 'single-answer',
           minAnswerCount: 1,
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          sidebar:
-          {
-            heading: 'Eligibility',
-            para: 'The land must be owned or have a tenancy in place until 2027 before starting the project.',
-            items: []
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'The land must be owned or have a tenancy in place until 2027 before starting the project.',
+                items: []
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select yes if the land has a tenancy agreement in place until 2026 or after'
@@ -569,9 +589,13 @@ const questionBank = {
           },
           nextUrl: 'acidification-infrastructure',
           sidebar: {
-            heading: 'Eligibility',
-            para: 'Your project must buy the mild acidification equipment required for:',
-            items: ['introducing acidification the first time ', 'adding additional acidification installations'],
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'Your project must buy the mild acidification equipment required for:',
+                items: ['introducing acidification the first time ', 'adding additional acidification installations']
+              }]
+            }],
             details: {
               summaryText: 'Items included as mild acidification equipment',
               html: '<ul class="govuk-list govuk-list--bullet"><li>acid storage</li><li>dosing equipment</li><li>mixing tank</li><li>pump</li></ul>'
@@ -693,9 +717,13 @@ const questionBank = {
             errorEmptyField: 'Select the option that describes your use of low-emission precision equipment'
           },
           sidebar: {
-            heading: 'Eligibility',
-            para: 'You must use low-emission precision application equipment.',
-            items: []
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'You must use low-emission precision application equipment.',
+                items: []
+              }]
+            }]
           },
           validations: [
             {
@@ -771,10 +799,15 @@ const questionBank = {
             }
           },
           sidebar: {
-            heading: 'Items selected',
-            para: '',
-            items: [],
-            dependentYarKey: 'projectItems'
+            values: [{
+              heading: 'Items selected',
+              content: [{
+                para: '',
+                items: []
+              }]
+            }],
+            dependentYarKey: 'projectItems',
+            dependentQuestionKey: 'mild-acidification-infrastructure'
           },
           validate: {
             errorEmptyField: 'Enter the estimated cost for the items',
@@ -842,12 +875,16 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           sidebar: {
-            heading: 'Eligibility',
-            para: `
-              You cannot use any grant funding from government or local authorities.
-              \n\nYou can use money from the Basic Payment Scheme or agri-environment schemes such as Countryside Stewardship Scheme.
-            `,
-            items: []
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `
+                  You cannot use any grant funding from government or local authorities.
+                  \n\nYou can use money from the Basic Payment Scheme or agri-environment schemes such as Countryside Stewardship Scheme.
+                `,
+                items: []
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select yes if you can pay the remaining costs without using any other grant money'
@@ -953,11 +990,14 @@ const questionBank = {
           fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li><li>introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
-          sidebar:
-          {
-            heading: 'Funding priorities',
-            para: 'RPA wants to fund projects that:',
-            items: ['improve productivity', 'improve the environment', 'introduce innovation']
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA wants to fund projects that:',
+                items: ['improve productivity', 'improve the environment', 'introduce innovation']
+              }]
+            }]
           },
           validations: [
             {
@@ -1025,11 +1065,14 @@ const questionBank = {
             }
           },
           fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li></ul>',
-          sidebar:
-          {
-            heading: 'Funding priorities',
-            para: 'RPA wants to fund projects that:',
-            items: ['improve productivity', 'improve the environment']
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA wants to fund projects that:',
+                items: ['improve productivity', 'improve the environment']
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Enter the volume of slurry or digestate you currently acidify',
@@ -1101,11 +1144,14 @@ const questionBank = {
             }
           },
           fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li></ul>',
-          sidebar:
-          {
-            heading: 'Funding priorities',
-            para: 'RPA wants to fund projects that:',
-            items: ['improve productivity', 'improve the environment', 'introduce innovation ']
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA wants to fund projects that:',
+                items: ['improve productivity', 'improve the environment', 'introduce innovation ']
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Enter the volume of digestate you will acidify after the project',
@@ -1255,9 +1301,13 @@ const questionBank = {
             <li>use actuators (the devices that move robot joints)</li></ul>`
           },
           sidebar: {
-            heading: 'Eligibility',
-            para: 'RPA will consider items that:',
-            items: ['have a sensing system', 'have a decision-making capability', 'use actuators (the devices that move robot joints)']
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'RPA will consider items that:',
+                items: ['have a sensing system', 'have a decision-making capability', 'use actuators (the devices that move robot joints)']
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select yes if your other robotic equipment meets the eligibility criteria',
@@ -1346,7 +1396,8 @@ const questionBank = {
           grantInfo: {
             minGrant: 35000,
             maxGrant: 500000,
-            grantPercentage: 40
+            grantPercentage: 40,
+            cappedGrant: true
           },
           label: {
             text: 'What is the total estimated cost of the items?',
@@ -1371,10 +1422,27 @@ const questionBank = {
             }
           },
           sidebar: {
-            heading: 'Items selected',
-            para: '',
-            items: [],
-            dependentYarKey: 'projectItems'
+            values: [
+              {
+                heading: 'Eligible items selected',
+                content: [{
+                  para: '',
+                  items: [],
+                  dependentAnswerExceptThese: ['robotics-project-items-A10']
+                }]
+              },
+              {
+                heading: 'Not yet eligible items',
+                content: [{
+                  para: '',
+                  items: [],
+                  dependentAnswerOnlyThese: ['robotics-project-items-A10']
+                }]
+              }
+            ],
+            dependentYarKey: 'projectItems',
+            dependentQuestionKey: 'robotics-project-items'
+
           },
           validate: {
             errorEmptyField: 'Enter the estimated cost for the items',
@@ -1391,6 +1459,14 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
+          warningCondition: {
+            dependentWarningQuestionKey: 'robotics-project-items',
+            dependentWarningAnswerKeysArray: ['robotics-project-items-A10'],
+            warning: {
+              text: 'RPA will assess your other robotic equipment and whether they can fund it. There’s no guarantee your item will be funded',
+              iconFallbackText: 'Warning'
+            }
+          },
           answers: [],
           yarKey: 'projectCost'
         },
@@ -1436,11 +1512,15 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           sidebar: {
-            heading: 'Eligibility',
-            para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.\n\n
-
-            You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.`,
-            items: []
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.\n\n
+                
+                You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.`,
+                items: []
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select yes if you can pay the remaining costs without using any other grant money'
@@ -1497,10 +1577,14 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           sidebar: {
-            heading: 'Eligibility',
-            para: `Your project must improve the productivity and profitability of your main agricultural or horticultural business.
-            \n\n Your project’s positive environmental benefit will be assessed full application stage.`,
-            items: []
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `Your project must improve the productivity and profitability of your main agricultural or horticultural business.
+                \n\n Your project’s positive environmental benefit will be assessed full application stage.`,
+                items: []
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select yes if the project will improve the productivity and profitability of your business'
@@ -1551,9 +1635,13 @@ const questionBank = {
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
-            heading: 'Funding priorities',
-            para: 'RPA wants to fund projects that:',
-            items: ['improve productivity', 'introduce innovation']
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA wants to fund projects that:',
+                items: ['improve productivity', 'introduce innovation']
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select whether your project will use data analytics to improve farm productivity'
@@ -1617,9 +1705,13 @@ const questionBank = {
             text: 'Select up to 2 options'
           },
           sidebar: {
-            heading: 'Funding priorities',
-            para: 'RPA wants to fund projects that:',
-            items: ['improve the environment']
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA wants to fund projects that:',
+                items: ['improve the environment']
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select up to 2 types of energy your project will use',
@@ -1678,9 +1770,13 @@ const questionBank = {
             text: 'Select up to 2 options'
           },
           sidebar: {
-            heading: 'Funding priorities',
-            para: 'RPA wants to fund sectors that:',
-            items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA wants to fund sectors that:',
+                items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select up to 2 sectors your project is in',
@@ -1736,9 +1832,13 @@ const questionBank = {
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
-            heading: 'Funding priorities',
-            para: 'RPA wants to fund projects that:',
-            items: ['introduce innovation']
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA wants to fund projects that:',
+                items: ['introduce innovation']
+              }]
+            }]
           },
           validate: {
             errorEmptyField: 'Select yes if you have used this technology on your farm'

@@ -1,20 +1,64 @@
 const { getUrl } = require('../helpers/urls')
 const { getOptions } = require('../helpers/answer-options')
 const { getYarValue } = require('../helpers/session')
+const { getQuestionByKey, allAnswersSelected } = require('../helpers/utils')
 
-const getDependentSideBarModel = (question, model, request) => {
+const getDependentSideBar = (sidebar, request) => {
   // sidebar contains values of a previous page
-  const rawSidebarValues = getYarValue(request, question.sidebar.dependentYarKey) || []
-  const formattedSidebarValues = [].concat(rawSidebarValues)
-  model = {
-    ...model,
-    sideBarText: {
-      heading: question.sidebar.heading,
-      para: '',
-      items: formattedSidebarValues
+
+  const { values, dependentYarKey, dependentQuestionKey } = sidebar
+
+  const questionAnswers = getQuestionByKey(dependentQuestionKey).answers
+  const yarValue = getYarValue(request, dependentYarKey) || []
+
+  const updatedValues = []
+  let addUpdatedValue
+
+  values.forEach((thisValue) => {
+    addUpdatedValue = false
+    const updatedContent = thisValue.content.map(thisContent => {
+      let formattedSidebarValues = []
+
+      if (thisContent?.dependentAnswerExceptThese?.length) {
+        const avoidThese = thisContent.dependentAnswerExceptThese
+
+        questionAnswers.forEach(({ key, value }) => {
+          if (!avoidThese.includes(key) && yarValue?.includes(value)) {
+            addUpdatedValue = true
+            formattedSidebarValues.push(value)
+          }
+        })
+      } else if (thisContent?.dependentAnswerOnlyThese?.length) {
+        const addThese = thisContent.dependentAnswerOnlyThese
+
+        questionAnswers.forEach(({ key, value }) => {
+          if (addThese.includes(key) && yarValue?.includes(value)) {
+            addUpdatedValue = true
+            formattedSidebarValues.push(value)
+          }
+        })
+      } else {
+        formattedSidebarValues = [].concat(yarValue)
+      }
+
+      return {
+        ...thisContent,
+        items: formattedSidebarValues
+      }
+    })
+
+    if (addUpdatedValue) {
+      updatedValues.push({
+        ...thisValue,
+        content: updatedContent
+      })
     }
+  })
+
+  return {
+    ...sidebar,
+    values: updatedValues
   }
-  return model
 }
 
 const getBackUrl = (hasScore, backUrlObject, backUrl, request) => {
@@ -23,20 +67,34 @@ const getBackUrl = (hasScore, backUrlObject, backUrl, request) => {
 }
 
 const getModel = (data, question, request, conditionalHtml = '') => {
-  let { type, backUrl, key, backUrlObject, sidebar, title, score, label } = question
+  let { type, backUrl, key, backUrlObject, sidebar, title, score, label, warning, warningCondition } = question
   const hasScore = !!getYarValue(request, 'current-score')
   title = title ?? label?.text
 
-  const model = {
+  const sideBarText = (sidebar?.dependentYarKey)
+    ? getDependentSideBar(sidebar, request)
+    : sidebar
+
+  let warningDetails
+  if (warningCondition) {
+    const { dependentWarningQuestionKey, dependentWarningAnswerKeysArray, warning } = warningCondition
+    if (allAnswersSelected(request, dependentWarningQuestionKey, dependentWarningAnswerKeysArray)) {
+      warningDetails = warning
+    }
+  } else if (warning) {
+    warningDetails = warning
+  }
+
+  return {
     type,
     key,
     title,
     backUrl: getBackUrl(hasScore, backUrlObject, backUrl, request),
     items: getOptions(data, question, conditionalHtml, request),
-    sideBarText: sidebar,
+    sideBarText,
+    ...(warningDetails ? ({ warning: warningDetails }) : {}),
     diaplaySecondryBtn: hasScore && score?.isDisplay
   }
-  return (sidebar?.dependentYarKey) ? getDependentSideBarModel(question, model, request) : model
 }
 
 module.exports = {
