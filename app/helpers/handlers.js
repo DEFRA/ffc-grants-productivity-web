@@ -247,7 +247,7 @@ const showPostPage = (currentQuestion, request, h) => {
   if (type === 'multi-input') {
     allFields.forEach(field => {
       const payloadYarVal = payload[field.yarKey]
-        ? payload[field.yarKey].split(/(?=.{3}$)/).join(' ').toUpperCase()
+        ? payload[field.yarKey].replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
         : ''
       dataObject = {
         ...dataObject,
