@@ -1378,14 +1378,7 @@ const questionBank = {
           pageTitle: '',
           url: 'robotics/project-cost',
           baseUrl: 'project-cost',
-          backUrlObject: {
-            dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['robotics-project-items-A10'],
-            urlOptions: {
-              thenUrl: 'other-robotic-equipment',
-              elseUrl: 'project-items'
-            }
-          },
+          backUrl: 'project-items',
           nextUrl: 'potential-amount',
           preValidationKeys: ['projectItems'],
           classes: 'govuk-input--width-10',
