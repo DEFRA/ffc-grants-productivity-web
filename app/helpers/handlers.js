@@ -221,6 +221,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
     if (type !== 'multi-input' && key !== 'secBtn') {
       payload.projectImpacts === 'Introduce acidification for the first time' && setYarValue(request, 'slurryCurrentlyTreated', 0)
+      payload.applying === 'Farmer or contractor' && setYarValue(request, 'agentsDetails', {})
       setYarValue(request, key, key === 'projectPostcode' ? value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
     }
   }
