@@ -67,19 +67,19 @@ const getBackUrl = (hasScore, backUrlObject, backUrl, request) => {
 }
 
 const getModel = (data, question, request, conditionalHtml = '') => {
-  let { type, backUrl, key, backUrlObject, sidebar, title, score, label, warning, warningCondition } = question
+  const { type, backUrl, key, backUrlObject, sidebar, score, label, warning, warningConditional } = question
   const hasScore = !!getYarValue(request, 'current-score')
-  title = title ?? label?.text
+  const title = question.title ?? label?.text
 
   const sideBarText = (sidebar?.dependentYarKey)
     ? getDependentSideBar(sidebar, request)
     : sidebar
 
   let warningDetails
-  if (warningCondition) {
-    const { dependentWarningQuestionKey, dependentWarningAnswerKeysArray, warning } = warningCondition
+  if (warningConditional) {
+    const { dependentWarningQuestionKey, dependentWarningAnswerKeysArray, ConditionalWarningMsg } = warningConditional
     if (allAnswersSelected(request, dependentWarningQuestionKey, dependentWarningAnswerKeysArray)) {
-      warningDetails = warning
+      warningDetails = ConditionalWarningMsg
     }
   } else if (warning) {
     warningDetails = warning
