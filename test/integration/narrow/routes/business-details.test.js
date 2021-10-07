@@ -29,7 +29,7 @@ describe('Project and business details page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Browns Hill Farm slurry acidification')
+    expect(response.payload).toContain('For example, Browns Hill Farm slurry acidification')
   })
 
   it('should diaplay correct hint text for project name, in case of robotics journey ', async () => {
@@ -40,7 +40,7 @@ describe('Project and business details page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Browns Hill Farm robotic milking')
+    expect(response.payload).toContain('For example, Browns Hill Farm robotic milking')
   })
 
   it('should diaplay Back to details buton if the user came from check details page ', async () => {
