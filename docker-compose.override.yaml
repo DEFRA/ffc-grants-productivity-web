@@ -15,7 +15,7 @@ services:
       NODE_ENV: development
     ports:
       - "3500:3500"
-      - "9233:9229"
+      - "9236:9229"
     volumes:
       - ./app/:/home/node/app/
       - ./package.json:/home/node/package.json

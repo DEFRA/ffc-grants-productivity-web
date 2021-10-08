@@ -110,11 +110,13 @@ const questionBank = {
           answers: [
             {
               key: 'project-subject-A1',
-              value: 'Robotics and innovation'
+              value: 'Robotics Innovation',
+              text: 'Robotics and innovation'
             },
             {
               key: 'project-subject-A2',
-              value: 'Slurry acidification'
+              value: 'Slurry Acidification',
+              text: 'Slurry acidification'
             }
           ],
           yarKey: 'projectSubject'
@@ -642,7 +644,7 @@ const questionBank = {
             {
               key: 'mild-acidification-infrastructure-A1',
               text: 'Yes, we will buy all 4 items',
-              value: ['acid storage', 'dosing equipment', 'mixing tank', 'pump']
+              value: 'acid storage | dosing equipment | mixing tank | pump'
             },
             {
               key: 'mild-acidification-infrastructure-A2',
@@ -2698,7 +2700,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost']
+const YAR_KEYS = ['projectPostcode', 'remainingCost', 'roboticEquipment']
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,
