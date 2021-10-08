@@ -33,23 +33,11 @@ const allAnswersSelected = (request, questionKey, answerKeyList) => {
   )
 }
 
-const someAnswersSelected = (request, questionKey, answerKeyList) => {
-  const { yarKey, answers } = getQuestionByKey(questionKey)
-  const yarValue = getYarValue(request, yarKey)
-  return (
-    answerKeyList.some(answerKey => (
-      answers.some(({ key, value }) => (
-        yarValue.includes(value) && key === answerKey
-      ))
-    ))
-  )
-}
 
 module.exports = {
   notUniqueSelection,
   uniqueSelection,
   getQuestionByKey,
   getQuestionAnswer,
-  allAnswersSelected,
-  someAnswersSelected
+  allAnswersSelected
 }

@@ -777,7 +777,8 @@ const questionBank = {
           grantInfo: {
             minGrant: 35000,
             maxGrant: 500000,
-            grantPercentage: 40
+            grantPercentage: 40,
+            cappedGrant: true
           },
           label: {
             text: 'What is the estimated cost of the items?',
@@ -1454,10 +1455,10 @@ const questionBank = {
               dependentAnswerKey: ''
             }
           ],
-          warningCondition: {
+          warningConditional: {
             dependentWarningQuestionKey: 'robotics-project-items',
             dependentWarningAnswerKeysArray: ['robotics-project-items-A10'],
-            warning: {
+            ConditionalWarningMsg: {
               text: 'RPA will assess your other robotic equipment and whether they can fund it. There’s no guarantee your item will be funded',
               iconFallbackText: 'Warning'
             }

@@ -119,8 +119,8 @@ async function updateProjectDescription (description) {
 
 async function rename () {
   const { description, projectName } = processInput(process.argv)
-  const rename = await confirmRename(projectName, description)
-  if (rename) {
+  const renameConfirm = await confirmRename(projectName, description)
+  if (renameConfirm) {
     await renameDirs(projectName)
     await updateProjectName(projectName)
     await updateProjectDescription(description)
