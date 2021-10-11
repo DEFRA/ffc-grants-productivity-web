@@ -1,4 +1,5 @@
-const CURRENCY_MAX_10 = /^[(\d+|\d{1,3}(,\d{3})*)(\d+)?]$/
+const CURRENCY_MAX_10 = /^((\d+|\d{1,3}(,\d{3})*)(\d+)?){1,14}$/
+const CHARS_MAX_12 = /^.{0,12}$/
 const CHARS_MIN_10 = /^.{10,}$/
 const CHARS_MAX_100 = /^.{0,100}$/
 const WORDS_MAX_60 = /^(?:\b\w+\b[\s.',-]*){1,60}$/
@@ -13,6 +14,7 @@ const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/
 
 module.exports = {
   CURRENCY_MAX_10,
+  CHARS_MAX_12,
   CHARS_MIN_10,
   CHARS_MAX_100,
   WORDS_MAX_60,

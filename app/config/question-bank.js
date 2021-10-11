@@ -8,6 +8,7 @@ const {
   NUMBER_REGEX,
   NAME_ONLY_REGEX,
   PHONE_REGEX,
+  CHARS_MAX_12,
   EMAIL_REGEX
 } = require('../helpers/regex')
 
@@ -807,7 +808,7 @@ const questionBank = {
             errorEmptyField: 'Enter the estimated cost for the items',
             checkRegex: {
               regex: CURRENCY_MAX_10,
-              error: 'Enter a whole number with a maximum of 7 digits'
+              error: 'Enter a whole number with a maximum of 7 digits',
             }
           },
           validations: [
