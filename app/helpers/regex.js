@@ -1,4 +1,4 @@
-const CURRENCY_MAX_10 = /^((\d+|\d{1,3}(,\d{3})*)(\d+)?){1,10}$/
+const CURRENCY_MAX_10 = /^[(\d+|\d{1,3}(,\d{3})*)(\d+)?]$/
 const CHARS_MIN_10 = /^.{10,}$/
 const CHARS_MAX_100 = /^.{0,100}$/
 const WORDS_MAX_60 = /^(?:\b\w+\b[\s.',-]*){1,60}$/

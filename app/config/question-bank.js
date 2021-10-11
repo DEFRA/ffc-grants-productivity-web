@@ -2605,7 +2605,7 @@ const questionBank = {
             <br/>Monday to Friday, 9am to 5pm (except public holidays)<br/>
             <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges">Find out about call charges (opens in new tab)</a></p>
             
-            Email: <a class="govuk-link" target="_blank" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a>
+            Email: <a class="govuk-link" title="Send email to RPA" target="_blank" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a>
             
             <p>RPA will be in touch when the full application period opens. They'll tell you about the application form and any guidance you need to submit a full application.</p>`,
             warning: {
