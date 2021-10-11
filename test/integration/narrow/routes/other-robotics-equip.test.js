@@ -66,7 +66,7 @@ describe('other Robotics Equipment', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Description must be 60 words or fewer and use letters, numbers, apostrophes, commas or fullstops')
+    expect(postResponse.payload).toContain('Description must be 60 words or fewer and use letters, numbers and punctuation')
   })
 
   it('should returns error message if description has special charcters thats not allowed', async () => {
@@ -81,7 +81,7 @@ describe('other Robotics Equipment', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Description must be 60 words or fewer and use letters, numbers, apostrophes, commas or fullstops')
+    expect(postResponse.payload).toContain('Description must be 60 words or fewer and use letters, numbers and punctuation')
   })
 
   it('should store user response and redirects to robotics conditional page', async () => {
@@ -114,7 +114,7 @@ describe('other Robotics Equipment', () => {
   })
 
   it('should display equipment ineligible conditional page when user response is \'No\' and user has also selected other eligible option', async () => {
-    varList.projectItems = ['Advanced ventilation control units', 'Robotic weeding equipment','Other robotic equipment']
+    varList.projectItems = ['Advanced ventilation control units', 'Robotic weeding equipment', 'Other robotic equipment']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/other-robotic-equipment`,
