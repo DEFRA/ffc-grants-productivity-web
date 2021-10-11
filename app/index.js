@@ -1,14 +1,16 @@
 const createServer = require('./server')
-
-const init = async () => {
-  const server = await createServer()
-  await server.start()
-  console.log('Server running on %s', server.info.uri)
-}
+const appInsights = require('./services/app-insights')
 
 process.on('unhandledRejection', (err) => {
+  console.log('# Hapi server error')
   console.log(err)
-  process.exit(1)
+  appInsights.logException(null, { error: err })
 })
 
-init()
+const initialise = async () => {
+  const server = await createServer()
+  await server.start()
+  console.log(`# Hapi server started successfully on ${server.info.uri}`)
+}
+
+initialise()
