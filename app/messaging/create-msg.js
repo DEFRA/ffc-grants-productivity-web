@@ -25,7 +25,7 @@ function getDesirabilityAnswers (request) {
   try {
     let val = {}
     const projectSubject = getYarValue(request, 'projectSubject')
-    if (projectSubject === 'Robotics Innovation') {
+    if (projectSubject === 'Robotics and Innovation') {
       const energySource = []
       if (!Array.isArray(getYarValue(request, 'energySource'))) {
         energySource.push(getYarValue(request, 'energySource'))

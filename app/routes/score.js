@@ -75,7 +75,7 @@ module.exports = [{
       const msgData = await getResult(request.yar.id)
       console.log('msgData', msgData)
       if (msgData) {
-        const scheme = getYarValue(request, 'projectSubject') === 'Robotics Innovation' ? 'robotics' : 'slurry'
+        const scheme = getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'robotics' : 'slurry'
         let questions = msgData.desirability.questions.map(desirabilityQuestion => {
           const bankQuestion = ALL_QUESTIONS.filter(bankQuestionD => bankQuestionD.score && bankQuestionD.score.isDisplay === true && bankQuestionD.key === desirabilityQuestion.key)[0]
           if (bankQuestion) {
