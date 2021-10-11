@@ -110,11 +110,13 @@ const questionBank = {
           answers: [
             {
               key: 'project-subject-A1',
-              value: 'Robotics and innovation'
+              value: 'Robotics and Innovation',
+              text: 'Robotics and innovation'
             },
             {
               key: 'project-subject-A2',
-              value: 'Slurry acidification'
+              value: 'Slurry Acidification',
+              text: 'Slurry acidification'
             }
           ],
           yarKey: 'projectSubject'
@@ -288,7 +290,7 @@ const questionBank = {
           ],
           yarKey: 'inEngland',
           conditionalKey: 'projectPostcode',
-          conditionalLabelData: 'What is the site postcode?<br/><br/> Postcode'
+          conditionalLabelData: 'Where will the work happen or the equipment be stored?<br/><br/> Postcode'
         },
         {
           key: 'planning-permission',
@@ -301,7 +303,7 @@ const questionBank = {
           nextUrl: 'project-start',
           preValidationKeys: ['inEngland'],
           ineligibleContent: {
-            messageContent: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).',
+            messageContent: 'Any planning permission must be in place by 31 December 2022 (the end of the application window).',
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -314,7 +316,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).',
+                para: 'Any planning permission must be in place by 31 December 2022 (the end of the application window).',
                 items: []
               }]
             }]
@@ -341,12 +343,12 @@ const questionBank = {
             },
             {
               key: 'planning-permission-A3',
-              value: 'Should be in place by 31 May 2022',
+              value: 'Should be in place by 31 December 2022',
               redirectUrl: 'planning-required-condition'
             },
             {
               key: 'planning-permission-A4',
-              value: 'Will not be in place by 31 May 2022',
+              value: 'Will not be in place by 31 December 2022',
               notEligible: true
             }
           ],
@@ -363,7 +365,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place by 31 May 2022 (the end of the application window).'
+            messageContent: 'Any planning permission must be in place by 31 December 2022 (the end of the application window).'
           }
         },
         {
@@ -454,6 +456,9 @@ const questionBank = {
               thenUrl: 'robotics/project-items',
               elseUrl: 'slurry/mild-acidification-infrastructure'
             }
+          },
+          hint: {
+            html: 'The land where the work will happen or the equipment will be stored'
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -642,7 +647,7 @@ const questionBank = {
             {
               key: 'mild-acidification-infrastructure-A1',
               text: 'Yes, we will buy all 4 items',
-              value: ['acid storage', 'dosing equipment', 'mixing tank', 'pump']
+              value: 'acid storage | dosing equipment | mixing tank | pump'
             },
             {
               key: 'mild-acidification-infrastructure-A2',
@@ -1351,7 +1356,7 @@ const questionBank = {
           ],
           yarKey: 'otherRoboticEquipment',
           conditionalKey: 'roboticEquipment',
-          conditionalLabelData: 'Enter your item, including the name, a brief description and benefit to the farm'
+          conditionalLabelData: 'Enter your item, including the name, a brief description and benefit'
         },
         {
           key: 'other-robotic-conditional',
@@ -2193,7 +2198,7 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               hint: {
-                text: 'We will only use this to send you a confirmation'
+                text: "We'll only use this to send them confirmation"
               },
               validate: [
                 {
@@ -2216,7 +2221,7 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               hint: {
-                text: 'We will only use this to contact you about your application'
+                text: 'We will only use this to contact them about their application'
               },
               validate: [
                 {
@@ -2699,7 +2704,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost']
+const YAR_KEYS = ['projectPostcode', 'remainingCost', 'roboticEquipment']
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,
