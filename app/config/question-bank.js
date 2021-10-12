@@ -1,5 +1,6 @@
 const {
-  CURRENCY_MAX_10,
+  CURRENCY_FORMAT,
+  CHARS_MAX_10,
   CHARS_MIN_10,
   CHARS_MAX_100,
   WORDS_MAX_60,
@@ -8,7 +9,6 @@ const {
   NUMBER_REGEX,
   NAME_ONLY_REGEX,
   PHONE_REGEX,
-  CHARS_MAX_12,
   EMAIL_REGEX
 } = require('../helpers/regex')
 
@@ -97,15 +97,10 @@ const questionBank = {
             `
           },
           sidebar: null,
-          validate: {
-            errorEmptyField: 'Select what your project is about'
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Select what your project is about'
             }
           ],
           answers: [
@@ -159,9 +154,12 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select the legal status of the business'
-          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select the legal status of the business'
+            }
+          ],
           validations: [
             {
               type: '',
@@ -255,22 +253,21 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select yes if the project is in England',
-            conditionalValidate: {
-              errorEmptyField: 'Enter a postcode, like AA1 1AA',
-              checkRegex: {
-                regex: POSTCODE_REGEX,
-                error: 'Enter a postcode, like AA1 1AA'
-              }
-            }
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the project is in England'
+            },
+            {
+              dependentKey: 'projectPostcode',
+              type: 'NOT_EMPTY',
+              error: 'Enter a postcode, like AA1 1AA'
+            },
+            {
+              dependentKey: 'projectPostcode',
+              type: 'REGEX',
+              regex: POSTCODE_REGEX,
+              error: 'Enter a postcode, like AA1 1AA'
             }
           ],
           answers: [
@@ -318,15 +315,10 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select when the project will have planning permission'
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Select when the project will have planning permission'
             }
           ],
           answers: [
@@ -402,15 +394,10 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select the option that applies to your project'
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Select the option that applies to your project'
             }
           ],
           answers: [
@@ -472,10 +459,12 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select yes if the planned project is on land the farm business owns'
-          },
-          validations: [],
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the planned project is on land the farm business owns'
+            }
+          ],
           answers: [
             {
               key: 'tenancy-A1',
@@ -520,9 +509,12 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select yes if the land has a tenancy agreement in place until 2026 or after'
-          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the land has a tenancy agreement in place until 2026 or after'
+            }
+          ],
           validations: [
             {
               type: '',
@@ -628,10 +620,12 @@ const questionBank = {
               <li>pump</li>
             </ul>`
           },
-          validate: {
-            errorEmptyField: 'Select yes if you will be buying mild acidification equipment'
-          },
-          validations: [],
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you will be buying mild acidification equipment'
+            }
+          ],
           answers: [
             {
               key: 'mild-acidification-infrastructure-A1',
@@ -665,11 +659,12 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          maxAnswerCount: 3,
-          validate: {
-            errorEmptyField: 'Select yes if you need acidification infrastructure'
-          },
-          validations: [],
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you need acidification infrastructure'
+            }
+          ],
           answers: [
             {
               key: 'acidification-infrastructure-A1',
@@ -707,9 +702,12 @@ const questionBank = {
           hint: {
             text: 'For example, shallow injection, trailing shoe or dribble bar'
           },
-          validate: {
-            errorEmptyField: 'Select the option that describes your use of low-emission precision equipment'
-          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select the option that describes your use of low-emission precision equipment'
+            }
+          ],
           sidebar: {
             values: [{
               heading: 'Eligibility',
@@ -719,14 +717,6 @@ const questionBank = {
               }]
             }]
           },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
           answers: [
             {
               key: 'slurry-application-A1',
@@ -794,30 +784,21 @@ const questionBank = {
               title: 'See other grants you may be eligible for.'
             }
           },
-          sidebar: {
-            values: [{
-              heading: 'Items selected',
-              content: [{
-                para: '',
-                items: []
-              }]
-            }],
-            dependentYarKey: 'projectItems',
-            dependentQuestionKey: 'mild-acidification-infrastructure'
-          },
-          validate: {
-            errorEmptyField: 'Enter the estimated cost for the items',
-            checkRegex: {
-              regex: CURRENCY_MAX_10,
-              error: 'Enter a whole number with a maximum of 7 digits'
-            }
-          },
-          validations: [
+          sidebar: null,
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Enter the estimated cost for the items'
+            },
+            {
+              type: 'REGEX',
+              regex: CURRENCY_FORMAT,
+              error: 'Enter a whole number in correct format'
+            },
+            {
+              type: 'REGEX',
+              regex: CHARS_MAX_10,
+              error: 'Enter a whole number with a maximum of 10 digits'
             }
           ],
           answers: [
@@ -882,15 +863,10 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select yes if you can pay the remaining costs without using any other grant money'
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you can pay the remaining costs without using any other grant money'
             }
           ],
           answers: [
@@ -923,15 +899,10 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
-          validate: {
-            errorEmptyField: 'Select yes if the project directly impacts a Site of Special Scientific Interest'
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the project directly impacts a Site of Special Scientific Interest'
             }
           ],
           answers: [
@@ -963,9 +934,12 @@ const questionBank = {
           hint: {
             html: '<br>Select one option<br>'
           },
-          validate: {
-            errorEmptyField: 'Select one option to describe the project impact'
-          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select one option to describe the project impact'
+            }
+          ],
           eliminationAnswerKeys: '',
           fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li><li>introduce innovation</li></ul>',
           type: 'single-answer',
@@ -1046,19 +1020,15 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Enter the volume of slurry or digestate you currently acidify',
-            checkRegex: {
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter the volume of slurry or digestate you currently acidify'
+            },
+            {
+              type: 'REGEX',
               regex: NUMBER_REGEX,
               error: 'Volume must be a whole number'
-            }
-          },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
             }
           ],
           answers: [
@@ -1117,19 +1087,15 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Enter the volume of digestate you will acidify after the project',
-            checkRegex: {
-              regex: NUMBER_REGEX,
-              error: 'Volume must be a number'
-            }
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Enter the volume of digestate you will acidify after the project'
+            },
+            {
+              type: 'REGEX',
+              regex: NUMBER_REGEX,
+              error: 'Volume must be a whole number'
             }
           ],
           answers: [{ title: 'Future volume treated' }],
@@ -1170,10 +1136,12 @@ const questionBank = {
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
-          validate: {
-            errorEmptyField: 'Select all the items your project needs'
-          },
-          validations: [],
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select all the items your project needs'
+            }
+          ],
           answers: [
             {
               key: 'robotics-project-items-A1',
@@ -1266,17 +1234,23 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select yes if your other robotic equipment meets the eligibility criteria',
-            conditionalValidate: {
-              errorEmptyField: 'Describe your other robotic equipment',
-              checkRegex: {
-                regex: WORDS_MAX_60,
-                error: 'Description must be 60 words or fewer and use letters, numbers and punctuation'
-              }
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if your other robotic equipment meets the eligibility criteria'
+            },
+            {
+              dependentKey: 'roboticEquipment',
+              type: 'NOT_EMPTY',
+              error: 'Describe your other robotic equipment'
+            },
+            {
+              dependentKey: 'roboticEquipment',
+              type: 'REGEX',
+              regex: WORDS_MAX_60,
+              error: 'Description must be 60 words or fewer and use letters, numbers and punctuation'
             }
-          },
-          validations: [],
+          ],
           answers: [
             {
               key: 'other-robotic-equipment-A1',
@@ -1394,19 +1368,21 @@ const questionBank = {
             dependentQuestionKey: 'robotics-project-items'
 
           },
-          validate: {
-            errorEmptyField: 'Enter the estimated cost for the items',
-            checkRegex: {
-              regex: CURRENCY_MAX_10,
-              error: 'Enter a whole number with a maximum of 7 digits'
-            }
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Enter the estimated cost for the items'
+            },
+            {
+              dependentKey: 'roboticEquipment',
+              type: 'REGEX',
+              regex: CURRENCY_FORMAT,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            },
+            {
+              type: 'REGEX',
+              regex: CHARS_MAX_10,
+              error: 'Enter a whole number with a maximum of 10 digits'
             }
           ],
           warningConditional: {
@@ -1472,15 +1448,10 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select yes if you can pay the remaining costs without using any other grant money'
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you can pay the remaining costs without using any other grant money'
             }
           ],
           answers: [
@@ -1536,15 +1507,10 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select yes if the project will improve the productivity and profitability of your business'
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the project will improve the productivity and profitability of your business'
             }
           ],
           answers: [
@@ -1593,17 +1559,13 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select whether your project will use data analytics to improve farm productivity'
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Select whether your project will use data analytics to improve farm productivity'
             }
           ],
+
           answers: [
             {
               key: 'robotics-data-analytics-A1',
@@ -1650,7 +1612,6 @@ const questionBank = {
           fundingPriorities: '<ul><li>improve the environment</li></ul>',
           type: 'multi-answer',
           minAnswerCount: 1,
-          maxAnswerCount: 2,
           hint: {
             text: 'Select up to 2 options'
           },
@@ -1663,16 +1624,15 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select up to 2 types of energy your project will use',
-            errorMaxSelect: 'Select up to 2 types of energy your project will use'
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Select up to 2 types of energy your project will use'
+            },
+            {
+              type: 'MAX_SELECT',
+              max: 2,
+              error: 'Select up to 2 types of energy your project will use'
             }
           ],
           answers: [
@@ -1715,7 +1675,6 @@ const questionBank = {
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
-          maxAnswerCount: 2,
           hint: {
             text: 'Select up to 2 options'
           },
@@ -1728,17 +1687,15 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select up to 2 sectors your project is in',
-            errorMaxSelect: 'Select up to 2 sectors your project is in'
-
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Select up to 2 sectors your project is in'
+            },
+            {
+              type: 'MAX_SELECT',
+              max: 2,
+              error: 'Select up to 2 sectors your project is in'
             }
           ],
           answers: [
@@ -1790,15 +1747,10 @@ const questionBank = {
               }]
             }]
           },
-          validate: {
-            errorEmptyField: 'Select yes if you have used this technology on your farm'
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you have used this technology on your farm'
             }
           ],
           answers: [
@@ -1838,7 +1790,6 @@ const questionBank = {
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
-          validations: [],
           answers: []
         },
         {
@@ -1857,14 +1808,6 @@ const questionBank = {
           type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
           allFields: [
             {
               yarKey: 'projectName',
@@ -2028,15 +1971,10 @@ const questionBank = {
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
-          validate: {
-            errorEmptyField: 'Select who is applying for this grant'
-          },
-          validations: [
+          validate: [
             {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
+              type: 'NOT_EMPTY',
+              error: 'Select who is applying for this grant'
             }
           ],
           answers: [
@@ -2077,7 +2015,6 @@ const questionBank = {
           minAnswerCount: '',
           maxAnswerCount: '',
           ga: [{ dimension: 'cd3', value: { type: 'yar', key: 'applying' } }],
-          validations: [],
           allFields: [
             {
               yarKey: 'firstName',
@@ -2300,7 +2237,6 @@ const questionBank = {
           type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
-          validations: [],
           allFields: [
             {
               yarKey: 'firstName',
@@ -2547,14 +2483,6 @@ const questionBank = {
           fundingPriorities: '',
           type: '',
           minAnswerCount: 1,
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
           answers: []
         },
         {
@@ -2624,7 +2552,6 @@ const questionBank = {
           fundingPriorities: '',
           type: '',
           minAnswerCount: 1,
-          validations: [],
           answers: []
         }
       ]
