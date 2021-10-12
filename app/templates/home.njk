@@ -10,18 +10,7 @@
 {% endblock %}
 
 {% block beforeContent %}
-  {{ govukBreadcrumbs({
-    items: [
-      {
-        text: "Home",
-        href: "./"
-      },
-      {
-        text: "Check if you can apply for a Farming Transformation Fund Improving Farm Productivity Grant",
-        href: "./"
-      }
-    ]
-  }) }}
+  
 {% endblock %}
 
 {% block content %}
@@ -76,7 +65,7 @@
       <a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges">Find out about call charges</a><br/><br/>
 
       <h2 class="govuk-heading-s">Email</h2>
-      <p><a class="govuk-link" href="mailto:FTF@rpa.gov.uk">FTF@rpa.gov.uk</a></p>
+      <p><a class="govuk-link" title="Send email to RPA" href="mailto:FTF@rpa.gov.uk">FTF@rpa.gov.uk</a></p>
     </div>
   </div>
 {% endblock %}

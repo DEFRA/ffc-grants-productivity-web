@@ -217,12 +217,15 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, yarKey, '')
   }
   for (const [key, value] of Object.entries(payload)) {
-    thisAnswer = answers?.find(answer => (answer.value === value))
+    let payloadValue = value
+    thisAnswer = answers?.find(answer => (answer.value === payloadValue))
 
     if (type !== 'multi-input' && key !== 'secBtn') {
       payload.projectImpacts === 'Introduce acidification for the first time' && setYarValue(request, 'slurryCurrentlyTreated', 0)
       payload.applying === 'Farmer or contractor' && setYarValue(request, 'agentsDetails', {})
-      setYarValue(request, key, key === 'projectPostcode' ? value.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : value)
+      payloadValue = key === 'projectPostcode' ? payloadValue.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : payloadValue
+      payloadValue = key === 'projectCost' ? payloadValue.replace(',', '') : payloadValue
+      setYarValue(request, key, payloadValue)
     }
   }
 

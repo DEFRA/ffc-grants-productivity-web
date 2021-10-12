@@ -1,5 +1,5 @@
 const {
-  DIGITS_MAX_7,
+  CURRENCY_MAX_10,
   CHARS_MIN_10,
   CHARS_MAX_100,
   WORDS_MAX_60,
@@ -8,6 +8,7 @@ const {
   NUMBER_REGEX,
   NAME_ONLY_REGEX,
   PHONE_REGEX,
+  CHARS_MAX_12,
   EMAIL_REGEX
 } = require('../helpers/regex')
 
@@ -240,11 +241,7 @@ const questionBank = {
           preValidationKeys: ['legalStatus'],
           ineligibleContent: {
             messageContent: 'This grant is only for projects in England.',
-            insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
+            insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' }
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -510,14 +507,6 @@ const questionBank = {
             }
           },
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -661,7 +650,7 @@ const questionBank = {
         {
           key: 'acidification-infrastructure',
           order: 81,
-          title: 'Does you project also need acidification infrastructure?',
+          title: 'Does your project also need acidification infrastructure?',
           hint: {
             text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
           },
@@ -818,8 +807,8 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Enter the estimated cost for the items',
             checkRegex: {
-              regex: DIGITS_MAX_7,
-              error: 'Enter a whole number with a maximum of 7 digits'
+              regex: CURRENCY_MAX_10,
+              error: 'Enter a whole number with a maximum of 7 digits',
             }
           },
           validations: [
@@ -929,14 +918,6 @@ const questionBank = {
           nextUrl: 'project-impacts',
           preValidationKeys: ['canPayRemainingCost'],
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
           fundingPriorities: '',
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
@@ -985,14 +966,6 @@ const questionBank = {
             errorEmptyField: 'Select one option to describe the project impact'
           },
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
           fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li><li>introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -1062,14 +1035,6 @@ const questionBank = {
               <br>Enter figure in cubic metres (m<sup>3</sup>), for example 18,000`
           },
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
           fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li></ul>',
           sidebar: {
             values: [{
@@ -1141,14 +1106,6 @@ const questionBank = {
               <br>Enter figure in cubic metres(m<sup>3</sup>), for example 18,000`
           },
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
           fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li></ul>',
           sidebar: {
             values: [{
@@ -1209,13 +1166,6 @@ const questionBank = {
               <br/><br/><span class="govuk-heading-s">Non-robotic equipment</span>`
           },
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
@@ -1321,7 +1271,7 @@ const questionBank = {
               errorEmptyField: 'Describe your other robotic equipment',
               checkRegex: {
                 regex: WORDS_MAX_60,
-                error: 'Description must be 60 words or fewer and use letters, numbers, apostrophes, commas or fullstops'
+                error: 'Description must be 60 words or fewer and use letters, numbers and punctuation'
               }
             }
           },
@@ -1356,7 +1306,7 @@ const questionBank = {
           ],
           yarKey: 'otherRoboticEquipment',
           conditionalKey: 'roboticEquipment',
-          conditionalLabelData: 'Enter your item, including the name, a brief description and benefit'
+          conditionalLabelData: 'Enter your item, including the name, a brief description and benefit to your business'
         },
         {
           key: 'other-robotic-conditional',
@@ -1446,7 +1396,7 @@ const questionBank = {
           validate: {
             errorEmptyField: 'Enter the estimated cost for the items',
             checkRegex: {
-              regex: DIGITS_MAX_7,
+              regex: CURRENCY_MAX_10,
               error: 'Enter a whole number with a maximum of 7 digits'
             }
           },
@@ -2073,14 +2023,6 @@ const questionBank = {
           backUrl: 'business-details',
           preValidationKeys: ['businessDetails'],
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
           fundingPriorities: '',
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
@@ -2121,14 +2063,6 @@ const questionBank = {
           nextUrl: 'check-details',
           preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: '',
-            insertText: { text: '' },
-            messageLink: {
-              url: '',
-              title: ''
-            }
-          },
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
             dependentAnswerKeysArray: ['applying-A1'],
@@ -2226,7 +2160,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY_EXTRA',
-                  error: 'Enter a landline or mobile number',
+                  error: 'Enter a mobile or landline number',
                   extraFieldsToCheck: ['landlineNumber']
                 },
                 {
@@ -2469,7 +2403,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY_EXTRA',
-                  error: 'Enter a landline or mobile number',
+                  error: 'Enter a mobile or landline number',
                   extraFieldsToCheck: ['landlineNumber']
                 },
                 {
@@ -2672,7 +2606,7 @@ const questionBank = {
             <br/>Monday to Friday, 9am to 5pm (except public holidays)<br/>
             <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges">Find out about call charges (opens in new tab)</a></p>
             
-            Email: <a class="govuk-link" target="_blank" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a>
+            Email: <a class="govuk-link" title="Send email to RPA" target="_blank" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a>
             
             <p>RPA will be in touch when the full application period opens. They'll tell you about the application form and any guidance you need to submit a full application.</p>`,
             warning: {
