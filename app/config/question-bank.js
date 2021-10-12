@@ -780,8 +780,9 @@ const questionBank = {
           hint: {
             html: `
               You can only apply for a grant of up to 40% of the estimated costs.
-              <br/>Do not include VAT.
-              <br/>The minimum grant you can apply for this project is £35,000 (40% of £87,500). The maximum grant is £500,000.
+              <br/>The minimum grant you can apply for this project is £35,000 (40% of £87,500).
+              <br/>The maximum grant is £500,000.
+              <br/><br/>Do not include VAT.
               <br/><br/>Enter amount, for example 95,000`
           },
           eliminationAnswerKeys: '',
@@ -808,7 +809,7 @@ const questionBank = {
             errorEmptyField: 'Enter the estimated cost for the items',
             checkRegex: {
               regex: CURRENCY_MAX_10,
-              error: 'Enter a whole number with a maximum of 7 digits',
+              error: 'Enter a whole number with a maximum of 7 digits'
             }
           },
           validations: [
