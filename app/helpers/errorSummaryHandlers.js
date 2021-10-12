@@ -94,13 +94,14 @@ const checkErrors = (payload, currentQuestion, h, request) => {
   const { yarKey, answers, validate } = currentQuestion
   const conditionalAnswer = answers?.find(answer => answer.conditional)
   const errorHrefList = []
+  let isconditionalAnswer
   let placeholderInputError
   if (currentQuestion.type === 'multi-input') {
     const { allFields } = currentQuestion
 
     allFields.forEach(
       ({ yarKey: inputYarKey, validate: inputValidate, answers: inputAnswers }) => {
-        const isconditionalAnswer = inputAnswers?.find(answer => answer.conditional)?.value === payload[inputYarKey]
+        isconditionalAnswer = inputAnswers?.find(answer => answer.conditional)?.value === payload[inputYarKey]
 
         if (inputValidate) {
           placeholderInputError = checkInputError(inputValidate, isconditionalAnswer, payload, inputYarKey)
@@ -131,7 +132,7 @@ const checkErrors = (payload, currentQuestion, h, request) => {
   }
 
   const payloadValue = typeof payload[yarKey] === 'string' ? payload[yarKey].trim() : payload[yarKey]
-  const isconditionalAnswer = payload[yarKey]?.includes(conditionalAnswer?.value)
+  isconditionalAnswer = payload[yarKey]?.includes(conditionalAnswer?.value)
   if (validate) {
     placeholderInputError = checkInputError(validate, isconditionalAnswer, payload, yarKey)
 
