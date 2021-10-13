@@ -33,9 +33,22 @@ const validateAnswerField = (value, validationType, details, payload) => {
       const { min, max } = details
       return (value >= min && value <= max)
     }
+
+    case 'MAX_SELECT': {
+      const { max } = details
+      return ([value].flat().length <= max)
+    }
     default:
       return false
   }
+}
+
+const checkInputError = (validate, isconditionalAnswer, payload, yarKey) => {
+  return validate.find(
+    ({ type, dependentKey, ...details }) => (isconditionalAnswer && dependentKey)
+      ? (validateAnswerField(payload[dependentKey], type, details, payload) === false)
+      : !dependentKey && (validateAnswerField(payload[yarKey], type, details, payload) === false)
+  )
 }
 
 const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
@@ -78,25 +91,20 @@ const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
 }
 
 const checkErrors = (payload, currentQuestion, h, request) => {
-  const { yarKey, conditionalKey, answers, validate, maxAnswerCount } = currentQuestion
-  const errorList = []
+  const { yarKey, answers, validate } = currentQuestion
   const conditionalAnswer = answers?.find(answer => answer.conditional)
-
+  const errorHrefList = []
+  let isconditionalAnswer
+  let placeholderInputError
   if (currentQuestion.type === 'multi-input') {
     const { allFields } = currentQuestion
-    const errorHrefList = []
-    let placeholderInputError
 
     allFields.forEach(
       ({ yarKey: inputYarKey, validate: inputValidate, answers: inputAnswers }) => {
-        const isconditionalAnswer = inputAnswers?.find(answer => answer.conditional)?.value === payload[inputYarKey]
+        isconditionalAnswer = inputAnswers?.find(answer => answer.conditional)?.value === payload[inputYarKey]
 
         if (inputValidate) {
-          placeholderInputError = inputValidate.find(
-            ({ type, dependentKey, ...details }) => (isconditionalAnswer && dependentKey)
-              ? (validateAnswerField(payload[dependentKey], type, details, payload) === false)
-              : !dependentKey && (validateAnswerField(payload[inputYarKey], type, details, payload) === false)
-          )
+          placeholderInputError = checkInputError(inputValidate, isconditionalAnswer, payload, inputYarKey)
 
           if (placeholderInputError) {
             errorHrefList.push({
@@ -111,56 +119,33 @@ const checkErrors = (payload, currentQuestion, h, request) => {
     if (errorHrefList.length > 0) {
       return customiseErrorText(payload, currentQuestion, errorHrefList, h, request)
     }
-  } else {
-    if (Object.keys(payload).length === 0 && currentQuestion.type) {
-      const errorTextNoSelection = validate?.errorEmptyField
-      errorList.push({
-        text: errorTextNoSelection,
-        href: `#${yarKey}`
+  }
+  if (Object.keys(payload).length === 0 && currentQuestion.type) {
+    placeholderInputError = validate.find(
+      ({ type, dependentKey, ...details }) => (validateAnswerField(payload[yarKey], type, details, payload) === false))
+
+    errorHrefList.push({
+      text: placeholderInputError.error,
+      href: `#${placeholderInputError.dependentKey ?? yarKey}`
+    })
+    return customiseErrorText('', currentQuestion, errorHrefList, h, request)
+  }
+
+  const payloadValue = typeof payload[yarKey] === 'string' ? payload[yarKey].trim() : payload[yarKey]
+  isconditionalAnswer = payload[yarKey]?.includes(conditionalAnswer?.value)
+  if (validate) {
+    placeholderInputError = checkInputError(validate, isconditionalAnswer, payload, yarKey)
+
+    if (placeholderInputError) {
+      errorHrefList.push({
+        text: placeholderInputError.error,
+        href: `#${placeholderInputError.dependentKey ?? yarKey}`
       })
-      return customiseErrorText('', currentQuestion, errorList, h, request)
     }
-    //* ** This loop needs refactoring *** */
-    for (const [key, value] of Object.entries(payload)) {
-      let payloadValue = typeof value === 'string' ? value.trim() : value
-      if (key !== 'secBtn') {
-        const noOptionSelected = ((validate?.errorEmptyField && !Object.keys(payload).includes(yarKey)) || payload[yarKey] === '')
-        const hasSelectionError = (payloadValue.includes(conditionalAnswer?.value) && validate?.conditionalValidate?.errorEmptyField && payload[conditionalKey].trim() === '') || noOptionSelected
-        const regexError = (validate?.checkRegex && !validate.checkRegex.regex.test(payloadValue))
-        const hasRegexValidationError = (payload[yarKey]?.includes(conditionalAnswer?.value) && key === conditionalKey && !validate.conditionalValidate?.checkRegex.regex.test(payloadValue)) || regexError
+  }
 
-        if (hasSelectionError || hasRegexValidationError) {
-          const errorTextNoSelection = hasSelectionError && noOptionSelected ? validate?.errorEmptyField : validate?.conditionalValidate?.errorEmptyField
-          const errorTextRegex = regexError ? validate.checkRegex.error : validate.conditionalValidate?.checkRegex?.error
-          const errorText = hasSelectionError ? errorTextNoSelection : errorTextRegex
-          const href = errorText && !noOptionSelected && !regexError ? conditionalKey : yarKey
-          errorList.push({
-            text: errorText,
-            href: `#${href}`
-          })
-          payloadValue = key === conditionalKey ? payload[yarKey] : payloadValue
-          return customiseErrorText(payloadValue, currentQuestion, errorList, h, request)
-        }
-
-        if (maxAnswerCount && typeof payload[yarKey] !== 'string' && payload[yarKey].length > maxAnswerCount) {
-          errorList.push({
-            text: validate.errorMaxSelect,
-            href: `#${yarKey}`
-          })
-          return customiseErrorText(payloadValue, currentQuestion, errorList, h, request)
-        }
-        // ERROR: mandatory checkbox / radiobutton not selected
-        const requiredAnswer = answers?.find(answer => (answer.mustSelect))
-
-        if ((!!requiredAnswer) && (!payloadValue || !payloadValue.includes(requiredAnswer.value))) {
-          errorList.push({
-            text: requiredAnswer.errorMustSelect,
-            href: `#${yarKey}`
-          })
-          return customiseErrorText(payloadValue, currentQuestion, errorList, h, request)
-        }
-      }
-    }
+  if (errorHrefList.length > 0) {
+    return customiseErrorText(payloadValue, currentQuestion, errorHrefList, h, request)
   }
 }
 
