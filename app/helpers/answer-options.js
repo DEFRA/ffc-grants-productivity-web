@@ -83,7 +83,7 @@ const textField = (data, question, request = null) => {
   const { yarKey, prefix, suffix, label, classes } = question
   const project = request ? getYarValue(request, 'projectSubject') : null
   if (yarKey === 'projectName') {
-    question.hint.text = project === 'Slurry acidification' ? 'For example, Browns Hill Farm slurry acidification' : 'For example, Browns Hill Farm robotic milking'
+    question.hint.text = project === 'Slurry Acidification' ? 'For example, Browns Hill Farm slurry acidification' : 'For example, Browns Hill Farm robotic milking'
   }
   return {
     id: yarKey,
