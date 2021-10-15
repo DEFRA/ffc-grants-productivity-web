@@ -1,6 +1,6 @@
 const { crumbToken } = require('./test-helper')
 const varListTemplate = {
-  projectSubject: 'Slurry acidification'
+  projectSubject: 'Slurry Acidification'
 }
 
 let varList
@@ -33,7 +33,7 @@ describe('Project and business details page', () => {
   })
 
   it('should diaplay correct hint text for project name, in case of robotics journey ', async () => {
-    varList.projectSubject = 'Robotics and innovation'
+    varList.projectSubject = 'Robotics and Innovation'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/business-details`
