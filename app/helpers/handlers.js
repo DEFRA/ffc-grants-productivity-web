@@ -224,7 +224,6 @@ const showPostPage = (currentQuestion, request, h) => {
       payload.projectImpacts === 'Introduce acidification for the first time' && setYarValue(request, 'slurryCurrentlyTreated', 0)
       payload.applying === 'Farmer or contractor' && setYarValue(request, 'agentsDetails', {})
       payloadValue = key === 'projectPostcode' ? payloadValue.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : payloadValue
-      payloadValue = key === 'projectCost' ? payloadValue.replace(',', '') : payloadValue
       setYarValue(request, key, payloadValue)
     }
   }
