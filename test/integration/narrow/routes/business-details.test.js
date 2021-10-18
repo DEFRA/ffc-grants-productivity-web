@@ -189,7 +189,6 @@ describe('Project and business details page', () => {
         businessName: 'Business Name',
         numberEmployees: '1234',
         businessTurnover: '5678',
-        inSbi: 'Yes',
         sbi: '123e',
         crumb: crumbToken
       },
@@ -212,7 +211,6 @@ describe('Project and business details page', () => {
         businessName: 'Business Name',
         numberEmployees: '1234',
         businessTurnover: '5678',
-        inSbi: 'Yes',
         sbi: '123 45',
         crumb: crumbToken
       },
@@ -235,7 +233,6 @@ describe('Project and business details page', () => {
         businessName: 'Business Name',
         numberEmployees: '1234',
         businessTurnover: '5678',
-        inSbi: 'Yes',
         sbi: '12345678',
         crumb: crumbToken
       },
@@ -258,7 +255,6 @@ describe('Project and business details page', () => {
         businessName: 'Business Name',
         numberEmployees: '1234',
         businessTurnover: '5678',
-        inSbi: 'Yes',
         sbi: '1234567890',
         crumb: crumbToken
       },
@@ -281,7 +277,6 @@ describe('Project and business details page', () => {
         businessName: 'Business Name',
         numberEmployees: '1234',
         businessTurnover: '5678',
-        inSbi: 'No',
         crumb: crumbToken
       },
       headers: {
@@ -303,7 +298,6 @@ describe('Project and business details page', () => {
         businessName: 'Business Name',
         numberEmployees: '1234',
         businessTurnover: '5678',
-        inSbi: 'Yes',
         sbi: '012345678',
         crumb: crumbToken
       },

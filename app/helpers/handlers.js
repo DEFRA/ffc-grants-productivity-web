@@ -122,7 +122,7 @@ const getPage = async (question, request, h) => {
   const data = getYarValue(request, yarKey) || null
   let conditionalHtml
   if (question?.conditionalKey && question?.conditionalLabelData) {
-    const conditional = yarKey === 'businessDetails' ? yarKey : question.conditionalKey
+    const conditional = question.conditionalKey
     conditionalHtml = handleConditinalHtmlData(
       type,
       question.conditionalLabelData,

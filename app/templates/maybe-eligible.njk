@@ -43,7 +43,9 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds govuk-body govuk-!-margin-bottom-0">
       {{ crumbToken(crumb)}}
-      <h1 class="govuk-heading-l">{{messageHeader}}</h1>
+      {% if messageHeader %}
+        <h1 class="govuk-heading-l">{{messageHeader}}</h1>
+      {% endif%}
       <p class="govuk-body">{{ messageContent | safe}}</p>
 
       {%if url === 'confirm' %}
