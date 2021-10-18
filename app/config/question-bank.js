@@ -2018,16 +2018,14 @@ const questionBank = {
           allFields: [
             {
               type: 'sub-heading',
-              text: 'smaple Heading'
+              text: 'Name'
             },
             {
               yarKey: 'firstName',
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                html: `
-                  <span class="govuk-heading-m">Name</span><span>First name</span>
-                `,
+                text: 'First name',
                 classes: 'govuk-label'
               },
               validate: [
@@ -2045,6 +2043,7 @@ const questionBank = {
             {
               yarKey: 'lastName',
               type: 'input',
+              endFieldset: 'true',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Last name',
@@ -2063,14 +2062,15 @@ const questionBank = {
               ]
             },
             {
+              type: 'sub-heading',
+              text: 'Contact details'
+            },
+            {
               yarKey: 'emailAddress',
               type: 'email',
               classes: 'govuk-input--width-20',
               label: {
-                text: '',
-                html: `
-                  <span class="govuk-heading-m">Contact details</span><span>Email address</span>
-                `,
+                text: 'Email address',
                 classes: 'govuk-label'
               },
               hint: {
@@ -2119,7 +2119,7 @@ const questionBank = {
             },
             {
               yarKey: 'landlineNumber',
-              endFieldset: true,
+              endFieldset: 'true',
               type: 'tel',
               classes: 'govuk-input--width-20',
               label: {
@@ -2148,13 +2148,15 @@ const questionBank = {
               ]
             },
             {
+              type: 'sub-heading',
+              text: 'Address'
+            },
+            {
               yarKey: 'address1',
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                html: `
-                  <span class="govuk-heading-m">Address</span><span>Building and street</span>
-                `,
+                text: 'Building and street',
                 classes: 'govuk-label'
               },
               validate: [
@@ -2205,6 +2207,7 @@ const questionBank = {
             {
               yarKey: 'postcode',
               type: 'input',
+              endFieldset: 'true',
               classes: 'govuk-input--width-5',
               label: {
                 text: 'Postcode',
@@ -2244,13 +2247,15 @@ const questionBank = {
           maxAnswerCount: '',
           allFields: [
             {
+              type: 'sub-heading',
+              text: 'Name'
+            },
+            {
               yarKey: 'firstName',
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                html: `
-                  <span class="govuk-heading-m">Name</span><span>First name</span>
-                `,
+                text: 'First name',
                 classes: 'govuk-label'
               },
               validate: [
@@ -2288,6 +2293,7 @@ const questionBank = {
             {
               yarKey: 'businessName',
               type: 'input',
+              endFieldset: 'true',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Business name',
@@ -2306,14 +2312,15 @@ const questionBank = {
               ]
             },
             {
+              type: 'sub-heading',
+              text: 'Contact details'
+            },
+            {
               yarKey: 'emailAddress',
               type: 'email',
               classes: 'govuk-input--width-20',
               label: {
-                text: '',
-                html: `
-                  <span class="govuk-heading-m">Contact details</span><span>Email address</span>
-                `,
+                text: 'Email address',
                 classes: 'govuk-label'
               },
               hint: {
@@ -2363,6 +2370,7 @@ const questionBank = {
             {
               yarKey: 'landlineNumber',
               type: 'tel',
+              endFieldset: 'true',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Landline number',
@@ -2390,13 +2398,15 @@ const questionBank = {
               ]
             },
             {
+              type: 'sub-heading',
+              text: 'Address'
+            },
+            {
               yarKey: 'address1',
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                html: `
-                  <span class="govuk-heading-m">Address</span><span>Building and street</span>
-                `,
+                text: 'Building and street',
                 classes: 'govuk-label'
               },
               validate: [
@@ -2447,6 +2457,7 @@ const questionBank = {
             {
               yarKey: 'postcode',
               type: 'input',
+              endFieldset: 'true',
               classes: 'govuk-input--width-5',
               label: {
                 text: 'Postcode',
