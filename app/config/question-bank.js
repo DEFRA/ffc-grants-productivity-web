@@ -7,6 +7,7 @@ const {
   POSTCODE_REGEX,
   WHOLE_NUMBER_REGEX,
   NUMBER_REGEX,
+  SBI_REGEX,
   NAME_ONLY_REGEX,
   PHONE_REGEX,
   EMAIL_REGEX
@@ -1908,54 +1909,29 @@ const questionBank = {
               ]
             },
             {
-              yarKey: 'inSbi',
-              conditionalKey: 'sbi',
-              type: 'single-answer',
+              yarKey: 'sbi',
+              type: 'input',
               title: 'Single Business Identifier (SBI)',
-              classes: 'govuk-fieldset__legend--s',
+              classes: 'govuk-input govuk-input--width-10',
+              label: {
+                text: 'Single Business Identifier (SBI)',
+                classes: 'govuk-label'
+              },
               hint: {
-                html: 'If you don\'t have an SBI, you can still apply.<br/>Select one option'
+                html: 'If you don\'t have an SBI, you can still apply.'
               },
               validate: [
                 {
-                  type: 'NOT_EMPTY',
-                  error: 'Select if you have an SBI number'
-                },
-                {
-                  dependentKey: 'sbi',
-                  type: 'NOT_EMPTY',
-                  error: 'SBI number must have 9 characters, like 011115678'
-                },
-                {
-                  dependentKey: 'sbi',
                   type: 'REGEX',
-                  regex: NUMBER_REGEX,
-                  error: 'SBI number must have 9 characters, like 011115678'
-                },
-                {
-                  dependentKey: 'sbi',
-                  type: 'MIN_MAX_CHARS',
-                  min: 9,
-                  max: 9,
+                  regex: SBI_REGEX,
                   error: 'SBI number must have 9 characters, like 011115678'
                 }
+
               ],
-              answers: [
-                {
-                  key: 'inSbi-A1',
-                  conditional: true,
-                  value: 'Yes'
-                },
-                {
-                  key: 'inSbi-A2',
-                  value: 'No'
-                }
-              ]
+              answers: []
             }
           ],
-          yarKey: 'businessDetails',
-          conditionalKey: 'sbi',
-          conditionalLabelData: 'SBI number'
+          yarKey: 'businessDetails'
         },
         {
           key: 'applying',
