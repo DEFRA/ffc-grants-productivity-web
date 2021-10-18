@@ -2132,7 +2132,7 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'Building and street',
+                html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
                 classes: 'govuk-label'
               },
               validate: [
@@ -2145,7 +2145,11 @@ const questionBank = {
             {
               yarKey: 'address2',
               type: 'input',
-              classes: 'govuk-input--width-20'
+              classes: 'govuk-input--width-20',
+              label: {
+                html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
+                classes: 'govuk-label'
+              }
             },
             {
               yarKey: 'town',
@@ -2382,7 +2386,7 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                text: 'Building and street',
+                html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
                 classes: 'govuk-label'
               },
               validate: [
@@ -2395,7 +2399,11 @@ const questionBank = {
             {
               yarKey: 'address2',
               type: 'input',
-              classes: 'govuk-input--width-20'
+              classes: 'govuk-input--width-20',
+              label: {
+                html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
+                classes: 'govuk-label'
+              }
             },
             {
               yarKey: 'town',
