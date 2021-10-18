@@ -57,8 +57,7 @@ const inputOptions = (data, question, conditionalHtml) => {
     fieldset: {
       legend: {
         text: title,
-        isPageHeading: true,
-        classes
+        isPageHeading: true
       }
     },
     hint,
@@ -113,6 +112,9 @@ const getAllInputs = (data, question, conditionalHtml, request) => {
     const { type } = field
     let fieldItems
     switch (type) {
+      case 'sub-heading':
+        fieldItems = { legend: { text: field.text, classes: 'govuk-heading-m', isPageHeading: true } }
+        break
       case 'input':
         fieldItems = textField(data[field.yarKey], field, request)
         break

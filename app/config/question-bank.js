@@ -2017,6 +2017,10 @@ const questionBank = {
           ga: [{ dimension: 'cd3', value: { type: 'yar', key: 'applying' } }],
           allFields: [
             {
+              type: 'sub-heading',
+              text: 'smaple Heading'
+            },
+            {
               yarKey: 'firstName',
               type: 'input',
               classes: 'govuk-input--width-20',
@@ -2115,6 +2119,7 @@ const questionBank = {
             },
             {
               yarKey: 'landlineNumber',
+              endFieldset: true,
               type: 'tel',
               classes: 'govuk-input--width-20',
               label: {
@@ -2499,7 +2504,8 @@ const questionBank = {
             messageContent: `<ul class="govuk-list"> <li>I confirm that, to the best of my knowledge, the details I have provided are correct.</li>
             <li> I understand the score was based on the answers I provided.</li>
             <li> I am aware the information I submit will be checked.</li>
-            <li> I am happy to be contacted by Defra and RPA (or a third-party on their behalf) about my application.</li></ul>`
+            <li> I am happy to be contacted by Defra and RPA (or a third-party on their behalf) about my application.</li></ul>
+            <br/>So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party working for us, to contact you.`
           },
           answers: [
             {
