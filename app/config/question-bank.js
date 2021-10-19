@@ -1918,7 +1918,7 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               hint: {
-                html: 'If you don\'t have an SBI, you can still apply.'
+                html: 'If you do not have an SBI, you will need to get one for full application'
               },
               validate: [
                 {
