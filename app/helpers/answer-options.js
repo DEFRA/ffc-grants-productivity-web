@@ -110,9 +110,12 @@ const getAllInputs = (data, question, conditionalHtml, request) => {
     data = dataObject
   }
   return allFields.map((field) => {
-    const { type } = field
+    const { type, endFieldset } = field
     let fieldItems
     switch (type) {
+      case 'sub-heading':
+        fieldItems = { text: field.text }
+        break
       case 'input':
         fieldItems = textField(data[field.yarKey], field, request)
         break
@@ -132,6 +135,7 @@ const getAllInputs = (data, question, conditionalHtml, request) => {
 
     return {
       type,
+      endFieldset,
       ...fieldItems
     }
   })

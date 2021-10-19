@@ -9,7 +9,6 @@
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "./components/macro.njk" import crumbToken, multiSideBar, conditionalButtons %}
 
-
 {% block pageTitle %}   
   {% if errorList %}
     Error: 
@@ -60,12 +59,11 @@
               <h1 class="govuk-heading-l">{{title}}</h1>
               {% for item in items %}
 
-                {% if item.type ==='single-answer' %}
-                  {{ govukRadios(item) }}
-                {%endif%}
-
-                {%if item.type ==='multi-answer' %}
-                  {{ govukCheckboxes(item) }}
+                {% if item.type ==='sub-heading' %}
+                  <fieldset class="govuk-fieldset">
+                    <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                      <h2 class="govuk-fieldset__heading">{{item.text}} </h2>
+                    </legend>
                 {%endif%}
 
                 {%if item.type ==='input' or item.type ==='email' or item.type ==='tel' %}
@@ -75,6 +73,14 @@
                 {%if item.type ==='select' %}
                   {{ govukSelect(item) }}
                 {%endif%}
+
+                {% if item.type ==='single-answer' %}
+                  {{ govukRadios(item) }}
+                {%endif%}
+
+              {%if item.endFieldset === 'true' %}
+                </fieldset>
+              {%endif%}
 
               {% endfor %}
             {%endif%}
