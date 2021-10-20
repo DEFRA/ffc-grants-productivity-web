@@ -75,7 +75,7 @@
           })
         }}
         
-        {% if applying == 'Agent' %}
+        {% if agentDetails.name %}
 
           <div>
             <h2 class="govuk-heading-m check-detail-heading">Agent's details</h2>
@@ -122,6 +122,52 @@
         {% endif %}
 
         <br/>
+  {% if contractorDetails.name %}
+
+          <div>
+            <h2 class="govuk-heading-m check-detail-heading">Contractor's details</h2>
+            <a title="Change Contractor's details" class="check-detail-change" href="{{contractorDetailsLink}}">Change<span class="govuk-visually-hidden">Change agent's details</span></a>
+            <hr/>
+          </div>
+          
+          {{ govukSummaryList({
+            rows: [
+              {
+                key: {
+                  text: "Name"
+                },
+                value: {
+                  text: contractorDetails.name
+                }
+              },
+              {
+                key: {
+                  text: "Business name"
+                },
+                value: {
+                  html: contractorDetails.businessName
+                }
+              },
+              {
+                key: {
+                  text: "Contact details"
+                },
+                value: {
+                  html: contractorDetails.contact
+                }
+              },
+              {
+                key: {
+                  text: "Address"
+                },
+                value: {
+                  html: contractorDetails.address
+                }
+              }
+            ]
+          }) }}
+        {% endif %}
+        <br/>
       
         {% set farmerSummaryItems = [
             {
@@ -150,18 +196,18 @@
             }
           ]
         %}
-
+      {% if farmerDetails.name%}
         <div>
-            <h2 class="govuk-heading-m check-detail-heading">Farmer or contractor’s details</h2>
-            <a title="Change Farmer or contractor’s details" class="check-detail-change" href="{{farmerDetailsLink}}">Change<span class="govuk-visually-hidden">Change farmer's details</span></a>
+            <h2 class="govuk-heading-m check-detail-heading">Farmer's details</h2>
+            <a title="Change Farmer details" class="check-detail-change" href="{{farmerDetailsLink}}">Change<span class="govuk-visually-hidden">Change farmer's details</span></a>
             <hr/>
         </div>
 
         {{ govukSummaryList({ rows: farmerSummaryItems }) }}
       
-      </div>
+        </div>
     </div>
-
+  {% endif %}
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-two-thirds">
         <form method="POST" action="{{ formActionPage }}" autocomplete="off" novalidate>

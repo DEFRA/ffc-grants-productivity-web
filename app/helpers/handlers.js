@@ -14,6 +14,16 @@ const createMsg = require('../messaging/create-msg')
 const gapiService = require('../services/gapi-service')
 const { startPageUrl } = require('../config/server')
 const { ALL_QUESTIONS } = require('../config/question-bank')
+
+const resetYarValues = (applying, request) => {
+  if (applying === 'Farmer') {
+    setYarValue(request, 'agentsDetails', null)
+    setYarValue(request, 'contractorsDetails', null)
+  } else {
+    setYarValue(request, 'farmerDetails', null)
+  }
+}
+
 const getConfirmationId = (guid, journey) => {
   const prefix = journey === 'Slurry acidification' ? 'SL' : 'RI'
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
@@ -139,10 +149,14 @@ const getPage = async (question, request, h) => {
     const applying = getYarValue(request, 'applying')
     const businessDetails = getYarValue(request, 'businessDetails')
     const agentDetails = getYarValue(request, 'agentsDetails')
+    const contractorDetails = getYarValue(request, 'contractorsDetails')
     const farmerDetails = getYarValue(request, 'farmerDetails')
 
     const agentContact = saveValuesToArray(agentDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
     const agentAddress = saveValuesToArray(agentDetails, ['address1', 'address2', 'county', 'postcode'])
+
+    const contractorContact = saveValuesToArray(contractorDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
+    const contractorAddress = saveValuesToArray(contractorDetails, ['address1', 'address2', 'county', 'postcode'])
 
     const farmerContact = saveValuesToArray(farmerDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
     const farmerAddress = saveValuesToArray(farmerDetails, ['address1', 'address2', 'county', 'postcode'])
@@ -171,6 +185,17 @@ const getPage = async (question, request, h) => {
               name: `${agentDetails.firstName} ${agentDetails.lastName}`,
               contact: agentContact.join('<br/>'),
               address: agentAddress.join('<br/>')
+            }
+          : {}
+        )
+      },
+      contractorDetails: {
+        ...contractorDetails,
+        ...(contractorDetails
+          ? {
+              name: `${contractorDetails.firstName} ${contractorDetails.lastName}`,
+              contact: contractorContact.join('<br/>'),
+              address: contractorAddress.join('<br/>')
             }
           : {}
         )
@@ -222,7 +247,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
     if (type !== 'multi-input' && key !== 'secBtn') {
       payload.projectImpacts === 'Introduce acidification for the first time' && setYarValue(request, 'slurryCurrentlyTreated', 0)
-      payload.applying === 'Farmer or contractor' && setYarValue(request, 'agentsDetails', {})
+      payload.applying && resetYarValues(payload.applying, request)
       payloadValue = key === 'projectPostcode' ? payloadValue.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : payloadValue
       setYarValue(request, key, payloadValue)
     }
