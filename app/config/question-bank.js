@@ -83,7 +83,7 @@ const questionBank = {
           title: 'What is your project about?',
           pageTitle: '',
           backUrl: 'start',
-          nextUrl: 'legal-status',
+          nextUrl: 'business-location',
           url: 'project-subject',
           baseUrl: 'project-subject',
           type: 'single-answer',
@@ -119,15 +119,61 @@ const questionBank = {
           yarKey: 'projectSubject'
         },
         {
+          key: 'business-location',
+          order: 15,
+          title: 'Is your business in England?',
+          pageTitle: '',
+          backUrl: 'project-subject',
+          nextUrl: 'legal-status',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          url: 'business-location',
+          baseUrl: 'business-location',
+          preValidationKeys: ['projectSubject'],
+          ineligibleContent: {
+            messageContent: 'This grant is only for businesses registered in England.',
+            insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'This grant is only for businesses registered in England. \n \n Scotland, Wales and Northern Ireland have other grants available.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the business is in England'
+            }
+          ],
+          answers: [
+            {
+              key: 'business-location-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'business-location-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'businessLocation'
+        },
+        {
           key: 'legal-status',
           order: 20,
           title: 'What is the legal status of the business?',
           pageTitle: '',
-          backUrl: 'project-subject',
+          backUrl: 'business-location',
           nextUrl: 'country',
           url: 'legal-status',
           baseUrl: 'legal-status',
-          preValidationKeys: ['projectSubject'],
+          preValidationKeys: ['businessLocation'],
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -159,14 +205,6 @@ const questionBank = {
             {
               type: 'NOT_EMPTY',
               error: 'Select the legal status of the business'
-            }
-          ],
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
             }
           ],
           answers: [
@@ -232,9 +270,13 @@ const questionBank = {
           key: 'country',
           order: 30,
           title: 'Is the planned project in England?',
+          hint: {
+            text: 'The site where the work will happen'
+          },
           pageTitle: '',
           backUrl: 'legal-status',
           nextUrl: 'planning-permission',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'country',
           baseUrl: 'country',
           preValidationKeys: ['legalStatus'],
@@ -258,23 +300,11 @@ const questionBank = {
             {
               type: 'NOT_EMPTY',
               error: 'Select yes if the project is in England'
-            },
-            {
-              dependentKey: 'projectPostcode',
-              type: 'NOT_EMPTY',
-              error: 'Enter a postcode, like AA1 1AA'
-            },
-            {
-              dependentKey: 'projectPostcode',
-              type: 'REGEX',
-              regex: POSTCODE_REGEX,
-              error: 'Enter a postcode, like AA1 1AA'
             }
           ],
           answers: [
             {
               key: 'country-A1',
-              conditional: true,
               value: 'Yes'
             },
             {
@@ -283,9 +313,7 @@ const questionBank = {
               notEligible: true
             }
           ],
-          yarKey: 'inEngland',
-          conditionalKey: 'projectPostcode',
-          conditionalLabelData: 'Where will the work happen or the equipment be stored?<br/><br/> Postcode'
+          yarKey: 'inEngland'
         },
         {
           key: 'planning-permission',
