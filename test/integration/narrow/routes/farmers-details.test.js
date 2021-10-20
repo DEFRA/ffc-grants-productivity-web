@@ -137,7 +137,7 @@ describe('Farmer details page', () => {
     expect(postResponse.payload).toContain('Enter a postcode, like AA1 1AA')
   })
 
-  it('should store user response and redirects to farmer details page, either of mobile or landline can be empty', async () => {
+  it('should store user response and redirects to check details page, either of mobile or landline can be empty', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/farmers-details`,
@@ -150,6 +150,7 @@ describe('Farmer details page', () => {
         town: 'MyTown',
         county: 'Devon',
         postcode: 'AA1 1AA',
+        projectPostcode: 'AA1 1AA',
         crumb: crumbToken
       },
       headers: { cookie: 'crumb=' + crumbToken }
@@ -160,7 +161,7 @@ describe('Farmer details page', () => {
     expect(postResponse.headers.location).toBe('check-details')
   })
 
-  it('should store user response and redirects to farmer details page, either of mobile or landline can be empty', async () => {
+  it('should store user response and redirects to ckeck details page, either of mobile or landline can be empty', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/farmers-details`,
@@ -174,6 +175,7 @@ describe('Farmer details page', () => {
         town: 'MyTown',
         county: 'Devon',
         postcode: 'AA1 1AA',
+        projectPostcode: 'AA1 1AA',
         crumb: crumbToken
       },
       headers: { cookie: 'crumb=' + crumbToken }
@@ -184,7 +186,7 @@ describe('Farmer details page', () => {
     expect(postResponse.headers.location).toBe('check-details')
   })
 
-  it('should store user response and redirects to farmer details page , either of mobile or landline can be empty', async () => {
+  it('should store user response and redirects to check details page , either of mobile or landline can be empty', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/farmers-details`,
@@ -199,6 +201,7 @@ describe('Farmer details page', () => {
         town: 'MyTown',
         county: 'Devon',
         postcode: 'AA1 1AA',
+        projectPostcode: 'AA1 1AA',
         crumb: crumbToken
       },
       headers: { cookie: 'crumb=' + crumbToken }
