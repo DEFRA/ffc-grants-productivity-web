@@ -80,8 +80,7 @@ module.exports = {
       filename: '.layout.njk',
       template: 'app/assets/src/layout.njk',
       metadata: {
-        urlPrefix,
-        surveyLink: process.env.SURVEY_LINK
+        urlPrefix
       }
     }),
     new MiniCssExtractPlugin({

@@ -1,4 +1,4 @@
-const { cookieOptions, urlPrefix } = require('../config/server')
+const { cookieOptions, urlPrefix, surveyLink } = require('../config/server')
 const { ALL_URLS } = require('../config/question-bank')
 const { getCurrentPolicy, validSession, sessionIgnorePaths } = require('../cookies')
 const cacheConfig = require('../config/cache')
@@ -24,6 +24,7 @@ module.exports = {
           request.response.source.manager._context.cookiesPolicy = cookiesPolicy
           request.response.source.manager._context.showTimeout = showTimeout
           request.response.source.manager._context.sessionTimeoutInMin = (cacheConfig.expiresIn / 60000) - 5
+          request.response.source.manager._context.surveyLink = surveyLink
         }
 
         return h.continue
