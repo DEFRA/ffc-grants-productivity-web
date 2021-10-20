@@ -32,7 +32,7 @@
       tag: {
       text: "beta"
     },
-    html: 'This is a new service – your <a class="govuk-link" href="<%= htmlWebpackPlugin.options.metadata.surveyLink %>" target="_blank" rel="noopener noreferrer">feedback</a> will help us to improve it.'
+    html: 'This is a new service – your <a class="govuk-link" href="<%= surveyLink %>" target="_blank" rel="noopener noreferrer">feedback</a> will help us to improve it.'
     }) }}
     </div>
 
@@ -58,7 +58,7 @@
   {% block footer %}
     {{ govukFooter({
   meta: {
-  html: '<h2 class="govuk-visually-hidden">Support links</h2>
+  html: `<h2 class="govuk-visually-hidden">Support links</h2>
           <ul class="govuk-footer__inline-list">
             <li class="govuk-footer__inline-list-item">
               <a class="govuk-footer__link" href="<%= htmlWebpackPlugin.options.metadata.urlPrefix %>/accessibility" rel="noopener noreferrer">
@@ -72,7 +72,7 @@
               </a>
             </li>
               <li class="govuk-footer__inline-list-item">
-              <a class="govuk-footer__link" href="<%= htmlWebpackPlugin.options.metadata.surveyLink %>" target="_blank" rel="noopener noreferrer">
+              <a class="govuk-footer__link" href="<%= surveyLink %>" target="_blank" rel="noopener noreferrer">
                 Feedback
               </a>
             </li>
