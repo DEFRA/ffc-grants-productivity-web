@@ -30,5 +30,5 @@ services:
       REDIS_PORT: 6379
       REDIS_PARTITION: ffc-grants-productivity-web
       REDIS_PASSWORD: ""
-      SESSION_CACHE_TTL: 1200000
+      SESSION_CACHE_TTL: 900000
       SURVEY_LINK: https://defragroup.eu.qualtrics.com/jfe/preview/SV_9ugumqZO9w4M20e?Q_CHL=preview&Q_SurveyVersionID=current
