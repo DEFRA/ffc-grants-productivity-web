@@ -1,15 +1,13 @@
 const { getYarValue } = require('../helpers/session')
 
-const guardPage = (request, guardData) => {
+function guardPage (request, guardData, rule = null) {
   let result = false
   if (guardData) {
-    guardData.forEach(dependcyKey => {
-    // check yar session value for each key exists
-      if (result === false && getYarValue(request, dependcyKey) === null) {
-        console.log('missing key', dependcyKey, getYarValue(request, dependcyKey))
-        result = true
-      }
-    })
+    if (rule) {
+      result = rule.condition === 'ANY' && !guardData.some(dependcyKey => getYarValue(request, dependcyKey) !== null)
+    } else {
+      result = guardData.filter(dependcyKey => getYarValue(request, dependcyKey) === null).length > 0
+    }
   }
   return result
 }

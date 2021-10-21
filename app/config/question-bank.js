@@ -2801,7 +2801,8 @@ const questionBank = {
           url: 'confirm',
           backUrl: 'check-details',
           nextUrl: 'confirmation',
-          preValidationKeys: ['farmerDetails'],
+          preValidationKeys: ['farmerDetails', 'contractorsDetails'],
+          preValidationKeysRule: { condition: 'ANY' },
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
