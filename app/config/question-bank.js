@@ -2161,7 +2161,7 @@ const questionBank = {
             },
             {
               type: 'sub-heading',
-              text: 'Address'
+              text: 'Business Address'
             },
             {
               yarKey: 'address1',
@@ -2231,7 +2231,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter your postcode, like AA1 1AA'
+                  error: 'Enter your business postcode, like AA1 1AA'
                 },
                 {
                   type: 'REGEX',
