@@ -471,7 +471,7 @@ const questionBank = {
             }
           },
           hint: {
-            html: 'The land where the work will happen or the equipment will be stored'
+            html: 'The site where the work will happen'
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -2777,8 +2777,15 @@ const questionBank = {
           title: 'Check your details',
           pageTitle: 'Check details',
           url: 'check-details',
-          baseUrl: 'check-details',
-          backUrl: 'farmers-details',
+          backUrlObject: 'farmers-details',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'tenancy',
+            dependentAnswerKeysArray: ['tenancy-A3'],
+            urlOptions: {
+              thenUrl: 'contractors-details',
+              elseUrl: 'farmers-details'
+            }
+          },
           nextUrl: 'confirm',
           preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
