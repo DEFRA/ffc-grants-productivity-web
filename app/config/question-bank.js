@@ -2109,7 +2109,7 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               hint: {
-                text: 'We will only use this to contact them about their application'
+                text: 'We will only use this to contact you about your application'
               },
               validate: [
                 {
@@ -2161,7 +2161,7 @@ const questionBank = {
             },
             {
               type: 'sub-heading',
-              text: 'Address'
+              text: 'Business Address'
             },
             {
               yarKey: 'address1',
@@ -2231,12 +2231,12 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter your postcode, like AA1 1AA'
+                  error: 'Enter your business postcode, like AA1 1AA'
                 },
                 {
                   type: 'REGEX',
                   regex: POSTCODE_REGEX,
-                  error: 'Enter a postcode, like AA1 1AA'
+                  error: 'Enter a business postcode, like AA1 1AA'
                 }
               ]
             },
@@ -2777,10 +2777,9 @@ const questionBank = {
           title: 'Check your details',
           pageTitle: 'Check details',
           url: 'check-details',
-          backUrlObject: 'farmers-details',
-          dependantNextUrl: {
-            dependentQuestionYarKey: 'tenancy',
-            dependentAnswerKeysArray: ['tenancy-A3'],
+          backUrlObject: {
+            dependentQuestionYarKey: 'applying',
+            dependentAnswerKeysArray: ['applying-A2'],
             urlOptions: {
               thenUrl: 'contractors-details',
               elseUrl: 'farmers-details'
