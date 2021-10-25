@@ -1,6 +1,11 @@
 const { ALL_QUESTIONS } = require('../config/question-bank')
 const { getYarValue } = require('./session')
 
+const answerContainsSelection = (answer, selection) => (
+  (typeof (answer) === 'string' && answer === selection) ||
+  (typeof (answer) === 'object' && answer.includes(selection))
+)
+
 const notUniqueSelection = (answers, option) => (
   answers?.includes(option) &&
     typeof (answers) === 'object' &&
@@ -33,8 +38,8 @@ const allAnswersSelected = (request, questionKey, answerKeyList) => {
   )
 }
 
-
 module.exports = {
+  answerContainsSelection,
   notUniqueSelection,
   uniqueSelection,
   getQuestionByKey,
