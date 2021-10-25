@@ -51,8 +51,10 @@ const saveValuesToArray = (yarKey, fields) => {
 }
 
 const getPage = async (question, request, h) => {
-  const { url, backUrl, dependantNextUrl, type, title, yarKey, preValidationKeys, preValidationKeysRule } = question
+  const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationKeys, preValidationKeysRule } = question
+  const backUrl = getUrl(backUrlObject, question.backUrl, request)
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
+  console.log(backUrl, nextUrl)
   const isRedirect = guardPage(request, preValidationKeys, preValidationKeysRule)
   if (isRedirect) {
     return h.redirect(startPageUrl)
@@ -145,12 +147,12 @@ const getPage = async (question, request, h) => {
   }
   if (url === 'check-details') {
     setYarValue(request, 'reachedCheckDetails', true)
-
     const applying = getYarValue(request, 'applying')
+    const tenancy = getYarValue(request, 'tenancy')
     const businessDetails = getYarValue(request, 'businessDetails')
     const agentDetails = getYarValue(request, 'agentsDetails')
-    const contractorDetails = getYarValue(request, 'contractorsDetails')
-    const farmerDetails = getYarValue(request, 'farmerDetails')
+    const contractorDetails = tenancy === 'tenancy-A3' || applying === 'Contractor' ? getYarValue(request, 'contractorsDetails') : null
+    const farmerDetails = tenancy === 'tenancy-A3' ? null : getYarValue(request, 'farmerDetails')
 
     const agentContact = saveValuesToArray(agentDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
     const agentAddress = saveValuesToArray(agentDetails, ['address1', 'address2', 'county', 'postcode'])
