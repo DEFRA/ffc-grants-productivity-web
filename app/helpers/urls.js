@@ -1,5 +1,6 @@
 const urlPrefix = require('../config/server').urlPrefix
 const { getYarValue } = require('../helpers/session')
+const { answerContainsSelection } = require('../helpers/utils')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const getUrl = (urlObject, url, request, secBtn) => {
@@ -21,7 +22,8 @@ const getUrl = (urlObject, url, request, secBtn) => {
     thisQuestion.answers.some(answer => (
       !!dependentAnswer &&
       dependentAnswerKeysArray.includes(answer.key) &&
-      dependentAnswer.includes(answer.value)
+      answerContainsSelection(dependentAnswer, answer.value)
+
     ))
   ))
 
