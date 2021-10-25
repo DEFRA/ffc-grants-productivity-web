@@ -134,7 +134,7 @@ describe('Farmer details page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter a postcode, like AA1 1AA')
+    expect(postResponse.payload).toContain('Enter a business postcode, like AA1 1AA')
   })
 
   it('should store user response and redirects to check details page, either of mobile or landline can be empty', async () => {
