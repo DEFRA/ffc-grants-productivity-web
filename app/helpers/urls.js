@@ -13,14 +13,14 @@ const getUrl = (urlObject, url, request, secBtn) => {
   const { dependentQuestionYarKey, dependentAnswerKeysArray, urlOptions } = urlObject
   const { thenUrl, elseUrl } = urlOptions
 
-  const dependentAnswer = [ getYarValue(request, dependentQuestionYarKey) ]
+  const dependentAnswer = getYarValue(request, dependentQuestionYarKey)
   const selectThenUrl = ALL_QUESTIONS.find(thisQuestion => (
     thisQuestion.yarKey === dependentQuestionYarKey &&
     thisQuestion.answers &&
     thisQuestion.answers.some(answer => (
       !!dependentAnswer &&
       dependentAnswerKeysArray.includes(answer.key) &&
-      dependentAnswer.includes(answer.value)
+      dependentAnswer === answer.value
     ))
   ))
   return selectThenUrl ? thenUrl : elseUrl
