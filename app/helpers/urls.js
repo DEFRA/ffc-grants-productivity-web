@@ -14,7 +14,6 @@ const getUrl = (urlObject, url, request, secBtn) => {
   const { thenUrl, elseUrl } = urlOptions
 
   const dependentAnswer = getYarValue(request, dependentQuestionYarKey)
-  console.log(dependentAnswer, 'dependentAnswer')
   const selectThenUrl = ALL_QUESTIONS.find(thisQuestion => (
     thisQuestion.yarKey === dependentQuestionYarKey &&
     thisQuestion.answers &&
@@ -24,7 +23,6 @@ const getUrl = (urlObject, url, request, secBtn) => {
       (Array.isArray(dependentAnswer) ? dependentAnswer.includes(answer.value) : dependentAnswer === answer.value)
     ))
   ))
-      console.log(selectThenUrl ,thenUrl, elseUrl, 'URLS', request.url)
   return selectThenUrl ? thenUrl : elseUrl
 }
 
