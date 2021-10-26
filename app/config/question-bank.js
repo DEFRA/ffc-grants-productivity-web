@@ -269,9 +269,9 @@ const questionBank = {
         {
           key: 'country',
           order: 30,
-          title: 'Is the planned project in England?',
+          title: 'Will the planned activity take place in England?',
           hint: {
-            text: 'The site where the work will happen'
+            text: 'The site(s) where the work will happen'
           },
           pageTitle: '',
           backUrl: 'legal-status',
@@ -471,7 +471,7 @@ const questionBank = {
             }
           },
           hint: {
-            html: 'The site where the work will happen'
+            html: 'The site(s) where the work will happen'
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -2526,6 +2526,7 @@ const questionBank = {
               elseUrl: 'farmers-details'
             }
           },
+          summaryPageUrl: 'check-details',
           preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
