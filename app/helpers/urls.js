@@ -1,6 +1,5 @@
 const urlPrefix = require('../config/server').urlPrefix
 const { getYarValue } = require('../helpers/session')
-const { answerContainsSelection } = require('../helpers/utils')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const getUrl = (urlObject, url, request, secBtn) => {
@@ -8,7 +7,7 @@ const getUrl = (urlObject, url, request, secBtn) => {
   const chekDetailsPath = `${urlPrefix}/check-details`
   const secBtnPath = secBtn === 'Back to score' ? scorePath : chekDetailsPath
 
-  if (!urlObject) {
+  if (!urlObject || secBtn) {
     return secBtn ? secBtnPath : url
   }
   const { dependentQuestionYarKey, dependentAnswerKeysArray, urlOptions } = urlObject
@@ -22,8 +21,7 @@ const getUrl = (urlObject, url, request, secBtn) => {
     thisQuestion.answers.some(answer => (
       !!dependentAnswer &&
       dependentAnswerKeysArray.includes(answer.key) &&
-      answerContainsSelection(dependentAnswer, answer.value)
-
+      dependentAnswer.includes(answer.value)
     ))
   ))
 
