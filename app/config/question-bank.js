@@ -1206,7 +1206,7 @@ const questionBank = {
           backUrl: 'project-items',
           preValidationKeys: ['projectItems'],
           dependantNextUrl: {
-            dependentQuestionYarKey: 'projectItems',
+            dependentQuestionYarKey: 'roboticsProjectItemEquipments',
             dependentAnswerKeysArray: ['robotics-project-items-A10'],
             urlOptions: {
               thenUrl: 'other-robotic-equipment',
