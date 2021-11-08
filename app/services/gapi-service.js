@@ -111,7 +111,7 @@ const getTimeofJourneySinceStart = (request) => {
   return 0
 }
 
-const processGA = async (request, ga, score, confirmationId) => {
+const processGA = async (request, ga, confirmationId) => {
   if (ga && Array.isArray(ga)) {
     const cmcds = []
     ga.forEach(async gaConfig => {
@@ -132,7 +132,7 @@ const processGA = async (request, ga, score, confirmationId) => {
             break
           case 'confirmationId':
             await protectiveMonitoringServiceSendEvent(request, request.yar.id, 'FTF-JOURNEY-COMPLETED', '0706')
-            value = gaConfig.value.value
+            value = confirmationId
             break
           case 'journey-time':
             value = getTimeofJourneySinceStart(request).toString()
