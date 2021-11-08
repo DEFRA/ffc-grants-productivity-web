@@ -1230,23 +1230,23 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'robotics-project-items-A4',
+              key: 'robotics-project-items-A7',
               value: 'Robotic or autonomous harvesting equipment'
             },
             {
-              key: 'robotics-project-items-A5',
+              key: 'robotics-project-items-A6',
               value: 'Robotic weeding equipment'
             },
             {
-              key: 'robotics-project-items-A6',
+              key: 'robotics-project-items-A4',
               value: 'Robotic spraying equipment'
             },
             {
-              key: 'robotics-project-items-A7',
+              key: 'robotics-project-items-A8',
               value: 'Autonomous driverless tractor'
             },
             {
-              key: 'robotics-project-items-A8',
+              key: 'robotics-project-items-A5',
               value: 'Voluntary robotic milking system'
             },
             {
@@ -1254,7 +1254,7 @@ const questionBank = {
               value: 'Robotic feeding system'
             },
             {
-              key: 'robotics-project-items-A11',
+              key: 'robotics-project-items-A3',
               value: 'Robotic transplanting'
             },
             {
@@ -1556,7 +1556,7 @@ const questionBank = {
           preValidationKeys: ['canPayRemainingCost'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'roboticsProjectItemEquipments',
-            dependentAnswerKeysArray: ['robotics-project-items-A10'],
+            dependentAnswerKeysArray: ['robotics-project-items-A7', 'robotics-project-items-A5', 'robotics-project-items-A4', 'robotics-project-items-A3', 'robotics-project-items-A9', 'robotics-project-items-A10'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'energy-source'

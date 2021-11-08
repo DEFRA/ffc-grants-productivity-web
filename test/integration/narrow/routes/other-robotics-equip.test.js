@@ -114,8 +114,7 @@ describe('other Robotics Equipment', () => {
   })
 
   it('should display equipment ineligible conditional page when user response is \'No\' and user has also selected other eligible option', async () => {
-    varList.projectItems = ['Advanced ventilation control units', 'Robotic weeding equipment']
-    varList.roboticsProjectItemEquipments = [ 'Other robotic equipment']
+    varList.roboticsProjectItemEquipments = ['Advanced ventilation control units', 'Robotic weeding equipment', 'Other robotic equipment']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/other-robotic-equipment`,
@@ -126,6 +125,6 @@ describe('other Robotics Equipment', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.payload).toContain('Your other robotic equipment is not eligible for a grant from this scheme')
+    expect(postResponse.payload).toContain('RPA will only fund items that')
   })
 })
