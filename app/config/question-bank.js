@@ -1879,6 +1879,10 @@ const questionBank = {
           backUrl: 'score',
           nextUrl: '/productivity/applying',
           preValidationKeys: ['current-score'],
+          ga: [
+            { dimension: 'cd2', value: { type: 'score' } },
+            { dimension: 'cm1', value: { type: 'journey-time' } }
+          ],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
