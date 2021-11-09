@@ -82,6 +82,7 @@ service:
 
 ingress:
   class: nginx
+  type: minion
   endpoint: ffc-grants-frontend
   server: example.com
   path: /productivity
