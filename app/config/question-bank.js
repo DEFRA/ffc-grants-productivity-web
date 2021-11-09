@@ -1155,7 +1155,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectItems',
             dependentAnswerKeysArray: ['robotics-project-items-A3'],
             urlOptions: {
-              thenUrl: 'robotics-item-equipment',
+              thenUrl: 'robotic-equipment-items',
               elseUrl: 'project-cost'
             }
           },
@@ -1179,14 +1179,14 @@ const questionBank = {
               key: 'robotics-project-items-A1',
               value: 'Advanced ventilation control units',
               hint: {
-                text: 'System to control ventilation of existing horticultural and livestock buildings to reduce greenhouse gas emissions '
+                text: 'System to control and monitor ventilation of existing horticultural or livestock buildings to minimise heat loss and reduce greenhouse gas and particulate emissions'
               }
             },
             {
               key: 'robotics-project-items-A2',
               value: 'Wavelength-specific LED lighting for horticultural crops',
               hint: {
-                html: 'Wavelength-specific LED lighting to help crop growth'
+                html: 'Wavelength-specific LED lighting to aid plant growth'
               }
             },
             {
@@ -1197,12 +1197,12 @@ const questionBank = {
           yarKey: 'projectItems'
         },
         {
-          key: 'robotics-item-equipment',
+          key: 'robotic-equipment-items',
           order: 300,
           title: 'Which robotic equipment do you need?',
           pageTitle: '',
-          url: 'robotics/robotics-item-equipment',
-          baseUrl: 'robotics-item-equipment',
+          url: 'robotics/robotic-equipment-items',
+          baseUrl: 'robotic-equipment-items',
           backUrl: 'project-items',
           preValidationKeys: ['projectItems'],
           dependantNextUrl: {
@@ -1332,7 +1332,7 @@ const questionBank = {
               value: 'No',
               notEligible: true,
               alsoMaybeEligible: {
-                dependentQuestionKey: 'robotics-item-equipment',
+                dependentQuestionKey: 'robotic-equipment-items',
                 dependentQuestionYarKey: 'roboticsProjectItemEquipments',
                 notUniqueAnswer: 'robotics-project-items-A10',
                 maybeEligibleContent: {
@@ -1383,7 +1383,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectItems',
             dependentAnswerKeysArray: ['robotics-project-items-A3'],
             urlOptions: {
-              thenUrl: '/productivity/robotics/robotics-item-equipment',
+              thenUrl: '/productivity/robotics/robotic-equipment-items',
               elseUrl: '/productivity/robotics/project-items'
             }
           },
