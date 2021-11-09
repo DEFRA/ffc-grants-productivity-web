@@ -12,7 +12,7 @@ appInsights:
 azureIdentity:
   clientID: not-a-real-clientID
   resourceID: not-a-real-resourceID
-  
+
 containerConfigMap:
   name: ffc-grants-productivity-web-config-map
 
