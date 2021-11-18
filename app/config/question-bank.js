@@ -83,7 +83,7 @@ const questionBank = {
           title: 'What is your project about?',
           pageTitle: '',
           backUrl: 'start',
-          nextUrl: 'business-location',
+          nextUrl: 'applicant',
           url: 'project-subject',
           baseUrl: 'project-subject',
           type: 'single-answer',
@@ -119,16 +119,55 @@ const questionBank = {
           yarKey: 'projectSubject'
         },
         {
+          key: 'applicant',
+          order: 12,
+          title: 'Who are you?',
+          pageTitle: '',
+          backUrl: 'project-subject',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'applicant',
+            dependentAnswerKeysArray: ['applicant-A1'],
+            urlOptions: {
+              thenUrl: 'legal-status',
+              elseUrl: 'business-location'
+            }
+          },
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          url: 'applicant',
+          baseUrl: 'applicant',
+          preValidationKeys: ['projectSubject'],
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if you’re a farmer or a contractor'
+            }
+          ],
+          answers: [
+            {
+              key: 'applicant-A1',
+              value: 'Farmer'
+            },
+            {
+              key: 'applicant-A2',
+              value: 'Contractor'
+            }
+          ],
+          yarKey: 'applicant'
+        },
+        {
           key: 'business-location',
           order: 15,
           title: 'Is your business in England?',
           pageTitle: '',
-          backUrl: 'project-subject',
+          backUrl: 'applicant',
           nextUrl: 'legal-status',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'business-location',
           baseUrl: 'business-location',
-          preValidationKeys: ['projectSubject'],
+          preValidationKeys: ['applicant'],
           ineligibleContent: {
             messageContent: 'This grant is only for businesses registered in England.',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' }
@@ -169,11 +208,25 @@ const questionBank = {
           order: 20,
           title: 'What is the legal status of the business?',
           pageTitle: '',
-          backUrl: 'business-location',
-          nextUrl: 'country',
+          backUrlObject: {
+            dependentQuestionYarKey: 'applicant',
+            dependentAnswerKeysArray: ['applicant-A1'],
+            urlOptions: {
+              thenUrl: 'applicant',
+              elseUrl: 'business-location'
+            }
+          },
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'applicant',
+            dependentAnswerKeysArray: ['applicant-A1'],
+            urlOptions: {
+              thenUrl: 'country',
+              elseUrl: 'planning-permission'
+            }
+          },
           url: 'legal-status',
           baseUrl: 'legal-status',
-          preValidationKeys: ['businessLocation'],
+          preValidationKeys: ['applicant'],
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -322,9 +375,16 @@ const questionBank = {
           pageTitle: '',
           url: 'planning-permission',
           baseUrl: 'planning-permission',
-          backUrl: 'country',
+          backUrlObject: {
+            dependentQuestionYarKey: 'applicant',
+            dependentAnswerKeysArray: ['applicant-A1'],
+            urlOptions: {
+              thenUrl: 'country',
+              elseUrl: 'legal-status'
+            }
+          },
           nextUrl: 'project-start',
-          preValidationKeys: ['inEngland'],
+          preValidationKeys: ['legalStatus'],
           ineligibleContent: {
             messageContent: 'Any planning permission must be in place by 31 December 2022 (the end of the application window).',
             messageLink: {
@@ -477,7 +537,7 @@ const questionBank = {
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'single-answer',
-          classes: 'govuk-fieldset__legend--l',
+          classes: ' govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           sidebar: {
             values: [{
@@ -503,10 +563,6 @@ const questionBank = {
               key: 'tenancy-A2',
               value: 'No',
               redirectUrl: 'tenancy-length'
-            },
-            {
-              key: 'tenancy-A3',
-              value: 'Not applicable - I’m a contractor'
             }
           ],
           yarKey: 'tenancy'
@@ -2021,6 +2077,14 @@ const questionBank = {
           url: 'applying',
           baseUrl: 'applying',
           backUrl: 'business-details',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'applicant',
+            dependentAnswerKeysArray: ['applicant-A1'],
+            urlOptions: {
+              thenUrl: '/productivity/farmers-details',
+              elseUrl: '/productivity/contractors-details'
+            }
+          },
           preValidationKeys: ['businessDetails'],
           eliminationAnswerKeys: '',
           fundingPriorities: '',
@@ -2036,16 +2100,10 @@ const questionBank = {
           answers: [
             {
               key: 'applying-A1',
-              value: 'Farmer',
-              redirectUrl: '/productivity/farmers-details'
+              value: 'Applicant'
             },
             {
               key: 'applying-A2',
-              value: 'Contractor',
-              redirectUrl: '/productivity/contractors-details'
-            },
-            {
-              key: 'applying-A3',
               value: 'Agent',
               redirectUrl: '/productivity/agents-details'
             }
@@ -2064,7 +2122,7 @@ const questionBank = {
           eliminationAnswerKeys: '',
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
-            dependentAnswerKeysArray: ['applying-A3'],
+            dependentAnswerKeysArray: ['applying-A2'],
             urlOptions: {
               thenUrl: '/productivity/agents-details',
               elseUrl: '/productivity/applying'
@@ -2323,13 +2381,12 @@ const questionBank = {
           pageTitle: '',
           url: 'contractors-details',
           baseUrl: 'contractors-details',
-          backUrl: '/productivity/applying',
           nextUrl: 'check-details',
           preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
-            dependentAnswerKeysArray: ['applying-A2'],
+            dependentAnswerKeysArray: ['applying-A1'],
             urlOptions: {
               thenUrl: '/productivity/applying',
               elseUrl: '/productivity/agents-details'
@@ -2567,14 +2624,13 @@ const questionBank = {
           baseUrl: 'agents-details',
           backUrl: 'applying',
           dependantNextUrl: {
-            dependentQuestionYarKey: 'tenancy',
-            dependentAnswerKeysArray: ['tenancy-A3'],
+            dependentQuestionYarKey: 'applicant',
+            dependentAnswerKeysArray: ['applicant-A1'],
             urlOptions: {
-              thenUrl: 'contractors-details',
-              elseUrl: 'farmers-details'
+              thenUrl: '/productivity/farmers-details',
+              elseUrl: '/productivity/contractors-details'
             }
           },
-          summaryPageUrl: 'check-details',
           preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -2827,11 +2883,11 @@ const questionBank = {
           pageTitle: 'Check details',
           url: 'check-details',
           backUrlObject: {
-            dependentQuestionYarKey: 'applying',
-            dependentAnswerKeysArray: ['applying-A2'],
+            dependentQuestionYarKey: 'applicant',
+            dependentAnswerKeysArray: ['applicant-A1'],
             urlOptions: {
-              thenUrl: 'contractors-details',
-              elseUrl: 'farmers-details'
+              thenUrl: 'farmers-details',
+              elseUrl: 'contractors-details'
             }
           },
           nextUrl: 'confirm',

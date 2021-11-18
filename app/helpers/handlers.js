@@ -157,12 +157,12 @@ const getPage = async (question, request, h) => {
   if (url === 'check-details') {
     setYarValue(request, 'reachedCheckDetails', true)
     const applying = getYarValue(request, 'applying')
-    const tenancy = getYarValue(request, 'tenancy')
+    const applicant = getYarValue(request, 'applicant')
     const businessDetails = getYarValue(request, 'businessDetails')
     const agentDetails = getYarValue(request, 'agentsDetails')
-    const isTenancyContractor = (tenancy !== 'Yes' && tenancy !== 'No') || applying === 'Contractor'
-    const contractorDetails = isTenancyContractor && applying !== 'Farmer' ? getYarValue(request, 'contractorsDetails') : null
-    const farmerDetails = applying === 'Contractor' ? null : getYarValue(request, 'farmerDetails')
+    const isContractor = applicant === 'Contractor'
+    const contractorDetails = isContractor ? getYarValue(request, 'contractorsDetails') : null
+    const farmerDetails = isContractor ? null : getYarValue(request, 'farmerDetails')
 
     const agentContact = saveValuesToArray(agentDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
     const agentAddress = saveValuesToArray(agentDetails, ['address1', 'address2', 'county', 'postcode'])
@@ -172,10 +172,9 @@ const getPage = async (question, request, h) => {
 
     const farmerContact = saveValuesToArray(farmerDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
     const farmerAddress = saveValuesToArray(farmerDetails, ['address1', 'address2', 'county', 'postcode'])
-    const newBackUrl = isTenancyContractor && applying !== 'Farmer' ? 'contractors-details' : backUrl
     const MODEL = {
       ...question.pageData,
-      backUrl: newBackUrl,
+      backUrl,
       nextUrl,
       applying,
       businessDetails,
