@@ -2074,7 +2074,7 @@ const questionBank = {
           eliminationAnswerKeys: '',
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
-            dependentAnswerKeysArray: ['applying-A3'],
+            dependentAnswerKeysArray: ['applying-A2'],
             urlOptions: {
               thenUrl: '/productivity/agents-details',
               elseUrl: '/productivity/applying'

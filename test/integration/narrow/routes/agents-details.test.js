@@ -1,7 +1,10 @@
 const { crumbToken } = require('./test-helper')
 
 describe('Agent details page', () => {
-  const varList = { applying: 'someValue' }
+  const varList = {
+    applicant: 'Farmer',
+    applying: 'Agent'
+  }
 
   jest.mock('../../../../app/helpers/session', () => ({
     setYarValue: (request, key, value) => null,
@@ -139,7 +142,31 @@ describe('Agent details page', () => {
     expect(postResponse.payload).toContain('Enter a postcode, like AA1 1AA')
   })
 
-  it('should store user response and redirects to farmer details page, either of mobile or landline can be empty', async () => {
+  it('should store user response and redirects to farmer details page , either of mobile or landline can be empty', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/agents-details`,
+      payload: {
+        firstName: 'First Name',
+        lastName: 'Last Name',
+        businessName: 'Business Name',
+        emailAddress: 'my@name.com',
+        mobileNumber: '07700 900 982',
+        address1: 'Address 1',
+        address2: 'Address 2',
+        town: 'MyTown',
+        county: 'Devon',
+        postcode: 'AA1 1AA',
+        crumb: crumbToken
+      },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('/productivity/farmers-details')
+  })
+  it('should store user response and redirects to farmer details page, if the applicant is farmer', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/agents-details`,
@@ -160,10 +187,11 @@ describe('Agent details page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('farmers-details')
+    expect(postResponse.headers.location).toBe('/productivity/farmers-details')
   })
 
-  it('should store user response and redirects to farmer details page, either of mobile or landline can be empty', async () => {
+  it('should store user response and redirects to contractor details page, if the applicant is contractor', async () => {
+    varList.applicant = 'Contractor'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/agents-details`,
@@ -185,33 +213,7 @@ describe('Agent details page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('farmers-details')
-  })
-
-  it('should store user response and redirects to farmer details page , either of mobile or landline can be empty', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/agents-details`,
-      payload: {
-        firstName: 'First Name',
-        lastName: 'Last Name',
-        businessName: 'Business Name',
-        emailAddress: 'my@name.com',
-        landlineNumber: '44 0808 157 0192',
-        mobileNumber: '07700 900 982',
-        address1: 'Address 1',
-        address2: 'Address 2',
-        town: 'MyTown',
-        county: 'Devon',
-        postcode: 'AA1 1AA',
-        crumb: crumbToken
-      },
-      headers: { cookie: 'crumb=' + crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('farmers-details')
+    expect(postResponse.headers.location).toBe('/productivity/contractors-details')
   })
 
   it('should be validate - if both mobile and landline are missing', async () => {
