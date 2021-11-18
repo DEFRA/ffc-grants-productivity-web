@@ -11,6 +11,11 @@ services:
     environment:
       NODE_ENV: test
       GOOGLE_TAG_MANAGER_KEY: 'GTM-WJ5C78H'
+      REDIS_HOSTNAME: redis
+      REDIS_PORT: 6379
+      REDIS_PARTITION: ffc-grants-productivity-web
+      REDIS_PASSWORD: ""
+      SESSION_CACHE_TTL: 900000
     command: npm run test
     volumes:
       - ./test-output/:/home/node/test-output/

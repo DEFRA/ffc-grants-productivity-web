@@ -16,16 +16,15 @@ const { startPageUrl } = require('../config/server')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const resetYarValues = (applying, request) => {
-  if (applying === 'Farmer') {
-    setYarValue(request, 'agentsDetails', null)
-    setYarValue(request, 'contractorsDetails', null)
-  } else {
-    setYarValue(request, 'farmerDetails', null)
-  }
+  setYarValue(request, 'agentsDetails', null)
+  setYarValue(request, 'contractorsDetails', null)
+  setYarValue(request, 'farmerDetails', null)
+  setYarValue(request, 'reachedCheckDetails', false)
 }
 
 const getConfirmationId = (guid, journey) => {
-  const prefix = journey === 'Slurry acidification' ? 'SL' : 'RI'
+  const prefix = journey.toLowerCase() === 'slurry acidification' ? 'SL' : 'RI'
+  console.log(journey, prefix, 'confirmationId')
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
 }
 
@@ -49,11 +48,23 @@ const saveValuesToArray = (yarKey, fields) => {
 
   return result
 }
+const getContractorFarmerModel = (data, question, request, conditionalHtml) => {
+  let MODEL = getModel(data, question, request, conditionalHtml)
+  const reachedCheckDetails = getYarValue(request, 'reachedCheckDetails')
 
+  if (reachedCheckDetails) {
+    MODEL = {
+      ...MODEL,
+      reachedCheckDetails
+    }
+  }
+  return MODEL
+}
 const getPage = async (question, request, h) => {
-  const { url, backUrl, dependantNextUrl, type, title, yarKey, preValidationKeys } = question
+  const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationKeys, preValidationKeysRule } = question
+  const backUrl = getUrl(backUrlObject, question.backUrl, request)
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
-  const isRedirect = guardPage(request, preValidationKeys)
+  const isRedirect = guardPage(request, preValidationKeys, preValidationKeysRule)
   if (isRedirect) {
     return h.redirect(startPageUrl)
   }
@@ -145,7 +156,6 @@ const getPage = async (question, request, h) => {
   }
   if (url === 'check-details') {
     setYarValue(request, 'reachedCheckDetails', true)
-
     const applying = getYarValue(request, 'applying')
     const applicant = getYarValue(request, 'applicant')
     const businessDetails = getYarValue(request, 'businessDetails')
@@ -162,10 +172,10 @@ const getPage = async (question, request, h) => {
 
     const farmerContact = saveValuesToArray(farmerDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
     const farmerAddress = saveValuesToArray(farmerDetails, ['address1', 'address2', 'county', 'postcode'])
-
+    const newBackUrl = isTenancyContractor && applying !== 'Farmer' ? 'contractors-details' : backUrl
     const MODEL = {
       ...question.pageData,
-      backUrl,
+      backUrl: newBackUrl,
       nextUrl,
       applying,
       businessDetails,
@@ -211,19 +221,14 @@ const getPage = async (question, request, h) => {
   switch (url) {
     case 'score':
     case 'business-details':
-    case 'agents-details':
+    case 'agents-details': {
+      return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
+    }
     case 'farmers-details': {
-      let MODEL = getModel(data, question, request, conditionalHtml)
-      const reachedCheckDetails = getYarValue(request, 'reachedCheckDetails')
-
-      if (reachedCheckDetails) {
-        MODEL = {
-          ...MODEL,
-          reachedCheckDetails
-        }
-      }
-
-      return h.view('page', MODEL)
+      return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
+    }
+    case 'contractors-details': {
+      return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
     default:
       break

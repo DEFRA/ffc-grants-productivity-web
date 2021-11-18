@@ -322,9 +322,9 @@ const questionBank = {
         {
           key: 'country',
           order: 30,
-          title: 'Is the planned project in England?',
+          title: 'Will the planned activity take place in England?',
           hint: {
-            text: 'The site where the work will happen'
+            text: 'The site(s) where the work will happen'
           },
           pageTitle: '',
           backUrl: 'legal-status',
@@ -531,13 +531,13 @@ const questionBank = {
             }
           },
           hint: {
-            html: 'The land where the work will happen or the equipment will be stored'
+            html: 'The site(s) where the work will happen'
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'single-answer',
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          classes: 'govuk-fieldset__legend--l',
           minAnswerCount: 1,
           sidebar: {
             values: [{
@@ -563,6 +563,10 @@ const questionBank = {
               key: 'tenancy-A2',
               value: 'No',
               redirectUrl: 'tenancy-length'
+            },
+            {
+              key: 'tenancy-A3',
+              value: 'Not applicable - I’m a contractor'
             }
           ],
           yarKey: 'tenancy'
@@ -1194,7 +1198,7 @@ const questionBank = {
         {
           key: 'robotics-project-items',
           order: 300,
-          title: 'Which eligible items do you need for your project?',
+          title: 'Which items does your project need?',
           pageTitle: '',
           url: 'robotics/project-items',
           baseUrl: 'robotics-project-items',
@@ -1209,17 +1213,16 @@ const questionBank = {
           preValidationKeys: ['projectStart'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['robotics-project-items-A10'],
+            dependentAnswerKeysArray: ['robotics-project-items-A3'],
             urlOptions: {
-              thenUrl: 'other-robotic-equipment',
+              thenUrl: 'robotic-equipment-items',
               elseUrl: 'project-cost'
             }
           },
           id: 'roboticsProjectItems',
           name: 'roboticsProjectItems',
           hint: {
-            html: `Select all the items your project needs 
-              <br/><br/><span class="govuk-heading-s">Non-robotic equipment</span>`
+            html: 'Select all the items your project needs'
           },
           eliminationAnswerKeys: '',
           fundingPriorities: '',
@@ -1236,52 +1239,90 @@ const questionBank = {
               key: 'robotics-project-items-A1',
               value: 'Advanced ventilation control units',
               hint: {
-                text: 'System to control ventilation of existing horticultural and livestock buildings to reduce greenhouse gas emissions '
+                text: 'System to control and monitor ventilation of existing horticultural or livestock buildings to minimise heat loss and reduce greenhouse gas and particulate emissions'
               }
             },
             {
               key: 'robotics-project-items-A2',
-              value: 'Wavelength-specific LED lighting',
+              value: 'Wavelength-specific LED lighting for horticultural crops',
               hint: {
-                html: `Wavelength-specific LED lighting to help crop growth, pest control and animal welfare 
-                  <br/><br/><span class="govuk-heading-s govuk-!-margin-bottom-0 checkBoxMargin">Robotic equipment</span>
-                  <div class="govuk-!-margin-bottom-4 checkBoxMargin">Autonomous farming equipment capable of sensing its environment, making decisions and performing actions </div>`
+                html: 'Wavelength-specific LED lighting to aid plant growth'
               }
             },
             {
               key: 'robotics-project-items-A3',
-              value: 'Robotic sowing/planting equipment'
-            },
+              value: 'Robotic equipment item'
+            }
+          ],
+          yarKey: 'projectItems'
+        },
+        {
+          key: 'robotic-equipment-items',
+          order: 300,
+          title: 'Which robotic equipment do you need?',
+          pageTitle: '',
+          url: 'robotics/robotic-equipment-items',
+          baseUrl: 'robotic-equipment-items',
+          backUrl: 'project-items',
+          preValidationKeys: ['projectItems'],
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'roboticsProjectItemEquipments',
+            dependentAnswerKeysArray: ['robotics-project-items-A10'],
+            urlOptions: {
+              thenUrl: 'other-robotic-equipment',
+              elseUrl: 'project-cost'
+            }
+          },
+          id: 'roboticsProjectItemEquipments',
+          name: 'roboticsProjectItemEquipments',
+          hint: {
+            html: 'Robotic equipment is autonomous farming equipment capable of sensing its environment, making decisions and performing actions <br/> Select all the items your project needs'
+          },
+          eliminationAnswerKeys: '',
+          fundingPriorities: '',
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          validate: [
             {
-              key: 'robotics-project-items-A4',
-              value: 'Robotic spraying equipment'
-            },
+              type: 'NOT_EMPTY',
+              error: 'Select all the robotic equipment items your project needs'
+            }
+          ],
+          answers: [
             {
-              key: 'robotics-project-items-A5',
-              value: 'Robotic milking equipment'
+              key: 'robotics-project-items-A7',
+              value: 'Robotic or autonomous harvesting equipment'
             },
             {
               key: 'robotics-project-items-A6',
               value: 'Robotic weeding equipment'
             },
             {
-              key: 'robotics-project-items-A7',
-              value: 'Robotic or automatic harvesting equipment'
+              key: 'robotics-project-items-A4',
+              value: 'Robotic spraying equipment'
             },
             {
               key: 'robotics-project-items-A8',
-              value: 'Robotic tractor'
+              value: 'Autonomous driverless tractor'
+            },
+            {
+              key: 'robotics-project-items-A5',
+              value: 'Voluntary robotic milking system'
             },
             {
               key: 'robotics-project-items-A9',
-              value: 'Automated feeding systems'
+              value: 'Robotic feeding system'
+            },
+            {
+              key: 'robotics-project-items-A3',
+              value: 'Robotic transplanting'
             },
             {
               key: 'robotics-project-items-A10',
               value: 'Other robotic equipment'
             }
           ],
-          yarKey: 'projectItems'
+          yarKey: 'roboticsProjectItemEquipments'
         },
         {
           key: 'other-robotic-equipment',
@@ -1351,8 +1392,8 @@ const questionBank = {
               value: 'No',
               notEligible: true,
               alsoMaybeEligible: {
-                dependentQuestionKey: 'robotics-project-items',
-                dependentQuestionYarKey: 'projectItems',
+                dependentQuestionKey: 'robotic-equipment-items',
+                dependentQuestionYarKey: 'roboticsProjectItemEquipments',
                 notUniqueAnswer: 'robotics-project-items-A10',
                 maybeEligibleContent: {
                   nextUrl: 'project-cost',
@@ -1398,7 +1439,14 @@ const questionBank = {
           pageTitle: '',
           url: 'robotics/project-cost',
           baseUrl: 'project-cost',
-          backUrl: 'project-items',
+          backUrlObject: {
+            dependentQuestionYarKey: 'projectItems',
+            dependentAnswerKeysArray: ['robotics-project-items-A3'],
+            urlOptions: {
+              thenUrl: '/productivity/robotics/robotic-equipment-items',
+              elseUrl: '/productivity/robotics/project-items'
+            }
+          },
           nextUrl: 'potential-amount',
           preValidationKeys: ['projectItems'],
           classes: 'govuk-input--width-10',
@@ -1567,8 +1615,8 @@ const questionBank = {
           backUrl: 'remaining-costs',
           preValidationKeys: ['canPayRemainingCost'],
           dependantNextUrl: {
-            dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['robotics-project-items-A7', 'robotics-project-items-A5', 'robotics-project-items-A4', 'robotics-project-items-A3', 'robotics-project-items-A9'],
+            dependentQuestionYarKey: 'roboticsProjectItemEquipments',
+            dependentAnswerKeysArray: ['robotics-project-items-A7', 'robotics-project-items-A5', 'robotics-project-items-A4', 'robotics-project-items-A3', 'robotics-project-items-A9', 'robotics-project-items-A10'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'energy-source'
@@ -1891,6 +1939,10 @@ const questionBank = {
           backUrl: 'score',
           nextUrl: '/productivity/applying',
           preValidationKeys: ['current-score'],
+          ga: [
+            { dimension: 'cd2', value: { type: 'score' } },
+            { dimension: 'cm1', value: { type: 'journey-time' } }
+          ],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -2056,6 +2108,11 @@ const questionBank = {
             },
             {
               key: 'applying-A2',
+              value: 'Contractor',
+              redirectUrl: '/productivity/contractors-details'
+            },
+            {
+              key: 'applying-A3',
               value: 'Agent',
               redirectUrl: '/productivity/agents-details'
             }
@@ -2167,7 +2224,7 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               hint: {
-                text: 'We will only use this to contact them about their application'
+                text: 'We will only use this to contact you about your application'
               },
               validate: [
                 {
@@ -2219,7 +2276,7 @@ const questionBank = {
             },
             {
               type: 'sub-heading',
-              text: 'Address'
+              text: 'Business Address'
             },
             {
               yarKey: 'address1',
@@ -2289,12 +2346,12 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter your postcode, like AA1 1AA'
+                  error: 'Enter your business postcode, like AA1 1AA'
                 },
                 {
                   type: 'REGEX',
                   regex: POSTCODE_REGEX,
-                  error: 'Enter a postcode, like AA1 1AA'
+                  error: 'Enter a business postcode, like AA1 1AA'
                 }
               ]
             },
@@ -2338,7 +2395,7 @@ const questionBank = {
           eliminationAnswerKeys: '',
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
-            dependentAnswerKeysArray: ['applying-A1'],
+            dependentAnswerKeysArray: ['applying-A2'],
             urlOptions: {
               thenUrl: '/productivity/applying',
               elseUrl: '/productivity/agents-details'
@@ -2864,7 +2921,8 @@ const questionBank = {
           url: 'confirm',
           backUrl: 'check-details',
           nextUrl: 'confirmation',
-          preValidationKeys: ['farmerDetails'],
+          preValidationKeys: ['farmerDetails', 'contractorsDetails'],
+          preValidationKeysRule: { condition: 'ANY' },
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
