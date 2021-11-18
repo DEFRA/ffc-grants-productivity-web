@@ -147,10 +147,12 @@ const getPage = async (question, request, h) => {
     setYarValue(request, 'reachedCheckDetails', true)
 
     const applying = getYarValue(request, 'applying')
+    const applicant = getYarValue(request, 'applicant')
     const businessDetails = getYarValue(request, 'businessDetails')
     const agentDetails = getYarValue(request, 'agentsDetails')
-    const contractorDetails = getYarValue(request, 'contractorsDetails')
-    const farmerDetails = getYarValue(request, 'farmerDetails')
+    const isContractor = applicant === 'Contractor'
+    const contractorDetails = isContractor ? getYarValue(request, 'contractorsDetails') : null
+    const farmerDetails = isContractor ? null : getYarValue(request, 'farmerDetails')
 
     const agentContact = saveValuesToArray(agentDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
     const agentAddress = saveValuesToArray(agentDetails, ['address1', 'address2', 'county', 'postcode'])
