@@ -172,10 +172,9 @@ const getPage = async (question, request, h) => {
 
     const farmerContact = saveValuesToArray(farmerDetails, ['emailAddress', 'mobileNumber', 'landlineNumber'])
     const farmerAddress = saveValuesToArray(farmerDetails, ['address1', 'address2', 'county', 'postcode'])
-    const newBackUrl = isTenancyContractor && applying !== 'Farmer' ? 'contractors-details' : backUrl
     const MODEL = {
       ...question.pageData,
-      backUrl: newBackUrl,
+      backUrl,
       nextUrl,
       applying,
       businessDetails,

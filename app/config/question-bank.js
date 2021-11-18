@@ -537,7 +537,7 @@ const questionBank = {
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'single-answer',
-          classes: 'govuk-fieldset__legend--l',
+          classes: ' govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           sidebar: {
             values: [{
@@ -563,10 +563,6 @@ const questionBank = {
               key: 'tenancy-A2',
               value: 'No',
               redirectUrl: 'tenancy-length'
-            },
-            {
-              key: 'tenancy-A3',
-              value: 'Not applicable - I’m a contractor'
             }
           ],
           yarKey: 'tenancy'
@@ -2108,11 +2104,6 @@ const questionBank = {
             },
             {
               key: 'applying-A2',
-              value: 'Contractor',
-              redirectUrl: '/productivity/contractors-details'
-            },
-            {
-              key: 'applying-A3',
               value: 'Agent',
               redirectUrl: '/productivity/agents-details'
             }
@@ -2395,7 +2386,7 @@ const questionBank = {
           eliminationAnswerKeys: '',
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
-            dependentAnswerKeysArray: ['applying-A2'],
+            dependentAnswerKeysArray: ['applying-A1'],
             urlOptions: {
               thenUrl: '/productivity/applying',
               elseUrl: '/productivity/agents-details'
