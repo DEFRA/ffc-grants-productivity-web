@@ -36,21 +36,6 @@ const getUrl = (urlObject, url, request, secBtn) => {
     return true
   })
 
-  // const slectUrlIndex = dependentQuestionYarKeys.map(dependantYarKey , index) => {
-  //   const selectedAnswer = getYarValue(request, dependentQuestionYarKey)
-  //   selectThenUrl = ALL_QUESTIONS.find(question => (
-  //     question.yarKey === dependentQuestionYarKey &&
-  //   question.answers &&
-  //   question.answers.some(answer => (
-  //     !!selectedAnswer &&
-  //     dependentAnswerKeysArray.includes(answer.key) &&
-  //     (Array.isArray(selectedAnswer) ? selectedAnswer.includes(answer.value) : selectedAnswer === answer.value)
-  //   ))
-  //   ))
-  //   console.log(selectThenUrl)
-  //   return selectThenUrl ?  index : null
-  // })
-
   return thenUrlIndex > -1 ? thenUrl[thenUrlIndex] : elseUrl
 }
 
