@@ -462,7 +462,14 @@ const questionBank = {
               elseUrl: '/productivity/planning-permission'
             }
           },
-          nextUrl: 'tenancy',
+          dependantNextUrl: {
+            dependentQuestionYarKey: ['applicant', 'projectSubject'],
+            dependentAnswerKeysArray: ['applicant-A1', 'project-subject-A1'],
+            urlOptions: {
+              thenUrl: ['tenancy', 'robotics/project-items'],
+              elseUrl: 'slurry/mild-acidification-infrastructure'
+            }
+          },
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
@@ -655,10 +662,10 @@ const questionBank = {
           baseUrl: 'mild-acidification-infrastructure',
           preValidationKeys: ['projectStart'],
           backUrlObject: {
-            dependentQuestionYarKey: 'tenancy',
-            dependentAnswerKeysArray: ['tenancy-A2'],
+            dependentQuestionYarKey: ['tenancy', 'applicant'],
+            dependentAnswerKeysArray: ['tenancy-A2', 'applicant-A2'],
             urlOptions: {
-              thenUrl: '/productivity/tenancy-length',
+              thenUrl: ['/productivity/tenancy-length', '/productivity/project-start'],
               elseUrl: '/productivity/tenancy'
             }
           },
@@ -1199,10 +1206,10 @@ const questionBank = {
           url: 'robotics/project-items',
           baseUrl: 'robotics-project-items',
           backUrlObject: {
-            dependentQuestionYarKey: 'tenancy',
-            dependentAnswerKeysArray: ['tenancy-A2'],
+            dependentQuestionYarKey: ['tenancy', 'applicant'],
+            dependentAnswerKeysArray: ['tenancy-A2', 'applicant-A2'],
             urlOptions: {
-              thenUrl: '/productivity/tenancy-length',
+              thenUrl: ['/productivity/tenancy-length', '/productivity/project-start'],
               elseUrl: '/productivity/tenancy'
             }
           },
