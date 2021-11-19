@@ -11,19 +11,32 @@ const getUrl = (urlObject, url, request, secBtn) => {
     return secBtn ? secBtnPath : url
   }
   const { dependentQuestionYarKey, dependentAnswerKeysArray, urlOptions } = urlObject
-  const { thenUrl, elseUrl } = urlOptions
+  let { thenUrl, elseUrl } = urlOptions
+  const dependentQuestionYarKeys = [dependentQuestionYarKey].flat()
+  thenUrl = [thenUrl].flat()
+  let selectThenUrl
+  let thenUrlIndex = -1
+  dependentQuestionYarKeys.every((dependantYarKey, index) => {
+    const selectedAnswer = getYarValue(request, dependantYarKey)
+    if (selectedAnswer !== null) {
+      selectThenUrl = ALL_QUESTIONS.find(question => (
+        question.yarKey === dependantYarKey &&
+        question.answers &&
+        question.answers.some(answer => (
+          !!selectedAnswer &&
+          dependentAnswerKeysArray.includes(answer.key) &&
+          (Array.isArray(selectedAnswer) ? selectedAnswer.includes(answer.value) : (selectedAnswer === answer.value))
+        ))
+      ))
+      if (selectThenUrl) {
+        thenUrlIndex = index
+        return false
+      }
+    }
+    return true
+  })
 
-  const dependentAnswer = getYarValue(request, dependentQuestionYarKey)
-  const selectThenUrl = ALL_QUESTIONS.find(thisQuestion => (
-    thisQuestion.yarKey === dependentQuestionYarKey &&
-    thisQuestion.answers &&
-    thisQuestion.answers.some(answer => (
-      !!dependentAnswer &&
-      dependentAnswerKeysArray.includes(answer.key) &&
-      (Array.isArray(dependentAnswer) ? dependentAnswer.includes(answer.value) : dependentAnswer === answer.value)
-    ))
-  ))
-  return selectThenUrl ? thenUrl : elseUrl
+  return thenUrlIndex > -1 ? thenUrl[thenUrlIndex] : elseUrl
 }
 
 module.exports = {
