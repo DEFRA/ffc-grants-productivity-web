@@ -5,11 +5,8 @@ const { getYarValue } = require('../helpers/session')
 function getAllDetails (request, confirmationId) {
   return YAR_KEYS.reduce(
     (allDetails, key) => {
+      console.log(key)
       allDetails[key] = getYarValue(request, key)
-      if (key.toLowerCase() === 'projectitems') {
-        allDetails[key] = [...allDetails[key], ...request.yar.get('roboticsProjectItemEquipments')]
-        console.log(allDetails[key], 'allDetails[key]')
-      }
       return allDetails
     },
     { confirmationId }
