@@ -97,7 +97,6 @@ const questionBank = {
               <br/><br/>Select one option
             `
           },
-          sidebar: null,
           validate: [
             {
               type: 'NOT_EMPTY',
@@ -2099,7 +2098,7 @@ const questionBank = {
           eliminationAnswerKeys: '',
           fundingPriorities: '',
           type: 'single-answer',
-          classes: 'govuk-fieldset__legend--l',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           validate: [
             {

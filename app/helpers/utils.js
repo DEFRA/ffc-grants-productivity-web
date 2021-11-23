@@ -29,13 +29,15 @@ const getQuestionAnswer = (questionKey, answerKey) => {
 const allAnswersSelected = (request, questionKey, answerKeyList) => {
   const { yarKey, answers } = getQuestionByKey(questionKey)
   const yarValue = getYarValue(request, yarKey)
-  return (
-    answerKeyList.every(answerKey => (
-      answers.some(({ key, value }) => (
-        yarValue.includes(value) && key === answerKey
-      ))
-    ))
-  )
+  return yarValue
+    ? (
+        answerKeyList.every(answerKey => (
+          answers.some(({ key, value }) => (
+            yarValue.includes(value) && key === answerKey
+          ))
+        ))
+      )
+    : false
 }
 
 module.exports = {
