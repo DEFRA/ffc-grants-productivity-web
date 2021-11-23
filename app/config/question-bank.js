@@ -523,7 +523,7 @@ const questionBank = {
         {
           key: 'tenancy',
           order: 60,
-          title: 'Is the planned project on land the farm business owns?',
+          title: 'Is the planned project on land the business owns?',
           pageTitle: '',
           url: 'tenancy',
           baseUrl: 'tenancy',
@@ -538,7 +538,7 @@ const questionBank = {
             }
           },
           hint: {
-            html: 'The site(s) where the work will happen'
+            html: 'The site where the work will happen'
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -1249,7 +1249,7 @@ const questionBank = {
               key: 'robotics-project-items-A2',
               value: 'Wavelength-specific LED lighting for horticultural crops',
               hint: {
-                html: 'Wavelength-specific LED lighting to aid plant growth'
+                html: 'Wavelength-specific LED lighting to aid plant growth only'
               }
             },
             {
@@ -1262,7 +1262,7 @@ const questionBank = {
         {
           key: 'robotic-equipment-items',
           order: 300,
-          title: 'Which robotic equipment do you need?',
+          title: 'Which robotic items does your project need?',
           pageTitle: '',
           url: 'robotics/robotic-equipment-items',
           baseUrl: 'robotic-equipment-items',
@@ -1270,7 +1270,7 @@ const questionBank = {
           preValidationKeys: ['projectItems'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'roboticsProjectItemEquipments',
-            dependentAnswerKeysArray: ['robotics-project-items-A10'],
+            dependentAnswerKeysArray: ['robotic-equipment-items-A8'],
             urlOptions: {
               thenUrl: 'other-robotic-equipment',
               elseUrl: 'project-cost'
@@ -1279,7 +1279,7 @@ const questionBank = {
           id: 'roboticsProjectItemEquipments',
           name: 'roboticsProjectItemEquipments',
           hint: {
-            html: 'Robotic equipment is autonomous farming equipment capable of sensing its environment, making decisions and performing actions <br/> Select all the items your project needs'
+            html: 'Farming equipment capable of sensing and understanding its environment, making decisions, and planning and controlling its actions in a continuous loop. <br/> <br/> Select all the items your project needs'
           },
           eliminationAnswerKeys: '',
           fundingPriorities: '',
@@ -1293,36 +1293,36 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'robotics-project-items-A7',
+              key: 'robotic-equipment-items-A1',
               value: 'Robotic or autonomous harvesting equipment'
             },
             {
-              key: 'robotics-project-items-A6',
+              key: 'robotic-equipment-items-A2',
               value: 'Robotic weeding equipment'
             },
             {
-              key: 'robotics-project-items-A4',
+              key: 'robotic-equipment-items-A3',
               value: 'Robotic spraying equipment'
             },
             {
-              key: 'robotics-project-items-A8',
+              key: 'robotic-equipment-items-A4',
               value: 'Autonomous driverless tractor'
             },
             {
-              key: 'robotics-project-items-A5',
+              key: 'robotic-equipment-items-A5',
               value: 'Voluntary robotic milking system'
             },
             {
-              key: 'robotics-project-items-A9',
+              key: 'robotic-equipment-items-A6',
               value: 'Robotic feeding system'
             },
             {
-              key: 'robotics-project-items-A3',
+              key: 'robotic-equipment-items-A7',
               value: 'Robotic transplanting'
             },
             {
-              key: 'robotics-project-items-A10',
-              value: 'Other robotic equipment'
+              key: 'robotic-equipment-items-A8',
+              value: 'Other autonomous robotic technology'
             }
           ],
           yarKey: 'roboticsProjectItemEquipments'
@@ -1330,7 +1330,7 @@ const questionBank = {
         {
           key: 'other-robotic-equipment',
           order: 305,
-          title: 'Does your other robotic equipment fit the eligibility criteria?',
+          title: 'Does your other robotic technology fit the eligibility criteria?',
           pageTitle: '',
           backUrl: 'project-items',
           nextUrl: 'other-robotic-conditional',
@@ -1340,9 +1340,10 @@ const questionBank = {
           ineligibleContent: {
             messageContent: 'RPA will only fund items that:',
             messageContentList: [
-              'have a sensing system',
-              'have a decision-making capability',
-              'use actuators'
+              'have a sensing system and can understand their environment',
+              'make decisions and plan',
+              'can control its actuators (the devices that move robot joints)',
+              'work in a continuous loop'
             ],
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
@@ -1354,16 +1355,17 @@ const questionBank = {
           minAnswerCount: 1,
           hint: {
             html: `All items must
-            <ul><li>have a sensing system</li>
-            <li>have a decision-making capability</li>
-            <li>use actuators (the devices that move robot joints)</li></ul>`
+            <ul><li>have a sensing system and can understand their environment</li>
+            <li>make decisions and plan</li>
+            <li>can control its actuators (the devices that move robot joints)</li>
+            <li>work in a continuous loop</li></ul>`
           },
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
                 para: 'RPA will consider items that:',
-                items: ['have a sensing system', 'have a decision-making capability', 'use actuators (the devices that move robot joints)']
+                items: ['have a sensing system and can understand their environment', 'make decisions and plan', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop']
               }]
             }]
           },
@@ -1397,14 +1399,15 @@ const questionBank = {
               alsoMaybeEligible: {
                 dependentQuestionKey: 'robotic-equipment-items',
                 dependentQuestionYarKey: 'roboticsProjectItemEquipments',
-                notUniqueAnswer: 'robotics-project-items-A10',
+                notUniqueAnswer: 'robotic-equipment-items-A8',
                 maybeEligibleContent: {
                   nextUrl: 'project-cost',
-                  messageHeader: 'Your other robotic equipment is not eligible for a grant from this scheme',
+                  messageHeader: 'Your other robotic technology is not eligible for a grant from this scheme',
                   messageContent: `RPA will only fund items that:
-                  <ul> <li>have a sensing system</li>
-                  <li>have a decision-making capability</li>
-                  <li>use actuators</li></ul>`,
+                  <ul><li>have a sensing system and can understand their environment</li>
+                  <li>make decisions and plan</li>
+                  <li>can control its actuators (the devices that move robot joints)</li>
+                  <li>work in a continuous loop</li></ul>`,
                   customButtonText: 'Continue with eligible items'
                 }
 
@@ -1418,7 +1421,7 @@ const questionBank = {
         },
         {
           key: 'other-robotic-conditional',
-          title: 'Your other robotic equipment might get a grant from this scheme',
+          title: 'Your other robotic technology might get a grant from this scheme',
           order: 307,
           url: 'robotics/other-robotic-conditional',
           backUrl: 'other-robotic-equipment',
@@ -1426,7 +1429,7 @@ const questionBank = {
           preValidationKeys: ['otherRoboticEquipment'],
           maybeEligible: true,
           maybeEligibleContent: {
-            messageHeader: 'Your other robotic equipment might get a grant from this scheme',
+            messageHeader: 'Your other robotic technology might get a grant from this scheme',
             messageContent: `RPA will assess your item and whether they will fund it.
             <br/>They will let you know if the item is eligible before the application window opens and projects are invited to apply.`,
             warning: {
@@ -1443,10 +1446,10 @@ const questionBank = {
           url: 'robotics/project-cost',
           baseUrl: 'project-cost',
           backUrlObject: {
-            dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['robotics-project-items-A3'],
+            dependentQuestionYarKey: ['roboticsProjectItemEquipments', 'projectItems'],
+            dependentAnswerKeysArray: ['robotic-equipment-items-A8', 'robotics-project-items-A3'],
             urlOptions: {
-              thenUrl: '/productivity/robotics/robotic-equipment-items',
+              thenUrl: ['/productivity/robotics/other-robotic-equipment', '/productivity/robotics/robotic-equipment-items'],
               elseUrl: '/productivity/robotics/project-items'
             }
           },
@@ -1492,7 +1495,7 @@ const questionBank = {
                 content: [{
                   para: '',
                   items: [],
-                  dependentAnswerExceptThese: ['robotics-project-items-A10']
+                  dependentAnswerExceptThese: ['robotic-equipment-items-A8']
                 }]
               },
               {
@@ -1500,12 +1503,12 @@ const questionBank = {
                 content: [{
                   para: '',
                   items: [],
-                  dependentAnswerOnlyThese: ['robotics-project-items-A10']
+                  dependentAnswerOnlyThese: ['robotic-equipment-items-A8']
                 }]
               }
             ],
-            dependentYarKey: 'projectItems',
-            dependentQuestionKey: 'robotics-project-items'
+            dependentYarKey: 'roboticsProjectItemEquipments',
+            dependentQuestionKey: 'robotic-equipment-items'
 
           },
           validate: [
@@ -1526,10 +1529,10 @@ const questionBank = {
             }
           ],
           warningConditional: {
-            dependentWarningQuestionKey: 'robotics-project-items',
-            dependentWarningAnswerKeysArray: ['robotics-project-items-A10'],
+            dependentWarningQuestionKey: 'other-robotic-equipment',
+            dependentWarningAnswerKeysArray: ['other-robotic-equipment-A1'],
             ConditionalWarningMsg: {
-              text: 'RPA will assess your other robotic equipment and whether they can fund it. There’s no guarantee your item will be funded',
+              text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
               iconFallbackText: 'Warning'
             }
           },
@@ -1619,7 +1622,7 @@ const questionBank = {
           preValidationKeys: ['canPayRemainingCost'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'roboticsProjectItemEquipments',
-            dependentAnswerKeysArray: ['robotics-project-items-A7', 'robotics-project-items-A5', 'robotics-project-items-A4', 'robotics-project-items-A3', 'robotics-project-items-A9', 'robotics-project-items-A10'],
+            dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'energy-source'
