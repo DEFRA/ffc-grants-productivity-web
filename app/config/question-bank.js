@@ -323,7 +323,7 @@ const questionBank = {
           order: 30,
           title: 'Will the planned activity take place in England?',
           hint: {
-            text: 'The site(s) where the work will happen'
+            text: 'The site where the work will happen'
           },
           pageTitle: '',
           backUrl: 'legal-status',
@@ -1293,7 +1293,7 @@ const questionBank = {
           answers: [
             {
               key: 'robotic-equipment-items-A1',
-              value: 'Robotic or autonomous harvesting equipment'
+              value: 'Robotic harvesting equipment'
             },
             {
               key: 'robotic-equipment-items-A2',
