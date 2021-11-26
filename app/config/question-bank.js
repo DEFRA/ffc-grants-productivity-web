@@ -321,7 +321,7 @@ const questionBank = {
         {
           key: 'country',
           order: 30,
-          title: 'Will the planned activity take place in England?',
+          title: 'Is the planned project in England?',
           hint: {
             text: 'The site where the work will happen'
           },
@@ -1305,7 +1305,7 @@ const questionBank = {
             },
             {
               key: 'robotic-equipment-items-A4',
-              value: 'Autonomous driverless tractor'
+              value: 'Autonomous driverless tractors or platforms'
             },
             {
               key: 'robotic-equipment-items-A5',
@@ -1331,7 +1331,7 @@ const questionBank = {
           order: 305,
           title: 'Does your other robotic technology fit the eligibility criteria?',
           pageTitle: '',
-          backUrl: 'project-items',
+          backUrl: 'robotic-equipment-items',
           nextUrl: 'other-robotic-conditional',
           url: 'robotics/other-robotic-equipment',
           baseUrl: 'other-robotic-equipment',
@@ -1741,8 +1741,8 @@ const questionBank = {
           baseUrl: 'energy-source',
           preValidationKeys: ['projectImpact'],
           backUrlObject: {
-            dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['robotics-project-items-A7', 'robotics-project-items-A5', 'robotics-project-items-A4', 'robotics-project-items-A3', 'robotics-project-items-A9'],
+            dependentQuestionYarKey: 'roboticsProjectItemEquipments',
+            dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'project-impact'
