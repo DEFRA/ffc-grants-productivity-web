@@ -1621,7 +1621,7 @@ const questionBank = {
           preValidationKeys: ['canPayRemainingCost'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'roboticsProjectItemEquipments',
-            dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7'],
+            dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7', 'robotic-equipment-items-A8'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'energy-source'
@@ -1742,7 +1742,7 @@ const questionBank = {
           preValidationKeys: ['projectImpact'],
           backUrlObject: {
             dependentQuestionYarKey: 'roboticsProjectItemEquipments',
-            dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7'],
+            dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7', 'robotic-equipment-items-A8'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'project-impact'
