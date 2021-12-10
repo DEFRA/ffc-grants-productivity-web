@@ -725,7 +725,7 @@ const questionBank = {
             {
               key: 'mild-acidification-infrastructure-A1',
               text: 'Yes, we will buy all 4 items',
-              value: 'acid storage | dosing equipment | mixing tank | pump'
+              value: 'Mild acidification equipment'
             },
             {
               key: 'mild-acidification-infrastructure-A2',
@@ -764,7 +764,7 @@ const questionBank = {
             {
               key: 'acidification-infrastructure-A1',
               text: 'Yes, we will buy acidification infrastructure',
-              value: 'acidification infrastructure'
+              value: 'Acidification infrastructure'
             },
             {
               key: 'acidification-infrastructure-A2',
@@ -879,7 +879,20 @@ const questionBank = {
               title: 'See other grants you may be eligible for.'
             }
           },
-          sidebar: null,
+          sidebar: {
+            values: [
+              {
+                heading: '',
+                content: [{
+                  para: '',
+                  items: [],
+                  dependentAnswerExceptThese: ['mild-acidification-infrastructure-A2', 'acidification-infrastructure-A2']
+                }]
+              }
+            ],
+            dependentYarKeys: ['projectItems', 'acidificationInfrastructure'],
+            dependentQuestionKeys: ['mild-acidification-infrastructure', 'acidification-infrastructure']
+          },
           validate: [
             {
               type: 'NOT_EMPTY',
@@ -1494,7 +1507,7 @@ const questionBank = {
                 content: [{
                   para: '',
                   items: [],
-                  dependentAnswerExceptThese: ['robotic-equipment-items-A8']
+                  dependentAnswerExceptThese: ['robotics-project-items-A3', 'robotic-equipment-items-A8']
                 }]
               },
               {
@@ -1506,9 +1519,8 @@ const questionBank = {
                 }]
               }
             ],
-            dependentYarKey: 'roboticsProjectItemEquipments',
-            dependentQuestionKey: 'robotic-equipment-items'
-
+            dependentYarKeys: ['projectItems', 'roboticsProjectItemEquipments'],
+            dependentQuestionKeys: ['robotics-project-items', 'robotic-equipment-items']
           },
           validate: [
             {
@@ -1748,14 +1760,21 @@ const questionBank = {
               elseUrl: 'project-impact'
             }
           },
-          nextUrl: 'agricultural-sector',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'energySource',
+            dependentAnswerKeysArray: ['robotics-energy-source-A4'],
+            urlOptions: {
+              thenUrl: 'fuel-conditional',
+              elseUrl: 'agricultural-sector'
+            }
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul><li>improve the environment</li></ul>',
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
-            text: 'Select up to 2 options'
+            html: 'Equipment powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative<br/><br/>Select up to 2 options'
           },
           sidebar: {
             values: [{
@@ -1798,6 +1817,22 @@ const questionBank = {
           yarKey: 'energySource'
         },
         {
+          key: 'fuel-conditional',
+          title: 'Your fossil fuel-powered equipment might be eligible',
+          order: 365,
+          url: 'robotics/fuel-conditional',
+          backUrl: 'energy-source',
+          nextUrl: 'agricultural-sector',
+          preValidationKeys: ['energySource'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Your fossil fuel-powered equipment might be eligible',
+            messageContent: 'I confirm I understand fossil fuel-powered equipment will only be funded where there is no commercially available electric or renewable energy alternative.',
+            customButtonText: 'Confirm and continue'
+          },
+          yarKey: 'fuelConditional'
+        },
+        {
           key: 'robotics-agricultural-sector',
           scheme: 'robotics',
           score: {
@@ -1809,7 +1844,14 @@ const questionBank = {
           pageTitle: '',
           url: 'robotics/agricultural-sector',
           baseUrl: 'agricultural-sector',
-          backUrl: 'energy-source',
+          backUrlObject: {
+            dependentQuestionYarKey: 'energySource',
+            dependentAnswerKeysArray: ['robotics-energy-source-A4'],
+            urlOptions: {
+              thenUrl: 'fuel-conditional',
+              elseUrl: 'energy-source'
+            }
+          },
           nextUrl: 'technology',
           preValidationKeys: ['energySource'],
           eliminationAnswerKeys: '',
@@ -1825,7 +1867,7 @@ const questionBank = {
               heading: 'Funding priorities',
               content: [{
                 para: 'RPA wants to fund sectors that:',
-                items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
+                items: ['have significant labour shortages', 'have not received many grants in the past, such as horticulture']
               }]
             }]
           },
@@ -2229,7 +2271,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY_EXTRA',
-                  error: 'Enter a mobile or landline number',
+                  error: 'Enter a mobile number (if you do not have a mobile, enter your landline number)',
                   extraFieldsToCheck: ['landlineNumber']
                 },
                 {
@@ -2259,7 +2301,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY_EXTRA',
-                  error: 'Enter a landline or mobile number',
+                  error: 'Enter a landline number (if you do not have a landline, enter your mobile number)',
                   extraFieldsToCheck: ['mobileNumber']
                 },
                 {
@@ -2493,7 +2535,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY_EXTRA',
-                  error: 'Enter a mobile or landline number',
+                  error: 'Enter a mobile number (if you do not have a mobile, enter your landline number)',
                   extraFieldsToCheck: ['landlineNumber']
                 },
                 {
@@ -2523,7 +2565,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY_EXTRA',
-                  error: 'Enter a landline or mobile number',
+                  error: 'Enter a landline number (if you do not have a landline, enter your mobile number)',
                   extraFieldsToCheck: ['mobileNumber']
                 },
                 {
@@ -2754,7 +2796,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY_EXTRA',
-                  error: 'Enter a mobile or landline number',
+                  error: 'Enter a mobile number (if you do not have a mobile, enter your landline number)',
                   extraFieldsToCheck: ['landlineNumber']
                 },
                 {
@@ -2784,7 +2826,7 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY_EXTRA',
-                  error: 'Enter a landline or mobile number',
+                  error: 'Enter a landline number (if you do not have a landline, enter your mobile number)',
                   extraFieldsToCheck: ['mobileNumber']
                 },
                 {
