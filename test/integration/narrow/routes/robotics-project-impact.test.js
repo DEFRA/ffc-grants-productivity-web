@@ -52,21 +52,6 @@ describe('robotics-project-impact', () => {
     expect(postResponse.headers.location).toBe('data-analytics')
   })
 
-  it('store user response and based on project items selected which already has analytics, redirect to energy source page', async () => {
-    varList.roboticsProjectItemEquipments = ['Robotic weeding equipment']
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/project-impact`,
-      payload: { projectImpact: 'Yes', crumb: crumbToken },
-      headers: {
-        cookie: 'crumb=' + crumbToken
-      }
-    }
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('energy-source')
-  })
-
   it('user selects: <No> -> display ineligible page', async () => {
     const postOptions = {
       method: 'POST',
