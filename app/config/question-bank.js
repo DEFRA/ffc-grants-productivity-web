@@ -1292,7 +1292,6 @@ const questionBank = {
           name: 'roboticsProjectItemEquipments',
           hint: {
             html: `Farming equipment capable of sensing and understanding its environment, making decisions, and planning and controlling its actions in a continuous loop. 
-            <br/><br/>Equipment powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative
               <br /><br />
               Select all the items your project needs`
           },
@@ -1373,8 +1372,7 @@ const questionBank = {
             <ul><li>have a sensing system and can understand their environment</li>
             <li>make decisions and plan</li>
             <li>can control its actuators (the devices that move robot joints)</li>
-            <li>work in a continuous loop</li></ul>
-            Equipment powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative`
+            <li>work in a continuous loop</li></ul>`
           },
           sidebar: {
             values: [{
@@ -1764,21 +1762,14 @@ const questionBank = {
               elseUrl: 'project-impact'
             }
           },
-          dependantNextUrl: {
-            dependentQuestionYarKey: 'energySource',
-            dependentAnswerKeysArray: ['robotics-energy-source-A4'],
-            urlOptions: {
-              thenUrl: 'fuel-conditional',
-              elseUrl: 'agricultural-sector'
-            }
-          },
+          nextUrl: 'agricultural-sector',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul><li>improve the environment</li></ul>',
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
-            html: 'Equipment powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative<br/><br/>Select up to 2 options'
+            html: 'Select up to 2 options'
           },
           sidebar: {
             values: [{
@@ -1821,22 +1812,6 @@ const questionBank = {
           yarKey: 'energySource'
         },
         {
-          key: 'fuel-conditional',
-          title: 'Your fossil fuel-powered equipment might be eligible',
-          order: 365,
-          url: 'robotics/fuel-conditional',
-          backUrl: 'energy-source',
-          nextUrl: 'agricultural-sector',
-          preValidationKeys: ['energySource'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Your fossil fuel-powered equipment might be eligible',
-            messageContent: 'I confirm I understand fossil fuel-powered equipment will only be funded where there is no commercially available electric or renewable energy alternative.',
-            customButtonText: 'Confirm and continue'
-          },
-          yarKey: 'fuelConditional'
-        },
-        {
           key: 'robotics-agricultural-sector',
           scheme: 'robotics',
           score: {
@@ -1848,14 +1823,7 @@ const questionBank = {
           pageTitle: '',
           url: 'robotics/agricultural-sector',
           baseUrl: 'agricultural-sector',
-          backUrlObject: {
-            dependentQuestionYarKey: 'energySource',
-            dependentAnswerKeysArray: ['robotics-energy-source-A4'],
-            urlOptions: {
-              thenUrl: 'fuel-conditional',
-              elseUrl: 'energy-source'
-            }
-          },
+          backUrl: 'energy-source',
           nextUrl: 'technology',
           preValidationKeys: ['energySource'],
           eliminationAnswerKeys: '',
