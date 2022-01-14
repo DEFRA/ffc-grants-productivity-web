@@ -964,8 +964,10 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: `
-                  You cannot use any grant funding from government or local authorities.
-                  \n\nYou can use money from the Basic Payment Scheme or agri-environment schemes such as Countryside Stewardship Scheme.
+                You cannot use public money (for example, grant funding from government or local authorities)
+                  towards the project costs.
+                  \n\nYou can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-
+                  environment schemes such as the Countryside Stewardship Scheme.
                 `,
                 items: []
               }]
@@ -2978,9 +2980,9 @@ const questionBank = {
             If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Transformation Fund scheme:<br/><br/>
             Telephone: 03000 200 301<br/>
             <br/>Monday to Friday, 9am to 5pm (except public holidays)<br/>
-            <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges">Find out about call charges (opens in new tab)</a></p>
+            <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in new tab)</a></p>
             
-            Email: <a class="govuk-link" title="Send email to RPA" target="_blank" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a>
+            Email: <a class="govuk-link" title="Send email to RPA" target="_blank" href="mailto:ftf@rpa.gov.uk" rel="noopener noreferrer">FTF@rpa.gov.uk</a>
             
             <p>RPA will be in touch when the full application period opens. They'll tell you about the application form and any guidance you need to submit a full application.</p>`,
             warning: {
