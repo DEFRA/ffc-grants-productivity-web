@@ -9,15 +9,16 @@ function createModel (cookiesPolicy = {}, updated = false) {
     analytics: {
       idPrefix: 'analytics',
       name: 'analytics',
+      classes: 'govuk-radios--inline',
       items: [
         {
           value: true,
-          text: 'Use cookies that measure my website use',
+          text: 'Yes',
           checked: cookiesPolicy.analytics
         },
         {
           value: false,
-          text: 'Do not use cookies that measure my website use',
+          text: 'No',
           checked: !cookiesPolicy.analytics
         }
       ]
