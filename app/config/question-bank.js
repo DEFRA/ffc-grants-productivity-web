@@ -3,7 +3,7 @@ const {
   CHARS_MAX_10,
   CHARS_MIN_10,
   CHARS_MAX_100,
-  WORDS_MAX_60,
+  CHARS_MAX_250,
   POSTCODE_REGEX,
   WHOLE_NUMBER_REGEX,
   NUMBER_REGEX,
@@ -385,7 +385,7 @@ const questionBank = {
           nextUrl: 'project-start',
           preValidationKeys: ['legalStatus'],
           ineligibleContent: {
-            messageContent: 'Any planning permission must be in place by 31 December 2022 .',
+            messageContent: 'Any planning permission must be in place by 31 December 2022.',
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -398,7 +398,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'Any planning permission must be in place by 31 December 2022 .',
+                para: `You must have applied for planning permission before you submit a full application
+                \n\n Any planning permission must be in place by 31 December 2022.`,
                 items: []
               }]
             }]
@@ -1398,8 +1399,8 @@ const questionBank = {
             {
               dependentKey: 'roboticEquipment',
               type: 'REGEX',
-              regex: WORDS_MAX_60,
-              error: 'Description must be 60 words or fewer and use letters, numbers and punctuation'
+              regex: CHARS_MAX_250,
+              error: 'Description must be 250 characters or fewer and use letters, numbers and punctuation'
             }
           ],
           answers: [
