@@ -54,7 +54,7 @@ describe('other Robotics Equipment', () => {
     expect(postResponse.payload).toContain('Describe your other robotic equipment')
   })
 
-  it('should returns error message if description is more than 60 words', async () => {
+  it('should returns error message if description is more than 250', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/other-robotic-equipment`,
@@ -66,7 +66,7 @@ describe('other Robotics Equipment', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Description must be 60 words or fewer and use letters, numbers and punctuation')
+    expect(postResponse.payload).toContain('Description must be 250 characters or fewer and use letters, numbers and punctuation')
   })
 
   it('should returns error message if description has special charcters thats not allowed', async () => {
@@ -81,7 +81,7 @@ describe('other Robotics Equipment', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Description must be 60 words or fewer and use letters, numbers and punctuation')
+    expect(postResponse.payload).toContain('Description must be 250 characters or fewer and use letters, numbers and punctuation')
   })
 
   it('should store user response and redirects to robotics conditional page', async () => {

@@ -3,7 +3,7 @@ const getHtml = (label, labelData, fieldValueData, error) => {
 
   if (label === 'roboticEquipment') {
     return !error
-      ? `<div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="60">
+      ? `<div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="250">
         <div class="govuk-form-group">
           <label class="govuk-label" for="${label}">
             ${labelData}
@@ -11,10 +11,10 @@ const getHtml = (label, labelData, fieldValueData, error) => {
           <textarea class="govuk-textarea govuk-js-character-count" id="${label}" name="${label}" rows="5" aria-describedby="${label}-info">${fieldValue}</textarea>
         </div>
         <div id="${label}-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
-          You can enter up to 60 words
+          You can enter up to 250 characters
         </div>
       </div>`
-      : `<div class="govuk-character-count" data-module="govuk-character-count" data-maxwords="60">
+      : `<div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="250">
       <div class="govuk-form-group govuk-form-group--error">
         <label class="govuk-label" for="${label}">
           ${labelData}
@@ -28,7 +28,7 @@ const getHtml = (label, labelData, fieldValueData, error) => {
         <textarea class="govuk-textarea govuk-textarea--error govuk-js-character-count" id="${label}" name="${label}" rows="5" autocomplete="off" aria-describedby="${label}-info ${label}-error">${fieldValue}</textarea>
       </div>
       <div id="${label}-info" class="govuk-hint govuk-character-count__message" aria-live="polite">
-        You can enter up to 60 words
+        You can enter up to 250 characters
       </div>
     </div>`
   }
