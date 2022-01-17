@@ -1661,7 +1661,7 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: `Your project must improve the productivity and profitability of your main agricultural or horticultural business.
-                \n\n Your project’s positive environmental benefit will be assessed full application stage.`,
+                \n\n Your project’s positive environmental benefit will be assessed at full application stage.`,
                 items: []
               }]
             }]
