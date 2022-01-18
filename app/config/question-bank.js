@@ -1533,10 +1533,9 @@ const questionBank = {
               error: 'Enter the estimated cost for the items'
             },
             {
-              dependentKey: 'roboticEquipment',
               type: 'REGEX',
               regex: CURRENCY_FORMAT,
-              error: 'Enter a whole number with a maximum of 7 digits'
+              error: 'Enter a whole number in correct format'
             },
             {
               type: 'REGEX',
