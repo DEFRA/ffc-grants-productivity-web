@@ -24,6 +24,7 @@ services:
       BACKEND_POLLING_HOST: http://host.docker.internal:3011
       POLLING_INTERVAL: 200
       POLLING_RETRIES: 20
+      START_PAGE_URL: ${START_PAGE_URL:-/productivity/start}
       APPINSIGHTS_CLOUDROLE: ffc-grants-productivity
       APPINSIGHTS_INSTRUMENTATIONKEY: ${APPINSIGHTS_INSTRUMENTATIONKEY:-notset}
       REDIS_HOSTNAME: redis
