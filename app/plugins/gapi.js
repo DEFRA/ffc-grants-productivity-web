@@ -1,4 +1,6 @@
 const Analytics = require('@defra/hapi-gapi/lib/analytics')
+const gapiService = require('../services/gapi-service')
+
 exports.plugin = {
   name: 'Gapi',
   /**
@@ -16,6 +18,10 @@ exports.plugin = {
       try {
         const response = request.response
         const statusFamily = Math.floor(response.statusCode / 100)
+
+        if (statusFamily === 2 && response.variety === 'view' && !gapiService.isBlockDefaultPageView(request.url)) {
+          await gapiService.sendDimensionOrMetric(request, { dimensionOrMetric: gapiService.dimensions.PRIMARY, value: true })
+        }
         if (statusFamily === 5) {
           await request.ga.event({ category: 'Exception', action: request.route.path, label: response.statusCode })
         }
