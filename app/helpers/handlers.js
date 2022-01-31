@@ -81,6 +81,19 @@ const getPage = async (question, request, h) => {
       confirmationId = getConfirmationId(request.yar.id, getYarValue(request, 'projectSubject'))
       try {
         await senders.sendContactDetails(createMsg.getAllDetails(request, confirmationId), request.yar.id)
+        await gapiService.sendDimensionOrMetrics(request, [{
+          dimensionOrMetric: gapiService.dimensions.CONFIRMATION,
+          value: confirmationId
+        }, {
+          dimensionOrMetric: gapiService.dimensions.FINALSCORE,
+          value: getYarValue(request, 'current-score')
+        },
+        {
+          dimensionOrMetric: gapiService.metrics.CONFIRMATION,
+          value: 'TIME'
+        }
+        ])
+        console.log('Confirmation event sent')
       } catch (err) {
         console.log('ERROR: ', err)
       }
@@ -258,7 +271,7 @@ const showPostPage = (currentQuestion, request, h) => {
       setYarValue(request, key, payloadValue)
     }
   }
-
+  gapiService.sendEligibilityEvent(request, !!thisAnswer?.notEligible)
   if (type === 'multi-input') {
     allFields.forEach(field => {
       const payloadYarVal = payload[field.yarKey]
@@ -288,14 +301,13 @@ const showPostPage = (currentQuestion, request, h) => {
 
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
+    gapiService.sendValidationDimension(request)
     return errors
   }
 
   if (thisAnswer?.notEligible ||
       (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)
   ) {
-    gapiService.sendEligibilityEvent(request)
-
     if (thisAnswer?.alsoMaybeEligible) {
       const {
         dependentQuestionKey,
