@@ -5,7 +5,6 @@ const { getYarValue } = require('../helpers/session')
 function getAllDetails (request, confirmationId) {
   return YAR_KEYS.reduce(
     (allDetails, key) => {
-      console.log(key)
       allDetails[key] = getYarValue(request, key)
       return allDetails
     },
