@@ -271,7 +271,6 @@ const showPostPage = (currentQuestion, request, h) => {
       setYarValue(request, key, payloadValue)
     }
   }
-  gapiService.sendEligibilityEvent(request, !!thisAnswer?.notEligible)
   if (type === 'multi-input') {
     allFields.forEach(field => {
       const payloadYarVal = payload[field.yarKey]
@@ -308,6 +307,8 @@ const showPostPage = (currentQuestion, request, h) => {
   if (thisAnswer?.notEligible ||
       (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)
   ) {
+    gapiService.sendEligibilityEvent(request, !!thisAnswer?.notEligible)
+
     if (thisAnswer?.alsoMaybeEligible) {
       const {
         dependentQuestionKey,

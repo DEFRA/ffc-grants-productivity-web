@@ -1005,6 +1005,9 @@ const questionBank = {
           backUrl: 'remaining-costs',
           nextUrl: 'project-impacts',
           preValidationKeys: ['canPayRemainingCost'],
+          ga: [
+            { dimension: 'cm2', value: { type: 'journey-time' } }
+          ],
           eliminationAnswerKeys: '',
           fundingPriorities: '',
           type: 'single-answer',
@@ -1635,6 +1638,9 @@ const questionBank = {
           baseUrl: 'project-impact',
           backUrl: 'remaining-costs',
           preValidationKeys: ['canPayRemainingCost'],
+          ga: [
+            { dimension: 'cm2', value: { type: 'journey-time' } }
+          ],
           dependantNextUrl: {
             dependentQuestionYarKey: 'roboticsProjectItemEquipments',
             dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A2', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7', 'robotic-equipment-items-A8'],
