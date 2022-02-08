@@ -81,7 +81,7 @@ const sendDimensionOrMetrics = async (request, dimenisons) => {
     appInsights.logException(request, { error: err })
   }
 }
-const sendEligibilityEvent = async (request, notEligible) => {
+const sendEligibilityEvent = async (request, notEligible = true) => {
   if (notEligible) {
     await sendDimensionOrMetrics(request, [{
       dimensionOrMetric: metrics.ELIMINATION,
@@ -89,7 +89,7 @@ const sendEligibilityEvent = async (request, notEligible) => {
     },
     {
       dimensionOrMetric: dimensions.ELIMINATION,
-      value: !notEligible
+      value: false
     }])
     console.log('NOT ELIGIBLE MATRIC SENT')
   } else {
