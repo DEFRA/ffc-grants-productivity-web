@@ -81,7 +81,7 @@ const sendDimensionOrMetrics = async (request, dimenisons) => {
     appInsights.logException(request, { error: err })
   }
 }
-const sendEligibilityEvent = async (request, notEligible = true) => {
+const sendEligibilityEvent = async (request, notEligible) => {
   if (notEligible) {
     await sendDimensionOrMetrics(request, [{
       dimensionOrMetric: metrics.ELIMINATION,
