@@ -1,4 +1,4 @@
-import dialogPolyfill from 'dialog-polyfill'
+import dialogPolyfill from './dialog-polyfill'
 const REDIRECT_MESSAGE = 'You are about to be redirected.'
 const EXTRA_TEXT = ' We do this to keep your information secure.'
 
