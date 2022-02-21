@@ -68,11 +68,11 @@ TimeoutWarning.prototype.countIdleTime = function () {
   let idleTime
   const milliSecondsBeforeTimeOut = this.idleMinutesBeforeTimeOut * 60000
 
-  // As user interacts with the page, keep resetting the timer
+  // reset the timer when page reloads
   window.onload = resetIdleTime.bind(this)
 
   function resetIdleTime () {
-    // As user has interacted with the page, reset idle time
+    // As page reloads, reset idle time
     clearTimeout(idleTime)
 
     // Start new idle time
