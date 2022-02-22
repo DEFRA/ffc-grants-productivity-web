@@ -68,17 +68,11 @@ TimeoutWarning.prototype.countIdleTime = function () {
   let idleTime
   const milliSecondsBeforeTimeOut = this.idleMinutesBeforeTimeOut * 60000
 
-  // As user interacts with the page, keep resetting the timer
+  // reset the timer when page reloads
   window.onload = resetIdleTime.bind(this)
-  window.onmousemove = resetIdleTime.bind(this)
-  window.onmousedown = resetIdleTime.bind(this) // Catches touchscreen presses
-  window.onclick = resetIdleTime.bind(this) // Catches touchpad clicks
-  window.onscroll = resetIdleTime.bind(this) // Catches scrolling with arrow keys
-  window.onkeypress = resetIdleTime.bind(this)
-  window.onkeyup = resetIdleTime.bind(this) // Catches Android keypad presses
 
   function resetIdleTime () {
-    // As user has interacted with the page, reset idle time
+    // As page reloads, reset idle time
     clearTimeout(idleTime)
 
     // Start new idle time
@@ -229,6 +223,7 @@ TimeoutWarning.prototype.closeDialog = function () {
     this.$module.close()
     this.setFocusOnLastFocusedEl()
     this.removeInertFromPageContent()
+    window.location.reload()
 
     this.clearTimers()
   }
