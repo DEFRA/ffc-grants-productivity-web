@@ -4,7 +4,6 @@ describe('Page Guard', () => {
 
   beforeEach(() => {
     jest.resetModules()
-    
     process.env = { ...OLD_ENV }
   })
 
@@ -20,7 +19,6 @@ describe('Page Guard', () => {
 
     const { startPageUrl, serviceEndDate, serviceEndTime } = require('../../../../app/config/server')
     console.log(startPageUrl, serviceEndDate, serviceEndTime)
-    console.log(process.env.SERVICE_END_TIME,'EEEEEEEEE')
     const getOptions = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-subject`

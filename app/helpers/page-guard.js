@@ -6,7 +6,6 @@ function guardPage (request, guardData, rule = null) {
   const currentUrl = request.url.pathname.split('/').pop()
   const today = new Date(new Date().toDateString())
   const decomissionServiceDate = new Date(serviceEndDate)
-  console.log(decomissionServiceDate)
   const time = new Date().toLocaleTimeString('it-IT')
   const dateExpired = +today > +decomissionServiceDate
   const expiringToday = (+today === +decomissionServiceDate) && (time > serviceEndTime)
