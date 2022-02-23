@@ -2,7 +2,7 @@ const Joi = require('joi')
 const urlPrefix = '/productivity'
 const startPageUrl = '/start'
 const serviceEndDate = '2022/03/17'
-const serviceEndTime = '23:59:58'
+const serviceEndTime = '00:00:00'
 // Define config schema
 const schema = Joi.object({
   urlPrefix: Joi.string().default(urlPrefix),
