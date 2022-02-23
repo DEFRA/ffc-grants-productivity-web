@@ -10,7 +10,6 @@ ALL_QUESTIONS.forEach(question => {
 jest.doMock('../../../../app/helpers/session', () => ({
   setYarValue: (request, key, value) => null,
   getYarValue: (request, key) => {
-    console.log(key, 'key')
     if (varList[key]) return varList[key]
     else return 'Error'
   }

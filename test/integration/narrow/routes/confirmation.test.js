@@ -40,6 +40,6 @@ describe('Reference number page', () => {
     }
     const getResponse = await global.__SERVER__.inject(getOtions)
     expect(getResponse.statusCode).toBe(302)
-    expect(getResponse.headers.location).toBe('/productivity/start')
+    expect(getResponse.headers.location).toBe(process.env.START_PAGE_URL)
   })
 })
