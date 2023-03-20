@@ -4,6 +4,8 @@ const { ALL_QUESTIONS } = require('../config/question-bank')
 const pollingConfig = require('../config/polling')
 const { setYarValue, getYarValue } = require('../helpers/session')
 const gapiService = require('../services/gapi-service')
+const { getProdScoring } = require('../messaging/application')
+
 
 const urlPrefix = require('../config/server').urlPrefix
 
@@ -66,13 +68,21 @@ module.exports = [{
       if (!msgDataToSend) {
         throw new Error('no data available for score.')
       }
+
       // Always re-calculate our score before rendering this page
-      await senders.sendProjectDetails(msgDataToSend, request.yar.id)
+      // ## For scoring ##
+      const formatAnswersForScoring = createMsg(msgDataToSend)
+
+      const msgData = await getProdScoring(formatAnswersForScoring, request.yar.id)
+
+      // await senders.sendProjectDetails(msgDataToSend, request.yar.id)
 
       console.log('Project details sent')
       // Poll for backend for results from scoring algorithm
       // If msgData is null then 500 page will be triggered when trying to access object below
-      const msgData = await getResult(request.yar.id)
+      // const msgData = await getResult(request.yar.id)
+
+      // setYarValue(request, 'overAllScore', msgData)
       console.log('msgData', msgData)
       if (msgData) {
         const scheme = getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'robotics' : 'slurry'
