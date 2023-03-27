@@ -82,7 +82,7 @@ const config = {
   eligibilityAnswersMsgType: `${msgTypePrefix}.prod.eligibility.details`,
   projectDetailsMsgType: `${msgTypePrefix}.prod.project.details`,
   contactDetailsMsgType: `${msgTypePrefix}.prod.contact.details`,
-  fetchScoreRequestMsgType: `${msgTypePrefix}.fetch.water.score.request`,
+  fetchScoreRequestMsgType: `${msgTypePrefix}.fetch.prod.score.request`,
   msgSrc: 'ffc-grants-prod-web'
 }
 

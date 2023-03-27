@@ -6,6 +6,7 @@ const { setYarValue, getYarValue } = require('../helpers/session')
 const gapiService = require('../services/gapi-service')
 const { getProdScoring } = require('../messaging/application')
 
+const createMsg = require('./../messaging/scoring/create-desirability-msg')
 
 const urlPrefix = require('../config/server').urlPrefix
 
