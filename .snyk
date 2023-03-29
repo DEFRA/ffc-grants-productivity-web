@@ -1,5 +1,5 @@
 # Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
-version: v1.22.0
+version: v1.25.0
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
   SNYK-CC-K8S-6:
@@ -17,19 +17,24 @@ ignore:
     - bcrypt > @mapbox/node-pre-gyp > npmlog > gauge > strip-ansi > ansi-regex:
         reason: No update available
         expires: '2021-10-13T14:15:24.862Z'
-      bcrypt > @mapbox/node-pre-gyp > npmlog > gauge > wide-align > string-width > strip-ansi > ansi-regex:
-        reason: No update available
-        expires: '2021-10-13T14:38:55.243Z'
     - bcrypt > @mapbox/node-pre-gyp > npmlog > gauge > string-width > strip-ansi > ansi-regex:
         reason: No update available
         expires: '2021-10-13T14:15:24.862Z'
-      ffc-messaging > @azure/identity > keytar > prebuild-install > npmlog > gauge > strip-ansi > ansi-regex:
-        reason: No update available
-        expires: '2021-10-13T14:38:55.244Z'
     - ffc-messaging > @azure/identity > keytar > prebuild-install > npmlog > gauge > string-width > strip-ansi > ansi-regex:
         reason: No Update available
         expires: '2021-10-13T14:38:55.245Z'
     - ffc-messaging > @azure/identity > keytar > prebuild-install > npmlog > gauge > wide-align > string-width > strip-ansi > ansi-regex:
         reason: No Updated available
         expires: '2021-10-13T14:38:55.245Z'
+    - bcrypt > @mapbox/node-pre-gyp > npmlog > gauge > wide-align > string-width > strip-ansi > ansi-regex:
+        reason: No update available
+        expires: '2021-10-13T14:38:55.243Z'
+    - ffc-messaging > @azure/identity > keytar > prebuild-install > npmlog > gauge > strip-ansi > ansi-regex:
+        reason: No update available
+        expires: '2021-10-13T14:38:55.244Z'
+  SNYK-JS-HAPISTATEHOOD-2769251:
+    - '*':
+        reason: None Given
+        expires: 2023-04-28T12:22:37.076Z
+        created: 2023-03-29T12:22:37.083Z
 patch: {}
