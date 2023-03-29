@@ -1,5 +1,7 @@
 const Joi = require('joi')
 
+require('dotenv').config()
+
 // Define config schema
 const schema = Joi.object({
   hideEmptyRows: Joi.bool().default(false),
