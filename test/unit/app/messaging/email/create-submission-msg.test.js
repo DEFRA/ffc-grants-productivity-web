@@ -1,0 +1,153 @@
+describe('Create submission message', () => {
+  const mockPassword = 'mock-pwd'
+
+  jest.mock('../../../../../app/messaging/email/config/email', () => ({ notifyTemplate: 'mock-template' }))
+  jest.mock('../../../../../app/messaging/email/config/spreadsheet', () => ({
+    hideEmptyRows: true,
+    protectEnabled: true,
+    sendEmailToRpa: true,
+    rpaEmail: 'FTF@rpa.gov.uk',
+    protectPassword: mockPassword
+  }))
+
+  const desirabilityScore = require('./desirability-score.json')
+  const createMsg = require('../../../../../app/messaging/email/create-submission-msg')
+
+  beforeEach(() => {
+    jest.resetModules()
+  })
+
+  test('Farmer submission generates correct message payload', () => {
+    const farmerSubmission = require('./submission-farmer.json')
+    const msg = createMsg(farmerSubmission, desirabilityScore)
+
+    expect(msg).toHaveProperty('agentEmail')
+    expect(msg).toHaveProperty('applicantEmail')
+    expect(msg).toHaveProperty('rpaEmail')
+    expect(msg).toHaveProperty('spreadsheet')
+    expect(msg.applicantEmail.emailAddress).toBe(farmerSubmission.farmerDetails.emailAddress)
+    expect(msg.rpaEmail.emailAddress).toBe('FTF@rpa.gov.uk')
+    expect(msg.agentEmail).toBe(null)
+  })
+
+  test('Farmer submission generates message payload without RPA email when config is Flase', () => {
+    const farmerSubmission = require('./submission-farmer.json')
+    const msg = createMsg(farmerSubmission, desirabilityScore)
+    jest.mock('../../../../../app/messaging/email/config/spreadsheet', () => ({
+      hideEmptyRows: true,
+      protectEnabled: false,
+      sendEmailToRpa: false,
+      protectPassword: mockPassword
+    }))
+    expect(msg).toHaveProperty('agentEmail')
+    expect(msg).toHaveProperty('applicantEmail')
+    expect(msg).toHaveProperty('rpaEmail')
+    expect(msg).toHaveProperty('spreadsheet')
+    expect(msg.applicantEmail.emailAddress).toBe(farmerSubmission.farmerDetails.emailAddress)
+    expect(msg.rpaEmail.emailAddress).toBeFalsy
+    expect(msg.agentEmail).toBe(null)
+  })
+
+  test('Agent submission generates correct message payload', () => {
+    const agentSubmission = require('./submission-agent.json')
+    const msg = createMsg(agentSubmission, desirabilityScore)
+
+    expect(msg).toHaveProperty('agentEmail')
+    expect(msg).toHaveProperty('applicantEmail')
+    expect(msg).toHaveProperty('rpaEmail')
+    expect(msg).toHaveProperty('spreadsheet')
+    expect(msg.agentEmail.emailAddress).toBe(agentSubmission.agentsDetails.emailAddress)
+    expect(msg.applicantEmail.emailAddress).toBe(agentSubmission.farmerDetails.emailAddress)
+    expect(msg.rpaEmail.emailAddress).toBe('FTF@rpa.gov.uk')
+  })
+
+  test('Email part of message should have correct properties', () => {
+    const farmerSubmission = require('./submission-farmer.json')
+    const msg = createMsg(farmerSubmission, desirabilityScore)
+
+    expect(msg.applicantEmail).toHaveProperty('notifyTemplate')
+    expect(msg.applicantEmail).toHaveProperty('emailAddress')
+    expect(msg.applicantEmail).toHaveProperty('details')
+    expect(msg.applicantEmail.details).toHaveProperty(
+      'firstName', 'lastName', 'referenceNumber', 'overallRating', 'scoreChance', 'projectSubject', 'isSlurry', 'isRobotics'
+      , 'legalStatus', 'location', 'planningPermission', 'projectStart', 'tenancy', 'tenancyLength', 'projectItems', 'acidificationInfrastructure'
+      , 'slurryApplication', 'projectCost', 'potentialFunding', 'remainingCost', 'sssi', 'slurryCurrentlyTreated', 'slurryToBeTreated', 'projectImpacts'
+      , 'dataAnalytics', 'dataAnalyticsScore', 'energySourceScore', 'agriculturalSector', 'agriculturalSectorScore', 'technology', 'technologyScore'
+      , 'projectName', 'businessName', 'farmerName', 'farmerSurname', 'farmerEmail', 'agentName', 'agentSurname', 'agentEmail', 'projectImpactsScore'
+      , 'contactConsent', 'scoreDate'
+    )
+  })
+
+  test('Spreadsheet part of message should have correct properties', () => {
+    const agentSubmission = require('./submission-agent.json')
+    const msg = createMsg(agentSubmission, desirabilityScore)
+
+    expect(msg.spreadsheet).toHaveProperty('filename')
+    expect(msg.spreadsheet).toHaveProperty('uploadLocation')
+    expect(msg.spreadsheet).toHaveProperty('worksheets')
+    expect(msg.spreadsheet.worksheets.length).toBe(1)
+    expect(msg.spreadsheet.worksheets[0]).toHaveProperty('title')
+    expect(msg.spreadsheet.worksheets[0]).toHaveProperty('hideEmptyRows')
+    expect(msg.spreadsheet.worksheets[0]).toHaveProperty('defaultColumnWidth')
+    expect(msg.spreadsheet.worksheets[0]).toHaveProperty('protectPassword')
+    expect(msg.spreadsheet.worksheets[0]).toHaveProperty('rows')
+    expect(msg.spreadsheet.worksheets[0].rows.length).toBe(70)
+  })
+
+  // test('Protect password property should not be set if config is false', () => {
+  //   jest.mock('../../../app/config/spreadsheet', () => ({
+  //     hideEmptyRows: true,
+  //     protectEnabled: false,
+  //     sendEmailToRpa: false,
+  //     protectPassword: mockPassword
+  //   }))
+  //   const agentSubmission = require('./submission-agent.json')
+  //   const createSubmissionMsg = require('../../../app/messaging/create-submission-msg')
+  //   const msg = createSubmissionMsg(agentSubmission, desirabilityScore)
+  //   expect(msg.spreadsheet.worksheets[0]).not.toHaveProperty('protectPassword')
+  // })
+
+  // test('Unknown farming type produces error string', () => {
+  //   const farmerSubmission = require('./submission-farmer.json')
+  //   farmerSubmission.farmingType = 'bad value'
+  //   const msg = createMsg(farmerSubmission, desirabilityScore)
+
+  //   expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 53).values[2]).toBe('Error: failed to map farming type')
+  // })
+
+  test('Under 10 employees results in micro business definition', () => {
+    const farmerSubmission = require('./submission-farmer.json')
+    farmerSubmission.businessDetails.numberEmployees = 1
+    farmerSubmission.businessDetails.businessTurnover = 1
+    const msg = createMsg(farmerSubmission, desirabilityScore)
+
+    expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 20).values[2]).toBe('Micro')
+  })
+
+  test('Under 50 employees results in small business definition', () => {
+    const farmerSubmission = require('./submission-farmer.json')
+    farmerSubmission.businessDetails.numberEmployees = 10
+    farmerSubmission.businessDetails.businessTurnover = 1
+    const msg = createMsg(farmerSubmission, desirabilityScore)
+
+    expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 20).values[2]).toBe('Small')
+  })
+
+  test('Under 250 employees results in medium business definition', () => {
+    const farmerSubmission = require('./submission-farmer.json')
+    farmerSubmission.businessDetails.numberEmployees = 50
+    farmerSubmission.businessDetails.businessTurnover = 1
+    const msg = createMsg(farmerSubmission, desirabilityScore)
+
+    expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 20).values[2]).toBe('Medium')
+  })
+
+  test('Over 250 employees results in large business definition', () => {
+    const farmerSubmission = require('./submission-farmer.json')
+    farmerSubmission.businessDetails.numberEmployees = 250
+    farmerSubmission.businessDetails.businessTurnover = 1
+    const msg = createMsg(farmerSubmission, desirabilityScore)
+
+    expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 20).values[2]).toBe('Large')
+  })
+})

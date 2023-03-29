@@ -1,0 +1,137 @@
+{
+  "grantScheme": {
+    "key": "PROD01",
+    "name": "Productivity Management"
+  },
+  "desirability": {
+    "questions": [
+      {
+        "key": "project-subject",
+        "answers": [
+          {
+            "key": "projectSubject",
+            "title": "The project will:",
+            "input": [
+              {
+                "key": "projectSubject-A2",
+                "value": "Slurry Acidification"
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": 1,
+          "band": "Weak",
+          "importance": null
+        }
+      },
+      {
+        "key": "project-impacts",
+        "answers": [
+          {
+            "key": "project-impacts-A1",
+            "title": "How much land is currently irrigated per year?",
+            "input": [
+              {
+                "key": null,
+                "value": 100
+              }
+            ]
+          },
+          {
+            "key": "project-impacts-A2",
+            "title": "How much land will be irrigated after the project?",
+            "input": [
+              {
+                "key": null,
+                "value": 200
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": 9,
+          "band": "Strong",
+          "importance": null
+        }
+      },
+      {
+        "key": "dataAnalytics",
+        "answers": [
+          {
+            "key": "dataAnalyticsa",
+            "title": "Where does your current irrigation water come from?",
+            "input": [
+              {
+                "key": "dataAnalyticsa-A6",
+                "value": "Not currently irrigating"
+              }
+            ]
+          },
+          {
+            "key": "dataAnalyticsb",
+            "title": "Where will your irrigation water come from?",
+            "input": [
+              {
+                "value": "Bore hole / aquifer"
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": null,
+          "band": "Average",
+          "importance": null
+        }
+      },
+      {
+        "key": "energySource",
+        "answers": [
+          {
+            "key": "energySource",
+            "title": "What systems are currently used to irrigate?",
+            "input": [
+              {
+                "key": "energySourcea-A1",
+                "value": "Not currently irrigating"
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": null,
+          "band": "Average",
+          "importance": null
+        }
+      },
+      {
+        "key": "agriculturalSector",
+        "answers": [
+          {
+            "key": "agriculturalSector",
+            "title": "How will the project improve productivity?",
+            "input": [
+              {
+                "key": "agriculturalSector-A1",
+                "value": "Maintain productivity"
+              },
+              {
+                "key": "agriculturalSector-A2",
+                "value": "Increased yield per hectare"
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": 0.5,
+          "band": "Weak",
+          "importance": null
+        }
+      }
+    ],
+    "overallRating": {
+      "score": null,
+      "band": "Average"
+    }
+  }
+}

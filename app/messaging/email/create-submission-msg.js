@@ -1,5 +1,5 @@
-const emailConfig = require('../config/email')
-const spreadsheetConfig = require('../config/spreadsheet')
+const emailConfig = require('./config/email')
+const spreadsheetConfig = require('./config/spreadsheet')
 const PROJECT_SUBJECT_SLURRY = 'Slurry Acidification'
 
 function getQuestionScoreBand (questions, questionKey) {

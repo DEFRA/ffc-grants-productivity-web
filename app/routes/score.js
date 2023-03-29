@@ -1,5 +1,6 @@
-const { senders, getDesirabilityAnswers } = require('../messaging')
-const Wreck = require('@hapi/wreck')
+// const { senders, getDesirabilityAnswers } = require('../messaging')
+const { getDesirabilityAnswers } = require('../messaging/create-msg')
+
 const { ALL_QUESTIONS } = require('../config/question-bank')
 const pollingConfig = require('../config/polling')
 const { setYarValue, getYarValue } = require('../helpers/session')
@@ -24,35 +25,35 @@ function createModel (data, request) {
   }
 }
 
-async function getResult (correlationId) {
-  const url = `${pollingConfig.host}/desirability-score?correlationId=${correlationId}`
-  console.log('polling Url: ', url)
-  for (let i = 0; i < pollingConfig.retries; i++) {
-    await new Promise(resolve => setTimeout(resolve, pollingConfig.interval))
-    try {
-      const response = await Wreck.get(url, { json: true })
+// async function getResult (correlationId) {
+//   const url = `${pollingConfig.host}/desirability-score?correlationId=${correlationId}`
+//   console.log('polling Url: ', url)
+//   for (let i = 0; i < pollingConfig.retries; i++) {
+//     await new Promise(resolve => setTimeout(resolve, pollingConfig.interval))
+//     try {
+//       // const response = await Wreck.get(url, { json: true })
 
-      switch (response.res.statusCode) {
-        case 202:
-          console.log('202 received, backend didn\'t have result, continue polling')
-          break
-        case 200:
-          console.log('200 received, got result from backend, stop polling')
-          return response.payload
-        default:
-          console.log('Unhandled status code, stop polling')
-          return null
-      }
-    } catch (err) {
-      // 4xx and 5xx errors will be caught here along with failure to connect
-      console.log(`${err}`)
-      return null
-    }
-  }
+//       switch (response.res.statusCode) {
+//         case 202:
+//           console.log('202 received, backend didn\'t have result, continue polling')
+//           break
+//         case 200:
+//           console.log('200 received, got result from backend, stop polling')
+//           return response.payload
+//         default:
+//           console.log('Unhandled status code, stop polling')
+//           return null
+//       }
+//     } catch (err) {
+//       // 4xx and 5xx errors will be caught here along with failure to connect
+//       console.log(`${err}`)
+//       return null
+//     }
+//   }
 
-  console.log(`Tried getting score ${pollingConfig.retries} times, giving up`)
-  return null
-}
+//   console.log(`Tried getting score ${pollingConfig.retries} times, giving up`)
+//   return null
+// }
 
 module.exports = [{
   method: 'GET',
@@ -83,7 +84,7 @@ module.exports = [{
       // If msgData is null then 500 page will be triggered when trying to access object below
       // const msgData = await getResult(request.yar.id)
 
-      // setYarValue(request, 'overAllScore', msgData)
+      setYarValue(request, 'overAllScore', msgData)
       console.log('msgData', msgData)
       if (msgData) {
         const scheme = getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'robotics' : 'slurry'
