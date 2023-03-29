@@ -11,6 +11,8 @@ const mockSession = {
   }
 }
 
+require('dotenv').config()
+
 jest.mock('../../../../app/helpers/session', () => mockSession)
 
 describe('Reference number page', () => {
