@@ -35,6 +35,7 @@
     "browserstack-local": "^1.5.1",
     "chai": "^4.1.2",
     "cross-env": "^5.2.0",
+    "dotenv": "^16.0.3",
     "ecstatic": "^4.1.4",
     "hosted-git-info": "^4.0.2",
     "selenium-server": "^3.141.59",
