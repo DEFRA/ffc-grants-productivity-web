@@ -2,6 +2,8 @@ const varListTemplate = {
   consentMain: true
 }
 
+require('dotenv').config()
+
 let varList
 const mockSession = {
   setYarValue: (request, key, value) => null,

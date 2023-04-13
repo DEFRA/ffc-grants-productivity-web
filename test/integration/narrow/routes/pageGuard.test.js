@@ -1,4 +1,7 @@
 const createServer = require('../../../../app/server')
+
+require('dotenv').config()
+
 describe('Page Guard', () => {
   const OLD_ENV = process.env
   let server

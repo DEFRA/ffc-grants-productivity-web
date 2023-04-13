@@ -5,6 +5,8 @@ const envRoot = (process.env.TEST_ENVIRONMENT_ROOT_URL || 'http://host.docker.in
 const chromeArgs = process.env.CHROME_ARGS ? process.env.CHROME_ARGS.split(' ') : []
 const maxInstances = process.env.MAX_INSTANCES ? Number(process.env.MAX_INSTANCES) : 5
 
+require('dotenv').config()
+
 exports.config = {
   hostname: 'selenium',
   path: '/wd/hub',

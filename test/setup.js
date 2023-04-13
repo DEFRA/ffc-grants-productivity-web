@@ -11,9 +11,25 @@ beforeEach(async () => {
   }
 
   jest.mock('../app/cookies/index', () => mockSession)
-  jest.setTimeout(10000)
+  jest.mock('../app/services/gapi-service.js')
+  jest.mock('../app/services/app-insights.js')
+  jest.mock('../app/services/protective-monitoring-service.js')
+  jest.mock('../app/config/auth', () => {
+    return {
+      credentials: {
+        username: '',
+        passwordHash: ''
+      },
+      cookie: {
+        name: 'session-auth',
+        password: '',
+        isSecure: false
+      },
+      enabled: false
+    }
+  })
+
   const server = await createServer()
-  await server.start()
   global.__SERVER__ = server
   global.__VALIDSESSION__ = true
   global.__URLPREFIX__ = require('../app/config/server').urlPrefix
