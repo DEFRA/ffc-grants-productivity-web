@@ -77,8 +77,6 @@ module.exports = [{
 
       const msgData = await getProdScoring(formatAnswersForScoring, request.yar.id)
 
-      // await senders.sendProjectDetails(msgDataToSend, request.yar.id)
-
       console.log('Project details sent')
       // Poll for backend for results from scoring algorithm
       // If msgData is null then 500 page will be triggered when trying to access object below
