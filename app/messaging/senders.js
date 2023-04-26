@@ -1,12 +1,12 @@
 const { MessageSender } = require('ffc-messaging')
 const msgCfg = require('../config/messaging')
+const protectiveMonitoringServiceSendEvent = require('../services/protective-monitoring-service-email')
 
-const projectDetailsSender = new MessageSender(msgCfg.projectDetailsQueue)
-const contactDetailsSender = new MessageSender(msgCfg.contactDetailsQueue)
+const desirabilitySubmittedSender = new MessageSender(msgCfg.desirabilitySubmittedTopic)
 
 async function stop () {
-  await projectDetailsSender.closeConnection()
-  await contactDetailsSender.closeConnection()
+  await desirabilitySubmittedSender.closeConnection()
+
 }
 
 process.on('SIGTERM', async () => {
@@ -35,10 +35,13 @@ async function sendMsg (sender, msgData, msgType, correlationId) {
 }
 
 module.exports = {
-  sendProjectDetails: async function (projectDetailsData, correlationId) {
-    await sendMsg(projectDetailsSender, projectDetailsData, msgCfg.projectDetailsMsgType, correlationId)
-  },
-  sendContactDetails: async function (contactDetailsData, correlationId) {
-    await sendMsg(contactDetailsSender, contactDetailsData, msgCfg.contactDetailsMsgType, correlationId)
+  sendDesirabilitySubmitted: async function (desirabilitySubmittedData, correlationId) {
+    await sendMsg(
+      desirabilitySubmittedSender,
+      desirabilitySubmittedData,
+      msgCfg.desirabilitySubmittedMsgType,
+      correlationId
+    )
+    await protectiveMonitoringServiceSendEvent(correlationId, 'FTF-DATA-SUBMITTED', '0703')
   }
 }
