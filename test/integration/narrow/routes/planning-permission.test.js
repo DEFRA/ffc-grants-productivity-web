@@ -55,11 +55,11 @@ describe('Page: /planning-permission', () => {
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('planning-required-condition')
   })
-// no condition page
-  xit('should load the condition page with correct heading', async () => {
+
+  it('should load the condition page with correct heading', async () => {
     const getOptions = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/planning-permission-condition`
+      url: `${global.__URLPREFIX__}/planning-required-condition`
     }
     const getResponse = await global.__SERVER__.inject(getOptions)
     expect(getResponse.statusCode).toBe(200)
