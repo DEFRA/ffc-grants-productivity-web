@@ -28,6 +28,6 @@ describe('Slurry Acidification Infrastructure Page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('slurry-application')
+    expect(postResponse.headers.location).toBe('project-impacts')
   })
 })
