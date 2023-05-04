@@ -1,4 +1,5 @@
-import dialogPolyfill from 'dialog-polyfill'
+const dialogPolyfill = require('dialog-polyfill')
+
 const REDIRECT_MESSAGE = 'You are about to be redirected.'
 const EXTRA_TEXT = ' We do this to keep your information secure.'
 
@@ -14,7 +15,7 @@ function TimeoutWarning ($module) {
   this.$countdown = $module.querySelector('.timer')
   this.$accessibleCountdown = $module.querySelector('.at-timer')
   // UI countdown specific settings
-  this.idleMinutesBeforeTimeOut = $module.getAttribute('data-minutes-idle-timeout') ? $module.getAttribute('data-minutes-idle-timeout') : 25
+  this.idleMinutesBeforeTimeOut = $module.getAttribute('data-minutes-idle-timeout') ? $module.getAttribute('data-minutes-idle-timeout') : 20
   this.timeOutRedirectUrl = $module.getAttribute('data-url-redirect') ? $module.getAttribute('data-url-redirect') : 'timeout'
   this.minutesTimeOutModalVisible = $module.getAttribute('data-minutes-modal-visible') ? $module.getAttribute('data-minutes-modal-visible') : 5
   this.timeUserLastInteractedWithPage = ''
@@ -40,7 +41,7 @@ TimeoutWarning.prototype.init = function () {
 
   // Debugging tip: This event doesn't kick in in Chrome if you have Inspector panel open and have clicked on it
   // as it is now the active element. Click on the window to make it active before moving to another tab.
-  window.addEventListener('load', this.checkIfShouldHaveTimedOut.bind(this))
+  window.addEventListener('focus', this.checkIfShouldHaveTimedOut.bind(this))
 }
 
 // Check if browser supports native dialog element or can use polyfill
@@ -144,7 +145,7 @@ function getAtText (minLeftText, secondsLeft, secLeftText, minutesLeft) {
   return atText
 }
 function runTimer (seconds, timers, iOS, timerRunOnce, $accessibleCountdown, $module, $countdown) {
-  const minutesLeft = parseInt(seconds / 60, 10)
+  const minutesLeft = parseInt(seconds / 60, 5)
   const secondsLeft = parseInt(seconds % 60, 10)
   const timerExpired = minutesLeft < 1 && secondsLeft < 1
   const minLeftText = (minutesLeft > 1 ? 's' : '')
@@ -282,4 +283,4 @@ TimeoutWarning.prototype.setLastActiveTimeOnServer = function () {
   return 0
 }
 
-export default TimeoutWarning
+module.exports = TimeoutWarning
