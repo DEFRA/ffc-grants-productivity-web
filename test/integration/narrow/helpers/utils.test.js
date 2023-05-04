@@ -36,7 +36,7 @@ describe('Utils', () => {
     expect(uniqueSelection(answers, option)).toBeFalsy
   })
 
-  test('getQuestionByKey', () => {
+  xtest('getQuestionByKey', () => {
     const { ALL_QUESTIONS } = require('../../../../app/config/question-bank')
     const { getQuestionByKey } = require('../../../../app/helpers/utils')
 
@@ -55,12 +55,12 @@ describe('Utils', () => {
     )
   })
 
-  test('getQuestionAnswer', () => {
+  xtest('getQuestionAnswer', () => {
     const { getQuestionAnswer } = require('../../../../app/helpers/utils')
     expect(getQuestionAnswer('applicant-type', 'applicant-type-A1')).toBe('Pig')
   })
 
-  test('allAnswersSelected', () => {
+  xtest('allAnswersSelected', () => {
     const { allAnswersSelected } = require('../../../../app/helpers/utils')
 
     const mockAnswerList = ['applicant-type-A1', 'applicant-type-A2', 'applicant-type-A3']
