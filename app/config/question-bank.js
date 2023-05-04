@@ -469,7 +469,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['applicant-A1', 'project-subject-A1'],
             urlOptions: {
               thenUrl: ['tenancy', 'robotics/project-items'],
-              elseUrl: 'slurry/mild-acidification-infrastructure'
+              elseUrl: 'slurry/slurry/project-impacts'
             }
           },
           ineligibleContent: {
@@ -536,7 +536,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/mild-acidification-infrastructure'
+              elseUrl: 'slurry/slurry/project-impacts'
             }
           },
           hint: {
@@ -590,7 +590,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/mild-acidification-infrastructure'
+              elseUrl: 'slurry/project-impacts'
             }
           },
           eliminationAnswerKeys: '',
@@ -646,7 +646,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/mild-acidification-infrastructure'
+              elseUrl: 'slurry/project-impacts'
             }
           },
           maybeEligible: true,
@@ -654,127 +654,6 @@ const questionBank = {
             messageHeader: 'You may be able to apply for a grant from this scheme',
             messageContent: 'You will need to extend your tenancy agreement before you can complete a full application.'
           }
-        },
-        {
-          key: 'mild-acidification-infrastructure',
-          order: 80,
-          title: 'Will your project buy mild acidification equipment?',
-          pageTitle: '',
-          url: 'slurry/mild-acidification-infrastructure',
-          baseUrl: 'mild-acidification-infrastructure',
-          preValidationKeys: ['projectStart'],
-          backUrlObject: {
-            dependentQuestionYarKey: ['tenancy', 'applicant'],
-            dependentAnswerKeysArray: ['tenancy-A2', 'applicant-A2'],
-            urlOptions: {
-              thenUrl: ['/productivity/tenancy-length', '/productivity/project-start'],
-              elseUrl: '/productivity/tenancy'
-            }
-          },
-          nextUrl: 'acidification-infrastructure',
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'Your project must buy the mild acidification equipment required for:',
-                items: ['introducing acidification the first time ', 'adding additional acidification installations']
-              }]
-            }],
-            details: {
-              summaryText: 'Items included as mild acidification equipment',
-              html: '<ul class="govuk-list govuk-list--bullet"><li>acid storage</li><li>dosing equipment</li><li>mixing tank</li><li>pump</li></ul>'
-            }
-          },
-          ineligibleContent: {
-            messageContent: `
-              <span>Your project must buy all 4 of the following mild acidification equipment: </span>
-              <ul class="govuk-body">
-                <li>acid storage </li>
-                <li>dosing equipment </li>
-                <li>mixing tank </li>
-                <li>pump</li>
-              </ul>`,
-            insertText: {
-              html: `<span>This mild acidification equipment is required for:</span>
-              <ul>
-                <li>introducing acidification the first time </li>
-                <li>adding additional acidification installations</li>
-                </ul>`
-            },
-            messageLink: {
-              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
-              title: 'See other grants you may be eligible for'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          hint: {
-            html: `<span>Your project must buy all 4 of the following mild acidification equipment:</span>
-            <ul>
-              <li>acid storage</li>
-              <li>dosing equipment</li>
-              <li>mixing tank</li>
-              <li>pump</li>
-            </ul>`
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if you will be buying mild acidification equipment'
-            }
-          ],
-          answers: [
-            {
-              key: 'mild-acidification-infrastructure-A1',
-              text: 'Yes, we will buy all 4 items',
-              value: 'Mild acidification equipment'
-            },
-            {
-              key: 'mild-acidification-infrastructure-A2',
-              value: 'No, we will not buy all 4 items',
-              notEligible: true
-            }
-          ],
-          yarKey: 'projectItems'
-
-        },
-        {
-          key: 'acidification-infrastructure',
-          order: 81,
-          title: 'Does your project also need acidification infrastructure?',
-          hint: {
-            text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
-          },
-          pageTitle: '',
-          url: 'slurry/acidification-infrastructure',
-          baseUrl: 'acidification-infrastructure',
-          backUrl: 'mild-acidification-infrastructure',
-          nextUrl: 'project-impacts',
-          preValidationKeys: ['projectItems'],
-          eliminationAnswerKeys: '',
-          ineligibleContent: {},
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if you need acidification infrastructure'
-            }
-          ],
-          answers: [
-            {
-              key: 'acidification-infrastructure-A1',
-              text: 'Yes, we will buy acidification infrastructure',
-              value: 'Acidification infrastructure'
-            },
-            {
-              key: 'acidification-infrastructure-A2',
-              value: 'No, we don’t need it'
-            }
-          ],
-          yarKey: 'acidificationInfrastructure'
         },
         {
           key: 'project-impacts',
@@ -788,8 +667,15 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/project-impacts',
           baseUrl: 'project-impacts',
-          backUrl: 'acidification-infrastructure',
-          preValidationKeys: ['acidificationInfrastructure'],
+          backUrlObject: {
+            dependentQuestionYarKey: ['tenancy', 'applicant'],
+            dependentAnswerKeysArray: ['tenancy-A2', 'applicant-A2'],
+            urlOptions: {
+              thenUrl: ['/productivity/tenancy-length', '/productivity/project-start'],
+              elseUrl: '/productivity/tenancy'
+            }
+          },
+          preValidationKeys: ['projectStart'],
           hint: {
             html: '<br>Select one option<br>'
           },
