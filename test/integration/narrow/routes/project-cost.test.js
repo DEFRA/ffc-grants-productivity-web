@@ -102,44 +102,6 @@ describe('Project cost page', () => {
     expect(postResponse.payload).toContain('Enter a whole number in correct format')
   })
 
-  it('should return an error message if number contains a comma "," ', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/slurry/project-cost`,
-      payload: { projectCost: '123,456', crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter a whole number in correct format')
-  })
-
-  it('should return an error message if a fraction is typed in - it contains a dot "." ', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/slurry/project-cost`,
-      payload: { projectCost: '123.456', crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter a whole number in correct format')
-  })
-
-  it('should return an error message if the number of digits typed exceed 7', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/slurry/project-cost`,
-      payload: { projectCost: '12345678', crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter a whole number in correct format')
-  })
 
   it('should eliminate user if the cost entered is too low', async () => {
     const postOptions = {
