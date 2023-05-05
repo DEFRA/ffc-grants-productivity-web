@@ -2,7 +2,7 @@ const appInsights = require('./app-insights')
 const { getYarValue, setYarValue } = require('../helpers/session')
 const protectiveMonitoringServiceSendEvent = require('../services/protective-monitoring-service')
 const blockDefaultPageViews = [
-  'start', 'applying', 'sssi', 'project-impact', 'remaining-costs',
+  'start', 'applying', 'project-impact', 'remaining-costs',
   'project-cost', 'project-start', 'planning-permission', 'score',
   'country', 'legal-status', 'farming-type'
 ]

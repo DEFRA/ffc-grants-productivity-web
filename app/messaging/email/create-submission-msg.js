@@ -14,21 +14,21 @@ function generateRow (rowNumber, name, value, bold = false) {
   }
 }
 
-function getProjectItems (projectItems, infrastructure, roboticEquipment, roboticsProjectItemEquipments) {
-  projectItems = [projectItems].flat()
-  if (infrastructure === 'Acidification infrastructure') {
-    projectItems.push(infrastructure.toLowerCase())
-  } else {
-    if (roboticsProjectItemEquipments) {
-      roboticsProjectItemEquipments = [roboticsProjectItemEquipments].flat()
-      projectItems = [...projectItems, ...roboticsProjectItemEquipments]
-    }
-    if (roboticEquipment) {
-      projectItems.push(roboticEquipment)
-    }
-  }
-  return projectItems.join('|')
-}
+// function getProjectItems (projectItems, infrastructure, roboticEquipment, roboticsProjectItemEquipments) {
+//   projectItems = [projectItems].flat()
+//   if (infrastructure === 'Acidification infrastructure') {
+//     projectItems.push(infrastructure.toLowerCase())
+//   } else {
+//     if (roboticsProjectItemEquipments) {
+//       roboticsProjectItemEquipments = [roboticsProjectItemEquipments].flat()
+//       projectItems = [...projectItems, ...roboticsProjectItemEquipments]
+//     }
+//     if (roboticEquipment) {
+//       projectItems.push(roboticEquipment)
+//     }
+//   }
+//   return projectItems.join('|')
+// }
 
 function calculateBusinessSize (employees, turnover) {
   const employeesNum = Number(employees)
@@ -111,7 +111,6 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(56, 'Grant amount requested', submission.calculatedGrant),
           generateRow(345, 'Remaining Cost to Farmer', submission.remainingCost),
           generateRow(346, 'Planning Permission Status', submission.planningPermission),
-          generateRow(377, 'Low emission application equipment', submission.slurryApplication ?? ''),
           generateRow(382, 'First Adoption', submission.projectImpacts ?? ''),
           generateRow(383, 'Current Slurry Acidify Volume', submission.slurryCurrentlyTreated ?? ''),
           generateRow(384, 'Future Slurry Acidify Volume', submission.slurryToBeTreated ?? ''),
@@ -120,7 +119,6 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(380, 'Agricultural Sector for Grant Item', [submission.agriculturalSector].flat().join('|') ?? ''),
           generateRow(381, 'Currently using Grant Item', submission.technology ?? ''),
           // generateRow(354, 'Irrigation Hectare Score', getQuestionScoreBand(desirabilityScore.desirability.questions, 'projectImpact')),
-          generateRow(49, 'Site of Special Scientific Interest (SSSI)', submission.sSSI ?? ''),
           generateRow(365, 'OA score', desirabilityScore.desirability.overallRating.band),
           generateRow(366, 'Date of OA decision', ''),
           generateRow(42, 'Project name', submission.businessDetails.projectName),
@@ -129,7 +127,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(367, 'Annual Turnover', submission.businessDetails.businessTurnover),
           generateRow(22, 'Employees', submission.businessDetails.numberEmployees),
           generateRow(20, 'Business size', calculateBusinessSize(submission.businessDetails.numberEmployees, submission.businessDetails.businessTurnover)),
-          generateRow(44, 'Project Items', getProjectItems(submission.projectItems, submission.acidificationInfrastructure, submission.roboticEquipment, submission.roboticsProjectItemEquipments)),
+          // generateRow(44, 'Project Items', getProjectItems(submission.projectItems, submission.roboticEquipment, submission.roboticsProjectItemEquipments)),
           generateRow(91, 'Are you an AGENT applying on behalf of your customer', submission.applying === 'Agent' ? 'Yes' : 'No'),
           generateRow(5, 'Surname', farmerContractorDetails.lastName),
           generateRow(6, 'Forename', farmerContractorDetails.firstName),
@@ -196,13 +194,10 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       tenancy: submission.tenancy ?? ' ',
       isTenancyLength: submission.tenancyLength ? 'Yes' : 'No',
       tenancyLength: submission.tenancyLength ?? ' ',
-      projectItems: submission.projectItems ? getProjectItems(submission.projectItems, submission.acidificationInfrastructure, submission.roboticEquipment, submission.roboticsProjectItemEquipments) : ' ',
-      acidificationInfrastructure: submission.acidificationInfrastructure ?? ' ',
-      slurryApplication: submission.slurryApplication ?? ' ',
+      // projectItems: submission.projectItems ? getProjectItems(submission.projectItems, submission.roboticEquipment, submission.roboticsProjectItemEquipments) : ' ',
       projectCost: getCurrencyFormat(submission.projectCost),
       potentialFunding: getCurrencyFormat(submission.calculatedGrant),
       remainingCost: getCurrencyFormat(submission.remainingCost),
-      sssi: submission.sSSI ?? ' ',
       slurryCurrentlyTreated: submission.slurryCurrentlyTreated ?? ' ',
       slurryToBeTreated: submission.slurryToBeTreated ?? ' ',
       projectImpacts: submission.projectImpacts ?? ' ',

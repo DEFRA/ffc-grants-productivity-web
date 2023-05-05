@@ -469,7 +469,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['applicant-A1', 'project-subject-A1'],
             urlOptions: {
               thenUrl: ['tenancy', 'robotics/project-items'],
-              elseUrl: 'slurry/mild-acidification-infrastructure'
+              elseUrl: 'slurry/slurry/project-impacts'
             }
           },
           ineligibleContent: {
@@ -536,7 +536,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/mild-acidification-infrastructure'
+              elseUrl: 'slurry/slurry/project-impacts'
             }
           },
           hint: {
@@ -590,7 +590,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/mild-acidification-infrastructure'
+              elseUrl: 'slurry/project-impacts'
             }
           },
           eliminationAnswerKeys: '',
@@ -646,7 +646,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/mild-acidification-infrastructure'
+              elseUrl: 'slurry/project-impacts'
             }
           },
           maybeEligible: true,
@@ -654,384 +654,6 @@ const questionBank = {
             messageHeader: 'You may be able to apply for a grant from this scheme',
             messageContent: 'You will need to extend your tenancy agreement before you can complete a full application.'
           }
-        },
-        {
-          key: 'mild-acidification-infrastructure',
-          order: 80,
-          title: 'Will your project buy mild acidification equipment?',
-          pageTitle: '',
-          url: 'slurry/mild-acidification-infrastructure',
-          baseUrl: 'mild-acidification-infrastructure',
-          preValidationKeys: ['projectStart'],
-          backUrlObject: {
-            dependentQuestionYarKey: ['tenancy', 'applicant'],
-            dependentAnswerKeysArray: ['tenancy-A2', 'applicant-A2'],
-            urlOptions: {
-              thenUrl: ['/productivity/tenancy-length', '/productivity/project-start'],
-              elseUrl: '/productivity/tenancy'
-            }
-          },
-          nextUrl: 'acidification-infrastructure',
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'Your project must buy the mild acidification equipment required for:',
-                items: ['introducing acidification the first time ', 'adding additional acidification installations']
-              }]
-            }],
-            details: {
-              summaryText: 'Items included as mild acidification equipment',
-              html: '<ul class="govuk-list govuk-list--bullet"><li>acid storage</li><li>dosing equipment</li><li>mixing tank</li><li>pump</li></ul>'
-            }
-          },
-          ineligibleContent: {
-            messageContent: `
-              <span>Your project must buy all 4 of the following mild acidification equipment: </span>
-              <ul class="govuk-body">
-                <li>acid storage </li>
-                <li>dosing equipment </li>
-                <li>mixing tank </li>
-                <li>pump</li>
-              </ul>`,
-            insertText: {
-              html: `<span>This mild acidification equipment is required for:</span>
-              <ul>
-                <li>introducing acidification the first time </li>
-                <li>adding additional acidification installations</li>
-                </ul>`
-            },
-            messageLink: {
-              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
-              title: 'See other grants you may be eligible for'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          hint: {
-            html: `<span>Your project must buy all 4 of the following mild acidification equipment:</span>
-            <ul>
-              <li>acid storage</li>
-              <li>dosing equipment</li>
-              <li>mixing tank</li>
-              <li>pump</li>
-            </ul>`
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if you will be buying mild acidification equipment'
-            }
-          ],
-          answers: [
-            {
-              key: 'mild-acidification-infrastructure-A1',
-              text: 'Yes, we will buy all 4 items',
-              value: 'Mild acidification equipment'
-            },
-            {
-              key: 'mild-acidification-infrastructure-A2',
-              value: 'No, we will not buy all 4 items',
-              notEligible: true
-            }
-          ],
-          yarKey: 'projectItems'
-
-        },
-        {
-          key: 'acidification-infrastructure',
-          order: 81,
-          title: 'Does your project also need acidification infrastructure?',
-          hint: {
-            text: 'Any work to adapt or install pipework, pumps etc to get slurry into the acidification system and then out to storage.'
-          },
-          pageTitle: '',
-          url: 'slurry/acidification-infrastructure',
-          baseUrl: 'acidification-infrastructure',
-          backUrl: 'mild-acidification-infrastructure',
-          nextUrl: 'slurry-application',
-          preValidationKeys: ['projectItems'],
-          eliminationAnswerKeys: '',
-          ineligibleContent: {},
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if you need acidification infrastructure'
-            }
-          ],
-          answers: [
-            {
-              key: 'acidification-infrastructure-A1',
-              text: 'Yes, we will buy acidification infrastructure',
-              value: 'Acidification infrastructure'
-            },
-            {
-              key: 'acidification-infrastructure-A2',
-              value: 'No, we don’t need it'
-            }
-          ],
-          yarKey: 'acidificationInfrastructure'
-        },
-        {
-          key: 'slurry-application',
-          order: 82,
-          title: 'Will you be using low-emission precision application equipment?',
-          pageTitle: '',
-          url: 'slurry/slurry-application',
-          baseUrl: 'slurry-application',
-          backUrl: 'acidification-infrastructure',
-          nextUrl: 'project-cost',
-          preValidationKeys: ['acidificationInfrastructure'],
-          eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: 'You cannot apply for a grant if you will not be using low emission precision application equipment.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          hint: {
-            text: 'For example, shallow injection, trailing shoe or dribble bar'
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select the option that describes your use of low-emission precision equipment'
-            }
-          ],
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'You must use low-emission precision application equipment.',
-                items: []
-              }]
-            }]
-          },
-          answers: [
-            {
-              key: 'slurry-application-A1',
-              value: 'Yes, I already have the equipment'
-            },
-            {
-              key: 'slurry-application-A2',
-              value: 'Yes, I will be purchasing the equipment as part of the project'
-            },
-            {
-              key: 'slurry-application-A3',
-              value: 'Yes, I will be using a contractor with low-emissions precision application equipment'
-            },
-
-            {
-              value: 'divider'
-            },
-            {
-              key: 'slurry-application-A4',
-              value: 'No, I won’t be using the equipment',
-              notEligible: true
-            }
-          ],
-          yarKey: 'slurryApplication'
-        },
-        {
-          key: 'project-cost',
-          order: 90,
-          pageTitle: '',
-          url: 'slurry/project-cost',
-          baseUrl: 'project-cost',
-          backUrl: 'slurry-application',
-          nextUrl: 'potential-amount',
-          preValidationKeys: ['slurryApplication'],
-          classes: 'govuk-input--width-10',
-          id: 'projectCost',
-          name: 'projectCost',
-          prefix: { text: '£' },
-          type: 'input',
-          grantInfo: {
-            minGrant: 35000,
-            maxGrant: 500000,
-            grantPercentage: 40,
-            cappedGrant: true
-          },
-          label: {
-            text: 'What is the estimated cost of the items?',
-            classes: 'govuk-label--l',
-            isPageHeading: true
-          },
-          hint: {
-            html: `
-              You can only apply for a grant of up to 40% of the estimated costs.
-              <br/>The minimum grant you can apply for this project is £35,000 (40% of £87,500).
-              <br/>The maximum grant is £500,000.
-              <br/><br/>Do not include VAT.
-              <br/><br/>Enter amount, for example 95,000`
-          },
-          eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
-            insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £500,000.' },
-            messageLink: {
-              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          sidebar: {
-            values: [
-              {
-                heading: '',
-                content: [{
-                  para: '',
-                  items: [],
-                  dependentAnswerExceptThese: ['mild-acidification-infrastructure-A2', 'acidification-infrastructure-A2']
-                }]
-              }
-            ],
-            dependentYarKeys: ['projectItems', 'acidificationInfrastructure'],
-            dependentQuestionKeys: ['mild-acidification-infrastructure', 'acidification-infrastructure']
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Enter the estimated cost for the items'
-            },
-            {
-              type: 'REGEX',
-              regex: CURRENCY_FORMAT,
-              error: 'Enter a whole number in correct format'
-            },
-            {
-              type: 'REGEX',
-              regex: CHARS_MAX_10,
-              error: 'Enter a whole number with a maximum of 10 digits'
-            }
-          ],
-          answers: [
-            {
-              key: '',
-              value: ''
-            }
-          ],
-          yarKey: 'projectCost'
-        },
-        {
-          key: 'potential-amount',
-          title: 'Potential grant funding',
-          order: 91,
-          url: 'slurry/potential-amount',
-          backUrl: 'project-cost',
-          nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
-            warning: {
-              text: 'There’s no guarantee the project will receive a grant.',
-              iconFallbackText: 'Warning'
-            }
-          },
-          yarKey: 'calculatedGrant'
-        },
-        {
-          key: 'remaining-costs',
-          order: 110,
-          title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
-          pageTitle: '',
-          url: 'slurry/remaining-costs',
-          baseUrl: 'remaining-costs',
-          backUrl: 'project-cost',
-          nextUrl: 'SSSI',
-          preValidationKeys: ['projectCost', 'calculatedGrant'],
-          eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
-            insertText: { text: 'You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.' },
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: `
-                You cannot use public money (for example, grant funding from government or local authorities)
-                  towards the project costs.
-                  \n\nYou can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-
-                  environment schemes such as the Countryside Stewardship Scheme.
-                `,
-                items: []
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if you can pay the remaining costs without using any other grant money'
-            }
-          ],
-          answers: [
-            {
-              key: 'remaining-costs-A1',
-              value: 'Yes'
-
-            },
-            {
-              key: 'remaining-costs-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'canPayRemainingCost'
-
-        },
-        {
-          key: 'slurry-SSSI',
-          order: 120,
-          title: 'Does the project directly impact a Site of Special Scientific Interest?',
-          pageTitle: '',
-          url: 'slurry/SSSI',
-          baseUrl: 'SSSI',
-          backUrl: 'remaining-costs',
-          nextUrl: 'project-impacts',
-          preValidationKeys: ['canPayRemainingCost'],
-          ga: [
-            { dimension: 'cm2', value: { type: 'journey-time' } }
-          ],
-          eliminationAnswerKeys: '',
-          fundingPriorities: '',
-          type: 'single-answer',
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if the project directly impacts a Site of Special Scientific Interest'
-            }
-          ],
-          answers: [
-            {
-              key: 'slurry-SSSI-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'slurry-SSSI-A2',
-              value: 'No'
-            }
-          ],
-          yarKey: 'sSSI'
         },
         {
           key: 'project-impacts',
@@ -1045,8 +667,15 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/project-impacts',
           baseUrl: 'project-impacts',
-          backUrl: 'SSSI',
-          preValidationKeys: ['sSSI'],
+          backUrlObject: {
+            dependentQuestionYarKey: ['tenancy', 'applicant'],
+            dependentAnswerKeysArray: ['tenancy-A2', 'applicant-A2'],
+            urlOptions: {
+              thenUrl: ['/productivity/tenancy-length', '/productivity/project-start'],
+              elseUrl: '/productivity/tenancy'
+            }
+          },
+          preValidationKeys: ['projectStart'],
           hint: {
             html: '<br>Select one option<br>'
           },
@@ -1166,7 +795,7 @@ const questionBank = {
           pageTitle: '',
           url: 'slurry/slurry-to-be-treated',
           baseUrl: 'slurry-to-be-treated',
-          preValidationKeys: ['projectImpacts'],
+          preValidationKeys: ['slurryCurrentlyTreated'],
           backUrlObject: {
             dependentQuestionYarKey: 'projectImpacts',
             dependentAnswerKeysArray: ['project-impacts-A2'],
