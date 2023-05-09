@@ -73,7 +73,7 @@ describe('project-start', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('slurry/slurry/project-impacts')
+    expect(postResponse.headers.location).toBe('slurry/project-impacts')
   })
 
   it('user selects option 2: <Yes, we have begun project work> -> display ineligible page', async () => {
