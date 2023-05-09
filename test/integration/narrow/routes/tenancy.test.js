@@ -49,10 +49,10 @@ describe('Page: /tenancy', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('slurry/mild-acidification-infrastructure') // will change
+    expect(postResponse.headers.location).toBe('slurry/project-impacts')
   })
 
-  xit('user selects \'No\' -> store user response and redirect to /tenancy-length', async () => {
+  it('user selects \'No\' -> store user response and redirect to /tenancy-length', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tenancy`,
@@ -62,7 +62,7 @@ describe('Page: /tenancy', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('project-items')
+    expect(postResponse.headers.location).toBe('tenancy-length')
   })
   it('page loads with correct back link', async () => {
     const options = {

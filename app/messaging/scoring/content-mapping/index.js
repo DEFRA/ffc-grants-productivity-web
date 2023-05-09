@@ -6,6 +6,6 @@ module.exports = {
     dataAnalytics: 'robotics-data-analytics',
     energySource: 'robotics-energy-source',
     agriculturalSector: 'robotics-agricultural-sector',
-    projectImpact: 'robotics-project-impact'
+    roboticProjectImpacts: 'robotics-project-impact'
   }
 }

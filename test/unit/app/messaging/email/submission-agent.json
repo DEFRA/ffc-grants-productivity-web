@@ -54,9 +54,6 @@
     "mixing tank",
     "pump"
   ],
-  "acidificationInfrastructure": [
-    "acidification infrastructure"
-  ],
   "legalStatus": "Limited Liability Partnership",
   "planningPermission": "Not needed",
   "productivity": [
@@ -102,6 +99,5 @@
   "payRemainingCosts": "Yes",
   "score-calculated": true,
   "tenancyLength": null,
-  "landOwnership": "Yes",
-  "sSSI": "No"
+  "landOwnership": "Yes"
 }
