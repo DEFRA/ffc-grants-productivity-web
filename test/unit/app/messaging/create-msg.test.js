@@ -17,15 +17,21 @@ describe('create-msg', () => {
       projectSubject: 'hello'
     })
 
-    // dict = {
-    //   ...dict,
-    //   waterSourcePlanned: 'wtr-src-pln',
-    //   mainsChange: 'mns-chn',
-    //   summerAbstractChange: null
-    // }
+    dict = {
+      ...dict,
+      projectSubject: 'Robotics and Innovation',
+      energySource: ['value'],
+      agriculturalSector: ['value'],
+      dataAnalytics: 'testing',
+      technology: 'testing'
+    }
     expect(getDesirabilityAnswers({})).toEqual({
+      projectSubject: 'Robotics and Innovation',
       projectImpacts: 'hello',
-      projectSubject: 'hello'
+      energySource: ['value'],
+      agriculturalSector: ['value'],
+      dataAnalytics: 'testing',
+      roboticProjectImpacts: 'testing'
     })
 
     dict = {
