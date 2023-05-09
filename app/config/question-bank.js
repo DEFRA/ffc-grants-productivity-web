@@ -469,7 +469,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['applicant-A1', 'project-subject-A1'],
             urlOptions: {
               thenUrl: ['tenancy', 'robotics/project-items'],
-              elseUrl: 'slurry/slurry/project-impacts'
+              elseUrl: 'slurry/project-impacts'
             }
           },
           ineligibleContent: {
@@ -536,7 +536,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/slurry/project-impacts'
+              elseUrl: 'slurry/project-impacts'
             }
           },
           hint: {
