@@ -70,8 +70,8 @@ describe('Create submission message', () => {
     expect(msg.applicantEmail).toHaveProperty('details')
     expect(msg.applicantEmail.details).toHaveProperty(
       'firstName', 'lastName', 'referenceNumber', 'overallRating', 'scoreChance', 'projectSubject', 'isSlurry', 'isRobotics'
-      , 'legalStatus', 'location', 'planningPermission', 'projectStart', 'tenancy', 'tenancyLength', 'projectItems', 'acidificationInfrastructure'
-      , 'slurryApplication', 'projectCost', 'potentialFunding', 'remainingCost', 'sssi', 'slurryCurrentlyTreated', 'slurryToBeTreated', 'projectImpacts'
+      , 'legalStatus', 'location', 'planningPermission', 'projectStart', 'tenancy', 'tenancyLength', 'projectItems', 'projectCost'
+      ,'potentialFunding', 'remainingCost', 'slurryCurrentlyTreated', 'slurryToBeTreated', 'projectImpacts'
       , 'dataAnalytics', 'dataAnalyticsScore', 'energySourceScore', 'agriculturalSector', 'agriculturalSectorScore', 'technology', 'technologyScore'
       , 'projectName', 'businessName', 'farmerName', 'farmerSurname', 'farmerEmail', 'agentName', 'agentSurname', 'agentEmail', 'projectImpactsScore'
       , 'contactConsent', 'scoreDate'
@@ -91,7 +91,7 @@ describe('Create submission message', () => {
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('defaultColumnWidth')
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('protectPassword')
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('rows')
-    expect(msg.spreadsheet.worksheets[0].rows.length).toBe(70)
+    expect(msg.spreadsheet.worksheets[0].rows.length).toBe(67)
   })
 
   // test('Protect password property should not be set if config is false', () => {
