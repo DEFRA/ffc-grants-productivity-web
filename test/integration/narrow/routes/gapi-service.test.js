@@ -140,7 +140,8 @@ describe('get gapiService setup', () => {
       {
         dimension: 12,
         value: {
-          type: 'score'
+          type: 'score',
+          value:'value'
         }
       },
       {
