@@ -232,7 +232,6 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
 }
 function spreadsheet (submission, desirabilityScore) {
   const data = getSpreadsheetDetails(submission, desirabilityScore)
-  console.log(data.worksheets[0], 'Spreadsheet Data')
   return data
 }
 

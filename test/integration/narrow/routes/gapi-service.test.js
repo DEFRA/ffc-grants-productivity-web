@@ -119,7 +119,7 @@ describe('get gapiService setup', () => {
     expect(result).toBe(undefined)
   })
 
-  xtest('Call processGA - populated ga', async () => {
+  test('Call processGA - populated ga', async () => {
     const ga = [
       { journeyStart: 'mock-journey-start' },
       { dimension: 0 },
@@ -140,7 +140,8 @@ describe('get gapiService setup', () => {
       {
         dimension: 12,
         value: {
-          type: 'score'
+          type: 'score',
+          value:'value'
         }
       },
       {

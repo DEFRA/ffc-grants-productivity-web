@@ -1,6 +1,6 @@
 const appInsights = require('./app-insights')
 const { getYarValue, setYarValue } = require('../helpers/session')
-const protectiveMonitoringServiceSendEvent = require('../services/protective-monitoring-service')
+const { protectiveMonitoringServiceSendEvent } = require('../services/protective-monitoring-service')
 const blockDefaultPageViews = [
   'start', 'applying', 'project-impact', 'remaining-costs',
   'project-cost', 'project-start', 'planning-permission', 'score',
@@ -57,6 +57,7 @@ const sendDimensionOrMetric = async (request, { dimensionOrMetric, value }) => {
   try {
     const dmetrics = {}
     dmetrics[dimensionOrMetric] = value
+    console.log(dmetrics,'GGGGGGGGGGGGGGGGGG')
     await request.ga.pageView(dmetrics)
     console.log('Metric Sending analytics page-view for %s', request.route.path)
   } catch (err) {
@@ -81,7 +82,7 @@ const sendDimensionOrMetrics = async (request, dimenisons) => {
     appInsights.logException(request, { error: err })
   }
 }
-const sendEligibilityEvent = async (request, notEligible = true) => {
+const sendEligibilityEvent = async (request, notEligible = false) => {
   if (notEligible) {
     await sendDimensionOrMetrics(request, [{
       dimensionOrMetric: metrics.ELIMINATION,
@@ -91,7 +92,6 @@ const sendEligibilityEvent = async (request, notEligible = true) => {
       dimensionOrMetric: dimensions.ELIMINATION,
       value: false
     }])
-    console.log('NOT ELIGIBLE MATRIC SENT')
   } else {
     await sendDimensionOrMetric(request, {
       dimensionOrMetric: dimensions.ELIMINATION,
@@ -112,12 +112,13 @@ const getTimeofJourneySinceStart = (request) => {
   return 0
 }
 
-const processGA = async (request, ga, confirmationId) => {
+const processGA = async (request, ga, _score, _confirmationId) => {
   if (ga && Array.isArray(ga)) {
     const cmcds = []
     ga.forEach(async gaConfig => {
       if (gaConfig.journeyStart) {
         setYarValue(request, 'journey-start-time', Date.now())
+        console.log('[JOURNEY STARTED] ')
       }
       if (gaConfig.dimension) {
         let value
@@ -129,11 +130,11 @@ const processGA = async (request, ga, confirmationId) => {
             value = gaConfig.value.value
             break
           case 'score':
-            value = getYarValue(request, 'current-score')
+            value = gaConfig.value.value
             break
           case 'confirmationId':
             await protectiveMonitoringServiceSendEvent(request, request.yar.id, 'FTF-JOURNEY-COMPLETED', '0706')
-            value = confirmationId
+            value = gaConfig.value.value
             break
           case 'journey-time':
             value = getTimeofJourneySinceStart(request).toString()
@@ -144,7 +145,7 @@ const processGA = async (request, ga, confirmationId) => {
 
         cmcds.push({
           dimensionOrMetric: gaConfig.dimension,
-          value: value.toString()
+          value: value?.toString()
         })
       }
     })
