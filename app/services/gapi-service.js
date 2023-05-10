@@ -92,7 +92,6 @@ const sendEligibilityEvent = async (request, notEligible = false) => {
       dimensionOrMetric: dimensions.ELIMINATION,
       value: false
     }])
-    console.log('[ NOT ELIGIBLE MATRIC SENT ]')
   } else {
     await sendDimensionOrMetric(request, {
       dimensionOrMetric: dimensions.ELIMINATION,
