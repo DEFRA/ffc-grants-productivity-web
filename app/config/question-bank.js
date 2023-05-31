@@ -469,7 +469,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['applicant-A1', 'project-subject-A1'],
             urlOptions: {
               thenUrl: ['tenancy', 'robotics/project-items'],
-              elseUrl: 'slurry/project-impacts'
+              elseUrl: 'tenancy'
             }
           },
           ineligibleContent: {
@@ -536,7 +536,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/project-impacts'
+              elseUrl: 'robotics/project-items'
             }
           },
           hint: {
@@ -590,7 +590,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/project-impacts'
+              elseUrl: 'robotics/project-items'
             }
           },
           eliminationAnswerKeys: '',
@@ -646,7 +646,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'slurry/project-impacts'
+              elseUrl: 'robotics/project-items'
             }
           },
           maybeEligible: true,
@@ -654,197 +654,6 @@ const questionBank = {
             messageHeader: 'You may be able to apply for a grant from this scheme',
             messageContent: 'You will need to extend your tenancy agreement before you can complete a full application.'
           }
-        },
-        {
-          key: 'project-impacts',
-          scheme: 'slurry',
-          score: {
-            isScore: true,
-            isDisplay: true
-          },
-          order: 130,
-          title: 'What impact will the project have?',
-          pageTitle: '',
-          url: 'slurry/project-impacts',
-          baseUrl: 'project-impacts',
-          backUrlObject: {
-            dependentQuestionYarKey: ['tenancy', 'applicant'],
-            dependentAnswerKeysArray: ['tenancy-A2', 'applicant-A2'],
-            urlOptions: {
-              thenUrl: ['/productivity/tenancy-length', '/productivity/project-start'],
-              elseUrl: '/productivity/tenancy'
-            }
-          },
-          preValidationKeys: ['projectStart'],
-          hint: {
-            html: '<br>Select one option<br>'
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select one option to describe the project impact'
-            }
-          ],
-          eliminationAnswerKeys: '',
-          fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li><li>introduce innovation</li></ul>',
-          type: 'single-answer',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Funding priorities',
-              content: [{
-                para: 'RPA wants to fund projects that:',
-                items: ['improve productivity', 'improve the environment', 'introduce innovation']
-              }]
-            }]
-          },
-          validations: [
-            {
-              type: '',
-              error: '',
-              regEx: '',
-              dependentAnswerKey: ''
-            }
-          ],
-          answers: [
-            {
-              key: 'project-impacts-A1',
-              value: 'Introduce acidification for the first time',
-              redirectUrl: 'slurry-to-be-treated'
-            },
-            {
-              key: 'project-impacts-A2',
-              value: 'Add additional acidification installations',
-              redirectUrl: 'slurry-currently-treated'
-            }
-          ],
-          yarKey: 'projectImpacts'
-        },
-        {
-          key: 'slurry-currently-treated',
-          scheme: 'slurry',
-          score: {
-            isScore: false,
-            isDisplay: true,
-            dependentAnswerKey: {
-              yarkey: 'projectImpacts',
-              value: 'Add additional acidification installations'
-            }
-          },
-          order: 140,
-          pageTitle: '',
-          url: 'slurry/slurry-currently-treated',
-          baseUrl: 'slurry-currently-treated',
-          backUrl: 'project-impacts',
-          nextUrl: 'slurry-to-be-treated',
-          preValidationKeys: ['projectImpacts'],
-          classes: 'govuk-input--width-10',
-          id: 'slurryCurrentlyTreated',
-          name: 'slurryCurrentlyTreated',
-          suffix: {
-            html: 'm<sup>3</sup>'
-          },
-          type: 'input',
-          label: {
-            text: 'What volume of slurry or digestate do you currently acidify per year?',
-            classes: 'govuk-label--l',
-            isPageHeading: true
-          },
-          hint: {
-            html: `
-              <br>Enter figure in cubic metres (m<sup>3</sup>), for example 18,000`
-          },
-          eliminationAnswerKeys: '',
-          fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li></ul>',
-          sidebar: {
-            values: [{
-              heading: 'Funding priorities',
-              content: [{
-                para: 'RPA wants to fund projects that:',
-                items: ['improve productivity', 'improve the environment']
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Enter the volume of slurry or digestate you currently acidify'
-            },
-            {
-              type: 'REGEX',
-              regex: NUMBER_REGEX,
-              error: 'Volume must be a whole number'
-            }
-          ],
-          answers: [
-            {
-              title: 'Current volume treated',
-              key: ''
-            }
-          ],
-          yarKey: 'slurryCurrentlyTreated'
-        },
-        {
-          key: 'slurry-to-be-treated',
-          scheme: 'slurry',
-          score: {
-            isScore: false,
-            isDisplay: true
-          },
-          order: 150,
-          pageTitle: '',
-          url: 'slurry/slurry-to-be-treated',
-          baseUrl: 'slurry-to-be-treated',
-          preValidationKeys: ['slurryCurrentlyTreated'],
-          backUrlObject: {
-            dependentQuestionYarKey: 'projectImpacts',
-            dependentAnswerKeysArray: ['project-impacts-A2'],
-            urlOptions: {
-              thenUrl: '/productivity/slurry/slurry-currently-treated',
-              elseUrl: '/productivity/slurry/project-impacts'
-            }
-          },
-          nextUrl: '/productivity/score',
-          classes: 'govuk-input--width-10',
-          id: 'slurryToBeTreated',
-          name: 'slurryToBeTreated',
-          suffix: {
-            html: 'm<sup>3</sup>'
-          },
-          type: 'input',
-          label: {
-            text: 'What volume of slurry or digestate will you acidify per year?',
-            classes: 'govuk-label--l',
-            isPageHeading: true
-          },
-          hint: {
-            html: `
-              <br>Enter figure in cubic metres(m<sup>3</sup>), for example 18,000`
-          },
-          eliminationAnswerKeys: '',
-          fundingPriorities: '<ul><li>improve productivity</li><li>improve the environment</li></ul>',
-          sidebar: {
-            values: [{
-              heading: 'Funding priorities',
-              content: [{
-                para: 'RPA wants to fund projects that:',
-                items: ['improve productivity', 'improve the environment', 'introduce innovation ']
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Enter the volume of digestate you will acidify after the project'
-            },
-            {
-              type: 'REGEX',
-              regex: NUMBER_REGEX,
-              error: 'Volume must be a whole number'
-            }
-          ],
-          answers: [{ title: 'Future volume treated' }],
-          yarKey: 'slurryToBeTreated'
         },
         /// ////// ***************** ROBOTICS ************************************/////////////////////
         {
