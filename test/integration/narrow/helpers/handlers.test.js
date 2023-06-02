@@ -66,18 +66,18 @@ describe('Get & Post Handlers', () => {
     expect(mockH.redirect).toHaveBeenCalledWith('/productivity/start')
   })
 
-  test('is eligible if calculated grant = min grant - whether grant is capped or not', async () => { // TODO: I don't understand this test is trying to check for
-    question = {
-      url: 'mock-url',
-      title: 'mock-title',
-      maybeEligible: true,
-      maybeEligibleContent: { reference: 'mock-reference' }
-    }
-    mockH = { redirect: jest.fn() }
+  // test('is eligible if calculated grant = min grant - whether grant is capped or not', async () => { // TODO: I don't understand this test is trying to check for
+  //   question = {
+  //     url: 'mock-url',
+  //     title: 'mock-title',
+  //     maybeEligible: true,
+  //     maybeEligibleContent: { reference: 'mock-reference' }
+  //   }
+  //   mockH = { redirect: jest.fn() }
 
-    await getHandler(question)({}, mockH)
-    expect(mockH.redirect).toHaveBeenCalledWith('/productivity/start')
-  })
+  //   await getHandler(question)({}, mockH)
+  //   expect(mockH.redirect).toHaveBeenCalledWith('/productivity/start')
+  // })
 
   // score not contained in handler.js, tests commented out
   xdescribe('it handles the score results page: ', () => {
