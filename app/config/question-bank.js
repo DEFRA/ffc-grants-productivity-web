@@ -469,7 +469,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['applicant-A1', 'project-subject-A1'],
             urlOptions: {
               thenUrl: ['tenancy', 'robotics/project-items'],
-              elseUrl: 'tenancy'
+              elseUrl: 'robotics/project-items'
             }
           },
           ineligibleContent: {
@@ -664,10 +664,10 @@ const questionBank = {
           url: 'robotics/project-items',
           baseUrl: 'robotics-project-items',
           backUrlObject: {
-            dependentQuestionYarKey: ['tenancy', 'applicant'],
-            dependentAnswerKeysArray: ['tenancy-A2', 'applicant-A2'],
+            dependentQuestionYarKey: ['applicant', 'tenancy'],
+            dependentAnswerKeysArray: ['applicant-A2', 'tenancy-A2'],
             urlOptions: {
-              thenUrl: ['/productivity/tenancy-length', '/productivity/project-start'],
+              thenUrl: ['/productivity/project-start', '/productivity/tenancy-length' ],
               elseUrl: '/productivity/tenancy'
             }
           },
