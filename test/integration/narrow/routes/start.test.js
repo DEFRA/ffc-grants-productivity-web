@@ -9,7 +9,7 @@ describe('Start page', () => {
     expect(response.payload).toContain('Check if you can apply for a Farming Transformation Fund Improving Farm Productivity Grant')
     expect(response.payload).toContain('Use this service to:')
     expect(response.payload).toContain('check if you can apply for a grant for your project (takes about 5 minutes)')
-    expect(response.payload).toContain('estimate how much grant funding you could get (takes about 15minutes if you have all the project details)')
+    expect(response.payload).toContain('estimate how much grant funding you could get (takes about 15 minutes if you have all the project details)')
     expect(response.payload).toContain('Who can apply')
     expect(response.payload).toContain('You can apply if you:')
     expect(response.payload).toContain('you are a farmer or agricultural contractor')
