@@ -4,15 +4,10 @@
 {% from "govuk/components/breadcrumbs/macro.njk" import govukBreadcrumbs %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
-
 {% block pageTitle %}
   {{ siteTitle }}
 {% endblock %}
-
-{% block beforeContent %}
-  
-{% endblock %}
-
+{% block beforeContent %}{% endblock %}
 {% block content %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds govuk-body">
@@ -25,16 +20,28 @@
       <h2 class="govuk-heading-m">Who can apply</h2>
       <span>You can apply if you:</span>
       <ul>
-        <li>are a farming or agricultural contracting business registered in England</li>
-        <li>will do the grant-funded work in England</li>
-        <li>estimate the project costs are over £87,500</li>
+        <li>you are a farmer or agricultural contractor</li>
+        <li>your business is registered in England or you will do the grant-funded work in England</li>
+        <li>estimated the project covers are over £37,500</li>
       </ul>
-      <p>Agricultural contractors can only use the grant for buying robotics and innovation equipment.</p>
-      {{ govukInsetText({
-          text: 'If your project is eligible, you can submit your answers to the Rural Payments Agency (RPA) to request the full application form.'
+      <p>Agricultural contractors can only use the grant for buying robotic and automatic technology.</p>
+      <span>You can apply for up to:</span>
+      <ul>
+        <li>40% of estimated costs of robotic and automatic technology</li>
+        <li>25% of estimated costs to buy and install a solar PV system</li>
+      </ul>
+      <p>The minimum grant you can claim is £15,000 (40% of £37,500).</p>
+      <p>The maximum grant for:</p>
+      <ul>
+        <li>robotic and automatic technology is £500,000</li>
+        <li>a solar PV system is £100,000</li>
+      </ul>
+      <p>If you want to apply for both robotic technology and solar PV system grant funding, you must submit 2 separate applications. The maximum grant amount for both projects together is £500,000.</p>
+      {{
+        govukInsetText({
+          text: 'If your project is eligible, you will be able to submit your online application to the Rural Payments Agency (RPA).'
         })
       }}
-
       {{ govukButton({
           classes: "govuk-!-margin-top-2 govuk-!-margin-bottom-8",
           href: button.nextLink,
@@ -42,27 +49,25 @@
           text: button.text
         })
       }}
-
       <h2 class="govuk-heading-m">Before you start</h2>
       <p>To use the checker, you need:</p>
       <ul class="govuk-list govuk-list--bullet">
-        <li>information about your business (for example, number of employees and turnover)</li>
-        <li>information about the project (for example, volume of slurry or digestate, the impact the project will have)</li>
+        <li>information about your business (for example, number of employees, turnover)</li>
+        <li>information about the project (for example, the impact the project will have)</li>
         <li>a list of the items you’d like to buy for the project</li>
-        <li>an estimate of the total cost of the items</li>
+        <li>an estimate of the total costs of the items</li>
       </ul>
-      <p>If you do not enter any information for more than 15 minutes, your application will time out and you will have to start again.</p>
-
+      <p>If you do not enter any information for more than 20 minutes, your application will time out and you will have to start again.</p>
       <h2 class="govuk-heading-m">Problems using the online service</h2>
       <span>If you have any problems using the online service, contact the RPA.</span><br/><br/>
-
       <h3 class="govuk-heading-s">Telephone</h3>
       <p>Telephone: 03000 200 301</p>
       <span>Monday to Friday, 9am to 5pm (except public holidays) </span><br/>
       <a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges</a><br/><br/>
-
       <h3 class="govuk-heading-s">Email</h3>
-      <p><a class="govuk-link" title="Send email to RPA" href="mailto:FTF@rpa.gov.uk">FTF@rpa.gov.uk</a></p>
+      <p>
+        <a class="govuk-link" title="Send email to RPA" href="mailto:FTF@rpa.gov.uk">FTF@rpa.gov.uk</a>
+      </p>
     </div>
   </div>
 {% endblock %}
