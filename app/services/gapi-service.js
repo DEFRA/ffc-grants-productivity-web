@@ -4,7 +4,7 @@ const { protectiveMonitoringServiceSendEvent } = require('../services/protective
 const blockDefaultPageViews = [
   'start', 'applying', 'project-impact', 'remaining-costs',
   'project-cost', 'project-start', 'planning-permission', 'score',
-  'country', 'legal-status', 'farming-type'
+  'legal-status', 'farming-type'
 ]
 const isBlockDefaultPageView = (url) => {
   const currentUrl = url.pathname.split('/').pop().toString().toLowerCase()
