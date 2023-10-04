@@ -76,13 +76,13 @@ const questionBank = {
       title: 'Eligibility',
       questions: [
         {
-          key: 'project-subject',
+          key: 'project-subject', // yikes! https://tenor.com/bCtQ7.gif
           score: {
             isScore: true,
             isDisplay: false
           },
           order: 10,
-          title: 'What is your project about?',
+          title: 'What would you like funding for?',
           pageTitle: '',
           backUrl: 'start',
           nextUrl: 'applicant',
@@ -93,10 +93,11 @@ const questionBank = {
           ga: [{ journeyStart: true }],
           hint: {
             html: `
-              If you want to apply for both a slurry project and a robotics project, 
-              you must submit 2 separate applications.
+              If you want to apply for funding for both a robotics and a solar project, you must submit 2 separate applications.
+              <br/>
               The maximum grant amount for both projects together is £500,000.
-              <br/><br/>Select one option
+              <br/>
+              Select one option
             `
           },
           validate: [
@@ -108,13 +109,13 @@ const questionBank = {
           answers: [
             {
               key: 'project-subject-A1',
-              value: 'Robotics and Innovation',
-              text: 'Robotics and innovation'
+              value: 'Robotics and automatic technology',
+              text: 'Robotics and automatic technology'
             },
             {
               key: 'project-subject-A2',
-              value: 'Slurry Acidification',
-              text: 'Slurry acidification'
+              value: 'Solar PV system',
+              text: 'Solar PV system'
             }
           ],
           yarKey: 'projectSubject'
