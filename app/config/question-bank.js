@@ -76,7 +76,7 @@ const questionBank = {
       title: 'Eligibility',
       questions: [
         {
-          key: 'project-subject', // yikes! https://tenor.com/bCtQ7.gif
+          key: 'project-subject',
           score: {
             isScore: true,
             isDisplay: false
