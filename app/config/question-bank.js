@@ -488,7 +488,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement.\n \n Before you start the project, you can:',
+                para: 'You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement \nBefore you start the project, you can:',
                 items: ['get quotes from suppliers', 'apply for planning permission (this can take a long time)']
               }]
             }]
@@ -511,7 +511,7 @@ const questionBank = {
               key: 'project-start-A2',
               value: 'Yes, we have begun project work',
               hint: {
-                text: 'For example, digging, signing contracts, placing orders'
+                text: 'For example, started construction work, signing contracts, placing orders'
               },
               notEligible: true
             },
@@ -520,6 +520,10 @@ const questionBank = {
               value: 'No, we have not done any work on this project yet'
             }
           ],
+          warning: {
+            text: 'You must not start the project work or commit to project costs before receiving your funding agreement.',
+            iconFallbackText: 'Warning'
+          },
           yarKey: 'projectStart'
 
         },
