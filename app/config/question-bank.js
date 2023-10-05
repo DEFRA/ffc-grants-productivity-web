@@ -401,8 +401,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `You must have applied for planning permission before you submit a full application
-                \n\n Any planning permission must be in place by 31 December 2022.`,
+                para: `You must have secured planning permission before you submit a full application.
+                \n\n The application deadline is 31 April 2024.`,
                 items: []
               }]
             }]
@@ -424,12 +424,12 @@ const questionBank = {
             },
             {
               key: 'planning-permission-A3',
-              value: 'Should be in place by 31 December 2022',
+              value: 'Should be in place by the time I make my full application',
               redirectUrl: 'planning-required-condition'
             },
             {
               key: 'planning-permission-A4',
-              value: 'Will not be in place by 31 December 2022',
+              value: 'Will not be in place by the time I make my full application',
               notEligible: true
             }
           ],
