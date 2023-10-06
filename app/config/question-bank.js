@@ -446,7 +446,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place by 31 December 2022 .'
+            messageContent: `Any planning permission must be in place before you submit your full application. The application deadline is 31 April 2024.`
           }
         },
         {
