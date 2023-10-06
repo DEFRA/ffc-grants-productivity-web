@@ -218,14 +218,7 @@ const questionBank = {
               elseUrl: 'business-location'
             }
           },
-          dependantNextUrl: {
-            dependentQuestionYarKey: 'applicant',
-            dependentAnswerKeysArray: ['applicant-A1'],
-            urlOptions: {
-              thenUrl: 'planning-permission',
-              elseUrl: 'planning-permission'
-            }
-          },
+          nextUrl: 'planning-permission',
           url: 'legal-status',
           baseUrl: 'legal-status',
           preValidationKeys: ['applicant'],
@@ -322,20 +315,62 @@ const questionBank = {
           yarKey: 'legalStatus'
         },
         {
+          key: 'country',
+          order: 30,
+          title: 'Is the planned project in England?',
+          hint: {
+            text: 'The site where the work will happen'
+          },
+          pageTitle: '',
+          backUrl: 'legal-status',
+          nextUrl: 'planning-permission',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          url: 'country',
+          baseUrl: 'country',
+          preValidationKeys: ['legalStatus'],
+          ineligibleContent: {
+            messageContent: 'This grant is only for projects in England.',
+            insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'This grant is only for projects in England. \n \n Scotland, Wales and Northern Ireland have other grants available.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if the project is in England'
+            }
+          ],
+          answers: [
+            {
+              key: 'country-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'country-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'inEngland'
+        },
+        {
           key: 'planning-permission',
           order: 40,
           title: 'Does the project have planning permission?',
           pageTitle: '',
           url: 'planning-permission',
           baseUrl: 'planning-permission',
-          backUrlObject: {
-            dependentQuestionYarKey: 'applicant',
-            dependentAnswerKeysArray: ['applicant-A1'],
-            urlOptions: {
-              thenUrl: 'legal-status',
-              elseUrl: 'legal-status'
-            }
-          },
+          backUrl: 'legal-status',
           nextUrl: 'project-start',
           preValidationKeys: ['legalStatus'],
           ineligibleContent: {
