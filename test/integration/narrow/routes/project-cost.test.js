@@ -3,7 +3,6 @@ const { crumbToken } = require('./test-helper')
 const varListTemplate = {
   farmingType: 'some fake crop',
   legalStatus: 'fale status',
-  inEngland: 'Yes',
   projectStarted: 'No',
   landOwnership: 'Yes',
   projectItemsList: {
@@ -44,7 +43,6 @@ describe('Project cost page', () => {
   it('should load page successfully if no projectCost', async () => {
     varList = {
       legalStatus: 'fale status',
-      inEngland: 'Yes',
       projectStarted: 'No',
       landOwnership: 'Yes',
       projectItemsList: {

@@ -218,14 +218,7 @@ const questionBank = {
               elseUrl: 'business-location'
             }
           },
-          dependantNextUrl: {
-            dependentQuestionYarKey: 'applicant',
-            dependentAnswerKeysArray: ['applicant-A1'],
-            urlOptions: {
-              thenUrl: 'country',
-              elseUrl: 'planning-permission'
-            }
-          },
+          nextUrl: 'planning-permission',
           url: 'legal-status',
           baseUrl: 'legal-status',
           preValidationKeys: ['applicant'],
@@ -377,14 +370,7 @@ const questionBank = {
           pageTitle: '',
           url: 'planning-permission',
           baseUrl: 'planning-permission',
-          backUrlObject: {
-            dependentQuestionYarKey: 'applicant',
-            dependentAnswerKeysArray: ['applicant-A1'],
-            urlOptions: {
-              thenUrl: 'country',
-              elseUrl: 'legal-status'
-            }
-          },
+          backUrl: 'legal-status',
           nextUrl: 'project-start',
           preValidationKeys: ['legalStatus'],
           ineligibleContent: {
