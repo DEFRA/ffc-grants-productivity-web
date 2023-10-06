@@ -488,8 +488,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement \nBefore you start the project, you can:',
-                items: ['get quotes from suppliers', 'apply for planning permission (this can take a long time)']
+                para: 'You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement.\n \n Before you start the project, you can:',
+                items: ['get quotes from suppliers', 'apply for planning permissions (this can take a long time)']
               }]
             }]
           },
