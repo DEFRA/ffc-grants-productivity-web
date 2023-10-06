@@ -351,8 +351,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `You must have applied for planning permission before you submit a full application
-                \n\n Any planning permission must be in place by 31 December 2022.`,
+                para: `You must have secured planning permission before you submit a full application.
+                \n\n The application deadline is 31 April 2024.`,
                 items: []
               }]
             }]
@@ -374,12 +374,12 @@ const questionBank = {
             },
             {
               key: 'planning-permission-A3',
-              value: 'Should be in place by 31 December 2022',
+              value: 'Should be in place by the time I make my full application',
               redirectUrl: 'planning-required-condition'
             },
             {
               key: 'planning-permission-A4',
-              value: 'Will not be in place by 31 December 2022',
+              value: 'Will not be in place by the time I make my full application',
               notEligible: true
             }
           ],
@@ -439,7 +439,7 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: 'You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement.\n \n Before you start the project, you can:',
-                items: ['get quotes from suppliers', 'apply for planning permission (this can take a long time)']
+                items: ['get quotes from suppliers', 'apply for planning permissions (this can take a long time)']
               }]
             }]
           },
@@ -461,7 +461,7 @@ const questionBank = {
               key: 'project-start-A2',
               value: 'Yes, we have begun project work',
               hint: {
-                text: 'For example, digging, signing contracts, placing orders'
+                text: 'For example, started construction work, signing contracts, placing orders'
               },
               notEligible: true
             },
@@ -470,6 +470,10 @@ const questionBank = {
               value: 'No, we have not done any work on this project yet'
             }
           ],
+          warning: {
+            text: 'You must not start the project work or commit to project costs before receiving your funding agreement.',
+            iconFallbackText: 'Warning'
+          },
           yarKey: 'projectStart'
 
         },
