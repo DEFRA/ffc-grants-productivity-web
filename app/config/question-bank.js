@@ -374,9 +374,9 @@ const questionBank = {
           nextUrl: 'project-start',
           preValidationKeys: ['legalStatus'],
           ineligibleContent: {
-            messageContent: 'Any planning permission must be in place by 31 December 2022.',
+            messageContent: 'Any planning permission must be in place before you submit your full application.',
             messageLink: {
-              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
             }
           },
@@ -432,7 +432,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place by 31 December 2022 .'
+            messageContent: `Any planning permission must be in place before you submit your full application. The application deadline is 31 April 2024.`
           }
         },
         {
