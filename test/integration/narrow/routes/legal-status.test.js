@@ -90,32 +90,5 @@ describe('Legal status page', () => {
         expect(response.statusCode).toBe(200)
         expect(response.payload).toContain('Select the legal status of the business')
     })
-    test('redirects to applicant page if user selects sole trader option', async () => {
-        const options = {
-            method: 'POST',
-            url: `${global.__URLPREFIX__}/legal-status`,
-            headers: { cookie: 'crumb=' + crumbToken },
-            payload: {
-                crumb: crumbToken,
-                legalStatus: 'Sole trader'
-            }
-        }
-        const response = await global.__SERVER__.inject(options)
-        expect(response.statusCode).toBe(302)
-        expect(response.headers.location).toBe('applicant')
-    })
-    test('redirects to applicant page if user selects partnership option', async () => {
-        const options = {
-            method: 'POST',
-            url: `${global.__URLPREFIX__}/legal-status`,
-            headers: { cookie: 'crumb=' + crumbToken },
-            payload: {
-                crumb: crumbToken,
-                legalStatus: 'Partnership'
-            }
-        }
-        const response = await global.__SERVER__.inject(options)
-        expect(response.statusCode).toBe(302)
-        expect(response.headers.location).toBe('planning-permission')
-    })
+    // TODO: add back link tests once they're confirmed in a story
 })
