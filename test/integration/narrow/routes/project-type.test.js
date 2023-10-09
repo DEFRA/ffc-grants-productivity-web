@@ -1,5 +1,4 @@
 const { crumbToken } = require('./test-helper')
-
 const varListTemplate = {
   farmingType: 'some fake crop',
   legalStatus: 'fale status',
@@ -11,7 +10,6 @@ const varListTemplate = {
   },
   projectCost: '12345678'
 }
-
 let varList
 const mockSession = {
   setYarValue: (request, key, value) => null,
@@ -20,13 +18,11 @@ const mockSession = {
     else return undefined
   }
 }
-
 jest.mock('../../../../app/helpers/session', () => mockSession)
 describe('Project subject page', () => {
   beforeEach(() => {
     varList = { ...varListTemplate }
   })
-
   afterEach(() => {
     jest.clearAllMocks()
   })
@@ -35,7 +31,6 @@ describe('Project subject page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-subject`
     }
-
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('What would you like funding for?')
@@ -45,7 +40,6 @@ describe('Project subject page', () => {
     expect(response.payload).toContain('Robotics and automatic technology')
     expect(response.payload).toContain('Solar PV system')
   })
-
   test('submits form successfully', async () => {
     const options = {
       method: 'POST',
@@ -56,12 +50,24 @@ describe('Project subject page', () => {
         projectSubject: 'Robotics and automatic technology'
       }
     }
-
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(302)
     expect(response.headers.location).toBe('applicant')
   })
-
+  test('redirects to legal-status if user selects solar option', async () => {
+    const options = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/project-subject`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: {
+        crumb: crumbToken,
+        projectSubject: 'Solar PV system'
+      }
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(302)
+    expect(response.headers.location).toBe('legal-status')
+  })
   test('shows error message if no option selected', async () => {
     const options = {
       method: 'POST',
@@ -72,7 +78,6 @@ describe('Project subject page', () => {
         projectSubject: ''
       }
     }
-
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Select what your project is about')
