@@ -115,7 +115,8 @@ const questionBank = {
             {
               key: 'project-subject-A2',
               value: 'Solar PV system',
-              text: 'Solar PV system'
+              text: 'Solar PV system',
+              redirectUrl: 'legal-status'
             }
           ],
           yarKey: 'projectSubject'
