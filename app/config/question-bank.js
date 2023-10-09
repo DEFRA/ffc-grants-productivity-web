@@ -115,7 +115,8 @@ const questionBank = {
             {
               key: 'project-subject-A2',
               value: 'Solar PV system',
-              text: 'Solar PV system'
+              text: 'Solar PV system',
+              redirectUrl: 'legal-status'
             }
           ],
           yarKey: 'projectSubject'
@@ -218,7 +219,15 @@ const questionBank = {
               elseUrl: 'business-location'
             }
           },
-          nextUrl: 'planning-permission',
+          // if user selects Solar PV system on project-subject page, redirect to /country, otherwise redirect to /planning-permission
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectSubject',
+            dependentAnswerKeysArray: ['project-subject-A2'],
+            urlOptions: {
+              thenUrl: 'country',
+              elseUrl: 'planning-permission'
+            }
+          },
           url: 'legal-status',
           baseUrl: 'legal-status',
           preValidationKeys: ['applicant'],
