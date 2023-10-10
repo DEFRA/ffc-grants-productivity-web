@@ -246,6 +246,10 @@ const getPage = async (question, request, h) => {
     case 'contractors-details': {
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
+    case 'legal-status':
+      if (getYarValue(request, 'projectSubject') === 'Solar PV system') {
+        setYarValue(request, 'applicant', null)
+      }
     default:
       break
   }

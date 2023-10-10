@@ -219,7 +219,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['applicant-A1'],
             urlOptions: {
               thenUrl: 'applicant',
-              elseUrl: 'business-location'
+              elseUrl: 'project-subject'
             }
           },
           // if user selects Solar PV system on project-subject page, redirect to /country, otherwise redirect to /planning-permission
@@ -233,7 +233,7 @@ const questionBank = {
           },
           url: 'legal-status',
           baseUrl: 'legal-status',
-          preValidationKeys: ['applicant'],
+          preValidationKeys: ['projectSubject'],
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -539,7 +539,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'robotics/project-items'
+              elseUrl: 'project-responsibility'
             }
           },
           hint: {
@@ -578,6 +578,54 @@ const questionBank = {
             }
           ],
           yarKey: 'tenancy'
+        },
+        {
+          key: 'project-responsibility',
+          order: 65,
+          title: 'Will you take full responsibility for your project?',
+          hint: {
+            html: `If you are on a short tenancy, you can ask your landlord to underwrite your agreement. This means they will take over your agreement if your tenancy ends. For example, your landlord could pass the agreed project to the new tenant.<br/><br/>
+            This approach is optional and we will only ask for details at full application.`
+          },
+          pageTitle: '',
+          url: 'project-responsibility',
+          baseUrl: 'project-responsibility',
+          backUrl: 'tenancy',
+          nextUrl: 'existing-solar',
+          preValidationKeys: ['tenancy'],
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswercount: 1,
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [
+                  {
+                    para: 'You must complete your project and keep the grant-funded items fit for purpose for 5 years after the date you receive your final grant payment.',
+                    items: []
+                  }
+                ]
+              }
+            ]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if will take full responsibility for your project'
+            }
+          ],
+          answers: [
+            {
+              key: 'project-responsibility-A1',
+              value: 'Yes, I plan to take full responsibility for my project'
+            },
+            {
+              key: 'project-responsibility-A2',
+              value: 'No, I plan to ask my landlord to underwrite my agreement'
+            }
+          ],
+          yarKey: 'projectResponsibility'
         },
         {
           key: 'tenancy-length',
