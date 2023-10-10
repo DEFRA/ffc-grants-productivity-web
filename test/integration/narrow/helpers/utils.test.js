@@ -71,6 +71,4 @@ describe('Utils', () => {
     expect(allAnswersSelected([], 'applicant-type', mockAnswerList)).toBe(false)
     expect(allAnswersSelected([], 'applicant-type', mockAnswerList)).toBe(true)
   })
-
-
 })

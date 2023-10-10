@@ -162,7 +162,7 @@ describe('answer-options', () => {
         hint: 'mock-hint',
         id: 'mock-yarKey',
         items: [
-          
+
         ],
         name: 'mock-yarKey'
       }

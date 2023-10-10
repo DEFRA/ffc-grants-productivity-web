@@ -100,7 +100,6 @@ describe('Project cost page', () => {
     expect(postResponse.payload).toContain('Enter a whole number in correct format')
   })
 
-
   it('should eliminate user if the cost entered is too low', async () => {
     const postOptions = {
       method: 'POST',

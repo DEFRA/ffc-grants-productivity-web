@@ -21,27 +21,25 @@ describe('Score page', () => {
   }))
 
   const getProdScoringSpy = jest.spyOn(newSender, 'getProdScoring').mockImplementation(() => {
-    Promise.resolve(scoreData);
+    Promise.resolve(scoreData)
   })
   const getDesirabilityAnswersSpy = jest.spyOn(createMsg, 'getDesirabilityAnswers').mockImplementation(() => {
     return {
       test: 'test'
-    };
+    }
   })
 
   beforeEach(async () => {
     jest.mock('../../../../app/messaging')
     jest.mock('../../../../app/messaging/senders')
     jest.mock('ffc-messaging')
-   
   })
 
   afterEach(async () => {
     jest.clearAllMocks()
   })
-  
+
   it('should load page with error score can not get desirability answers', async () => {
-    
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
@@ -49,7 +47,7 @@ describe('Score page', () => {
         referer: `${global.__URLPREFIX__}/robotics/technology`
       }
     }
-    
+
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const header = getCookieHeader(response)
@@ -58,7 +56,6 @@ describe('Score page', () => {
     expect(response.result).toContain(crumCookie[1])
   })
   it('should load page with error score not received after polling scroing service', async () => {
-
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
@@ -76,7 +73,6 @@ describe('Score page', () => {
   })
 
   it('should load page with error unhandled response from scoring service', async () => {
-
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
@@ -119,8 +115,8 @@ describe('Score page', () => {
     }
 
     jest.spyOn(newSender, 'getProdScoring').mockImplementationOnce(() => {
-			throw new Error('can\'t reach')
-		})
+      throw new Error('can\'t reach')
+    })
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
@@ -139,8 +135,8 @@ describe('Score page', () => {
     }
 
     jest.spyOn(newSender, 'getProdScoring').mockImplementationOnce(() => {
-			return null
-		})
+      return null
+    })
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
@@ -159,9 +155,9 @@ describe('Score page', () => {
     }
 
     jest.spyOn(newSender, 'getProdScoring').mockImplementationOnce(() => {
-			// console.log('Spy: STRONG', JSON.stringify(scoreDataRobotics));
-			return scoreDataRobotics;
-		})
+      // console.log('Spy: STRONG', JSON.stringify(scoreDataRobotics));
+      return scoreDataRobotics
+    })
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
@@ -172,7 +168,7 @@ describe('Score page', () => {
     const responseScoreMessage = 'This means your project is likely to be successful.'
     expect(response.payload).toContain(responseScoreMessage)
     expect(getDesirabilityAnswersSpy).toHaveBeenCalledTimes(1)
-		expect(getProdScoringSpy).toHaveBeenCalledTimes(1)
+    expect(getProdScoringSpy).toHaveBeenCalledTimes(1)
   })
   it('should load page with success Robotics Average', async () => {
     const options = {
@@ -185,10 +181,10 @@ describe('Score page', () => {
     scoreDataRobotics.desirability.overallRating.band = 'Average'
 
     jest.spyOn(newSender, 'getProdScoring').mockImplementationOnce(() => {
-			// console.log('Spy: Average', JSON.stringify(scoreDataRobotics));
-			return scoreDataRobotics;
-		})
-    
+      // console.log('Spy: Average', JSON.stringify(scoreDataRobotics));
+      return scoreDataRobotics
+    })
+
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const header = getCookieHeader(response)
@@ -198,7 +194,7 @@ describe('Score page', () => {
     const responseScoreMessage = 'This means your project might be successful.'
     expect(response.payload).toContain(responseScoreMessage)
     expect(getDesirabilityAnswersSpy).toHaveBeenCalledTimes(1)
-		expect(getProdScoringSpy).toHaveBeenCalledTimes(1)
+    expect(getProdScoringSpy).toHaveBeenCalledTimes(1)
   })
   it('should load page with sucess Robotics Weak', async () => {
     const options = {
@@ -211,9 +207,9 @@ describe('Score page', () => {
     scoreDataRobotics.desirability.overallRating.band = 'Weak'
 
     jest.spyOn(newSender, 'getProdScoring').mockImplementationOnce(() => {
-			// console.log('Spy: WEAK', JSON.stringify(scoreDataRobotics));
-			return scoreDataRobotics;
-		})
+      // console.log('Spy: WEAK', JSON.stringify(scoreDataRobotics));
+      return scoreDataRobotics
+    })
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
@@ -224,7 +220,7 @@ describe('Score page', () => {
     const responseScoreMessage = 'This means your project is unlikely to be successful.'
     expect(response.payload).toContain(responseScoreMessage)
     expect(getDesirabilityAnswersSpy).toHaveBeenCalledTimes(1)
-		expect(getProdScoringSpy).toHaveBeenCalledTimes(1)
+    expect(getProdScoringSpy).toHaveBeenCalledTimes(1)
   })
   it('should load page with success Slurry Strong', async () => {
     const options = {
@@ -234,11 +230,11 @@ describe('Score page', () => {
         referer: `${global.__URLPREFIX__}/slurry/slurry-to-be-treated`
       }
     }
-    
+
     jest.spyOn(newSender, 'getProdScoring').mockImplementationOnce(() => {
-			// console.log('Spy: STRONG', JSON.stringify(scoreDataSlurry));
-			return scoreDataSlurry;
-		})
+      // console.log('Spy: STRONG', JSON.stringify(scoreDataSlurry));
+      return scoreDataSlurry
+    })
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
@@ -249,7 +245,7 @@ describe('Score page', () => {
     const responseScoreMessage = 'This means your project is likely to be successful.'
     expect(response.payload).toContain(responseScoreMessage)
     expect(getDesirabilityAnswersSpy).toHaveBeenCalledTimes(1)
-		expect(getProdScoringSpy).toHaveBeenCalledTimes(1)
+    expect(getProdScoringSpy).toHaveBeenCalledTimes(1)
   })
   it('redirects to project business details page', async () => {
     const postOptions = {
@@ -265,5 +261,4 @@ describe('Score page', () => {
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe(`${global.__URLPREFIX__}/business-details`)
   })
-
 })

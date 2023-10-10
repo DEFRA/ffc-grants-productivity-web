@@ -6,7 +6,6 @@ const desirabilitySubmittedSender = new MessageSender(msgCfg.desirabilitySubmitt
 
 async function stop () {
   await desirabilitySubmittedSender.closeConnection()
-
 }
 
 process.on('SIGTERM', async () => {
