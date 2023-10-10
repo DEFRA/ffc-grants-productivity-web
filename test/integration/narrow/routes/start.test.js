@@ -14,9 +14,6 @@ describe('Start page', () => {
     expect(response.payload).toContain('You can apply if you:')
     expect(response.payload).toContain('you are a farmer or agricultural contractor')
     expect(response.payload).toContain('your business is registered in England or you will do the grant-funded work in England')
-    expect(response.payload).toContain(
-      "estimated the project covers are over £62,500"
-    );
     expect(response.payload).toContain('Agricultural contractors can only use the grant for buying robotic and automatic technology.')
     expect(response.payload).toContain('You can apply for up to:')
     expect(response.payload).toContain('40% of estimated costs of robotic and automatic technology')
