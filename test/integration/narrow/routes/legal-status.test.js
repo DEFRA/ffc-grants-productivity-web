@@ -1,14 +1,7 @@
 const { crumbToken } = require('./test-helper')
 const varListTemplate = {
-  farmingType: 'some fake crop',
-  legalStatus: 'fale status',
-  inEngland: 'Yes',
-  projectStarted: 'No',
-  landOwnership: 'Yes',
-  projectItemsList: {
-    projectEquipment: ['Boom', 'Trickle']
-  },
-  projectCost: '12345678'
+  projectSubject: 'Robotics and automatic technology',
+  applicant: 'Farmer'
 }
 let varList
 const mockSession = {
@@ -33,9 +26,7 @@ describe('Legal status page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain(
-      'What is the legal status of the business?'
-    )
+    expect(response.payload).toContain('What is the legal status of the business?')
     expect(response.payload).toContain('Sole trader')
     expect(response.payload).toContain('Partnership')
     expect(response.payload).toContain('Limited company')
@@ -53,10 +44,7 @@ describe('Legal status page', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/legal-status`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: {
-        crumb: crumbToken,
-        legalStatus: 'Limited company'
-      }
+      payload: { crumb: crumbToken, legalStatus: 'Limited company' }
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(302)
@@ -90,23 +78,9 @@ describe('Legal status page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain(
-      'Select the legal status of the business'
-    )
-  })
-  it('page loads with correct back link', async () => {
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/legal-status`
-    }
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain(
-      '<a href="business-location" class="govuk-back-link">Back</a>'
-    )
+    expect(response.payload).toContain('Select the legal status of the business')
   })
   it('page loads with correct back link - if applicant was a farmer', async () => {
-    varList.applicant = 'Farmer'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/legal-status`
@@ -117,4 +91,18 @@ describe('Legal status page', () => {
       '<a href="applicant" class="govuk-back-link">Back</a>'
     )
   })
+  it('page loads with correct back link', async () => {
+    varList.applicant = null,
+    varList.projectSubject = 'Solar PV system'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/legal-status`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain(
+      '<a href="project-subject" class="govuk-back-link">Back</a>'
+    )
+  })
+
 })

@@ -219,7 +219,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['applicant-A1'],
             urlOptions: {
               thenUrl: 'applicant',
-              elseUrl: 'business-location'
+              elseUrl: 'project-subject'
             }
           },
           // if user selects Solar PV system on project-subject page, redirect to /country, otherwise redirect to /planning-permission
@@ -233,7 +233,7 @@ const questionBank = {
           },
           url: 'legal-status',
           baseUrl: 'legal-status',
-          preValidationKeys: ['applicant'],
+          preValidationKeys: ['projectSubject'],
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
