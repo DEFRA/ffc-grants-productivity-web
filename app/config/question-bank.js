@@ -539,7 +539,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
               thenUrl: 'robotics/project-items',
-              elseUrl: 'robotics/project-responsibility'
+              elseUrl: 'project-responsibility'
             }
           },
           hint: {
