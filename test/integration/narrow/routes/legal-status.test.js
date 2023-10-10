@@ -93,7 +93,7 @@ describe('Legal status page', () => {
   })
   it('page loads with correct back link', async () => {
     varList.applicant = null,
-    varList.projectSubject = 'Solar PV system'
+    varList.projectSubject = 'Solar technologies'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/legal-status`
