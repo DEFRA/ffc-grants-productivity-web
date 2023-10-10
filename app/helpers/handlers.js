@@ -247,7 +247,7 @@ const getPage = async (question, request, h) => {
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
     case 'legal-status':
-      if (getYarValue(request, 'projectSubject') === 'Solar PV system') {
+      if (getYarValue(request, 'projectSubject') === 'Solar technologies') {
         setYarValue(request, 'applicant', null)
       }
     default:

@@ -38,7 +38,7 @@ describe('Project subject page', () => {
     expect(response.payload).toContain('The maximum grant amount for both projects together is £500,000.')
     expect(response.payload).toContain('Select one option')
     expect(response.payload).toContain('Robotics and automatic technology')
-    expect(response.payload).toContain('Solar PV system')
+    expect(response.payload).toContain('Solar technologies')
   })
   test('submits form successfully', async () => {
     const options = {
@@ -61,7 +61,7 @@ describe('Project subject page', () => {
       headers: { cookie: 'crumb=' + crumbToken },
       payload: {
         crumb: crumbToken,
-        projectSubject: 'Solar PV system'
+        projectSubject: 'Solar technologies'
       }
     }
     const response = await global.__SERVER__.inject(options)

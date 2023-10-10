@@ -51,7 +51,7 @@ describe('Legal status page', () => {
     expect(response.headers.location).toBe('planning-permission')
   })
   test('redirects to country if user selected solar option on project-subject page', async () => {
-    varList.projectSubject = 'Solar PV system'
+    varList.projectSubject = 'Solar technologies'
     const options = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/legal-status`,
@@ -59,7 +59,7 @@ describe('Legal status page', () => {
       payload: {
         crumb: crumbToken,
         legalStatus: 'Sole trader',
-        projectSubject: 'Solar PV system'
+        projectSubject: 'Solar technologies'
       }
     }
     const response = await global.__SERVER__.inject(options)
@@ -93,7 +93,7 @@ describe('Legal status page', () => {
   })
   it('page loads with correct back link', async () => {
     varList.applicant = null,
-    varList.projectSubject = 'Solar PV system'
+    varList.projectSubject = 'Solar technologies'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/legal-status`
