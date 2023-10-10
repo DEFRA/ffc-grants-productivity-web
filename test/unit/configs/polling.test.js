@@ -20,7 +20,7 @@ describe('polling.js', () => {
       POLLING_RETRIES,
       BACKEND_POLLING_HOST
     } = process.env
-    
+
     expect(value).toEqual({
       interval: Number(POLLING_INTERVAL),
       retries: Number(POLLING_RETRIES),

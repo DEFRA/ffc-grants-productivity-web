@@ -382,7 +382,7 @@ const questionBank = {
           pageTitle: '',
           url: 'planning-permission',
           baseUrl: 'planning-permission',
-          backUrl: 'legal-status',
+          backUrl: 'country',
           nextUrl: 'project-start',
           preValidationKeys: ['legalStatus'],
           ineligibleContent: {
@@ -444,7 +444,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: `Any planning permission must be in place before you submit your full application. The application deadline is 31 April 2024.`
+            messageContent: 'Any planning permission must be in place before you submit your full application. The application deadline is 31 April 2024.'
           }
         },
         {
@@ -670,7 +670,7 @@ const questionBank = {
             dependentQuestionYarKey: ['applicant', 'tenancy'],
             dependentAnswerKeysArray: ['applicant-A2', 'tenancy-A2'],
             urlOptions: {
-              thenUrl: ['/productivity/project-start', '/productivity/tenancy-length' ],
+              thenUrl: ['/productivity/project-start', '/productivity/tenancy-length'],
               elseUrl: '/productivity/tenancy'
             }
           },

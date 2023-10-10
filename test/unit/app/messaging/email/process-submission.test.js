@@ -26,7 +26,7 @@ describe('get processSubmission setup defined', () => {
   test('Should be called', () => {
     expect(processSubmission('', projectDetailsReceiver)).toBeDefined()
   })
-  
+
   test('Should be called with error', async () => {
     await expect(processSubmission(null, projectDetailsReceiver)).rejected
     expect(appInsights.logException).toHaveBeenCalledTimes(1)
