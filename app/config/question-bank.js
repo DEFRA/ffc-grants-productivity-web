@@ -379,7 +379,7 @@ const questionBank = {
           pageTitle: '',
           url: 'planning-permission',
           baseUrl: 'planning-permission',
-          backUrl: 'legal-status',
+          backUrl: 'country',
           nextUrl: 'project-start',
           preValidationKeys: ['legalStatus'],
           ineligibleContent: {
