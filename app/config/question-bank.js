@@ -233,7 +233,7 @@ const questionBank = {
           },
           url: 'legal-status',
           baseUrl: 'legal-status',
-          preValidationKeys: ['projectSubject'],
+          // preValidationKeys: ['projectSubject'],
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -578,6 +578,60 @@ const questionBank = {
             }
           ],
           yarKey: 'tenancy'
+        },
+        // existing-solar
+        {
+          key: 'existing-solar',
+          order: 62,
+          title: 'Does your farm have an existing solar PV system?',
+          pageTitle: '',
+          url: 'solar/existing-solar',
+          baseUrl: 'solar/existing-solar',
+          backUrlObject: {
+            dependentQuestionYarKey: 'tenancy',
+            dependentAnswerKeysArray: ['tenancy-A1'],
+            urlOptions: {
+              thenUrl: '/productivity/tenancy',
+              elseUrl: '/productivity/planning-permission'
+            }
+          },
+          // preValidationKeys: ['tenancy'],
+          nexturl: 'solar-technologies',
+          hint: {
+            html: 'The site where the work will happen'
+          },
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: ' govuk-radios--inline govuk-fieldset__legend--l',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'Applicants who already have a solar PV system can still apply for this grant. For example, you can apply for a battery to support your existing solar PV panels.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if your farm has an existing solar PV system'
+            }
+          ],
+          answers: [
+            {
+              key: 'existing-solar-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'existing-solar-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'existingSolar'
         },
         {
           key: 'project-responsibility',
