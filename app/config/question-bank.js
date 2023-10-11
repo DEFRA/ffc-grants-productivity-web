@@ -106,7 +106,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select what your project is about'
+              error: 'Select what you would like funding for'
             }
           ],
           answers: [
