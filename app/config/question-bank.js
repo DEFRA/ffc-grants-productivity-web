@@ -681,20 +681,25 @@ const questionBank = {
           url: 'solar/solar-technologies',
           baseUrl: 'solar/solar-technologies',
           backUrl: 'existing-solar',
-          preValidationKeys: [],
           nextUrl: 'project-cost',
+          preValidationKeys: [],
+          id: 'solarTechnologies',
+          name: 'solarTechnologies',
           hint: {
-            html: `You can apply for grant funding to:
-            <ul><li>buy a new solar PV system</li>
-            <li>add technology to an existing solar PV system on your farm</li></ul>
-            Select all that apply`
+            html: `
+                    You can apply for grant funding to:
+                    <ul>
+                      <li>buy a new solar PV system</li>
+                      <li>add technology to an existing solar PV system on your farm</li>
+                    </ul>
+                    Select all that apply
+                    `
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
-          classes: ' govuk-radios--inline govuk-fieldset__legend--l',
           validate: [
             {
               type: 'NOT_EMPTY',
@@ -708,7 +713,7 @@ const questionBank = {
             },
             {
               key: 'solar-technologies-A2',
-              value: 'Solar panels'
+              value: 'Solar panels',
             },
             {
               key: 'solar-technologies-A3',
