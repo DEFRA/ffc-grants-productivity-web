@@ -683,14 +683,6 @@ const questionBank = {
           backUrl: 'existing-solar',
           preValidationKeys: [],
           nextUrl: 'project-cost',
-          // dependantNextUrl: {
-          //   dependentQuestionYarKey: 'projectSubject', // TODO
-          //   dependentAnswerKeysArray: ['project-subject-A1'], // TODO
-          //   urlOptions: {
-          //     thenUrl: 'robotics/project-items', // TODO
-          //     elseUrl: 'project-cost' // TODO
-          //   }
-          // },
           hint: {
             html: `You can apply for grant funding to:
             <ul><li>buy a new solar PV system</li>
@@ -701,8 +693,8 @@ const questionBank = {
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-answer',
-          classes: ' govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
+          classes: ' govuk-radios--inline govuk-fieldset__legend--l',
           validate: [
             {
               type: 'NOT_EMPTY',
