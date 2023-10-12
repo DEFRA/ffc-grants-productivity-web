@@ -47,7 +47,7 @@ describe('Page: /project-responsibility', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('existing-solar')
+    expect(postResponse.headers.location).toBe('solar/existing-solar')
   })
 
   it('user selects \'No\' -> store user response and redirect to /existing-solar', async () => {
@@ -60,9 +60,10 @@ describe('Page: /project-responsibility', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('existing-solar')
+    expect(postResponse.headers.location).toBe('solar/existing-solar')
   })
   it('page loads with correct back link', async () => {
+    varList.tenancy ='No'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-responsibility`

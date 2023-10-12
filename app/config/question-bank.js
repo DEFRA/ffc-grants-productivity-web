@@ -463,14 +463,7 @@ const questionBank = {
               elseUrl: '/productivity/planning-permission'
             }
           },
-          dependantNextUrl: {
-            dependentQuestionYarKey: ['applicant', 'projectSubject'],
-            dependentAnswerKeysArray: ['applicant-A1', 'project-subject-A1'],
-            urlOptions: {
-              thenUrl: ['tenancy', 'robotics/project-items'],
-              elseUrl: 'robotics/project-items'
-            }
-          },
+          nextUrl:'tenancy',
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
@@ -536,9 +529,9 @@ const questionBank = {
           preValidationKeys: ['projectStart'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
-            dependentAnswerKeysArray: ['project-subject-A1'],
+            dependentAnswerKeysArray: ['project-subject-A2'],
             urlOptions: {
-              thenUrl: 'robotics/project-items',
+              thenUrl: 'solar/existing-solar',
               elseUrl: 'project-responsibility'
             }
           },
@@ -574,7 +567,7 @@ const questionBank = {
             {
               key: 'tenancy-A2',
               value: 'No',
-              redirectUrl: 'tenancy-length'
+              redirectUrl: 'project-responsibility'
             }
           ],
           yarKey: 'tenancy'
@@ -591,8 +584,8 @@ const questionBank = {
           url: 'project-responsibility',
           baseUrl: 'project-responsibility',
           backUrl: 'tenancy',
-          nextUrl: 'existing-solar',
-          preValidationKeys: ['tenancy'],
+          nextUrl: 'solar/existing-solar',
+          preValidationKeys: [],
           fundingPriorities: '',
           type: 'single-answer',
           minAnswercount: 1,
@@ -627,7 +620,6 @@ const questionBank = {
           ],
           yarKey: 'projectResponsibility'
         },
-        // existing-solar
         {
           key: 'existing-solar',
           order: 62,
@@ -635,6 +627,7 @@ const questionBank = {
           pageTitle: '',
           url: 'solar/existing-solar',
           baseUrl: 'solar/existing-solar',
+          nextUrl: 'solar-technologies',
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
             dependentAnswerKeysArray: ['tenancy-A1'],
@@ -644,7 +637,6 @@ const questionBank = {
             }
           },
           preValidationKeys: [],
-          nexturl: 'solar-technologies',
           hint: {
             html: 'The site where the work will happen'
           },
@@ -681,60 +673,52 @@ const questionBank = {
           ],
           yarKey: 'existingSolar'
         },
-        // upcoming solar-technologies
-        // {
-        //   key: 'solar-technologies',
-        //   order: 62,
-        //   title: 'Does your farm have an existing solar PV system?',
-        //   pageTitle: '',
-        //   url: 'solar/solar-technologies',
-        //   baseUrl: 'solar/solar-technologies',
-        //   backUrlObject: {
-        //     dependentQuestionYarKey: 'tenancy',
-        //     dependentAnswerKeysArray: ['tenancy-A1'],
-        //     urlOptions: {
-        //       thenUrl: '/productivity/tenancy',
-        //       elseUrl: '/productivity/project-responsibility'
-        //     }
-        //   },
-        //   preValidationKeys: [],
-        //   nexturl: 'sds',
-        //   hint: {
-        //     html: 'The site where the work will happen'
-        //   },
-        //   eliminationAnswerKeys: '',
-        //   ineligibleContent: {},
-        //   fundingPriorities: '',
-        //   type: 'single-answer',
-        //   classes: ' govuk-radios--inline govuk-fieldset__legend--l',
-        //   minAnswerCount: 1,
-        //   sidebar: {
-        //     values: [{
-        //       heading: 'Funding priorities',
-        //       content: [{
-        //         para: 'Applicants who already have a solar PV system can still apply for this grant. For example, you can apply for a battery to support your existing solar PV panels.',
-        //         items: []
-        //       }]
-        //     }]
-        //   },
-        //   validate: [
-        //     {
-        //       type: 'NOT_EMPTY',
-        //       error: 'Select if your farm has an existing solar PV system'
-        //     }
-        //   ],
-        //   answers: [
-        //     {
-        //       key: 'existing-solar-A1',
-        //       value: 'Yes'
-        //     },
-        //     {
-        //       key: 'existing-solar-A2',
-        //       value: 'No'
-        //     }
-        //   ],
-        //   yarKey: 'existingSolar'
-        // },
+        {
+          key: 'solar/solar-technologies',
+          order: 62,
+          title: 'What solar technologies does your project need?',
+          pageTitle: '',
+          url: 'solar/solar-technologies',
+          baseUrl: 'solar/solar-technologies',
+          backUrl: 'existing-solar',
+          preValidationKeys: [],
+          nexturl: 'sds',
+          hint: {
+            html: 'The site where the work will happen'
+          },
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: ' govuk-radios--inline govuk-fieldset__legend--l',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'Applicants who already have a solar PV system can still apply for this grant. For example, you can apply for a battery to support your existing solar PV panels.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if your farm has an existing solar PV system'
+            }
+          ],
+          answers: [
+            {
+              key: 'solar-technologies-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'solar-technologies-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'solarTechnologies'
+        },
         {
           key: 'tenancy-length',
           order: 70,
