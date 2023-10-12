@@ -674,48 +674,66 @@ const questionBank = {
           yarKey: 'existingSolar'
         },
         {
-          key: 'solar/solar-technologies',
-          order: 62,
+          key: 'solar-technologies',
+          order: 61,
           title: 'What solar technologies does your project need?',
           pageTitle: '',
           url: 'solar/solar-technologies',
           baseUrl: 'solar/solar-technologies',
           backUrl: 'existing-solar',
           preValidationKeys: [],
-          nexturl: 'sds',
+          nextUrl: 'project-cost',
+          // dependantNextUrl: {
+          //   dependentQuestionYarKey: 'projectSubject', // TODO
+          //   dependentAnswerKeysArray: ['project-subject-A1'], // TODO
+          //   urlOptions: {
+          //     thenUrl: 'robotics/project-items', // TODO
+          //     elseUrl: 'project-cost' // TODO
+          //   }
+          // },
           hint: {
-            html: 'The site where the work will happen'
+            html: `You can apply for grant funding to:
+            <ul><li>buy a new solar PV system</li>
+            <li>add technology to an existing solar PV system on your farm</li></ul>
+            Select all that apply`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
-          type: 'single-answer',
+          type: 'multi-answer',
           classes: ' govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Funding priorities',
-              content: [{
-                para: 'Applicants who already have a solar PV system can still apply for this grant. For example, you can apply for a battery to support your existing solar PV panels.',
-                items: []
-              }]
-            }]
-          },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select if your farm has an existing solar PV system'
+              error: 'Select what solar technologies your project needs'
             }
           ],
           answers: [
             {
               key: 'solar-technologies-A1',
-              value: 'Yes'
+              value: 'An electrical grid connection',
             },
             {
               key: 'solar-technologies-A2',
-              value: 'No'
-            }
+              value: 'Solar panels'
+            },
+            {
+              key: 'solar-technologies-A3',
+              value: 'An inverter',
+            },
+            {
+              key: 'solar-technologies-A4',
+              value: 'A utility meter',
+            },
+            {
+              key: 'solar-technologies-A5',
+              value: 'A battery',
+            },
+            {
+              key: 'solar-technologies-A6',
+              value: 'Limit-loading power diverter to heat or cold store',
+            },
           ],
           yarKey: 'solarTechnologies'
         },

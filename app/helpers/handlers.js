@@ -12,7 +12,7 @@ const { notUniqueSelection, uniqueSelection } = require('../helpers/utils')
 const senders = require('../messaging/senders')
 const createMsg = require('../messaging/create-msg')
 const gapiService = require('../services/gapi-service')
-const { startPageUrl } = require('../config/server')
+const { startPageUrl, urlPrefix } = require('../config/server')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const emailFormatting = require('./../messaging/email/process-submission')
@@ -260,11 +260,23 @@ const getPage = async (question, request, h) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields } = currentQuestion
+  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields, url } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   let thisAnswer
   let dataObject
+
+  switch (url) {
+    case 'solar/solar-technologies':
+      if([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){
+        return h.redirect(`${urlPrefix}/solar/solar-installation`)
+      }else{
+        return h.redirect(`${urlPrefix}/solar/project-cost`)
+      }
+    default:
+      break
+  }
+
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
