@@ -260,22 +260,11 @@ const getPage = async (question, request, h) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields, url } = currentQuestion
+  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   let thisAnswer
   let dataObject
-
-  switch (url) {
-    case 'solar/solar-technologies':
-      if([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){
-        return h.redirect(`${urlPrefix}/solar/solar-installation`)
-      }else{
-        return h.redirect(`${urlPrefix}/solar/project-cost`)
-      }
-    default:
-      break
-  }
 
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
@@ -367,6 +356,18 @@ const showPostPage = (currentQuestion, request, h) => {
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
+  }
+
+  switch (baseUrl) {
+    case 'solar/solar-technologies':
+      console.log('AAAAAA',getYarValue(request, 'solarTechnologies'))
+      if([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){
+        return h.redirect(`${urlPrefix}/solar/solar-installation`)
+      } else {
+        return h.redirect(`${urlPrefix}/solar/project-cost`)
+      }
+    default:
+      break
   }
 
   if (yarKey === 'projectCost') {
