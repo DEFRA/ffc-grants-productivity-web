@@ -682,15 +682,6 @@ const questionBank = {
           baseUrl: 'solar/solar-technologies',
           backUrl: 'existing-solar',
           preValidationKeys: [],
-          nextUrl: 'project-cost',
-          // dependantNextUrl: {
-          //   dependentQuestionYarKey: 'projectSubject', // TODO
-          //   dependentAnswerKeysArray: ['project-subject-A1'], // TODO
-          //   urlOptions: {
-          //     thenUrl: 'robotics/project-items', // TODO
-          //     elseUrl: 'project-cost' // TODO
-          //   }
-          // },
           hint: {
             html: `You can apply for grant funding to:
             <ul><li>buy a new solar PV system</li>
@@ -716,7 +707,7 @@ const questionBank = {
             },
             {
               key: 'solar-technologies-A2',
-              value: 'Solar panels'
+              value: 'Solar panels',
             },
             {
               key: 'solar-technologies-A3',
