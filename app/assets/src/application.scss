@@ -135,3 +135,12 @@ $govuk-assets-path: "~govuk-frontend/govuk/assets/";
 .checkBoxMargin {
   margin-left: -53px;
 }
+
+.govuk-back-link:hover, .govuk-details__summary-text:hover,  .govuk-link:hover {
+  text-decoration-thickness: max(3px, 0.1875rem, 0.12em);
+  -webkit-text-decoration-skip-ink: none;
+  text-decoration-skip-ink: none;
+  -webkit-text-decoration-skip: none;
+  text-decoration-skip: none;
+  color: #003078;
+}
