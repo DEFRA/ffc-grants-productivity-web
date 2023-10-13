@@ -57,23 +57,7 @@ describe('project-start', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('robotics/project-items')
-  })
-
-  it('store user response and redirect to slurry project items page if applicant is Contractor', async () => {
-    varList.projectSubject = 'Slurry Acidification'
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/project-start`,
-      payload: { projectStart: 'Yes, preparatory work', crumb: crumbToken },
-      headers: {
-        cookie: 'crumb=' + crumbToken
-      }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('robotics/project-items')
+    expect(postResponse.headers.location).toBe('tenancy')
   })
 
   it('user selects option 2: <Yes, we have begun project work> -> display ineligible page', async () => {

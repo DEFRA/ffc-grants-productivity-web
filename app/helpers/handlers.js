@@ -12,7 +12,7 @@ const { notUniqueSelection, uniqueSelection } = require('../helpers/utils')
 const senders = require('../messaging/senders')
 const createMsg = require('../messaging/create-msg')
 const gapiService = require('../services/gapi-service')
-const { startPageUrl } = require('../config/server')
+const { startPageUrl, urlPrefix } = require('../config/server')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const emailFormatting = require('./../messaging/email/process-submission')
@@ -265,6 +265,7 @@ const showPostPage = (currentQuestion, request, h) => {
   const payload = request.payload
   let thisAnswer
   let dataObject
+
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
@@ -355,6 +356,17 @@ const showPostPage = (currentQuestion, request, h) => {
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
+  }
+
+  switch (baseUrl) {
+    case 'solar/solar-technologies':
+      if([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){
+        return h.redirect(`${urlPrefix}/solar/solar-installation`)
+      } else {
+        return h.redirect(`${urlPrefix}/solar/project-cost`)
+      }
+    default:
+      break
   }
 
   if (yarKey === 'projectCost') {

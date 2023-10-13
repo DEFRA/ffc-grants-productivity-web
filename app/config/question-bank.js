@@ -233,7 +233,7 @@ const questionBank = {
           },
           url: 'legal-status',
           baseUrl: 'legal-status',
-          preValidationKeys: ['projectSubject'],
+          // preValidationKeys: ['projectSubject'],
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -463,14 +463,7 @@ const questionBank = {
               elseUrl: '/productivity/planning-permission'
             }
           },
-          dependantNextUrl: {
-            dependentQuestionYarKey: ['applicant', 'projectSubject'],
-            dependentAnswerKeysArray: ['applicant-A1', 'project-subject-A1'],
-            urlOptions: {
-              thenUrl: ['tenancy', 'robotics/project-items'],
-              elseUrl: 'robotics/project-items'
-            }
-          },
+          nextUrl:'tenancy',
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
@@ -536,9 +529,9 @@ const questionBank = {
           preValidationKeys: ['projectStart'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
-            dependentAnswerKeysArray: ['project-subject-A1'],
+            dependentAnswerKeysArray: ['project-subject-A2'],
             urlOptions: {
-              thenUrl: 'robotics/project-items',
+              thenUrl: 'solar/existing-solar',
               elseUrl: 'project-responsibility'
             }
           },
@@ -574,7 +567,7 @@ const questionBank = {
             {
               key: 'tenancy-A2',
               value: 'No',
-              redirectUrl: 'tenancy-length'
+              redirectUrl: 'project-responsibility'
             }
           ],
           yarKey: 'tenancy'
@@ -591,8 +584,8 @@ const questionBank = {
           url: 'project-responsibility',
           baseUrl: 'project-responsibility',
           backUrl: 'tenancy',
-          nextUrl: 'existing-solar',
-          preValidationKeys: ['tenancy'],
+          nextUrl: 'solar/existing-solar',
+          preValidationKeys: [],
           fundingPriorities: '',
           type: 'single-answer',
           minAnswercount: 1,
@@ -626,6 +619,120 @@ const questionBank = {
             }
           ],
           yarKey: 'projectResponsibility'
+        },
+        {
+          key: 'existing-solar',
+          order: 62,
+          title: 'Does your farm have an existing solar PV system?',
+          pageTitle: '',
+          url: 'solar/existing-solar',
+          baseUrl: 'solar/existing-solar',
+          nextUrl: 'solar-technologies',
+          backUrlObject: {
+            dependentQuestionYarKey: 'tenancy',
+            dependentAnswerKeysArray: ['tenancy-A1'],
+            urlOptions: {
+              thenUrl: '/productivity/tenancy',
+              elseUrl: '/productivity/project-responsibility'
+            }
+          },
+          preValidationKeys: [],
+          hint: {
+            html: 'The site where the work will happen'
+          },
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: ' govuk-radios--inline govuk-fieldset__legend--l',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'Applicants who already have a solar PV system can still apply for this grant. For example, you can apply for a battery to support your existing solar PV panels.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if your farm has an existing solar PV system'
+            }
+          ],
+          answers: [
+            {
+              key: 'existing-solar-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'existing-solar-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'existingSolar'
+        },
+        {
+          key: 'solar-technologies',
+          order: 61,
+          title: 'What solar technologies does your project need?',
+          pageTitle: '',
+          url: 'solar/solar-technologies',
+          baseUrl: 'solar/solar-technologies',
+          backUrl: 'existing-solar',
+          nextUrl: 'project-cost',
+          preValidationKeys: [],
+          id: 'solarTechnologies',
+          name: 'solarTechnologies',
+          hint: {
+            html: `
+                    You can apply for grant funding to:
+                    <ul>
+                      <li>buy a new solar PV system</li>
+                      <li>add technology to an existing solar PV system on your farm</li>
+                    </ul>
+                    Select all that apply
+                    `
+          },
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what solar technologies your project needs'
+            }
+          ],
+          answers: [
+            {
+              key: 'solar-technologies-A1',
+              value: 'An electrical grid connection',
+            },
+            {
+              key: 'solar-technologies-A2',
+              value: 'Solar panels',
+            },
+            {
+              key: 'solar-technologies-A3',
+              value: 'An inverter',
+            },
+            {
+              key: 'solar-technologies-A4',
+              value: 'A utility meter',
+            },
+            {
+              key: 'solar-technologies-A5',
+              value: 'A battery',
+            },
+            {
+              key: 'solar-technologies-A6',
+              value: 'Limit-loading power diverter to heat or cold store',
+            },
+          ],
+          yarKey: 'solarTechnologies'
         },
         {
           key: 'tenancy-length',
