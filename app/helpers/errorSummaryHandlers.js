@@ -1,6 +1,7 @@
 const { getModel } = require('../helpers/models')
 const { getHtml } = require('../helpers/conditionalHTML')
 const { getYarValue } = require('../helpers/session')
+const { getQuestionAnswer } = require('../helpers/utils')
 
 const validateAnswerField = (value, validationType, details, payload) => {
   switch (validationType) {
@@ -17,6 +18,22 @@ const validateAnswerField = (value, validationType, details, payload) => {
       return extraFieldsToCheck.some(extraField => (
         !!payload[extraField]
       ))
+    }
+
+    case 'STANDALONE_ANSWER': {
+      const selectedAnswer = [value].flat()
+      const {
+        standaloneObject: {
+          questionKey: standaloneQuestionKey,
+          answerKey: standaloneAnswerKey
+        }
+      } = details
+      const standAloneAnswer = getQuestionAnswer(standaloneQuestionKey, standaloneAnswerKey)
+
+      if (selectedAnswer.includes(standAloneAnswer)) {
+        return selectedAnswer.length === 1
+      }
+      return true
     }
 
     case 'REGEX': {

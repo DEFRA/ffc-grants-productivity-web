@@ -735,6 +735,88 @@ const questionBank = {
           yarKey: 'solarTechnologies'
         },
         {
+          key: 'solar-installation',
+          order: 61,
+          title: 'What solar technologies does your project need?',
+          pageTitle: '',
+          url: 'solar/solar-installation',
+          baseUrl: 'solar-installation',
+          backUrl: 'solar-technologies',
+          nextUrl: 'project-cost',
+          preValidationKeys: [],
+          id: 'solarInstallation',
+          name: 'solarInstallation',
+          hint: {
+            text: 'Select all that apply'
+          },
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          ineligibleContent: {
+            messageContent:  `
+                    <div class="govuk-list govuk-list--bullet">
+                    <p class="govuk-body">Solar panels must be installed:</p>
+                          <ul>
+                            <li>on a rooftop</li>
+                            <li>on an existing hardstanding area</li>
+                            <li>floating (on a reservoir)</li>
+                          </ul>
+                    </div>`,
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'Solar panels must be installed:',
+                items: ['on a rooftop', 'on an existing hardstanding area', 'floating (on a reservoir)']
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select where you will instal the solar PV panels'
+            },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'solar-installation',
+                answerKey: 'solar-installation-A4'
+              }
+            }
+          ],
+          answers: [
+            {
+              key: 'solar-installation-A1',
+              value: 'On a rooftop',
+            },
+            {
+              key: 'solar-installation-A2',
+              value: 'On an existing hardstanding area',
+            },
+            {
+              key: 'solar-installation-A3',
+              value: 'Floating (on a a reservoir)',
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'solar-installation-A4',
+              value: 'None of the above',
+              notEligible: true
+            }
+          ],
+          yarKey: 'solarInstallation'
+        },
+        {
           key: 'tenancy-length',
           order: 70,
           title: 'Do you have a tenancy agreement until 2027 or after?',
