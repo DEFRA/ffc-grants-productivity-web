@@ -1,13 +1,9 @@
 const { crumbToken } = require('./test-helper')
 
 const varListTemplate = {
-  farmingType: 'some fake crop',
+  projectSubject: 'Solar technologies',
   legalStatus: 'fale status',
-  projectStarted: 'No',
-  landOwnership: 'Yes',
-  projectItemsList: {
-    projectEquipment: ['Boom', 'Trickle']
-  },
+  solarTechnologies: 'An electrical grid connection',
   projectCost: '12345678'
 }
 
@@ -33,7 +29,7 @@ describe('Project cost page', () => {
   it('should load page successfully', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/robotics/project-cost`
+      url: `${global.__URLPREFIX__}/solar/project-cost`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -42,18 +38,12 @@ describe('Project cost page', () => {
 
   it('should load page successfully if no projectCost', async () => {
     varList = {
-      legalStatus: 'fale status',
-      projectStarted: 'No',
-      landOwnership: 'Yes',
-      projectItemsList: {
-        projectEquipment: ['Boom', 'Trickle']
-      },
       projectCost: undefined
     }
 
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/robotics/project-cost`
+      url: `${global.__URLPREFIX__}/solar/project-cost`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -64,46 +54,46 @@ describe('Project cost page', () => {
     varList['current-score'] = null
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/project-cost`,
+      url: `${global.__URLPREFIX__}/solar/project-cost`,
       payload: { crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter the estimated cost for the items')
+    expect(postResponse.payload).toContain('Enter the total estimated cost for the items')
   })
 
   it('should return an error message if a string is typed in', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/project-cost`,
+      url: `${global.__URLPREFIX__}/solar/project-cost`,
       payload: { projectCost: '1234s6', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter a whole number in correct format')
+    expect(postResponse.payload).toContain('Enter a whole number with a maximum of 7 digits')
   })
 
   it('should return an error message if number contains a space', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/project-cost`,
+      url: `${global.__URLPREFIX__}/solar/project-cost`,
       payload: { projectCost: '1234 6', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter a whole number in correct format')
+    expect(postResponse.payload).toContain('Enter a whole number with a maximum of 7 digits')
   })
 
   it('should eliminate user if the cost entered is too low', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/project-cost`,
+      url: `${global.__URLPREFIX__}/solar/project-cost`,
       payload: { projectCost: '12', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
@@ -116,7 +106,7 @@ describe('Project cost page', () => {
   it('should redirected to the Potential funding page if the cost entered is too high', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/project-cost`,
+      url: `${global.__URLPREFIX__}/solar/project-cost`,
       payload: { projectCost: '9999999', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
@@ -130,7 +120,7 @@ describe('Project cost page', () => {
   it('should store valid user input and redirect to potential-amount page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/project-cost`,
+      url: `${global.__URLPREFIX__}/solar/project-cost`,
       payload: { projectCost: '1234567', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
@@ -139,4 +129,27 @@ describe('Project cost page', () => {
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('potential-amount')
   })
+
+it('page loads with correct back link', async () => {
+    const options = {
+        method: 'GET',
+        url: `${global.__URLPREFIX__}/solar/project-cost`
+    }
+
+const response = await global.__SERVER__.inject(options)
+expect(response.statusCode).toBe(200)
+expect(response.payload).toContain('<a href=\"solar-technologies\" class=\"govuk-back-link\">Back</a>')
+})
+it('page loads with correct back link when solar technologies is /Solar panels/ ', async () => {
+  varList.solarTechnologies = 'Solar panels'
+  varList.solarInstallation = 'On an existing hardstanding area'
+  const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/solar/project-cost`
+  }
+
+const response = await global.__SERVER__.inject(options)
+expect(response.statusCode).toBe(200)
+expect(response.payload).toContain('<a href=\"solar-installation\" class=\"govuk-back-link\">Back</a>')
+})
 })
