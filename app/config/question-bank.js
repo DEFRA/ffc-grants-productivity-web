@@ -740,7 +740,7 @@ const questionBank = {
           title: 'What solar technologies does your project need?',
           pageTitle: '',
           url: 'solar/solar-installation',
-          baseUrl: 'solar/solar-installation',
+          baseUrl: 'solar-installation',
           backUrl: 'solar-technologies',
           nextUrl: 'project-cost',
           preValidationKeys: [],
