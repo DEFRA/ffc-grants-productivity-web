@@ -544,7 +544,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The land must be owned or have a tenancy in place until 2027 before starting the project.',
+                para: 'If you are a tenant farmer, you will have the option to ask your landlord to underwrite your agreement.',
                 items: []
               }]
             }]
@@ -552,7 +552,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the planned project is on land the farm business owns'
+              error: 'Select if the planned project is on land the business owns'
             }
           ],
           answers: [
