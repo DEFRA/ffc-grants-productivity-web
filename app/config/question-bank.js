@@ -93,9 +93,8 @@ const questionBank = {
           ga: [{ journeyStart: true }],
           hint: {
             html: `
-              If you want to apply for funding for both a robotics and a solar project, you must submit 2 separate applications.
+              If you want to apply for funding for both a robotics and a solar project, you must submit 2 separate applications. The maximum grant amount for both projects together is £500,000.
               <br/>
-              The maximum grant amount for both projects together is £500,000.
               <br/>
               Select one option
             `
