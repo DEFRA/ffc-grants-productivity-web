@@ -818,7 +818,7 @@ const questionBank = {
           title: 'Will you use most of the energy produced by solar on your farm?',
           pageTitle: '',
           url: 'solar/solar-usage',
-          baseUrl: 'solar/solar-usage',
+          baseUrl: 'solar-usage',
           backUrl: 'remaining-costs',
           preValidationKeys: [],
           nextUrl: 'solar-size',
