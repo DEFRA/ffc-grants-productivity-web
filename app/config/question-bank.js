@@ -908,6 +908,74 @@ const questionBank = {
           }
         },
         {
+          key: 'remaining-costs',
+          order: 240,
+          title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
+          pageTitle: '',
+          url: 'solar/remaining-costs',
+          baseUrl: 'remaining-costs',
+          backUrl: 'potential-amount',
+          nextUrl: 'solar-usage',
+          preValidationKeys: ['projectCost'],
+          ineligibleContent: {
+            messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
+            insertText: {
+              html: `
+                  <p>You can use:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>loans</li>
+                    <li>overdrafts</li>
+                    <li>the Basic Payment Scheme</li>
+                  </ul>
+            </span>`
+            },
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.
+                  
+                  You can use:`,
+                  items: [
+                    'loans',
+                    'overdrafts',
+                    'the Basic Payment Scheme'
+                  ]
+                }]
+              }
+            ]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you can pay the remaining costs'
+            }
+          ],
+          answers: [
+            {
+              key: 'remaining-costs-A1',
+              value: 'Yes'
+
+            },
+            {
+              key: 'remaining-costs-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'remainingCosts'
+        },
+        {
           key: 'tenancy-length',
           order: 70,
           title: 'Do you have a tenancy agreement until 2027 or after?',
