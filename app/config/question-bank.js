@@ -7,6 +7,7 @@ const {
   POSTCODE_REGEX,
   WHOLE_NUMBER_REGEX,
   NUMBER_REGEX,
+  PROJECT_COST_REGEX,
   SBI_REGEX,
   NAME_ONLY_REGEX,
   PHONE_REGEX,
@@ -15,6 +16,11 @@ const {
 
 const { LIST_COUNTIES } = require('../helpers/all-counties')
 
+const {
+  MIN_GRANT,
+  MAX_GRANT,
+  GRANT_PERCENTAGE
+} = require('../helpers/grant-details')
 require('dotenv').config()
 
 /**
@@ -811,6 +817,78 @@ const questionBank = {
             }
           ],
           yarKey: 'solarInstallation'
+        },
+        {
+          key: 'project-cost',
+          order: 65,
+          pageTitle: '',
+          classes: 'govuk-input--width-10',
+          url: 'solar/project-cost',
+          baseUrl: 'project-cost',
+          backUrlObject: {
+            dependentQuestionYarKey: 'solarTechnologies',
+            dependentAnswerKeysArray: ['solar-technologies-A2'],
+            urlOptions: {
+              thenUrl: 'solar-installation',
+              elseUrl: 'solar-technologies'
+            }
+          },
+          nextUrl: 'potential-amount',
+          fundingPriorities: '',
+          preValidationKeys: ['solarTechnologies'],
+          grantInfo: {
+            minGrant: MIN_GRANT,
+            maxGrant: MAX_GRANT,
+            grantPercentage: GRANT_PERCENTAGE,
+            cappedGrant: true
+          },
+          type: 'input',
+          prefix: {
+            text: '£'
+          },
+          id: 'projectCost',
+          label: {
+            text: 'What is the total estimated cost of the solar PV system?',
+            classes: 'govuk-label--l',
+            isPageHeading: true,
+            for: 'projectCost'
+          },
+          hint: {
+            html: `
+                  <p>You can only apply for a grant of up to 25% of the estimated costs. The 
+                  minimum grant you can apply for this project is £15,000 (25% of £60,000). 
+                  The maximum grant is £100,000 (25% of £400,000).<p/>
+                  <p>Do not include VAT<p/>
+                  <p>Enter amount, for example 95,000<p/>
+              `
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter the total estimated cost for the items'
+            },
+            {
+              type: 'REGEX',
+              regex: PROJECT_COST_REGEX,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            },
+            {
+              type: 'MIN_MAX_CHARS',
+              min: 1,
+              max: 7,
+              error: 'Enter a whole number with a maximum of 7 digits'
+            }
+          ],
+          ineligibleContent: {
+            messageContent: 'You can only apply for a grant of up to 25% of the estimated costs.',
+            insertText: { text: 'The minimum grant you can apply for is £15,000 (25% of £60,000). The maximum grant is £100,000 (25% of £400,000).' },
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          answers: [],
+          yarKey: 'projectCost'
         },
         {
           key: 'tenancy-length',
