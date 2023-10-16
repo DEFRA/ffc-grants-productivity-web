@@ -891,6 +891,23 @@ const questionBank = {
           yarKey: 'projectCost'
         },
         {
+          key: 'solar-potential-amount',
+          order: 230,
+          url: 'solar/potential-amount',
+          baseUrl: 'potential-amount',
+          backUrl: 'project-cost',
+          nextUrl: 'remaining-costs',
+          preValidationKeys: ['projectCost'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: 'You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.',
+            warning: {
+              text: 'There’s no guarantee the project will receive a grant.'
+            }
+          }
+        },
+        {
           key: 'tenancy-length',
           order: 70,
           title: 'Do you have a tenancy agreement until 2027 or after?',
