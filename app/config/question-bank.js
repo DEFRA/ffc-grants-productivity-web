@@ -534,9 +534,8 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A2'],
             urlOptions: {
               thenUrl: 'solar/existing-solar',
-              elseUrl: 'robotics/project-items'
-            },
-            elseUrl: 'project-responsibility',
+              elseUrl: 'project-responsibility'
+            }
           },
           hint: {
             html: 'The site where the work will happen'
@@ -994,15 +993,8 @@ const questionBank = {
           title: 'Which items does your project need?',
           pageTitle: '',
           url: 'robotics/project-items',
-          baseUrl: 'robotics-project-items',
-          backUrlObject: {
-            dependentQuestionYarKey: ['applicant', 'tenancy'],
-            dependentAnswerKeysArray: ['applicant-A2', 'tenancy-A2'],
-            urlOptions: {
-              thenUrl: ['/productivity/project-start', '/productivity/tenancy-length'],
-              elseUrl: '/productivity/tenancy'
-            }
-          },
+          baseUrl: 'project-items',
+          backUrl: 'tenancy',
           preValidationKeys: ['projectStart'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
