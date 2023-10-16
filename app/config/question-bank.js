@@ -534,8 +534,9 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A2'],
             urlOptions: {
               thenUrl: 'solar/existing-solar',
-              elseUrl: 'project-responsibility'
-            }
+              elseUrl: 'robotics/project-items'
+            },
+            elseUrl: 'project-responsibility',
           },
           hint: {
             html: 'The site where the work will happen'
