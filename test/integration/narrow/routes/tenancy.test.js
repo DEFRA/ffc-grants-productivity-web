@@ -39,7 +39,7 @@ describe('Page: /tenancy', () => {
     expect(postResponse.payload).toContain('Select if the planned project is on land the business owns')
   })
 
-  it('user selects \'Yes\' -> store user response and redirect to /project', async () => {
+  it('user selects \'Yes\' -> store user response and redirect to /robotics/project-items', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tenancy`,
@@ -49,7 +49,7 @@ describe('Page: /tenancy', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('project-responsibility')
+    expect(postResponse.headers.location).toBe('robotics/project-items')
   })
 
   it('user selects \'No\' -> store user response and redirect to /project-responsibility', async () => {
