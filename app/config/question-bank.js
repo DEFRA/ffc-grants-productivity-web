@@ -819,6 +819,49 @@ const questionBank = {
           yarKey: 'solarInstallation'
         },
         {
+          key: 'solar-usage',
+          order: 63,
+          title: 'Will you use most of the energy produced by solar on your farm?',
+          pageTitle: '',
+          url: 'solar/solar-usage',
+          baseUrl: 'solar-usage',
+          backUrl: 'remaining-costs',
+          preValidationKeys: [],
+          nextUrl: 'solar-size',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA wants to fund projects that improve the environment.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if you will use most of the energy produced on your farm'
+            }
+          ],
+          answers: [
+            {
+              key: 'solar-usage-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'solar-usage-A2',
+              value: 'No',
+            }
+          ],
+          yarKey: 'solarUsage'
+        },
+        {
           key: 'project-cost',
           order: 65,
           pageTitle: '',
