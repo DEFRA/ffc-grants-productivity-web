@@ -2,15 +2,15 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /project-responsibility', () => {
   const varList = {
-    projectSubject: 'Solar technologies',
-    tenancy: 'No'
+    projectSubject: 'randomData',
+    tenancy: 'data'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
       if (varList[key]) return varList[key]
-      else return 'Error'
+      else return null
     }
   }))
 
@@ -41,20 +41,22 @@ describe('Page: /project-responsibility', () => {
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /existing-solar', async () => {
-      varList.projectSubject = 'Solar technologies'
+    varList.projectSubject = 'Solar technologies'
+    varList.tenancy = 'Yes'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-responsibility`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { projectResponsibility: 'Yes, I plan to take full responsibility for my project', crumb: crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('solar/existing-solar')
   })
 
   it('user selects \'No\' -> store user response and redirect to /existing-solar', async () => {
+    varList.tenancy = 'No'
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-responsibility`,
@@ -68,7 +70,7 @@ describe('Page: /project-responsibility', () => {
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /existing-solar', async () => {
-    varList.projectSubject = 'Robotics and automatic technology'
+  varList.projectSubject = 'Robotics and automatic technology'
   const postOptions = {
     method: 'POST',
     url: `${global.__URLPREFIX__}/project-responsibility`,
@@ -78,10 +80,11 @@ describe('Page: /project-responsibility', () => {
 
   const postResponse = await global.__SERVER__.inject(postOptions)
   expect(postResponse.statusCode).toBe(302)
-  expect(postResponse.headers.location).toBe('solar/existing-solar')
+  expect(postResponse.headers.location).toBe('project-items')
 })
 
 it('user selects \'No\' -> store user response and redirect to /existing-solar', async () => {
+  varList.projectSubject = 'Robotics and automatic technology'
   const postOptions = {
     method: 'POST',
     url: `${global.__URLPREFIX__}/project-responsibility`,
@@ -91,7 +94,7 @@ it('user selects \'No\' -> store user response and redirect to /existing-solar',
 
   const postResponse = await global.__SERVER__.inject(postOptions)
   expect(postResponse.statusCode).toBe(302)
-  expect(postResponse.headers.location).toBe('solar/existing-solar')
+  expect(postResponse.headers.location).toBe('project-items')
 })
   it('page loads with correct back link', async () => {
     const options = {
