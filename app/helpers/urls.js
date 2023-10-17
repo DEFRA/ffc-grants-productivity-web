@@ -16,6 +16,13 @@ const getUrl = (urlObject, url, request, secBtn) => {
   thenUrl = [thenUrl].flat()
   let selectThenUrl
   let thenUrlIndex = -1
+
+  if(getYarValue(request, 'projectSubject') === 'Robotics and automatic technology') {
+    if(getYarValue(request, 'tenancy') === 'Yes' && elseUrl === 'project-responsibility') {
+      elseUrl = 'robotics/project-items'
+    }
+  }
+
   dependentQuestionYarKeys.every((dependantYarKey, index) => {
     const selectedAnswer = getYarValue(request, dependantYarKey)
     if (selectedAnswer !== null) {

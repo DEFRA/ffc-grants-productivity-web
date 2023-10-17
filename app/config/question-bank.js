@@ -550,7 +550,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'The land must be owned or have a tenancy in place until 2027 before starting the project.',
+                para: 'If you are a tenant farmer, you will have the option to ask your landlord to underwrite your agreement.',
                 items: []
               }]
             }]
@@ -558,7 +558,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if the planned project is on land the farm business owns'
+              error: 'Select if the planned project is on land the business owns'
             }
           ],
           answers: [
@@ -819,6 +819,49 @@ const questionBank = {
           yarKey: 'solarInstallation'
         },
         {
+          key: 'solar-usage',
+          order: 63,
+          title: 'Will you use most of the energy produced by solar on your farm?',
+          pageTitle: '',
+          url: 'solar/solar-usage',
+          baseUrl: 'solar-usage',
+          backUrl: 'remaining-costs',
+          preValidationKeys: [],
+          nextUrl: 'solar-size',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA wants to fund projects that improve the environment.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if you will use most of the energy produced on your farm'
+            }
+          ],
+          answers: [
+            {
+              key: 'solar-usage-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'solar-usage-A2',
+              value: 'No',
+            }
+          ],
+          yarKey: 'solarUsage'
+        },
+        {
           key: 'project-cost',
           order: 65,
           pageTitle: '',
@@ -1061,15 +1104,8 @@ const questionBank = {
           title: 'Which items does your project need?',
           pageTitle: '',
           url: 'robotics/project-items',
-          baseUrl: 'robotics-project-items',
-          backUrlObject: {
-            dependentQuestionYarKey: ['applicant', 'tenancy'],
-            dependentAnswerKeysArray: ['applicant-A2', 'tenancy-A2'],
-            urlOptions: {
-              thenUrl: ['/productivity/project-start', '/productivity/tenancy-length'],
-              elseUrl: '/productivity/tenancy'
-            }
-          },
+          baseUrl: 'project-items',
+          backUrl: 'tenancy',
           preValidationKeys: ['projectStart'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
