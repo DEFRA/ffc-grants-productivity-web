@@ -2,6 +2,18 @@ const { crumbToken } = require('./test-helper')
 
 describe('Robotics project items page', () => {
   it('should returns error message if no option is selected', async () => {
+    const varList = {
+      tenancy: null,
+      projectSubject: 'Robotics and automatic technology'
+    }
+  
+    jest.mock('../../../../app/helpers/session', () => ({
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return undefined
+      }
+    }))
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-items`,
@@ -51,7 +63,6 @@ describe('Robotics project items page', () => {
 
   it('page loads with correct back link', async () => {
     varList.tenancy = 'No'
-    varList.projectSubject = 'Robotics and automatic technology'
 
     const options = {
       method: 'GET',
@@ -63,7 +74,6 @@ describe('Robotics project items page', () => {
   })
   it('page loads with correct back link', async () => {
     varList.tenancy = 'Yes'
-    varList.projectSubject = 'Robotics and automatic technology'
 
     const options = {
       method: 'GET',
