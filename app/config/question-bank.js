@@ -1167,7 +1167,7 @@ const questionBank = {
         },
         {
           key: 'robotic-equipment-items',
-          order: 300,
+          order: 310,
           title: 'Which robotic items does your project need?',
           pageTitle: '',
           url: 'robotic-equipment-items',
@@ -1240,6 +1240,69 @@ const questionBank = {
             }
           ],
           yarKey: 'projectItemEquipments'
+        },
+        {
+          key: 'robotic-automatic',
+          order: 320,
+          title: 'Is the {{_projectItemEquipments_}} robotic or automatic?',
+          pageTitle: '',
+          url: 'robotic-automatic',
+          baseUrl: 'robotic-automatic',
+          preValidationKeys: ['projectItemEquipments'],
+          backUrl: 'robotic-equipment-items',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectSubject',
+            dependentAnswerKeysArray: ['project-subject-A1'],
+            urlOptions: {
+              thenUrl: 'robotics/project-items',
+              elseUrl: 'robotics/project-items'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          id: 'roboticAutomatic',
+          hint: {
+            html: 
+            ` <div id="roboticAutomatic" class="govuk-hint">
+                <p class="govuk-body">To be eligible, your robotic technology must:</P>
+                  <ul>
+                    <li>have a sensing system and can understand its environment</li>
+                    <li>make decisions and plan</li>
+                    <li>be able to control its actuators (the devices that move robot joints)</li>
+                    <li>work in a continuous loop</li>
+                  <ul>
+              </div>
+            `
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `There are 4 eligibility criteria for grant funding.</br></br>
+                        Robotic items must meet all 4 criteria to be eligible.<br/><br/>
+                        Automatic items must meet at least 2 criteria to be eligible. `
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select the option that applies to your project'
+            }
+          ],
+          answers: [
+            {
+              key: 'project-start-A1',
+              value: 'Robotic'
+            },
+            {
+              key: 'project-start-A2',
+              value: 'Automatic'
+            }
+          ],
+          yarKey: 'roboticAutomatic'
         },
         {
           key: 'other-robotic-equipment',
@@ -2913,7 +2976,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost', 'roboticEquipment']
+const YAR_KEYS = ['projectPostcode', 'remainingCost', 'roboticEquipment', 'projectItemEquipments']
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,
