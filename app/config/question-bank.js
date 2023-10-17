@@ -518,7 +518,6 @@ const questionBank = {
             iconFallbackText: 'Warning'
           },
           yarKey: 'projectStart'
-
         },
         {
           key: 'tenancy',
@@ -1171,51 +1170,53 @@ const questionBank = {
           order: 300,
           title: 'Which robotic items does your project need?',
           pageTitle: '',
-          url: 'robotics/robotic-equipment-items',
+          url: 'robotic-equipment-items',
           baseUrl: 'robotic-equipment-items',
           backUrl: 'project-items',
           preValidationKeys: ['projectItems'],
-          dependantNextUrl: {
-            dependentQuestionYarKey: 'roboticsProjectItemEquipments',
-            dependentAnswerKeysArray: ['robotic-equipment-items-A8'],
-            urlOptions: {
-              thenUrl: 'other-robotic-equipment',
-              elseUrl: 'project-cost'
-            }
-          },
-          id: 'roboticsProjectItemEquipments',
-          name: 'roboticsProjectItemEquipments',
+          nextUrl: 'robotic-automatic',
+          id: 'projectItemEquipments',
+          name: 'projectItemEquipments',
           hint: {
-            html: `Farming equipment capable of sensing and understanding its environment, making decisions, and planning and controlling its actions in a continuous loop. 
-              <br /><br />
-              Select all the items your project needs`
+            html: `Technology powered by fossil fuels will only be funded where there is no 
+                    commercially available electric or renewable energy alternative.<br/><br/>
+                    If you need multiple items, you can add another item later in the checker.`
           },
           eliminationAnswerKeys: '',
           fundingPriorities: '',
-          type: 'multi-answer',
+          type: 'single-answer',
           minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'RPA will consider items that:',
+                items: ['have a sensing system and can understand their environment', 'make decisions and plans', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop']
+              }]
+            }]
+          },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select all the robotic equipment items your project needs'
+              error: 'Select what robotic or automatic technology your project needs'
             }
           ],
           answers: [
             {
               key: 'robotic-equipment-items-A1',
-              value: 'Robotic harvesting equipment'
+              value: 'Harvesting technology'
             },
             {
               key: 'robotic-equipment-items-A2',
-              value: 'Robotic weeding equipment'
+              value: 'Weeding technology'
             },
             {
               key: 'robotic-equipment-items-A3',
-              value: 'Robotic spraying equipment'
+              value: 'Spraying technology'
             },
             {
               key: 'robotic-equipment-items-A4',
-              value: 'Autonomous driverless tractors or platforms'
+              value: 'Driverless tractor'
             },
             {
               key: 'robotic-equipment-items-A5',
@@ -1223,18 +1224,22 @@ const questionBank = {
             },
             {
               key: 'robotic-equipment-items-A6',
-              value: 'Robotic feeding system'
+              value: 'Feeding system'
             },
             {
               key: 'robotic-equipment-items-A7',
-              value: 'Robotic transplanting'
+              value: 'Transplanting technology'
             },
             {
               key: 'robotic-equipment-items-A8',
-              value: 'Other autonomous robotic technology'
+              value: 'Slurry and manure management'
+            },
+            {
+              key: 'robotic-equipment-items-A9',
+              value: 'Other robotics or automatic technology'
             }
           ],
-          yarKey: 'roboticsProjectItemEquipments'
+          yarKey: 'projectItemEquipments'
         },
         {
           key: 'other-robotic-equipment',
@@ -1307,7 +1312,7 @@ const questionBank = {
               notEligible: true,
               alsoMaybeEligible: {
                 dependentQuestionKey: 'robotic-equipment-items',
-                dependentQuestionYarKey: 'roboticsProjectItemEquipments',
+                dependentQuestionYarKey: 'projectItemEquipments',
                 notUniqueAnswer: 'robotic-equipment-items-A8',
                 maybeEligibleContent: {
                   nextUrl: 'project-cost',
@@ -1355,7 +1360,7 @@ const questionBank = {
           url: 'robotics/project-cost',
           baseUrl: 'project-cost',
           backUrlObject: {
-            dependentQuestionYarKey: ['roboticsProjectItemEquipments', 'projectItems'],
+            dependentQuestionYarKey: ['projectItemEquipments', 'projectItems'],
             dependentAnswerKeysArray: ['robotic-equipment-items-A8', 'robotics-project-items-A3'],
             urlOptions: {
               thenUrl: ['/productivity/robotics/other-robotic-equipment', '/productivity/robotics/robotic-equipment-items'],
@@ -1416,7 +1421,7 @@ const questionBank = {
                 }]
               }
             ],
-            dependentYarKeys: ['projectItems', 'roboticsProjectItemEquipments'],
+            dependentYarKeys: ['projectItems', 'projectItemEquipments'],
             dependentQuestionKeys: ['robotics-project-items', 'robotic-equipment-items']
           },
           validate: [
@@ -1531,7 +1536,7 @@ const questionBank = {
             { dimension: 'cm2', value: { type: 'journey-time' } }
           ],
           dependantNextUrl: {
-            dependentQuestionYarKey: 'roboticsProjectItemEquipments',
+            dependentQuestionYarKey: 'projectItemEquipments',
             dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A2', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7', 'robotic-equipment-items-A8'],
             urlOptions: {
               thenUrl: 'data-analytics',
@@ -1652,7 +1657,7 @@ const questionBank = {
           baseUrl: 'energy-source',
           preValidationKeys: ['projectImpact'],
           backUrlObject: {
-            dependentQuestionYarKey: 'roboticsProjectItemEquipments',
+            dependentQuestionYarKey: 'projectItemEquipments',
             dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A2', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7', 'robotic-equipment-items-A8'],
             urlOptions: {
               thenUrl: 'data-analytics',

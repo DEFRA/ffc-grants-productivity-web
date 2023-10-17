@@ -114,7 +114,7 @@ describe('other Robotics Equipment', () => {
   })
 
   it('should display equipment ineligible conditional page when user response is \'No\' and user has also selected other eligible option', async () => {
-    varList.roboticsProjectItemEquipments = ['Advanced ventilation control units', 'Robotic weeding equipment', 'Other robotic equipment']
+    varList.projectItemEquipments = ['Advanced ventilation control units', 'Robotic weeding equipment', 'Other robotic equipment']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/other-robotic-equipment`,

@@ -1,7 +1,7 @@
 const { crumbToken } = require('./test-helper')
 const varListTemplate = {
   projectItems: ['Robotic equipment item', 'Advanced ventilation control units'],
-  roboticsProjectItemEquipments: ['Autonomous driverless tractors or platforms', 'Other robotic equipment']
+  projectItemEquipments: ['Autonomous driverless tractors or platforms', 'Other robotic equipment']
 }
 
 let varList

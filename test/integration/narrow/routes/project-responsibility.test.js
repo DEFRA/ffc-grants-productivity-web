@@ -43,6 +43,11 @@ describe('Page: /project-responsibility', () => {
   it('user selects \'Yes\' -> store user response and redirect to /existing-solar', async () => {
     varList.projectSubject = 'Solar technologies'
     varList.tenancy = 'Yes'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-responsibility`
+    }
+    await global.__SERVER__.inject(options)
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-responsibility`,
