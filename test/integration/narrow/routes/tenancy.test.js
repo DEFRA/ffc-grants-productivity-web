@@ -2,7 +2,8 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /tenancy', () => {
   const varList = {
-    tenancy: 'randomData'
+    tenancy: 'randomData',
+    projectSubject: 'randomData'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -40,6 +41,8 @@ describe('Page: /tenancy', () => {
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /robotics/project-items', async () => {
+    varList.tenancy = 'Yes'
+    varList.projectSubject = 'Robotics and automatic technology'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tenancy`,
@@ -50,6 +53,21 @@ describe('Page: /tenancy', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('robotics/project-items')
+  })
+
+  it('user selects \'Yes\' -> store user response and redirect to /solar/existing-solar', async () => {
+    varList.tenancy = 'Yes'
+    varList.projectSubject = 'Solar technologies'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/tenancy`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { tenancy: 'Yes', crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('solar/existing-solar')
   })
 
   it('user selects \'No\' -> store user response and redirect to /project-responsibility', async () => {
