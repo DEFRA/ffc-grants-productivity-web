@@ -52,7 +52,7 @@ describe('Page: /tenancy', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('robotics/project-items')
+    expect(postResponse.headers.location).toBe('project-items')
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /solar/existing-solar', async () => {

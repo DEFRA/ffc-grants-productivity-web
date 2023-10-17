@@ -586,7 +586,14 @@ const questionBank = {
           url: 'project-responsibility',
           baseUrl: 'project-responsibility',
           backUrl: 'tenancy',
-          nextUrl: 'solar/existing-solar',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectSubject',
+            dependentAnswerKeysArray: ['projectSubject-A2'],
+            urlOptions: {
+              thenUrl: 'solar/existing-solar',
+              elseUrl: 'project-items'
+            }
+          },
           preValidationKeys: [],
           fundingPriorities: '',
           type: 'single-answer',
@@ -1103,9 +1110,16 @@ const questionBank = {
           order: 300,
           title: 'Which items does your project need?',
           pageTitle: '',
-          url: 'robotics/project-items',
+          url: 'project-items',
           baseUrl: 'project-items',
-          backUrl: 'tenancy',
+          backUrlObject: {
+            dependentQuestionYarKey: 'tenancy',
+            dependentAnswerKeysArray: ['tenancy-A1'],
+            urlOptions: {
+              thenUrl: 'tenancy',
+              elseUrl: 'project-responsibility'
+            }
+          },
           preValidationKeys: ['projectStart'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
@@ -1127,7 +1141,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select all the items your project needs'
+              error: 'Select which items your project needs'
             }
           ],
           answers: [

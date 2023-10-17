@@ -19,7 +19,7 @@ const getUrl = (urlObject, url, request, secBtn) => {
 
   if(getYarValue(request, 'projectSubject') === 'Robotics and automatic technology') {
     if(getYarValue(request, 'tenancy') === 'Yes' && elseUrl === 'project-responsibility') {
-      elseUrl = 'robotics/project-items'
+      elseUrl = 'project-items'
     }
   }
 
