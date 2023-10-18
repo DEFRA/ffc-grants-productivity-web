@@ -1345,7 +1345,8 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter a project name'
+                  error: 'Enter a project name',
+                  for: 'brand'
                 }
               ]
             },
@@ -1355,10 +1356,11 @@ const questionBank = {
               classes: 'govuk-input--width-10',
               label: {
                 text: 'Model',
-                classes: 'govuk-label'
+                classes: 'govuk-label',
+                for: 'model'
               },
-              id: "Model",
-              name: "Model",
+              id: "model",
+              name: "model",
               validate: [
                 {
                   type: 'NOT_EMPTY',
