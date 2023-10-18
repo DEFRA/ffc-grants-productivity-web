@@ -1331,6 +1331,23 @@ const questionBank = {
             }]
           },
           type: 'multi-input',
+          // validate: [
+          //   {
+          //     type: 'NOT_EMPTY',
+          //     error: 'Select yes if your other robotic equipment meets the eligibility criteria'
+          //   },
+          //   {
+          //     dependentKey: 'roboticTechnology',
+          //     type: 'NOT_EMPTY',
+          //     error: 'Describe your other robotic equipment'
+          //   },
+          //   {
+          //     dependentKey: 'roboticTechnology',
+          //     type: 'REGEX',
+          //     regex: CHARS_MAX_250,
+          //     error: 'Description must be 250 characters or fewer and use letters, numbers and punctuation'
+          //   }
+          // ],
           allFields: [
             {
               yarKey: 'brand',
@@ -1367,35 +1384,11 @@ const questionBank = {
                   error: 'Enter a project name'
                 }
               ]
-            },
-            // {
-            //   yarKey: 'description',
-            //   type: 'textarea',
-            //   label: {
-            //     text: 'Project name',
-            //     classes: 'govuk-input'
-            //   },
-            //   hint: {
-            //     text: ''
-            //   },
-            //   validate: [
-            //     {
-            //       type: 'NOT_EMPTY',
-            //       error: 'Select yes if your other robotic equipment meets the eligibility criteria'
-            //     },
-            //     {
-            //       type: 'NOT_EMPTY',
-            //       error: 'Describe your other robotic equipment'
-            //     },
-            //     {
-            //       type: 'REGEX',
-            //       regex: CHARS_MAX_250,
-            //       error: 'Description must be 250 characters or fewer and use letters, numbers and punctuation'
-            //     }
-            //   ]
-            // }
+            }
           ],
-          yarKey: 'otherRoboticTechnology'
+          yarKey: 'otherRoboticTechnology',
+          conditionalKey: 'roboticTechnology',
+          conditionalLabelData: 'Enter your item, including the name, a brief description and benefit to your business'
         },
         {
           key: 'other-robotic-conditional',
@@ -1404,7 +1397,7 @@ const questionBank = {
           url: 'robotics/other-robotic-conditional',
           backUrl: 'other-robotic-technology',
           nextUrl: 'project-cost',
-          preValidationKeys: ['otherRoboticEquipment'],
+          preValidationKeys: ['otherRoboticTechnology'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Your other robotic technology might get a grant from this scheme',
@@ -2977,7 +2970,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost', 'roboticEquipment', 'technologyItem']
+const YAR_KEYS = ['projectPostcode', 'remainingCost', 'roboticTechnology', 'technologyItem']
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,

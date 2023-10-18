@@ -14,7 +14,7 @@ function generateRow (rowNumber, name, value, bold = false) {
   }
 }
 
-// function getProjectItems (projectItems, infrastructure, roboticEquipment, technologyItems) {
+// function getProjectItems (projectItems, infrastructure, roboticTechnology, technologyItems) {
 //   projectItems = [projectItems].flat()
 //   if (infrastructure === 'Acidification infrastructure') {
 //     projectItems.push(infrastructure.toLowerCase())
@@ -23,8 +23,8 @@ function generateRow (rowNumber, name, value, bold = false) {
 //       technologyItems = [technologyItems].flat()
 //       projectItems = [...projectItems, ...technologyItems]
 //     }
-//     if (roboticEquipment) {
-//       projectItems.push(roboticEquipment)
+//     if (roboticTechnology) {
+//       projectItems.push(roboticTechnology)
 //     }
 //   }
 //   return projectItems.join('|')
@@ -127,7 +127,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(367, 'Annual Turnover', submission.businessDetails.businessTurnover),
           generateRow(22, 'Employees', submission.businessDetails.numberEmployees),
           generateRow(20, 'Business size', calculateBusinessSize(submission.businessDetails.numberEmployees, submission.businessDetails.businessTurnover)),
-          // generateRow(44, 'Project Items', getProjectItems(submission.projectItems, submission.roboticEquipment, submission.technologyItems)),
+          // generateRow(44, 'Project Items', getProjectItems(submission.projectItems, submission.roboticTechnology, submission.technologyItems)),
           generateRow(91, 'Are you an AGENT applying on behalf of your customer', submission.applying === 'Agent' ? 'Yes' : 'No'),
           generateRow(5, 'Surname', farmerContractorDetails.lastName),
           generateRow(6, 'Forename', farmerContractorDetails.firstName),
@@ -194,7 +194,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       tenancy: submission.tenancy ?? ' ',
       isTenancyLength: submission.tenancyLength ? 'Yes' : 'No',
       tenancyLength: submission.tenancyLength ?? ' ',
-      // projectItems: submission.projectItems ? getProjectItems(submission.projectItems, submission.roboticEquipment, submission.technologyItems) : ' ',
+      // projectItems: submission.projectItems ? getProjectItems(submission.projectItems, submission.roboticTechnology, submission.technologyItems) : ' ',
       projectCost: getCurrencyFormat(submission.projectCost),
       potentialFunding: getCurrencyFormat(submission.calculatedGrant),
       remainingCost: getCurrencyFormat(submission.remainingCost),

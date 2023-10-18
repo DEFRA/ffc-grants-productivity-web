@@ -1,7 +1,7 @@
 const getHtml = (label, labelData, fieldValueData, error) => {
   const fieldValue = fieldValueData?.trim() || ''
 
-  if (label === 'roboticEquipment') {
+  if (label === 'roboticTechnology') {
     return !error
       ? `<div class="govuk-character-count" data-module="govuk-character-count" data-maxlength="250">
         <div class="govuk-form-group">

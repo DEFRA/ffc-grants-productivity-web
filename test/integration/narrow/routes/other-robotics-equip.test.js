@@ -43,7 +43,7 @@ describe('other Robotics Equipment', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/other-robotic-equipment`,
-      payload: { otherRoboticEquipment: 'Yes', roboticEquipment: '', crumb: crumbToken },
+      payload: { otherRoboticTechnology: 'Yes', roboticTechnology: '', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
@@ -58,7 +58,7 @@ describe('other Robotics Equipment', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/other-robotic-equipment`,
-      payload: { otherRoboticEquipment: 'Yes', roboticEquipment: fakeDescription, crumb: crumbToken },
+      payload: { otherRoboticTechnology: 'Yes', roboticTechnology: fakeDescription, crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
@@ -73,7 +73,7 @@ describe('other Robotics Equipment', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/other-robotic-equipment`,
-      payload: { otherRoboticEquipment: 'Yes', roboticEquipment: 'some fake description &^*<', crumb: crumbToken },
+      payload: { otherRoboticTechnology: 'Yes', roboticTechnology: 'some fake description &^*<', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
@@ -88,7 +88,7 @@ describe('other Robotics Equipment', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/other-robotic-equipment`,
-      payload: { otherRoboticEquipment: 'Yes', roboticEquipment: 'this is fake description', crumb: crumbToken },
+      payload: { otherRoboticTechnology: 'Yes', roboticTechnology: 'this is fake description', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
@@ -103,7 +103,7 @@ describe('other Robotics Equipment', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/other-robotic-equipment`,
-      payload: { otherRoboticEquipment: 'No', crumb: crumbToken },
+      payload: { otherRoboticTechnology: 'No', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
@@ -118,7 +118,7 @@ describe('other Robotics Equipment', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/other-robotic-equipment`,
-      payload: { otherRoboticEquipment: 'No', crumb: crumbToken },
+      payload: { otherRoboticTechnology: 'No', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
