@@ -1124,7 +1124,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectItems',
             dependentAnswerKeysArray: ['robotics-project-items-A3'],
             urlOptions: {
-              thenUrl: 'robotic-equipment-items',
+              thenUrl: 'technology-items',
               elseUrl: 'project-cost'
             }
           },
@@ -1166,12 +1166,12 @@ const questionBank = {
           yarKey: 'projectItems'
         },
         {
-          key: 'robotic-equipment-items',
+          key: 'technology-items',
           order: 310,
           title: 'Which robotic items does your project need?',
           pageTitle: '',
-          url: 'robotic-equipment-items',
-          baseUrl: 'robotic-equipment-items',
+          url: 'technology-items',
+          baseUrl: 'technology-items',
           backUrl: 'project-items',
           preValidationKeys: ['projectItems'],
           nextUrl: 'robotic-automatic',
@@ -1198,44 +1198,44 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select what robotic or automatic technology your project needs'
+              error: 'Select what technology your project needs'
             }
           ],
           answers: [
             {
-              key: 'robotic-equipment-items-A1',
+              key: 'technology-items-A1',
               value: 'Harvesting technology'
             },
             {
-              key: 'robotic-equipment-items-A2',
+              key: 'technology-items-A2',
               value: 'Weeding technology'
             },
             {
-              key: 'robotic-equipment-items-A3',
+              key: 'technology-items-A3',
               value: 'Spraying technology'
             },
             {
-              key: 'robotic-equipment-items-A4',
+              key: 'technology-items-A4',
               value: 'Driverless tractor'
             },
             {
-              key: 'robotic-equipment-items-A5',
+              key: 'technology-items-A5',
               value: 'Voluntary robotic milking system'
             },
             {
-              key: 'robotic-equipment-items-A6',
+              key: 'technology-items-A6',
               value: 'Feeding system'
             },
             {
-              key: 'robotic-equipment-items-A7',
+              key: 'technology-items-A7',
               value: 'Transplanting technology'
             },
             {
-              key: 'robotic-equipment-items-A8',
+              key: 'technology-items-A8',
               value: 'Slurry and manure management'
             },
             {
-              key: 'robotic-equipment-items-A9',
+              key: 'technology-items-A9',
               value: 'Other robotics or automatic technology'
             }
           ],
@@ -1244,12 +1244,12 @@ const questionBank = {
         {
           key: 'robotic-automatic',
           order: 320,
-          title: 'Is the {{_projectItemEquipments_}} robotic or automatic?',
+          title: 'Is the {{_projectItemEquipment_}} robotic or automatic?',
           pageTitle: '',
           url: 'robotic-automatic',
           baseUrl: 'robotic-automatic',
           preValidationKeys: ['projectItemEquipments'],
-          backUrl: 'robotic-equipment-items',
+          backUrl: 'technology-items',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
@@ -1289,7 +1289,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select the option that applies to your project'
+              error: 'Select if your {{_projectItemEquipment_}} is robotic or automatic'
             }
           ],
           answers: [
@@ -1309,7 +1309,7 @@ const questionBank = {
           order: 305,
           title: 'Does your other robotic technology fit the eligibility criteria?',
           pageTitle: '',
-          backUrl: 'robotic-equipment-items',
+          backUrl: 'technology-items',
           nextUrl: 'other-robotic-conditional',
           url: 'robotics/other-robotic-equipment',
           baseUrl: 'other-robotic-equipment',
@@ -1374,9 +1374,9 @@ const questionBank = {
               value: 'No',
               notEligible: true,
               alsoMaybeEligible: {
-                dependentQuestionKey: 'robotic-equipment-items',
+                dependentQuestionKey: 'technology-items',
                 dependentQuestionYarKey: 'projectItemEquipments',
-                notUniqueAnswer: 'robotic-equipment-items-A8',
+                notUniqueAnswer: 'technology-items-A8',
                 maybeEligibleContent: {
                   nextUrl: 'project-cost',
                   messageHeader: 'Your other robotic technology is not eligible for a grant from this scheme',
@@ -1424,9 +1424,9 @@ const questionBank = {
           baseUrl: 'project-cost',
           backUrlObject: {
             dependentQuestionYarKey: ['projectItemEquipments', 'projectItems'],
-            dependentAnswerKeysArray: ['robotic-equipment-items-A8', 'robotics-project-items-A3'],
+            dependentAnswerKeysArray: ['technology-items-A8', 'robotics-project-items-A3'],
             urlOptions: {
-              thenUrl: ['/productivity/robotics/other-robotic-equipment', '/productivity/robotics/robotic-equipment-items'],
+              thenUrl: ['/productivity/robotics/other-robotic-equipment', '/productivity/robotics/technology-items'],
               elseUrl: '/productivity/robotics/project-items'
             }
           },
@@ -1472,7 +1472,7 @@ const questionBank = {
                 content: [{
                   para: '',
                   items: [],
-                  dependentAnswerExceptThese: ['robotics-project-items-A3', 'robotic-equipment-items-A8']
+                  dependentAnswerExceptThese: ['robotics-project-items-A3', 'technology-items-A8']
                 }]
               },
               {
@@ -1480,12 +1480,12 @@ const questionBank = {
                 content: [{
                   para: '',
                   items: [],
-                  dependentAnswerOnlyThese: ['robotic-equipment-items-A8']
+                  dependentAnswerOnlyThese: ['technology-items-A8']
                 }]
               }
             ],
             dependentYarKeys: ['projectItems', 'projectItemEquipments'],
-            dependentQuestionKeys: ['robotics-project-items', 'robotic-equipment-items']
+            dependentQuestionKeys: ['robotics-project-items', 'technology-items']
           },
           validate: [
             {
@@ -1600,7 +1600,7 @@ const questionBank = {
           ],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItemEquipments',
-            dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A2', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7', 'robotic-equipment-items-A8'],
+            dependentAnswerKeysArray: ['technology-items-A1', 'technology-items-A2', 'technology-items-A3', 'technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7', 'technology-items-A8'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'energy-source'
@@ -1721,7 +1721,7 @@ const questionBank = {
           preValidationKeys: ['projectImpact'],
           backUrlObject: {
             dependentQuestionYarKey: 'projectItemEquipments',
-            dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A2', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7', 'robotic-equipment-items-A8'],
+            dependentAnswerKeysArray: ['technology-items-A1', 'technology-items-A2', 'technology-items-A3', 'technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7', 'technology-items-A8'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'project-impact'
@@ -2976,7 +2976,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost', 'roboticEquipment', 'projectItemEquipments']
+const YAR_KEYS = ['projectPostcode', 'remainingCost', 'roboticEquipment', 'projectItemEquipment']
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,

@@ -233,7 +233,7 @@ const getPage = async (question, request, h) => {
 
     return h.view('check-details', MODEL)
   }
-
+console.log(url, 'URL')
   switch (url) {
     case 'score':
     case 'business-details':
@@ -250,6 +250,9 @@ const getPage = async (question, request, h) => {
       if (getYarValue(request, 'projectSubject') === 'Solar technologies') {
         setYarValue(request, 'applicant', null)
       }
+    case 'technology-items':
+        const projectItemEquipment = getYarValue(request, 'projectItemEquipments')
+        setYarValue(request, 'projectItemEquipment', projectItemEquipment)
     default:
       break
   }

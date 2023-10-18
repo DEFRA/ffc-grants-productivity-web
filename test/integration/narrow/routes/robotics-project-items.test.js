@@ -42,7 +42,7 @@ describe('Robotics project items page', () => {
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select which items your project needs')
   })
-  it('when we select /robotic-equipment-items/ should store user response and redirects to robotic-equipment-items', async () => {
+  it('when we select /technology-items/ should store user response and redirects to technology-items', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-items`,
@@ -52,7 +52,7 @@ describe('Robotics project items page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('robotic-equipment-items')
+    expect(postResponse.headers.location).toBe('technology-items')
   })
 
   it('should store user response and redirects to project cost page', async () => {
