@@ -1295,11 +1295,11 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'project-start-A1',
+              key: 'robotic-automatic-A1',
               value: 'Robotic'
             },
             {
-              key: 'project-start-A2',
+              key: 'robotic-automatic-A2',
               value: 'Automatic',
               redirectUrl: 'automatic-eligibility'
             }
@@ -1307,103 +1307,100 @@ const questionBank = {
           yarKey: 'roboticAutomatic'
         },
         {
-          key: 'other-robotic-equipment',
+          key: 'other-robotic-technology',
           order: 305,
-          title: 'Does your other robotic technology fit the eligibility criteria?',
+          title: 'What is your other robotic technology?',
           pageTitle: '',
-          backUrl: 'technology-items',
+          backUrl: 'robotic-automatic',
           nextUrl: 'other-robotic-conditional',
-          url: 'robotics/other-robotic-equipment',
-          baseUrl: 'other-robotic-equipment',
+          url: 'other-robotic-technology',
+          baseUrl: 'other-robotic-technology',
           preValidationKeys: ['projectItems'],
-          ineligibleContent: {
-            messageContent: 'RPA will only fund items that:',
-            messageContentList: [
-              'have a sensing system and can understand their environment',
-              'make decisions and plan',
-              'can control its actuators (the devices that move robot joints)',
-              'work in a continuous loop'
-            ],
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
           fundingPriorities: '',
-          type: 'single-answer',
           minAnswerCount: 1,
           hint: {
-            html: `All items must
-            <ul><li>have a sensing system and can understand their environment</li>
-            <li>make decisions and plan</li>
-            <li>can control its actuators (the devices that move robot joints)</li>
-            <li>work in a continuous loop</li></ul>`
+            text: `Technology powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative`
           },
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'RPA will consider items that:',
+                para: 'To be eligible for grant funding, your robotic technology must:',
                 items: ['have a sensing system and can understand their environment', 'make decisions and plan', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop']
               }]
             }]
           },
-          validate: [
+          type: 'multi-input',
+          allFields: [
             {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if your other robotic equipment meets the eligibility criteria'
-            },
-            {
-              dependentKey: 'roboticEquipment',
-              type: 'NOT_EMPTY',
-              error: 'Describe your other robotic equipment'
-            },
-            {
-              dependentKey: 'roboticEquipment',
-              type: 'REGEX',
-              regex: CHARS_MAX_250,
-              error: 'Description must be 250 characters or fewer and use letters, numbers and punctuation'
-            }
-          ],
-          answers: [
-            {
-              key: 'other-robotic-equipment-A1',
-              conditional: true,
-              value: 'Yes'
-            },
-            {
-              key: 'other-robotic-equipment-A2',
-              value: 'No',
-              notEligible: true,
-              alsoMaybeEligible: {
-                dependentQuestionKey: 'technology-items',
-                dependentQuestionYarKey: 'technologyItems',
-                notUniqueAnswer: 'technology-items-A8',
-                maybeEligibleContent: {
-                  nextUrl: 'project-cost',
-                  messageHeader: 'Your other robotic technology is not eligible for a grant from this scheme',
-                  messageContent: `RPA will only fund items that:
-                  <ul><li>have a sensing system and can understand their environment</li>
-                  <li>make decisions and plan</li>
-                  <li>can control its actuators (the devices that move robot joints)</li>
-                  <li>work in a continuous loop</li></ul>`,
-                  customButtonText: 'Continue with eligible items'
+              yarKey: 'brand',
+              type: 'input',
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'Brand',
+                classes: 'govuk-label'
+              },
+              id: "brand",
+              name: "brand",
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter a project name'
                 }
-
-              }
-
-            }
+              ]
+            },
+            {
+              yarKey: 'Model',
+              type: 'input',
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'Model',
+                classes: 'govuk-label'
+              },
+              id: "Model",
+              name: "Model",
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter a project name'
+                }
+              ]
+            },
+            // {
+            //   yarKey: 'description',
+            //   type: 'textarea',
+            //   label: {
+            //     text: 'Project name',
+            //     classes: 'govuk-input'
+            //   },
+            //   hint: {
+            //     text: ''
+            //   },
+            //   validate: [
+            //     {
+            //       type: 'NOT_EMPTY',
+            //       error: 'Select yes if your other robotic equipment meets the eligibility criteria'
+            //     },
+            //     {
+            //       type: 'NOT_EMPTY',
+            //       error: 'Describe your other robotic equipment'
+            //     },
+            //     {
+            //       type: 'REGEX',
+            //       regex: CHARS_MAX_250,
+            //       error: 'Description must be 250 characters or fewer and use letters, numbers and punctuation'
+            //     }
+            //   ]
+            // }
           ],
-          yarKey: 'otherRoboticEquipment',
-          conditionalKey: 'roboticEquipment',
-          conditionalLabelData: 'Enter your item, including the name, a brief description and benefit to your business'
+          yarKey: 'otherRoboticTechnology'
         },
         {
           key: 'other-robotic-conditional',
           title: 'Your other robotic technology might get a grant from this scheme',
           order: 307,
           url: 'robotics/other-robotic-conditional',
-          backUrl: 'other-robotic-equipment',
+          backUrl: 'other-robotic-technology',
           nextUrl: 'project-cost',
           preValidationKeys: ['otherRoboticEquipment'],
           maybeEligible: true,
@@ -1428,7 +1425,7 @@ const questionBank = {
             dependentQuestionYarKey: ['technologyItems', 'projectItems'],
             dependentAnswerKeysArray: ['technology-items-A8', 'robotics-project-items-A3'],
             urlOptions: {
-              thenUrl: ['/productivity/robotics/other-robotic-equipment', '/productivity/robotics/technology-items'],
+              thenUrl: ['/productivity/other-robotic-technology', '/productivity/robotics/technology-items'],
               elseUrl: '/productivity/robotics/project-items'
             }
           },
@@ -1506,8 +1503,8 @@ const questionBank = {
             }
           ],
           warningConditional: {
-            dependentWarningQuestionKey: 'other-robotic-equipment',
-            dependentWarningAnswerKeysArray: ['other-robotic-equipment-A1'],
+            dependentWarningQuestionKey: 'other-robotic-technology',
+            dependentWarningAnswerKeysArray: ['other-robotic-technology-A1'],
             ConditionalWarningMsg: {
               text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
               iconFallbackText: 'Warning'

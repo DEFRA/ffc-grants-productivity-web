@@ -57,6 +57,12 @@
 
         {%if type === 'multi-input' %}
           <h1 class="govuk-heading-l">{{title}}</h1>
+          {% if hint.text %}
+          <span class="govuk-hint">{{ hint.text }}</span> <br><br>
+          {% endif %}
+          {% if hint.html %}
+            <span class="govuk-hint">{{ hint.html | safe }}</span>
+          {% endif %}
           {% for item in items %}
 
             {% if item.type ==='sub-heading' %}
