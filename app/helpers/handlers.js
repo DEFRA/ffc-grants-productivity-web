@@ -281,7 +281,7 @@ const showPostPage = (currentQuestion, request, h) => {
   const payload = request.payload
   let thisAnswer
   let dataObject
-  let projectItemEquipment
+  let technologyItem
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
@@ -396,8 +396,8 @@ const showPostPage = (currentQuestion, request, h) => {
         return h.redirect(`${urlPrefix}/solar/project-cost`)
       }
       case 'technology-items':
-        projectItemEquipment = getYarValue(request, 'projectItemEquipments')
-        setYarValue(request, 'projectItemEquipment', projectItemEquipment)
+        technologyItem = getYarValue(request, 'technologyItems')
+        setYarValue(request, 'technologyItem', technologyItem)
     default:
       break
   }

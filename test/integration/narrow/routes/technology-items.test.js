@@ -38,7 +38,7 @@ describe('technology-items', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/technology-items`,
-      payload: { projectItemEquipments: '', crumb: crumbToken },
+      payload: { technologyItems: '', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
@@ -51,7 +51,7 @@ describe('technology-items', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/technology-items`,
-      payload: { projectItemEquipments: 'Harvesting technology', crumb: crumbToken },
+      payload: { technologyItems: 'Harvesting technology', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
