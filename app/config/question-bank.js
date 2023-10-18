@@ -1252,11 +1252,11 @@ const questionBank = {
           backUrl: 'technology-items',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           dependantNextUrl: {
-            dependentQuestionYarKey: 'projectSubject',
-            dependentAnswerKeysArray: ['project-subject-A1'],
+            dependentQuestionYarKey: 'projectItemEquipments',
+            dependentAnswerKeysArray: ['technology-items-A9'],
             urlOptions: {
-              thenUrl: 'robotics/project-items',
-              elseUrl: 'robotics/project-items'
+              thenUrl: 'other-robotic-technology',
+              elseUrl: 'other-item'
             }
           },
           fundingPriorities: '',
@@ -1299,7 +1299,8 @@ const questionBank = {
             },
             {
               key: 'project-start-A2',
-              value: 'Automatic'
+              value: 'Automatic',
+              redirectUrl: 'automatic-eligibility'
             }
           ],
           yarKey: 'roboticAutomatic'

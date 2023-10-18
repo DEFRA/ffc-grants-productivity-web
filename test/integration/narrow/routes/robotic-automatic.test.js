@@ -2,8 +2,8 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /robotic-automatic', () => {
   const varList = {
-    technologyItems: 'Harvesting technology',
-    projectSubject: 'randomData'
+    projectSubject: 'Robotics and automatic technology',
+    technologyItems: 'Harvesting technology'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -39,23 +39,20 @@ describe('Page: /robotic-automatic', () => {
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select if your Harvesting technology is robotic or automatic')
   })
-
-  it('user selects \'Robotic\' -> store user response and redirect to /automatic-eligibility', async () => {
-    varList.projectSubject = 'Robotics and automatic technology'
+  it('user selects \'Robotic\' and Other robotic or automatic technology from tech items -> store user response and redirect to /other-robotic-technology', async () => {
+    varList.technologyItems = 'Other robotic or automatic technology'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotic-automatic`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { roboticAutomatic: 'Automatic', crumb: crumbToken }
+      payload: { roboticAutomatic: 'Robotic', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('automatic-eligibility')
+    expect(postResponse.headers.location).toBe('other-robotic-technology')
   })
-
   it('user selects \'Robotic\' and except Other robotic or automatic technology from tech items -> store user response and redirect to /other-item', async () => {
-    varList.projectSubject = 'Robotics and automatic technology'
     varList.technologyItems = 'Spraying technology'
     const postOptions = {
       method: 'POST',
@@ -68,20 +65,17 @@ describe('Page: /robotic-automatic', () => {
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('other-item')
   })
-
-  it('user selects \'Robotic\' and Other robotic or automatic technology from tech items -> store user response and redirect to /other-robotic-technology', async () => {
-    varList.projectSubject = 'Robotics and automatic technology'
-    varList.technologyItems = 'Other robotic or automatic technology'
+  it('user selects \'Automatic\' -> store user response and redirect to /automatic-eligibility', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotic-automatic`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { roboticAutomatic: 'Robotic', crumb: crumbToken }
+      payload: { roboticAutomatic: 'Automatic', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('other-robotic-technology')
+    expect(postResponse.headers.location).toBe('automatic-eligibility')
   })
 
   it('page loads with correct back link', async () => {
