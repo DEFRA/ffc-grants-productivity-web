@@ -28,7 +28,7 @@ describe('technology-items', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Which robotic items does your project need?')
+    expect(response.payload).toContain('What technology does your project need?')
     expect(response.payload).toContain('Harvesting technology')
     expect(response.payload).toContain('Driverless tractor')
     expect(response.payload).toContain('Weeding technology')

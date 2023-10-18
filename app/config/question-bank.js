@@ -1168,7 +1168,7 @@ const questionBank = {
         {
           key: 'technology-items',
           order: 310,
-          title: 'Which robotic items does your project need?',
+          title: 'What technology does your project need?',
           pageTitle: '',
           url: 'technology-items',
           baseUrl: 'technology-items',
