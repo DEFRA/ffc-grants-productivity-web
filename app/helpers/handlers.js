@@ -16,6 +16,7 @@ const { startPageUrl, urlPrefix } = require('../config/server')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const emailFormatting = require('./../messaging/email/process-submission')
+const { validate } = require('uuid')
 
 const resetYarValues = (applying, request) => {
   setYarValue(request, 'agentsDetails', null)
@@ -157,6 +158,22 @@ const getPage = async (question, request, h) => {
     }
   }
 
+  if (url === "robotic-automatic") {
+    question = {
+      ...question,
+      title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+          getYarValue(request, additionalYarKeyName)
+      ),
+      validate: [
+        {
+          type: "NOT_EMPTY",
+          error: question.validate[0].error.replace(
+            SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => getYarValue(request, additionalYarKeyName)
+          ),
+        },
+      ],
+    };
+  }
   const data = getYarValue(request, yarKey) || null
   let conditionalHtml
   if (question?.conditionalKey && question?.conditionalLabelData) {
@@ -233,7 +250,6 @@ const getPage = async (question, request, h) => {
 
     return h.view('check-details', MODEL)
   }
-console.log(url, 'URL')
   switch (url) {
     case 'score':
     case 'business-details':
@@ -250,9 +266,6 @@ console.log(url, 'URL')
       if (getYarValue(request, 'projectSubject') === 'Solar technologies') {
         setYarValue(request, 'applicant', null)
       }
-    case 'technology-items':
-        const projectItemEquipment = getYarValue(request, 'projectItemEquipments')
-        setYarValue(request, 'projectItemEquipment', projectItemEquipment)
     default:
       break
   }
@@ -268,7 +281,7 @@ const showPostPage = (currentQuestion, request, h) => {
   const payload = request.payload
   let thisAnswer
   let dataObject
-
+  let projectItemEquipment
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
@@ -300,7 +313,6 @@ const showPostPage = (currentQuestion, request, h) => {
     })
     setYarValue(request, yarKey, dataObject)
   }
-
   if (title) {
     currentQuestion = {
       ...currentQuestion,
@@ -308,6 +320,21 @@ const showPostPage = (currentQuestion, request, h) => {
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }
+  }
+  if (baseUrl === "robotic-automatic") {
+    currentQuestion = {
+      ...currentQuestion,
+      title: title.replace(
+        SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => getYarValue(request, additionalYarKeyName)),
+      validate: [
+        {
+          type: "NOT_EMPTY",
+          error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+              getYarValue(request, additionalYarKeyName)
+          ),
+        },
+      ],
+    };
   }
 
   const errors = checkErrors(payload, currentQuestion, h, request)
@@ -368,6 +395,9 @@ const showPostPage = (currentQuestion, request, h) => {
       } else {
         return h.redirect(`${urlPrefix}/solar/project-cost`)
       }
+      case 'technology-items':
+        projectItemEquipment = getYarValue(request, 'projectItemEquipments')
+        setYarValue(request, 'projectItemEquipment', projectItemEquipment)
     default:
       break
   }
