@@ -1180,6 +1180,7 @@ const questionBank = {
           hint: {
             html: `Technology powered by fossil fuels will only be funded where there is no 
                     commercially available electric or renewable energy alternative.<br/><br/>
+                    Select one option.<br/><br/>
                     If you need multiple items, you can add another item later in the checker.`
           },
           eliminationAnswerKeys: '',
