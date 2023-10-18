@@ -1331,23 +1331,6 @@ const questionBank = {
             }]
           },
           type: 'multi-input',
-          // validate: [
-          //   {
-          //     type: 'NOT_EMPTY',
-          //     error: 'Select yes if your other robotic equipment meets the eligibility criteria'
-          //   },
-          //   {
-          //     dependentKey: 'roboticTechnology',
-          //     type: 'NOT_EMPTY',
-          //     error: 'Describe your other robotic equipment'
-          //   },
-          //   {
-          //     dependentKey: 'roboticTechnology',
-          //     type: 'REGEX',
-          //     regex: CHARS_MAX_250,
-          //     error: 'Description must be 250 characters or fewer and use letters, numbers and punctuation'
-          //   }
-          // ],
           allFields: [
             {
               yarKey: 'brand',
@@ -1384,7 +1367,30 @@ const questionBank = {
                   error: 'Enter a project name'
                 }
               ]
-            }
+            },
+            // {
+            //   yarKey: 'description',
+            //   conditional: true,
+            //   id: "description",
+            //   name: "description",
+            //   validate: [
+            //     {
+            //       type: 'NOT_EMPTY',
+            //       error: 'Select yes if your other robotic equipment meets the eligibility criteria'
+            //     },
+            //     {
+            //       dependentKey: 'roboticTechnology',
+            //       type: 'NOT_EMPTY',
+            //       error: 'Describe your other robotic equipment'
+            //     },
+            //     {
+            //       dependentKey: 'roboticTechnology',
+            //       type: 'REGEX',
+            //       regex: CHARS_MAX_250,
+            //       error: 'Description must be 250 characters or fewer and use letters, numbers and punctuation'
+            //     }
+            //   ]
+            // }
           ],
           yarKey: 'otherRoboticTechnology',
           conditionalKey: 'roboticTechnology',
