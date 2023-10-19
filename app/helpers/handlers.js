@@ -149,31 +149,22 @@ const getPage = async (question, request, h) => {
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
   }
 
-  if (title) {
+  if (title.includes('£')) {
     question = {
       ...question,
       title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }
-  }
-
-  if (url === "robotic-automatic") {
+  }else{
     question = {
       ...question,
       title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
           getYarValue(request, additionalYarKeyName)
-      ),
-      validate: [
-        {
-          type: "NOT_EMPTY",
-          error: question.validate[0].error.replace(
-            SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => getYarValue(request, additionalYarKeyName)
-          ),
-        },
-      ],
+      )
     };
   }
+  
   const data = getYarValue(request, yarKey) || null
   let conditionalHtml
   if (question?.conditionalKey && question?.conditionalLabelData) {
@@ -312,15 +303,15 @@ const showPostPage = (currentQuestion, request, h) => {
     })
     setYarValue(request, yarKey, dataObject)
   }
-  if (title) {
+
+  if (title.includes('£')) {
     currentQuestion = {
       ...currentQuestion,
       title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }
-  }
-  if (baseUrl === "robotic-automatic") {
+  }else{
     currentQuestion = {
       ...currentQuestion,
       title: title.replace(
@@ -335,7 +326,6 @@ const showPostPage = (currentQuestion, request, h) => {
       ],
     };
   }
-
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
     gapiService.sendValidationDimension(request)
@@ -394,9 +384,6 @@ const showPostPage = (currentQuestion, request, h) => {
       } else {
         return h.redirect(`${urlPrefix}/solar/project-cost`)
       }
-      case 'technology-items':
-        technologyItem = getYarValue(request, 'technologyItems')
-        setYarValue(request, 'technologyItem', technologyItem)
     default:
       break
   }

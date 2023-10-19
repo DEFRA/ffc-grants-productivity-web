@@ -1295,7 +1295,7 @@ const questionBank = {
         {
           key: 'robotic-automatic',
           order: 320,
-          title: 'Is the {{_technologyItem_}} robotic or automatic?',
+          title: 'Is the {{_technologyItems_}} robotic or automatic?',
           pageTitle: '',
           url: 'robotic-automatic',
           baseUrl: 'robotic-automatic',
@@ -1340,7 +1340,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select if your {{_technologyItem_}} is robotic or automatic'
+              error: 'Select if your {{_technologyItems_}} is robotic or automatic'
             }
           ],
           answers: [
