@@ -868,6 +868,56 @@ const questionBank = {
           yarKey: 'solarUsage'
         },
         {
+          key: 'solar-size',
+          order: 64,
+          title: 'How much energy will your solar PV system output?',
+          hint: {
+            html: 'The size of your solar PV system'
+          },
+          pageTitle: '',
+          url: 'solar/solar-size',
+          baseUrl: 'solar-size',
+          backUrl: 'solar-usage',
+          preValidationKeys: [],
+          nextUrl: 'agricultural-sector',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: 'govuk-radios govuk-fieldset__legend--l',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA wants to fund projects that need smaller solar PV systems.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select how much energy your solar PV system will output'
+            }
+          ],
+          answers: [
+            {
+              key: 'solar-size-A1',
+              value: 'Up to 100kW'
+            },
+            {
+              key: 'solar-size-A2',
+              value: '100kW to 350kW',
+            },
+            {
+              key: 'solar-size-A3',
+              value: 'More than 350kW',
+            }
+          ],
+          yarKey: 'solarSize'
+        },
+        {
           key: 'project-cost',
           order: 65,
           pageTitle: '',
