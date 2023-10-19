@@ -8,6 +8,7 @@
 {% from "govuk/components/select/macro.njk" import govukSelect %}
 {% from "govuk/components/error-summary/macro.njk" import govukErrorSummary %}
 {% from "./components/macro.njk" import crumbToken, multiSideBar, conditionalButtons %}
+{% from "govuk/components/character-count/macro.njk" import govukCharacterCount %}
 
 {% block pageTitle %}   
   {% if errorList %}
@@ -83,11 +84,13 @@
             {% if item.type ==='single-answer' %}
               {{ govukRadios(item) }}
             {%endif%}
+            {% if item.type ==='textarea' %}
+              {{ govukCharacterCount(item) }}
+            {%endif%}
 
             {%if item.endFieldset === 'true' %}
               </fieldset>
             {%endif%}
-
           {% endfor %}
         {%endif%}
 
