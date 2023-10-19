@@ -7,7 +7,8 @@ describe('Robotics project items page', () => {
     legalStatus: 'Sole trader',
     planningPermission: 'Secured',
     projectStart: 'Yes, preparatory work',
-    tenancy: 'Yes'
+    tenancy: 'Yes',
+    projectItems: 'Robotic equipment item'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -43,6 +44,7 @@ describe('Robotics project items page', () => {
     expect(postResponse.payload).toContain('Select which items your project needs')
   })
   it('when we select /technology-items/ should store user response and redirects to technology-items', async () => {
+    varList.projectItems = ['Wavelength-specific LED lighting for horticultural crops', 'Robotic equipment item']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-items`,
@@ -56,6 +58,7 @@ describe('Robotics project items page', () => {
   })
 
   it('should store user response and redirects to project cost page', async () => {
+    varList.projectItems = ['Advanced ventilation control units', 'Wavelength-specific LED lighting for horticultural crops']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-items`,

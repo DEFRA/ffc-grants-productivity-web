@@ -44,7 +44,7 @@ describe('technology-items', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select what robotic or automatic technology your project needs')
+    expect(postResponse.payload).toContain('Select what technology your project needs')
   })
 
   it('store user response and redirect to robotic-automatic page', async () => {

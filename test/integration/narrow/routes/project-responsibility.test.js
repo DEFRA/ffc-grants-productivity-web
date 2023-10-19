@@ -43,11 +43,7 @@ describe('Page: /project-responsibility', () => {
   it('user selects \'Yes\' -> store user response and redirect to /existing-solar', async () => {
     varList.projectSubject = 'Solar technologies'
     varList.tenancy = 'Yes'
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/project-responsibility`
-    }
-    await global.__SERVER__.inject(options)
+    
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-responsibility`,
@@ -74,7 +70,7 @@ describe('Page: /project-responsibility', () => {
     expect(postResponse.headers.location).toBe('solar/existing-solar')
   })
 
-  it('user selects \'Yes\' -> store user response and redirect to /existing-solar', async () => {
+  it('user selects \'Yes\' -> store user response and redirect to /project-items', async () => {
   varList.projectSubject = 'Robotics and automatic technology'
   const postOptions = {
     method: 'POST',
@@ -88,7 +84,7 @@ describe('Page: /project-responsibility', () => {
   expect(postResponse.headers.location).toBe('project-items')
 })
 
-it('user selects \'No\' -> store user response and redirect to /existing-solar', async () => {
+it('user selects \'No\' -> store user response and redirect to /project-items', async () => {
   varList.projectSubject = 'Robotics and automatic technology'
   const postOptions = {
     method: 'POST',

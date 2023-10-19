@@ -41,7 +41,7 @@ describe('Page: /robotic-automatic', () => {
     expect(postResponse.payload).toContain('Select if your Harvesting technology is robotic or automatic')
   })
   it('user selects \'Robotic\' and Other robotic or automatic technology from tech items -> store user response and redirect to /other-robotic-technology', async () => {
-    varList.technologyItems = 'Other robotic or automatic technology'
+    varList.technologyItems = 'Other robotics or automatic technology'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotic-automatic`,

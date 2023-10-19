@@ -533,7 +533,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A2'],
             urlOptions: {
               thenUrl: 'solar/existing-solar',
-              elseUrl: 'project-responsibility'
+              elseUrl: 'project-items'
             }
           },
           hint: {
@@ -587,7 +587,7 @@ const questionBank = {
           backUrl: 'tenancy',
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
-            dependentAnswerKeysArray: ['projectSubject-A2'],
+            dependentAnswerKeysArray: ['project-subject-A2'],
             urlOptions: {
               thenUrl: 'solar/existing-solar',
               elseUrl: 'project-items'

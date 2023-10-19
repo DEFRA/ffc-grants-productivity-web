@@ -39,6 +39,7 @@ describe('robotics-project-impact', () => {
   })
 
   it('user selects: <Yes> -> store user response and based on project items selected redirect to data analytics page', async () => {
+    varList.technologyItems = ['Feeding system']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/project-impact`,
