@@ -224,18 +224,10 @@ const questionBank = {
               elseUrl: 'project-subject'
             }
           },
-          // if user selects Solar technologies system on project-subject page, redirect to /country, otherwise redirect to /planning-permission
-          dependantNextUrl: {
-            dependentQuestionYarKey: 'projectSubject',
-            dependentAnswerKeysArray: ['project-subject-A2'],
-            urlOptions: {
-              thenUrl: 'country',
-              elseUrl: 'planning-permission'
-            }
-          },
           url: 'legal-status',
           baseUrl: 'legal-status',
-          // preValidationKeys: ['projectSubject'],
+          nextUrl: 'country',
+          preValidationKeys: ['businessLocation'],
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
