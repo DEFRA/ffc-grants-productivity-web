@@ -63,7 +63,7 @@ describe('Page: /project-responsibility', () => {
     expect(postResponse.headers.location).toBe('solar/existing-solar')
   })
   it('page loads with correct back link', async () => {
-    varList.tenancy ='No'
+    varList.tenancy = 'No'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-responsibility`

@@ -105,5 +105,4 @@ describe('Legal status page', () => {
       '<a href="project-subject" class="govuk-back-link">Back</a>'
     )
   })
-
 })

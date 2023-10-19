@@ -457,7 +457,7 @@ const questionBank = {
               elseUrl: '/productivity/planning-permission'
             }
           },
-          nextUrl:'tenancy',
+          nextUrl: 'tenancy',
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
@@ -703,28 +703,28 @@ const questionBank = {
           answers: [
             {
               key: 'solar-technologies-A1',
-              value: 'An electrical grid connection',
+              value: 'An electrical grid connection'
             },
             {
               key: 'solar-technologies-A2',
-              value: 'Solar panels',
+              value: 'Solar panels'
             },
             {
               key: 'solar-technologies-A3',
-              value: 'An inverter',
+              value: 'An inverter'
             },
             {
               key: 'solar-technologies-A4',
-              value: 'A utility meter',
+              value: 'A utility meter'
             },
             {
               key: 'solar-technologies-A5',
-              value: 'A battery',
+              value: 'A battery'
             },
             {
               key: 'solar-technologies-A6',
-              value: 'Limit-loading power diverter to heat or cold store',
-            },
+              value: 'Limit-loading power diverter to heat or cold store'
+            }
           ],
           yarKey: 'solarTechnologies'
         },
@@ -749,7 +749,7 @@ const questionBank = {
           type: 'multi-answer',
           minAnswerCount: 1,
           ineligibleContent: {
-            messageContent:  `
+            messageContent: `
                     <div class="govuk-list govuk-list--bullet">
                     <p class="govuk-body">Solar panels must be installed:</p>
                           <ul>
@@ -789,15 +789,15 @@ const questionBank = {
           answers: [
             {
               key: 'solar-installation-A1',
-              value: 'On a rooftop',
+              value: 'On a rooftop'
             },
             {
               key: 'solar-installation-A2',
-              value: 'On an existing hardstanding area',
+              value: 'On an existing hardstanding area'
             },
             {
               key: 'solar-installation-A3',
-              value: 'Floating (on a a reservoir)',
+              value: 'Floating (on a a reservoir)'
             },
             {
               value: 'divider'
@@ -848,7 +848,7 @@ const questionBank = {
             },
             {
               key: 'solar-usage-A2',
-              value: 'No',
+              value: 'No'
             }
           ],
           yarKey: 'solarUsage'
@@ -894,11 +894,11 @@ const questionBank = {
             },
             {
               key: 'solar-size-A2',
-              value: '100kW to 350kW',
+              value: '100kW to 350kW'
             },
             {
               key: 'solar-size-A3',
-              value: 'More than 350kW',
+              value: 'More than 350kW'
             }
           ],
           yarKey: 'solarSize'

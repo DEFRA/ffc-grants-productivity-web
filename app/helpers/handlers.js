@@ -360,7 +360,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
   switch (baseUrl) {
     case 'solar/solar-technologies':
-      if([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){
+      if ([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')) {
         return h.redirect(`${urlPrefix}/solar/solar-installation`)
       } else {
         return h.redirect(`${urlPrefix}/solar/project-cost`)

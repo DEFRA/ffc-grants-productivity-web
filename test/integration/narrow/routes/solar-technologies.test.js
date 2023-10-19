@@ -1,7 +1,7 @@
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /solar-technologies', () => {
-  let varList = {
+  const varList = {
     solarTechnologies: 'randomData'
   }
 

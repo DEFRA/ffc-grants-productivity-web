@@ -5,5 +5,5 @@ const GRANT_PERCENTAGE = 25
 module.exports = {
   MIN_GRANT,
   MAX_GRANT,
-  GRANT_PERCENTAGE,
+  GRANT_PERCENTAGE
 }

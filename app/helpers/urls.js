@@ -17,8 +17,8 @@ const getUrl = (urlObject, url, request, secBtn) => {
   let selectThenUrl
   let thenUrlIndex = -1
 
-  if(getYarValue(request, 'projectSubject') === 'Robotics and automatic technology') {
-    if(getYarValue(request, 'tenancy') === 'Yes' && elseUrl === 'project-responsibility') {
+  if (getYarValue(request, 'projectSubject') === 'Robotics and automatic technology') {
+    if (getYarValue(request, 'tenancy') === 'Yes' && elseUrl === 'project-responsibility') {
       elseUrl = 'robotics/project-items'
     }
   }

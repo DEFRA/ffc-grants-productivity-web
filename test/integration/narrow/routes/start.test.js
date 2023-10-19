@@ -19,14 +19,14 @@ describe('Start page', () => {
     expect(response.payload).toContain('40% of estimated costs of robotic and automatic technology')
     expect(response.payload).toContain('25% of estimated costs to buy and install a solar PV system')
     expect(response.payload).toContain(
-      "For robotic and automatic technology the maximum grant you can claim is £500,000. The minimum grant is £25,000."
-    );
+      'For robotic and automatic technology the maximum grant you can claim is £500,000. The minimum grant is £25,000.'
+    )
     expect(response.payload).toContain(
-      "For a solar PV system the maximum grant you can claim is £100,000. The minimum grant is £15,000."
-    );
+      'For a solar PV system the maximum grant you can claim is £100,000. The minimum grant is £15,000.'
+    )
     expect(response.payload).toContain(
-      "If you want to apply for both robotic technology and solar PV system grant funding, you must submit 2 separate applications. The maximum grant amount for both projects together is £500,000."
-    );
+      'If you want to apply for both robotic technology and solar PV system grant funding, you must submit 2 separate applications. The maximum grant amount for both projects together is £500,000.'
+    )
     expect(response.payload).toContain('If your project is eligible, you will be able to submit your online application to the Rural Payments Agency (RPA).')
     expect(response.payload).toContain('Start now') // button
     expect(response.payload).toContain('Before you start')

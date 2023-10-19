@@ -1,9 +1,9 @@
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /solar/remaining-costs', () => {
-  const varList = { 
-    projectCost: '150000', 
-    calculatedGrant: '37500', 
+  const varList = {
+    projectCost: '150000',
+    calculatedGrant: '37500',
     remainingCost: 112500
   }
 
