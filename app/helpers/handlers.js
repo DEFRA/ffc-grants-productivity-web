@@ -149,14 +149,16 @@ const getPage = async (question, request, h) => {
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
   }
 
-  if (title.includes('£')) {
+  if (title) {
     question = {
       ...question,
       title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }
-  }else{
+  }
+
+  if (url === "robotic-automatic") {
     question = {
       ...question,
       title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
@@ -303,15 +305,15 @@ const showPostPage = (currentQuestion, request, h) => {
     })
     setYarValue(request, yarKey, dataObject)
   }
-
-  if (title.includes('£')) {
+  if (title) {
     currentQuestion = {
       ...currentQuestion,
       title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }
-  }else{
+  }
+  if (baseUrl === "robotic-automatic") {
     currentQuestion = {
       ...currentQuestion,
       title: title.replace(
@@ -326,6 +328,7 @@ const showPostPage = (currentQuestion, request, h) => {
       ],
     };
   }
+
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
     gapiService.sendValidationDimension(request)
@@ -384,6 +387,9 @@ const showPostPage = (currentQuestion, request, h) => {
       } else {
         return h.redirect(`${urlPrefix}/solar/project-cost`)
       }
+      // case 'technology-items':
+      //   technologyItem = getYarValue(request, 'technologyItems')
+      //   setYarValue(request, 'technologyItem', technologyItem)
     default:
       break
   }
