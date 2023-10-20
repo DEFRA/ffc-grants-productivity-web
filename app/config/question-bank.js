@@ -1458,7 +1458,7 @@ const questionBank = {
           order: 307,
           url: 'other-robotic-conditional',
           backUrl: 'other-robotic-technology',
-          nextUrl: 'project-cost',
+          nextUrl: 'robotics/project-cost',
           preValidationKeys: ['otherRoboticTechnology'],
           maybeEligible: true,
           maybeEligibleContent: {
@@ -1476,7 +1476,7 @@ const questionBank = {
           key: 'robotics-project-cost',
           order: 310,
           pageTitle: '',
-          url: 'project-cost',
+          url: 'robotics/project-cost',
           baseUrl: 'project-cost',
           backUrlObject: {
             dependentQuestionYarKey: ['technologyItems', 'projectItems'],
@@ -1486,6 +1486,7 @@ const questionBank = {
               elseUrl: 'project-items'
             }
           },
+          backUrl:'other-robotic-conditional',
           nextUrl: 'potential-amount',
           preValidationKeys: ['projectItems'],
           classes: 'govuk-input--width-10',
@@ -1559,15 +1560,15 @@ const questionBank = {
               error: 'Enter a whole number with a maximum of 10 digits'
             }
           ],
-          warningConditional: {
-            dependentWarningQuestionKey: 'other-robotic-technology',
-            dependentWarningAnswerKeysArray: ['other-robotic-technology-A1'],
-            ConditionalWarningMsg: {
-              text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
-              iconFallbackText: 'Warning'
-            }
-          },
-          answers: [],
+          // warningConditional: {
+          //   dependentWarningQuestionKey: 'other-robotic-technology',
+          //   dependentWarningAnswerKeysArray: ['other-robotic-technology-A1'],
+          //   ConditionalWarningMsg: {
+          //     text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
+          //     iconFallbackText: 'Warning'
+          //   }
+          // },
+          // answers: [],
           yarKey: 'projectCost'
         },
         {
