@@ -1455,7 +1455,7 @@ const questionBank = {
           key: 'other-robotic-conditional',
           title: 'Your other robotic technology might get a grant from this scheme',
           order: 307,
-          url: 'robotics/other-robotic-conditional',
+          url: 'other-robotic-conditional',
           backUrl: 'other-robotic-technology',
           nextUrl: 'project-cost',
           preValidationKeys: ['otherRoboticTechnology'],
