@@ -586,7 +586,14 @@ const questionBank = {
           url: 'project-responsibility',
           baseUrl: 'project-responsibility',
           backUrl: 'tenancy',
-          nextUrl: 'solar/existing-solar',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectSubject',
+            dependentAnswerKeysArray: ['project-subject-A2'],
+            urlOptions: {
+              thenUrl: 'solar/existing-solar',
+              elseUrl: 'project-items'
+            }
+          },
           preValidationKeys: [],
           fundingPriorities: '',
           type: 'single-answer',
