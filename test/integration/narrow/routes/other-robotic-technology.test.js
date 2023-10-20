@@ -75,7 +75,7 @@ describe('other Robotics Equipment', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter the description of your other robotic technology')
+    expect(postResponse.payload).toContain('You can enter up to 250 characters')
   })
 
   it('should returns error message if description is less than 10 chars.', async () => {
@@ -107,7 +107,7 @@ describe('other Robotics Equipment', () => {
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/robotic-automatic`
+      url: `${global.__URLPREFIX__}/other-robotic-technology`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
