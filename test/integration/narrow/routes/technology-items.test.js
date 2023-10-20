@@ -30,9 +30,14 @@ describe('technology-items', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('What technology does your project need?')
     expect(response.payload).toContain('Harvesting technology')
-    expect(response.payload).toContain('Driverless tractor')
     expect(response.payload).toContain('Weeding technology')
     expect(response.payload).toContain('Spraying technology')
+    expect(response.payload).toContain('Driverless tractor')
+    expect(response.payload).toContain('Voluntary robotic milking system')
+    expect(response.payload).toContain('Feeding system')
+    expect(response.payload).toContain('Transplanting technology')
+    expect(response.payload).toContain('Slurry and manure management')
+    expect(response.payload).toContain('Other robotics or automatic technology')
   })
   it('no option is selected -> return error message', async () => {
     const postOptions = {

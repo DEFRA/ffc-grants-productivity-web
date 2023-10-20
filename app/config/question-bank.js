@@ -2,6 +2,7 @@ const {
   CURRENCY_FORMAT,
   CHARS_MAX_10,
   CHARS_MIN_10,
+  CHARS_MAX_18,
   CHARS_MAX_100,
   CHARS_MAX_250,
   POSTCODE_REGEX,
@@ -1393,15 +1394,15 @@ const questionBank = {
               id: "brand",
               name: "brand",
               validate: [
-                {
-                  type: 'NOT_EMPTY',
-                  error: 'Enter a project name',
-                  for: 'brand'
-                }
+                  {
+                    type: 'REGEX',
+                    regex: CHARS_MAX_18,
+                    error: 'Brand must be 18 characters or less'
+                  }
               ]
             },
             {
-              yarKey: 'Model',
+              yarKey: 'model',
               type: 'input',
               classes: 'govuk-input--width-10',
               label: {
@@ -1409,14 +1410,15 @@ const questionBank = {
                 classes: 'govuk-label',
                 for: 'model'
               },
-              id: "model",
-              name: "model",
               validate: [
                 {
-                  type: 'NOT_EMPTY',
-                  error: 'Enter a project name'
+                  type: 'REGEX',
+                  regex: CHARS_MAX_18,
+                  error: 'Model must be 18 characters or less'
                 }
-              ]
+            ],
+              id: "model",
+              name: "model"
             },
             {
               yarKey: 'description',
@@ -1432,19 +1434,18 @@ const questionBank = {
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Select yes if your other robotic equipment meets the eligibility criteria'
+                  error: 'Enter the description of your other robotic technology'
                 },
                 {
-                  dependentKey: 'roboticTechnology',
-                  type: 'NOT_EMPTY',
-                  error: 'Describe your other robotic equipment'
-                },
-                {
-                  dependentKey: 'roboticTechnology',
                   type: 'REGEX',
                   regex: CHARS_MAX_250,
-                  error: 'Description must be 250 characters or fewer and use letters, numbers and punctuation'
-                }
+                  error: 'Description must be 250 characters or less'
+                },
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Description must be 10 characters or more'
+                },
               ]
             }
           ],
@@ -3030,7 +3031,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost', 'roboticTechnology', 'technologyItem']
+const YAR_KEYS = ['projectPostcode', 'remainingCost']
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,
