@@ -34,7 +34,7 @@ describe('Page: /project-responsibility', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select if will take full responsibility for your project')
+    expect(postResponse.payload).toContain('Select if you will take full responsibility for your project')
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /existing-solar', async () => {

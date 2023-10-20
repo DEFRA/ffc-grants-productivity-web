@@ -21,10 +21,10 @@ it('page loads successfully, with all the options', async () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What solar technologies does your project need?')
+    expect(response.payload).toContain('Where will you install the solar PV panels?')
     expect(response.payload).toContain('On a rooftop')
     expect(response.payload).toContain('On an existing hardstanding area')
-    expect(response.payload).toContain('Floating (on a a reservoir)')
+    expect(response.payload).toContain('Floating (on a reservoir)')
     expect(response.payload).toContain('None of the above')
 })
 
@@ -38,7 +38,7 @@ it('no option selected -> show error message', async () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select where you will instal the solar PV panels')
+    expect(postResponse.payload).toContain('Select where you will install the solar PV panels')
 })
 
 it('user selects ineligible option: \'None of the above\' -> display ineligible page', async () => {
