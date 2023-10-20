@@ -1458,7 +1458,7 @@ const questionBank = {
           order: 307,
           url: 'other-robotic-conditional',
           backUrl: 'other-robotic-technology',
-          nextUrl: 'robotics/project-cost',
+          nextUrl: 'project-cost',
           preValidationKeys: ['otherRoboticTechnology'],
           maybeEligible: true,
           maybeEligibleContent: {
@@ -1476,7 +1476,7 @@ const questionBank = {
           key: 'robotics-project-cost',
           order: 310,
           pageTitle: '',
-          url: 'robotics/project-cost',
+          url: 'project-cost',
           baseUrl: 'project-cost',
           backUrlObject: {
             dependentQuestionYarKey: ['technologyItems', 'projectItems'],
