@@ -64,7 +64,7 @@ const getContractorFarmerModel = (data, question, request, conditionalHtml) => {
   return MODEL
 }
 const getPage = async (question, request, h) => {
-  const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationKeys, preValidationKeysRule } = question
+  const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationKeys, preValidationKeysRule, replace } = question
   const backUrl = getUrl(backUrlObject, question.backUrl, request)
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationKeys, preValidationKeysRule)
@@ -157,8 +157,7 @@ const getPage = async (question, request, h) => {
       ))
     }
   }
-
-  if (url === "robotic-automatic") {
+  if(replace) {
     question = {
       ...question,
       title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
@@ -269,7 +268,7 @@ const getPage = async (question, request, h) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields } = currentQuestion
+  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields, replace } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   let thisAnswer
@@ -313,7 +312,7 @@ const showPostPage = (currentQuestion, request, h) => {
       ))
     }
   }
-  if (baseUrl === "robotic-automatic") {
+  if (replace) {
     currentQuestion = {
       ...currentQuestion,
       title: title.replace(
@@ -387,9 +386,6 @@ const showPostPage = (currentQuestion, request, h) => {
       } else {
         return h.redirect(`${urlPrefix}/solar/project-cost`)
       }
-      // case 'technology-items':
-      //   technologyItem = getYarValue(request, 'technologyItems')
-      //   setYarValue(request, 'technologyItem', technologyItem)
     default:
       break
   }

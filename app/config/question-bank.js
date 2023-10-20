@@ -1297,6 +1297,7 @@ const questionBank = {
           key: 'robotic-automatic',
           order: 320,
           title: 'Is the {{_technologyItems_}} robotic or automatic?',
+          replace: true,
           pageTitle: '',
           url: 'robotic-automatic',
           baseUrl: 'robotic-automatic',
@@ -1387,12 +1388,12 @@ const questionBank = {
               yarKey: 'brand',
               type: 'input',
               classes: 'govuk-input--width-10',
+              id: "brand",
+              name: "brand",
               label: {
                 text: 'Brand',
                 classes: 'govuk-label'
               },
-              id: "brand",
-              name: "brand",
               validate: [
                   {
                     type: 'REGEX',
@@ -1405,6 +1406,8 @@ const questionBank = {
               yarKey: 'model',
               type: 'input',
               classes: 'govuk-input--width-10',
+              id: "model",
+              name: "model",
               label: {
                 text: 'Model',
                 classes: 'govuk-label',
@@ -1416,9 +1419,7 @@ const questionBank = {
                   regex: CHARS_MAX_18,
                   error: 'Model must be 18 characters or less'
                 }
-            ],
-              id: "model",
-              name: "model"
+            ]
             },
             {
               yarKey: 'description',
@@ -3031,7 +3032,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost']
+const YAR_KEYS = ['projectPostcode', 'remainingCost', 'technologyItems']
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,
