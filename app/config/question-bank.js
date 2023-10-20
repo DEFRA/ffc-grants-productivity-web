@@ -1439,14 +1439,14 @@ const questionBank = {
                 },
                 {
                   type: 'REGEX',
-                  regex: CHARS_MAX_250,
-                  error: 'Description must be 250 characters or less'
-                },
-                {
-                  type: 'REGEX',
                   regex: CHARS_MIN_10,
                   error: 'Description must be 10 characters or more'
                 },
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MAX_250,
+                  error: 'Description must be 250 characters or less'
+                }
               ]
             }
           ],
@@ -1476,14 +1476,14 @@ const questionBank = {
           key: 'robotics-project-cost',
           order: 310,
           pageTitle: '',
-          url: 'robotics/project-cost',
+          url: 'project-cost',
           baseUrl: 'project-cost',
           backUrlObject: {
             dependentQuestionYarKey: ['technologyItems', 'projectItems'],
             dependentAnswerKeysArray: ['technology-items-A8', 'robotics-project-items-A3'],
             urlOptions: {
-              thenUrl: ['/productivity/other-robotic-technology', '/productivity/robotics/technology-items'],
-              elseUrl: '/productivity/robotics/project-items'
+              thenUrl: ['other-robotic-technology', 'technology-items'],
+              elseUrl: 'project-items'
             }
           },
           nextUrl: 'potential-amount',
