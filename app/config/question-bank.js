@@ -762,7 +762,7 @@ const questionBank = {
           url: 'solar-installation',
           baseUrl: 'solar-installation',
           backUrl: 'solar-technologies',
-          nextUrl: 'project-cost',
+          nextUrl: 'solar-size',
           preValidationKeys: [],
           id: 'solarInstallation',
           name: 'solarInstallation',
