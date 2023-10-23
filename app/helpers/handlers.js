@@ -8,7 +8,7 @@ const { getHtml } = require('../helpers/conditionalHTML')
 const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
 const { setOptionsLabel } = require('../helpers/answer-options')
-const { notUniqueSelection, uniqueSelection } = require('../helpers/utils')
+const { notUniqueSelection, uniqueSelection, getQuestionAnswer } = require('../helpers/utils')
 const senders = require('../messaging/senders')
 const createMsg = require('../messaging/create-msg')
 const gapiService = require('../services/gapi-service')
@@ -390,11 +390,28 @@ const showPostPage = (currentQuestion, request, h) => {
       break
   }
 
-  if (yarKey === 'projectCost') {
-    const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+  switch (yarKey) {
+    case 'projectCost': {
+      const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+      setYarValue(request, 'calculatedGrant', calculatedGrant)
+      setYarValue(request, 'remainingCost', remainingCost)
+    }
 
-    setYarValue(request, 'calculatedGrant', calculatedGrant)
-    setYarValue(request, 'remainingCost', remainingCost)
+    case 'automaticEligibility': {
+      const automaticEligibilityAnswer = getYarValue(request, 'automaticEligibility') 
+      const technologyItemsAnswer = getYarValue(request, 'technologyItems')
+      const roboticAutomaticAnswer = getYarValue(request, 'roboticAutomatic')
+      const isTechnologyItemsA9 = getQuestionAnswer('technology-items', 'technology-items-A9')
+      const isRoboticAutomaticA2 = getQuestionAnswer('robotic-automatic', 'robotic-automatic-A2')
+      // 'string' means that only one option is selected, otherwise it returns an array
+      if (typeof automaticEligibilityAnswer === "string") {
+        return h.view('not-eligible', NOT_ELIGIBLE)
+      } else if (technologyItemsAnswer === isTechnologyItemsA9 && roboticAutomaticAnswer === isRoboticAutomaticA2) {
+        return h.redirect(`${urlPrefix}/other-automatic-technology`)
+      } else {
+        return h.redirect(`${urlPrefix}/other-item`)
+      }
+    }
   }
 
   return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.secBtn))

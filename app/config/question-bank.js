@@ -1951,6 +1951,69 @@ const questionBank = {
           ],
           yarKey: 'technology'
         },
+        {
+          key: 'automatic-eligibility',
+          order: 375,
+          title: `Which eligibility criteria does your automatic {{_technologyItems_}} meet?`,
+          pageTitle: '',
+          replace: true,
+          url: 'automatic-eligibility',
+          baseUrl: 'automatic-eligibility',
+          backUrl: 'robotic-automatic',
+          preValidationKeys: ['technologyItems'],
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: 'Your project must improve the productivity and profitability of your main agricultural or horticultural business.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          hint: {
+            text: 'Select all that apply'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what eligibility criteria your automatic technology meets'
+            },
+          ],
+          answers: [
+            {
+              key: 'automatic-eligibility-A1',
+              value: 'Has sensing system that can understand its environment '
+            },
+            {
+              key: 'automatic-eligibility-A2',
+              value: 'Makes decisions and plans'
+            },
+            {
+              key: 'automatic-eligibility-A3',
+              value: 'Can control its actuators (the devices that move robotic joints)'
+            },
+            {
+              key: 'automatic-eligibility-A4',
+              value: 'Works in a continuous loop'
+            },
+            {
+              key: 'automatic-eligibility-A5',
+              value: 'None of the above',
+              notEligible: true
+            }
+          ],
+          yarKey: 'automaticEligibility'
+        },
 
         /// ////// ***************** ROBOTICS END  ************************************/////////////////////
         {
