@@ -144,6 +144,12 @@ const questionBank = {
           url: 'applicant',
           baseUrl: 'applicant',
           preValidationKeys: ['projectSubject'],
+          // preValidationObject: {
+          //    preValidationKey: ['projectSubject'],
+          //    preValidationAnswer: ['project-subject-A1'],
+          //    preValidationRule: 'AND',
+          //    preValidationUrls: ['project-subject']
+          // }
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
