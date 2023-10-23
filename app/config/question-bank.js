@@ -1361,7 +1361,7 @@ const questionBank = {
           title: 'What is your other robotic technology?',
           pageTitle: '',
           backUrl: 'robotic-automatic',
-          nextUrl: 'other-robotic-conditional',
+          nextUrl: 'other-conditional',
           url: 'other-robotic-technology',
           baseUrl: 'other-robotic-technology',
           preValidationKeys: ['projectItems'],
@@ -1450,10 +1450,10 @@ const questionBank = {
           yarKey: 'otherRoboticTechnology'
         },
         {
-          key: 'other-robotic-conditional',
+          key: 'other-conditional',
           title: 'Your other robotic technology might get a grant from this scheme',
           order: 307,
-          url: 'other-robotic-conditional',
+          url: 'other-conditional',
           backUrlObject: {
             dependentQuestionYarKey: ['roboticAutomatic'],
             dependentAnswerKeysArray: ['robotic-automatic-A1'],
@@ -1490,7 +1490,7 @@ const questionBank = {
               elseUrl: 'project-items'
             }
           },
-          backUrl:'other-robotic-conditional',
+          backUrl:'other-conditional',
           nextUrl: 'potential-amount',
           preValidationKeys: ['projectItems'],
           classes: 'govuk-input--width-10',

@@ -17,7 +17,7 @@ describe('Page: /potential-amount-conditional', () => {
 it('page loads successfully, with all the Eligible options', async () => {
     const options = {
         method: 'GET',
-        url: `${global.__URLPREFIX__}/other-robotic-conditional`
+        url: `${global.__URLPREFIX__}/other-conditional`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -29,7 +29,7 @@ it('page loads successfully, with all the Eligible options', async () => {
 it('should redirect to /other-item when user press continue', async () => {
     const postOptions = {
         method: 'POST',
-        url: `${global.__URLPREFIX__}/other-robotic-conditional`,
+        url: `${global.__URLPREFIX__}/other-conditional`,
         headers: { cookie: 'crumb=' + crumbToken },
         payload: { otherRoboticsConditional: 'Yes', crumb: crumbToken }
     }
@@ -42,7 +42,7 @@ it('should redirect to /other-item when user press continue', async () => {
 it('page loads with correct back link', async () => {
     const options = {
         method: 'GET',
-        url: `${global.__URLPREFIX__}/other-robotic-conditional`
+        url: `${global.__URLPREFIX__}/other-conditional`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
@@ -52,7 +52,7 @@ it(`page loads with correct back link when robotic automatic page is Automatic`,
     varList.roboticAutomatic = 'Automatic'
         const options = {
             method: 'GET',
-            url: `${global.__URLPREFIX__}/other-robotic-conditional`
+            url: `${global.__URLPREFIX__}/other-conditional`
         }
         const response = await global.__SERVER__.inject(options)
         expect(response.statusCode).toBe(200)
