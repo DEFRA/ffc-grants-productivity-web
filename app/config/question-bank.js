@@ -1454,14 +1454,21 @@ const questionBank = {
           title: 'Your other robotic technology might get a grant from this scheme',
           order: 307,
           url: 'other-robotic-conditional',
-          backUrl: 'other-robotic-technology',
-          nextUrl: 'project-cost',
-          preValidationKeys: ['otherRoboticTechnology'],
+          backUrlObject: {
+            dependentQuestionYarKey: ['roboticAutomatic'],
+            dependentAnswerKeysArray: ['robotic-automatic-A1'],
+            urlOptions: {
+              thenUrl: 'other-robotic-technology',
+              elseUrl: 'other-automatic-technology'
+            }
+          },
+          nextUrl: 'other-item',
+          preValidationKeys: ['roboticAutomatic'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Your other robotic technology might get a grant from this scheme',
-            messageContent: `RPA will assess your item and whether they will fund it.
-            <br/>They will let you know if the item is eligible before the application window opens and projects are invited to apply.`,
+            messageContent: `RPA will assess your item and whether they will fund it.<br/><br/>
+            They will let you know if the item is eligible before the application window opens and projects are invited to apply.`,
             warning: {
               text: 'There’s no guarantee your item will be funded.',
               iconFallbackText: 'Warning'
