@@ -114,8 +114,28 @@ describe('answer-options', () => {
 
     question = {
       ...question,
+      type: 'textarea'
+    }
+    expect(getOptions(undefined, question, 'cond-html', {})).toEqual({
+      fieldset: {
+        legend: {
+          classes: 'mock-classes',
+          isPageHeading: true,
+          text: undefined
+        },
+      },
+      classes: 'mock-classes',
+      hint: 'mock-hint',
+      id: 'mock-yarKey',
+      name: 'mock-yarKey',
+      items: [],
+    })
+
+    question = {
+      ...question,
       type: 'select'
     }
+
     expect(getOptions(undefined, question, 'cond-html', {})).toEqual({
       classes: 'mock-classes',
       hint: 'mock-hint',
