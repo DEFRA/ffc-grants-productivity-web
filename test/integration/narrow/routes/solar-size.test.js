@@ -16,7 +16,7 @@ describe('Page: /solar-size', () => {
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/solar-size`
+      url: `${global.__URLPREFIX__}/solar-size`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -30,7 +30,7 @@ describe('Page: /solar-size', () => {
   it('no option selected -> show error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-size`,
+      url: `${global.__URLPREFIX__}/solar-size`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { solarSize: '', crumb: crumbToken }
     }
@@ -43,7 +43,7 @@ describe('Page: /solar-size', () => {
   it('user selects \'Up to 100kW\' -> store user response and redirect to /agricultural-sector', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-size`,
+      url: `${global.__URLPREFIX__}/solar-size`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { solarSize: 'Up to 100kW', crumb: crumbToken }
     }
@@ -56,7 +56,7 @@ describe('Page: /solar-size', () => {
   it('user selects \'100kW to 350kW\' -> store user response and redirect to /agricultural-sector', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-size`,
+      url: `${global.__URLPREFIX__}/solar-size`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { solarSize: '100kW to 350kW', crumb: crumbToken }
     }
@@ -69,7 +69,7 @@ describe('Page: /solar-size', () => {
   it('user selects \'More than 350kW\' -> store user response and redirect to /agricultural-sector', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-size`,
+      url: `${global.__URLPREFIX__}/solar-size`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { solarSize: 'More than 350kW', crumb: crumbToken }
     }
@@ -82,7 +82,7 @@ describe('Page: /solar-size', () => {
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/solar-size`
+      url: `${global.__URLPREFIX__}/solar-size`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)

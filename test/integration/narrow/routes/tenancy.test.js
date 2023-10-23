@@ -55,7 +55,7 @@ describe('Page: /tenancy', () => {
     expect(postResponse.headers.location).toBe('project-items')
   })
 
-  it('user selects \'Yes\' -> store user response and redirect to /solar/existing-solar', async () => {
+  it('user selects \'Yes\' -> store user response and redirect to /existing-solar', async () => {
     varList.tenancy = 'Yes'
     varList.projectSubject = 'Solar technologies'
     const postOptions = {
@@ -67,7 +67,7 @@ describe('Page: /tenancy', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('solar/existing-solar')
+    expect(postResponse.headers.location).toBe('existing-solar')
   })
 
   it('user selects \'No\' -> store user response and redirect to /project-responsibility', async () => {

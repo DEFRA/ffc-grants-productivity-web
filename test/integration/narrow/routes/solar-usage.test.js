@@ -16,7 +16,7 @@ describe('Page: /solar-usage', () => {
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/solar-usage`
+      url: `${global.__URLPREFIX__}/solar-usage`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -29,7 +29,7 @@ describe('Page: /solar-usage', () => {
   it('no option selected -> show error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-usage`,
+      url: `${global.__URLPREFIX__}/solar-usage`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { solarUsage: '', crumb: crumbToken }
     }
@@ -44,7 +44,7 @@ describe('Page: /solar-usage', () => {
   it('user selects \'Yes\' -> store user response and redirect to /solar-size', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-usage`,
+      url: `${global.__URLPREFIX__}/solar-usage`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { solarUsage: 'Yes', crumb: crumbToken }
     }
@@ -57,7 +57,7 @@ describe('Page: /solar-usage', () => {
   it('user selects \'No\' -> store user response and redirect to /solar-size', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-usage`,
+      url: `${global.__URLPREFIX__}/solar-usage`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { solarUsage: 'No', crumb: crumbToken }
     }
@@ -70,7 +70,7 @@ describe('Page: /solar-usage', () => {
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/solar-usage`
+      url: `${global.__URLPREFIX__}/solar-usage`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)

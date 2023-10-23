@@ -380,11 +380,16 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   switch (baseUrl) {
-    case 'solar/solar-technologies':
+    case 'solar-technologies':
       if([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){
-        return h.redirect(`${urlPrefix}/solar/solar-installation`)
+        return h.redirect(`${urlPrefix}/solar-installation`)
       } else {
-        return h.redirect(`${urlPrefix}/solar/project-cost`)
+        if(getYarValue(request, 'existingSolar') === 'Yes'){
+          return h.redirect(`${urlPrefix}/project-cost`)
+        }else{
+          return  h.view('not-eligible', NOT_ELIGIBLE)
+        }
+        
       }
     default:
       break

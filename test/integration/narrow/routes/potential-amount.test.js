@@ -1,6 +1,6 @@
 const { crumbToken } = require('./test-helper')
 
-describe('Page: solar/potential-amount', () => {
+describe('Page: /potential-amount', () => {
   const varList = {
     projectCost: 37500,
     calculatedGrant: 15000,
@@ -19,7 +19,7 @@ describe('Page: solar/potential-amount', () => {
   it('page loads successfully, with all the Eligible options', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/potential-amount`
+      url: `${global.__URLPREFIX__}/potential-amount`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -31,7 +31,7 @@ describe('Page: solar/potential-amount', () => {
   it('should redirect to /remaining-costs when user press continue', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/potential-amount`,
+      url: `${global.__URLPREFIX__}/potential-amount`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { remainingCosts: 'Yes', crumb: crumbToken }
     }
@@ -44,7 +44,7 @@ describe('Page: solar/potential-amount', () => {
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/potential-amount`
+      url: `${global.__URLPREFIX__}/potential-amount`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
