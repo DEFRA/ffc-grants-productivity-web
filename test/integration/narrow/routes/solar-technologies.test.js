@@ -72,6 +72,7 @@ describe('Page: /solar-technologies', () => {
   })
 
   it('user selects one option WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost', async () => {
+    varList.existingSolar = 'Yes'
     varList.solarTechnologies = 'A utility meter'
     const postOptions = {
       method: 'POST',
@@ -87,6 +88,7 @@ describe('Page: /solar-technologies', () => {
 
   it('user selects multiple options WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost', async () => {
     varList.solarTechnologies = ['An inverter', 'A battery']
+    varList.existingSolar = 'No'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-technologies`,
@@ -95,8 +97,8 @@ describe('Page: /solar-technologies', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toContain('/productivity/project-cost')
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
   })
 
   it('page loads with correct back link', async () => {
