@@ -2,7 +2,7 @@ const { getYarValue } = require('../helpers/session')
 const { startPageUrl, serviceEndDate, serviceEndTime } = require('../config/server')
 const { getQuestionAnswer } = require('./utils')
 
-function guardPage (request, guardData, rule = null) {
+function guardPage (request, guardData) {
   let result = false
   const currentUrl = request.url.pathname.split('/').pop()
   const today = new Date(new Date().toDateString())
@@ -16,11 +16,9 @@ function guardPage (request, guardData, rule = null) {
   if (guardData) {
     // filter list of answers with keys?
 
-    // make an object of question as key and answers for said question?
-
     let preValidationList = []
 
-    for(let i=0; i<guardData.preValidationKeys.length; i++) {
+    for(let i=0; i < guardData.preValidationKeys.length; i++) {
       preValidationList.push({
        key: guardData.preValidationKeys[i], 
        values: (guardData.preValidationAnswer.filter((answer) => answer.startsWith(guardData.preValidationUrls[i]))),
@@ -70,7 +68,7 @@ function guardPage (request, guardData, rule = null) {
 
         return false
 
-      case 'SOLARAND':
+      case 'SOLAROR':
         // check for a type of journey and another requirement (solar + project repsonsibility etc)
 
         // check yar value of journey
@@ -85,7 +83,7 @@ function guardPage (request, guardData, rule = null) {
         }
         return true
 
-      case 'ROBOTAND':
+      case 'ROBOTOR':
         // check for a type of journey and another requirement (solar + project repsonsibility etc)
 
         if (getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A2')) {

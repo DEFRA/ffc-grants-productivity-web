@@ -143,13 +143,12 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'applicant',
           baseUrl: 'applicant',
-          preValidationKeys: ['projectSubject'],
-          // preValidationObject: {
-          //    preValidationKey: ['projectSubject'],
-          //    preValidationAnswer: ['project-subject-A1'],
-          //    preValidationRule: 'AND',
-          //    preValidationUrls: ['project-subject']
-          // }
+          preValidationObject: {
+             preValidationKeys: ['projectSubject'],
+             preValidationAnswer: ['project-subject-A1'],
+             preValidationRule: 'AND',
+             preValidationUrls: ['project-subject']
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -181,7 +180,12 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'business-location',
           baseUrl: 'business-location',
-          preValidationKeys: ['applicant'],
+          preValidationObject: {
+            preValidationKeys: ['applicant'],
+            preValidationAnswer: ['applicant-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['applicant']
+          },
           ineligibleContent: {
             messageContent: 'This grant is only for businesses registered in England.',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' }
@@ -241,7 +245,12 @@ const questionBank = {
           },
           url: 'legal-status',
           baseUrl: 'legal-status',
-          // preValidationKeys: ['projectSubject'],
+          preValidationObject: {
+            preValidationKeys: ['projectSubject', 'businessLocation'],
+            preValidationAnswer: ['project-subject-A2', 'business-location-A1', 'business-location-A2'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['project-subject', 'business-location']
+          },          
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -347,7 +356,12 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'country',
           baseUrl: 'country',
-          preValidationKeys: ['legalStatus'],
+          preValidationObject: {
+            preValidationKeys: ['legalStatus'],
+            preValidationAnswer: ['legal-status-A12'],
+            preValidationRule: 'NOT',
+            preValidationUrls: ['legal-status']
+          },
           ineligibleContent: {
             messageContent: 'This grant is only for projects in England.',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' }
@@ -392,7 +406,12 @@ const questionBank = {
           baseUrl: 'planning-permission',
           backUrl: 'country',
           nextUrl: 'project-start',
-          preValidationKeys: ['legalStatus'],
+          preValidationObject: {
+            preValidationKeys: ['inEngland'],
+            preValidationAnswer: ['country-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['country']
+          },
           ineligibleContent: {
             messageContent: 'Any planning permission must be in place before you submit your full application.',
             messageLink: {
@@ -448,7 +467,12 @@ const questionBank = {
           url: 'planning-required-condition',
           backUrl: 'planning-permission',
           nextUrl: 'project-start',
-          preValidationKeys: ['planningPermission'],
+          preValidationObject: {
+            preValidationKeys: ['planningPermission'],
+            preValidationAnswer: ['planning-permission-A3'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['planning-permission']
+          },
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
@@ -462,7 +486,12 @@ const questionBank = {
           pageTitle: '',
           url: 'project-start',
           baseUrl: 'project-start',
-          preValidationKeys: ['planningPermission'],
+          preValidationObject: {
+            preValidationKeys: ['planningPermission'],
+            preValidationAnswer: ['pplanning-permission-A4'],
+            preValidationRule: 'NOT',
+            preValidationUrls: ['planning-permission']
+          },
           backUrlObject: {
             dependentQuestionYarKey: 'planningPermission',
             dependentAnswerKeysArray: ['planning-permission-A3'],
@@ -534,7 +563,12 @@ const questionBank = {
           url: 'tenancy',
           baseUrl: 'tenancy',
           backUrl: 'project-start',
-          preValidationKeys: ['projectStart'],
+          preValidationObject: {
+            preValidationKeys: ['projectStart'],
+            preValidationAnswer: ['project-start-A2'],
+            preValidationRule: 'NOT',
+            preValidationUrls: ['project-start']
+          },
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A2'],
@@ -600,7 +634,13 @@ const questionBank = {
               elseUrl: 'project-items'
             }
           },
-          preValidationKeys: [],
+          // routing TBC
+          preValidationObject: {
+            preValidationKeys: ['tenancy'],
+            preValidationAnswer: ['tenancy-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['tenancy']
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswercount: 1,
@@ -651,7 +691,12 @@ const questionBank = {
               elseUrl: '/productivity/project-responsibility'
             }
           },
-          preValidationKeys: [],
+          preValidationObject: {
+            preValidationKeys: ['tenancy', 'projectResponsibility'],
+            preValidationAnswer: ['tenancy-A1', 'project-responsibility-A1', 'project-responsibility-A2'],
+            preValidationRule: 'SOLAROR',
+            preValidationUrls: ['tenancy', 'project-responsibility']
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -694,7 +739,12 @@ const questionBank = {
           baseUrl: 'solar/solar-technologies',
           backUrl: 'existing-solar',
           nextUrl: 'project-cost',
-          preValidationKeys: [],
+          preValidationObject: {
+            preValidationKeys: ['existingSolar'],
+            preValidationAnswer: ['existing-solar-A1', 'existing-solar-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['existing-solar']
+          },
           id: 'solarTechnologies',
           name: 'solarTechnologies',
           hint: {
@@ -755,7 +805,7 @@ const questionBank = {
           baseUrl: 'solar-installation',
           backUrl: 'solar-technologies',
           nextUrl: 'project-cost',
-          preValidationKeys: [],
+          // preValidationKeys: [],
           id: 'solarInstallation',
           name: 'solarInstallation',
           hint: {
@@ -836,7 +886,7 @@ const questionBank = {
           url: 'solar/solar-usage',
           baseUrl: 'solar-usage',
           backUrl: 'remaining-costs',
-          preValidationKeys: [],
+          // preValidationKeys: [],
           nextUrl: 'solar-size',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -882,7 +932,7 @@ const questionBank = {
           url: 'solar/solar-size',
           baseUrl: 'solar-size',
           backUrl: 'solar-usage',
-          preValidationKeys: [],
+          // preValidationKeys: [],
           nextUrl: 'agricultural-sector',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -938,7 +988,7 @@ const questionBank = {
           },
           nextUrl: 'potential-amount',
           fundingPriorities: '',
-          preValidationKeys: ['solarTechnologies'],
+          // preValidationKeys: ['solarTechnologies'],
           grantInfo: {
             minGrant: MIN_GRANT,
             maxGrant: MAX_GRANT,
@@ -1000,7 +1050,7 @@ const questionBank = {
           baseUrl: 'potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
+          // preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -1019,7 +1069,7 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'potential-amount',
           nextUrl: 'solar-usage',
-          preValidationKeys: ['projectCost'],
+          // preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
             insertText: {
@@ -1086,7 +1136,7 @@ const questionBank = {
           url: 'tenancy-length',
           baseUrl: 'tenancy-length',
           backUrl: 'tenancy',
-          preValidationKeys: ['tenancy'],
+          // preValidationKeys: ['tenancy'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
@@ -1142,7 +1192,7 @@ const questionBank = {
           order: 71,
           url: 'tenancy-length-condition',
           backUrl: 'tenancy-length',
-          preValidationKeys: ['tenancyLength'],
+          // preValidationKeys: ['tenancyLength'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
@@ -1166,7 +1216,12 @@ const questionBank = {
           url: 'robotics/project-items',
           baseUrl: 'project-items',
           backUrl: 'tenancy',
-          preValidationKeys: ['projectStart'],
+          preValidationObject: {
+            preValidationKeys: ['tenancy', 'projectResponsibility'],
+            preValidationAnswer: ['tenancy-A1', 'project-responsibility-A1', 'project-responsibility-A2'],
+            preValidationRule: 'ROBOTOR',
+            preValidationUrls: ['tenancy', 'project-responsibility']
+          },          
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
             dependentAnswerKeysArray: ['robotics-project-items-A3'],
@@ -1220,7 +1275,7 @@ const questionBank = {
           url: 'robotics/robotic-equipment-items',
           baseUrl: 'robotic-equipment-items',
           backUrl: 'project-items',
-          preValidationKeys: ['projectItems'],
+          // preValidationKeys: ['projectItems'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'roboticsProjectItemEquipments',
             dependentAnswerKeysArray: ['robotic-equipment-items-A8'],
@@ -1291,7 +1346,7 @@ const questionBank = {
           nextUrl: 'other-robotic-conditional',
           url: 'robotics/other-robotic-equipment',
           baseUrl: 'other-robotic-equipment',
-          preValidationKeys: ['projectItems'],
+          // preValidationKeys: ['projectItems'],
           ineligibleContent: {
             messageContent: 'RPA will only fund items that:',
             messageContentList: [
@@ -1381,7 +1436,7 @@ const questionBank = {
           url: 'robotics/other-robotic-conditional',
           backUrl: 'other-robotic-equipment',
           nextUrl: 'project-cost',
-          preValidationKeys: ['otherRoboticEquipment'],
+          // preValidationKeys: ['otherRoboticEquipment'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Your other robotic technology might get a grant from this scheme',
@@ -1409,7 +1464,7 @@ const questionBank = {
             }
           },
           nextUrl: 'potential-amount',
-          preValidationKeys: ['projectItems'],
+          // preValidationKeys: ['projectItems'],
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',
@@ -1499,7 +1554,7 @@ const questionBank = {
           url: 'robotics/potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
+          // preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -1519,7 +1574,7 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'project-cost',
           nextUrl: 'project-impact',
-          preValidationKeys: ['projectCost'],
+          // preValidationKeys: ['projectCost'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
@@ -1572,7 +1627,7 @@ const questionBank = {
           url: 'robotics/project-impact',
           baseUrl: 'project-impact',
           backUrl: 'remaining-costs',
-          preValidationKeys: ['canPayRemainingCost'],
+          // preValidationKeys: ['canPayRemainingCost'],
           ga: [
             { dimension: 'cm2', value: { type: 'journey-time' } }
           ],
@@ -1643,7 +1698,7 @@ const questionBank = {
           baseUrl: 'data-analytics',
           backUrl: 'project-impact',
           nextUrl: 'energy-source',
-          preValidationKeys: ['projectImpact'],
+          // preValidationKeys: ['projectImpact'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul><li>improve productivity</li><li>introduce innovation</li></ul>',
@@ -1696,7 +1751,7 @@ const questionBank = {
           pageTitle: '',
           url: 'robotics/energy-source',
           baseUrl: 'energy-source',
-          preValidationKeys: ['projectImpact'],
+          // preValidationKeys: ['projectImpact'],
           backUrlObject: {
             dependentQuestionYarKey: 'roboticsProjectItemEquipments',
             dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A2', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7', 'robotic-equipment-items-A8'],
@@ -1768,7 +1823,7 @@ const questionBank = {
           baseUrl: 'agricultural-sector',
           backUrl: 'energy-source',
           nextUrl: 'technology',
-          preValidationKeys: ['energySource'],
+          // preValidationKeys: ['energySource'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -1831,7 +1886,7 @@ const questionBank = {
           baseUrl: 'technology',
           backUrl: 'agricultural-sector',
           nextUrl: '/productivity/score',
-          preValidationKeys: ['agriculturalSector'],
+          // preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul><li>introduce innovation</li></ul>',
@@ -1900,7 +1955,7 @@ const questionBank = {
           baseUrl: 'business-details',
           backUrl: 'score',
           nextUrl: '/productivity/applying',
-          preValidationKeys: ['current-score'],
+          // preValidationKeys: ['current-score'],
           ga: [
             { dimension: 'cd2', value: { type: 'score' } },
             { dimension: 'cm1', value: { type: 'journey-time' } }
@@ -2051,7 +2106,7 @@ const questionBank = {
               elseUrl: '/productivity/contractors-details'
             }
           },
-          preValidationKeys: ['businessDetails'],
+          // preValidationKeys: ['businessDetails'],
           eliminationAnswerKeys: '',
           fundingPriorities: '',
           type: 'single-answer',
@@ -2084,7 +2139,7 @@ const questionBank = {
           url: 'farmers-details',
           baseUrl: 'farmer-details',
           nextUrl: 'check-details',
-          preValidationKeys: ['applying'],
+          // preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
@@ -2348,7 +2403,7 @@ const questionBank = {
           url: 'contractors-details',
           baseUrl: 'contractors-details',
           nextUrl: 'check-details',
-          preValidationKeys: ['applying'],
+          // preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
@@ -2597,7 +2652,7 @@ const questionBank = {
               elseUrl: '/productivity/contractors-details'
             }
           },
-          preValidationKeys: ['applying'],
+          // preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -2857,7 +2912,7 @@ const questionBank = {
             }
           },
           nextUrl: 'confirm',
-          preValidationKeys: ['applying'],
+          // preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           pageData: {
@@ -2878,8 +2933,7 @@ const questionBank = {
           url: 'confirm',
           backUrl: 'check-details',
           nextUrl: 'confirmation',
-          preValidationKeys: ['farmerDetails', 'contractorsDetails'],
-          preValidationKeysRule: { condition: 'ANY' },
+          // preValidationKeys: ['farmerDetails', 'contractorsDetails'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -2904,7 +2958,7 @@ const questionBank = {
           pageTitle: '',
           url: 'confirmation',
           baseUrl: 'confirmation',
-          preValidationKeys: ['consentOptional'],
+          // preValidationKeys: ['consentOptional'],
           ga: [
             { dimension: 'cd2', value: { type: 'score' } },
             { dimension: 'cd5', value: { type: 'confirmationId' } },
