@@ -389,17 +389,16 @@ const showPostPage = (currentQuestion, request, h) => {
         }else{
           return  h.view('not-eligible', NOT_ELIGIBLE)
         }
-        
       }
+      case 'project-cost' || 'project-cost-solar':
+        const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+        if (payload[Object.keys(payload)[0]] > 1250000) {
+          return h.redirect('potential-amount-capped')
+        }
+        setYarValue(request, 'calculatedGrant', calculatedGrant)
+        setYarValue(request, 'remainingCost', remainingCost)
     default:
       break
-  }
-
-  if (yarKey === 'projectCost') {
-    const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
-
-    setYarValue(request, 'calculatedGrant', calculatedGrant)
-    setYarValue(request, 'remainingCost', remainingCost)
   }
 
   return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.secBtn))
