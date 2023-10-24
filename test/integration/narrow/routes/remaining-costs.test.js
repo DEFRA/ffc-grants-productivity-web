@@ -1,6 +1,6 @@
 const { crumbToken } = require('./test-helper')
 
-describe('Page: /remaining-costs', () => {
+describe('Page: /remaining-costs-solar', () => {
   const varList = { 
     projectCost: '150000', 
     calculatedGrant: '37500', 
@@ -18,7 +18,7 @@ describe('Page: /remaining-costs', () => {
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/remaining-costs`
+      url: `${global.__URLPREFIX__}/remaining-costs-solar`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -31,7 +31,7 @@ describe('Page: /remaining-costs', () => {
   it('no option selected -> show error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/remaining-costs`,
+      url: `${global.__URLPREFIX__}/remaining-costs-solar`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { remainingCosts: '', crumb: crumbToken }
     }
@@ -44,7 +44,7 @@ describe('Page: /remaining-costs', () => {
   it('user selects ineligible option: \'No\' -> display ineligible page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/remaining-costs`,
+      url: `${global.__URLPREFIX__}/remaining-costs-solar`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { remainingCosts: 'No', crumb: crumbToken }
     }
@@ -56,7 +56,7 @@ describe('Page: /remaining-costs', () => {
   it('user selects eligible option: \'Yes\' -> store user response and redirect to /solar-usage', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/remaining-costs`,
+      url: `${global.__URLPREFIX__}/remaining-costs-solar`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { remainingCosts: 'Yes', crumb: crumbToken }
     }
@@ -71,7 +71,7 @@ describe('Page: /remaining-costs', () => {
 
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/remaining-costs`
+      url: `${global.__URLPREFIX__}/remaining-costs-solar`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)

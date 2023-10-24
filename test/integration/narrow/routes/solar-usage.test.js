@@ -74,6 +74,6 @@ describe('Page: /solar-usage', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"remaining-costs\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"remaining-costs-solar\" class=\"govuk-back-link\">Back</a>')
   })
 })

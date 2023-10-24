@@ -843,7 +843,7 @@ const questionBank = {
           pageTitle: '',
           url: 'solar-usage',
           baseUrl: 'solar-usage',
-          backUrl: 'remaining-costs',
+          backUrl: 'remaining-costs-solar',
           preValidationKeys: [],
           nextUrl: 'solar-output',
           eliminationAnswerKeys: '',
@@ -1015,7 +1015,7 @@ const questionBank = {
           url: 'potential-amount',
           baseUrl: 'potential-amount',
           backUrl: 'project-cost-solar',
-          nextUrl: 'remaining-costs',
+          nextUrl: 'remaining-costs-solar',
           preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
@@ -1027,12 +1027,12 @@ const questionBank = {
           }
         },
         {
-          key: 'remaining-costs',
+          key: 'remaining-costs-solar',
           order: 240,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
           pageTitle: '',
-          url: 'remaining-costs',
-          baseUrl: 'remaining-costs',
+          url: 'remaining-costs-solar',
+          baseUrl: 'remaining-costs-solar',
           backUrl: 'potential-amount',
           nextUrl: 'solar-usage',
           preValidationKeys: ['projectCost'],

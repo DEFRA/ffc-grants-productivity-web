@@ -28,7 +28,7 @@ describe('Page: /potential-amount', () => {
     expect(response.payload).toContain(eligiblePageText)
   })
 
-  it('should redirect to /remaining-costs when user press continue', async () => {
+  it('should redirect to /remaining-costs-solar when user press continue', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/potential-amount`,
@@ -38,7 +38,7 @@ describe('Page: /potential-amount', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('remaining-costs')
+    expect(postResponse.headers.location).toBe('remaining-costs-solar')
   })
 
   it('page loads with correct back link', async () => {
