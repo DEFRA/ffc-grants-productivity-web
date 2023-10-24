@@ -221,13 +221,12 @@ const questionBank = {
             dependentAnswerKeysArray: ['applicant-A1'],
             urlOptions: {
               thenUrl: 'applicant',
-              elseUrl: 'project-subject'
+              elseUrl: 'country'
             }
           },
           url: 'legal-status',
           baseUrl: 'legal-status',
-          nextUrl: 'country',
-          preValidationKeys: ['businessLocation'],
+          // preValidationKeys: ['businessLocation'],
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -652,7 +651,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select if your farm has an existing solar PV system'
+              error: 'Select yes if your farm has an existing solar PV system'
             }
           ],
           answers: [

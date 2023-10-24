@@ -51,22 +51,22 @@ describe('Legal status page', () => {
     expect(response.headers.location).toBe('country')
   })
   // commented out as per latest requirements, keeping it it here for reference
-  // test('redirects to country if user selected solar option on project-subject page', async () => {
-  //   varList.projectSubject = 'Solar technologies'
-  //   const options = {
-  //     method: 'POST',
-  //     url: `${global.__URLPREFIX__}/legal-status`,
-  //     headers: { cookie: 'crumb=' + crumbToken },
-  //     payload: {
-  //       crumb: crumbToken,
-  //       legalStatus: 'Sole trader',
-  //       projectSubject: 'Solar technologies'
-  //     }
-  //   }
-  //   const response = await global.__SERVER__.inject(options)
-  //   expect(response.statusCode).toBe(302)
-  //   expect(response.headers.location).toBe('country')
-  // })
+  test('redirects to country if user selected solar option on project-subject page', async () => {
+    varList.projectSubject = 'Solar technologies'
+    const options = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/legal-status`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: {
+        crumb: crumbToken,
+        legalStatus: 'Sole trader',
+        projectSubject: 'Solar technologies'
+      }
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(302)
+    expect(response.headers.location).toBe('country')
+  })
   test('shows error message if no option selected', async () => {
     const options = {
       method: 'POST',
@@ -102,7 +102,7 @@ describe('Legal status page', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain(
-      '<a href="project-subject" class="govuk-back-link">Back</a>'
+      '<a href="country" class="govuk-back-link">Back</a>'
     )
   })
 })
