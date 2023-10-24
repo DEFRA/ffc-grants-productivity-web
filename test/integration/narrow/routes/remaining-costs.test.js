@@ -63,7 +63,7 @@ describe('Page: /remaining-costs-solar', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('solar-usage')
+    expect(postResponse.headers.location).toBe('agricultural-sector-solar')
   })
 
   it('page loads with correct back link - potential-amount', async () => {
