@@ -909,7 +909,7 @@ const questionBank = {
               elseUrl: 'solar-technologies'
             }
           },
-          nextUrl: 'potential-amount',
+          nextUrl: 'potential-amount-solar',
           fundingPriorities: '',
           preValidationKeys: [],
           grantInfo: {
@@ -969,8 +969,8 @@ const questionBank = {
         {
           key: 'solar-potential-amount',
           order: 230,
-          url: 'potential-amount',
-          baseUrl: 'potential-amount',
+          url: 'potential-amount-solar',
+          baseUrl: 'potential-amount-solar',
           backUrl: 'project-cost-solar',
           nextUrl: 'remaining-costs-solar',
           preValidationKeys: ['projectCost'],
@@ -990,7 +990,7 @@ const questionBank = {
           pageTitle: '',
           url: 'remaining-costs-solar',
           baseUrl: 'remaining-costs-solar',
-          backUrl: 'potential-amount',
+          backUrl: 'potential-amount-solar',
           nextUrl: 'agricultural-sector-solar',
           preValidationKeys: ['projectCost'],
           ineligibleContent: {
@@ -1634,10 +1634,11 @@ const questionBank = {
           yarKey: 'projectCost'
         },
         {
-          key: 'robotics-potential-amount',
+          key: 'potential-amount',
           title: 'Potential grant funding',
           order: 320,
-          url: 'robotics/potential-amount',
+          url: 'potential-amount',
+          baseUrl: 'potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
           preValidationKeys: ['projectCost'],
@@ -1656,7 +1657,7 @@ const questionBank = {
           order: 330,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
           pageTitle: '',
-          url: 'robotics/remaining-costs',
+          url: 'remaining-costs',
           baseUrl: 'remaining-costs',
           backUrl: 'project-cost',
           nextUrl: 'project-impact',

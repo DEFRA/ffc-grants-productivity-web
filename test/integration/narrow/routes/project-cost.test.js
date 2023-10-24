@@ -35,7 +35,6 @@ describe('Project cost solar page', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
   })
-
   it('should load page successfully if no projectCost', async () => {
     varList = {
       projectCost: undefined
@@ -49,7 +48,6 @@ describe('Project cost solar page', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
   })
-
   it('should return an error message if no option is selected', async () => {
     varList['current-score'] = null
     const postOptions = {
@@ -114,9 +112,8 @@ describe('Project cost solar page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     console.log('payload: ', postResponse.payload)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('potential-amount')
+    expect(postResponse.headers.location).toBe('potential-amount-solar')
   })
-
   it('should store valid user input and redirect to potential-amount page', async () => {
     const postOptions = {
       method: 'POST',
@@ -127,9 +124,8 @@ describe('Project cost solar page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('potential-amount')
-  })
-
+    expect(postResponse.headers.location).toBe('potential-amount-solar')
+})
 it('page loads with correct back link', async () => {
     const options = {
         method: 'GET',
