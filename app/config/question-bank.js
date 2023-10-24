@@ -577,7 +577,14 @@ const questionBank = {
           url: 'project-responsibility',
           baseUrl: 'project-responsibility',
           backUrl: 'tenancy',
-          nextUrl: 'solar/existing-solar',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectSubject',
+            dependentAnswerKeysArray: ['project-subject-A2'],
+            urlOptions: {
+              thenUrl: 'solar/existing-solar',
+              elseUrl: 'project-items'
+            }
+          },
           preValidationKeys: [],
           fundingPriorities: '',
           type: 'single-answer',
@@ -598,7 +605,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select if will take full responsibility for your project'
+              error: 'Select if you will take full responsibility for your project'
             }
           ],
           answers: [
@@ -630,9 +637,6 @@ const questionBank = {
             }
           },
           preValidationKeys: [],
-          hint: {
-            html: 'The site where the work will happen'
-          },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -730,7 +734,7 @@ const questionBank = {
         {
           key: 'solar-installation',
           order: 61,
-          title: 'What solar technologies does your project need?',
+          title: 'Where will you install the solar PV panels?',
           pageTitle: '',
           url: 'solar/solar-installation',
           baseUrl: 'solar-installation',
@@ -743,7 +747,6 @@ const questionBank = {
             text: 'Select all that apply'
           },
           eliminationAnswerKeys: '',
-          ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
@@ -774,7 +777,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select where you will instal the solar PV panels'
+              error: 'Select where you will install the solar PV panels'
             },
             {
               type: 'STANDALONE_ANSWER',
@@ -796,7 +799,7 @@ const questionBank = {
             },
             {
               key: 'solar-installation-A3',
-              value: 'Floating (on a a reservoir)'
+              value: 'Floating (on a reservoir)',
             },
             {
               value: 'divider'
