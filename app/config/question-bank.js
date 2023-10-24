@@ -533,7 +533,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A2'],
             urlOptions: {
-              thenUrl: 'solar/existing-solar',
+              thenUrl: 'existing-solar',
               elseUrl: 'project-items'
             }
           },
@@ -590,7 +590,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A2'],
             urlOptions: {
-              thenUrl: 'solar/existing-solar',
+              thenUrl: 'existing-solar',
               elseUrl: 'project-items'
             }
           },
@@ -634,8 +634,8 @@ const questionBank = {
           order: 62,
           title: 'Does your farm have an existing solar PV system?',
           pageTitle: '',
-          url: 'solar/existing-solar',
-          baseUrl: 'solar/existing-solar',
+          url: 'existing-solar',
+          baseUrl: 'existing-solar',
           nextUrl: 'solar-technologies',
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
@@ -656,7 +656,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'Applicants who already have a solar PV system can still apply for this grant. For example, you can apply for a battery to support your existing solar PV panels.',
+                para: 'Applicants who already have a solar PV system can still apply for this grant. For example, you can apply for a battery to add to your existing solar PV panels.',
                 items: []
               }]
             }]
@@ -684,10 +684,10 @@ const questionBank = {
           order: 61,
           title: 'What solar technologies does your project need?',
           pageTitle: '',
-          url: 'solar/solar-technologies',
-          baseUrl: 'solar/solar-technologies',
+          url: 'solar-technologies',
+          baseUrl: 'solar-technologies',
           backUrl: 'existing-solar',
-          nextUrl: 'project-cost',
+          nextUrl: 'project-cost-solar',
           preValidationKeys: [],
           id: 'solarTechnologies',
           name: 'solarTechnologies',
@@ -701,11 +701,25 @@ const questionBank = {
                     Select all that apply
                     `
           },
+          ineligibleContent: {
+            messageContent: 'You must have solar PV panels to be eligible for funding for other solar technology.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
           eliminationAnswerKeys: '',
-          ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'If you do not have an existing solar PV system you must select solar PV panels to be eligible for this grant.'
+              }]
+            }]
+          },
           validate: [
             {
               type: 'NOT_EMPTY',
@@ -745,10 +759,10 @@ const questionBank = {
           order: 61,
           title: 'Where will you install the solar PV panels?',
           pageTitle: '',
-          url: 'solar/solar-installation',
+          url: 'solar-installation',
           baseUrl: 'solar-installation',
           backUrl: 'solar-technologies',
-          nextUrl: 'project-cost',
+          nextUrl: 'solar-output',
           preValidationKeys: [],
           id: 'solarInstallation',
           name: 'solarInstallation',
@@ -823,61 +837,18 @@ const questionBank = {
           yarKey: 'solarInstallation'
         },
         {
-          key: 'solar-usage',
-          order: 63,
-          title: 'Will you use most of the energy produced by solar on your farm?',
-          pageTitle: '',
-          url: 'solar/solar-usage',
-          baseUrl: 'solar-usage',
-          backUrl: 'remaining-costs',
-          preValidationKeys: [],
-          nextUrl: 'solar-size',
-          eliminationAnswerKeys: '',
-          ineligibleContent: {},
-          fundingPriorities: '',
-          type: 'single-answer',
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Funding priorities',
-              content: [{
-                para: 'RPA wants to fund projects that improve the environment.',
-                items: []
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select if you will use most of the energy produced on your farm'
-            }
-          ],
-          answers: [
-            {
-              key: 'solar-usage-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'solar-usage-A2',
-              value: 'No',
-            }
-          ],
-          yarKey: 'solarUsage'
-        },
-        {
-          key: 'solar-size',
+          key: 'solar-output',
           order: 64,
           title: 'How much energy will your solar PV system output?',
           hint: {
             html: 'The size of your solar PV system'
           },
           pageTitle: '',
-          url: 'solar/solar-size',
-          baseUrl: 'solar-size',
-          backUrl: 'solar-usage',
+          url: 'solar-output',
+          baseUrl: 'solar-output',
+          backUrl: 'solar-installation',
           preValidationKeys: [],
-          nextUrl: 'agricultural-sector',
+          nextUrl: 'project-cost-solar',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -901,38 +872,46 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'solar-size-A1',
-              value: 'Up to 100kW'
+              key: 'solar-output-A1',
+              value: 'Up to 50kW'
             },
             {
-              key: 'solar-size-A2',
-              value: '100kW to 350kW',
+              key: 'solar-output-A2',
+              value: '51kW to 100kW',
             },
             {
-              key: 'solar-size-A3',
-              value: 'More than 350kW',
+              key: 'solar-output-A3',
+              value: '101kW to 150kW',
+            },
+            {
+              key: 'solar-output-A4',
+              value: '151kW to 200kW',
+            },
+            {
+              key: 'solar-output-A5',
+              value: 'More than 201kW',
             }
           ],
-          yarKey: 'solarSize'
+          yarKey: 'solarOutput'
         },
         {
-          key: 'project-cost',
+          key: 'project-cost-solar',
           order: 65,
           pageTitle: '',
           classes: 'govuk-input--width-10',
-          url: 'solar/project-cost',
-          baseUrl: 'project-cost',
+          url: 'project-cost-solar',
+          baseUrl: 'project-cost-solar',
           backUrlObject: {
             dependentQuestionYarKey: 'solarTechnologies',
             dependentAnswerKeysArray: ['solar-technologies-A2'],
             urlOptions: {
-              thenUrl: 'solar-installation',
+              thenUrl: 'solar-output',
               elseUrl: 'solar-technologies'
             }
           },
-          nextUrl: 'potential-amount',
+          nextUrl: 'potential-amount-solar',
           fundingPriorities: '',
-          preValidationKeys: ['solarTechnologies'],
+          preValidationKeys: [],
           grantInfo: {
             minGrant: MIN_GRANT,
             maxGrant: MAX_GRANT,
@@ -990,10 +969,10 @@ const questionBank = {
         {
           key: 'solar-potential-amount',
           order: 230,
-          url: 'solar/potential-amount',
-          baseUrl: 'potential-amount',
-          backUrl: 'project-cost',
-          nextUrl: 'remaining-costs',
+          url: 'potential-amount-solar',
+          baseUrl: 'potential-amount-solar',
+          backUrl: 'project-cost-solar',
+          nextUrl: 'remaining-costs-solar',
           preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
@@ -1005,14 +984,14 @@ const questionBank = {
           }
         },
         {
-          key: 'remaining-costs',
+          key: 'remaining-costs-solar',
           order: 240,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
           pageTitle: '',
-          url: 'solar/remaining-costs',
-          baseUrl: 'remaining-costs',
-          backUrl: 'potential-amount',
-          nextUrl: 'solar-usage',
+          url: 'remaining-costs-solar',
+          baseUrl: 'remaining-costs-solar',
+          backUrl: 'potential-amount-solar',
+          nextUrl: 'agricultural-sector-solar',
           preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
@@ -1071,6 +1050,85 @@ const questionBank = {
             }
           ],
           yarKey: 'remainingCosts'
+        },
+        {
+          key: 'agricultural-sector-solar',
+          scheme: '',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
+          order: 245,
+          title: 'Which agricultural sector is your project in?',
+          pageTitle: '',
+          url: 'agricultural-sector-solar',
+          baseUrl: 'agricultural-sector-solar',
+          backUrl: 'remaining-costs-solar',
+          nextUrl: 'score',
+          preValidationKeys: ['remainingCosts'],
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          hint: {
+            text: 'Select up to 2 options'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA wants to fund sectors that:',
+                items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what agricultural sector your project is in'
+            },
+            {
+              type: 'MAX_SELECT',
+              max: 2,
+              error: 'Select up to 2 sectors your project is in'
+            }
+          ],
+          answers: [
+            {
+              key: 'robotics-agricultural-sector-A1',
+              value: 'Arable'
+            },
+            {
+              key: 'robotics-agricultural-sector-A2',
+              value: 'Beef'
+            },
+            {
+              key: 'robotics-agricultural-sector-A3',
+              value: 'Dairy livestock'
+            },
+            {
+              key: 'robotics-agricultural-sector-A4',
+              value: 'Horticulture'
+            },
+            {
+              key: 'robotics-agricultural-sector-A5',
+              value: 'Mixed livestock'
+            },
+            {
+              key: 'robotics-agricultural-sector-A6',
+              value: 'Pig'
+            },
+            {
+              key: 'robotics-agricultural-sector-A7',
+              value: 'Poultry'
+            },
+            {
+              key: 'robotics-agricultural-sector-A7',
+              value: 'Sheep'
+            }
+          ],
+          yarKey: 'agriculturalSector'
         },
         {
           key: 'tenancy-length',
@@ -1361,7 +1419,7 @@ const questionBank = {
           title: 'What is your other robotic technology?',
           pageTitle: '',
           backUrl: 'robotic-automatic',
-          nextUrl: 'other-robotic-conditional',
+          nextUrl: 'other-conditional',
           url: 'other-robotic-technology',
           baseUrl: 'other-robotic-technology',
           preValidationKeys: ['projectItems'],
@@ -1450,10 +1508,10 @@ const questionBank = {
           yarKey: 'otherRoboticTechnology'
         },
         {
-          key: 'other-robotic-conditional',
+          key: 'other-conditional',
           title: 'Your other robotic technology might get a grant from this scheme',
           order: 307,
-          url: 'other-robotic-conditional',
+          url: 'other-conditional',
           backUrlObject: {
             dependentQuestionYarKey: ['roboticAutomatic'],
             dependentAnswerKeysArray: ['robotic-automatic-A1'],
@@ -1477,7 +1535,7 @@ const questionBank = {
           yarKey: 'otherRoboticsConditional'
         },
         {
-          key: 'robotics-project-cost',
+          key: 'project-cost',
           order: 310,
           pageTitle: '',
           url: 'project-cost',
@@ -1490,7 +1548,7 @@ const questionBank = {
               elseUrl: 'project-items'
             }
           },
-          backUrl:'other-robotic-conditional',
+          backUrl:'other-conditional',
           nextUrl: 'potential-amount',
           preValidationKeys: ['projectItems'],
           classes: 'govuk-input--width-10',
@@ -1499,7 +1557,7 @@ const questionBank = {
           prefix: { text: '£' },
           type: 'input',
           grantInfo: {
-            minGrant: 35000,
+            minGrant: 25000,
             maxGrant: 500000,
             grantPercentage: 40,
             cappedGrant: true
@@ -1512,7 +1570,7 @@ const questionBank = {
           hint: {
             html: `
               You can only apply for a grant of up to 40% of the estimated costs.
-              <br/>The minimum grant you can apply for this project is £35,000 (40% of £87,500).
+              <br/>The minimum grant you can apply for this project is £25,000 (40% of £62,500).
               <br/>The maximum grant is £500,000.
               <br/><br/>Do not include VAT.
               <br/><br/>Enter amount, for example 95,000`
@@ -1520,7 +1578,7 @@ const questionBank = {
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
-            insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £500,000.' },
+            insertText: { text: 'The minimum grant you can apply for is £25,000 (40% of £62,500). The maximum grant is £500,000 (40% of £1.25 million).' },
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -1564,22 +1622,23 @@ const questionBank = {
               error: 'Enter a whole number with a maximum of 10 digits'
             }
           ],
-          // warningConditional: {
-          //   dependentWarningQuestionKey: 'other-robotic-technology',
-          //   dependentWarningAnswerKeysArray: ['other-robotic-technology-A1'],
-          //   ConditionalWarningMsg: {
-          //     text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
-          //     iconFallbackText: 'Warning'
-          //   }
-          // },
-          // answers: [],
+          warningConditional: {
+            dependentWarningQuestionKey: 'other-robotic-technology',
+            dependentWarningAnswerKeysArray: ['other-robotic-technology-A1'],
+            ConditionalWarningMsg: {
+              text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
+              iconFallbackText: 'Warning'
+            }
+          },
+          answers: [],
           yarKey: 'projectCost'
         },
         {
-          key: 'robotics-potential-amount',
+          key: 'potential-amount',
           title: 'Potential grant funding',
           order: 320,
-          url: 'robotics/potential-amount',
+          url: 'potential-amount',
+          baseUrl: 'potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
           preValidationKeys: ['projectCost'],
@@ -1598,7 +1657,7 @@ const questionBank = {
           order: 330,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
           pageTitle: '',
-          url: 'robotics/remaining-costs',
+          url: 'remaining-costs',
           baseUrl: 'remaining-costs',
           backUrl: 'project-cost',
           nextUrl: 'project-impact',
