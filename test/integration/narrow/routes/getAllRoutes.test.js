@@ -1,11 +1,29 @@
 const { ALL_QUESTIONS } = require('../../../../app/config/question-bank')
+const varListTemplate = {
+  planningPermission: 'Should be in place by the time I make my full application',
+  planningPermissionEvidence: {
+    planningAuthority: 'some planning',
+    planningReferenceNumber: '123456-ref'
+  },
+  projectSubject: 'Robotics and automatic technology',
+  applicant: 'Contractor',
+  businessLocation: 'Yes',
+  inEngland: 'Yes',
+  tenancy: 'No',
+  projectResponsibility: 'Yes, I plan to take full responsibility for my project',
+  existingSolar: 'Yes'
+
+}
+
 let varList
 ALL_QUESTIONS.forEach(question => {
+  
   if (question.preValidationKeys) {
     varList = question.preValidationKeys.map(m => {
       return { m: 'someValue' }
     })
   }
+  
 })
 jest.doMock('../../../../app/helpers/session', () => ({
   setYarValue: (request, key, value) => null,
@@ -16,13 +34,25 @@ jest.doMock('../../../../app/helpers/session', () => ({
 }))
 
 describe('All default GET routes', () => {
-  varList.planningPermission = 'Not yet applied'
-  varList.PlanningPermissionEvidence = {
-    planningAuthority: 'some planning',
-    planningReferenceNumber: '123456-ref'
-  }
+
+  beforeEach(() => {
+    varList = { ...varListTemplate }
+  })
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
+
   ALL_QUESTIONS.forEach(question => {
     it(`should load ${question.key} page successfully`, async () => {
+
+      if (question.key === 'existing-solar') {
+        varList.projectSubject = 'Solar technologies'
+      } else if (question.key === 'robotics-project-items') {
+        varList.projectSubject = 'Robotics and automatic technology'
+    
+      }
+
       const options = {
         method: 'GET',
         url: `${global.__URLPREFIX__}/${question.url}`

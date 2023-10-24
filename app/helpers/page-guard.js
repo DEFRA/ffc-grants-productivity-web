@@ -41,14 +41,19 @@ function guardPage (request, guardData) {
         // check for all keys (that every key and value pair exists)
 
         for (let i = 0; i< preValidationList.length; i++) {
-          if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].key, answer) === getYarValue(request, preValidationList[i].key)).length === 0) {
+          if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length === 0) {
             return true
           }
         }
         return false
 
+
       case 'OR':
         // check for one of the keys (if any key value pair exists)
+
+        if (guardData?.andCheck && getYarValue(request, 'projectSubject') != getQuestionAnswer('project-subject', guardData.andCheck)) {
+          return true
+        }
 
         for (let i = 0; i< preValidationList.length; i++) {
           if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length > 0) {
@@ -67,36 +72,6 @@ function guardPage (request, guardData) {
         }
 
         return false
-
-      case 'SOLAROR':
-        // check for a type of journey and another requirement (solar + project repsonsibility etc)
-
-        // check yar value of journey
-        if (getYarValue(request, 'projectSubject') === getQuestionAnswer('projectSubject', 'project-subject-A1')) {
-          return true
-        }
-
-        for (let i = 0; i< preValidationList.length; i++) {
-          if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length > 0) {
-            return false
-          }
-        }
-        return true
-
-      case 'ROBOTOR':
-        // check for a type of journey and another requirement (solar + project repsonsibility etc)
-
-        if (getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A2')) {
-          return true
-        }
-
-        for (let i = 0; i< preValidationList.length; i++) {
-          if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length > 0) {
-            return false
-          }
-        }
-        return true
-  
     }   
 
   }

@@ -1,7 +1,8 @@
 const { crumbToken } = require('./test-helper')
 const varListTemplate = {
   projectSubject: 'Robotics and automatic technology',
-  applicant: 'Farmer'
+  applicant: 'Farmer',
+  businessLocation: 'Yes'
 }
 let varList
 const mockSession = {

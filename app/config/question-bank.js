@@ -247,7 +247,7 @@ const questionBank = {
           baseUrl: 'legal-status',
           preValidationObject: {
             preValidationKeys: ['projectSubject', 'businessLocation'],
-            preValidationAnswer: ['project-subject-A2', 'business-location-A1', 'business-location-A2'],
+            preValidationAnswer: ['project-subject-A2', 'business-location-A1'],
             preValidationRule: 'OR',
             preValidationUrls: ['project-subject', 'business-location']
           },          
@@ -694,8 +694,9 @@ const questionBank = {
           preValidationObject: {
             preValidationKeys: ['tenancy', 'projectResponsibility'],
             preValidationAnswer: ['tenancy-A1', 'project-responsibility-A1', 'project-responsibility-A2'],
-            preValidationRule: 'SOLAROR',
-            preValidationUrls: ['tenancy', 'project-responsibility']
+            preValidationRule: 'OR',
+            preValidationUrls: ['tenancy', 'project-responsibility'],
+            andCheck: 'project-subject-A2'
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -1219,8 +1220,9 @@ const questionBank = {
           preValidationObject: {
             preValidationKeys: ['tenancy', 'projectResponsibility'],
             preValidationAnswer: ['tenancy-A1', 'project-responsibility-A1', 'project-responsibility-A2'],
-            preValidationRule: 'ROBOTOR',
-            preValidationUrls: ['tenancy', 'project-responsibility']
+            preValidationRule: 'OR',
+            preValidationUrls: ['tenancy', 'project-responsibility'],
+            andCheck: 'project-subject-A1'
           },          
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
