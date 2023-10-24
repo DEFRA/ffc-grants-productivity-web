@@ -1211,7 +1211,7 @@ const questionBank = {
         },
         /// ////// ***************** ROBOTICS ************************************/////////////////////
         {
-          key: 'robotics-project-items',
+          key: 'project-items',
           order: 300,
           title: 'Which items does your project need?',
           pageTitle: '',
@@ -1228,7 +1228,7 @@ const questionBank = {
           preValidationKeys: ['projectStart'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['robotics-project-items-A3'],
+            dependentAnswerKeysArray: ['project-items-A3'],
             urlOptions: {
               thenUrl: 'technology-items',
               elseUrl: 'project-cost'
@@ -1251,21 +1251,21 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'robotics-project-items-A1',
+              key: 'project-items-A1',
               value: 'Advanced ventilation control units',
               hint: {
                 text: 'System to control and monitor ventilation of existing horticultural or livestock buildings to minimise heat loss and reduce greenhouse gas and particulate emissions'
               }
             },
             {
-              key: 'robotics-project-items-A2',
+              key: 'project-items-A2',
               value: 'Wavelength-specific LED lighting for horticultural crops',
               hint: {
                 html: 'Wavelength-specific LED lighting to aid plant growth only'
               }
             },
             {
-              key: 'robotics-project-items-A3',
+              key: 'project-items-A3',
               value: 'Robotic equipment item'
             }
           ],
@@ -1542,7 +1542,7 @@ const questionBank = {
           baseUrl: 'project-cost',
           backUrlObject: {
             dependentQuestionYarKey: ['technologyItems', 'projectItems'],
-            dependentAnswerKeysArray: ['technology-items-A8', 'robotics-project-items-A3'],
+            dependentAnswerKeysArray: ['technology-items-A8', 'project-items-A3'],
             urlOptions: {
               thenUrl: ['other-robotic-technology', 'technology-items'],
               elseUrl: 'project-items'
@@ -1550,7 +1550,7 @@ const questionBank = {
           },
           backUrl:'other-conditional',
           nextUrl: 'potential-amount',
-          preValidationKeys: ['projectItems'],
+          preValidationKeys: [],
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',
@@ -1591,7 +1591,7 @@ const questionBank = {
                 content: [{
                   para: '',
                   items: [],
-                  dependentAnswerExceptThese: ['robotics-project-items-A3', 'technology-items-A8']
+                  dependentAnswerExceptThese: ['project-items-A3', 'technology-items-A8']
                 }]
               },
               {
@@ -1604,7 +1604,7 @@ const questionBank = {
               }
             ],
             dependentYarKeys: ['projectItems', 'technologyItems'],
-            dependentQuestionKeys: ['robotics-project-items', 'technology-items']
+            dependentQuestionKeys: ['project-items', 'technology-items']
           },
           validate: [
             {
