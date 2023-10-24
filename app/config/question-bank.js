@@ -1195,7 +1195,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['robotics-project-items-A3'],
             urlOptions: {
               thenUrl: 'technology-items',
-              elseUrl: 'project-cost-solar'
+              elseUrl: 'project-cost'
             }
           },
           id: 'roboticsProjectItems',
@@ -1499,11 +1499,11 @@ const questionBank = {
           yarKey: 'otherRoboticsConditional'
         },
         {
-          key: 'project-cost-robotics',
+          key: 'project-cost',
           order: 310,
           pageTitle: '',
-          url: 'project-cost-robotics',
-          baseUrl: 'project-cost-robotics',
+          url: 'project-cost',
+          baseUrl: 'project-cost',
           backUrlObject: {
             dependentQuestionYarKey: ['technologyItems', 'projectItems'],
             dependentAnswerKeysArray: ['technology-items-A8', 'robotics-project-items-A3'],
