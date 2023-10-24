@@ -13,7 +13,7 @@ describe('robotics-remaining-costs page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if you can pay the remaining costs without using any other grant money')
+    expect(postResponse.payload).toContain('Select yes if you can pay the remaining costs')
   })
 
   it('user selects: <Yes> -> store user response and redirect to project impact page', async () => {

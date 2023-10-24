@@ -1671,7 +1671,7 @@ const questionBank = {
           }
         },
         {
-          key: 'robotics-remaining-costs',
+          key: 'remaining-costs',
           order: 330,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
           pageTitle: '',
@@ -1682,8 +1682,17 @@ const questionBank = {
           preValidationKeys: ['projectCost'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
-            insertText: { text: 'You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.' },
+            messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
+            insertText: {
+              html: `
+                  <p>You can use:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>loans</li>
+                    <li>overdrafts</li>
+                    <li>the Basic Payment Scheme</li>
+                  </ul>
+            </span>`
+            },
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
@@ -1694,20 +1703,26 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.\n\n
-                
-                You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.`,
-                items: []
-              }]
-            }]
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.
+                  
+                  You can use:`,
+                  items: [
+                    'loans',
+                    'overdrafts',
+                    'the Basic Payment Scheme'
+                  ]
+                }]
+              }
+            ]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if you can pay the remaining costs without using any other grant money'
+              error: 'Select yes if you can pay the remaining costs'
             }
           ],
           answers: [
