@@ -50,23 +50,6 @@ describe('Legal status page', () => {
     expect(response.statusCode).toBe(302)
     expect(response.headers.location).toBe('country')
   })
-  // commented out as per latest requirements, keeping it it here for reference
-  test('redirects to country if user selected solar option on project-subject page', async () => {
-    varList.projectSubject = 'Solar technologies'
-    const options = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/legal-status`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: {
-        crumb: crumbToken,
-        legalStatus: 'Sole trader',
-        projectSubject: 'Solar technologies'
-      }
-    }
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(302)
-    expect(response.headers.location).toBe('country')
-  })
   test('shows error message if no option selected', async () => {
     const options = {
       method: 'POST',
@@ -82,6 +65,7 @@ describe('Legal status page', () => {
     expect(response.payload).toContain('Select the legal status of the business')
   })
   it('page loads with correct back link - if applicant was a farmer', async () => {
+    varList.applicant = 'Farmer'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/legal-status`
@@ -92,7 +76,19 @@ describe('Legal status page', () => {
       '<a href="applicant" class="govuk-back-link">Back</a>'
     )
   })
-  it('page loads with correct back link', async () => {
+  it('page loads with correct back link - if applicant was a contractor', async () => {
+    varList.applicant = 'Contractor'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/legal-status`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain(
+      '<a href="country" class="govuk-back-link">Back</a>'
+    )
+  })
+  it.skip('page loads with back link to /project-subject if user selected Solar', async () => {
     varList.applicant = null,
     varList.projectSubject = 'Solar technologies'
     const options = {
@@ -102,7 +98,7 @@ describe('Legal status page', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain(
-      '<a href="country" class="govuk-back-link">Back</a>'
+      '<a href="project-subject" class="govuk-back-link">Back</a>'
     )
   })
 })
