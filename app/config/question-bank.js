@@ -948,7 +948,7 @@ const questionBank = {
             dependentQuestionYarKey: 'solarTechnologies',
             dependentAnswerKeysArray: ['solar-technologies-A2'],
             urlOptions: {
-              thenUrl: 'solar-installation',
+              thenUrl: 'solar-output',
               elseUrl: 'solar-technologies'
             }
           },
