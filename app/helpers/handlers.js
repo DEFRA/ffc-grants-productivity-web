@@ -409,13 +409,13 @@ const showPostPage = (currentQuestion, request, h) => {
     }
 
     case 'automaticEligibility': {
-      const automaticEligibilityAnswer = getYarValue(request, 'automaticEligibility') 
+      const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
       const technologyItemsAnswer = getYarValue(request, 'technologyItems')
       const roboticAutomaticAnswer = getYarValue(request, 'roboticAutomatic')
       const isTechnologyItemsA9 = getQuestionAnswer('technology-items', 'technology-items-A9')
       const isRoboticAutomaticA2 = getQuestionAnswer('robotic-automatic', 'robotic-automatic-A2')
-      // 'string' means that only one option is selected, otherwise it returns an array
-      if (typeof automaticEligibilityAnswer === "string") {
+      
+      if (automaticEligibilityAnswer.length === 1) {
         return h.view('not-eligible', NOT_ELIGIBLE)
       } else if (technologyItemsAnswer === isTechnologyItemsA9 && roboticAutomaticAnswer === isRoboticAutomaticA2) {
         return h.redirect(`${urlPrefix}/other-automatic-technology`)
