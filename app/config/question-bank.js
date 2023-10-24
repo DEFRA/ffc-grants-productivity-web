@@ -837,49 +837,6 @@ const questionBank = {
           yarKey: 'solarInstallation'
         },
         {
-          key: 'solar-usage',
-          order: 63,
-          title: 'Will you use most of the energy produced by solar on your farm?',
-          pageTitle: '',
-          url: 'solar-usage',
-          baseUrl: 'solar-usage',
-          backUrl: 'remaining-costs-solar',
-          preValidationKeys: [],
-          nextUrl: 'solar-output',
-          eliminationAnswerKeys: '',
-          ineligibleContent: {},
-          fundingPriorities: '',
-          type: 'single-answer',
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          minAnswerCount: 1,
-          sidebar: {
-            values: [{
-              heading: 'Funding priorities',
-              content: [{
-                para: 'RPA wants to fund projects that improve the environment.',
-                items: []
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select if you will use most of the energy produced on your farm'
-            }
-          ],
-          answers: [
-            {
-              key: 'solar-usage-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'solar-usage-A2',
-              value: 'No',
-            }
-          ],
-          yarKey: 'solarUsage'
-        },
-        {
           key: 'solar-output',
           order: 64,
           title: 'How much energy will your solar PV system output?',
@@ -1034,7 +991,7 @@ const questionBank = {
           url: 'remaining-costs-solar',
           baseUrl: 'remaining-costs-solar',
           backUrl: 'potential-amount',
-          nextUrl: 'solar-usage',
+          nextUrl: 'agricultural-sector-solar',
           preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
@@ -1093,6 +1050,85 @@ const questionBank = {
             }
           ],
           yarKey: 'remainingCosts'
+        },
+        {
+          key: 'agricultural-sector-solar',
+          scheme: '',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
+          order: 245,
+          title: 'Which agricultural sector is your project in?',
+          pageTitle: '',
+          url: 'agricultural-sector-solar',
+          baseUrl: 'agricultural-sector-solar',
+          backUrl: 'remaining-costs-solar',
+          nextUrl: 'score',
+          preValidationKeys: ['remainingCosts'],
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          hint: {
+            text: 'Select up to 2 options'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA wants to fund sectors that:',
+                items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what agricultural sector your project is in'
+            },
+            {
+              type: 'MAX_SELECT',
+              max: 2,
+              error: 'Select up to 2 sectors your project is in'
+            }
+          ],
+          answers: [
+            {
+              key: 'robotics-agricultural-sector-A1',
+              value: 'Arable'
+            },
+            {
+              key: 'robotics-agricultural-sector-A2',
+              value: 'Beef'
+            },
+            {
+              key: 'robotics-agricultural-sector-A3',
+              value: 'Dairy livestock'
+            },
+            {
+              key: 'robotics-agricultural-sector-A4',
+              value: 'Horticulture'
+            },
+            {
+              key: 'robotics-agricultural-sector-A5',
+              value: 'Mixed livestock'
+            },
+            {
+              key: 'robotics-agricultural-sector-A6',
+              value: 'Pig'
+            },
+            {
+              key: 'robotics-agricultural-sector-A7',
+              value: 'Poultry'
+            },
+            {
+              key: 'robotics-agricultural-sector-A7',
+              value: 'Sheep'
+            }
+          ],
+          yarKey: 'agriculturalSector'
         },
         {
           key: 'tenancy-length',
