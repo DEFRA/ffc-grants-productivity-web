@@ -4,7 +4,7 @@ describe('robotics-remaining-costs page', () => {
   it('no option is selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/remaining-costs`,
+      url: `${global.__URLPREFIX__}/remaining-costs`,
       payload: { canPayRemainingCost: '', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
@@ -19,7 +19,7 @@ describe('robotics-remaining-costs page', () => {
   it('user selects: <Yes> -> store user response and redirect to project impact page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/remaining-costs`,
+      url: `${global.__URLPREFIX__}/remaining-costs`,
       payload: { canPayRemainingCost: 'Yes', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
@@ -34,7 +34,7 @@ describe('robotics-remaining-costs page', () => {
   it('user selects: <No> -> display ineligible page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/remaining-costs`,
+      url: `${global.__URLPREFIX__}/remaining-costs`,
       payload: { canPayRemainingCost: 'No', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
