@@ -967,7 +967,7 @@ const questionBank = {
           yarKey: 'projectCost'
         },
         {
-          key: 'solar-potential-amount',
+          key: 'potential-amount-solar',
           order: 230,
           url: 'potential-amount-solar',
           baseUrl: 'potential-amount-solar',
@@ -1609,17 +1609,18 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the estimated cost for the items'
+              error: 'Enter the total estimated cost for the items'
             },
             {
               type: 'REGEX',
-              regex: CURRENCY_FORMAT,
-              error: 'Enter a whole number in correct format'
+              regex: PROJECT_COST_REGEX,
+              error: 'Enter a whole number with a maximum of 7 digits'
             },
             {
-              type: 'REGEX',
-              regex: CHARS_MAX_10,
-              error: 'Enter a whole number with a maximum of 10 digits'
+              type: 'MIN_MAX_CHARS',
+              min: 1,
+              max: 7,
+              error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],
           warningConditional: {
