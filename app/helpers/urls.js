@@ -10,7 +10,7 @@ const getUrl = (urlObject, url, request, secBtn) => {
   if (!urlObject || secBtn) {
     return secBtn ? secBtnPath : url
   }
-  const { dependentQuestionYarKey, dependentAnswerKeysArray, urlOptions } = urlObject
+  const { dependentQuestionYarKey, secondDependentQuestionYarKey, dependentAnswerKeysArray, seconddependentAnswerKeysArray, urlOptions } = urlObject // just make it work for now
   let { thenUrl, elseUrl } = urlOptions
   const dependentQuestionYarKeys = [dependentQuestionYarKey].flat()
   thenUrl = [thenUrl].flat()
