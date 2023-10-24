@@ -385,7 +385,7 @@ const showPostPage = (currentQuestion, request, h) => {
         return h.redirect(`${urlPrefix}/solar-installation`)
       } else {
         if(getYarValue(request, 'existingSolar') === 'Yes'){
-          return h.redirect(`${urlPrefix}/project-cost`)
+          return h.redirect(`${urlPrefix}/project-cost-solar`)
         }else{
           return  h.view('not-eligible', NOT_ELIGIBLE)
         }

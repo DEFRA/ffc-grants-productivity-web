@@ -64,7 +64,7 @@ it('user selects any option AND \'Solar panels\' -> store user response and redi
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toContain('solar-size')
+    expect(postResponse.headers.location).toContain('solar-output')
 })
 
 it('page loads with correct back link', async () => {

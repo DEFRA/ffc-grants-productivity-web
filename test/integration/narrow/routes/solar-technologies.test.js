@@ -71,7 +71,7 @@ describe('Page: /solar-technologies', () => {
     expect(postResponse.headers.location).toContain('solar-installation')
   })
 
-  it('user selects one option WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost', async () => {
+  it('user selects one option WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost-solar', async () => {
     varList.existingSolar = 'Yes'
     varList.solarTechnologies = 'A utility meter'
     const postOptions = {
@@ -83,10 +83,10 @@ describe('Page: /solar-technologies', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toContain('/productivity/project-cost')
+    expect(postResponse.headers.location).toContain('/productivity/project-cost-solar')
   })
 
-  it('user selects multiple options WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost', async () => {
+  it('user selects multiple options WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost-solar', async () => {
     varList.solarTechnologies = ['An inverter', 'A battery']
     varList.existingSolar = 'No'
     const postOptions = {

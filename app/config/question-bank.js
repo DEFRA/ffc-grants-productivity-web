@@ -687,7 +687,7 @@ const questionBank = {
           url: 'solar-technologies',
           baseUrl: 'solar-technologies',
           backUrl: 'existing-solar',
-          nextUrl: 'project-cost',
+          nextUrl: 'project-cost-solar',
           preValidationKeys: [],
           id: 'solarTechnologies',
           name: 'solarTechnologies',
@@ -762,7 +762,7 @@ const questionBank = {
           url: 'solar-installation',
           baseUrl: 'solar-installation',
           backUrl: 'solar-technologies',
-          nextUrl: 'solar-size',
+          nextUrl: 'solar-output',
           preValidationKeys: [],
           id: 'solarInstallation',
           name: 'solarInstallation',
@@ -845,7 +845,7 @@ const questionBank = {
           baseUrl: 'solar-usage',
           backUrl: 'remaining-costs',
           preValidationKeys: [],
-          nextUrl: 'solar-size',
+          nextUrl: 'solar-output',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -880,18 +880,18 @@ const questionBank = {
           yarKey: 'solarUsage'
         },
         {
-          key: 'solar-size',
+          key: 'solar-output',
           order: 64,
           title: 'How much energy will your solar PV system output?',
           hint: {
             html: 'The size of your solar PV system'
           },
           pageTitle: '',
-          url: 'solar-size',
-          baseUrl: 'solar-size',
-          backUrl: 'solar-usage',
+          url: 'solar-output',
+          baseUrl: 'solar-output',
+          backUrl: 'solar-installation',
           preValidationKeys: [],
-          nextUrl: 'agricultural-sector',
+          nextUrl: 'project-cost-solar',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -915,27 +915,35 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'solar-size-A1',
-              value: 'Up to 100kW'
+              key: 'solar-output-A1',
+              value: 'Up to 50kW'
             },
             {
-              key: 'solar-size-A2',
-              value: '100kW to 350kW',
+              key: 'solar-output-A2',
+              value: '51kW to 100kW',
             },
             {
-              key: 'solar-size-A3',
-              value: 'More than 350kW',
+              key: 'solar-output-A3',
+              value: '101kW to 150kW',
+            },
+            {
+              key: 'solar-output-A4',
+              value: '151kW to 200kW',
+            },
+            {
+              key: 'solar-output-A5',
+              value: 'More than 201kW',
             }
           ],
-          yarKey: 'solarSize'
+          yarKey: 'solarOutput'
         },
         {
-          key: 'project-cost',
+          key: 'project-cost-solar',
           order: 65,
           pageTitle: '',
           classes: 'govuk-input--width-10',
-          url: 'project-cost',
-          baseUrl: 'project-cost',
+          url: 'project-cost-solar',
+          baseUrl: 'project-cost-solar',
           backUrlObject: {
             dependentQuestionYarKey: 'solarTechnologies',
             dependentAnswerKeysArray: ['solar-technologies-A2'],
@@ -1006,7 +1014,7 @@ const questionBank = {
           order: 230,
           url: 'potential-amount',
           baseUrl: 'potential-amount',
-          backUrl: 'project-cost',
+          backUrl: 'project-cost-solar',
           nextUrl: 'remaining-costs',
           preValidationKeys: ['projectCost'],
           maybeEligible: true,
@@ -1187,7 +1195,7 @@ const questionBank = {
             dependentAnswerKeysArray: ['robotics-project-items-A3'],
             urlOptions: {
               thenUrl: 'technology-items',
-              elseUrl: 'project-cost'
+              elseUrl: 'project-cost-solar'
             }
           },
           id: 'roboticsProjectItems',
@@ -1490,105 +1498,105 @@ const questionBank = {
           },
           yarKey: 'otherRoboticsConditional'
         },
-        // {
-        //   key: 'robotics-project-cost',
-        //   order: 310,
-        //   pageTitle: '',
-        //   url: 'project-cost',
-        //   baseUrl: 'project-cost',
-        //   backUrlObject: {
-        //     dependentQuestionYarKey: ['technologyItems', 'projectItems'],
-        //     dependentAnswerKeysArray: ['technology-items-A8', 'robotics-project-items-A3'],
-        //     urlOptions: {
-        //       thenUrl: ['other-robotic-technology', 'technology-items'],
-        //       elseUrl: 'project-items'
-        //     }
-        //   },
-        //   backUrl:'other-conditional',
-        //   nextUrl: 'potential-amount',
-        //   preValidationKeys: ['projectItems'],
-        //   classes: 'govuk-input--width-10',
-        //   id: 'projectCost',
-        //   name: 'projectCost',
-        //   prefix: { text: '£' },
-        //   type: 'input',
-        //   grantInfo: {
-        //     minGrant: 35000,
-        //     maxGrant: 500000,
-        //     grantPercentage: 40,
-        //     cappedGrant: true
-        //   },
-        //   label: {
-        //     text: 'What is the total estimated cost of the items?',
-        //     classes: 'govuk-label--l',
-        //     isPageHeading: true
-        //   },
-        //   hint: {
-        //     html: `
-        //       You can only apply for a grant of up to 40% of the estimated costs.
-        //       <br/>The minimum grant you can apply for this project is £35,000 (40% of £87,500).
-        //       <br/>The maximum grant is £500,000.
-        //       <br/><br/>Do not include VAT.
-        //       <br/><br/>Enter amount, for example 95,000`
-        //   },
-        //   eliminationAnswerKeys: '',
-        //   ineligibleContent: {
-        //     messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
-        //     insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £500,000.' },
-        //     messageLink: {
-        //       url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
-        //       title: 'See other grants you may be eligible for.'
-        //     }
-        //   },
-        //   sidebar: {
-        //     values: [
-        //       {
-        //         heading: 'Eligible items selected',
-        //         content: [{
-        //           para: '',
-        //           items: [],
-        //           dependentAnswerExceptThese: ['robotics-project-items-A3', 'technology-items-A8']
-        //         }]
-        //       },
-        //       {
-        //         heading: 'Not yet eligible items',
-        //         content: [{
-        //           para: '',
-        //           items: [],
-        //           dependentAnswerOnlyThese: ['technology-items-A8']
-        //         }]
-        //       }
-        //     ],
-        //     dependentYarKeys: ['projectItems', 'technologyItems'],
-        //     dependentQuestionKeys: ['robotics-project-items', 'technology-items']
-        //   },
-        //   validate: [
-        //     {
-        //       type: 'NOT_EMPTY',
-        //       error: 'Enter the estimated cost for the items'
-        //     },
-        //     {
-        //       type: 'REGEX',
-        //       regex: CURRENCY_FORMAT,
-        //       error: 'Enter a whole number in correct format'
-        //     },
-        //     {
-        //       type: 'REGEX',
-        //       regex: CHARS_MAX_10,
-        //       error: 'Enter a whole number with a maximum of 10 digits'
-        //     }
-        //   ],
-          // warningConditional: {
-          //   dependentWarningQuestionKey: 'other-robotic-technology',
-          //   dependentWarningAnswerKeysArray: ['other-robotic-technology-A1'],
-          //   ConditionalWarningMsg: {
-          //     text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
-          //     iconFallbackText: 'Warning'
-          //   }
-          // },
-          // answers: [],
-        //   yarKey: 'projectCost'
-        // },
+        {
+          key: 'project-cost-robotics',
+          order: 310,
+          pageTitle: '',
+          url: 'project-cost-robotics',
+          baseUrl: 'project-cost-robotics',
+          backUrlObject: {
+            dependentQuestionYarKey: ['technologyItems', 'projectItems'],
+            dependentAnswerKeysArray: ['technology-items-A8', 'robotics-project-items-A3'],
+            urlOptions: {
+              thenUrl: ['other-robotic-technology', 'technology-items'],
+              elseUrl: 'project-items'
+            }
+          },
+          backUrl:'other-conditional',
+          nextUrl: 'potential-amount',
+          preValidationKeys: ['projectItems'],
+          classes: 'govuk-input--width-10',
+          id: 'projectCost',
+          name: 'projectCost',
+          prefix: { text: '£' },
+          type: 'input',
+          grantInfo: {
+            minGrant: 35000,
+            maxGrant: 500000,
+            grantPercentage: 40,
+            cappedGrant: true
+          },
+          label: {
+            text: 'What is the total estimated cost of the items?',
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          hint: {
+            html: `
+              You can only apply for a grant of up to 40% of the estimated costs.
+              <br/>The minimum grant you can apply for this project is £35,000 (40% of £87,500).
+              <br/>The maximum grant is £500,000.
+              <br/><br/>Do not include VAT.
+              <br/><br/>Enter amount, for example 95,000`
+          },
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
+            insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £500,000.' },
+            messageLink: {
+              url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          sidebar: {
+            values: [
+              {
+                heading: 'Eligible items selected',
+                content: [{
+                  para: '',
+                  items: [],
+                  dependentAnswerExceptThese: ['robotics-project-items-A3', 'technology-items-A8']
+                }]
+              },
+              {
+                heading: 'Not yet eligible items',
+                content: [{
+                  para: '',
+                  items: [],
+                  dependentAnswerOnlyThese: ['technology-items-A8']
+                }]
+              }
+            ],
+            dependentYarKeys: ['projectItems', 'technologyItems'],
+            dependentQuestionKeys: ['robotics-project-items', 'technology-items']
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Enter the estimated cost for the items'
+            },
+            {
+              type: 'REGEX',
+              regex: CURRENCY_FORMAT,
+              error: 'Enter a whole number in correct format'
+            },
+            {
+              type: 'REGEX',
+              regex: CHARS_MAX_10,
+              error: 'Enter a whole number with a maximum of 10 digits'
+            }
+          ],
+          warningConditional: {
+            dependentWarningQuestionKey: 'other-robotic-technology',
+            dependentWarningAnswerKeysArray: ['other-robotic-technology-A1'],
+            ConditionalWarningMsg: {
+              text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
+              iconFallbackText: 'Warning'
+            }
+          },
+          answers: [],
+          yarKey: 'projectCost'
+        },
         {
           key: 'robotics-potential-amount',
           title: 'Potential grant funding',

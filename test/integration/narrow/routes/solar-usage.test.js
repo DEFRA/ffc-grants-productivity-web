@@ -41,7 +41,7 @@ describe('Page: /solar-usage', () => {
     expect(postResponse.payload).toContain('No')
   })
 
-  it('user selects \'Yes\' -> store user response and redirect to /solar-size', async () => {
+  it('user selects \'Yes\' -> store user response and redirect to /solar-output', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-usage`,
@@ -51,10 +51,10 @@ describe('Page: /solar-usage', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('solar-size')
+    expect(postResponse.headers.location).toBe('solar-output')
   })
 
-  it('user selects \'No\' -> store user response and redirect to /solar-size', async () => {
+  it('user selects \'No\' -> store user response and redirect to /solar-output', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-usage`,
@@ -64,7 +64,7 @@ describe('Page: /solar-usage', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('solar-size')
+    expect(postResponse.headers.location).toBe('solar-output')
   })
 
   it('page loads with correct back link', async () => {

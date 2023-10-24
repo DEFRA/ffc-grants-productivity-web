@@ -18,7 +18,7 @@ const mockSession = {
 
 jest.mock('../../../../app/helpers/session', () => mockSession)
 
-describe('Project cost page', () => {
+describe('Project cost solar page', () => {
   beforeEach(() => {
     varList = { ...varListTemplate }
   })
@@ -29,7 +29,7 @@ describe('Project cost page', () => {
   it('should load page successfully', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/project-cost`
+      url: `${global.__URLPREFIX__}/project-cost-solar`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -43,7 +43,7 @@ describe('Project cost page', () => {
 
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/project-cost`
+      url: `${global.__URLPREFIX__}/project-cost-solar`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -54,7 +54,7 @@ describe('Project cost page', () => {
     varList['current-score'] = null
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/project-cost`,
+      url: `${global.__URLPREFIX__}/project-cost-solar`,
       payload: { crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
@@ -67,7 +67,7 @@ describe('Project cost page', () => {
   it('should return an error message if a string is typed in', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/project-cost`,
+      url: `${global.__URLPREFIX__}/project-cost-solar`,
       payload: { projectCost: '1234s6', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
@@ -80,7 +80,7 @@ describe('Project cost page', () => {
   it('should return an error message if number contains a space', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/project-cost`,
+      url: `${global.__URLPREFIX__}/project-cost-solar`,
       payload: { projectCost: '1234 6', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
@@ -93,7 +93,7 @@ describe('Project cost page', () => {
   it('should eliminate user if the cost entered is too low', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/project-cost`,
+      url: `${global.__URLPREFIX__}/project-cost-solar`,
       payload: { projectCost: '12', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
@@ -106,7 +106,7 @@ describe('Project cost page', () => {
   it('should redirected to the Potential funding page if the cost entered is too high', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/project-cost`,
+      url: `${global.__URLPREFIX__}/project-cost-solar`,
       payload: { projectCost: '9999999', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
@@ -120,7 +120,7 @@ describe('Project cost page', () => {
   it('should store valid user input and redirect to potential-amount page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/project-cost`,
+      url: `${global.__URLPREFIX__}/project-cost-solar`,
       payload: { projectCost: '1234567', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
@@ -133,7 +133,7 @@ describe('Project cost page', () => {
 it('page loads with correct back link', async () => {
     const options = {
         method: 'GET',
-        url: `${global.__URLPREFIX__}/project-cost`
+        url: `${global.__URLPREFIX__}/project-cost-solar`
     }
 
 const response = await global.__SERVER__.inject(options)
@@ -146,7 +146,7 @@ it('page loads with correct back link when solar technologies is /Solar panels/ 
   varList.solarInstallation = 'On an existing hardstanding area'
   const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/project-cost`
+      url: `${global.__URLPREFIX__}/project-cost-solar`
   }
 
 const response = await global.__SERVER__.inject(options)
