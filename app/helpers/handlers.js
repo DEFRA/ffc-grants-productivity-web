@@ -64,10 +64,10 @@ const getContractorFarmerModel = (data, question, request, conditionalHtml) => {
   return MODEL
 }
 const getPage = async (question, request, h) => {
-  const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationKeys, preValidationKeysRule, replace } = question
+  const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationObject, replace } = question
   const backUrl = getUrl(backUrlObject, question.backUrl, request)
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
-  const isRedirect = guardPage(request, preValidationKeys, preValidationKeysRule)
+  const isRedirect = guardPage(request, preValidationObject)
   if (isRedirect) {
     return h.redirect(startPageUrl)
   }

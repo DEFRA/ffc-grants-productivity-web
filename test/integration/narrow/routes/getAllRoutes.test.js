@@ -2,6 +2,23 @@ const { ALL_QUESTIONS } = require('../../../../app/config/question-bank')
 
 const senders = require('../../../../app/messaging/senders')
 
+const varListTemplate = {
+  planningPermission: 'Should be in place by the time I make my full application',
+  planningPermissionEvidence: {
+    planningAuthority: 'some planning',
+    planningReferenceNumber: '123456-ref'
+  },
+  projectSubject: 'Robotics and automatic technology',
+  applicant: 'Contractor',
+  businessLocation: 'Yes',
+  inEngland: 'Yes',
+  tenancy: 'No',
+  projectResponsibility: 'Yes, I plan to take full responsibility for my project',
+  existingSolar: 'Yes',
+  farmersDetails: 'voila',
+  consentMain: 'lalal'
+}
+
 let varList
 ALL_QUESTIONS.forEach(question => {
   if (question.preValidationKeys) {
@@ -19,17 +36,25 @@ jest.doMock('../../../../app/helpers/session', () => ({
 }))
 
 describe('All default GET routes', () => {
-  varList.planningPermission = 'Not yet applied'
-  varList.PlanningPermissionEvidence = {
-    planningAuthority: 'some planning',
-    planningReferenceNumber: '123456-ref'
-  }
-  varList.consentMain = 'random'
-  varList.farmersDetails = 'values'
-  varList.projectSubject = '12345'
+
+  beforeEach(() => {
+    varList = { ...varListTemplate }
+  })
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
 
   ALL_QUESTIONS.forEach(question => {
     it(`should load ${question.key} page successfully`, async () => {
+
+      if (question.key === 'existing-solar') {
+        varList.projectSubject = 'Solar technologies'
+      } else if (question.key === 'robotics-project-items') {
+        varList.projectSubject = 'Robotics and automatic technology'
+    
+      }
+
       const options = {
         method: 'GET',
         url: `${global.__URLPREFIX__}/${question.url}`
