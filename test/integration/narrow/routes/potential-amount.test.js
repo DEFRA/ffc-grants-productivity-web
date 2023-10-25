@@ -1,6 +1,6 @@
 const { crumbToken } = require('./test-helper')
 
-describe('Page: solar/potential-amount', () => {
+describe('Page: /potential-amount', () => {
   const varList = {
     projectCost: 37500,
     calculatedGrant: 15000,
@@ -19,7 +19,7 @@ describe('Page: solar/potential-amount', () => {
   it('page loads successfully, with all the Eligible options', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/potential-amount`
+      url: `${global.__URLPREFIX__}/potential-amount`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -27,11 +27,10 @@ describe('Page: solar/potential-amount', () => {
     expect(response.payload).toContain('Potential grant funding')
     expect(response.payload).toContain(eligiblePageText)
   })
-
-  it('should redirect to /remaining-costs when user press continue', async () => {
+it('should redirect to /remaining-costs-solar when user press continue', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/potential-amount`,
+      url: `${global.__URLPREFIX__}/potential-amount`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { remainingCosts: 'Yes', crumb: crumbToken }
     }
@@ -44,10 +43,34 @@ describe('Page: solar/potential-amount', () => {
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/potential-amount`
+      url: `${global.__URLPREFIX__}/potential-amount`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"project-cost\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
+  })
+
+  //  Solar Journey url checks // 
+  it('page loads with correct back link when the user on solar journey', async () => {
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/potential-amount-solar`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"project-cost-solar\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
+  })
+
+  it('should redirect to /remaining-costs-solar when user press continue', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/potential-amount-solar`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { remainingCosts: 'Yes', crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('remaining-costs-solar')
   })
 })

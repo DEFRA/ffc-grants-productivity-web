@@ -1,8 +1,8 @@
 const { crumbToken } = require('./test-helper')
 
-describe('Page: /solar-size', () => {
+describe('Page: /solar-output', () => {
   const varList = {
-    solarSize: 'randomData'
+    solarOutput: 'randomData'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -16,23 +16,25 @@ describe('Page: /solar-size', () => {
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/solar-size`
+      url: `${global.__URLPREFIX__}/solar-output`
     }
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('How much energy will your solar PV system output?')
-    expect(response.payload).toContain('Up to 100kW')
-    expect(response.payload).toContain('100kW to 350kW')
-    expect(response.payload).toContain('More than 350kW')
+    expect(response.payload).toContain('Up to 50kW')
+    expect(response.payload).toContain('51kW to 100kW')
+    expect(response.payload).toContain('101kW to 150kW')
+    expect(response.payload).toContain('151kW to 200kW')
+    expect(response.payload).toContain('More than 201kW')
   })
 
   it('no option selected -> show error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-size`,
+      url: `${global.__URLPREFIX__}/solar-output`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { solarSize: '', crumb: crumbToken }
+      payload: { solarOutput: '', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -40,52 +42,52 @@ describe('Page: /solar-size', () => {
     expect(postResponse.payload).toContain('Select how much energy your solar PV system will output')
   })
 
-  it('user selects \'Up to 100kW\' -> store user response and redirect to /agricultural-sector', async () => {
+  it('user selects \'Up to 100kW\' -> store user response and redirect to /project-cost-solar', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-size`,
+      url: `${global.__URLPREFIX__}/solar-output`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { solarSize: 'Up to 100kW', crumb: crumbToken }
+      payload: { solarOutput: 'Up to 50kW', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('agricultural-sector')
+    expect(postResponse.headers.location).toBe('project-cost-solar')
   })
 
-  it('user selects \'100kW to 350kW\' -> store user response and redirect to /agricultural-sector', async () => {
+  it('user selects \'100kW to 350kW\' -> store user response and redirect to /project-cost-solar', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-size`,
+      url: `${global.__URLPREFIX__}/solar-output`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { solarSize: '100kW to 350kW', crumb: crumbToken }
+      payload: { solarOutput: '100kW to 350kW', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('agricultural-sector')
+    expect(postResponse.headers.location).toBe('project-cost-solar')
   })
 
-  it('user selects \'More than 350kW\' -> store user response and redirect to /agricultural-sector', async () => {
+  it('user selects \'More than 350kW\' -> store user response and redirect to /project-cost-solar', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-size`,
+      url: `${global.__URLPREFIX__}/solar-output`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { solarSize: 'More than 350kW', crumb: crumbToken }
+      payload: { solarOutput: 'More than 350kW', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('agricultural-sector')
+    expect(postResponse.headers.location).toBe('project-cost-solar')
   })
 
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/solar-size`
+      url: `${global.__URLPREFIX__}/solar-output`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"solar-usage\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"solar-installation\" class=\"govuk-back-link\">Back</a>')
   })
 })

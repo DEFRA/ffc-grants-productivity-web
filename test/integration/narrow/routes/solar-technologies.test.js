@@ -1,8 +1,11 @@
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /solar-technologies', () => {
-  const varList = {
-    solarTechnologies: 'randomData'
+  let varList = {
+    solarTechnologies: 'randomData',
+    existingSolar: 'Yes',
+    projectSubject: 'Solar technologies',
+    tenancy: 'Yes'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -16,7 +19,7 @@ describe('Page: /solar-technologies', () => {
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/solar-technologies`
+      url: `${global.__URLPREFIX__}/solar-technologies`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -33,7 +36,7 @@ describe('Page: /solar-technologies', () => {
   it('no option selected -> show error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-technologies`,
+      url: `${global.__URLPREFIX__}/solar-technologies`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { solarTechnologies: '', crumb: crumbToken }
     }
@@ -47,7 +50,7 @@ describe('Page: /solar-technologies', () => {
     varList.solarTechnologies = 'Solar panels'
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-technologies`,
+      url: `${global.__URLPREFIX__}/solar-technologies`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { solarTechnologies: 'Solar panels', crumb: crumbToken }
     }
@@ -61,7 +64,7 @@ describe('Page: /solar-technologies', () => {
     varList.solarTechnologies = ['Solar panels', 'An electrical grid connection']
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-technologies`,
+      url: `${global.__URLPREFIX__}/solar-technologies`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { solarTechnologies: ['Solar panels', 'An electrical grid connection'], crumb: crumbToken }
     }
@@ -71,38 +74,40 @@ describe('Page: /solar-technologies', () => {
     expect(postResponse.headers.location).toContain('solar-installation')
   })
 
-  it('user selects one option WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost', async () => {
+  it('user selects one option WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost-solar', async () => {
+    varList.existingSolar = 'Yes'
     varList.solarTechnologies = 'A utility meter'
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-technologies`,
+      url: `${global.__URLPREFIX__}/solar-technologies`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { solarTechnologies: 'A utility meter', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toContain('/productivity/solar/project-cost')
+    expect(postResponse.headers.location).toContain('/productivity/project-cost-solar')
   })
 
-  it('user selects multiple options WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost', async () => {
+  it('user selects multiple options WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost-solar', async () => {
     varList.solarTechnologies = ['An inverter', 'A battery']
+    varList.existingSolar = 'No'
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-technologies`,
+      url: `${global.__URLPREFIX__}/solar-technologies`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { solarTechnologies: ['An inverter', 'A battery'], crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toContain('/productivity/solar/project-cost')
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
   })
 
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/solar-technologies`
+      url: `${global.__URLPREFIX__}/solar-technologies`
     }
 
     const response = await global.__SERVER__.inject(options)

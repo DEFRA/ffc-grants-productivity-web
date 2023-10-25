@@ -15,8 +15,8 @@ describe('Page: /solar-installation', () => {
 
   it('page loads successfully, with all the options', async () => {
     const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/solar-installation`
+        method: 'GET',
+        url: `${global.__URLPREFIX__}/solar-installation`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -30,10 +30,10 @@ describe('Page: /solar-installation', () => {
 
   it('no option selected -> show error message', async () => {
     const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-installation`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: { solarInstallation: '', crumb: crumbToken }
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/solar-installation`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { solarInstallation: '', crumb: crumbToken }
     }
 
       const postResponse = await global.__SERVER__.inject(postOptions)
@@ -43,10 +43,10 @@ describe('Page: /solar-installation', () => {
 
   it('user selects ineligible option: \'None of the above\' -> display ineligible page', async () => {
     const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-installation`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: { solarInstallation: 'None of the above', crumb: crumbToken }
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/solar-installation`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { solarInstallation: 'None of the above', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -56,21 +56,21 @@ describe('Page: /solar-installation', () => {
   it('user selects any option AND \'Solar panels\' -> store user response and redirect to /solar-installation', async () => {
     varList.solarInstallation = ['Solar panels', 'An electrical grid connection']
     const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/solar-installation`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: { solarInstallation: ['On a rooftop', 'On an existing hardstanding area'], crumb: crumbToken }
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/solar-installation`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { solarInstallation: ['On a rooftop', 'On an existing hardstanding area'], crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toContain('project-cost')
-  })
+    expect(postResponse.headers.location).toContain('solar-output')
+})
 
   it('page loads with correct back link', async () => {
     const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/solar-installation`
+        method: 'GET',
+        url: `${global.__URLPREFIX__}/solar-installation`
     }
 
     const response = await global.__SERVER__.inject(options)

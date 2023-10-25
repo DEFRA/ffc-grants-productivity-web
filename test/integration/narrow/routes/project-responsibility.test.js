@@ -3,7 +3,7 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /project-responsibility', () => {
   const varList = {
     projectSubject: 'randomData',
-    tenancy: 'data'
+    tenancy: 'No'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -52,7 +52,7 @@ describe('Page: /project-responsibility', () => {
     }
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('solar/existing-solar')
+    expect(postResponse.headers.location).toBe('existing-solar')
   })
 
   it('user selects \'No\' -> store user response and redirect to /existing-solar', async () => {
@@ -67,7 +67,7 @@ describe('Page: /project-responsibility', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('solar/existing-solar')
+    expect(postResponse.headers.location).toBe('existing-solar')
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /project-items', async () => {

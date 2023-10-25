@@ -8,7 +8,7 @@ const { getHtml } = require('../helpers/conditionalHTML')
 const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
 const { setOptionsLabel } = require('../helpers/answer-options')
-const { notUniqueSelection, uniqueSelection } = require('../helpers/utils')
+const { notUniqueSelection, uniqueSelection, getQuestionAnswer, getQuestionByKey } = require('../helpers/utils')
 const senders = require('../messaging/senders')
 const createMsg = require('../messaging/create-msg')
 const gapiService = require('../services/gapi-service')
@@ -16,6 +16,7 @@ const { startPageUrl, urlPrefix } = require('../config/server')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const emailFormatting = require('./../messaging/email/process-submission')
+const { validate } = require('uuid')
 
 const resetYarValues = (applying, request) => {
   setYarValue(request, 'agentsDetails', null)
@@ -63,10 +64,10 @@ const getContractorFarmerModel = (data, question, request, conditionalHtml) => {
   return MODEL
 }
 const getPage = async (question, request, h) => {
-  const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationKeys, preValidationKeysRule } = question
+  const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationObject, replace } = question
   const backUrl = getUrl(backUrlObject, question.backUrl, request)
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
-  const isRedirect = guardPage(request, preValidationKeys, preValidationKeysRule)
+  const isRedirect = guardPage(request, preValidationObject)
   if (isRedirect) {
     return h.redirect(startPageUrl)
   }
@@ -156,6 +157,25 @@ const getPage = async (question, request, h) => {
       ))
     }
   }
+  if(replace) {
+    question = {
+      ...question,
+      title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+          getYarValue(request, additionalYarKeyName)
+      )
+    };
+  }
+  // change title on /automatic-eligibility page if 'Other robotics or automatic technology' option is selected on /technology-items
+  if(url === 'automatic-eligibility') {
+    const technologyItemsAnswer = getYarValue(request, 'technologyItems')
+    const isTechnologyItemsA9 = getQuestionAnswer('technology-items', 'technology-items-A9')
+    if(technologyItemsAnswer === isTechnologyItemsA9) {
+      question = {
+        ...question,
+        title: 'Which eligibility criteria does your other automatic technology meet?'
+      };
+    }
+  }
 
   const data = getYarValue(request, yarKey) || null
   let conditionalHtml
@@ -233,7 +253,6 @@ const getPage = async (question, request, h) => {
 
     return h.view('check-details', MODEL)
   }
-
   switch (url) {
     case 'score':
     case 'business-details':
@@ -260,12 +279,11 @@ const getPage = async (question, request, h) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields } = currentQuestion
+  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields, replace } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   let thisAnswer
   let dataObject
-
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
@@ -297,7 +315,6 @@ const showPostPage = (currentQuestion, request, h) => {
     })
     setYarValue(request, yarKey, dataObject)
   }
-
   if (title) {
     currentQuestion = {
       ...currentQuestion,
@@ -305,6 +322,21 @@ const showPostPage = (currentQuestion, request, h) => {
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }
+  }
+  if (replace) {
+    currentQuestion = {
+      ...currentQuestion,
+      title: title.replace(
+        SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => getYarValue(request, additionalYarKeyName)),
+      validate: [
+        {
+          type: "NOT_EMPTY",
+          error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+              getYarValue(request, additionalYarKeyName)
+          ),
+        },
+      ],
+    };
   }
 
   const errors = checkErrors(payload, currentQuestion, h, request)
@@ -359,21 +391,41 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   switch (baseUrl) {
-    case 'solar/solar-technologies':
-      if ([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')) {
-        return h.redirect(`${urlPrefix}/solar/solar-installation`)
+    case 'solar-technologies':
+      if([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){
+        return h.redirect(`${urlPrefix}/solar-installation`)
       } else {
-        return h.redirect(`${urlPrefix}/solar/project-cost`)
+        if(getYarValue(request, 'existingSolar') === 'Yes'){
+          return h.redirect(`${urlPrefix}/project-cost-solar`)
+        }else{
+          return  h.view('not-eligible', NOT_ELIGIBLE)
+        }
+      }
+    case 'project-cost' || 'project-cost-solar':
+      const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+      if (payload[Object.keys(payload)[0]] > 1250000) {
+        return h.redirect('potential-amount-capped')
+      }
+      setYarValue(request, 'calculatedGrant', calculatedGrant)
+      setYarValue(request, 'remainingCost', remainingCost)
+      break
+    case 'automatic-eligibility': {
+        const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
+        const technologyItemsAnswer = getYarValue(request, 'technologyItems')
+        const roboticAutomaticAnswer = getYarValue(request, 'roboticAutomatic')
+        const isTechnologyItemsA9 = getQuestionAnswer('technology-items', 'technology-items-A9')
+        const isRoboticAutomaticA2 = getQuestionAnswer('robotic-automatic', 'robotic-automatic-A2')
+        
+        if (automaticEligibilityAnswer.length === 1) {
+          return h.view('not-eligible', NOT_ELIGIBLE)
+        } else if (technologyItemsAnswer === isTechnologyItemsA9 && roboticAutomaticAnswer === isRoboticAutomaticA2) {
+          return h.redirect(`${urlPrefix}/other-automatic-technology`)
+        } else {
+          return h.redirect(`${urlPrefix}/other-item`)
+        }
       }
     default:
       break
-  }
-
-  if (yarKey === 'projectCost') {
-    const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
-
-    setYarValue(request, 'calculatedGrant', calculatedGrant)
-    setYarValue(request, 'remainingCost', remainingCost)
   }
 
   return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.secBtn))

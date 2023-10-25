@@ -2,7 +2,9 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /existing-solar', () => {
   const varList = {
-    existingSolar: 'randomData'
+    existingSolar: 'randomData',
+    projectSubject: 'Solar technologies',
+    projectResponsibility: 'Yes, I plan to take full responsibility for my project'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -16,7 +18,7 @@ describe('Page: /existing-solar', () => {
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/existing-solar`
+      url: `${global.__URLPREFIX__}/existing-solar`
     }
 
     const response = await global.__SERVER__.inject(options)
@@ -29,7 +31,7 @@ describe('Page: /existing-solar', () => {
   it('no option selected -> show error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/existing-solar`,
+      url: `${global.__URLPREFIX__}/existing-solar`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { existingSolar: '', crumb: crumbToken }
     }
@@ -44,7 +46,7 @@ describe('Page: /existing-solar', () => {
   it('user selects \'Yes\' -> store user response and redirect to /solar-technologies', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/existing-solar`,
+      url: `${global.__URLPREFIX__}/existing-solar`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { existingSolar: 'Yes', crumb: crumbToken }
     }
@@ -57,7 +59,7 @@ describe('Page: /existing-solar', () => {
   it('user selects \'No\' -> store user response and redirect to solar-technologies', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/solar/existing-solar`,
+      url: `${global.__URLPREFIX__}/existing-solar`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { existingSolar: 'No', crumb: crumbToken }
     }
@@ -71,7 +73,7 @@ describe('Page: /existing-solar', () => {
     varList.tenancy = 'Yes'
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/existing-solar`
+      url: `${global.__URLPREFIX__}/existing-solar`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
@@ -81,7 +83,7 @@ describe('Page: /existing-solar', () => {
     varList.tenancy = 'No'
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/solar/existing-solar`
+      url: `${global.__URLPREFIX__}/existing-solar`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)

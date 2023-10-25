@@ -3,7 +3,7 @@ const CHARS_MAX_10 = /^.{1,10}$/
 const CHARS_MIN_10 = /^.{10,}$/
 const CHARS_MAX_100 = /^.{0,100}$/
 const WORDS_MAX_60 = /^(?:\b\w+\b[\s.',-]*){1,6}$/
-const CHARS_MAX_250 = /^[A-Za-z0-9\s.',-]{1,250}[#\$\^]?$/
+const CHARS_MAX_250 = /^.{1,250}$/
 const WHOLE_NUMBER_REGEX = /^[1-9]\d*/
 const NUMBER_REGEX = /^\d+$/
 const SBI_REGEX = /^(\d{0}|\d{9})$/
@@ -14,6 +14,7 @@ const NAME_ONLY_REGEX = /^[a-zA-Z,' -]*$/
 const PHONE_REGEX = /^\+?[0-9\[\s\(\)\]\-]{10,}$/
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/
 const PROJECT_COST_REGEX = /^[1-9]\d*$/
+const CHARS_MAX_18 = /^.{0,18}$/
 
 module.exports = {
   CURRENCY_FORMAT,
@@ -31,5 +32,6 @@ module.exports = {
   NAME_ONLY_REGEX,
   PHONE_REGEX,
   EMAIL_REGEX,
-  PROJECT_COST_REGEX
+  PROJECT_COST_REGEX,
+  CHARS_MAX_18
 }
