@@ -95,6 +95,7 @@ describe('Page Guard', () => {
   it('OR - should redirect to start page if no key found', async () => {
 
     varList.projectSubject = 'random'
+    varList.applicant = 'random'
 
     server = await createServer()
     const getOptions = {

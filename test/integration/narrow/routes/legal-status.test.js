@@ -49,7 +49,7 @@ describe('Legal status page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(302)
-    expect(response.headers.location).toBe('planning-permission')
+    expect(response.headers.location).toBe('country')
   })
   test('redirects to country if user selected solar option on project-subject page', async () => {
     varList.projectSubject = 'Solar technologies'
