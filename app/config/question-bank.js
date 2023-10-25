@@ -967,7 +967,7 @@ const questionBank = {
           yarKey: 'projectCost'
         },
         {
-          key: 'solar-potential-amount',
+          key: 'potential-amount-solar',
           order: 230,
           url: 'potential-amount-solar',
           baseUrl: 'potential-amount-solar',
@@ -1211,7 +1211,7 @@ const questionBank = {
         },
         /// ////// ***************** ROBOTICS ************************************/////////////////////
         {
-          key: 'robotics-project-items',
+          key: 'project-items',
           order: 300,
           title: 'Which items does your project need?',
           pageTitle: '',
@@ -1228,7 +1228,7 @@ const questionBank = {
           preValidationKeys: ['projectStart'],
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['robotics-project-items-A3'],
+            dependentAnswerKeysArray: ['project-items-A3'],
             urlOptions: {
               thenUrl: 'technology-items',
               elseUrl: 'project-cost'
@@ -1251,21 +1251,21 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'robotics-project-items-A1',
+              key: 'project-items-A1',
               value: 'Advanced ventilation control units',
               hint: {
                 text: 'System to control and monitor ventilation of existing horticultural or livestock buildings to minimise heat loss and reduce greenhouse gas and particulate emissions'
               }
             },
             {
-              key: 'robotics-project-items-A2',
+              key: 'project-items-A2',
               value: 'Wavelength-specific LED lighting for horticultural crops',
               hint: {
                 html: 'Wavelength-specific LED lighting to aid plant growth only'
               }
             },
             {
-              key: 'robotics-project-items-A3',
+              key: 'project-items-A3',
               value: 'Robotic equipment item'
             }
           ],
@@ -1542,7 +1542,7 @@ const questionBank = {
           baseUrl: 'project-cost',
           backUrlObject: {
             dependentQuestionYarKey: ['technologyItems', 'projectItems'],
-            dependentAnswerKeysArray: ['technology-items-A8', 'robotics-project-items-A3'],
+            dependentAnswerKeysArray: ['technology-items-A8', 'project-items-A3'],
             urlOptions: {
               thenUrl: ['other-robotic-technology', 'technology-items'],
               elseUrl: 'project-items'
@@ -1550,7 +1550,7 @@ const questionBank = {
           },
           backUrl:'other-conditional',
           nextUrl: 'potential-amount',
-          preValidationKeys: ['projectItems'],
+          preValidationKeys: [],
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',
@@ -1591,7 +1591,7 @@ const questionBank = {
                 content: [{
                   para: '',
                   items: [],
-                  dependentAnswerExceptThese: ['robotics-project-items-A3', 'technology-items-A8']
+                  dependentAnswerExceptThese: ['project-items-A3', 'technology-items-A8']
                 }]
               },
               {
@@ -1604,22 +1604,23 @@ const questionBank = {
               }
             ],
             dependentYarKeys: ['projectItems', 'technologyItems'],
-            dependentQuestionKeys: ['robotics-project-items', 'technology-items']
+            dependentQuestionKeys: ['project-items', 'technology-items']
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the estimated cost for the items'
+              error: 'Enter the total estimated cost for the items'
             },
             {
               type: 'REGEX',
-              regex: CURRENCY_FORMAT,
-              error: 'Enter a whole number in correct format'
+              regex: PROJECT_COST_REGEX,
+              error: 'Enter a whole number with a maximum of 7 digits'
             },
             {
-              type: 'REGEX',
-              regex: CHARS_MAX_10,
-              error: 'Enter a whole number with a maximum of 10 digits'
+              type: 'MIN_MAX_CHARS',
+              min: 1,
+              max: 7,
+              error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],
           warningConditional: {
@@ -1632,6 +1633,24 @@ const questionBank = {
           },
           answers: [],
           yarKey: 'projectCost'
+        },
+        {
+          key: 'potential-amount-capped',
+          order: 312,
+          url: 'potential-amount-capped',
+          baseUrl: 'potential-amount-capped',
+          backUrl: 'project-cost',
+          nextUrl: 'remaining-costs',
+          preValidationKeys: ['projectCost'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: `The maximum grant you can apply for is £500,000.
+            You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.`,
+            warning: {
+              text: 'There’s no guarantee the project will receive a grant.'
+            }
+          }
         },
         {
           key: 'potential-amount',
@@ -1653,7 +1672,7 @@ const questionBank = {
           }
         },
         {
-          key: 'robotics-remaining-costs',
+          key: 'remaining-costs',
           order: 330,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
           pageTitle: '',
@@ -1664,8 +1683,17 @@ const questionBank = {
           preValidationKeys: ['projectCost'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
-            insertText: { text: 'You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.' },
+            messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
+            insertText: {
+              html: `
+                  <p>You can use:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>loans</li>
+                    <li>overdrafts</li>
+                    <li>the Basic Payment Scheme</li>
+                  </ul>
+            </span>`
+            },
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
@@ -1676,20 +1704,26 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.\n\n
-                
-                You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.`,
-                items: []
-              }]
-            }]
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.
+                  
+                  You can use:`,
+                  items: [
+                    'loans',
+                    'overdrafts',
+                    'the Basic Payment Scheme'
+                  ]
+                }]
+              }
+            ]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if you can pay the remaining costs without using any other grant money'
+              error: 'Select yes if you can pay the remaining costs'
             }
           ],
           answers: [
