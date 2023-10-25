@@ -1550,7 +1550,7 @@ const questionBank = {
           },
           backUrl:'other-conditional',
           nextUrl: 'potential-amount',
-          preValidationKeys: [],
+          // preValidationKeys: [],
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',

@@ -408,6 +408,7 @@ const showPostPage = (currentQuestion, request, h) => {
       }
       setYarValue(request, 'calculatedGrant', calculatedGrant)
       setYarValue(request, 'remainingCost', remainingCost)
+      break
     case 'automatic-eligibility': {
         const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
         const technologyItemsAnswer = getYarValue(request, 'technologyItems')
