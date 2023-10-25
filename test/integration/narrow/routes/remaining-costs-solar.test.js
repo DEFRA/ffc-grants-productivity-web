@@ -41,12 +41,13 @@ describe('Page: /remaining-costs-solar', () => {
     expect(postResponse.payload).toContain('Select yes if you can pay the remaining costs')
   })
 
-  it('user selects ineligible option: \'No\' -> display ineligible page', async () => {
+  it('user selects: <Yes> -> store user response and redirect to project impact page', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/remaining-costs-solar`,
       headers: { cookie: 'crumb=' + crumbToken },
       payload: { remainingCosts: 'No', crumb: crumbToken }
+
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -77,4 +78,5 @@ describe('Page: /remaining-costs-solar', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"potential-amount-solar\" class=\"govuk-back-link\">Back</a>')
   })
+
 })
