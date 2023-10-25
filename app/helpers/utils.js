@@ -23,7 +23,6 @@ const getQuestionByKey = (questionKey) => ALL_QUESTIONS.find(({ key }) => (key =
 
 const getQuestionAnswer = (questionKey, answerKey) => {
   const question = getQuestionByKey(questionKey)
-  console.log('yay data', question, questionKey)
   return (question.answers.find(({ key }) => (key === answerKey)).value)
 }
 

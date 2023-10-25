@@ -228,14 +228,21 @@ const questionBank = {
           title: 'What is the legal status of the business?',
           pageTitle: '',
           backUrlObject: {
-            dependentQuestionYarKey: 'applicant',
-            dependentAnswerKeysArray: ['applicant-A1'],
+            dependentQuestionYarKey: ['projectSubject', 'applicant'],
+            dependentAnswerKeysArray: ['project-subject-A2', 'applicant-A1'],
             urlOptions: {
-              thenUrl: 'applicant',
+              thenUrl: ['project-subject', 'applicant'],
               elseUrl: 'country'
             }
           },
-          url: 'legal-status',
+          // dependantNextUrl: {
+          //   dependentQuestionYarKey: ['applicant', 'projectSubject'],
+          //   dependentAnswerKeysArray: ['applicant-A1', 'project-subject-A1'],
+          //   urlOptions: {
+          //     thenUrl: ['tenancy', 'robotics/project-items'],
+          //     elseUrl: 'slurry/mild-acidification-infrastructure'
+          //   }
+          // },
           baseUrl: 'legal-status',
           nextUrl: 'country',
           // preValidationKeys: ['businessLocation'],

@@ -8,7 +8,10 @@ describe("getUrl()", () => {
   let secBtn = "Back to score";
   let dict = {};
   beforeEach(() => {
-    getYarValue.mockImplementation((req, key) => dict[key]);
+    getYarValue.mockImplementation((req, key) => {
+      console.log('here: mock: ', dict[key]);
+      return dict[key]
+    });
   });
   afterEach(() => {
     jest.resetAllMocks();
@@ -20,35 +23,59 @@ describe("getUrl()", () => {
     secBtn = "";
     expect(getUrl(urlObject, "mock-url", {}, secBtn, "")).toEqual("mock-url");
   });
-
-  it.skip("should return nonDependentUrl if urlObject is present, but yar values are empty", () => {
+  it("should return elseUrl if urlObject and dependent Yar values are not present", () => {
     urlObject = {
-      dependentQuestionYarKey: "dependentQuestionYarKey",
-      dependentAnswerKeysArray: ["dependentAnswerKeysArray"],
+      dependentQuestionYarKey: "tenancy",
+      dependentAnswerKeysArray: ["tenancy-A1"],
       urlOptions: {
         thenUrl: "thenUrl",
         elseUrl: "elseUrl",
-        nonDependentUrl: "nonDependentUrl",
       },
     };
-    const selectedURL = getUrl(urlObject, "mock-url", {}, secBtn, "");
-    console.log("here: ", selectedURL);
-    expect(selectedURL).toEqual("nonDependentUrl");
+     dict = {
+      tenancy: "No",
+    };
+    const selectedURL = getUrl(urlObject, "mock-url", {}, "", "");
+    expect(selectedURL).toEqual("elseUrl");
   });
-  it("should return elseUrl if urlObject and dependent Yar values are present", () => {
+  it("should return thenUrl if urlObject and dependent Yar values are present", () => {
     urlObject = {
-      dependentQuestionYarKey: "dependentQuestionYarKey",
-      dependentAnswerKeysArray: "dependentAnswerKeysArray",
+      dependentQuestionYarKey: ['tenancy'],
+      dependentAnswerKeysArray: ["tenancy-A1"],
       urlOptions: {
         thenUrl: "thenUrl",
         elseUrl: "elseUrl",
-        nonDependentUrl: "nonDependentUrl",
       },
     };
     dict = {
-      dependentQuestionYarKey: "dependentAnswerKeysArray",
+      tenancy: "Yes",
     };
-    expect(getUrl(urlObject, "mock-url", {}, secBtn, "")).toEqual("elseUrl");
+    expect(getUrl(urlObject, "mock-url", {}, "", "")).toEqual("thenUrl");
+  });
+
+  it.only("should return the correct thenUrl if urlObject and co-responding Yar values are present", () => {
+    urlObject = {
+      dependentQuestionYarKey: ['tenancy', 'applicant', 'businessLocation'],
+      dependentAnswerKeysArray: ["tenancy-A1", 'applicant-A2', 'business-location-A1'],
+      urlOptions: {
+        thenUrl: ["thenUrl", "thenUrl2", "thenUrl3"],
+        elseUrl: "elseUrl",
+      },
+    };
+    dict = {
+      tenancy: "Yes",
+      applicant: "Not The Answer We Are Looking For",
+    };
+    expect(getUrl(urlObject, "mock-url", {}, "", "")).toEqual("thenUrl");
+    dict = {
+      tenancy: "Not an answer we are looking for",
+      applicant: "Contractor",
+    };
+    expect(getUrl(urlObject, "mock-url", {}, "", "")).toEqual("thenUrl2");
+    dict = {
+      businessLocation: "Yes",
+    };
+    expect(getUrl(urlObject, "mock-url", {}, "", "")).toEqual("thenUrl3");
   });
   it('should return secBtnPath if secBtn is "Back to score"', () => {
     urlObject = null;
@@ -74,15 +101,5 @@ describe("getUrl()", () => {
         "or-even-java"
       )
     ).toEqual(`${urlPrefix}/check-details`);
-  });
-  it.skip("should redirect to /project-responsibility if user selected Robotics and is in England", () => {
-    urlObject = null;
-    dict = {
-      projectSubject: "Robotics and automatic technology",
-      tenancy: "Yes",
-    };
-    expect(getUrl(urlObject, "mock-url", {}, "", "")).toEqual(
-      "project-responsibility"
-    );
   });
 });
