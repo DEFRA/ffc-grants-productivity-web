@@ -1,4 +1,7 @@
 const { ALL_QUESTIONS } = require('../../../../app/config/question-bank')
+
+const senders = require('../../../../app/messaging/senders')
+
 const varListTemplate = {
   planningPermission: 'Should be in place by the time I make my full application',
   planningPermissionEvidence: {
@@ -11,19 +14,18 @@ const varListTemplate = {
   inEngland: 'Yes',
   tenancy: 'No',
   projectResponsibility: 'Yes, I plan to take full responsibility for my project',
-  existingSolar: 'Yes'
-
+  existingSolar: 'Yes',
+  farmersDetails: 'voila',
+  consentMain: 'lalal'
 }
 
 let varList
 ALL_QUESTIONS.forEach(question => {
-  
   if (question.preValidationKeys) {
     varList = question.preValidationKeys.map(m => {
       return { m: 'someValue' }
     })
   }
-  
 })
 jest.doMock('../../../../app/helpers/session', () => ({
   setYarValue: (request, key, value) => null,
@@ -57,6 +59,8 @@ describe('All default GET routes', () => {
         method: 'GET',
         url: `${global.__URLPREFIX__}/${question.url}`
       }
+
+      jest.spyOn(senders, 'sendDesirabilitySubmitted').mockImplementationOnce(() => Promise.resolve(true))
 
       const response = await global.__SERVER__.inject(options)
       expect(response.statusCode).toBe(200)

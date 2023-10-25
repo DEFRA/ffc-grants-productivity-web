@@ -1391,82 +1391,13 @@ const questionBank = {
           id: 'technologyItems',
           name: 'technologyItems',
           hint: {
-            html: `Technology powered by fossil fuels will only be funded where there is no 
-                    commercially available electric or renewable energy alternative.<br/><br/>
-                    Select one option.<br/><br/>
-                    If you need multiple items, you can add another item later in the checker.`
+            html: `Technology powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative.<br/><br/>
+            Select one option.<br/><br/>
+            If you need multiple items, you can add another item later in the checker.`
           },
           eliminationAnswerKeys: '',
           fundingPriorities: '',
           type: 'multi-answer',
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select all the robotic equipment items your project needs'
-            }
-          ],
-          answers: [
-            {
-              key: 'robotic-equipment-items-A1',
-              value: 'Robotic harvesting equipment'
-            },
-            {
-              key: 'robotic-equipment-items-A2',
-              value: 'Robotic weeding equipment'
-            },
-            {
-              key: 'robotic-equipment-items-A3',
-              value: 'Robotic spraying equipment'
-            },
-            {
-              key: 'robotic-equipment-items-A4',
-              value: 'Autonomous driverless tractors or platforms'
-            },
-            {
-              key: 'robotic-equipment-items-A5',
-              value: 'Voluntary robotic milking system'
-            },
-            {
-              key: 'robotic-equipment-items-A6',
-              value: 'Robotic feeding system'
-            },
-            {
-              key: 'robotic-equipment-items-A7',
-              value: 'Robotic transplanting'
-            },
-            {
-              key: 'robotic-equipment-items-A8',
-              value: 'Other autonomous robotic technology'
-            }
-          ],
-          yarKey: 'roboticsProjectItemEquipments'
-        },
-        {
-          key: 'other-robotic-equipment',
-          order: 305,
-          title: 'Does your other robotic technology fit the eligibility criteria?',
-          pageTitle: '',
-          backUrl: 'robotic-equipment-items',
-          nextUrl: 'other-robotic-conditional',
-          url: 'robotics/other-robotic-equipment',
-          baseUrl: 'other-robotic-equipment',
-          // preValidationKeys: ['projectItems'],
-          ineligibleContent: {
-            messageContent: 'RPA will only fund items that:',
-            messageContentList: [
-              'have a sensing system and can understand their environment',
-              'make decisions and plan',
-              'can control its actuators (the devices that move robot joints)',
-              'work in a continuous loop'
-            ],
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          fundingPriorities: '',
-          type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
             values: [{
@@ -1531,7 +1462,7 @@ const questionBank = {
           pageTitle: '',
           url: 'robotic-automatic',
           baseUrl: 'robotic-automatic',
-          preValidationKeys: ['technologyItems'],
+          // preValidationKeys: ['technologyItems'],
           backUrl: 'technology-items',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           dependantNextUrl: {

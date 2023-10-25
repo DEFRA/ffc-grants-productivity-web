@@ -81,7 +81,7 @@ describe('Robotics project items page', () => {
   })
   it('page loads with correct back link when tenancy is "No" ', async () => {
     varList.tenancy = 'No'
-    varList.projectResponsibility = 'Fake data'
+    varList.projectResponsibility = 'Yes, I plan to take full responsibility for my project'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-items`
