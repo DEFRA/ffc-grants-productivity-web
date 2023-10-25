@@ -16,6 +16,7 @@ const { startPageUrl, urlPrefix } = require('../config/server')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const emailFormatting = require('./../messaging/email/process-submission')
+const { validate } = require('uuid')
 
 const resetYarValues = (applying, request) => {
   setYarValue(request, 'agentsDetails', null)
@@ -63,7 +64,7 @@ const getContractorFarmerModel = (data, question, request, conditionalHtml) => {
   return MODEL
 }
 const getPage = async (question, request, h) => {
-  const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationObject } = question
+  const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationObject, replace } = question
   const backUrl = getUrl(backUrlObject, question.backUrl, request)
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject)
@@ -156,7 +157,15 @@ const getPage = async (question, request, h) => {
       ))
     }
   }
-
+  if(replace) {
+    question = {
+      ...question,
+      title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+          getYarValue(request, additionalYarKeyName)
+      )
+    };
+  }
+  
   const data = getYarValue(request, yarKey) || null
   let conditionalHtml
   if (question?.conditionalKey && question?.conditionalLabelData) {
@@ -233,7 +242,6 @@ const getPage = async (question, request, h) => {
 
     return h.view('check-details', MODEL)
   }
-
   switch (url) {
     case 'score':
     case 'business-details':
@@ -260,12 +268,11 @@ const getPage = async (question, request, h) => {
 }
 
 const showPostPage = (currentQuestion, request, h) => {
-  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields } = currentQuestion
+  const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields, replace } = currentQuestion
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   let thisAnswer
   let dataObject
-
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
@@ -297,7 +304,6 @@ const showPostPage = (currentQuestion, request, h) => {
     })
     setYarValue(request, yarKey, dataObject)
   }
-
   if (title) {
     currentQuestion = {
       ...currentQuestion,
@@ -305,6 +311,21 @@ const showPostPage = (currentQuestion, request, h) => {
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }
+  }
+  if (replace) {
+    currentQuestion = {
+      ...currentQuestion,
+      title: title.replace(
+        SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => getYarValue(request, additionalYarKeyName)),
+      validate: [
+        {
+          type: "NOT_EMPTY",
+          error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+              getYarValue(request, additionalYarKeyName)
+          ),
+        },
+      ],
+    };
   }
 
   const errors = checkErrors(payload, currentQuestion, h, request)
@@ -359,21 +380,25 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   switch (baseUrl) {
-    case 'solar/solar-technologies':
+    case 'solar-technologies':
       if([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){
-        return h.redirect(`${urlPrefix}/solar/solar-installation`)
+        return h.redirect(`${urlPrefix}/solar-installation`)
       } else {
-        return h.redirect(`${urlPrefix}/solar/project-cost`)
+        if(getYarValue(request, 'existingSolar') === 'Yes'){
+          return h.redirect(`${urlPrefix}/project-cost-solar`)
+        }else{
+          return  h.view('not-eligible', NOT_ELIGIBLE)
+        }
       }
+    case 'project-cost' || 'project-cost-solar':
+      const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+      if (payload[Object.keys(payload)[0]] > 1250000) {
+        return h.redirect('potential-amount-capped')
+      }
+      setYarValue(request, 'calculatedGrant', calculatedGrant)
+      setYarValue(request, 'remainingCost', remainingCost)
     default:
       break
-  }
-
-  if (yarKey === 'projectCost') {
-    const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
-
-    setYarValue(request, 'calculatedGrant', calculatedGrant)
-    setYarValue(request, 'remainingCost', remainingCost)
   }
 
   return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.secBtn))

@@ -29,7 +29,7 @@ jest.doMock('../../../../app/helpers/session', () => ({
   setYarValue: (request, key, value) => null,
   getYarValue: (request, key) => {
     if (varList[key]) return varList[key]
-    else return 'Error'
+    else return undefined
   }
 }))
 
@@ -57,6 +57,7 @@ describe('All default GET routes', () => {
         method: 'GET',
         url: `${global.__URLPREFIX__}/${question.url}`
       }
+
       const response = await global.__SERVER__.inject(options)
       expect(response.statusCode).toBe(200)
     })

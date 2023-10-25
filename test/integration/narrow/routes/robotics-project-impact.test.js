@@ -1,7 +1,7 @@
 const { crumbToken } = require('./test-helper')
 const varListTemplate = {
   projectItems: ['Robotic equipment item', 'Advanced ventilation control units'],
-  roboticsProjectItemEquipments: ['Autonomous driverless tractors or platforms', 'Other robotic equipment']
+  technologyItems: ['Autonomous driverless tractors or platforms', 'Other robotic equipment']
 }
 
 let varList
@@ -39,6 +39,7 @@ describe('robotics-project-impact', () => {
   })
 
   it('user selects: <Yes> -> store user response and based on project items selected redirect to data analytics page', async () => {
+    varList.technologyItems = ['Feeding system']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotics/project-impact`,

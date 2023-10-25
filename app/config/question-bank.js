@@ -2,6 +2,7 @@ const {
   CURRENCY_FORMAT,
   CHARS_MAX_10,
   CHARS_MIN_10,
+  CHARS_MAX_18,
   CHARS_MAX_100,
   CHARS_MAX_250,
   POSTCODE_REGEX,
@@ -553,7 +554,6 @@ const questionBank = {
             iconFallbackText: 'Warning'
           },
           yarKey: 'projectStart'
-
         },
         {
           key: 'tenancy',
@@ -573,8 +573,8 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A2'],
             urlOptions: {
-              thenUrl: 'solar/existing-solar',
-              elseUrl: 'project-responsibility'
+              thenUrl: 'existing-solar',
+              elseUrl: 'project-items'
             }
           },
           hint: {
@@ -630,7 +630,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A2'],
             urlOptions: {
-              thenUrl: 'solar/existing-solar',
+              thenUrl: 'existing-solar',
               elseUrl: 'project-items'
             }
           },
@@ -680,8 +680,8 @@ const questionBank = {
           order: 62,
           title: 'Does your farm have an existing solar PV system?',
           pageTitle: '',
-          url: 'solar/existing-solar',
-          baseUrl: 'solar/existing-solar',
+          url: 'existing-solar',
+          baseUrl: 'existing-solar',
           nextUrl: 'solar-technologies',
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
@@ -708,7 +708,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'Applicants who already have a solar PV system can still apply for this grant. For example, you can apply for a battery to support your existing solar PV panels.',
+                para: 'Applicants who already have a solar PV system can still apply for this grant. For example, you can apply for a battery to add to your existing solar PV panels.',
                 items: []
               }]
             }]
@@ -736,10 +736,10 @@ const questionBank = {
           order: 61,
           title: 'What solar technologies does your project need?',
           pageTitle: '',
-          url: 'solar/solar-technologies',
-          baseUrl: 'solar/solar-technologies',
+          url: 'solar-technologies',
+          baseUrl: 'solar-technologies',
           backUrl: 'existing-solar',
-          nextUrl: 'project-cost',
+          nextUrl: 'project-cost-solar',
           preValidationObject: {
             preValidationKeys: ['existingSolar'],
             preValidationAnswer: ['existing-solar-A1', 'existing-solar-A2'],
@@ -758,11 +758,25 @@ const questionBank = {
                     Select all that apply
                     `
           },
+          ineligibleContent: {
+            messageContent: 'You must have solar PV panels to be eligible for funding for other solar technology.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
           eliminationAnswerKeys: '',
-          ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'If you do not have an existing solar PV system you must select solar PV panels to be eligible for this grant.'
+              }]
+            }]
+          },
           validate: [
             {
               type: 'NOT_EMPTY',
@@ -802,10 +816,10 @@ const questionBank = {
           order: 61,
           title: 'Where will you install the solar PV panels?',
           pageTitle: '',
-          url: 'solar/solar-installation',
+          url: 'solar-installation',
           baseUrl: 'solar-installation',
           backUrl: 'solar-technologies',
-          nextUrl: 'project-cost',
+          nextUrl: 'solar-output',
           // preValidationKeys: [],
           id: 'solarInstallation',
           name: 'solarInstallation',
@@ -924,17 +938,18 @@ const questionBank = {
         },
         {
           key: 'solar-size',
+          key: 'solar-output',
           order: 64,
           title: 'How much energy will your solar PV system output?',
           hint: {
             html: 'The size of your solar PV system'
           },
           pageTitle: '',
-          url: 'solar/solar-size',
-          baseUrl: 'solar-size',
-          backUrl: 'solar-usage',
+          url: 'solar-output',
+          baseUrl: 'solar-output',
+          backUrl: 'solar-installation',
           // preValidationKeys: [],
-          nextUrl: 'agricultural-sector',
+          nextUrl: 'project-cost-solar',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -958,38 +973,46 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'solar-size-A1',
-              value: 'Up to 100kW'
+              key: 'solar-output-A1',
+              value: 'Up to 50kW'
             },
             {
-              key: 'solar-size-A2',
-              value: '100kW to 350kW',
+              key: 'solar-output-A2',
+              value: '51kW to 100kW',
             },
             {
-              key: 'solar-size-A3',
-              value: 'More than 350kW',
+              key: 'solar-output-A3',
+              value: '101kW to 150kW',
+            },
+            {
+              key: 'solar-output-A4',
+              value: '151kW to 200kW',
+            },
+            {
+              key: 'solar-output-A5',
+              value: 'More than 201kW',
             }
           ],
-          yarKey: 'solarSize'
+          yarKey: 'solarOutput'
         },
         {
-          key: 'project-cost',
+          key: 'project-cost-solar',
           order: 65,
           pageTitle: '',
           classes: 'govuk-input--width-10',
-          url: 'solar/project-cost',
-          baseUrl: 'project-cost',
+          url: 'project-cost-solar',
+          baseUrl: 'project-cost-solar',
           backUrlObject: {
             dependentQuestionYarKey: 'solarTechnologies',
             dependentAnswerKeysArray: ['solar-technologies-A2'],
             urlOptions: {
-              thenUrl: 'solar-installation',
+              thenUrl: 'solar-output',
               elseUrl: 'solar-technologies'
             }
           },
-          nextUrl: 'potential-amount',
+          nextUrl: 'potential-amount-solar',
           fundingPriorities: '',
-          // preValidationKeys: ['solarTechnologies'],
+          // preValidationKeys: [],
           grantInfo: {
             minGrant: MIN_GRANT,
             maxGrant: MAX_GRANT,
@@ -1045,12 +1068,12 @@ const questionBank = {
           yarKey: 'projectCost'
         },
         {
-          key: 'solar-potential-amount',
+          key: 'potential-amount-solar',
           order: 230,
-          url: 'solar/potential-amount',
-          baseUrl: 'potential-amount',
-          backUrl: 'project-cost',
-          nextUrl: 'remaining-costs',
+          url: 'potential-amount-solar',
+          baseUrl: 'potential-amount-solar',
+          backUrl: 'project-cost-solar',
+          nextUrl: 'remaining-costs-solar',
           // preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
@@ -1062,14 +1085,14 @@ const questionBank = {
           }
         },
         {
-          key: 'remaining-costs',
+          key: 'remaining-costs-solar',
           order: 240,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
           pageTitle: '',
-          url: 'solar/remaining-costs',
-          baseUrl: 'remaining-costs',
-          backUrl: 'potential-amount',
-          nextUrl: 'solar-usage',
+          url: 'remaining-costs-solar',
+          baseUrl: 'remaining-costs-solar',
+          backUrl: 'potential-amount-solar',
+          nextUrl: 'agricultural-sector-solar',
           // preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
@@ -1128,6 +1151,85 @@ const questionBank = {
             }
           ],
           yarKey: 'remainingCosts'
+        },
+        {
+          key: 'agricultural-sector-solar',
+          scheme: '',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
+          order: 245,
+          title: 'Which agricultural sector is your project in?',
+          pageTitle: '',
+          url: 'agricultural-sector-solar',
+          baseUrl: 'agricultural-sector-solar',
+          backUrl: 'remaining-costs-solar',
+          nextUrl: 'score',
+          preValidationKeys: ['remainingCosts'],
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          hint: {
+            text: 'Select up to 2 options'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Funding priorities',
+              content: [{
+                para: 'RPA wants to fund sectors that:',
+                items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what agricultural sector your project is in'
+            },
+            {
+              type: 'MAX_SELECT',
+              max: 2,
+              error: 'Select up to 2 sectors your project is in'
+            }
+          ],
+          answers: [
+            {
+              key: 'robotics-agricultural-sector-A1',
+              value: 'Arable'
+            },
+            {
+              key: 'robotics-agricultural-sector-A2',
+              value: 'Beef'
+            },
+            {
+              key: 'robotics-agricultural-sector-A3',
+              value: 'Dairy livestock'
+            },
+            {
+              key: 'robotics-agricultural-sector-A4',
+              value: 'Horticulture'
+            },
+            {
+              key: 'robotics-agricultural-sector-A5',
+              value: 'Mixed livestock'
+            },
+            {
+              key: 'robotics-agricultural-sector-A6',
+              value: 'Pig'
+            },
+            {
+              key: 'robotics-agricultural-sector-A7',
+              value: 'Poultry'
+            },
+            {
+              key: 'robotics-agricultural-sector-A7',
+              value: 'Sheep'
+            }
+          ],
+          yarKey: 'agriculturalSector'
         },
         {
           key: 'tenancy-length',
@@ -1210,13 +1312,12 @@ const questionBank = {
         },
         /// ////// ***************** ROBOTICS ************************************/////////////////////
         {
-          key: 'robotics-project-items',
+          key: 'project-items',
           order: 300,
           title: 'Which items does your project need?',
           pageTitle: '',
-          url: 'robotics/project-items',
+          url: 'project-items',
           baseUrl: 'project-items',
-          backUrl: 'tenancy',
           preValidationObject: {
             preValidationKeys: ['tenancy', 'projectResponsibility'],
             preValidationAnswer: ['tenancy-A1', 'project-responsibility-A1', 'project-responsibility-A2'],
@@ -1224,11 +1325,19 @@ const questionBank = {
             preValidationUrls: ['tenancy', 'project-responsibility'],
             andCheck: 'project-subject-A1'
           },          
+          backUrlObject: {
+            dependentQuestionYarKey: 'tenancy',
+            dependentAnswerKeysArray: ['tenancy-A1'],
+            urlOptions: {
+              thenUrl: 'tenancy',
+              elseUrl: 'project-responsibility'
+            }
+          },
           dependantNextUrl: {
             dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['robotics-project-items-A3'],
+            dependentAnswerKeysArray: ['project-items-A3'],
             urlOptions: {
-              thenUrl: 'robotic-equipment-items',
+              thenUrl: 'technology-items',
               elseUrl: 'project-cost'
             }
           },
@@ -1244,54 +1353,48 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select all the items your project needs'
+              error: 'Select which items your project needs'
             }
           ],
           answers: [
             {
-              key: 'robotics-project-items-A1',
+              key: 'project-items-A1',
               value: 'Advanced ventilation control units',
               hint: {
                 text: 'System to control and monitor ventilation of existing horticultural or livestock buildings to minimise heat loss and reduce greenhouse gas and particulate emissions'
               }
             },
             {
-              key: 'robotics-project-items-A2',
+              key: 'project-items-A2',
               value: 'Wavelength-specific LED lighting for horticultural crops',
               hint: {
                 html: 'Wavelength-specific LED lighting to aid plant growth only'
               }
             },
             {
-              key: 'robotics-project-items-A3',
+              key: 'project-items-A3',
               value: 'Robotic equipment item'
             }
           ],
           yarKey: 'projectItems'
         },
         {
-          key: 'robotic-equipment-items',
-          order: 300,
-          title: 'Which robotic items does your project need?',
+          key: 'technology-items',
+          order: 310,
+          title: 'What technology does your project need?',
           pageTitle: '',
-          url: 'robotics/robotic-equipment-items',
-          baseUrl: 'robotic-equipment-items',
+          url: 'technology-items',
+          baseUrl: 'technology-items',
           backUrl: 'project-items',
           // preValidationKeys: ['projectItems'],
-          dependantNextUrl: {
-            dependentQuestionYarKey: 'roboticsProjectItemEquipments',
-            dependentAnswerKeysArray: ['robotic-equipment-items-A8'],
-            urlOptions: {
-              thenUrl: 'other-robotic-equipment',
-              elseUrl: 'project-cost'
-            }
-          },
-          id: 'roboticsProjectItemEquipments',
-          name: 'roboticsProjectItemEquipments',
+          nextUrl: 'robotic-automatic',
+          id: 'technologyItems',
+          name: 'technologyItems',
           hint: {
-            html: `Farming equipment capable of sensing and understanding its environment, making decisions, and planning and controlling its actions in a continuous loop. 
-              <br /><br />
-              Select all the items your project needs`
+            html: `Technology powered by fossil fuels will only be funded where there is no 
+                    commercially available electric or renewable energy alternative.<br/><br/>
+                    Select one option.<br/><br/>
+                    If you need multiple items, you can add another item later in the checker.`
           },
           eliminationAnswerKeys: '',
           fundingPriorities: '',
@@ -1365,85 +1468,240 @@ const questionBank = {
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
-          hint: {
-            html: `All items must
-            <ul><li>have a sensing system and can understand their environment</li>
-            <li>make decisions and plan</li>
-            <li>can control its actuators (the devices that move robot joints)</li>
-            <li>work in a continuous loop</li></ul>`
-          },
           sidebar: {
             values: [{
               heading: 'Eligibility',
               content: [{
                 para: 'RPA will consider items that:',
-                items: ['have a sensing system and can understand their environment', 'make decisions and plan', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop']
+                items: ['have a sensing system and can understand their environment', 'make decisions and plans', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop']
               }]
             }]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if your other robotic equipment meets the eligibility criteria'
-            },
-            {
-              dependentKey: 'roboticEquipment',
-              type: 'NOT_EMPTY',
-              error: 'Describe your other robotic equipment'
-            },
-            {
-              dependentKey: 'roboticEquipment',
-              type: 'REGEX',
-              regex: CHARS_MAX_250,
-              error: 'Description must be 250 characters or fewer and use letters, numbers and punctuation'
+              error: 'Select what technology your project needs'
             }
           ],
           answers: [
             {
-              key: 'other-robotic-equipment-A1',
-              conditional: true,
-              value: 'Yes'
+              key: 'technology-items-A1',
+              value: 'Harvesting technology'
             },
             {
-              key: 'other-robotic-equipment-A2',
-              value: 'No',
-              notEligible: true,
-              alsoMaybeEligible: {
-                dependentQuestionKey: 'robotic-equipment-items',
-                dependentQuestionYarKey: 'roboticsProjectItemEquipments',
-                notUniqueAnswer: 'robotic-equipment-items-A8',
-                maybeEligibleContent: {
-                  nextUrl: 'project-cost',
-                  messageHeader: 'Your other robotic technology is not eligible for a grant from this scheme',
-                  messageContent: `RPA will only fund items that:
-                  <ul><li>have a sensing system and can understand their environment</li>
-                  <li>make decisions and plan</li>
-                  <li>can control its actuators (the devices that move robot joints)</li>
-                  <li>work in a continuous loop</li></ul>`,
-                  customButtonText: 'Continue with eligible items'
-                }
-
-              }
-
+              key: 'technology-items-A2',
+              value: 'Weeding technology'
+            },
+            {
+              key: 'technology-items-A3',
+              value: 'Spraying technology'
+            },
+            {
+              key: 'technology-items-A4',
+              value: 'Driverless tractor'
+            },
+            {
+              key: 'technology-items-A5',
+              value: 'Voluntary robotic milking system'
+            },
+            {
+              key: 'technology-items-A6',
+              value: 'Feeding system'
+            },
+            {
+              key: 'technology-items-A7',
+              value: 'Transplanting technology'
+            },
+            {
+              key: 'technology-items-A8',
+              value: 'Slurry and manure management'
+            },
+            {
+              key: 'technology-items-A9',
+              value: 'Other robotics or automatic technology'
             }
           ],
-          yarKey: 'otherRoboticEquipment',
-          conditionalKey: 'roboticEquipment',
-          conditionalLabelData: 'Enter your item, including the name, a brief description and benefit to your business'
+          yarKey: 'technologyItems'
         },
         {
-          key: 'other-robotic-conditional',
+          key: 'robotic-automatic',
+          order: 320,
+          title: 'Is the {{_technologyItems_}} robotic or automatic?',
+          replace: true,
+          pageTitle: '',
+          url: 'robotic-automatic',
+          baseUrl: 'robotic-automatic',
+          preValidationKeys: ['technologyItems'],
+          backUrl: 'technology-items',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'technologyItems',
+            dependentAnswerKeysArray: ['technology-items-A9'],
+            urlOptions: {
+              thenUrl: 'other-robotic-technology',
+              elseUrl: 'other-item'
+            }
+          },
+          fundingPriorities: '',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          id: 'roboticAutomatic',
+          hint: {
+            html: 
+            ` <div id="roboticAutomatic" class="govuk-hint">
+                <p class="govuk-body">To be eligible, your robotic technology must:</P>
+                  <ul>
+                    <li>have a sensing system and can understand its environment</li>
+                    <li>make decisions and plan</li>
+                    <li>be able to control its actuators (the devices that move robot joints)</li>
+                    <li>work in a continuous loop</li>
+                  <ul>
+              </div>
+            `
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `There are 4 eligibility criteria for grant funding.</br></br>
+                        Robotic items must meet all 4 criteria to be eligible.<br/><br/>
+                        Automatic items must meet at least 2 criteria to be eligible. `
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if your {{_technologyItems_}} is robotic or automatic'
+            }
+          ],
+          answers: [
+            {
+              key: 'robotic-automatic-A1',
+              value: 'Robotic'
+            },
+            {
+              key: 'robotic-automatic-A2',
+              value: 'Automatic',
+              redirectUrl: 'automatic-eligibility'
+            }
+          ],
+          yarKey: 'roboticAutomatic'
+        },
+        {
+          key: 'other-robotic-technology',
+          order: 305,
+          title: 'What is your other robotic technology?',
+          pageTitle: '',
+          backUrl: 'robotic-automatic',
+          nextUrl: 'other-conditional',
+          url: 'other-robotic-technology',
+          baseUrl: 'other-robotic-technology',
+          preValidationKeys: ['projectItems'],
+          fundingPriorities: '',
+          minAnswerCount: 1,
+          hint: {
+            text: `Technology powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative`
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'To be eligible for grant funding, your robotic technology must:',
+                items: ['have a sensing system and can understand their environment', 'make decisions and plan', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop']
+              }]
+            }]
+          },
+          type: 'multi-input',
+          allFields: [
+            {
+              yarKey: 'brand',
+              type: 'input',
+              classes: 'govuk-input--width-10',
+              id: "brand",
+              name: "brand",
+              label: {
+                text: 'Brand',
+                classes: 'govuk-label'
+              },
+              validate: [
+                  {
+                    type: 'REGEX',
+                    regex: CHARS_MAX_18,
+                    error: 'Brand must be 18 characters or less'
+                  }
+              ]
+            },
+            {
+              yarKey: 'model',
+              type: 'input',
+              classes: 'govuk-input--width-10',
+              id: "model",
+              name: "model",
+              label: {
+                text: 'Model',
+                classes: 'govuk-label',
+                for: 'model'
+              },
+              validate: [
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MAX_18,
+                  error: 'Model must be 18 characters or less'
+                }
+            ]
+            },
+            {
+              yarKey: 'description',
+              id: "description",
+              name: "description",
+              type: 'textarea',
+              maxlength: 250,
+              label: {
+                text: 'Enter a brief description of the item and the benefit to your business',
+                classes: 'govuk-label',
+                for: 'description'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter the description of your other robotic technology'
+                },
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Description must be 10 characters or more'
+                },
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MAX_250,
+                  error: 'Description must be 250 characters or less'
+                }
+              ]
+            }
+          ],
+          yarKey: 'otherRoboticTechnology'
+        },
+        {
+          key: 'other-conditional',
           title: 'Your other robotic technology might get a grant from this scheme',
           order: 307,
-          url: 'robotics/other-robotic-conditional',
-          backUrl: 'other-robotic-equipment',
-          nextUrl: 'project-cost',
-          // preValidationKeys: ['otherRoboticEquipment'],
+          url: 'other-conditional',
+          backUrlObject: {
+            dependentQuestionYarKey: ['roboticAutomatic'],
+            dependentAnswerKeysArray: ['robotic-automatic-A1'],
+            urlOptions: {
+              thenUrl: 'other-robotic-technology',
+              elseUrl: 'other-automatic-technology'
+            }
+          },
+          nextUrl: 'other-item',
+          // preValidationKeys: ['roboticAutomatic'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Your other robotic technology might get a grant from this scheme',
-            messageContent: `RPA will assess your item and whether they will fund it.
-            <br/>They will let you know if the item is eligible before the application window opens and projects are invited to apply.`,
+            messageContent: `RPA will assess your item and whether they will fund it.<br/><br/>
+            They will let you know if the item is eligible before the application window opens and projects are invited to apply.`,
             warning: {
               text: 'There’s no guarantee your item will be funded.',
               iconFallbackText: 'Warning'
@@ -1452,28 +1710,29 @@ const questionBank = {
           yarKey: 'otherRoboticsConditional'
         },
         {
-          key: 'robotics-project-cost',
+          key: 'project-cost',
           order: 310,
           pageTitle: '',
-          url: 'robotics/project-cost',
+          url: 'project-cost',
           baseUrl: 'project-cost',
           backUrlObject: {
-            dependentQuestionYarKey: ['roboticsProjectItemEquipments', 'projectItems'],
-            dependentAnswerKeysArray: ['robotic-equipment-items-A8', 'robotics-project-items-A3'],
+            dependentQuestionYarKey: ['technologyItems', 'projectItems'],
+            dependentAnswerKeysArray: ['technology-items-A8', 'project-items-A3'],
             urlOptions: {
-              thenUrl: ['/productivity/robotics/other-robotic-equipment', '/productivity/robotics/robotic-equipment-items'],
-              elseUrl: '/productivity/robotics/project-items'
+              thenUrl: ['other-robotic-technology', 'technology-items'],
+              elseUrl: 'project-items'
             }
           },
+          backUrl:'other-conditional',
           nextUrl: 'potential-amount',
-          // preValidationKeys: ['projectItems'],
+          // preValidationKeys: [],
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',
           prefix: { text: '£' },
           type: 'input',
           grantInfo: {
-            minGrant: 35000,
+            minGrant: 25000,
             maxGrant: 500000,
             grantPercentage: 40,
             cappedGrant: true
@@ -1486,7 +1745,7 @@ const questionBank = {
           hint: {
             html: `
               You can only apply for a grant of up to 40% of the estimated costs.
-              <br/>The minimum grant you can apply for this project is £35,000 (40% of £87,500).
+              <br/>The minimum grant you can apply for this project is £25,000 (40% of £62,500).
               <br/>The maximum grant is £500,000.
               <br/><br/>Do not include VAT.
               <br/><br/>Enter amount, for example 95,000`
@@ -1494,7 +1753,7 @@ const questionBank = {
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
-            insertText: { text: 'The minimum grant you can apply for is £35,000 (40% of £87,500). The maximum grant is £500,000.' },
+            insertText: { text: 'The minimum grant you can apply for is £25,000 (40% of £62,500). The maximum grant is £500,000 (40% of £1.25 million).' },
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -1507,7 +1766,7 @@ const questionBank = {
                 content: [{
                   para: '',
                   items: [],
-                  dependentAnswerExceptThese: ['robotics-project-items-A3', 'robotic-equipment-items-A8']
+                  dependentAnswerExceptThese: ['project-items-A3', 'technology-items-A8']
                 }]
               },
               {
@@ -1515,32 +1774,33 @@ const questionBank = {
                 content: [{
                   para: '',
                   items: [],
-                  dependentAnswerOnlyThese: ['robotic-equipment-items-A8']
+                  dependentAnswerOnlyThese: ['technology-items-A8']
                 }]
               }
             ],
-            dependentYarKeys: ['projectItems', 'roboticsProjectItemEquipments'],
-            dependentQuestionKeys: ['robotics-project-items', 'robotic-equipment-items']
+            dependentYarKeys: ['projectItems', 'technologyItems'],
+            dependentQuestionKeys: ['project-items', 'technology-items']
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Enter the estimated cost for the items'
+              error: 'Enter the total estimated cost for the items'
             },
             {
               type: 'REGEX',
-              regex: CURRENCY_FORMAT,
-              error: 'Enter a whole number in correct format'
+              regex: PROJECT_COST_REGEX,
+              error: 'Enter a whole number with a maximum of 7 digits'
             },
             {
-              type: 'REGEX',
-              regex: CHARS_MAX_10,
-              error: 'Enter a whole number with a maximum of 10 digits'
+              type: 'MIN_MAX_CHARS',
+              min: 1,
+              max: 7,
+              error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],
           warningConditional: {
-            dependentWarningQuestionKey: 'other-robotic-equipment',
-            dependentWarningAnswerKeysArray: ['other-robotic-equipment-A1'],
+            dependentWarningQuestionKey: 'other-robotic-technology',
+            dependentWarningAnswerKeysArray: ['other-robotic-technology-A1'],
             ConditionalWarningMsg: {
               text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
               iconFallbackText: 'Warning'
@@ -1550,10 +1810,29 @@ const questionBank = {
           yarKey: 'projectCost'
         },
         {
-          key: 'robotics-potential-amount',
+          key: 'potential-amount-capped',
+          order: 312,
+          url: 'potential-amount-capped',
+          baseUrl: 'potential-amount-capped',
+          backUrl: 'project-cost',
+          nextUrl: 'remaining-costs',
+          preValidationKeys: ['projectCost'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: `The maximum grant you can apply for is £500,000.
+            You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.`,
+            warning: {
+              text: 'There’s no guarantee the project will receive a grant.'
+            }
+          }
+        },
+        {
+          key: 'potential-amount',
           title: 'Potential grant funding',
           order: 320,
-          url: 'robotics/potential-amount',
+          url: 'potential-amount',
+          baseUrl: 'potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
           // preValidationKeys: ['projectCost'],
@@ -1568,19 +1847,28 @@ const questionBank = {
           }
         },
         {
-          key: 'robotics-remaining-costs',
+          key: 'remaining-costs',
           order: 330,
           title: 'Can you pay the remaining costs of £{{_remainingCost_}}?',
           pageTitle: '',
-          url: 'robotics/remaining-costs',
+          url: 'remaining-costs',
           baseUrl: 'remaining-costs',
           backUrl: 'project-cost',
           nextUrl: 'project-impact',
           // preValidationKeys: ['projectCost'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: 'You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.',
-            insertText: { text: 'You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.' },
+            messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
+            insertText: {
+              html: `
+                  <p>You can use:</p>
+                  <ul class="govuk-list--bullet">
+                    <li>loans</li>
+                    <li>overdrafts</li>
+                    <li>the Basic Payment Scheme</li>
+                  </ul>
+            </span>`
+            },
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
@@ -1591,20 +1879,26 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
           sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.\n\n
-                
-                You can use loans, overdrafts and certain other grants, such as the Basic Payment Scheme or agri-environment schemes such as the Countryside Stewardship Scheme.`,
-                items: []
-              }]
-            }]
+            values: [
+              {
+                heading: 'Eligibility',
+                content: [{
+                  para: `You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.
+                  
+                  You can use:`,
+                  items: [
+                    'loans',
+                    'overdrafts',
+                    'the Basic Payment Scheme'
+                  ]
+                }]
+              }
+            ]
           },
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if you can pay the remaining costs without using any other grant money'
+              error: 'Select yes if you can pay the remaining costs'
             }
           ],
           answers: [
@@ -1634,8 +1928,8 @@ const questionBank = {
             { dimension: 'cm2', value: { type: 'journey-time' } }
           ],
           dependantNextUrl: {
-            dependentQuestionYarKey: 'roboticsProjectItemEquipments',
-            dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A2', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7', 'robotic-equipment-items-A8'],
+            dependentQuestionYarKey: 'technologyItems',
+            dependentAnswerKeysArray: ['technology-items-A1', 'technology-items-A2', 'technology-items-A3', 'technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7', 'technology-items-A8'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'energy-source'
@@ -1755,8 +2049,8 @@ const questionBank = {
           baseUrl: 'energy-source',
           // preValidationKeys: ['projectImpact'],
           backUrlObject: {
-            dependentQuestionYarKey: 'roboticsProjectItemEquipments',
-            dependentAnswerKeysArray: ['robotic-equipment-items-A1', 'robotic-equipment-items-A2', 'robotic-equipment-items-A3', 'robotic-equipment-items-A4', 'robotic-equipment-items-A5', 'robotic-equipment-items-A6', 'robotic-equipment-items-A7', 'robotic-equipment-items-A8'],
+            dependentQuestionYarKey: 'technologyItems',
+            dependentAnswerKeysArray: ['technology-items-A1', 'technology-items-A2', 'technology-items-A3', 'technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7', 'technology-items-A8'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'project-impact'
@@ -3010,7 +3304,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost', 'roboticEquipment']
+const YAR_KEYS = ['projectPostcode', 'remainingCost']
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,
