@@ -8,7 +8,7 @@ const { getHtml } = require('../helpers/conditionalHTML')
 const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
 const { setOptionsLabel } = require('../helpers/answer-options')
-const { notUniqueSelection, uniqueSelection } = require('../helpers/utils')
+const { notUniqueSelection, uniqueSelection, getQuestionAnswer, getQuestionByKey } = require('../helpers/utils')
 const senders = require('../messaging/senders')
 const createMsg = require('../messaging/create-msg')
 const gapiService = require('../services/gapi-service')
@@ -165,7 +165,18 @@ const getPage = async (question, request, h) => {
       )
     };
   }
-  
+  // change title on /automatic-eligibility page if 'Other robotics or automatic technology' option is selected on /technology-items
+  if(url === 'automatic-eligibility') {
+    const technologyItemsAnswer = getYarValue(request, 'technologyItems')
+    const isTechnologyItemsA9 = getQuestionAnswer('technology-items', 'technology-items-A9')
+    if(technologyItemsAnswer === isTechnologyItemsA9) {
+      question = {
+        ...question,
+        title: 'Which eligibility criteria does your other automatic technology meet?'
+      };
+    }
+  }
+
   const data = getYarValue(request, yarKey) || null
   let conditionalHtml
   if (question?.conditionalKey && question?.conditionalLabelData) {
@@ -397,6 +408,22 @@ const showPostPage = (currentQuestion, request, h) => {
       }
       setYarValue(request, 'calculatedGrant', calculatedGrant)
       setYarValue(request, 'remainingCost', remainingCost)
+      break
+    case 'automatic-eligibility': {
+        const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
+        const technologyItemsAnswer = getYarValue(request, 'technologyItems')
+        const roboticAutomaticAnswer = getYarValue(request, 'roboticAutomatic')
+        const isTechnologyItemsA9 = getQuestionAnswer('technology-items', 'technology-items-A9')
+        const isRoboticAutomaticA2 = getQuestionAnswer('robotic-automatic', 'robotic-automatic-A2')
+        
+        if (automaticEligibilityAnswer.length === 1) {
+          return h.view('not-eligible', NOT_ELIGIBLE)
+        } else if (technologyItemsAnswer === isTechnologyItemsA9 && roboticAutomaticAnswer === isRoboticAutomaticA2) {
+          return h.redirect(`${urlPrefix}/other-automatic-technology`)
+        } else {
+          return h.redirect(`${urlPrefix}/other-item`)
+        }
+      }
     default:
       break
   }
