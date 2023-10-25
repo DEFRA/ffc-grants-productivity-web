@@ -53,7 +53,7 @@ describe("getUrl()", () => {
     expect(getUrl(urlObject, "mock-url", {}, "", "")).toEqual("thenUrl");
   });
 
-  it.only("should return the correct thenUrl if urlObject and co-responding Yar values are present", () => {
+  it("should return the co-responding thenUrl if urlObject included more conditions", () => {
     urlObject = {
       dependentQuestionYarKey: ['tenancy', 'applicant', 'businessLocation'],
       dependentAnswerKeysArray: ["tenancy-A1", 'applicant-A2', 'business-location-A1'],
