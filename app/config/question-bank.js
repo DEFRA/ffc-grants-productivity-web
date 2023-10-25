@@ -590,7 +590,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select if the planned project is on land the business owns'
+              error: 'Select yes if the planned project is on land the business owns'
             }
           ],
           answers: [
@@ -1364,7 +1364,7 @@ const questionBank = {
             },
             {
               key: 'project-items-A3',
-              value: 'Robotic equipment item'
+              value: 'Robotic and automatic technology'
             }
           ],
           yarKey: 'projectItems'
@@ -1388,7 +1388,7 @@ const questionBank = {
           },
           eliminationAnswerKeys: '',
           fundingPriorities: '',
-          type: 'multi-answer',
+          type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
             values: [{
