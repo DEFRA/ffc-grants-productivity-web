@@ -29,7 +29,7 @@ describe('Robotics project items page', () => {
     expect(response.payload).toContain('Which items does your project need?')
     expect(response.payload).toContain('Advanced ventilation control units')
     expect(response.payload).toContain('Wavelength-specific LED lighting for horticultural crops')
-    expect(response.payload).toContain('Robotic equipment item')
+    expect(response.payload).toContain('Robotic and automatic technology')
   })
   it('should returns error message if no option is selected', async () => {
     const postOptions = {
@@ -44,12 +44,12 @@ describe('Robotics project items page', () => {
     expect(postResponse.payload).toContain('Select which items your project needs')
   })
   it('when we select /technology-items/ should store user response and redirects to technology-items', async () => {
-    varList.projectItems = ['Wavelength-specific LED lighting for horticultural crops', 'Robotic equipment item']
+    varList.projectItems = ['Wavelength-specific LED lighting for horticultural crops', 'Robotic and automatic technology']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-items`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { projectItems: ['Wavelength-specific LED lighting for horticultural crops', 'Robotic equipment item'], crumb: crumbToken }
+      payload: { projectItems: ['Wavelength-specific LED lighting for horticultural crops', 'Robotic and automatic technology'], crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
