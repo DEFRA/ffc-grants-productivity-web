@@ -11,7 +11,7 @@ describe('answer-options', () => {
       yarKey: 'mock-yarKey',
       type: 'input',
       classes: 'mock-classes',
-      hint: 'mock-hint',
+      hint: {text: 'voila'},
       id: 'mock-id',
       label: 'mock-label',
       prefix: 'mock-prefix',
@@ -20,7 +20,7 @@ describe('answer-options', () => {
     }
     expect(getOptions(undefined, question, 'cond-html', {})).toEqual({
       classes: 'mock-classes',
-      hint: 'mock-hint',
+      hint:  {text: 'voila'},
       id: 'mock-yarKey',
       name: 'mock-yarKey',
       label: 'mock-label',
@@ -35,7 +35,7 @@ describe('answer-options', () => {
     }
     expect(getOptions(undefined, question, 'cond-html', {})).toEqual({
       classes: 'mock-classes',
-      hint: 'mock-hint',
+      hint:  {text: 'voila'},
       id: 'mock-yarKey',
       name: 'mock-yarKey',
       label: 'mock-label',
@@ -50,7 +50,7 @@ describe('answer-options', () => {
     }
     expect(getOptions(undefined, question, 'cond-html', {})).toEqual({
       classes: 'mock-classes',
-      hint: 'mock-hint',
+      hint: {text: 'voila'},
       id: 'mock-yarKey',
       name: 'mock-yarKey',
       label: 'mock-label',
@@ -67,6 +67,22 @@ describe('answer-options', () => {
           yarKey: 'mock-yarkey',
           type: 'switch-default',
           answers: [{ value: 'value', hint: 'hint', text: 'text', conditional: 'conditional' }]
+        },
+        {
+          yarKey: 'projectName',
+          type: 'textarea',
+          answers: [{ value: 'value', hint: {text: 'haha'}, text: 'text', conditional: 'conditional' }],
+          hint: {
+            text: 'ahhh'
+          }
+        },
+        {
+          yarKey: 'randomName',
+          type: 'textarea',
+          answers: [{ value: 'value', hint: {text: 'haha'}, text: 'text', conditional: 'conditional' }],
+          hint: {
+            text: 'ahh'
+          }
         }
       ]
     }
@@ -89,6 +105,36 @@ describe('answer-options', () => {
         ],
         name: 'mock-yarkey',
         type: 'switch-default'
+      },
+      {
+        classes: undefined,
+        endFieldset: undefined,
+        hint: {
+          text: 'For example, Browns Hill Farm robotic milking'
+        },
+        id: 'projectName',
+        label: undefined,
+        maxlength: undefined,
+        name: 'projectName',
+        prefix: undefined,
+        suffix: undefined,
+        type: 'textarea',
+        value: '',
+      },
+      {
+        classes: undefined,
+        endFieldset: undefined,
+        hint: {
+          text: 'ahh'
+        },
+        id: 'randomName',
+        label: undefined,
+        maxlength: undefined,
+        name: 'randomName',
+        prefix: undefined,
+        suffix: undefined,
+        type: 'textarea',
+        value: '',
       }
     ])
     expect(getOptions(undefined, question, 'cond-html', {})).toEqual([
@@ -109,46 +155,38 @@ describe('answer-options', () => {
         ],
         name: 'mock-yarkey',
         type: 'switch-default'
+      },
+      {
+        classes: undefined,
+        endFieldset: undefined,
+        hint: {
+          text: 'For example, Browns Hill Farm robotic milking'
+        },
+        id: 'projectName',
+        label: undefined,
+        maxlength: undefined,
+        name: 'projectName',
+        prefix: undefined,
+        suffix: undefined,
+        type: 'textarea',
+        value: '',
+      },
+      {
+        classes: undefined,
+        endFieldset: undefined,
+        hint: {
+          text: 'ahh'
+        },
+        id: 'randomName',
+        label: undefined,
+        maxlength: undefined,
+        name: 'randomName',
+        prefix: undefined,
+        suffix: undefined,
+        type: 'textarea',
+        value: '',
       }
     ])
-
-    question = {
-      ...question,
-      type: 'textarea'
-    }
-    expect(getOptions(undefined, question, 'cond-html', {})).toEqual({
-      fieldset: {
-        legend: {
-          classes: 'mock-classes',
-          isPageHeading: true,
-          text: undefined
-        },
-      },
-      classes: 'mock-classes',
-      hint: 'mock-hint',
-      id: 'mock-yarKey',
-      name: 'mock-yarKey',
-      items: [],
-    })
-
-    question = {
-      ...question,
-      type: 'textAreaField'
-    }
-    expect(getOptions(undefined, question, 'cond-html', {})).toEqual({
-      fieldset: {
-        legend: {
-          classes: 'mock-classes',
-          isPageHeading: true,
-          text: undefined
-        },
-      },
-      classes: 'mock-classes',
-      hint: 'mock-hint',
-      id: 'mock-yarKey',
-      name: 'mock-yarKey',
-      items: [],
-    })
 
     question = {
       ...question,
@@ -157,7 +195,7 @@ describe('answer-options', () => {
 
     expect(getOptions(undefined, question, 'cond-html', {})).toEqual({
       classes: 'mock-classes',
-      hint: 'mock-hint',
+      hint: {text: 'voila'},
       id: 'mock-yarKey',
       name: 'mock-yarKey',
       label: 'mock-label',
@@ -172,7 +210,7 @@ describe('answer-options', () => {
     const { classes, ...questionWithoutClasses } = question
     expect(getOptions(undefined, questionWithoutClasses, 'cond-html', {})).toEqual({
       classes: 'govuk-fieldset__legend--l',
-      hint: 'mock-hint',
+      hint: {text: 'voila'},
       id: 'mock-yarKey',
       name: 'mock-yarKey',
       label: 'mock-label',
@@ -198,7 +236,7 @@ describe('answer-options', () => {
             text: undefined
           }
         },
-        hint: 'mock-hint',
+        hint: {text: 'voila'},
         id: 'mock-yarKey',
         items: [
 
@@ -211,16 +249,16 @@ describe('answer-options', () => {
   test('check setOptionsLabel()', () => {
     const answers = [
       { value: 'divider' },
-      { value: 'mock-data', hint: 'mock-hint' },
-      { value: 'another-mock-data', hint: 'mock-hint', conditional: 'mock-cond' },
-      { value: 'another-mock-data', hint: 'mock-hint', conditional: 'mock-cond', text: 'mock-text' }
+      { value: 'mock-data', hint: {text: 'voila'}},
+      { value: 'another-mock-data', hint: {text: 'voila'}, conditional: 'mock-cond' },
+      { value: 'another-mock-data', hint: {text: 'voila'}, conditional: 'mock-cond', text: 'mock-text' }
     ]
     expect(setOptionsLabel('mock-data', answers, 'cond-html')).toEqual([
       { divider: 'or' },
       {
         value: 'mock-data',
         text: 'mock-data',
-        hint: 'mock-hint',
+        hint: {text: 'voila'},
         checked: true,
         selected: true
       },
@@ -228,7 +266,7 @@ describe('answer-options', () => {
         value: 'another-mock-data',
         text: 'another-mock-data',
         conditional: { html: 'cond-html' },
-        hint: 'mock-hint',
+        hint: {text: 'voila'},
         checked: false,
         selected: false
       },
@@ -236,7 +274,7 @@ describe('answer-options', () => {
         value: 'another-mock-data',
         text: 'mock-text',
         conditional: 'mock-cond',
-        hint: 'mock-hint',
+        hint: {text: 'voila'},
         checked: false,
         selected: false
       }
