@@ -408,32 +408,23 @@ const showPostPage = (currentQuestion, request, h) => {
       }
       setYarValue(request, 'calculatedGrant', calculatedGrant)
       setYarValue(request, 'remainingCost', remainingCost)
+    case 'automatic-eligibility': {
+        const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
+        const technologyItemsAnswer = getYarValue(request, 'technologyItems')
+        const roboticAutomaticAnswer = getYarValue(request, 'roboticAutomatic')
+        const isTechnologyItemsA9 = getQuestionAnswer('technology-items', 'technology-items-A9')
+        const isRoboticAutomaticA2 = getQuestionAnswer('robotic-automatic', 'robotic-automatic-A2')
+        
+        if (automaticEligibilityAnswer.length === 1) {
+          return h.view('not-eligible', NOT_ELIGIBLE)
+        } else if (technologyItemsAnswer === isTechnologyItemsA9 && roboticAutomaticAnswer === isRoboticAutomaticA2) {
+          return h.redirect(`${urlPrefix}/other-automatic-technology`)
+        } else {
+          return h.redirect(`${urlPrefix}/other-item`)
+        }
+      }
     default:
       break
-  }
-
-  switch (yarKey) {
-    case 'projectCost': {
-      const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
-      setYarValue(request, 'calculatedGrant', calculatedGrant)
-      setYarValue(request, 'remainingCost', remainingCost)
-    }
-
-    case 'automaticEligibility': {
-      const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
-      const technologyItemsAnswer = getYarValue(request, 'technologyItems')
-      const roboticAutomaticAnswer = getYarValue(request, 'roboticAutomatic')
-      const isTechnologyItemsA9 = getQuestionAnswer('technology-items', 'technology-items-A9')
-      const isRoboticAutomaticA2 = getQuestionAnswer('robotic-automatic', 'robotic-automatic-A2')
-      
-      if (automaticEligibilityAnswer.length === 1) {
-        return h.view('not-eligible', NOT_ELIGIBLE)
-      } else if (technologyItemsAnswer === isTechnologyItemsA9 && roboticAutomaticAnswer === isRoboticAutomaticA2) {
-        return h.redirect(`${urlPrefix}/other-automatic-technology`)
-      } else {
-        return h.redirect(`${urlPrefix}/other-item`)
-      }
-    }
   }
 
   return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.secBtn))
