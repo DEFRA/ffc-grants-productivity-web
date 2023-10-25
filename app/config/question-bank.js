@@ -1389,7 +1389,7 @@ const questionBank = {
           },
           eliminationAnswerKeys: '',
           fundingPriorities: '',
-          type: 'multi-answer',
+          type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
             values: [{
