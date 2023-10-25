@@ -158,12 +158,19 @@ const getPage = async (question, request, h) => {
     }
   }
   if(replace) {
-    question = {
-      ...question,
-      title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-          getYarValue(request, additionalYarKeyName)
-      )
-    };
+    if(getYarValue(request, 'technologyItems') != 'Other robotics or automatic technology' ){
+      question = {
+        ...question,
+        title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+            getYarValue(request, additionalYarKeyName).toLowerCase()
+        )
+      };
+    }else {
+      question = {
+        ...question,
+        title: 'Is the other technology robotic or automatic?'
+      }
+    }
   }
   // change title on /automatic-eligibility page if 'Other robotics or automatic technology' option is selected on /technology-items
   if(url === 'automatic-eligibility') {
@@ -327,12 +334,12 @@ const showPostPage = (currentQuestion, request, h) => {
     currentQuestion = {
       ...currentQuestion,
       title: title.replace(
-        SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => getYarValue(request, additionalYarKeyName)),
+        SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => getYarValue(request, additionalYarKeyName)).toLowerCase(),
       validate: [
         {
           type: "NOT_EMPTY",
           error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-              getYarValue(request, additionalYarKeyName)
+              getYarValue(request, additionalYarKeyName).toLowerCase()
           ),
         },
       ],

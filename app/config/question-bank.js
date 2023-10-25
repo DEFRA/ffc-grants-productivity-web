@@ -929,7 +929,6 @@ const questionBank = {
           yarKey: 'solarUsage'
         },
         {
-          key: 'solar-size',
           key: 'solar-output',
           order: 64,
           title: 'How much energy will your solar PV system output?',
@@ -1179,7 +1178,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select what agricultural sector your project is in'
+              error: 'Select up to 2 sectors your project is in'
             },
             {
               type: 'MAX_SELECT',
@@ -1622,7 +1621,7 @@ const questionBank = {
           // preValidationKeys: ['roboticAutomatic'],
           maybeEligible: true,
           maybeEligibleContent: {
-            messageHeader: 'Your other robotic technology might get a grant from this scheme',
+            messageHeader: 'Your other technology might get a grant from this scheme',
             messageContent: `RPA will assess your item and whether they will fund it.<br/><br/>
             They will let you know if the item is eligible before the application window opens and projects are invited to apply.`,
             warning: {
@@ -2029,7 +2028,7 @@ const questionBank = {
           yarKey: 'energySource'
         },
         {
-          key: 'robotics-agricultural-sector',
+          key: 'agricultural-sector',
           scheme: 'robotics',
           score: {
             isScore: true,
@@ -2038,7 +2037,7 @@ const questionBank = {
           order: 370,
           title: 'Which agricultural sector is your project in?',
           pageTitle: '',
-          url: 'robotics/agricultural-sector',
+          url: 'agricultural-sector',
           baseUrl: 'agricultural-sector',
           backUrl: 'energy-source',
           nextUrl: 'technology',
