@@ -359,7 +359,6 @@ const showPostPage = (currentQuestion, request, h) => {
         ],
       };
     }
-
   }
 
   const errors = checkErrors(payload, currentQuestion, h, request)

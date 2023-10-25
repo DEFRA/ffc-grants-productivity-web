@@ -16,7 +16,7 @@ const currentPath = `${urlPrefix}/${viewTemplate}`
 const nextPath = `${urlPrefix}/business-details`
 
 function createModel (data, request) {
-  const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'robotics/technology' : 'slurry/slurry-to-be-treated'}`
+  const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'technology-use' : 'slurry/slurry-to-be-treated'}`
 
   return {
     backLink: previousPath,

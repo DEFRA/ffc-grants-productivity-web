@@ -1188,35 +1188,35 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'robotics-agricultural-sector-A1',
+              key: 'agricultural-sector-solar-A1',
               value: 'Arable'
             },
             {
-              key: 'robotics-agricultural-sector-A2',
+              key: 'agricultural-sector-solar-A2',
               value: 'Beef'
             },
             {
-              key: 'robotics-agricultural-sector-A3',
+              key: 'agricultural-sector-solar-A3',
               value: 'Dairy livestock'
             },
             {
-              key: 'robotics-agricultural-sector-A4',
+              key: 'agricultural-sector-solar-A4',
               value: 'Horticulture'
             },
             {
-              key: 'robotics-agricultural-sector-A5',
+              key: 'agricultural-sector-solar-A5',
               value: 'Mixed livestock'
             },
             {
-              key: 'robotics-agricultural-sector-A6',
+              key: 'agricultural-sector-solar-A6',
               value: 'Pig'
             },
             {
-              key: 'robotics-agricultural-sector-A7',
+              key: 'agricultural-sector-solar-A7',
               value: 'Poultry'
             },
             {
-              key: 'robotics-agricultural-sector-A7',
+              key: 'agricultural-sector-solar-A7',
               value: 'Sheep'
             }
           ],
@@ -1958,7 +1958,7 @@ const questionBank = {
           yarKey: 'dataAnalytics'
         },
         {
-          key: 'robotics-energy-source',
+          key: 'energy-source',
           scheme: 'robotics',
           score: {
             isScore: true,
@@ -1967,7 +1967,7 @@ const questionBank = {
           order: 360,
           title: 'What type of energy will you use?',
           pageTitle: '',
-          url: 'robotics/energy-source',
+          url: 'energy-source',
           baseUrl: 'energy-source',
           // preValidationKeys: ['projectImpact'],
           backUrlObject: {
@@ -2009,19 +2009,19 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'robotics-energy-source-A1',
+              key: 'energy-source-A1',
               value: 'Mains electricity'
             },
             {
-              key: 'robotics-energy-source-A2',
+              key: 'energy-source-A2',
               value: 'Renewable electricity generated on the farm'
             },
             {
-              key: 'robotics-energy-source-A3',
+              key: 'energy-source-A3',
               value: 'Biofuels'
             },
             {
-              key: 'robotics-energy-source-A4',
+              key: 'energy-source-A4',
               value: 'Fossil fuels'
             }
           ],
@@ -2039,8 +2039,15 @@ const questionBank = {
           pageTitle: '',
           url: 'agricultural-sector',
           baseUrl: 'agricultural-sector',
-          backUrl: 'energy-source',
-          nextUrl: 'technology',
+          backUrlObject: {
+            dependentQuestionYarKey: 'energySource',
+            dependentAnswerKeysArray: ['energy-source-A4'],
+            urlOptions: {
+              thenUrl: 'fossil-fuel-conditional',
+              elseUrl: 'energy-source'
+            }
+          },
+          nextUrl: 'technology-use',
           // preValidationKeys: ['energySource'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -2072,26 +2079,26 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'robotics-agricultural-sector-A1',
+              key: 'agricultural-sector-A1',
               value: 'Horticulture'
             },
             {
-              key: 'robotics-agricultural-sector-A2',
+              key: 'agricultural-sector-A2',
               value: 'Arable'
             },
             {
-              key: 'robotics-agricultural-sector-A3',
+              key: 'agricultural-sector-A3',
               value: 'Dairy livestock'
             },
             {
-              key: 'robotics-agricultural-sector-A4',
+              key: 'agricultural-sector-A4',
               value: 'Non-dairy livestock'
             }
           ],
           yarKey: 'agriculturalSector'
         },
         {
-          key: 'robotics-technology',
+          key: 'technology-use',
           scheme: 'robotics',
           score: {
             isScore: true,
@@ -2100,7 +2107,7 @@ const questionBank = {
           order: 380,
           title: 'Are you already using this technology?',
           pageTitle: '',
-          url: 'robotics/technology',
+          url: 'technology-use',
           baseUrl: 'technology',
           backUrl: 'agricultural-sector',
           nextUrl: '/productivity/score',
@@ -2217,7 +2224,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
-              thenUrl: 'robotics/technology',
+              thenUrl: 'technology-use',
               elseUrl: 'slurry/slurry-to-be-treated'
             }
           },
