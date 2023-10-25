@@ -133,6 +133,25 @@ describe('answer-options', () => {
 
     question = {
       ...question,
+      type: 'textAreaField'
+    }
+    expect(getOptions(undefined, question, 'cond-html', {})).toEqual({
+      fieldset: {
+        legend: {
+          classes: 'mock-classes',
+          isPageHeading: true,
+          text: undefined
+        },
+      },
+      classes: 'mock-classes',
+      hint: 'mock-hint',
+      id: 'mock-yarKey',
+      name: 'mock-yarKey',
+      items: [],
+    })
+
+    question = {
+      ...question,
       type: 'select'
     }
 
