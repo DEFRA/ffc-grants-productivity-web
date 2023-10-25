@@ -158,18 +158,18 @@ const getPage = async (question, request, h) => {
     }
   }
   if(replace) {
-    if(getYarValue(request, 'technologyItems') != 'Other robotics or automatic technology' ){
+    if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ){
+      question = {
+        ...question,
+        title: 'Is the other technology robotic or automatic?'
+      }
+    }else {
       question = {
         ...question,
         title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
             getYarValue(request, additionalYarKeyName).toLowerCase()
         )
       };
-    }else {
-      question = {
-        ...question,
-        title: 'Is the other technology robotic or automatic?'
-      }
     }
   }
   // change title on /automatic-eligibility page if 'Other robotics or automatic technology' option is selected on /technology-items
@@ -330,20 +330,36 @@ const showPostPage = (currentQuestion, request, h) => {
       ))
     }
   }
+  
   if (replace) {
-    currentQuestion = {
-      ...currentQuestion,
-      title: title.replace(
-        SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => getYarValue(request, additionalYarKeyName)).toLowerCase(),
-      validate: [
-        {
-          type: "NOT_EMPTY",
-          error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-              getYarValue(request, additionalYarKeyName).toLowerCase()
-          ),
-        },
-      ],
-    };
+    if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ){
+      currentQuestion = {
+        ...currentQuestion,
+        title: 'Is the other technology robotic or automatic?',
+        validate: [
+          {
+            type: 'NOT_EMPTY',
+            error: 'Select if your other technology is robotic or automatic'
+          }
+        ],
+      }
+    }else {
+      currentQuestion = {
+        ...currentQuestion,
+        title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+            getYarValue(request, additionalYarKeyName).toLowerCase()
+        ),
+        validate: [
+          {
+            type: "NOT_EMPTY",
+            error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+                getYarValue(request, additionalYarKeyName).toLowerCase()
+            ),
+          },
+        ],
+      };
+    }
+
   }
 
   const errors = checkErrors(payload, currentQuestion, h, request)
