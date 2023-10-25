@@ -52,7 +52,7 @@ describe('robotics agricultural sector page', () => {
     expect(postResponse.payload).toContain('Select up to 2 sectors your project is in')
   })
 
-  it('2 options are selected -> store user response and redirect to energy source page', async () => {
+  it('2 options are selected -> store user response and redirect to technology-use page', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/agricultural-sector`,
@@ -62,10 +62,10 @@ describe('robotics agricultural sector page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('technology')
+    expect(postResponse.headers.location).toBe('technology-use')
   })
 
-  it('1 option is selected -> store user response and redirect to energy source page', async () => {
+  it('1 option is selected -> store user response and redirect to technology-use page', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/agricultural-sector`,
@@ -75,24 +75,24 @@ describe('robotics agricultural sector page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('technology')
+    expect(postResponse.headers.location).toBe('technology-use')
   })
-  it('page loads with correct back link', async () => {
+  it('page loads with correct back link when energy source is ains electricity', async () => {
     varList.energySource = 'Mains electricity'
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/agricultural-sector-solar`
+      url: `${global.__URLPREFIX__}/agricultural-sector`
     }
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"energy-source\" class=\"govuk-back-link\">Back</a>')
   })
-  it('page loads with correct back link', async () => {
+  it('page loads with correct back link  when energy source is Fossil fuels', async () => {
     varList.energySource = 'Fossil fuels'
     const options = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/agricultural-sector-solar`
+      url: `${global.__URLPREFIX__}/agricultural-sector`
     }
 
     const response = await global.__SERVER__.inject(options)

@@ -2108,7 +2108,7 @@ const questionBank = {
           title: 'Are you already using this technology?',
           pageTitle: '',
           url: 'technology-use',
-          baseUrl: 'technology',
+          baseUrl: 'technology-use',
           backUrl: 'agricultural-sector',
           nextUrl: '/productivity/score',
           // preValidationKeys: ['agriculturalSector'],
