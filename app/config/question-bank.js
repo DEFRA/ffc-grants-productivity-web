@@ -1732,6 +1732,23 @@ const questionBank = {
           yarKey: 'projectCost'
         },
         {
+          key: 'potential-amount-capped-solar',
+          order: 312,
+          url: 'potential-amount-capped-solar',
+          baseUrl: 'potential-amount-capped-solar',
+          backUrl: 'project-cost-solar',
+          nextUrl: 'remaining-costs-solar',
+          preValidationKeys: ['projectCost'],
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Potential grant funding',
+            messageContent: `The maximum grant you can apply for is £100,000. based on the estimated cost of £{{_projectCost_}}`,
+            warning: {
+              text: 'There’s no guarantee the project will receive a grant.'
+            }
+          }
+        },
+        {
           key: 'potential-amount-capped',
           order: 312,
           url: 'potential-amount-capped',
@@ -1742,8 +1759,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
-            messageContent: `The maximum grant you can apply for is £500,000.
-            You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.`,
+            messageContent: `You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.`,
             warning: {
               text: 'There’s no guarantee the project will receive a grant.'
             }

@@ -423,13 +423,17 @@ const showPostPage = (currentQuestion, request, h) => {
           return  h.view('not-eligible', NOT_ELIGIBLE)
         }
       }
-    case 'project-cost' || 'project-cost-solar':
-      const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
-      if (payload[Object.keys(payload)[0]] > 1250000) {
-        return h.redirect('potential-amount-capped')
-      }
+    case  'project-cost-solar':
+      let { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
       setYarValue(request, 'calculatedGrant', calculatedGrant)
       setYarValue(request, 'remainingCost', remainingCost)
+      setYarValue(request, 'projectCost', projectCost)
+      if (baseUrl === 'project-cost-solar' && payload[Object.keys(payload)[0]] > 400000) {
+        return h.redirect('potential-amount-capped-solar')
+      }
+      if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
+        return h.redirect('potential-amount-capped')
+      }
       break
     case 'automatic-eligibility': {
         const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
@@ -449,8 +453,13 @@ const showPostPage = (currentQuestion, request, h) => {
     default:
       break
   }
-
-  return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.secBtn))
+  if (yarKey === 'projectCost' || yarKey === 'project-cost-solar' ) {
+    const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+    setYarValue(request, 'calculatedGrant', calculatedGrant)
+    setYarValue(request, 'remainingCost', remainingCost)
+    setYarValue(request, 'projectCost', projectCost)
+  }
+  return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.results, currentQuestion.url))
 }
 
 const getHandler = (question) => {
