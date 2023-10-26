@@ -146,10 +146,10 @@ const questionBank = {
           url: 'applicant',
           baseUrl: 'applicant',
           preValidationObject: {
-             preValidationKeys: ['projectSubject'],
-             preValidationAnswer: ['project-subject-A1'],
-             preValidationRule: 'AND',
-             preValidationUrls: ['project-subject']
+              preValidationKeys: ['projectSubject'],
+              preValidationAnswer: ['project-subject-A1'],
+              preValidationRule: 'AND',
+              preValidationUrls: ['project-subject']
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -929,7 +929,6 @@ const questionBank = {
           yarKey: 'solarUsage'
         },
         {
-          key: 'solar-size',
           key: 'solar-output',
           order: 64,
           title: 'How much energy will your solar PV system output?',
@@ -1179,7 +1178,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select what agricultural sector your project is in'
+              error: 'Select up to 2 sectors your project is in'
             },
             {
               type: 'MAX_SELECT',
@@ -1189,35 +1188,35 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'robotics-agricultural-sector-A1',
+              key: 'agricultural-sector-solar-A1',
               value: 'Arable'
             },
             {
-              key: 'robotics-agricultural-sector-A2',
+              key: 'agricultural-sector-solar-A2',
               value: 'Beef'
             },
             {
-              key: 'robotics-agricultural-sector-A3',
+              key: 'agricultural-sector-solar-A3',
               value: 'Dairy livestock'
             },
             {
-              key: 'robotics-agricultural-sector-A4',
+              key: 'agricultural-sector-solar-A4',
               value: 'Horticulture'
             },
             {
-              key: 'robotics-agricultural-sector-A5',
+              key: 'agricultural-sector-solar-A5',
               value: 'Mixed livestock'
             },
             {
-              key: 'robotics-agricultural-sector-A6',
+              key: 'agricultural-sector-solar-A6',
               value: 'Pig'
             },
             {
-              key: 'robotics-agricultural-sector-A7',
+              key: 'agricultural-sector-solar-A7',
               value: 'Poultry'
             },
             {
-              key: 'robotics-agricultural-sector-A7',
+              key: 'agricultural-sector-solar-A7',
               value: 'Sheep'
             }
           ],
@@ -1520,7 +1519,7 @@ const questionBank = {
           nextUrl: 'other-conditional',
           url: 'other-robotic-technology',
           baseUrl: 'other-robotic-technology',
-          preValidationKeys: ['projectItems'],
+          // preValidationKeys: ['projectItems'],
           fundingPriorities: '',
           minAnswerCount: 1,
           hint: {
@@ -1622,7 +1621,7 @@ const questionBank = {
           // preValidationKeys: ['roboticAutomatic'],
           maybeEligible: true,
           maybeEligibleContent: {
-            messageHeader: 'Your other robotic technology might get a grant from this scheme',
+            messageHeader: 'Your other technology might get a grant from this scheme',
             messageContent: `RPA will assess your item and whether they will fund it.<br/><br/>
             They will let you know if the item is eligible before the application window opens and projects are invited to apply.`,
             warning: {
@@ -1733,24 +1732,6 @@ const questionBank = {
           yarKey: 'projectCost'
         },
         {
-          key: 'potential-amount-capped',
-          order: 312,
-          url: 'potential-amount-capped',
-          baseUrl: 'potential-amount-capped',
-          backUrl: 'project-cost',
-          nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: `The maximum grant you can apply for is £500,000.
-            You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.`,
-            warning: {
-              text: 'There’s no guarantee the project will receive a grant.'
-            }
-          }
-        },
-        {
           key: 'potential-amount',
           title: 'Potential grant funding',
           order: 320,
@@ -1776,7 +1757,7 @@ const questionBank = {
           pageTitle: '',
           url: 'remaining-costs',
           baseUrl: 'remaining-costs',
-          backUrl: 'project-cost',
+          backUrl: 'potential-amount',
           nextUrl: 'project-impact',
           // preValidationKeys: ['projectCost'],
           eliminationAnswerKeys: '',
@@ -1959,7 +1940,7 @@ const questionBank = {
           yarKey: 'dataAnalytics'
         },
         {
-          key: 'robotics-energy-source',
+          key: 'energy-source',
           scheme: 'robotics',
           score: {
             isScore: true,
@@ -1977,6 +1958,14 @@ const questionBank = {
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'project-impact'
+            }
+          },
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'energySource',
+            dependentAnswerKeysArray: ['energy-source-A4'],
+            urlOptions: {
+              thenUrl: 'fossil-fuel-conditional',
+              elseUrl: 'agricultural-sector'
             }
           },
           nextUrl: 'agricultural-sector',
@@ -2010,26 +1999,47 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'robotics-energy-source-A1',
+              key: 'energy-source-A1',
               value: 'Mains electricity'
             },
             {
-              key: 'robotics-energy-source-A2',
+              key: 'energy-source-A2',
               value: 'Renewable electricity generated on the farm'
             },
             {
-              key: 'robotics-energy-source-A3',
+              key: 'energy-source-A3',
               value: 'Biofuels'
             },
             {
-              key: 'robotics-energy-source-A4',
+              key: 'energy-source-A4',
               value: 'Fossil fuels'
             }
           ],
           yarKey: 'energySource'
         },
         {
-          key: 'robotics-agricultural-sector',
+          key: 'fossil-fuel-conditional',
+          title: 'You may be able to apply for a grant from this scheme',
+          order: 91,
+          url: 'fossil-fuel-conditional',
+          baseUrl: 'fossil-fuel-conditional',
+          backUrl: 'energy-source',
+          nextUrl: 'agricultural-sector',
+          // preValidationObject: {
+          //   preValidationKeys: ['energySource'],
+          //   preValidationAnswer: ['energy-source-A4'],
+          //   preValidationRule: 'AND',
+          //   preValidationUrls: ['energy-source']
+          // },
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Your fossil fuel technology might be eligible',
+            messageContent: 'I confirm I understand fossil fuel technology will only be funded where there is no commercially available electric or renewable energy alternative.',
+            isFossilFuel: true,
+          }
+        },
+        {
+          key: 'agricultural-sector',
           scheme: 'robotics',
           score: {
             isScore: true,
@@ -2040,8 +2050,15 @@ const questionBank = {
           pageTitle: '',
           url: 'agricultural-sector',
           baseUrl: 'agricultural-sector',
-          backUrl: 'energy-source',
-          nextUrl: 'technology',
+          backUrlObject: {
+            dependentQuestionYarKey: 'energySource',
+            dependentAnswerKeysArray: ['energy-source-A4'],
+            urlOptions: {
+              thenUrl: 'fossil-fuel-conditional',
+              elseUrl: 'energy-source'
+            }
+          },
+          nextUrl: 'technology-use',
           // preValidationKeys: ['energySource'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -2073,26 +2090,26 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'robotics-agricultural-sector-A1',
+              key: 'agricultural-sector-A1',
               value: 'Horticulture'
             },
             {
-              key: 'robotics-agricultural-sector-A2',
+              key: 'agricultural-sector-A2',
               value: 'Arable'
             },
             {
-              key: 'robotics-agricultural-sector-A3',
+              key: 'agricultural-sector-A3',
               value: 'Dairy livestock'
             },
             {
-              key: 'robotics-agricultural-sector-A4',
+              key: 'agricultural-sector-A4',
               value: 'Non-dairy livestock'
             }
           ],
           yarKey: 'agriculturalSector'
         },
         {
-          key: 'robotics-technology',
+          key: 'technology-use',
           scheme: 'robotics',
           score: {
             isScore: true,
@@ -2101,8 +2118,8 @@ const questionBank = {
           order: 380,
           title: 'Are you already using this technology?',
           pageTitle: '',
-          url: 'technology',
-          baseUrl: 'technology',
+          url: 'technology-use',
+          baseUrl: 'technology-use',
           backUrl: 'agricultural-sector',
           nextUrl: '/score',
           // preValidationKeys: ['agriculturalSector'],
@@ -2218,8 +2235,8 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
-              thenUrl: 'technology',
-              elseUrl: 'slurry-to-be-treated'
+              thenUrl: 'technology-use',
+              elseUrl: 'slurry/slurry-to-be-treated'
             }
           },
           nextUrl: 'business-details',

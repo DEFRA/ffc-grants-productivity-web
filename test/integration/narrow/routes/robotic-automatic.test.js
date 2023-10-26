@@ -3,8 +3,7 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /robotic-automatic', () => {
   const varList = {
     projectSubject: 'Robotics and automatic technology',
-    technologyItems: 'Harvesting technology',
-    technologyItem: 'Harvesting technology'
+    technologyItems: 'Harvesting technology'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -23,7 +22,7 @@ describe('Page: /robotic-automatic', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Is the Harvesting technology robotic or automatic?')
+    expect(response.payload).toContain('Is the harvesting technology robotic or automatic?')
     expect(response.payload).toContain('Robotic')
     expect(response.payload).toContain('Automatic')
   })
@@ -38,7 +37,7 @@ describe('Page: /robotic-automatic', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select if your Harvesting technology is robotic or automatic')
+    expect(postResponse.payload).toContain('Select if your harvesting technology is robotic or automatic')
   })
   it('user selects \'Robotic\' and Other robotic or automatic technology from tech items -> store user response and redirect to /other-robotic-technology', async () => {
     varList.technologyItems = 'Other robotics or automatic technology'
