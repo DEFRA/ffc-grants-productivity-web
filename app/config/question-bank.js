@@ -232,13 +232,18 @@ const questionBank = {
             dependentAnswerKeysArray: ['project-subject-A2', 'applicant-A1'],
             urlOptions: {
               thenUrl: ['project-subject', 'applicant'],
-              elseUrl: 'country'
+              elseUrl: 'business-location'
             }
           },
-          baseUrl: 'legal-status',
-          url: 'legal-status',
           nextUrl: 'country',
-          preValidationKeys: ['projectSubject'],
+          url: 'legal-status',
+          baseUrl: 'legal-status',
+          preValidationObject: {
+            preValidationKeys: ['projectSubject', 'businessLocation', 'applicant',], 
+            preValidationAnswer: ['project-subject-A2', 'business-location-A1', 'applicant-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['project-subject', 'business-location', 'applicant']
+          },          
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -866,7 +871,7 @@ const questionBank = {
             },
             {
               key: 'solar-installation-A3',
-              value: 'Floating (on a reservoir)',
+              value: 'Floating (on a reservoir)'
             },
             {
               value: 'divider'
@@ -917,7 +922,7 @@ const questionBank = {
             },
             {
               key: 'solar-usage-A2',
-              value: 'No'
+              value: 'No',
             }
           ],
           yarKey: 'solarUsage'
