@@ -14,7 +14,6 @@ const getUrl = (urlObject, url, request, secBtn) => {
   let { thenUrl, elseUrl } = urlOptions
 
   const dependentQuestionYarKeys = [dependentQuestionYarKey].flat()
-  console.log('dependentQuestionYarKeys: ', dependentQuestionYarKeys);
   thenUrl = [thenUrl].flat()
   let selectThenUrl
   let thenUrlIndex = -1

@@ -238,7 +238,7 @@ const questionBank = {
           baseUrl: 'legal-status',
           url: 'legal-status',
           nextUrl: 'country',
-          // preValidationKeys: ['businessLocation'],
+          preValidationKeys: ['projectSubject'],
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -327,7 +327,7 @@ const questionBank = {
             }
           ],
           errorMessage: {
-            text: ''
+            text: '' // why?
           },
           yarKey: 'legalStatus'
         },
