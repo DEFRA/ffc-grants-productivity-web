@@ -39,6 +39,21 @@ describe('Reference number page', () => {
     expect(getResponse.payload).toContain('Details submitted')
   })
 
+  it('load page successfully with the solar Reference ID', async () => {
+
+    varList.projectSubject ='Solar technologies'
+    const getOtions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/confirmation`
+    }
+    
+    jest.spyOn(senders, 'sendDesirabilitySubmitted').mockImplementationOnce(() => Promise.resolve(true))
+
+    const getResponse = await global.__SERVER__.inject(getOtions)
+    expect(getResponse.statusCode).toBe(200)
+    expect(getResponse.payload).toContain('Details submitted')
+  })
+
   it('it redirects to start page if no conscent is given', async () => {
     varList.consentMain = null
     const getOtions = {
