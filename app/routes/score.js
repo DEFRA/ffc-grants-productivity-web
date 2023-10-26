@@ -102,7 +102,7 @@ module.exports = [{
         })
         questions = questions.filter(a => a !== null)
         // Add extra questions
-        ALL_QUESTIONS.filter(q => q.score && q.score.isDisplay === true && q.scheme === scheme && scheme === 'slurry').forEach(bankQuestion => {
+        ALL_QUESTIONS.filter(q => q.score && q.score.isDisplay === true && q.scheme === scheme && scheme === 'solar').forEach(bankQuestion => {
           if (questions.filter(qD => qD.key !== bankQuestion.key).length > 0 && getYarValue(request, bankQuestion.yarKey) !== null) { // Add extra question in result
             let addQuestionToResult = true
             if (bankQuestion.score.dependentAnswerKey) {

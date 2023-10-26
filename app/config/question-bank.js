@@ -1145,7 +1145,7 @@ const questionBank = {
         },
         {
           key: 'agricultural-sector-solar',
-          scheme: '',
+          scheme: 'solar',
           score: {
             isScore: true,
             isDisplay: true
