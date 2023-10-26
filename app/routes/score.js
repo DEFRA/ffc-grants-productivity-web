@@ -16,7 +16,9 @@ const currentPath = `${urlPrefix}/${viewTemplate}`
 const nextPath = `${urlPrefix}/business-details`
 
 function createModel (data, request) {
-  const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'technology' : 'slurry-to-be-treated'}` // update for solar
+  // const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'technology' : 'slurry-to-be-treated'}` // update for solar
+
+const previousPath = 'technology'
 
   return {
     backLink: previousPath,
@@ -66,10 +68,9 @@ module.exports = [{
   handler: async (request, h, err) => {
     try {
       const msgDataToSend = getDesirabilityAnswers(request)
-      console.log('msgDataToSend', msgDataToSend)
-      if (!msgDataToSend) {
-        throw new Error('no data available for score.')
-      }
+      // if (!msgDataToSend) {
+      //   throw new Error('no data available for score.')
+      // }
 
       // Always re-calculate our score before rendering this page
       // ## For scoring ##
@@ -85,7 +86,7 @@ module.exports = [{
       setYarValue(request, 'overAllScore', msgData)
       console.log('msgData', msgData)
       if (msgData) {
-        const scheme = getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'robotics' : 'slurry'
+        // const scheme = getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'robotics' : 'slurry'
         let questions = msgData.desirability.questions.map(desirabilityQuestion => {
           const bankQuestion = ALL_QUESTIONS.filter(bankQuestionD => bankQuestionD.score && bankQuestionD.score.isDisplay === true && bankQuestionD.key === desirabilityQuestion.key)[0]
           if (bankQuestion) {
