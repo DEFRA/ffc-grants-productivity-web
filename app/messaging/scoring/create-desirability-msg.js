@@ -4,6 +4,8 @@ const desirabilityQuestions = ['projectSubject', 'projectImpacts']
 const desirabilityRoboticsQuestions = ['projectSubject', 'dataAnalytics', 'energySource', 'agriculturalSector', 'roboticProjectImpacts']
 const PROJECT_SUBJECT_SLURRY = 'Slurry Acidification'
 
+// update to replace slurry with solar
+
 function getUserAnswer (answers, userInput) {
   if (answers) {
     return [userInput].flat().map(answer =>

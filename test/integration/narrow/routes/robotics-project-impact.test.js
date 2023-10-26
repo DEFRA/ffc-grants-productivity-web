@@ -27,7 +27,7 @@ describe('robotics-project-impact', () => {
   it('no option is selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/project-impact`,
+      url: `${global.__URLPREFIX__}/project-impact`,
       payload: { projectImpact: '', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
@@ -42,7 +42,7 @@ describe('robotics-project-impact', () => {
     varList.technologyItems = ['Feeding system']
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/project-impact`,
+      url: `${global.__URLPREFIX__}/project-impact`,
       payload: { projectImpact: 'Yes', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
@@ -56,7 +56,7 @@ describe('robotics-project-impact', () => {
   it('user selects: <No> -> display ineligible page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/project-impact`,
+      url: `${global.__URLPREFIX__}/project-impact`,
       payload: { projectImpact: 'No', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken

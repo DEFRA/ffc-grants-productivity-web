@@ -4,7 +4,7 @@ describe('Robotics Energy Source Page', () => {
   it('should returns error message if no option is selected', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/energy-source`,
+      url: `${global.__URLPREFIX__}/energy-source`,
       payload: { crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
@@ -19,7 +19,7 @@ describe('Robotics Energy Source Page', () => {
   it('should returns error message if more than 2 options selected', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/energy-source`,
+      url: `${global.__URLPREFIX__}/energy-source`,
       payload: { energySource: ['some source', 'another source', 'energy source 3'], crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
@@ -34,7 +34,7 @@ describe('Robotics Energy Source Page', () => {
   it('should store user response and redirects to project cost page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/energy-source`,
+      url: `${global.__URLPREFIX__}/energy-source`,
       payload: { energySource: ['some source', 'another source'], crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken

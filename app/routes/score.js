@@ -16,7 +16,9 @@ const currentPath = `${urlPrefix}/${viewTemplate}`
 const nextPath = `${urlPrefix}/business-details`
 
 function createModel (data, request) {
-  const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'robotics/technology' : 'slurry/slurry-to-be-treated'}`
+  // const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'technology' : 'slurry-to-be-treated'}` // update for solar
+
+const previousPath = 'technology'
 
   return {
     backLink: previousPath,
@@ -66,10 +68,9 @@ module.exports = [{
   handler: async (request, h, err) => {
     try {
       const msgDataToSend = getDesirabilityAnswers(request)
-      console.log('msgDataToSend', msgDataToSend)
-      if (!msgDataToSend) {
-        throw new Error('no data available for score.')
-      }
+      // if (!msgDataToSend) {
+      //   throw new Error('no data available for score.')
+      // }
 
       // Always re-calculate our score before rendering this page
       // ## For scoring ##
@@ -85,7 +86,7 @@ module.exports = [{
       setYarValue(request, 'overAllScore', msgData)
       console.log('msgData', msgData)
       if (msgData) {
-        const scheme = getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'robotics' : 'slurry'
+        // const scheme = getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'robotics' : 'slurry'
         let questions = msgData.desirability.questions.map(desirabilityQuestion => {
           const bankQuestion = ALL_QUESTIONS.filter(bankQuestionD => bankQuestionD.score && bankQuestionD.score.isDisplay === true && bankQuestionD.key === desirabilityQuestion.key)[0]
           if (bankQuestion) {
@@ -102,29 +103,29 @@ module.exports = [{
         })
         questions = questions.filter(a => a !== null)
         // Add extra questions
-        ALL_QUESTIONS.filter(q => q.score && q.score.isDisplay === true && q.scheme === scheme && scheme === 'slurry').forEach(bankQuestion => {
-          if (questions.filter(qD => qD.key !== bankQuestion.key).length > 0 && getYarValue(request, bankQuestion.yarKey) !== null) { // Add extra question in result
-            let addQuestionToResult = true
-            if (bankQuestion.score.dependentAnswerKey) {
-              addQuestionToResult = !(bankQuestion.score.dependentAnswerKey && getYarValue(request, bankQuestion.score.dependentAnswerKey.yarKey) === bankQuestion.score.dependentAnswerKey.value)
-            }
-            if (addQuestionToResult) {
-              const displayQuestion = {}
-              displayQuestion.key = bankQuestion.key
-              displayQuestion.answers = []
-              displayQuestion.title = bankQuestion.title ?? bankQuestion.answers[0].title
-              const unit = bankQuestion.suffix ? bankQuestion.suffix.html : ''
-              displayQuestion.answers.push({ title: displayQuestion.title, input: [{ value: getYarValue(request, bankQuestion.yarKey), unit: unit }] })
-              displayQuestion.desc = bankQuestion.desc ?? ''
-              displayQuestion.url = `${urlPrefix}/${bankQuestion.url}`
-              displayQuestion.order = bankQuestion.order
-              displayQuestion.unit = unit
-              displayQuestion.pageTitle = bankQuestion.pageTitle
-              displayQuestion.fundingPriorities = bankQuestion.fundingPriorities
-              questions.push(displayQuestion)
-            }
-          }
-        })
+        // ALL_QUESTIONS.filter(q => q.score && q.score.isDisplay === true && q.scheme === scheme && scheme === 'solar').forEach(bankQuestion => {
+        //   if (questions.filter(qD => qD.key !== bankQuestion.key).length > 0 && getYarValue(request, bankQuestion.yarKey) !== null) { // Add extra question in result
+        //     let addQuestionToResult = true
+        //     if (bankQuestion.score.dependentAnswerKey) {
+        //       addQuestionToResult = !(bankQuestion.score.dependentAnswerKey && getYarValue(request, bankQuestion.score.dependentAnswerKey.yarKey) === bankQuestion.score.dependentAnswerKey.value)
+        //     }
+        //     if (addQuestionToResult) {
+        //       const displayQuestion = {}
+        //       displayQuestion.key = bankQuestion.key
+        //       displayQuestion.answers = []
+        //       displayQuestion.title = bankQuestion.title ?? bankQuestion.answers[0].title
+        //       const unit = bankQuestion.suffix ? bankQuestion.suffix.html : ''
+        //       displayQuestion.answers.push({ title: displayQuestion.title, input: [{ value: getYarValue(request, bankQuestion.yarKey), unit: unit }] })
+        //       displayQuestion.desc = bankQuestion.desc ?? ''
+        //       displayQuestion.url = `${urlPrefix}/${bankQuestion.url}`
+        //       displayQuestion.order = bankQuestion.order
+        //       displayQuestion.unit = unit
+        //       displayQuestion.pageTitle = bankQuestion.pageTitle
+        //       displayQuestion.fundingPriorities = bankQuestion.fundingPriorities
+        //       questions.push(displayQuestion)
+        //     }
+        //   }
+        // })
         let scoreChance
         switch (msgData.desirability.overallRating.band.toLowerCase()) {
           case 'strong':
