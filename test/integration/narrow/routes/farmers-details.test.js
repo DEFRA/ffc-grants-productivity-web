@@ -35,7 +35,7 @@ describe('Farmer details page', () => {
     expect(postResponse.payload).toContain('Enter your last name')
     expect(postResponse.payload).toContain('Enter your email address')
     expect(postResponse.payload).toContain('Enter a landline number (if you do not have a landline, enter your mobile number)')
-    expect(postResponse.payload).toContain('Enter your building and street details')
+    expect(postResponse.payload).toContain('Enter your address line 1')
     expect(postResponse.payload).toContain('Enter your town')
     expect(postResponse.payload).toContain('Select your county')
     expect(postResponse.payload).toContain('Enter your business postcode, like AA1 1AA')
@@ -119,6 +119,38 @@ describe('Farmer details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192')
+  })
+
+  it('should show error message when address line 1 is invalid', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/farmers-details`,
+      payload: {
+        address1: 'Flat 9/?:;',
+        crumb: crumbToken
+      },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Address must only include letters, numbers, hyphens and apostrophes')
+  })
+
+  it('should NOT show error message when address line 1 is valid', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/farmers-details`,
+      payload: {
+        address1: 'Flat 9 Address.,\'',
+        crumb: crumbToken
+      },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).not.toContain('Address must only include letters, numbers, hyphens and apostrophes')
   })
 
   it('should validate postcode - raise error when postcode is invalid', async () => {
