@@ -424,17 +424,13 @@ const showPostPage = (currentQuestion, request, h) => {
         }
       }
     case  'project-cost-solar':
-      let { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
-      setYarValue(request, 'calculatedGrant', calculatedGrant)
-      setYarValue(request, 'remainingCost', remainingCost)
-      setYarValue(request, 'projectCost', projectCost)
       if (baseUrl === 'project-cost-solar' && payload[Object.keys(payload)[0]] > 400000) {
         return h.redirect('potential-amount-capped-solar')
       }
+    case  'project-cost':
       if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
         return h.redirect('potential-amount-capped')
       }
-      break
     case 'automatic-eligibility': {
         const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
         const technologyItemsAnswer = getYarValue(request, 'technologyItems')
