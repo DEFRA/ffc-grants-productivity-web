@@ -4,7 +4,7 @@ describe('robotics Technology page', () => {
   it('no option is selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/technology`,
+      url: `${global.__URLPREFIX__}/technology-use`,
       payload: { crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
@@ -19,7 +19,7 @@ describe('robotics Technology page', () => {
   it('store user response and redirect to energy source page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/technology`,
+      url: `${global.__URLPREFIX__}/technology-use`,
       payload: { technology: 'some fake technology', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken

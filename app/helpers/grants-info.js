@@ -8,10 +8,11 @@ const getGrantValues = (projectCostValue, grantsInfo) => {
     calculatedGrant = Math.min(calculatedGrant, maxGrant)
   }
   const remainingCost = Number(projectCostValue - calculatedGrant).toFixed(2)
+  const projectCost = Number(projectCostValue)
   const isEligible = (
     (minGrant <= calculatedGrant) && (calculatedGrant <= maxGrant)
   )
-  return { calculatedGrant, remainingCost, isEligible }
+  return { calculatedGrant, remainingCost, isEligible, projectCost }
 }
 
 module.exports = {

@@ -158,12 +158,19 @@ const getPage = async (question, request, h) => {
     }
   }
   if(replace) {
-    question = {
-      ...question,
-      title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-          getYarValue(request, additionalYarKeyName)
-      )
-    };
+    if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ){
+      question = {
+        ...question,
+        title: 'Is the other technology robotic or automatic?'
+      }
+    }else {
+      question = {
+        ...question,
+        title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+            getYarValue(request, additionalYarKeyName).toLowerCase()
+        )
+      };
+    }
   }
   // change title on /automatic-eligibility page if 'Other robotics or automatic technology' option is selected on /technology-items
   if(url === 'automatic-eligibility') {
@@ -323,20 +330,35 @@ const showPostPage = (currentQuestion, request, h) => {
       ))
     }
   }
+  
   if (replace) {
-    currentQuestion = {
-      ...currentQuestion,
-      title: title.replace(
-        SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => getYarValue(request, additionalYarKeyName)),
-      validate: [
-        {
-          type: "NOT_EMPTY",
-          error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-              getYarValue(request, additionalYarKeyName)
-          ),
-        },
-      ],
-    };
+    if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ){
+      currentQuestion = {
+        ...currentQuestion,
+        title: 'Is the other technology robotic or automatic?',
+        validate: [
+          {
+            type: 'NOT_EMPTY',
+            error: 'Select if your other technology is robotic or automatic'
+          }
+        ],
+      }
+    }else {
+      currentQuestion = {
+        ...currentQuestion,
+        title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+            getYarValue(request, additionalYarKeyName).toLowerCase()
+        ),
+        validate: [
+          {
+            type: "NOT_EMPTY",
+            error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+                getYarValue(request, additionalYarKeyName).toLowerCase()
+            ),
+          },
+        ],
+      };
+    }
   }
 
   const errors = checkErrors(payload, currentQuestion, h, request)
@@ -389,6 +411,14 @@ const showPostPage = (currentQuestion, request, h) => {
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }
+  
+  if (yarKey === 'projectCost' ) {
+    const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+    setYarValue(request, 'calculatedGrant', calculatedGrant)
+    setYarValue(request, 'remainingCost', remainingCost)
+    setYarValue(request, 'projectCost', projectCost)
+    console.log(calculatedGrant, remainingCost, projectCost, 'calculatedGrant, remainingCost, projectCost')
+  }
 
   switch (baseUrl) {
     case 'solar-technologies':
@@ -401,14 +431,6 @@ const showPostPage = (currentQuestion, request, h) => {
           return  h.view('not-eligible', NOT_ELIGIBLE)
         }
       }
-    case 'project-cost' || 'project-cost-solar':
-      const { calculatedGrant, remainingCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
-      if (payload[Object.keys(payload)[0]] > 1250000) {
-        return h.redirect('potential-amount-capped')
-      }
-      setYarValue(request, 'calculatedGrant', calculatedGrant)
-      setYarValue(request, 'remainingCost', remainingCost)
-      break
     case 'automatic-eligibility': {
         const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
         const technologyItemsAnswer = getYarValue(request, 'technologyItems')
@@ -427,8 +449,7 @@ const showPostPage = (currentQuestion, request, h) => {
     default:
       break
   }
-
-  return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.secBtn))
+  return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.results, currentQuestion.url))
 }
 
 const getHandler = (question) => {
