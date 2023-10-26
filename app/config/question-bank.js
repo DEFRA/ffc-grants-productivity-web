@@ -145,10 +145,10 @@ const questionBank = {
           url: 'applicant',
           baseUrl: 'applicant',
           preValidationObject: {
-             preValidationKeys: ['projectSubject'],
-             preValidationAnswer: ['project-subject-A1'],
-             preValidationRule: 'AND',
-             preValidationUrls: ['project-subject']
+              preValidationKeys: ['projectSubject'],
+              preValidationAnswer: ['project-subject-A1'],
+              preValidationRule: 'AND',
+              preValidationUrls: ['project-subject']
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -1959,6 +1959,14 @@ const questionBank = {
               elseUrl: 'project-impact'
             }
           },
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'energySource',
+            dependentAnswerKeysArray: ['energy-source-A4'],
+            urlOptions: {
+              thenUrl: 'fossil-fuel-conditional',
+              elseUrl: 'agricultural-sector'
+            }
+          },
           nextUrl: 'agricultural-sector',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -2016,12 +2024,12 @@ const questionBank = {
           baseUrl: 'fossil-fuel-conditional',
           backUrl: 'energy-source',
           nextUrl: 'agricultural-sector',
-          // preValidationObject: {
-          //   preValidationKeys: ['energySource'],
-          //   preValidationAnswer: ['energy-source-A4'],
-          //   preValidationRule: 'AND',
-          //   preValidationUrls: ['energy-source']
-          // },
+          preValidationObject: {
+            preValidationKeys: ['energySource'],
+            preValidationAnswer: ['energy-source-A4'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['energy-source']
+          },
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Your fossil fuel technology might be eligible',

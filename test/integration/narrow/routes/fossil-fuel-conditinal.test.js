@@ -24,7 +24,7 @@ it('page loads successfully, with all the Eligible options', async () => {
     expect(response.payload).toContain(eligiblePageText)
 })
 
-it('should redirect to /other-item when user press continue', async () => {
+it('should redirect to /agricultural-sector when user press continue', async () => {
     const postOptions = {
         method: 'POST',
         url: `${global.__URLPREFIX__}/fossil-fuel-conditional`,
@@ -47,6 +47,4 @@ it(`page loads with correct back link`, async () => {
         expect(response.statusCode).toBe(200)
         expect(response.payload).toContain('<a href=\"energy-source\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
         })
-
-
 })
