@@ -411,6 +411,14 @@ const showPostPage = (currentQuestion, request, h) => {
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }
+  
+  if (yarKey === 'projectCost' ) {
+    const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
+    setYarValue(request, 'calculatedGrant', calculatedGrant)
+    setYarValue(request, 'remainingCost', remainingCost)
+    setYarValue(request, 'projectCost', projectCost)
+    console.log(calculatedGrant, remainingCost, projectCost, 'calculatedGrant, remainingCost, projectCost')
+  }
 
   switch (baseUrl) {
     case 'solar-technologies':
@@ -424,13 +432,17 @@ const showPostPage = (currentQuestion, request, h) => {
         }
       }
     case  'project-cost-solar':
+      console.log(payload[Object.keys(payload)[0]], 'solar payload[Object.keys(payload)[0]]')
       if (baseUrl === 'project-cost-solar' && payload[Object.keys(payload)[0]] > 400000) {
         return h.redirect('potential-amount-capped-solar')
       }
+      break
     case  'project-cost':
+      console.log(payload[Object.keys(payload)[0]], 'robotic payload[Object.keys(payload)[0]]')
       if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
         return h.redirect('potential-amount-capped')
       }
+      break
     case 'automatic-eligibility': {
         const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
         const technologyItemsAnswer = getYarValue(request, 'technologyItems')
@@ -448,12 +460,6 @@ const showPostPage = (currentQuestion, request, h) => {
       }
     default:
       break
-  }
-  if (yarKey === 'projectCost' || yarKey === 'project-cost-solar' ) {
-    const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
-    setYarValue(request, 'calculatedGrant', calculatedGrant)
-    setYarValue(request, 'remainingCost', remainingCost)
-    setYarValue(request, 'projectCost', projectCost)
   }
   return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.results, currentQuestion.url))
 }

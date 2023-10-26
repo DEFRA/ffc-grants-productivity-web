@@ -2,11 +2,11 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /potential-amount-capped', () => {
   const varList = {
-    projectCost: 37500,
-    calculatedGrant: 15000,
+    projectCost: 600000,
+    calculatedGrant: 240000,
     solarPVSystem: 'No'
   }
-  const eligiblePageText = `The maximum grant you can apply for is £500,000.`
+  const eligiblePageText = `You may be able to apply for a grant of up to £240,000, based on the estimated cost of £600,000.`
 
   jest.mock('../../../../app/helpers/session', () => ({
     setYarValue: (request, key, value) => null,

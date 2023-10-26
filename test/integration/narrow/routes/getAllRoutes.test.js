@@ -16,7 +16,8 @@ const varListTemplate = {
   projectResponsibility: 'Yes, I plan to take full responsibility for my project',
   existingSolar: 'Yes',
   farmersDetails: 'voila',
-  consentMain: 'lalal'
+  consentMain: 'lalal',
+  technologyItems: 'Solar panels',
 }
 
 let varList
