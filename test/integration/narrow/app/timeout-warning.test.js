@@ -23,6 +23,9 @@ global.navigator = dom.window.navigator
 const TimeoutWarning = require('../../../../app/templates/components/timeout-warning/timeout-warning')
 
 describe('Timeout Warning', () => {
+  afterAll(() => {
+    jest.resetAllMocks()
+  })
   it('test TimeoutWarning constructor', () => {
     expect(TimeoutWarning).toBeDefined()
 

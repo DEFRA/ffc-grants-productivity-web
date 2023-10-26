@@ -18,10 +18,9 @@ const getUrl = (urlObject, url, request, secBtn) => {
   let selectThenUrl
   let thenUrlIndex = -1
 
-
   dependentQuestionYarKeys.every((dependantYarKey, index) => {
     const selectedAnswer = getYarValue(request, dependantYarKey)
-    if (selectedAnswer !== null) {
+    if (selectedAnswer) {
       selectThenUrl = ALL_QUESTIONS.find(question => (
         question.yarKey === dependantYarKey &&
         question.answers &&
@@ -38,8 +37,8 @@ const getUrl = (urlObject, url, request, secBtn) => {
     }
     return true
   })
-
-  return thenUrlIndex > -1 ? thenUrl[thenUrlIndex] : elseUrl
+  const resultURL = thenUrlIndex > -1 ? thenUrl[thenUrlIndex] : elseUrl
+  return resultURL
 }
 
 module.exports = {

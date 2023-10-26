@@ -228,11 +228,11 @@ const questionBank = {
           title: 'What is the legal status of the business?',
           pageTitle: '',
           backUrlObject: {
-            dependentQuestionYarKey: 'applicant',
-            dependentAnswerKeysArray: ['applicant-A1'],
+            dependentQuestionYarKey: ['projectSubject', 'applicant'],
+            dependentAnswerKeysArray: ['project-subject-A2', 'applicant-A1'],
             urlOptions: {
-              thenUrl: 'applicant',
-              elseUrl: 'project-subject'
+              thenUrl: ['project-subject', 'applicant'],
+              elseUrl: 'business-location'
             }
           },
           nextUrl: 'country',
@@ -332,7 +332,7 @@ const questionBank = {
             }
           ],
           errorMessage: {
-            text: ''
+            text: '' // why?
           },
           yarKey: 'legalStatus'
         },
@@ -493,7 +493,7 @@ const questionBank = {
               elseUrl: '/productivity/planning-permission'
             }
           },
-          nextUrl:'tenancy',
+          nextUrl: 'tenancy',
           ineligibleContent: {
             messageContent: 'You cannot apply for a grant if you have already started work on the project.',
             insertText: { text: 'Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement invalidates your application.' },
@@ -708,7 +708,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select if your farm has an existing solar PV system'
+              error: 'Select yes if your farm has an existing solar PV system'
             }
           ],
           answers: [
@@ -778,28 +778,28 @@ const questionBank = {
           answers: [
             {
               key: 'solar-technologies-A1',
-              value: 'An electrical grid connection',
+              value: 'An electrical grid connection'
             },
             {
               key: 'solar-technologies-A2',
-              value: 'Solar panels',
+              value: 'Solar panels'
             },
             {
               key: 'solar-technologies-A3',
-              value: 'An inverter',
+              value: 'An inverter'
             },
             {
               key: 'solar-technologies-A4',
-              value: 'A utility meter',
+              value: 'A utility meter'
             },
             {
               key: 'solar-technologies-A5',
-              value: 'A battery',
+              value: 'A battery'
             },
             {
               key: 'solar-technologies-A6',
-              value: 'Limit-loading power diverter to heat or cold store',
-            },
+              value: 'Limit-loading power diverter to heat or cold store'
+            }
           ],
           yarKey: 'solarTechnologies'
         },
@@ -819,12 +819,11 @@ const questionBank = {
             text: 'Select all that apply'
           },
           eliminationAnswerKeys: '',
-          ineligibleContent: {},
           fundingPriorities: '',
           type: 'multi-answer',
           minAnswerCount: 1,
           ineligibleContent: {
-            messageContent:  `
+            messageContent: `
                     <div class="govuk-list govuk-list--bullet">
                     <p class="govuk-body">Solar panels must be installed:</p>
                           <ul>
@@ -864,15 +863,15 @@ const questionBank = {
           answers: [
             {
               key: 'solar-installation-A1',
-              value: 'On a rooftop',
+              value: 'On a rooftop'
             },
             {
               key: 'solar-installation-A2',
-              value: 'On an existing hardstanding area',
+              value: 'On an existing hardstanding area'
             },
             {
               key: 'solar-installation-A3',
-              value: 'Floating (on a reservoir)',
+              value: 'Floating (on a reservoir)'
             },
             {
               value: 'divider'
