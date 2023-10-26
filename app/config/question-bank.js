@@ -889,7 +889,7 @@ const questionBank = {
           order: 63,
           title: 'Will you use most of the energy produced by solar on your farm?',
           pageTitle: '',
-          url: 'solar/solar-usage',
+          url: 'solar-usage',
           baseUrl: 'solar-usage',
           backUrl: 'remaining-costs',
           // preValidationKeys: [],
@@ -1235,8 +1235,8 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
-              thenUrl: 'robotics/project-items',
-              elseUrl: 'robotics/project-items'
+              thenUrl: 'project-items',
+              elseUrl: 'project-items'
             }
           },
           eliminationAnswerKeys: '',
@@ -1291,8 +1291,8 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
-              thenUrl: 'robotics/project-items',
-              elseUrl: 'robotics/project-items'
+              thenUrl: 'project-items',
+              elseUrl: 'project-items'
             }
           },
           maybeEligible: true,
@@ -1842,7 +1842,7 @@ const questionBank = {
           order: 340,
           title: 'Will the project improve the productivity and profitability of your business?',
           pageTitle: '',
-          url: 'robotics/project-impact',
+          url: 'project-impact',
           baseUrl: 'project-impact',
           backUrl: 'remaining-costs',
           // preValidationKeys: ['canPayRemainingCost'],
@@ -1912,7 +1912,7 @@ const questionBank = {
             text: 'Software automating data analysis to improve efficiency (for example, analysing white blood cell counts in dairy)'
           },
           pageTitle: '',
-          url: 'robotics/data-analytics',
+          url: 'data-analytics',
           baseUrl: 'data-analytics',
           backUrl: 'project-impact',
           nextUrl: 'energy-source',
@@ -1967,7 +1967,7 @@ const questionBank = {
           order: 360,
           title: 'What type of energy will you use?',
           pageTitle: '',
-          url: 'robotics/energy-source',
+          url: 'energy-source',
           baseUrl: 'energy-source',
           // preValidationKeys: ['projectImpact'],
           backUrlObject: {
@@ -2037,7 +2037,7 @@ const questionBank = {
           order: 370,
           title: 'Which agricultural sector is your project in?',
           pageTitle: '',
-          url: 'robotics/agricultural-sector',
+          url: 'agricultural-sector',
           baseUrl: 'agricultural-sector',
           backUrl: 'energy-source',
           nextUrl: 'technology',
@@ -2100,10 +2100,10 @@ const questionBank = {
           order: 380,
           title: 'Are you already using this technology?',
           pageTitle: '',
-          url: 'robotics/technology',
+          url: 'technology',
           baseUrl: 'technology',
           backUrl: 'agricultural-sector',
-          nextUrl: '/productivity/score',
+          nextUrl: '/score',
           // preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -2217,8 +2217,8 @@ const questionBank = {
             dependentQuestionYarKey: 'projectSubject',
             dependentAnswerKeysArray: ['project-subject-A1'],
             urlOptions: {
-              thenUrl: 'robotics/technology',
-              elseUrl: 'slurry/slurry-to-be-treated'
+              thenUrl: 'technology',
+              elseUrl: 'slurry-to-be-treated'
             }
           },
           nextUrl: 'business-details',

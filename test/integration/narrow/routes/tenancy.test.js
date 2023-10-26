@@ -40,7 +40,7 @@ describe('Page: /tenancy', () => {
     expect(postResponse.payload).toContain('Select yes if the planned project is on land the business owns')
   })
 
-  it('user selects \'Yes\' -> store user response and redirect to /robotics/project-items', async () => {
+  it('user selects \'Yes\' -> store user response and redirect to /project-items', async () => {
     varList.tenancy = 'Yes'
     varList.projectSubject = 'Robotics and automatic technology'
     const postOptions = {

@@ -44,7 +44,7 @@ describe('Score page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
       headers: {
-        referer: `${global.__URLPREFIX__}/robotics/technology`
+        referer: `${global.__URLPREFIX__}/technology`
       }
     }
 
@@ -60,7 +60,7 @@ describe('Score page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
       headers: {
-        referer: `${global.__URLPREFIX__}/robotics/technology`
+        referer: `${global.__URLPREFIX__}/technology`
       }
     }
 
@@ -77,7 +77,7 @@ describe('Score page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
       headers: {
-        referer: `${global.__URLPREFIX__}/robotics/technology`
+        referer: `${global.__URLPREFIX__}/technology`
       }
     }
 
@@ -94,7 +94,7 @@ describe('Score page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
       headers: {
-        referer: `${global.__URLPREFIX__}/robotics/technology`
+        referer: `${global.__URLPREFIX__}/technology`
       }
     }
 
@@ -110,7 +110,7 @@ describe('Score page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
       headers: {
-        referer: `${global.__URLPREFIX__}/robotics/technology`
+        referer: `${global.__URLPREFIX__}/technology`
       }
     }
 
@@ -130,7 +130,7 @@ describe('Score page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
       headers: {
-        referer: `${global.__URLPREFIX__}/robotics/technology`
+        referer: `${global.__URLPREFIX__}/technology`
       }
     }
 
@@ -150,7 +150,7 @@ describe('Score page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
       headers: {
-        referer: `${global.__URLPREFIX__}/robotics/technology`
+        referer: `${global.__URLPREFIX__}/technology`
       }
     }
 
@@ -175,7 +175,7 @@ describe('Score page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
       headers: {
-        referer: `${global.__URLPREFIX__}/robotics/technology`
+        referer: `${global.__URLPREFIX__}/technology`
       }
     }
     scoreDataRobotics.desirability.overallRating.band = 'Average'
@@ -201,7 +201,7 @@ describe('Score page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
       headers: {
-        referer: `${global.__URLPREFIX__}/robotics/technology`
+        referer: `${global.__URLPREFIX__}/technology`
       }
     }
     scoreDataRobotics.desirability.overallRating.band = 'Weak'
@@ -227,7 +227,7 @@ describe('Score page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
       headers: {
-        referer: `${global.__URLPREFIX__}/slurry/slurry-to-be-treated`
+        referer: `${global.__URLPREFIX__}/slurry-to-be-treated`
       }
     }
 
