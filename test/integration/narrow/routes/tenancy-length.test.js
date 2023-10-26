@@ -60,7 +60,7 @@ describe('Page: /tenancy-length', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('robotics/project-items')
+    expect(postResponse.headers.location).toBe('project-items')
   })
 
   it('user selects eligible option: \'Yes\' -> store user response and redirect to /system-type', async () => {
@@ -73,6 +73,6 @@ describe('Page: /tenancy-length', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('robotics/project-items')
+    expect(postResponse.headers.location).toBe('project-items')
   })
 })

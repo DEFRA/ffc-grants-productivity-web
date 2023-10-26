@@ -4,7 +4,7 @@ describe('robotics agricultural sector page', () => {
   it('no option is selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/agricultural-sector`,
+      url: `${global.__URLPREFIX__}/agricultural-sector`,
       payload: { crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
@@ -19,7 +19,7 @@ describe('robotics agricultural sector page', () => {
   it('3 or more options are selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/agricultural-sector`,
+      url: `${global.__URLPREFIX__}/agricultural-sector`,
       payload: {
         agriculturalSector: ['Horticulture', 'Arable', 'Dairy livestock'],
         crumb: crumbToken
@@ -37,7 +37,7 @@ describe('robotics agricultural sector page', () => {
   it('2 options are selected -> store user response and redirect to energy source page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/agricultural-sector`,
+      url: `${global.__URLPREFIX__}/agricultural-sector`,
       payload: {
         agriculturalSector: ['Horticulture', 'Arable'],
         crumb: crumbToken
@@ -55,7 +55,7 @@ describe('robotics agricultural sector page', () => {
   it('1 option is selected -> store user response and redirect to energy source page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/agricultural-sector`,
+      url: `${global.__URLPREFIX__}/agricultural-sector`,
       payload: {
         agriculturalSector: 'Horticulture',
         crumb: crumbToken
