@@ -31,12 +31,12 @@ const getConfirmationId = (guid, journey) => {
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
 }
 
-const handleConditinalHtmlData = (type, labelData, yarKey, request) => {
-  const isMultiInput = type === 'multi-input'
-  const label = isMultiInput ? 'sbi' : yarKey
-  const fieldValue = isMultiInput ? getYarValue(request, yarKey)?.sbi : getYarValue(request, yarKey)
-  return getHtml(label, labelData, fieldValue)
-}
+// const handleConditinalHtmlData = (type, labelData, yarKey, request) => {
+//   const isMultiInput = type === 'multi-input'
+//   const label = isMultiInput ? 'sbi' : yarKey
+//   const fieldValue = isMultiInput ? getYarValue(request, yarKey)?.sbi : getYarValue(request, yarKey)
+//   return getHtml(label, labelData, fieldValue)
+// }
 
 const saveValuesToArray = (yarKey, fields) => {
   const result = []
