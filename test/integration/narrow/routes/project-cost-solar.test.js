@@ -101,7 +101,7 @@ describe('Project cost solar page', () => {
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
   })
 
-  it('should redirected to the potential-amount-capped-solar page if the cost over capped amount', async () => {
+  it('should redirected to the potential-amount-solar page if the cost over capped amount', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-cost-solar`,
@@ -112,7 +112,7 @@ describe('Project cost solar page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     console.log('payload: ', postResponse.payload)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('potential-amount-capped-solar')
+    expect(postResponse.headers.location).toBe('potential-amount-solar')
   })
 it('page loads with correct back link', async () => {
     const options = {

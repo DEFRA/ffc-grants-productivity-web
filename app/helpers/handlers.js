@@ -431,18 +431,6 @@ const showPostPage = (currentQuestion, request, h) => {
           return  h.view('not-eligible', NOT_ELIGIBLE)
         }
       }
-    case  'project-cost-solar':
-      console.log(payload[Object.keys(payload)[0]], 'solar payload[Object.keys(payload)[0]]')
-      if (baseUrl === 'project-cost-solar' && payload[Object.keys(payload)[0]] > 400000) {
-        return h.redirect('potential-amount-capped-solar')
-      }
-      break
-    case  'project-cost':
-      console.log(payload[Object.keys(payload)[0]], 'robotic payload[Object.keys(payload)[0]]')
-      if (baseUrl === 'project-cost' && payload[Object.keys(payload)[0]] > 1250000) {
-        return h.redirect('potential-amount-capped')
-      }
-      break
     case 'automatic-eligibility': {
         const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
         const technologyItemsAnswer = getYarValue(request, 'technologyItems')

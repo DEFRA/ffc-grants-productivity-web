@@ -1518,7 +1518,7 @@ const questionBank = {
           nextUrl: 'other-conditional',
           url: 'other-robotic-technology',
           baseUrl: 'other-robotic-technology',
-          preValidationKeys: ['projectItems'],
+          // preValidationKeys: ['projectItems'],
           fundingPriorities: '',
           minAnswerCount: 1,
           hint: {
@@ -1731,40 +1731,6 @@ const questionBank = {
           yarKey: 'projectCost'
         },
         {
-          key: 'potential-amount-capped-solar',
-          order: 312,
-          url: 'potential-amount-capped-solar',
-          baseUrl: 'potential-amount-capped-solar',
-          backUrl: 'project-cost-solar',
-          nextUrl: 'remaining-costs-solar',
-          preValidationKeys: ['projectCost'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: `The maximum grant you can apply for is £100,000. based on the estimated cost of £{{_projectCost_}}`,
-            warning: {
-              text: 'There’s no guarantee the project will receive a grant.'
-            }
-          }
-        },
-        {
-          key: 'potential-amount-capped',
-          order: 312,
-          url: 'potential-amount-capped',
-          baseUrl: 'potential-amount-capped',
-          backUrl: 'project-cost',
-          nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Potential grant funding',
-            messageContent: `You may be able to apply for a grant of up to £{{_calculatedGrant_}}, based on the estimated cost of £{{_projectCost_}}.`,
-            warning: {
-              text: 'There’s no guarantee the project will receive a grant.'
-            }
-          }
-        },
-        {
           key: 'potential-amount',
           title: 'Potential grant funding',
           order: 320,
@@ -1790,7 +1756,7 @@ const questionBank = {
           pageTitle: '',
           url: 'remaining-costs',
           baseUrl: 'remaining-costs',
-          backUrl: 'project-cost',
+          backUrl: 'potential-amount',
           nextUrl: 'project-impact',
           // preValidationKeys: ['projectCost'],
           eliminationAnswerKeys: '',
@@ -2041,6 +2007,27 @@ const questionBank = {
             }
           ],
           yarKey: 'energySource'
+        },
+        {
+          key: 'fossil-fuel-conditional',
+          title: 'You may be able to apply for a grant from this scheme',
+          order: 91,
+          url: 'fossil-fuel-conditional',
+          baseUrl: 'fossil-fuel-conditional',
+          backUrl: 'energy-source',
+          nextUrl: 'agricultural-sector',
+          // preValidationObject: {
+          //   preValidationKeys: ['energySource'],
+          //   preValidationAnswer: ['energy-source-A4'],
+          //   preValidationRule: 'AND',
+          //   preValidationUrls: ['energy-source']
+          // },
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Your fossil fuel technology might be eligible',
+            messageContent: 'I confirm I understand fossil fuel technology will only be funded where there is no commercially available electric or renewable energy alternative.',
+            isFossilFuel: true,
+          }
         },
         {
           key: 'agricultural-sector',
