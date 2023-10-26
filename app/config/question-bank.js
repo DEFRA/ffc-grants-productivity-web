@@ -2024,12 +2024,12 @@ const questionBank = {
           baseUrl: 'fossil-fuel-conditional',
           backUrl: 'energy-source',
           nextUrl: 'agricultural-sector',
-          preValidationObject: {
-            preValidationKeys: ['energySource'],
-            preValidationAnswer: ['energy-source-A4'],
-            preValidationRule: 'AND',
-            preValidationUrls: ['energy-source']
-          },
+          // preValidationObject: {
+          //   preValidationKeys: ['energySource'],
+          //   preValidationAnswer: ['energy-source-A4'],
+          //   preValidationRule: 'AND',
+          //   preValidationUrls: ['energy-source']
+          // },
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Your fossil fuel technology might be eligible',
