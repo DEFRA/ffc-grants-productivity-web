@@ -19,10 +19,8 @@ const getUrl = (urlObject, url, request, secBtn) => {
   let selectThenUrl
   let thenUrlIndex = -1
 
-
   dependentQuestionYarKeys.every((dependantYarKey, index) => {
     const selectedAnswer = getYarValue(request, dependantYarKey)
-    console.log('selectedAnswer: ', selectedAnswer);
     if (selectedAnswer) {
       selectThenUrl = ALL_QUESTIONS.find(question => (
         question.yarKey === dependantYarKey &&
@@ -33,19 +31,14 @@ const getUrl = (urlObject, url, request, secBtn) => {
           (Array.isArray(selectedAnswer) ? selectedAnswer.includes(answer.value) : (selectedAnswer === answer.value))
         ))
       ))
-      console.log('selectThenUrl: ', selectThenUrl);
       if (selectThenUrl) {
         thenUrlIndex = index
-        console.log('selectThenUrl: ', selectThenUrl, '- thenUrlIndex: ', thenUrlIndex);
         return false
       }
     }
     return true
   })
-  console.log('thenUrlIndex: ', thenUrlIndex);
-  console.log('thenUrl: ', thenUrl);
   const resultURL = thenUrlIndex > -1 ? thenUrl[thenUrlIndex] : elseUrl
-  console.log('resultURL: ', resultURL);
   return resultURL
 }
 
