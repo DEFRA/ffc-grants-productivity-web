@@ -45,8 +45,4 @@ describe('Start page', () => {
     expect(response.payload).toContain('Email')
     expect(response.payload).toContain('FTF@rpa.gov.uk')
   })
-
-  it('should redirect to /project-subject if start button is clicked', async () => {
-    
-  })
 })
