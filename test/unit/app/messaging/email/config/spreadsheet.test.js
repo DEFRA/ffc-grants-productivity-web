@@ -22,7 +22,7 @@ describe("spreadsheet.js", () => {
       protectEnabled: WORKSHEET_PROTECT_ENABLED === "true",
       sendEmailToRpa: SEND_EMAIL_TO_RPA === "true",
       protectPassword: WORKSHEET_PROTECT_PASSWORD,
-      rpaEmail: RPA_EMAIL_ADDRESS,
+      rpaEmail: "FTF@rpa.gov.uk",
       uploadEnvironment: EXCEL_UPLOAD_ENVIRONMENT,
     });
   });
