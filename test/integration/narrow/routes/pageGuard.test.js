@@ -92,11 +92,9 @@ describe('Page Guard', () => {
     expect(getResponse.payload).toContain('Who are you?')
   })
 
-  it('OR - should redirect to start page if no key found', async () => {
-
+  it('OR - should redirect to start page if no key found', async () => { 
     varList.projectSubject = 'random'
     varList.applicant = 'random'
-
     server = await createServer()
     const getOptions = {
       method: 'GET',

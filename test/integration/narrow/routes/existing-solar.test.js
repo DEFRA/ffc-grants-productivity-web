@@ -38,7 +38,7 @@ describe('Page: /existing-solar', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select if your farm has an existing solar PV system')
+    expect(postResponse.payload).toContain('Select yes if your farm has an existing solar PV system')
     expect(postResponse.payload).toContain('Yes')
     expect(postResponse.payload).toContain('No')
   })
