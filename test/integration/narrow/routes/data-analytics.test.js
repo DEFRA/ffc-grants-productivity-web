@@ -4,7 +4,7 @@ describe('robotics data analytics page', () => {
   it('no option is selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/data-analytics`,
+      url: `${global.__URLPREFIX__}/data-analytics`,
       payload: { canPayRemainingCost: '', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
@@ -19,7 +19,7 @@ describe('robotics data analytics page', () => {
   it('store user response and redirect to energy source page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/robotics/data-analytics`,
+      url: `${global.__URLPREFIX__}/data-analytics`,
       payload: { dataAnalytics: 'some fake answer', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken

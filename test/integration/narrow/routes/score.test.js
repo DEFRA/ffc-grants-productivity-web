@@ -222,12 +222,12 @@ describe('Score page', () => {
     expect(getDesirabilityAnswersSpy).toHaveBeenCalledTimes(1)
     expect(getProdScoringSpy).toHaveBeenCalledTimes(1)
   })
-  it('should load page with success Slurry Strong', async () => {
+  it('should load page with success solar Strong', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/score`,
       headers: {
-        referer: `${global.__URLPREFIX__}/slurry/slurry-to-be-treated`
+        referer: `${global.__URLPREFIX__}/slurry-to-be-treated`
       }
     }
 

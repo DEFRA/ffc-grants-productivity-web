@@ -50,18 +50,6 @@ describe('Page Guard', () => {
     expect(getResponse.headers.location).toBe(process.env.START_PAGE_URL)
   })
 
-  // it('should redirect to start page if the user skip journey question', async () => {
-  //   server = await createServer()
-  //   const getOptions = {
-  //     method: 'GET',
-  //     url: `${global.__URLPREFIX__}/technology-use`
-  //   }
-
-  //   const response = await server.inject(getOptions)
-  //   expect(response.statusCode).toBe(302)
-  //   expect(response.headers.location).toBe(process.env.START_PAGE_URL)
-  // })
-
   it('AND - should redirect to start page if no key found', async () => {
 
     varList.projectSubject = 'random'

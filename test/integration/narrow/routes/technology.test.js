@@ -28,6 +28,6 @@ describe('robotics Technology page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/productivity/score')
+    expect(postResponse.headers.location).toBe('/score')
   })
 })
