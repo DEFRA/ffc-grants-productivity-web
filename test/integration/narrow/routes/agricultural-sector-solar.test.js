@@ -40,7 +40,7 @@ describe('agricultural sector solar page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select what agricultural sector your project is in')
+    expect(postResponse.payload).toContain('Select up to 2 sectors your project is in')
   })
 
   it('3 or more options are selected -> return error message', async () => {

@@ -23,7 +23,7 @@ describe('Page: /automatic-eligibility', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Which eligibility criteria does your automatic Harvesting technology meet?')
+    expect(response.payload).toContain('Which eligibility criteria does your automatic harvesting technology meet?')
     expect(response.payload).toContain('Has sensing system that can understand its environment')
     expect(response.payload).toContain('Makes decisions and plans')
     expect(response.payload).toContain('Can control its actuators (the devices that move robotic joints)')
