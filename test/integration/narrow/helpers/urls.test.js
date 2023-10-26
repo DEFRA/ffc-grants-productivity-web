@@ -9,7 +9,6 @@ describe("getUrl()", () => {
   let dict = {};
   beforeEach(() => {
     getYarValue.mockImplementation((req, key) => {
-      console.log('here: mock: ', dict[key]);
       return dict[key]
     });
   });

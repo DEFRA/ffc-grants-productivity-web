@@ -235,15 +235,8 @@ const questionBank = {
               elseUrl: 'country'
             }
           },
-          // dependantNextUrl: {
-          //   dependentQuestionYarKey: ['applicant', 'projectSubject'],
-          //   dependentAnswerKeysArray: ['applicant-A1', 'project-subject-A1'],
-          //   urlOptions: {
-          //     thenUrl: ['tenancy', 'robotics/project-items'],
-          //     elseUrl: 'slurry/mild-acidification-infrastructure'
-          //   }
-          // },
           baseUrl: 'legal-status',
+          url: 'legal-status',
           nextUrl: 'country',
           // preValidationKeys: ['businessLocation'],
           ineligibleContent: {
