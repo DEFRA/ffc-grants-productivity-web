@@ -11,7 +11,7 @@ describe('confirm page', () => {
       else return 'Error'
     }
   }))
-  it('should load page successfully', async () => {
+  it('should load page successfully with all details', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/confirm`,
@@ -23,6 +23,16 @@ describe('confirm page', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Confirm and send')
+    expect(response.payload).toContain('I confirm that, to the best of my knowledge, the details I have provided are correct.')
+    expect(response.payload).toContain('I understand the project’s eligibility and estimated grant amount is based on the answers I provided.')
+    expect(response.payload).toContain('I am aware that the information I submit will be checked by the RPA.')
+    expect(response.payload).toContain('I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.')
+    expect(response.payload).toContain('Improving our schemes')
+    expect(response.payload).toContain('So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party working for us, to contact you.')
+    expect(response.payload).toContain('(Optional) I confirm') //checkbox
+    expect(response.payload).toContain('You can only submit your details once')
+    expect(response.payload).toContain('Confirm and send') //button
   })
 
   it('should store user response and redirects to confirmation page', async () => {
