@@ -2594,7 +2594,7 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                html: 'Address line 1',
+                text: 'Address line 1',
                 classes: 'govuk-label'
               },
               validate: [
@@ -3163,7 +3163,7 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                html: 'Address line 2 (optional)',
+                text: 'Address line 2 (optional)',
                 classes: 'govuk-label'
               },
               validate: [
