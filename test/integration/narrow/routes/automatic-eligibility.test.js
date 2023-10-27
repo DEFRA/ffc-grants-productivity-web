@@ -55,6 +55,7 @@ describe('Page: /automatic-eligibility', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
+    expect(postResponse.payload).toContain('Automatic items must meet at least 2 criteria to be eligible for grant funding.')
   })
 
   it('should display ineligible page when user selects only one option', async () => {
@@ -68,6 +69,7 @@ describe('Page: /automatic-eligibility', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
+    expect(postResponse.payload).toContain('Automatic items must meet at least 2 criteria to be eligible for grant funding.')
   })
 
   it('user selects two eligible options and \'Automatic\' and \'Other robotic or automatic technology\' from tech items -> store user response and redirect to /other-automatic-technology', async () => {

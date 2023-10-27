@@ -2170,7 +2170,7 @@ const questionBank = {
           preValidationKeys: ['technologyItems'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: 'Your project must improve the productivity and profitability of your main agricultural or horticultural business.',
+            messageContent: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
