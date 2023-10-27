@@ -41,7 +41,7 @@ describe('robotics Technology page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/score-summary')
+    expect(postResponse.headers.location).toBe('/labour-saved')
   })
   it('page loads with correct back link', async () => {
     const options = {
