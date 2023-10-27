@@ -1332,8 +1332,8 @@ const questionBank = {
               elseUrl: 'project-cost'
             }
           },
-          id: 'roboticsProjectItems',
-          name: 'roboticsProjectItems',
+          id: 'projectItems',
+          name: 'projectItems',
           hint: {
             html: 'Select all the items your project needs'
           },
@@ -1951,10 +1951,10 @@ const questionBank = {
           pageTitle: '',
           url: 'energy-source',
           baseUrl: 'energy-source',
-          // preValidationKeys: ['projectImpact'],
+          // preValidationKeys: ['projectItems'],
           backUrlObject: {
-            dependentQuestionYarKey: 'technologyItems',
-            dependentAnswerKeysArray: ['technology-items-A1', 'technology-items-A2', 'technology-items-A3', 'technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7', 'technology-items-A8'],
+            dependentQuestionYarKey: 'projectItems',
+            dependentAnswerKeysArray: ['project-items-A3'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'project-impact'
@@ -1975,14 +1975,15 @@ const questionBank = {
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
-            html: 'Select up to 2 options'
+            html: `Technology powered by fossil fuels will only be funded where there is no 
+                  commercially available electric or renewable energy alternative.<br/><br/>
+                  Select up to 2 options`
           },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA wants to fund projects that:',
-                items: ['improve the environment']
+                para: 'RPA wants to fund projects that improve the environment'
               }]
             }]
           },
