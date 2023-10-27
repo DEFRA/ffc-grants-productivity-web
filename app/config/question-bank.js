@@ -701,7 +701,11 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'Applicants who already have a solar PV system can still apply for this grant. For example, you can apply for a battery to add to your existing solar PV panels.',
+                para: `Applicants who already have a solar 
+                PV system can still apply for this 
+                grant. For example, you can apply 
+                for a battery to add to your existing 
+                solar PV panels.`,
                 items: []
               }]
             }]
@@ -2122,7 +2126,7 @@ const questionBank = {
           url: 'technology-use',
           baseUrl: 'technology-use',
           backUrl: 'agricultural-sector',
-          nextUrl: '/score',
+          nextUrl: 'score-summary',
           // preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -2141,7 +2145,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if you have used this technology on your farm'
+              error: 'Select if you are already using this technology'
             }
           ],
           answers: [

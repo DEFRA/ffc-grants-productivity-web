@@ -21,14 +21,12 @@ describe('robotics Technology page', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/technology-use`,
       payload: { crumb: crumbToken },
-      headers: {
-        cookie: 'crumb=' + crumbToken
-      }
+      headers: { cookie: 'crumb=' + crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if you have used this technology on your farm')
+    expect(postResponse.payload).toContain('Select if you are already using this technology')
   })
 
   it('store user response and redirect to energy source page', async () => {
@@ -43,6 +41,15 @@ describe('robotics Technology page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/score')
+    expect(postResponse.headers.location).toBe('/score-summary')
+  })
+  it('page loads with correct back link', async () => {
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/technology-use`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"agricultural-sector\" class=\"govuk-back-link\">Back</a>')
   })
 })
