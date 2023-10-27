@@ -30,8 +30,7 @@ describe('create-msg', () => {
       projectImpacts: 'hello',
       energySource: ['value'],
       agriculturalSector: ['value'],
-      dataAnalytics: 'testing',
-      roboticProjectImpacts: undefined
+      dataAnalytics: 'testing'
     })
 
     dict = {
@@ -45,8 +44,7 @@ describe('create-msg', () => {
       projectImpacts: 'hello',
       energySource: ['value'],
       agriculturalSector: ['value'],
-      dataAnalytics: 'testing',
-      roboticProjectImpacts: undefined
+      dataAnalytics: 'testing'
     })
 
     dict = {

@@ -1824,7 +1824,7 @@ const questionBank = {
           yarKey: 'canPayRemainingCost'
         },
         {
-          key: 'robotics-project-impact',
+          key: 'project-impact',
           order: 340,
           title: 'Will the project improve the productivity and profitability of your business?',
           pageTitle: '',
@@ -1873,12 +1873,12 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'robotics-project-impact-A1',
+              key: 'project-impact-A1',
               value: 'Yes'
 
             },
             {
-              key: 'robotics-project-impact-A2',
+              key: 'project-impact-A2',
               value: 'No',
               notEligible: true
             }
@@ -1886,7 +1886,7 @@ const questionBank = {
           yarKey: 'projectImpact'
         },
         {
-          key: 'robotics-data-analytics',
+          key: 'data-analytics',
           scheme: 'robotics',
           score: {
             isScore: true,
@@ -1926,18 +1926,18 @@ const questionBank = {
 
           answers: [
             {
-              key: 'robotics-data-analytics-A1',
+              key: 'data-analytics-A1',
               value: 'Yes, we have the technology already'
             },
             {
-              key: 'robotics-data-analytics-A2',
+              key: 'data-analytics-A2',
               value: 'Yes, we’ll buy the technology as part of the project',
               hint: {
                 text: 'Software licences cannot be paid for by the grant'
               }
             },
             {
-              key: 'robotics-data-analytics-A3',
+              key: 'data-analytics-A3',
               value: 'No, we will not use any data analytics'
             }
           ],

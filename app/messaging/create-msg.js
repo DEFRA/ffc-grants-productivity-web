@@ -25,7 +25,7 @@ function getDesirabilityAnswers (request) {
   try {
     let val = {}
     const projectSubject = getYarValue(request, 'projectSubject')
-    if (projectSubject === 'Robotics and Innovation') {
+    if (projectSubject === 'Robotics and automatic technology') {
       const energySource = []
       if (!Array.isArray(getYarValue(request, 'energySource'))) {
         energySource.push(getYarValue(request, 'energySource'))
@@ -40,7 +40,7 @@ function getDesirabilityAnswers (request) {
         dataAnalytics: getYarValue(request, 'dataAnalytics'),
         energySource: energySource.length > 0 ? energySource : getYarValue(request, 'energySource'),
         agriculturalSector: agriculturalSector.length > 0 ? agriculturalSector : getYarValue(request, 'agriculturalSector'),
-        roboticProjectImpacts: getYarValue(request, 'technology')
+        roboticProjectImpacts: getYarValue(request, 'technologyUse')
       }
     } else {
       val = {
