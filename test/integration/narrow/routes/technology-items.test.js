@@ -56,7 +56,7 @@ describe('technology-items', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/technology-items`,
-      payload: { Items: 'Harvesting technology', crumb: crumbToken },
+      payload: { technologyItems: 'Harvesting technology', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
