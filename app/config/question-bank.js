@@ -2171,7 +2171,7 @@ const questionBank = {
           preValidationKeys: ['technologyItems'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: 'Your project must improve the productivity and profitability of your main agricultural or horticultural business.',
+            messageContent: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
@@ -3273,10 +3273,11 @@ const questionBank = {
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
             messageContent: `<ul class="govuk-list"> <li>I confirm that, to the best of my knowledge, the details I have provided are correct.</li>
-            <li> I understand the score was based on the answers I provided.</li>
-            <li> I am aware the information I submit will be checked.</li>
-            <li> I am happy to be contacted by Defra and RPA (or a third-party on their behalf) about my application.</li></ul>
-            <br/>So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party working for us, to contact you.`
+            <li> I understand the project’s eligibility and estimated grant amount is based on the answers I provided.</li>
+            <li> I am aware that the information I submit will be checked by the RPA.</li>
+            <li> I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.</li></ul>
+            <h2 class="govuk-heading-m">Improving our schemes</h2>
+            <p>So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party working for us, to contact you.</p>`,
           },
           answers: [
             {
