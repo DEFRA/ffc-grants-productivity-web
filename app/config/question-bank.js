@@ -12,7 +12,8 @@ const {
   SBI_REGEX,
   NAME_ONLY_REGEX,
   PHONE_REGEX,
-  EMAIL_REGEX
+  EMAIL_REGEX,
+  ADDRESS_REGEX
 } = require('../helpers/regex')
 
 const { LIST_COUNTIES } = require('../helpers/all-counties')
@@ -2593,14 +2594,19 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
+                text: 'Address line 1',
                 classes: 'govuk-label'
               },
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter your building and street details'
-                }
+                  error: 'Enter your address line 1'
+                },
+                {
+                  type: 'REGEX',
+                  regex: ADDRESS_REGEX,
+                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                },
               ]
             },
             {
@@ -2608,9 +2614,16 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
+                text: 'Address line 2 (optional)',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'REGEX',
+                  regex: ADDRESS_REGEX,
+                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                },
+              ]
             },
             {
               yarKey: 'town',
@@ -2857,14 +2870,19 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
+                text: 'Address line 1',
                 classes: 'govuk-label'
               },
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter your building and street details'
-                }
+                  error: 'Enter your address line 1'
+                },
+                {
+                  type: 'REGEX',
+                  regex: ADDRESS_REGEX,
+                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                },
               ]
             },
             {
@@ -2872,9 +2890,16 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
+                text: 'Address line 2 (optional)',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'REGEX',
+                  regex: ADDRESS_REGEX,
+                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                },
+              ]
             },
             {
               yarKey: 'town',
@@ -3118,14 +3143,19 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                html: 'Building and street <span class="govuk-visually-hidden">line 1 of 2</span>',
+                text: 'Address line 1',
                 classes: 'govuk-label'
               },
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter your building and street details'
-                }
+                  error: 'Enter your address line 1'
+                },
+                {
+                  type: 'REGEX',
+                  regex: ADDRESS_REGEX,
+                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                },
               ]
             },
             {
@@ -3133,9 +3163,16 @@ const questionBank = {
               type: 'input',
               classes: 'govuk-input--width-20',
               label: {
-                html: '<span class="govuk-visually-hidden">Building and street line 2 of 2</span>',
+                text: 'Address line 2 (optional)',
                 classes: 'govuk-label'
-              }
+              },
+              validate: [
+                {
+                  type: 'REGEX',
+                  regex: ADDRESS_REGEX,
+                  error: 'Address must only include letters, numbers, hyphens and apostrophes'
+                },
+              ]
             },
             {
               yarKey: 'town',

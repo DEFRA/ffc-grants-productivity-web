@@ -15,6 +15,7 @@ const PHONE_REGEX = /^\+?[0-9\[\s\(\)\]\-]{10,}$/
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/
 const PROJECT_COST_REGEX = /^[1-9]\d*$/
 const CHARS_MAX_18 = /^.{0,18}$/
+const ADDRESS_REGEX = /^[\w .,\-']*$/
 
 module.exports = {
   CURRENCY_FORMAT,
@@ -33,5 +34,6 @@ module.exports = {
   PHONE_REGEX,
   EMAIL_REGEX,
   PROJECT_COST_REGEX,
-  CHARS_MAX_18
+  CHARS_MAX_18,
+  ADDRESS_REGEX
 }
