@@ -1515,6 +1515,79 @@ const questionBank = {
           yarKey: 'roboticAutomatic'
         },
         {
+          key: 'technology-description',
+          order: 305,
+          title: 'What is your other robotic technology?',
+          pageTitle: '',
+          nextUrl: 'other-item',
+          url: 'technology-description',
+          baseUrl: 'technology-description',
+          backUrlObject: {
+            dependentQuestionYarKey: ['roboticAutomatic'],
+            dependentAnswerKeysArray: ['robotic-automatic-A2'],
+            urlOptions: {
+              thenUrl: 'automatic-eligibility',
+              elseUrl: 'robotic-eligibility'
+            }
+          },
+          // preValidationKeys: ['roboticAutomatic'],
+          fundingPriorities: '',
+          minAnswerCount: 1,
+          hint: {
+            html: `Technology powered by fossil fuels will only be funded where there is no 
+            commercially available electric or renewable energy alternative.<br/><br/>
+            <p class="govuk-body">Enter a brief description of the technology including:</p>
+            <ul class="govuk-list govuk-list--bullet">
+              <li>name</li>
+              <li>brand and model (if available)</li>
+              <li>number of items</li>
+              <li>the benefit to your business</li>
+            </ul>`
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'To be eligible for grant funding, your robotic technology must:',
+                items: ['have a sensing system and can understand their environment', 'make decisions and plan', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop'],
+                additionalPara: 'Automatic technology must fit at least 2 of these eligibility criteria. '
+              }]
+            }]
+          },
+          type: 'multi-input',
+          allFields: [
+            {
+              yarKey: 'description',
+              id: "description",
+              name: "description",
+              type: 'textarea',
+              maxlength: 250,
+              label: {
+                text: '',
+                classes: 'govuk-label',
+                for: 'description'
+              },
+              validate: [
+                {
+                  type: 'NOT_EMPTY',
+                  error: 'Enter a brief description of your technology'
+                },
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MIN_10,
+                  error: 'Description must be 10 characters or more'
+                },
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MAX_250,
+                  error: 'Description must be 250 characters or less'
+                }
+              ]
+            }
+          ],
+          yarKey: 'technologyDescription'
+        },
+        {
           key: 'other-robotic-technology',
           order: 305,
           title: 'What is your other robotic technology?',

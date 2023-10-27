@@ -41,6 +41,9 @@
             <li>{{ item }}</li>
           {% endfor %}
         </ul>
+          {% if content.additionalPara %}
+          <p>{{ content.additionalPara  | striptags(true) | escape | nl2br }}</p>
+        {% endif %}
       {% endfor %}
     {% endfor %}
 
