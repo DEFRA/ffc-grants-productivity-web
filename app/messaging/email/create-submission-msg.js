@@ -211,7 +211,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       agriculturalSectorScore: submission.projectSubject !== PROJECT_SUBJECT_SLURRY ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-agricultural-sector') : ' ',
       isTechnology: submission.technology ? 'Yes' : 'No',
       technology: submission.technology ?? ' ',
-      technologyScore: submission.projectSubject !== PROJECT_SUBJECT_SLURRY ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-technology') : ' ',
+      technologyScore: submission.projectSubject !== PROJECT_SUBJECT_SLURRY ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'technology-use') : ' ',
       projectName: submission.businessDetails.projectName,
       businessName: submission.businessDetails.businessName,
       isFarmer: submission.farmerDetails ? 'Yes' : 'No',

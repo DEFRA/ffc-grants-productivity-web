@@ -1,6 +1,21 @@
 const { crumbToken } = require('./test-helper')
 
 describe('robotics Technology page', () => {
+
+  test('loads page successfully', async () => {
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/technology-use`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Are you already using this technology?')
+    expect(response.payload).toContain('Yes, we’re using it now')
+    expect(response.payload).toContain('Yes, we’re using it now but want to upgrade')
+    expect(response.payload).toContain('Yes, as a pilot, demonstration or trial')
+    expect(response.payload).toContain('No, we haven’t used it yet')
+
+  })
   it('no option is selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
@@ -20,7 +35,7 @@ describe('robotics Technology page', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/technology-use`,
-      payload: { technology: 'some fake technology', crumb: crumbToken },
+      payload: { technologyUse: 'some fake technology', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }

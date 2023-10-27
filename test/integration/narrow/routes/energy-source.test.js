@@ -74,7 +74,7 @@ describe('Robotics Energy Source Page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/project-impact" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"project-impact\" class=\"govuk-back-link\">Back</a>')
   })
   it('page loads with correct back link', async () => {
     varList.projectItems = 'Robotic and automatic technology'
@@ -84,6 +84,6 @@ describe('Robotics Energy Source Page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/data-analytics" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"data-analytics\" class=\"govuk-back-link\">Back</a>')
   })
 })

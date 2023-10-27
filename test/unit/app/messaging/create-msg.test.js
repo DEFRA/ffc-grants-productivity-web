@@ -23,7 +23,7 @@ describe('create-msg', () => {
       energySource: ['value'],
       agriculturalSector: ['value'],
       dataAnalytics: 'testing',
-      technology: 'testing'
+      technologyUse: 'testing'
     }
     expect(getDesirabilityAnswers({})).toEqual({
       projectSubject: 'Robotics and Innovation',

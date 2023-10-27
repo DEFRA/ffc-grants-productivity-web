@@ -2146,19 +2146,23 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'robotics-technology-A1',
+              key: 'technology-use-A1',
               value: 'Yes, we’re using it now'
             },
             {
-              key: 'robotics-technology-A2',
+              key: 'technology-use-A2',
+              value: 'Yes, we’re using it now but want to upgrade'
+            },
+            {
+              key: 'technology-use-A3',
               value: 'Yes, as a pilot, demonstration or trial'
             },
             {
-              key: 'robotics-technology-A3',
+              key: 'technology-use-A4',
               value: 'No, we haven’t used it yet'
             }
           ],
-          yarKey: 'technology'
+          yarKey: 'technologyUse'
         },
         {
           key: 'automatic-eligibility',

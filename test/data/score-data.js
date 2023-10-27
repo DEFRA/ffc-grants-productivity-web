@@ -26,14 +26,14 @@ const msgData = {
         }
       },
       {
-        key: 'robotics-technology',
+        key: 'technology-use',
         answers: [
           {
-            key: 'robotics-technology',
+            key: 'technology-use',
             title: 'Robotics Technology',
             input: [
               {
-                key: 'robotics-technology-A1',
+                key: 'technology-use-A1',
                 value: 'Yes, we’re using it now'
               }
             ]
@@ -132,7 +132,7 @@ const msgData = {
     dataAnalytics: 'robotics-data-analytics',
     energySource: 'robotics-energy-source',
     agriculturalSector: 'robotics-agricultural-sector',
-    roboticProjectImpacts: 'robotics-technology'
+    roboticProjectImpacts: 'technology-use'
   }
 }
 module.exports = msgData

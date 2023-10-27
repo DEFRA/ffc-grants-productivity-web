@@ -1,4 +1,4 @@
-const desirabilityQuestions = ['project-subject', 'robotics-data-analytics', 'robotics-energy-source', 'robotics-agricultural-sector', 'robotics-technology']
+const desirabilityQuestions = ['project-subject', 'robotics-data-analytics', 'robotics-energy-source', 'robotics-agricultural-sector', 'technology-use']
 
 const mockQuestionContent = {
   projectSubject: [
@@ -105,7 +105,7 @@ describe('Create desirability message', () => {
     const dataAnalytics = questions.find(q => q.key === 'robotics-data-analytics')
     const energySource = questions.find(q => q.key === 'robotics-energy-source')
     const agriculturalSector = questions.find(q => q.key === 'robotics-agricultural-sector')
-    const roboticProjectImpacts = questions.find(q => q.key === 'robotics-technology')
+    const roboticProjectImpacts = questions.find(q => q.key === 'technology-use')
 
     const dataAnalyticsAnswers = dataAnalytics.answers.find(a => a.key === 'robotics-data-analytics')
     const energySourceAnswers = energySource.answers.find(a => a.key === 'robotics-energy-source')
