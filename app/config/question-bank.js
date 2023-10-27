@@ -1631,6 +1631,55 @@ const questionBank = {
           },
           yarKey: 'otherRoboticsConditional'
         },
+
+        {
+          key: 'other-item',
+          order: 308,
+          title: 'Do you need to add another robotic or automatic item?',
+          pageTitle: '',
+          url: 'other-item',
+          baseUrl: 'other-item',
+          backUrl: 'technology-description',
+          // preValidationObject: {
+          //   preValidationKeys: ['projectStart'],
+          //   preValidationAnswer: ['project-start-A2'],
+          //   preValidationRule: 'NOT',
+          //   preValidationUrls: ['project-start']
+          // },
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectSubject',
+            dependentAnswerKeysArray: ['project-subject-A2'],
+            urlOptions: {
+              thenUrl: 'existing-solar',
+              elseUrl: 'project-items'
+            }
+          },
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: ' govuk-radios--inline govuk-fieldset__legend--l',
+          minAnswerCount: 1,
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if you need to add another robotic or automatic item'
+            }
+          ],
+          answers: [
+            {
+              key: 'other-item-A1',
+              value: 'Yes',
+              redirectUrl: 'technology-items'
+            },
+            {
+              key: 'other-item-A2',
+              value: 'No',
+            }
+          ],
+          yarKey: 'otherItem'
+        },
+
         {
           key: 'project-cost',
           order: 310,
@@ -3344,7 +3393,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost']
+const YAR_KEYS = ['projectPostcode', 'remainingCost'] // project-items-list
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,
