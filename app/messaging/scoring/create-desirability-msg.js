@@ -1,7 +1,7 @@
 const grantSchemeConfig = require('./config/grant-scheme')
 const { desirabilityQuestions: questionContent } = require('./content-mapping')
 const desirabilityQuestions = ['projectSubject', 'projectImpacts']
-const desirabilityRoboticsQuestions = ['projectSubject', 'dataAnalytics', 'energySource', 'agriculturalSector', 'roboticProjectImpacts']
+const desirabilityRoboticsQuestions = ['projectSubject', 'dataAnalytics', 'energySource', 'agriculturalSector']
 const PROJECT_SUBJECT_SLURRY = 'Slurry Acidification'
 
 // update to replace slurry with solar
