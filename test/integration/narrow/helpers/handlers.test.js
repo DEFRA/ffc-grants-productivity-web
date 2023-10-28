@@ -1,6 +1,7 @@
+/* eslint-disable */
 // const data = require('../../../../app/helpers/desirability-score.json')
 // const scoreData = require('../../../data/score-data')
-describe.skip('Get & Post Handlers', () => {
+describe('Get & Post Handlers', () => {
   // const newSender = require('../../../../app/messaging/application')
   // const createMsg = require('../../../../app/messaging/create-msg')
   // const getUserScoreSpy = jest.spyOn(newSender, 'getUserScore').mockImplementation(() => {
@@ -38,23 +39,23 @@ describe.skip('Get & Post Handlers', () => {
       else return null
     }
   }))
-  // let question
-  // let mockH
-  // let mockRequest
-  // const {
-  //   getHandler,
-  //   createModel
-  // } = require('../../../../app/helpers/handlers')
+  let question
+  let mockH
+  let mockRequest
+  const {
+    getHandler,
+    createModel
+  } = require('../../../../app/helpers/handlers')
   // plannign permission summary not in code yet
-  // test.skip('will redirect to start page if planning permission evidence is missing', async () => {
-  //   question = {
-  //     url: 'planning-permission-summary',
-  //     title: 'mock-title'
-  //   }
-  //   mockH = { redirect: jest.fn() }
-  //   await getHandler(question)({}, mockH)
-  //   expect(mockH.redirect).toHaveBeenCalledWith('/productivity/start')
-  // })
+  test.skip('will redirect to start page if planning permission evidence is missing', async () => {
+    question = {
+      url: 'planning-permission-summary',
+      title: 'mock-title'
+    }
+    mockH = { redirect: jest.fn() }
+    await getHandler(question)({}, mockH)
+    expect(mockH.redirect).toHaveBeenCalledWith('/productivity/start')
+  })
   // test('is eligible if calculated grant = min grant - whether grant is capped or not', async () => { // TODO: I don't understand this test is trying to check for
   //   question = {
   //     url: 'mock-url',
@@ -144,15 +145,15 @@ describe.skip('Get & Post Handlers', () => {
   //   })
   // })
   // create model doesn't exist in handler.js, tests commented out
-  // describe('Create Model', () => {
-  //   test('it creates a model!', () => {
-  //     // const res = createModel(data, 'test-back-link', 'score')
-  //     const res = createModel({data}, 'test-back-link', 'score')
-  //     expect(res).toEqual({
-  //       // ...data,
-  //       formActionPage: 'score',
-  //       backLink: 'test-back-link'
-  //     })
-  //   })
-  // })
+  describe.skip('Create Model', () => {
+    test('it creates a model!', () => {
+      // const res = createModel(data, 'test-back-link', 'score')
+      const res = createModel({ data }, 'test-back-link', 'score')
+      expect(res).toEqual({
+        // ...data,
+        formActionPage: 'score',
+        backLink: 'test-back-link'
+      })
+    })
+  })
 })
