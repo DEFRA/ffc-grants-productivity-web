@@ -1,5 +1,7 @@
 describe('Data formats', () => {
-  const { formatUKCurrency } = require('../../../../app/helpers/data-formats')
+  const {
+    formatUKCurrency
+  } = require('../../../../app/helpers/functions/data-formats')
 
   test('check formatUKCurrency() - string', () => {
     expect(formatUKCurrency('string')).toEqual('NaN')

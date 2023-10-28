@@ -1,3 +1,4 @@
+require('dotenv').config()
 beforeEach(async () => {
   // ...
   // Set reference to server in order to close the server during teardown.
@@ -8,6 +9,11 @@ beforeEach(async () => {
     updatePolicy: (request, h, analytics) => null,
     validSession: (request) => global.__VALIDSESSION__ ?? true,
     sessionIgnorePaths: []
+  }
+
+  // if global environment variable CLEANLOGS is set to true, then silence console.log
+  if (process.env.CLEANLOGS === 'true') {
+    console.log = jest.fn().mockImplementation(() => {})
   }
 
   jest.mock('../app/cookies/index', () => mockSession)

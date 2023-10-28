@@ -3,28 +3,28 @@ const { getYarValue } = require('../../../../app/helpers/functions/session')
 
 describe('Utils', () => {
   test('notUniqueSelection', () => {
-    const { notUniqueSelection } = require('../../../../app/helpers/utils')
+    const { notUniqueSelection } = require('../../../../app/helpers/functions/utils')
 
     const option = 'option'
     let answers = 'answers'
-    expect(notUniqueSelection(answers, option)).toBeFalsy
+    expect(notUniqueSelection(answers, option)).toBeFalsy()
 
     answers = 'stringIncludesoption'
-    expect(notUniqueSelection(answers, option)).toBeFalsy
+    expect(notUniqueSelection(answers, option)).toBeFalsy()
 
     answers = ['option']
-    expect(notUniqueSelection(answers, option)).toBeFalsy
+    expect(notUniqueSelection(answers, option)).toBeFalsy()
 
     answers = ['notOption', 'option']
     expect(notUniqueSelection(answers, option)).toBe(true)
   })
 
   test('uniqueSelection', () => {
-    const { uniqueSelection } = require('../../../../app/helpers/utils')
+    const { uniqueSelection } = require('../../../../app/helpers/functions/utils')
 
     const option = 'option'
     let answers = 'answers'
-    expect(uniqueSelection(answers, option)).toBeFalsy
+    expect(uniqueSelection(answers, option)).toBeFalsy()
 
     answers = 'stringIncludesoption'
     expect(uniqueSelection(answers, option)).toBe(true)
@@ -33,20 +33,20 @@ describe('Utils', () => {
     expect(uniqueSelection(answers, option)).toBe(false)
 
     answers = ['option']
-    expect(uniqueSelection(answers, option)).toBeFalsy
+    expect(uniqueSelection(answers, option)).toBeFalsy()
   })
 
-  xtest('getQuestionByKey', () => {
+  test.skip('getQuestionByKey', () => {
     const { ALL_QUESTIONS } = require('../../../../app/config/question-bank')
-    const { getQuestionByKey } = require('../../../../app/helpers/utils')
+    const { getQuestionByKey } = require('../../../../app/helpers/functions/utils')
 
     const containsKey = (searchKey) => (ALL_QUESTIONS.some(({ key }) => searchKey === key))
 
     expect(containsKey('fake-key')).toBe(false)
-    expect(getQuestionByKey('fake-key')).toBeUndefined
+    expect(getQuestionByKey('fake-key')).toBeUndefined()
 
     expect(containsKey('applicant-type')).toBe(true)
-    expect(getQuestionByKey('applicant-type')).toBeDefined
+    expect(getQuestionByKey('applicant-type')).toBeDefined()
     expect(getQuestionByKey('applicant-type')).toEqual(
       expect.objectContaining({
         key: 'applicant-type',
@@ -55,13 +55,13 @@ describe('Utils', () => {
     )
   })
 
-  xtest('getQuestionAnswer', () => {
-    const { getQuestionAnswer } = require('../../../../app/helpers/utils')
+  test.skip('getQuestionAnswer', () => {
+    const { getQuestionAnswer } = require('../../../../app/helpers/functions/utils')
     expect(getQuestionAnswer('applicant-type', 'applicant-type-A1')).toBe('Pig')
   })
 
-  xtest('allAnswersSelected', () => {
-    const { allAnswersSelected } = require('../../../../app/helpers/utils')
+  test.skip('allAnswersSelected', () => {
+    const { allAnswersSelected } = require('../../../../app/helpers/functions/utils')
 
     const mockAnswerList = ['applicant-type-A1', 'applicant-type-A2', 'applicant-type-A3']
 

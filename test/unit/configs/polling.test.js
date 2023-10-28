@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 describe('polling.js', () => {
   const value = require('../../../app/config/polling')
 
@@ -14,7 +12,7 @@ describe('polling.js', () => {
     process.env = OLD_ENV
   })
 
-  xtest('check polling config', () => {
+  test.skip('check polling config', () => {
     const {
       POLLING_INTERVAL,
       POLLING_RETRIES,

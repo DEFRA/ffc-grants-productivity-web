@@ -8,15 +8,17 @@ describe('Get & Post Handlers', () => {
   })
   const { getYarValue } = require('../../../../app/helpers/functions/session')
 
-  jest.mock('../../../../app/helpers/conditionalHTML')
-  const { getHtml } = require('../../../../app/helpers/conditionalHTML')
+  jest.mock('../../../../app/helpers/functions/conditionalHTML')
+  const {
+    getHtml
+  } = require('../../../../app/helpers/functions/conditionalHTML')
 
-  jest.mock('../../../../app/helpers/models')
-  const { getModel } = require('../../../../app/helpers/models')
+  jest.mock('../../../../app/helpers/functions/models')
+  const { getModel } = require('../../../../app/helpers/functions/models')
 
   const {
     customiseErrorText
-  } = require('../../../../app/helpers/errorSummaryHandlers')
+  } = require('../../../../app/helpers/functions/errorSummaryHandlers')
 
   let mockH
 
