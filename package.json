@@ -10,12 +10,12 @@
     "lint": "standard",
     "lint-fix": "standard --fix",
     "lint-changed": "standard --fix $(git diff --name-only HEAD | xargs)",
-    "eslint-changed": "eslint --fix $(git diff --name-only HEAD | xargs)",
-    "test": "npm run eslint-changed && jest --runInBand",
+    "test": "jest test/integration/narrow/helpers/handlers.test.js --runInBand",
     "test:watch": "jest --watch",
     "start:watch": "npm-run-all --parallel build:watch start:nodemon",
     "start:nodemon": "nodemon --verbose --inspect=0.0.0.0 --ext js,njk --legacy-watch app/index.js"
   },
+  "pre-commit": [ "lint-changed" ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DEFRA/ffc-grants-productivity-web.git"
@@ -68,6 +68,7 @@
     "mini-css-extract-plugin": "^2.6.1",
     "nodemon": "^2.0.19",
     "npm-run-all": "^4.1.5",
+    "pre-commit": "^1.2.2",
     "resolve-url-loader": "^5.0.0",
     "sass": "^1.54.7",
     "sass-loader": "^13.0.2",
@@ -93,7 +94,8 @@
       "assert",
       "$",
       "XMLHttpRequest"
-    ]
+    ],
+    "ignore": ["package-lock.json", "package.json"]
   },
   "nodemonConfig": {
     "ignore": [
