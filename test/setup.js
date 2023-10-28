@@ -3,10 +3,11 @@ const jsdom = require('jsdom')
 const { JSDOM } = jsdom
 const {
   createPage,
+  extractCleanText,
   getQuestionH1,
   getQuestionCheckboxes,
   getQuestionErrors,
-  getQuestionRadios,
+  getTargetError,
   getBackLink
 } = require('./test-helpers')
 beforeEach(async () => {
@@ -52,9 +53,10 @@ beforeEach(async () => {
   global.__URLPREFIX__ = require('../app/config/server').urlPrefix
   global.JSDOM = JSDOM
   global.createPage = createPage
+  global.extractCleanText = extractCleanText
   global.getQuestionH1 = getQuestionH1
   global.getQuestionCheckboxes = getQuestionCheckboxes
   global.getQuestionErrors = getQuestionErrors
-  global.getQuestionRadios = getQuestionRadios
+  global.getTargetError = getTargetError
   global.getBackLink = getBackLink
 })

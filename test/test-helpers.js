@@ -11,15 +11,23 @@ const getQuestionCheckboxes = (htmlPage) => {
 }
 
 const getQuestionErrors = (htmlPage) => {
-  return htmlPage.querySelectorAll('ul.govuk-error-summary__list')
+  return htmlPage
+    .querySelector("ul.govuk-error-summary__list")
+    .querySelectorAll("li")
+}
+
+const getTargetError = (errors, targetText) => {
+  return Object.values(errors).filter((error) => {
+    return extractCleanText(error) === targetText;
+  });
 }
 
 const getBackLink = (htmlPage) => {
   return htmlPage.querySelector('.govuk-back-link')
 }
 
-const getQuestionRadios = (htmlPage) => {
-  return htmlPage.querySelectorAll('input.govuk-radios__input')
+const extractCleanText = (element) => {
+  return element.textContent.trim()
 }
 
 module.exports = {
@@ -27,6 +35,7 @@ module.exports = {
   getQuestionH1,
   getQuestionCheckboxes,
   getQuestionErrors,
+  getTargetError,
   getBackLink,
-  getQuestionRadios
+  extractCleanText
 }

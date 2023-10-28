@@ -94,13 +94,14 @@
       "assert",
       "$",
       "XMLHttpRequest",
+      "JSDOM",
       "createPage",
       "getQuestionH1",
       "getQuestionCheckboxes",
-      "getQuestionRadios",
       "getQuestionErrors",
+      "getTargetError",
       "getBackLink",
-      "JSDOM"
+      "extractCleanText"
     ],
     "ignore": ["package-lock.json", "package.json"]
   },

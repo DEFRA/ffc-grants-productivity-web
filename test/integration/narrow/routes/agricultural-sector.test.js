@@ -1,3 +1,4 @@
+const { extractCleanText, getQuestionCheckboxes } = require('../../../test-helpers')
 const { crumbToken } = require('./test-helper')
 
 describe('robotics agricultural sector page', () => {
@@ -19,11 +20,15 @@ describe('robotics agricultural sector page', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Which agricultural sector is your project in?')
-    expect(response.payload).toContain('Horticulture')
-    expect(response.payload).toContain('Arable')
-    expect(response.payload).toContain('Dairy livestock')
-    expect(response.payload).toContain('Non-dairy livestock')
+    const htmlPage = createPage(response.payload)
+    const questionH1 = getQuestionH1(htmlPage)
+    const questionAnswers = getQuestionCheckboxes(htmlPage);
+    expect(questionAnswers.length).toBe(4)
+    expect(extractCleanText(questionH1)).toBe('Which agricultural sector is your project in?')
+    expect(questionAnswers[0].value).toBe("Horticulture");
+    expect(questionAnswers[1].value).toBe('Arable')
+    expect(questionAnswers[2].value).toBe('Dairy livestock')
+    expect(questionAnswers[3].value).toBe('Non-dairy livestock')
   })
 
   it('no option is selected -> return error message', async () => {
@@ -36,7 +41,10 @@ describe('robotics agricultural sector page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select up to 2 sectors your project is in')
+    const htmlPage = createPage(postResponse.payload)
+    const questionErrors = getQuestionErrors(htmlPage)
+    const targetError = getTargetError(questionErrors, 'Select up to 2 sectors your project is in')
+    expect(targetError.length).toBe(1)
   })
 
   it('3 or more options are selected -> return error message', async () => {
@@ -86,7 +94,10 @@ describe('robotics agricultural sector page', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href="energy-source"  class="govuk-back-link" id="linkBack">Back</a>')
+    const htmlPage = createPage(response.payload)
+    const backLink = getBackLink(htmlPage)
+    expect(extractCleanText(backLink)).toBe('Back')
+    expect(backLink.href).toBe('energy-source')
   })
   it('page loads with correct back link  when energy source is Fossil fuels', async () => {
     varList.energySource = 'Fossil fuels'
@@ -97,6 +108,9 @@ describe('robotics agricultural sector page', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href="fossil-fuel-conditional"  class="govuk-back-link" id="linkBack">Back</a>')
+    const htmlPage = createPage(response.payload)
+    const backLink = getBackLink(htmlPage)
+    expect(extractCleanText(backLink)).toBe('Back')
+    expect(backLink.href).toBe('fossil-fuel-conditional')
   })
 })
