@@ -1,12 +1,9 @@
-const { extractCleanText, getTargetByText } = require('../../../test-helpers')
 const { crumbToken } = require('./test-helper')
-
 describe('Agent details page', () => {
   const varList = {
     applicant: 'Farmer',
     applying: 'Agent'
   }
-
   jest.mock('../../../../app/helpers/functions/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
@@ -14,17 +11,14 @@ describe('Agent details page', () => {
       else return 'Error'
     }
   }))
-
   it('should load page successfully', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/agents-details`
     }
-
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
   })
-
   it('should return various error messages if no data is entered', async () => {
     const postOptions = {
       method: 'POST',
@@ -32,7 +26,6 @@ describe('Agent details page', () => {
       payload: { crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
@@ -56,7 +49,6 @@ describe('Agent details page', () => {
       'Enter your postcode, like AA1 1AA'
     )
   })
-
   it('should validate first name - no digits', async () => {
     const postOptions = {
       method: 'POST',
@@ -67,7 +59,6 @@ describe('Agent details page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
@@ -78,7 +69,6 @@ describe('Agent details page', () => {
     )
     expect(targetError.length).toBe(1)
   })
-
   it('should validate last name - no digits', async () => {
     const postOptions = {
       method: 'POST',
@@ -89,7 +79,6 @@ describe('Agent details page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
@@ -100,7 +89,6 @@ describe('Agent details page', () => {
     )
     expect(targetError.length).toBe(1)
   })
-
   it('should validate email', async () => {
     const postOptions = {
       method: 'POST',
@@ -111,7 +99,6 @@ describe('Agent details page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
@@ -122,7 +109,6 @@ describe('Agent details page', () => {
     )
     expect(targetError.length).toBe(1)
   })
-
   it('should validate landline - if typed in', async () => {
     const postOptions = {
       method: 'POST',
@@ -133,7 +119,6 @@ describe('Agent details page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
@@ -143,7 +128,6 @@ describe('Agent details page', () => {
     )
     expect(targetError.length).toBe(1)
   })
-
   it('should validate mobile correct format - if typed in', async () => {
     const postOptions = {
       method: 'POST',
@@ -154,7 +138,6 @@ describe('Agent details page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
@@ -164,7 +147,6 @@ describe('Agent details page', () => {
     )
     expect(targetError.length).toBe(1)
   })
-
   it('should show error message when address line 1 is invalid', async () => {
     const postOptions = {
       method: 'POST',
@@ -175,7 +157,6 @@ describe('Agent details page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
@@ -185,7 +166,6 @@ describe('Agent details page', () => {
     )
     expect(targetError.length).toBe(1)
   })
-
   it('should NOT show error message when address line 1 is valid', async () => {
     const postOptions = {
       method: 'POST',
@@ -196,7 +176,6 @@ describe('Agent details page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
@@ -206,7 +185,6 @@ describe('Agent details page', () => {
     )
     expect(targetError.length).toBe(0)
   })
-
   it('should validate postcode - raise error when postcode is invalid', async () => {
     const postOptions = {
       method: 'POST',
@@ -217,7 +195,6 @@ describe('Agent details page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
@@ -227,7 +204,6 @@ describe('Agent details page', () => {
     )
     expect(targetError.length).toBe(1)
   })
-
   it('should store user response and redirects to farmer details page , either of mobile or landline can be empty', async () => {
     const postOptions = {
       method: 'POST',
@@ -247,7 +223,6 @@ describe('Agent details page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('/productivity/farmers-details')
@@ -270,12 +245,10 @@ describe('Agent details page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('/productivity/farmers-details')
   })
-
   it('should store user response and redirects to contractor details page, if the applicant is contractor', async () => {
     varList.applicant = 'Contractor'
     const postOptions = {
@@ -296,14 +269,12 @@ describe('Agent details page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe(
       '/productivity/contractors-details'
     )
   })
-
   it('should be validate - if both mobile and landline are missing', async () => {
     const postOptions = {
       method: 'POST',
@@ -322,7 +293,6 @@ describe('Agent details page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)

@@ -1,10 +1,8 @@
 const { crumbToken } = require('./test-helper')
-
 describe('agricultural sector solar page', () => {
   const varList = {
     remainingCosts: 120000
   }
-
   jest.mock('../../../../app/helpers/functions/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
@@ -17,7 +15,6 @@ describe('agricultural sector solar page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/agricultural-sector-solar`
     }
-
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const htmlPage = createPage(response.payload)
@@ -43,7 +40,6 @@ describe('agricultural sector solar page', () => {
       payload: { crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
@@ -53,7 +49,6 @@ describe('agricultural sector solar page', () => {
       'Select up to 2 sectors your project is in'
     )
   })
-
   it('3 or more options are selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
@@ -64,7 +59,6 @@ describe('agricultural sector solar page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
@@ -84,7 +78,6 @@ describe('agricultural sector solar page', () => {
       },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('score')
@@ -96,7 +89,6 @@ describe('agricultural sector solar page', () => {
       payload: { agriculturalSector: 'Horticulture', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('score')
@@ -106,7 +98,6 @@ describe('agricultural sector solar page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/agricultural-sector-solar`
     }
-
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const htmlPage = createPage(response.payload)

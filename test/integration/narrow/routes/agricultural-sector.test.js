@@ -1,9 +1,6 @@
-const { extractCleanText, getQuestionCheckboxes } = require('../../../test-helpers')
 const { crumbToken } = require('./test-helper')
-
 describe('robotics agricultural sector page', () => {
   const varList = { }
-
   jest.mock('../../../../app/helpers/functions/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
@@ -11,13 +8,11 @@ describe('robotics agricultural sector page', () => {
       else return undefined
     }
   }))
-
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/agricultural-sector`
     }
-
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const htmlPage = createPage(response.payload)
@@ -30,7 +25,6 @@ describe('robotics agricultural sector page', () => {
     expect(questionAnswers[2].value).toBe('Dairy livestock')
     expect(questionAnswers[3].value).toBe('Non-dairy livestock')
   })
-
   it('no option is selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
@@ -38,7 +32,6 @@ describe('robotics agricultural sector page', () => {
       payload: { crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
@@ -46,7 +39,6 @@ describe('robotics agricultural sector page', () => {
     const targetError = getTargetByText(questionErrors, 'Select up to 2 sectors your project is in')
     expect(targetError.length).toBe(1)
   })
-
   it('3 or more options are selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
@@ -54,12 +46,10 @@ describe('robotics agricultural sector page', () => {
       payload: { agriculturalSector: ['Horticulture', 'Arable', 'Dairy livestock'], crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select up to 2 sectors your project is in')
   })
-
   it('2 options are selected -> store user response and redirect to technology-use page', async () => {
     const postOptions = {
       method: 'POST',
@@ -67,12 +57,10 @@ describe('robotics agricultural sector page', () => {
       payload: { agriculturalSector: ['Horticulture', 'Arable'], crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('technology-use')
   })
-
   it('1 option is selected -> store user response and redirect to technology-use page', async () => {
     const postOptions = {
       method: 'POST',
@@ -80,7 +68,6 @@ describe('robotics agricultural sector page', () => {
       payload: { agriculturalSector: 'Horticulture', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('technology-use')
@@ -91,7 +78,6 @@ describe('robotics agricultural sector page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/agricultural-sector`
     }
-
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const htmlPage = createPage(response.payload)
@@ -105,7 +91,6 @@ describe('robotics agricultural sector page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/agricultural-sector`
     }
-
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const htmlPage = createPage(response.payload)

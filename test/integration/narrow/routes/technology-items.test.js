@@ -1,5 +1,4 @@
 const { crumbToken } = require('./test-helper')
-
 describe('technology-items', () => {
   const varList = {
     projectSubject: 'Robotics and automatic technology',
@@ -10,7 +9,6 @@ describe('technology-items', () => {
     tenancy: 'Yes',
     projectItems: 'Robotic equipment item'
   }
-
   jest.mock('../../../../app/helpers/functions/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
@@ -18,19 +16,16 @@ describe('technology-items', () => {
       else return 'Error'
     }
   }))
-
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/technology-items`
     }
-
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const htmlPage = createPage(response.payload)
     const heading = getQuestionH1(htmlPage)
     const questionAnswers = getQuestionRadios(htmlPage)
-
     expect(extractCleanText(heading)).toBe('What technology does your project need?')
     expect(questionAnswers.length).toBe(9)
     expect(questionAnswers[0].value).toBe('Harvesting technology')
@@ -50,7 +45,6 @@ describe('technology-items', () => {
       payload: { technologyItems: '', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
@@ -58,7 +52,6 @@ describe('technology-items', () => {
     const targetError = getTargetByText(questionErrors, 'Select what technology your project needs')
     expect(targetError.length).toBe(1)
   })
-
   it('store user response and redirect to robotic-automatic page', async () => {
     const postOptions = {
       method: 'POST',
@@ -66,12 +59,10 @@ describe('technology-items', () => {
       payload: { technologyItems: 'Harvesting technology', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
-
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('robotic-automatic')
   })
-
   it('page loads with correct back link - project-items', async () => {
     const options = {
       method: 'GET',
