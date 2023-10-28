@@ -1,5 +1,7 @@
 require('dotenv').config()
+const jsdom = require("jsdom");
 beforeEach(async () => {
+  const { JSDOM } = jsdom;
   // ...
   // Set reference to server in order to close the server during teardown.
   const createServer = require('../app/server')
@@ -40,4 +42,5 @@ beforeEach(async () => {
   global.__SERVER__ = server
   global.__VALIDSESSION__ = true
   global.__URLPREFIX__ = require('../app/config/server').urlPrefix
+  global.JSDOM = JSDOM
 })
