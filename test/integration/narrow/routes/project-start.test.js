@@ -9,7 +9,6 @@ describe('project-start', () => {
   jest.mock('../../../../app/helpers/functions/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
-      console.log(key, 'key')
       if (varList[key]) return varList[key]
       else return 'Error'
     }
@@ -26,7 +25,10 @@ describe('project-start', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select the option that applies to your project')
+    const page = createPage(postResponse.payload)
+    const errors = getQuestionErrors(page)
+    const error = getTargetByText(errors, 'Select the option that applies to your project')
+    expect(error.length).toBe(1)
   })
 
   it('store user response and redirect to tenancy page if applicant is Farmer', async () => {
@@ -71,6 +73,13 @@ describe('project-start', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
+    expect(postResponse.statusCode).toBe(200)
+    const page = createPage(postResponse.payload)
+    const headings = page.querySelectorAll('h1')
+    const heading = getTargetByText(
+      headings,
+      'You cannot apply for a grant from this scheme'
+    )
+    expect(heading.length).toBe(1)
   })
 })

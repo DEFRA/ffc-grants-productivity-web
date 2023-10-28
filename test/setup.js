@@ -6,9 +6,12 @@ const {
   extractCleanText,
   getQuestionH1,
   getQuestionCheckboxes,
+  getQuestionRadios,
+  getQuestionLabels,
   getQuestionErrors,
-  getTargetError,
-  getBackLink
+  getTargetByText,
+  getBackLink,
+  findParagraphs
 } = require('./test-helpers')
 beforeEach(async () => {
   // ...
@@ -56,7 +59,10 @@ beforeEach(async () => {
   global.extractCleanText = extractCleanText
   global.getQuestionH1 = getQuestionH1
   global.getQuestionCheckboxes = getQuestionCheckboxes
+  global.getQuestionRadios = getQuestionRadios
+  global.getQuestionLabels = getQuestionLabels
   global.getQuestionErrors = getQuestionErrors
-  global.getTargetError = getTargetError
+  global.getTargetByText = getTargetByText
   global.getBackLink = getBackLink
+  global.findParagraphs = findParagraphs
 })

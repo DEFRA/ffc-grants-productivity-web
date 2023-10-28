@@ -98,10 +98,13 @@
       "createPage",
       "getQuestionH1",
       "getQuestionCheckboxes",
+      "getQuestionRadios",
+      "getQuestionLabels",
       "getQuestionErrors",
-      "getTargetError",
+      "getTargetByText",
       "getBackLink",
-      "extractCleanText"
+      "extractCleanText",
+      "findParagraphs"
     ],
     "ignore": ["package-lock.json", "package.json"]
   },

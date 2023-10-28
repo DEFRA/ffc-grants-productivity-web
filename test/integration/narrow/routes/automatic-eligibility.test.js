@@ -1,3 +1,4 @@
+const { createPage, extractCleanText, getTargetByText } = require('../../../test-helpers')
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /automatic-eligibility', () => {
@@ -16,6 +17,7 @@ describe('Page: /automatic-eligibility', () => {
   }))
 
   it('page loads successfully with all the options', async () => {
+    expect.assertions(8)
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/automatic-eligibility`
@@ -23,12 +25,17 @@ describe('Page: /automatic-eligibility', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Which eligibility criteria does your automatic harvesting technology meet?')
-    expect(response.payload).toContain('Has sensing system that can understand its environment')
-    expect(response.payload).toContain('Makes decisions and plans')
-    expect(response.payload).toContain('Can control its actuators (the devices that move robotic joints)')
-    expect(response.payload).toContain('Works in a continuous loop')
-    expect(response.payload).toContain('None of the above')
+    const page = createPage(response.payload)
+    const h1s = page.querySelectorAll('h1.govuk-heading-l')
+    const mainH1 = getTargetByText(h1s, 'Which eligibility criteria does your automatic harvesting technology meet?')
+    const checkboxes = getQuestionCheckboxes(page)
+    expect(mainH1).not.toBeNull()
+    expect(checkboxes.length).toBe(5)
+    expect(checkboxes[0].value).toBe('Has sensing system that can understand its environment')
+    expect(checkboxes[1].value).toBe('Makes decisions and plans')
+    expect(checkboxes[2].value).toBe('Can control its actuators (the devices that move robotic joints)')
+    expect(checkboxes[3].value).toBe('Works in a continuous loop')
+    expect(checkboxes[4].value).toBe('None of the above')
   })
 
   it('no option selected -> show error message', async () => {
@@ -41,7 +48,10 @@ describe('Page: /automatic-eligibility', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select what eligibility criteria your automatic technology meets')
+    const page = createPage(postResponse.payload)
+    const errors = getQuestionErrors(page)
+    const error = getTargetByText(errors, 'Select what eligibility criteria your automatic technology meets')
+    expect(error.length).toBe(1)
   })
 
   it('should display ineligible page when user response is \'None of the above\'', async () => {
@@ -54,8 +64,13 @@ describe('Page: /automatic-eligibility', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('Automatic items must meet at least 2 criteria to be eligible for grant funding.')
+    const page = createPage(postResponse.payload)
+    const headings = page.querySelectorAll('h1.govuk-heading-l')
+    const h1 = getTargetByText(headings, 'You cannot apply for a grant from this scheme')
+    expect(h1).not.toBeNull()
+    const paragraphs = findParagraphs(page)
+    const paragraph = getTargetByText(paragraphs, 'Automatic items must meet at least 2 criteria to be eligible for grant funding.')
+    expect(paragraph).not.toBeNull()
   })
 
   it('should display ineligible page when user selects only one option', async () => {
@@ -68,8 +83,13 @@ describe('Page: /automatic-eligibility', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
-    expect(postResponse.payload).toContain('Automatic items must meet at least 2 criteria to be eligible for grant funding.')
+    const page = createPage(postResponse.payload)
+    const headings = page.querySelectorAll('h1.govuk-heading-l')
+    const h1 = getTargetByText(headings, 'You cannot apply for a grant from this scheme')
+    expect(h1).not.toBeNull()
+    const paragraphs = findParagraphs(page)
+    const paragraph = getTargetByText(paragraphs, 'Automatic items must meet at least 2 criteria to be eligible for grant funding.')
+    expect(paragraph).not.toBeNull()
   })
 
   it('user selects two eligible options and \'Automatic\' and \'Other robotic or automatic technology\' from tech items -> store user response and redirect to /other-automatic-technology', async () => {
@@ -112,7 +132,10 @@ describe('Page: /automatic-eligibility', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Which eligibility criteria does your other automatic technology meet?')
+    const page = createPage(response.payload)
+    const h1 = getQuestionH1(page)
+    expect(h1).not.toBeNull()
+    expect(extractCleanText(h1)).toBe('Which eligibility criteria does your other automatic technology meet?')
   })
 
   it('page loads with correct back link', async () => {
@@ -122,6 +145,9 @@ describe('Page: /automatic-eligibility', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href="robotic-automatic"  class="govuk-back-link" id="linkBack">Back</a>')
+    const page = createPage(response.payload)
+    const backLink = getBackLink(page)
+    expect(backLink).not.toBeNull()
+    expect(backLink.href).toBe('robotic-automatic')
   })
 })

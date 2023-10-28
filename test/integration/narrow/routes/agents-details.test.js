@@ -1,4 +1,4 @@
-const { extractCleanText, getTargetError } = require('../../../test-helpers')
+const { extractCleanText, getTargetByText } = require('../../../test-helpers')
 const { crumbToken } = require('./test-helper')
 
 describe('Agent details page', () => {
@@ -10,7 +10,6 @@ describe('Agent details page', () => {
   jest.mock('../../../../app/helpers/functions/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
-      console.log(key, 'key')
       if (varList[key]) return varList[key]
       else return 'Error'
     }
@@ -73,8 +72,10 @@ describe('Agent details page', () => {
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
     const errors = getQuestionErrors(htmlPage)
-    const targetError = getTargetError(errors,
-      'Name must only include letters, hyphens and apostrophes')
+    const targetError = getTargetByText(
+      errors,
+      'Name must only include letters, hyphens and apostrophes'
+    )
     expect(targetError.length).toBe(1)
   })
 
@@ -93,8 +94,10 @@ describe('Agent details page', () => {
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
     const errors = getQuestionErrors(htmlPage)
-    const targetError = getTargetError(errors,
-      'Name must only include letters, hyphens and apostrophes')
+    const targetError = getTargetByText(
+      errors,
+      'Name must only include letters, hyphens and apostrophes'
+    )
     expect(targetError.length).toBe(1)
   })
 
@@ -113,7 +116,8 @@ describe('Agent details page', () => {
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
     const errors = getQuestionErrors(htmlPage)
-    const targetError = getTargetError(errors,
+    const targetError = getTargetByText(
+      errors,
       'Enter an email address in the correct format, like name@example.com'
     )
     expect(targetError.length).toBe(1)
@@ -134,7 +138,7 @@ describe('Agent details page', () => {
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
     const errors = getQuestionErrors(htmlPage)
-    const targetError = getTargetError(errors,
+    const targetError = getTargetByText(errors,
       'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
     )
     expect(targetError.length).toBe(1)
@@ -155,7 +159,7 @@ describe('Agent details page', () => {
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
     const errors = getQuestionErrors(htmlPage)
-    const targetError = getTargetError(errors,
+    const targetError = getTargetByText(errors,
       'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
     )
     expect(targetError.length).toBe(1)
@@ -176,13 +180,10 @@ describe('Agent details page', () => {
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
     const errors = getQuestionErrors(htmlPage)
-    const targetError = getTargetError(errors,
+    const targetError = getTargetByText(errors,
       'Address must only include letters, numbers, hyphens and apostrophes'
     )
     expect(targetError.length).toBe(1)
-    // expect(postResponse.payload).toContain(
-    //   "Address must only include letters, numbers, hyphens and apostrophes"
-    // );
   })
 
   it('should NOT show error message when address line 1 is valid', async () => {
@@ -200,7 +201,7 @@ describe('Agent details page', () => {
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
     const errors = getQuestionErrors(htmlPage)
-    const targetError = getTargetError(errors,
+    const targetError = getTargetByText(errors,
       'Address must only include letters, numbers, hyphens and apostrophes'
     )
     expect(targetError.length).toBe(0)
@@ -221,7 +222,7 @@ describe('Agent details page', () => {
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
     const errors = getQuestionErrors(htmlPage)
-    const targetError = getTargetError(errors,
+    const targetError = getTargetByText(errors,
       'Enter a postcode, like AA1 1AA'
     )
     expect(targetError.length).toBe(1)
@@ -326,7 +327,7 @@ describe('Agent details page', () => {
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
     const errors = getQuestionErrors(htmlPage)
-    const targetError1 = getTargetError(errors,
+    const targetError1 = getTargetByText(errors,
       'Enter a mobile number (if you do not have a mobile, enter your landline number)'
     )
     expect(targetError1.length).toBe(1)

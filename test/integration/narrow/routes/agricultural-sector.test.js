@@ -43,7 +43,7 @@ describe('robotics agricultural sector page', () => {
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
     const questionErrors = getQuestionErrors(htmlPage)
-    const targetError = getTargetError(questionErrors, 'Select up to 2 sectors your project is in')
+    const targetError = getTargetByText(questionErrors, 'Select up to 2 sectors your project is in')
     expect(targetError.length).toBe(1)
   })
 

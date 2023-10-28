@@ -6,7 +6,6 @@ describe('confirm page', () => {
   jest.mock('../../../../app/helpers/functions/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
-      console.log(key, 'key')
       if (varList[key]) return varList[key]
       else return 'Error'
     }

@@ -2200,7 +2200,7 @@ const questionBank = {
           answers: [
             {
               key: 'automatic-eligibility-A1',
-              value: 'Has sensing system that can understand its environment '
+              value: 'Has sensing system that can understand its environment'
             },
             {
               key: 'automatic-eligibility-A2',
