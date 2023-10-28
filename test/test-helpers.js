@@ -32,6 +32,10 @@ const extractCleanText = (element) => {
 const findParagraphs = (htmlPage) => {
   return htmlPage.querySelectorAll('p')
 }
+const findButton = (htmlPage, value) => {
+  return htmlPage.querySelector(`input[value="${value}"]`)
+}
+
 module.exports = {
   createPage,
   getQuestionH1,
@@ -42,5 +46,6 @@ module.exports = {
   getTargetByText,
   getBackLink,
   extractCleanText,
-  findParagraphs
+  findParagraphs,
+  findButton
 }

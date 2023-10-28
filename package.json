@@ -104,7 +104,8 @@
       "getTargetByText",
       "getBackLink",
       "extractCleanText",
-      "findParagraphs"
+      "findParagraphs",
+      "findButton"
     ],
     "ignore": ["package-lock.json", "package.json"]
   },

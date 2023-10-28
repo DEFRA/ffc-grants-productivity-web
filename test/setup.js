@@ -11,7 +11,8 @@ const {
   getQuestionErrors,
   getTargetByText,
   getBackLink,
-  findParagraphs
+  findParagraphs,
+  findButton
 } = require('./test-helpers')
 beforeEach(async () => {
   // ...
@@ -65,4 +66,5 @@ beforeEach(async () => {
   global.getTargetByText = getTargetByText
   global.getBackLink = getBackLink
   global.findParagraphs = findParagraphs
+  global.findButton = findButton
 })
