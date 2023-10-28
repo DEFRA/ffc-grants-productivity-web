@@ -99,7 +99,8 @@
       "getQuestionCheckboxes",
       "getQuestionRadios",
       "getQuestionErrors",
-      "getBackLink"
+      "getBackLink",
+      "JSDOM"
     ],
     "ignore": ["package-lock.json", "package.json"]
   },
