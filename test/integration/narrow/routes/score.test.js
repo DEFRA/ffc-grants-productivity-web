@@ -11,14 +11,14 @@ describe('Score page', () => {
     slurryToBeTreated: 12
   }
 
-  jest.mock('../../../../app/helpers/session', () => ({
+  jest.mock("../../../../app/helpers/functions/session", () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
-      console.log(key, 'key')
-      if (Object.keys(varList).includes(key)) return varList[key]
-      else return 'Error'
-    }
-  }))
+      console.log(key, "key");
+      if (Object.keys(varList).includes(key)) return varList[key];
+      else return "Error";
+    },
+  }));
 
   const getProdScoringSpy = jest.spyOn(newSender, 'getProdScoring').mockImplementation(() => {
     Promise.resolve(scoreData)

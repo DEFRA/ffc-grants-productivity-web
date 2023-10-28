@@ -28,7 +28,7 @@ ALL_QUESTIONS.forEach(question => {
     })
   }
 })
-jest.doMock('../../../../app/helpers/session', () => ({
+jest.doMock('../../../../app/helpers/functions/session', () => ({
   setYarValue: (request, key, value) => null,
   getYarValue: (request, key) => {
     if (varList[key]) return varList[key]

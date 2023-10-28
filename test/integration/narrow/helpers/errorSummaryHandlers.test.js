@@ -1,12 +1,12 @@
 describe('Get & Post Handlers', () => {
-  jest.mock('../../../../app/helpers/session', () => {
-    const original = jest.requireActual('../../../../app/helpers/session')
+  jest.mock('../../../../app/helpers/functions/session', () => {
+    const original = jest.requireActual('../../../../app/helpers/functions/session')
     return {
       ...original,
       getYarValue: jest.fn()
     }
   })
-  const { getYarValue } = require('../../../../app/helpers/session')
+  const { getYarValue } = require('../../../../app/helpers/functions/session')
 
   jest.mock('../../../../app/helpers/conditionalHTML')
   const { getHtml } = require('../../../../app/helpers/conditionalHTML')

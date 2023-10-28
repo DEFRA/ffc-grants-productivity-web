@@ -6,7 +6,7 @@ describe('Agent details page', () => {
     applying: 'Agent'
   }
 
-  jest.mock('../../../../app/helpers/session', () => ({
+  jest.mock('../../../../app/helpers/functions/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
       console.log(key, 'key')

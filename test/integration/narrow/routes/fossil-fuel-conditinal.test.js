@@ -4,7 +4,7 @@ describe('Page: /fossil-fuel-conditional', () => {
     const varList = { energySource: 'Fossil fuels'}
     const eligiblePageText = 'I confirm I understand fossil fuel technology will only be funded where there is no commercially available electric or renewable energy alternative.'
 
-    jest.mock('../../../../app/helpers/session', () => ({
+    jest.mock('../../../../app/helpers/functions/session', () => ({
         setYarValue: (request, key, value) => null,
         getYarValue: (request, key) => {
             if (varList[key]) return varList[key]

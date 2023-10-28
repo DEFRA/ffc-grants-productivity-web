@@ -1,7 +1,7 @@
 const urlPrefix = require("../../../../app/config/server").urlPrefix;
 describe("getUrl()", () => {
-  jest.mock("../../../../app/helpers/session");
-  const { getYarValue } = require("../../../../app/helpers/session");
+  jest.mock("../../../../app/helpers/functions/session");
+  const { getYarValue } = require("../../../../app/helpers/functions/session");
 
   const { getUrl } = require("../../../../app/helpers/urls");
   let urlObject = null;

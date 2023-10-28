@@ -6,7 +6,7 @@ describe('Page: /potential-amount-conditional', () => {
     }
     const eligiblePageText = 'RPA will assess your item and whether they will fund it.'
 
-    jest.mock('../../../../app/helpers/session', () => ({
+    jest.mock('../../../../app/helpers/functions/session', () => ({
         setYarValue: (request, key, value) => null,
         getYarValue: (request, key) => {
             if (varList[key]) return varList[key]

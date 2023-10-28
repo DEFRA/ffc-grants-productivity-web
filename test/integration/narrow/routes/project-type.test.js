@@ -18,7 +18,7 @@ const mockSession = {
     else return undefined
   }
 }
-jest.mock('../../../../app/helpers/session', () => mockSession)
+jest.mock('../../../../app/helpers/functions/session', () => mockSession)
 describe('Project subject page', () => {
   beforeEach(() => {
     varList = { ...varListTemplate }

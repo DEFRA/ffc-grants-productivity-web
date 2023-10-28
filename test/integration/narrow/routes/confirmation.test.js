@@ -15,7 +15,7 @@ const mockSession = {
   }
 }
 
-jest.mock('../../../../app/helpers/session', () => mockSession)
+jest.mock('../../../../app/helpers/functions/session', () => mockSession)
 
 describe('Reference number page', () => {
   beforeEach(() => {
