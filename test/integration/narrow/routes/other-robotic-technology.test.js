@@ -95,7 +95,7 @@ describe('other Robotics Equipment', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/other-robotic-technology`,
-      payload: { otherRoboticTechnology: 'this is fake description', description:'this is fake description', crumb: crumbToken },
+      payload: { otherRoboticTechnology: 'this is fake description', description: 'this is fake description', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
@@ -111,6 +111,6 @@ describe('other Robotics Equipment', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"robotic-automatic\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href="robotic-automatic" class="govuk-back-link">Back</a>')
   })
 })

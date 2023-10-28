@@ -1,9 +1,9 @@
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /remaining-costs-solar', () => {
-  const varList = { 
-    projectCost: '150000', 
-    calculatedGrant: '37500', 
+  const varList = {
+    projectCost: '150000',
+    calculatedGrant: '37500',
     remainingCost: 112500
   }
 
@@ -76,7 +76,6 @@ describe('Page: /remaining-costs-solar', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"potential-amount-solar\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href="potential-amount-solar" class="govuk-back-link">Back</a>')
   })
-
 })

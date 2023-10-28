@@ -1,7 +1,7 @@
 const { crumbToken } = require('./test-helper')
 
 describe('agricultural sector solar page', () => {
-  let varList = {
+  const varList = {
     remainingCosts: 120000
   }
 
@@ -90,6 +90,6 @@ describe('agricultural sector solar page', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"remaining-costs-solar\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href="remaining-costs-solar"  class="govuk-back-link" id="linkBack">Back</a>')
   })
 })

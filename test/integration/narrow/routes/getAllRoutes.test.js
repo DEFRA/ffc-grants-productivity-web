@@ -17,7 +17,7 @@ const varListTemplate = {
   existingSolar: 'Yes',
   farmersDetails: 'voila',
   consentMain: 'lalal',
-  technologyItems: 'Solar panels',
+  technologyItems: 'Solar panels'
 }
 
 let varList
@@ -37,7 +37,6 @@ jest.doMock('../../../../app/helpers/functions/session', () => ({
 }))
 
 describe('All default GET routes', () => {
-
   beforeEach(() => {
     varList = { ...varListTemplate }
   })
@@ -45,15 +44,12 @@ describe('All default GET routes', () => {
     jest.clearAllMocks()
   })
 
-
   ALL_QUESTIONS.forEach(question => {
     it(`should load ${question.key} page successfully`, async () => {
-
       if (question.key === 'existing-solar') {
         varList.projectSubject = 'Solar technologies'
       } else if (question.key === 'robotics-project-items') {
         varList.projectSubject = 'Robotics and automatic technology'
-    
       }
 
       const options = {

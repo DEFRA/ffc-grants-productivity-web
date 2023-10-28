@@ -114,27 +114,27 @@ describe('Project cost solar page', () => {
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('potential-amount-solar')
   })
-it('page loads with correct back link', async () => {
+  it('page loads with correct back link', async () => {
     const options = {
-        method: 'GET',
-        url: `${global.__URLPREFIX__}/project-cost-solar`
-    }
-
-const response = await global.__SERVER__.inject(options)
-expect(response.statusCode).toBe(200)
-expect(response.payload).toContain('<a href=\"solar-technologies\" class=\"govuk-back-link\">Back</a>')
-})
-
-it('page loads with correct back link when solar technologies is /Solar panels/ ', async () => {
-  varList.solarTechnologies = 'Solar panels'
-  varList.solarInstallation = 'On an existing hardstanding area'
-  const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-cost-solar`
-  }
+    }
 
-const response = await global.__SERVER__.inject(options)
-expect(response.statusCode).toBe(200)
-expect(response.payload).toContain('<a href=\"solar-output\" class=\"govuk-back-link\">Back</a>')
-})
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href="solar-technologies" class="govuk-back-link">Back</a>')
+  })
+
+  it('page loads with correct back link when solar technologies is /Solar panels/ ', async () => {
+    varList.solarTechnologies = 'Solar panels'
+    varList.solarInstallation = 'On an existing hardstanding area'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-cost-solar`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href="solar-output" class="govuk-back-link">Back</a>')
+  })
 })

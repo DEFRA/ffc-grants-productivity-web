@@ -2,7 +2,7 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /automatic-eligibility', () => {
   const varList = {
-    automaticEligibility: ['Has sensing system that can understand its environment','Makes decisions and plans','Can control its actuators (the devices that move robotic joints)','Works in a continuous loop','None of the above'],
+    automaticEligibility: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop', 'None of the above'],
     technologyItems: 'Harvesting technology',
     roboticAutomatic: 'Automatic'
   }
@@ -122,6 +122,6 @@ describe('Page: /automatic-eligibility', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"robotic-automatic\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href="robotic-automatic"  class="govuk-back-link" id="linkBack">Back</a>')
   })
 })

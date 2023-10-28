@@ -43,7 +43,7 @@ describe('Page: /project-responsibility', () => {
   it('user selects \'Yes\' -> store user response and redirect to /existing-solar', async () => {
     varList.projectSubject = 'Solar technologies'
     varList.tenancy = 'Yes'
-    
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-responsibility`,
@@ -71,32 +71,32 @@ describe('Page: /project-responsibility', () => {
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /project-items', async () => {
-  varList.projectSubject = 'Robotics and automatic technology'
-  const postOptions = {
-    method: 'POST',
-    url: `${global.__URLPREFIX__}/project-responsibility`,
-    headers: { cookie: 'crumb=' + crumbToken },
-    payload: { projectResponsibility: 'Yes, I plan to take full responsibility for my project', crumb: crumbToken }
-  }
+    varList.projectSubject = 'Robotics and automatic technology'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/project-responsibility`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { projectResponsibility: 'Yes, I plan to take full responsibility for my project', crumb: crumbToken }
+    }
 
-  const postResponse = await global.__SERVER__.inject(postOptions)
-  expect(postResponse.statusCode).toBe(302)
-  expect(postResponse.headers.location).toBe('project-items')
-})
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('project-items')
+  })
 
-it('user selects \'No\' -> store user response and redirect to /project-items', async () => {
-  varList.projectSubject = 'Robotics and automatic technology'
-  const postOptions = {
-    method: 'POST',
-    url: `${global.__URLPREFIX__}/project-responsibility`,
-    headers: { cookie: 'crumb=' + crumbToken },
-    payload: { projectResponsibility: 'No, I plan to ask my landlord to underwrite my agreement', crumb: crumbToken }
-  }
+  it('user selects \'No\' -> store user response and redirect to /project-items', async () => {
+    varList.projectSubject = 'Robotics and automatic technology'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/project-responsibility`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { projectResponsibility: 'No, I plan to ask my landlord to underwrite my agreement', crumb: crumbToken }
+    }
 
-  const postResponse = await global.__SERVER__.inject(postOptions)
-  expect(postResponse.statusCode).toBe(302)
-  expect(postResponse.headers.location).toBe('project-items')
-})
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('project-items')
+  })
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
@@ -104,6 +104,6 @@ it('user selects \'No\' -> store user response and redirect to /project-items', 
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"tenancy\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href="tenancy" class="govuk-back-link">Back</a>')
   })
 })

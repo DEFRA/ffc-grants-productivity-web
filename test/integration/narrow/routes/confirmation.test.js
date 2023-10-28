@@ -31,7 +31,7 @@ describe('Reference number page', () => {
       method: 'GET',
       url: `${global.__URLPREFIX__}/confirmation`
     }
-    
+
     jest.spyOn(senders, 'sendDesirabilitySubmitted').mockImplementationOnce(() => Promise.resolve(true))
 
     const getResponse = await global.__SERVER__.inject(getOtions)
@@ -40,13 +40,12 @@ describe('Reference number page', () => {
   })
 
   it('load page successfully with the solar Reference ID', async () => {
-
-    varList.projectSubject ='Solar technologies'
+    varList.projectSubject = 'Solar technologies'
     const getOtions = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/confirmation`
     }
-    
+
     jest.spyOn(senders, 'sendDesirabilitySubmitted').mockImplementationOnce(() => Promise.resolve(true))
 
     const getResponse = await global.__SERVER__.inject(getOtions)

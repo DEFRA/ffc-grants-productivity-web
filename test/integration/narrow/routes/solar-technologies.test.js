@@ -1,7 +1,7 @@
 const { crumbToken } = require('./test-helper')
 
 describe('Page: /solar-technologies', () => {
-  let varList = {
+  const varList = {
     solarTechnologies: 'randomData',
     existingSolar: 'Yes',
     projectSubject: 'Solar technologies',
@@ -112,6 +112,6 @@ describe('Page: /solar-technologies', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"existing-solar\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href="existing-solar" class="govuk-back-link">Back</a>')
   })
 })

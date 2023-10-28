@@ -1,7 +1,7 @@
 const { crumbToken } = require('./test-helper')
 
 describe('Robotics Energy Source Page', () => {
-  const varList = { 
+  const varList = {
     energySource: ['Biofuels', 'another source']
   }
 

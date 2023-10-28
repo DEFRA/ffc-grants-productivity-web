@@ -1,6 +1,6 @@
-const { getUrl } = require("./urls");
-const { getOptions } = require("./answer-options");
-const { getYarValue } = require("./session");
+const { getUrl } = require('./urls')
+const { getOptions } = require('./answer-options')
+const { getYarValue } = require('./session')
 const { getQuestionByKey, allAnswersSelected } = require('./utils')
 
 const getDependentSideBar = (sidebar, request) => {

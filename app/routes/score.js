@@ -2,8 +2,8 @@
 const { getDesirabilityAnswers } = require('../messaging/create-msg')
 
 const { ALL_QUESTIONS } = require('../config/question-bank')
-const pollingConfig = require('../config/polling')
-const { setYarValue, getYarValue } = require('../helpers/functions/session')
+// const pollingConfig = require('../config/polling')
+const { setYarValue } = require('../helpers/functions/session')
 const gapiService = require('../services/gapi-service')
 const { getProdScoring } = require('../messaging/application')
 
@@ -18,7 +18,7 @@ const nextPath = `${urlPrefix}/business-details`
 function createModel (data, request) {
   // const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'technology' : 'slurry-to-be-treated'}` // update for solar
 
-const previousPath = 'technology'
+  const previousPath = 'technology'
 
   return {
     backLink: previousPath,
