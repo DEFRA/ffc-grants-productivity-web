@@ -22,10 +22,10 @@ describe('robotics agricultural sector page', () => {
     expect(response.statusCode).toBe(200)
     const htmlPage = createPage(response.payload)
     const questionH1 = getQuestionH1(htmlPage)
-    const questionAnswers = getQuestionCheckboxes(htmlPage);
+    const questionAnswers = getQuestionCheckboxes(htmlPage)
     expect(questionAnswers.length).toBe(4)
     expect(extractCleanText(questionH1)).toBe('Which agricultural sector is your project in?')
-    expect(questionAnswers[0].value).toBe("Horticulture");
+    expect(questionAnswers[0].value).toBe('Horticulture')
     expect(questionAnswers[1].value).toBe('Arable')
     expect(questionAnswers[2].value).toBe('Dairy livestock')
     expect(questionAnswers[3].value).toBe('Non-dairy livestock')

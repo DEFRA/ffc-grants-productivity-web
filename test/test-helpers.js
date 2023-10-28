@@ -12,14 +12,14 @@ const getQuestionCheckboxes = (htmlPage) => {
 
 const getQuestionErrors = (htmlPage) => {
   return htmlPage
-    .querySelector("ul.govuk-error-summary__list")
-    .querySelectorAll("li")
+    .querySelector('ul.govuk-error-summary__list')
+    .querySelectorAll('li')
 }
 
 const getTargetError = (errors, targetText) => {
   return Object.values(errors).filter((error) => {
-    return extractCleanText(error) === targetText;
-  });
+    return extractCleanText(error) === targetText
+  })
 }
 
 const getBackLink = (htmlPage) => {
