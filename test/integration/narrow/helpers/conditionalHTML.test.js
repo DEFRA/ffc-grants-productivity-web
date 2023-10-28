@@ -1,5 +1,5 @@
 describe('Conditional html', () => {
-  const { getHtml } = require('../../../../app/helpers/conditionalHTML')
+  const { getHtml } = require('../../../../app/helpers/functions/conditionalHTML')
 
   test('check function getHtml - robotic equipment, no errors', () => {
     const label = 'yesStructureEligibility'

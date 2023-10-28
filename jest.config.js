@@ -1,4 +1,5 @@
 module.exports = {
+  bail: true, // Stop running tests after `n` failures
   collectCoverage: true,
   collectCoverageFrom: [
     '**/*.js',

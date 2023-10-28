@@ -16,7 +16,7 @@ const mockSession = {
   }
 }
 
-jest.mock('../../../../app/helpers/session', () => mockSession)
+jest.mock('../../../../app/helpers/functions/session', () => mockSession)
 
 describe('Project cost robotics page', () => {
   beforeEach(() => {
@@ -125,25 +125,25 @@ describe('Project cost robotics page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('potential-amount')
-})
-it('page loads with correct back link', async () => {
+  })
+  it('page loads with correct back link', async () => {
     const options = {
-        method: 'GET',
-        url: `${global.__URLPREFIX__}/project-cost`
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-cost`
     }
 
-const response = await global.__SERVER__.inject(options)
-expect(response.statusCode).toBe(200)
-expect(response.payload).toContain('<a href=\"project-items\" class=\"govuk-back-link\">Back</a>')
-})
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href="project-items" class="govuk-back-link">Back</a>')
+  })
 
-// it('page loads with correct back link when solar technologies is /Solar panels/ ', async () => {
-//   varList.solarTechnologies = 'Solar panels'
-//   varList.solarInstallation = 'On an existing hardstanding area'
-//   const options = {
-//       method: 'GET',
-//       url: `${global.__URLPREFIX__}/project-cost`
-//   }
+  // it('page loads with correct back link when solar technologies is /Solar panels/ ', async () => {
+  //   varList.solarTechnologies = 'Solar panels'
+  //   varList.solarInstallation = 'On an existing hardstanding area'
+  //   const options = {
+  //       method: 'GET',
+  //       url: `${global.__URLPREFIX__}/project-cost`
+  //   }
 
 // const response = await global.__SERVER__.inject(options)
 // expect(response.statusCode).toBe(200)

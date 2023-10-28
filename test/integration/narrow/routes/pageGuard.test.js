@@ -14,7 +14,7 @@ const mockSession = {
     else return undefined
   }
 }
-jest.mock('../../../../app/helpers/session', () => mockSession)
+jest.mock('../../../../app/helpers/functions/session', () => mockSession)
 
 describe('Page Guard', () => {
   const OLD_ENV = process.env
@@ -24,14 +24,12 @@ describe('Page Guard', () => {
     jest.resetModules()
     process.env = { ...OLD_ENV }
     varList = { ...varListTemplate }
-
   })
 
   afterEach(() => {
     process.env = OLD_ENV
     server.stop()
     jest.clearAllMocks()
-
   })
 
   // massive edit time yayyyyyyyy
@@ -51,7 +49,6 @@ describe('Page Guard', () => {
   })
 
   it('AND - should redirect to start page if no key found', async () => {
-
     varList.projectSubject = 'random'
 
     server = await createServer()
@@ -66,7 +63,6 @@ describe('Page Guard', () => {
   })
 
   it('AND - should load normal page if all keys found (1 item)', async () => {
-
     varList.projectSubject = 'Robotics and automatic technology'
 
     server = await createServer()
@@ -80,7 +76,7 @@ describe('Page Guard', () => {
     expect(getResponse.payload).toContain('Who are you?')
   })
 
-  it('OR - should redirect to start page if no key found', async () => { 
+  it('OR - should redirect to start page if no key found', async () => {
     varList.projectSubject = 'random'
     varList.applicant = 'random'
     server = await createServer()
@@ -95,7 +91,6 @@ describe('Page Guard', () => {
   })
 
   it('OR - should load normal page if any key found', async () => {
-
     varList.businessLocation = 'Yes'
 
     server = await createServer()
@@ -110,7 +105,6 @@ describe('Page Guard', () => {
   })
 
   it('OR andCheck - should redirect to start page if projectSubject not correct', async () => {
-
     varList.projectSubject = 'Robotics and automatic technology'
 
     server = await createServer()
@@ -125,7 +119,6 @@ describe('Page Guard', () => {
   })
 
   it('OR andCheck - should load normal page if any key found as well as projectSubject', async () => {
-
     varList.projectSubject = 'Solar technologies'
     varList.tenancy = 'Yes'
 
@@ -141,7 +134,6 @@ describe('Page Guard', () => {
   })
 
   it('NOT - should redirect to start page if any key found', async () => {
-
     varList.legalStatus = 'None of the above'
 
     server = await createServer()
@@ -156,7 +148,6 @@ describe('Page Guard', () => {
   })
 
   it('NOT - should load normal page if key not found', async () => {
-
     varList.legalStatus = 'asjhakh'
 
     server = await createServer()
@@ -169,6 +160,4 @@ describe('Page Guard', () => {
     expect(getResponse.statusCode).toBe(200)
     expect(getResponse.payload).toContain('Is the planned project in England?')
   })
-
-
 })

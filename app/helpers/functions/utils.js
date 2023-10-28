@@ -1,4 +1,4 @@
-const { ALL_QUESTIONS } = require('../config/question-bank')
+const { ALL_QUESTIONS } = require('../../config/question-bank')
 const { getYarValue } = require('./session')
 
 const answerContainsSelection = (answer, selection) => (
@@ -12,12 +12,14 @@ const notUniqueSelection = (answers, option) => (
     answers.length > 1
 )
 
-const uniqueSelection = (answers, option) => (
-  answers?.includes(option) &&
+const uniqueSelection = (answers, option) => {
+  return (
+    answers?.includes(option) &&
     (typeof (answers) === 'string' ||
       (typeof (answers) === 'object' && answers.length === 1)
     )
-)
+  )
+}
 
 const getQuestionByKey = (questionKey) => ALL_QUESTIONS.find(({ key }) => (key === questionKey))
 

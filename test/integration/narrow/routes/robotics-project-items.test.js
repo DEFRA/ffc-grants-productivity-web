@@ -11,7 +11,7 @@ describe('Robotics project items page', () => {
     projectItems: 'Robotic equipment item'
   }
 
-  jest.mock('../../../../app/helpers/session', () => ({
+  jest.mock('../../../../app/helpers/functions/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
       if (varList[key]) return varList[key]
@@ -35,7 +35,7 @@ describe('Robotics project items page', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-items`,
-      payload: { projectItems: '',  crumb: crumbToken },
+      payload: { projectItems: '', crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
@@ -77,7 +77,7 @@ describe('Robotics project items page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"tenancy\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href="tenancy" class="govuk-back-link">Back</a>')
   })
   it('page loads with correct back link when tenancy is "No" ', async () => {
     varList.tenancy = 'No'
@@ -88,6 +88,6 @@ describe('Robotics project items page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"project-responsibility\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href="project-responsibility" class="govuk-back-link">Back</a>')
   })
 })

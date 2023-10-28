@@ -114,7 +114,6 @@ async function createServer () {
     require('./routes/session-timeout'),
     ...require('./routes')
   )
-  console.log('[SERVER][GET ALL ROUTES]')
   server.route(routes)
 
   server.views({

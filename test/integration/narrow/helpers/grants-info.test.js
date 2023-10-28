@@ -1,5 +1,7 @@
 describe('Grants Info', () => {
-  const { getGrantValues } = require('../../../../app/helpers/grants-info')
+  const {
+    getGrantValues
+  } = require('../../../../app/helpers/functions/grants-info')
 
   test('is eligible if calculated grant = min grant - whether grant is capped or not', () => {
     const projectCostValue = '50'

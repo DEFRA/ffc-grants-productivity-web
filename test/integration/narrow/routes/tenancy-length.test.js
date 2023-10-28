@@ -3,7 +3,7 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /tenancy-length', () => {
   const varList = { tenancy: 'randomData' }
 
-  jest.mock('../../../../app/helpers/session', () => ({
+  jest.mock('../../../../app/helpers/functions/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
       if (varList[key]) return varList[key]

@@ -1,28 +1,28 @@
 const {
-  CURRENCY_FORMAT,
-  CHARS_MAX_10,
+  // CURRENCY_FORMAT,
+  // CHARS_MAX_10,
   CHARS_MIN_10,
   CHARS_MAX_18,
   CHARS_MAX_100,
   CHARS_MAX_250,
   POSTCODE_REGEX,
   WHOLE_NUMBER_REGEX,
-  NUMBER_REGEX,
+  // NUMBER_REGEX,
   PROJECT_COST_REGEX,
   SBI_REGEX,
   NAME_ONLY_REGEX,
   PHONE_REGEX,
   EMAIL_REGEX,
   ADDRESS_REGEX
-} = require('../helpers/regex')
+} = require('../helpers/constants/regex')
 
-const { LIST_COUNTIES } = require('../helpers/all-counties')
+const { LIST_COUNTIES } = require('../helpers/constants/all-counties')
 
 const {
   MIN_GRANT,
   MAX_GRANT,
   GRANT_PERCENTAGE
-} = require('../helpers/grant-details')
+} = require('../helpers/constants/grant-details')
 require('dotenv').config()
 
 /**
@@ -146,10 +146,10 @@ const questionBank = {
           url: 'applicant',
           baseUrl: 'applicant',
           preValidationObject: {
-              preValidationKeys: ['projectSubject'],
-              preValidationAnswer: ['project-subject-A1'],
-              preValidationRule: 'AND',
-              preValidationUrls: ['project-subject']
+            preValidationKeys: ['projectSubject'],
+            preValidationAnswer: ['project-subject-A1'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['project-subject']
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -240,11 +240,11 @@ const questionBank = {
           url: 'legal-status',
           baseUrl: 'legal-status',
           preValidationObject: {
-            preValidationKeys: ['projectSubject', 'businessLocation', 'applicant',], 
+            preValidationKeys: ['projectSubject', 'businessLocation', 'applicant'],
             preValidationAnswer: ['project-subject-A2', 'business-location-A1', 'applicant-A1'],
             preValidationRule: 'OR',
             preValidationUrls: ['project-subject', 'business-location', 'applicant']
-          },          
+          },
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
             details: {
@@ -923,7 +923,7 @@ const questionBank = {
             },
             {
               key: 'solar-usage-A2',
-              value: 'No',
+              value: 'No'
             }
           ],
           yarKey: 'solarUsage'
@@ -969,19 +969,19 @@ const questionBank = {
             },
             {
               key: 'solar-output-A2',
-              value: '51kW to 100kW',
+              value: '51kW to 100kW'
             },
             {
               key: 'solar-output-A3',
-              value: '101kW to 150kW',
+              value: '101kW to 150kW'
             },
             {
               key: 'solar-output-A4',
-              value: '151kW to 200kW',
+              value: '151kW to 200kW'
             },
             {
               key: 'solar-output-A5',
-              value: 'More than 201kW',
+              value: 'More than 201kW'
             }
           ],
           yarKey: 'solarOutput'
@@ -1315,7 +1315,7 @@ const questionBank = {
             preValidationRule: 'OR',
             preValidationUrls: ['tenancy', 'project-responsibility'],
             andCheck: 'project-subject-A1'
-          },          
+          },
           backUrlObject: {
             dependentQuestionYarKey: 'tenancy',
             dependentAnswerKeysArray: ['tenancy-A1'],
@@ -1469,7 +1469,7 @@ const questionBank = {
           minAnswerCount: 1,
           id: 'roboticAutomatic',
           hint: {
-            html: 
+            html:
             ` <div id="roboticAutomatic" class="govuk-hint">
                 <p class="govuk-body">To be eligible, your robotic technology must:</P>
                   <ul>
@@ -1523,7 +1523,7 @@ const questionBank = {
           fundingPriorities: '',
           minAnswerCount: 1,
           hint: {
-            text: `Technology powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative`
+            text: 'Technology powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative'
           },
           sidebar: {
             values: [{
@@ -1540,26 +1540,26 @@ const questionBank = {
               yarKey: 'brand',
               type: 'input',
               classes: 'govuk-input--width-10',
-              id: "brand",
-              name: "brand",
+              id: 'brand',
+              name: 'brand',
               label: {
                 text: 'Brand',
                 classes: 'govuk-label'
               },
               validate: [
-                  {
-                    type: 'REGEX',
-                    regex: CHARS_MAX_18,
-                    error: 'Brand must be 18 characters or less'
-                  }
+                {
+                  type: 'REGEX',
+                  regex: CHARS_MAX_18,
+                  error: 'Brand must be 18 characters or less'
+                }
               ]
             },
             {
               yarKey: 'model',
               type: 'input',
               classes: 'govuk-input--width-10',
-              id: "model",
-              name: "model",
+              id: 'model',
+              name: 'model',
               label: {
                 text: 'Model',
                 classes: 'govuk-label',
@@ -1571,12 +1571,12 @@ const questionBank = {
                   regex: CHARS_MAX_18,
                   error: 'Model must be 18 characters or less'
                 }
-            ]
+              ]
             },
             {
               yarKey: 'description',
-              id: "description",
-              name: "description",
+              id: 'description',
+              name: 'description',
               type: 'textarea',
               maxlength: 250,
               label: {
@@ -1645,7 +1645,7 @@ const questionBank = {
               elseUrl: 'project-items'
             }
           },
-          backUrl:'other-conditional',
+          backUrl: 'other-conditional',
           nextUrl: 'potential-amount',
           // preValidationKeys: [],
           classes: 'govuk-input--width-10',
@@ -2035,7 +2035,7 @@ const questionBank = {
           maybeEligibleContent: {
             messageHeader: 'Your fossil fuel technology might be eligible',
             messageContent: 'I confirm I understand fossil fuel technology will only be funded where there is no commercially available electric or renewable energy alternative.',
-            isFossilFuel: true,
+            isFossilFuel: true
           }
         },
         {
@@ -2162,7 +2162,7 @@ const questionBank = {
         {
           key: 'automatic-eligibility',
           order: 375,
-          title: `Which eligibility criteria does your automatic {{_technologyItems_}} meet?`,
+          title: 'Which eligibility criteria does your automatic {{_technologyItems_}} meet?',
           pageTitle: '',
           replace: true,
           url: 'automatic-eligibility',
@@ -2195,12 +2195,12 @@ const questionBank = {
             {
               type: 'NOT_EMPTY',
               error: 'Select what eligibility criteria your automatic technology meets'
-            },
+            }
           ],
           answers: [
             {
               key: 'automatic-eligibility-A1',
-              value: 'Has sensing system that can understand its environment '
+              value: 'Has sensing system that can understand its environment'
             },
             {
               key: 'automatic-eligibility-A2',
@@ -2606,7 +2606,7 @@ const questionBank = {
                   type: 'REGEX',
                   regex: ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
-                },
+                }
               ]
             },
             {
@@ -2622,7 +2622,7 @@ const questionBank = {
                   type: 'REGEX',
                   regex: ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
-                },
+                }
               ]
             },
             {
@@ -2882,7 +2882,7 @@ const questionBank = {
                   type: 'REGEX',
                   regex: ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
-                },
+                }
               ]
             },
             {
@@ -2898,7 +2898,7 @@ const questionBank = {
                   type: 'REGEX',
                   regex: ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
-                },
+                }
               ]
             },
             {
@@ -3155,7 +3155,7 @@ const questionBank = {
                   type: 'REGEX',
                   regex: ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
-                },
+                }
               ]
             },
             {
@@ -3171,7 +3171,7 @@ const questionBank = {
                   type: 'REGEX',
                   regex: ADDRESS_REGEX,
                   error: 'Address must only include letters, numbers, hyphens and apostrophes'
-                },
+                }
               ]
             },
             {
@@ -3277,7 +3277,7 @@ const questionBank = {
             <li> I am aware that the information I submit will be checked by the RPA.</li>
             <li> I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.</li></ul>
             <h2 class="govuk-heading-m">Improving our schemes</h2>
-            <p>So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party working for us, to contact you.</p>`,
+            <p>So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party working for us, to contact you.</p>`
           },
           answers: [
             {

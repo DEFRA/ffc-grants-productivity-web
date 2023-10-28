@@ -1,7 +1,7 @@
-const { getModel } = require('../helpers/models')
-const { getHtml } = require('../helpers/conditionalHTML')
-const { getYarValue } = require('../helpers/session')
-const { getQuestionAnswer } = require('../helpers/utils')
+const { getModel } = require('./models')
+const { getHtml } = require('./conditionalHTML')
+const { getYarValue } = require('./session')
+const { getQuestionAnswer } = require('./utils')
 
 const validateAnswerField = (value, validationType, details, payload) => {
   switch (validationType) {

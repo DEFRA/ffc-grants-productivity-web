@@ -1,4 +1,4 @@
-const { getOptions, setOptionsLabel } = require('../../../../app/helpers/answer-options')
+const { getOptions, setOptionsLabel } = require('../../../../app/helpers/functions/answer-options')
 
 // jest.mock('../../../../app/helpers/standardised-grant-amounts-array', () => ({
 //   formatAnswerArray: (a, b, c, d) => ([ 'answer-1', 'answer-2' ]),
@@ -11,7 +11,7 @@ describe('answer-options', () => {
       yarKey: 'mock-yarKey',
       type: 'input',
       classes: 'mock-classes',
-      hint: {text: 'voila'},
+      hint: { text: 'voila' },
       id: 'mock-id',
       label: 'mock-label',
       prefix: 'mock-prefix',
@@ -20,7 +20,7 @@ describe('answer-options', () => {
     }
     expect(getOptions(undefined, question, 'cond-html', {})).toEqual({
       classes: 'mock-classes',
-      hint:  {text: 'voila'},
+      hint: { text: 'voila' },
       id: 'mock-yarKey',
       name: 'mock-yarKey',
       label: 'mock-label',
@@ -35,7 +35,7 @@ describe('answer-options', () => {
     }
     expect(getOptions(undefined, question, 'cond-html', {})).toEqual({
       classes: 'mock-classes',
-      hint:  {text: 'voila'},
+      hint: { text: 'voila' },
       id: 'mock-yarKey',
       name: 'mock-yarKey',
       label: 'mock-label',
@@ -50,7 +50,7 @@ describe('answer-options', () => {
     }
     expect(getOptions(undefined, question, 'cond-html', {})).toEqual({
       classes: 'mock-classes',
-      hint: {text: 'voila'},
+      hint: { text: 'voila' },
       id: 'mock-yarKey',
       name: 'mock-yarKey',
       label: 'mock-label',
@@ -71,7 +71,7 @@ describe('answer-options', () => {
         {
           yarKey: 'projectName',
           type: 'textarea',
-          answers: [{ value: 'value', hint: {text: 'haha'}, text: 'text', conditional: 'conditional' }],
+          answers: [{ value: 'value', hint: { text: 'haha' }, text: 'text', conditional: 'conditional' }],
           hint: {
             text: 'ahhh'
           }
@@ -79,7 +79,7 @@ describe('answer-options', () => {
         {
           yarKey: 'randomName',
           type: 'textarea',
-          answers: [{ value: 'value', hint: {text: 'haha'}, text: 'text', conditional: 'conditional' }],
+          answers: [{ value: 'value', hint: { text: 'haha' }, text: 'text', conditional: 'conditional' }],
           hint: {
             text: 'ahh'
           }
@@ -119,7 +119,7 @@ describe('answer-options', () => {
         prefix: undefined,
         suffix: undefined,
         type: 'textarea',
-        value: '',
+        value: ''
       },
       {
         classes: undefined,
@@ -134,7 +134,7 @@ describe('answer-options', () => {
         prefix: undefined,
         suffix: undefined,
         type: 'textarea',
-        value: '',
+        value: ''
       }
     ])
     expect(getOptions(undefined, question, 'cond-html', {})).toEqual([
@@ -169,7 +169,7 @@ describe('answer-options', () => {
         prefix: undefined,
         suffix: undefined,
         type: 'textarea',
-        value: '',
+        value: ''
       },
       {
         classes: undefined,
@@ -184,7 +184,7 @@ describe('answer-options', () => {
         prefix: undefined,
         suffix: undefined,
         type: 'textarea',
-        value: '',
+        value: ''
       }
     ])
 
@@ -195,7 +195,7 @@ describe('answer-options', () => {
 
     expect(getOptions(undefined, question, 'cond-html', {})).toEqual({
       classes: 'mock-classes',
-      hint: {text: 'voila'},
+      hint: { text: 'voila' },
       id: 'mock-yarKey',
       name: 'mock-yarKey',
       label: 'mock-label',
@@ -210,7 +210,7 @@ describe('answer-options', () => {
     const { classes, ...questionWithoutClasses } = question
     expect(getOptions(undefined, questionWithoutClasses, 'cond-html', {})).toEqual({
       classes: 'govuk-fieldset__legend--l',
-      hint: {text: 'voila'},
+      hint: { text: 'voila' },
       id: 'mock-yarKey',
       name: 'mock-yarKey',
       label: 'mock-label',
@@ -236,7 +236,7 @@ describe('answer-options', () => {
             text: undefined
           }
         },
-        hint: {text: 'voila'},
+        hint: { text: 'voila' },
         id: 'mock-yarKey',
         items: [
 
@@ -249,16 +249,16 @@ describe('answer-options', () => {
   test('check setOptionsLabel()', () => {
     const answers = [
       { value: 'divider' },
-      { value: 'mock-data', hint: {text: 'voila'}},
-      { value: 'another-mock-data', hint: {text: 'voila'}, conditional: 'mock-cond' },
-      { value: 'another-mock-data', hint: {text: 'voila'}, conditional: 'mock-cond', text: 'mock-text' }
+      { value: 'mock-data', hint: { text: 'voila' } },
+      { value: 'another-mock-data', hint: { text: 'voila' }, conditional: 'mock-cond' },
+      { value: 'another-mock-data', hint: { text: 'voila' }, conditional: 'mock-cond', text: 'mock-text' }
     ]
     expect(setOptionsLabel('mock-data', answers, 'cond-html')).toEqual([
       { divider: 'or' },
       {
         value: 'mock-data',
         text: 'mock-data',
-        hint: {text: 'voila'},
+        hint: { text: 'voila' },
         checked: true,
         selected: true
       },
@@ -266,7 +266,7 @@ describe('answer-options', () => {
         value: 'another-mock-data',
         text: 'another-mock-data',
         conditional: { html: 'cond-html' },
-        hint: {text: 'voila'},
+        hint: { text: 'voila' },
         checked: false,
         selected: false
       },
@@ -274,7 +274,7 @@ describe('answer-options', () => {
         value: 'another-mock-data',
         text: 'mock-text',
         conditional: 'mock-cond',
-        hint: {text: 'voila'},
+        hint: { text: 'voila' },
         checked: false,
         selected: false
       }

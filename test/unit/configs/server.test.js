@@ -1,7 +1,5 @@
 const config = require('../../../app/config/server')
 
-require('dotenv').config()
-
 describe('get config', () => {
   const OLD_ENV = process.env
 

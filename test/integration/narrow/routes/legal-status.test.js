@@ -12,7 +12,7 @@ const mockSession = {
     else return undefined
   }
 }
-jest.mock('../../../../app/helpers/session', () => mockSession)
+jest.mock('../../../../app/helpers/functions/session', () => mockSession)
 describe('Legal status page', () => {
   beforeEach(() => {
     varList = { ...varListTemplate }
@@ -27,18 +27,25 @@ describe('Legal status page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What is the legal status of the business?')
-    expect(response.payload).toContain('Sole trader')
-    expect(response.payload).toContain('Partnership')
-    expect(response.payload).toContain('Limited company')
-    expect(response.payload).toContain('Charity')
-    expect(response.payload).toContain('Trust')
-    expect(response.payload).toContain('Limited liability partnership')
-    expect(response.payload).toContain('Community interest company')
-    expect(response.payload).toContain('Limited partnership')
-    expect(response.payload).toContain('Industrial and provident society')
-    expect(response.payload).toContain('Co-operative society (Co-Op)')
-    expect(response.payload).toContain('Community benefit society (BenCom)')
+    const page = createPage(response.payload)
+    const heading = getQuestionH1(page)
+    expect(extractCleanText(heading)).toEqual(
+      'What is the legal status of the business?'
+    )
+    const radios = getQuestionRadios(page)
+    expect(radios.length).toEqual(12)
+    expect(radios[0].value).toBe('Sole trader')
+    expect(radios[1].value).toBe('Partnership')
+    expect(radios[2].value).toBe('Limited company')
+    expect(radios[3].value).toBe('Charity')
+    expect(radios[4].value).toBe('Trust')
+    expect(radios[5].value).toBe('Limited liability partnership')
+    expect(radios[6].value).toBe('Community interest company')
+    expect(radios[7].value).toBe('Limited partnership')
+    expect(radios[8].value).toBe('Industrial and provident society')
+    expect(radios[9].value).toBe('Co-operative society (Co-Op)')
+    expect(radios[10].value).toBe('Community benefit society (BenCom)')
+    expect(radios[11].value).toBe('None of the above')
   })
   test('submits form successfully and redirects to next page', async () => {
     const options = {
@@ -63,10 +70,15 @@ describe('Legal status page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Select the legal status of the business')
+    const page = createPage(response.payload)
+    const errors = getQuestionErrors(page)
+    expect(errors.length).toBe(1)
+    expect(extractCleanText(errors[0])).toBe(
+      'Select the legal status of the business'
+    )
   })
   it('page loads with back link to /project-subject if user selected Solar', async () => {
-    varList.applicant = null,
+    varList.applicant = null
     varList.projectSubject = 'Solar technologies'
     const options = {
       method: 'GET',
@@ -74,9 +86,10 @@ describe('Legal status page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain(
-      '<a href="project-subject" class="govuk-back-link">Back</a>'
-    )
+    const page = createPage(response.payload)
+    const backLink = getBackLink(page)
+    expect(extractCleanText(backLink)).toBe('Back')
+    expect(backLink.href).toBe('project-subject')
   })
   it('page loads with correct back link - if applicant was a farmer', async () => {
     varList.applicant = 'Farmer'
@@ -86,9 +99,10 @@ describe('Legal status page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain(
-      '<a href="applicant" class="govuk-back-link">Back</a>'
-    )
+    const page = createPage(response.payload)
+    const backLink = getBackLink(page)
+    expect(extractCleanText(backLink)).toBe('Back')
+    expect(backLink.href).toBe('applicant')
   })
   it('page loads with correct back link - if applicant was a contractor', async () => {
     varList.applicant = 'Contractor'
@@ -98,8 +112,9 @@ describe('Legal status page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain(
-      '<a href="business-location" class="govuk-back-link">Back</a>'
-    )
+    const page = createPage(response.payload)
+    const backLink = getBackLink(page)
+    expect(extractCleanText(backLink)).toBe('Back')
+    expect(backLink.href).toBe('business-location')
   })
 })

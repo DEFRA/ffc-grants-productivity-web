@@ -3,8 +3,8 @@ appInsights.logException = jest.fn((req, event) => {
   return null
 })
 
-jest.mock('../../../../app/helpers/session', () => {
-  const original = jest.requireActual('../../../../app/helpers/session')
+jest.mock('../../../../app/helpers/functions/session', () => {
+  const original = jest.requireActual('../../../../app/helpers/functions/session')
   return {
     ...original,
     setYarValue: jest.fn((a, b, c) => {})

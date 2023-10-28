@@ -1,6 +1,6 @@
-const urlPrefix = require('../config/server').urlPrefix
-const { getYarValue } = require('../helpers/session')
-const { ALL_QUESTIONS } = require('../config/question-bank')
+const urlPrefix = require('../../config/server').urlPrefix
+const { getYarValue } = require('./session')
+const { ALL_QUESTIONS } = require('../../config/question-bank')
 
 const getUrl = (urlObject, url, request, secBtn) => {
   const scorePath = `${urlPrefix}/score`
@@ -25,7 +25,6 @@ const getUrl = (urlObject, url, request, secBtn) => {
         question.yarKey === dependantYarKey &&
         question.answers &&
         question.answers.some(answer => (
-          !!selectedAnswer &&
           dependentAnswerKeysArray.includes(answer.key) &&
           (Array.isArray(selectedAnswer) ? selectedAnswer.includes(answer.value) : (selectedAnswer === answer.value))
         ))

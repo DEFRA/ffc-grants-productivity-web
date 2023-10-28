@@ -1,5 +1,5 @@
 const appInsights = require('./app-insights')
-const { getYarValue, setYarValue } = require('../helpers/session')
+const { getYarValue, setYarValue } = require('../helpers/functions/session')
 const { protectiveMonitoringServiceSendEvent } = require('../services/protective-monitoring-service')
 const blockDefaultPageViews = [
   'start', 'applying', 'project-impact', 'remaining-costs', 'project-cost',

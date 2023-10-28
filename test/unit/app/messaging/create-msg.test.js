@@ -1,6 +1,6 @@
 describe('create-msg', () => {
-  jest.mock('../../../../app/helpers/session')
-  const { getYarValue } = require('../../../../app/helpers/session')
+  jest.mock('../../../../app/helpers/functions/session')
+  const { getYarValue } = require('../../../../app/helpers/functions/session')
 
   const { getDesirabilityAnswers } = require('../../../../app/messaging/create-msg')
 
