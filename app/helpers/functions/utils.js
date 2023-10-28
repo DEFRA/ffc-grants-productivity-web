@@ -1,4 +1,4 @@
-const { ALL_QUESTIONS } = require('../config/question-bank')
+const { ALL_QUESTIONS } = require('../../config/question-bank')
 const { getYarValue } = require('./session')
 
 const answerContainsSelection = (answer, selection) => (

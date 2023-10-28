@@ -1,7 +1,7 @@
-const { getUrl } = require('../helpers/urls')
-const { getOptions } = require('../helpers/answer-options')
-const { getYarValue } = require('../helpers/session')
-const { getQuestionByKey, allAnswersSelected } = require('../helpers/utils')
+const { getUrl } = require("./urls");
+const { getOptions } = require("./answer-options");
+const { getYarValue } = require("./session");
+const { getQuestionByKey, allAnswersSelected } = require('./utils')
 
 const getDependentSideBar = (sidebar, request) => {
   // sidebar contains values of a previous page

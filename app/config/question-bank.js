@@ -14,15 +14,15 @@ const {
   PHONE_REGEX,
   EMAIL_REGEX,
   ADDRESS_REGEX
-} = require('../helpers/regex')
+} = require('../helpers/constants/regex')
 
-const { LIST_COUNTIES } = require('../helpers/all-counties')
+const { LIST_COUNTIES } = require("../helpers/constants/all-counties");
 
 const {
   MIN_GRANT,
   MAX_GRANT,
-  GRANT_PERCENTAGE
-} = require('../helpers/grant-details')
+  GRANT_PERCENTAGE,
+} = require("../helpers/constants/grant-details");
 require('dotenv').config()
 
 /**

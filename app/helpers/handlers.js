@@ -1,21 +1,21 @@
-const { getYarValue, setYarValue } = require('../helpers/session')
-const { getModel } = require('../helpers/models')
-const { checkErrors } = require('../helpers/errorSummaryHandlers')
-const { getGrantValues } = require('../helpers/grants-info')
-const { formatUKCurrency } = require('../helpers/data-formats')
-const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
-const { getHtml } = require('../helpers/conditionalHTML')
-const { getUrl } = require('../helpers/urls')
-const { guardPage } = require('../helpers/page-guard')
-const { setOptionsLabel } = require('../helpers/answer-options')
-const { notUniqueSelection, uniqueSelection, getQuestionAnswer, getQuestionByKey } = require('../helpers/utils')
+const { getYarValue, setYarValue } = require('./functions/session')
+const { getModel } = require("./functions/models");
+const { checkErrors } = require("../helpers/functions/errorSummaryHandlers");
+const { getGrantValues } = require('./functions/grants-info')
+const { formatUKCurrency } = require("./functions/data-formats");
+const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('./constants/regex')
+const { getHtml } = require("./functions/conditionalHTML");
+const { getUrl } = require('./functions/urls')
+const { guardPage } = require('./page-guard')
+const { setOptionsLabel } = require("./functions/answer-options");
+const { notUniqueSelection, uniqueSelection, getQuestionAnswer, getQuestionByKey } = require('./functions/utils')
 const senders = require('../messaging/senders')
 const createMsg = require('../messaging/create-msg')
 const gapiService = require('../services/gapi-service')
 const { startPageUrl, urlPrefix } = require('../config/server')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
-const emailFormatting = require('./../messaging/email/process-submission')
+const emailFormatting = require('../messaging/email/process-submission')
 const { validate } = require('uuid')
 
 const resetYarValues = (applying, request) => {
