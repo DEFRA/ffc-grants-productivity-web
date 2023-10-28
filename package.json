@@ -93,7 +93,13 @@
       "browser",
       "assert",
       "$",
-      "XMLHttpRequest"
+      "XMLHttpRequest",
+      "createPage",
+      "getQuestionH1",
+      "getQuestionCheckboxes",
+      "getQuestionRadios",
+      "getQuestionErrors",
+      "getBackLink"
     ],
     "ignore": ["package-lock.json", "package.json"]
   },

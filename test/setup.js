@@ -1,7 +1,15 @@
 require('dotenv').config()
-const jsdom = require("jsdom");
+const jsdom = require('jsdom')
+const { JSDOM } = jsdom
+const {
+  createPage,
+  getQuestionH1,
+  getQuestionCheckboxes,
+  getQuestionErrors,
+  getQuestionRadios,
+  getBackLink
+} = require('./test-helpers')
 beforeEach(async () => {
-  const { JSDOM } = jsdom;
   // ...
   // Set reference to server in order to close the server during teardown.
   const createServer = require('../app/server')
@@ -43,4 +51,10 @@ beforeEach(async () => {
   global.__VALIDSESSION__ = true
   global.__URLPREFIX__ = require('../app/config/server').urlPrefix
   global.JSDOM = JSDOM
+  global.createPage = createPage
+  global.getQuestionH1 = getQuestionH1
+  global.getQuestionCheckboxes = getQuestionCheckboxes
+  global.getQuestionErrors = getQuestionErrors
+  global.getQuestionRadios = getQuestionRadios
+  global.getBackLink = getBackLink
 })

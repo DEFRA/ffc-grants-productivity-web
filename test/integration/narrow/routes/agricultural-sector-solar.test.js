@@ -20,15 +20,21 @@ describe('agricultural sector solar page', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Which agricultural sector is your project in?')
-    expect(response.payload).toContain('Arable')
-    expect(response.payload).toContain('Beef')
-    expect(response.payload).toContain('Dairy livestock')
-    expect(response.payload).toContain('Horticulture')
-    expect(response.payload).toContain('Mixed livestock')
-    expect(response.payload).toContain('Pig')
-    expect(response.payload).toContain('Poultry')
-    expect(response.payload).toContain('Sheep')
+    const htmlPage = createPage(response.payload)
+    const h1 = getQuestionH1(htmlPage)
+    const checkboxes = getQuestionCheckboxes(htmlPage)
+    expect(h1.textContent.trim()).toEqual(
+      'Which agricultural sector is your project in?'
+    )
+    expect(checkboxes.length).toEqual(8)
+    expect(checkboxes[0].value).toEqual('Arable')
+    expect(checkboxes[1].value).toEqual('Beef')
+    expect(checkboxes[2].value).toEqual('Dairy livestock')
+    expect(checkboxes[3].value).toEqual('Horticulture')
+    expect(checkboxes[4].value).toEqual('Mixed livestock')
+    expect(checkboxes[5].value).toEqual('Pig')
+    expect(checkboxes[6].value).toEqual('Poultry')
+    expect(checkboxes[7].value).toEqual('Sheep')
   })
   it('no option is selected -> return error message', async () => {
     const postOptions = {
@@ -40,7 +46,12 @@ describe('agricultural sector solar page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select up to 2 sectors your project is in')
+    const htmlPage = createPage(postResponse.payload)
+    const errors = getQuestionErrors(htmlPage)
+    expect(errors.length).toEqual(1)
+    expect(errors[0].textContent.trim()).toEqual(
+      'Select up to 2 sectors your project is in'
+    )
   })
 
   it('3 or more options are selected -> return error message', async () => {
@@ -56,13 +67,21 @@ describe('agricultural sector solar page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select up to 2 sectors your project is in')
+    const htmlPage = createPage(postResponse.payload)
+    const errors = getQuestionErrors(htmlPage)
+    expect(errors.length).toEqual(1)
+    expect(errors[0].textContent.trim()).toEqual(
+      'Select up to 2 sectors your project is in'
+    )
   })
   it('2 options are selected -> store user response and redirect to score page', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/agricultural-sector-solar`,
-      payload: { agriculturalSector: ['Horticulture', 'Arable'], crumb: crumbToken },
+      payload: {
+        agriculturalSector: ['Horticulture', 'Arable'],
+        crumb: crumbToken
+      },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
@@ -90,6 +109,9 @@ describe('agricultural sector solar page', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href="remaining-costs-solar"  class="govuk-back-link" id="linkBack">Back</a>')
+    const htmlPage = createPage(response.payload)
+    const backLink = getBackLink(htmlPage)
+    expect(backLink.textContent.trim()).toEqual('Back')
+    expect(backLink.href).toEqual('remaining-costs-solar')
   })
 })
