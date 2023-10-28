@@ -33,10 +33,10 @@ function guardPage (request, guardData) {
         url: guardData.preValidationUrls[i]
       })
     }
-    console.log(
-      'should be a formatted list combining all answewrs and relevant values in one object',
-      preValidationList
-    )
+    // console.log(
+    //   'should be a formatted list combining all answewrs and relevant values in one object',
+    //   preValidationList
+    // )
     // should format preValidations as below
     // [{
     //   key: 'key name',
