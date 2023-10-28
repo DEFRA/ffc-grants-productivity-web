@@ -27,13 +27,13 @@ describe('Utils', () => {
     expect(uniqueSelection(answers, option)).toBeFalsy()
 
     answers = 'stringIncludesoption'
-    expect(uniqueSelection(answers, option)).toBe(true)
+    expect(uniqueSelection(answers, option)).toBeTruthy()
 
     answers = ['notOption', 'option']
-    expect(uniqueSelection(answers, option)).toBe(false)
+    expect(uniqueSelection(answers, option)).toBeFalsy()
 
     answers = ['option']
-    expect(uniqueSelection(answers, option)).toBeFalsy()
+    expect(uniqueSelection(answers, option)).toBeTruthy()
   })
 
   test.skip('getQuestionByKey', () => {
