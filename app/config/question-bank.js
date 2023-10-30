@@ -1461,11 +1461,11 @@ const questionBank = {
           backUrl: 'technology-items',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           dependantNextUrl: {
-            dependentQuestionYarKey: 'technologyItems',
-            dependentAnswerKeysArray: ['technology-items-A9'],
+            dependentQuestionYarKey: 'roboticAutomatic',
+            dependentAnswerKeysArray: ['robotic-automatic-A1'],
             urlOptions: {
-              thenUrl: 'other-robotic-technology',
-              elseUrl: 'other-item'
+              thenUrl: 'robotic-eligibility',
+              elseUrl: 'automatic-eligibility'
             }
           },
           fundingPriorities: '',
