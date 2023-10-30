@@ -1811,12 +1811,12 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'robotics-remaining-costs-A1',
+              key: 'remaining-costs-A1',
               value: 'Yes'
 
             },
             {
-              key: 'robotics-remaining-costs-A2',
+              key: 'remaining-costs-A2',
               value: 'No',
               notEligible: true
             }
@@ -1836,8 +1836,8 @@ const questionBank = {
             { dimension: 'cm2', value: { type: 'journey-time' } }
           ],
           dependantNextUrl: {
-            dependentQuestionYarKey: 'technologyItems',
-            dependentAnswerKeysArray: ['technology-items-A1', 'technology-items-A2', 'technology-items-A3', 'technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7', 'technology-items-A8'],
+            dependentQuestionYarKey: 'projectItems',
+            dependentAnswerKeysArray: ['project-items-A3'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'energy-source'
