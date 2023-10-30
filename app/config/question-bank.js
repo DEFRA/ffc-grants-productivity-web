@@ -2137,8 +2137,8 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA wants to fund projects that:',
-                items: ['introduce innovation']
+                para: 'RPA wants to fund projects that introduce innovation',
+                items: []
               }]
             }]
           },
