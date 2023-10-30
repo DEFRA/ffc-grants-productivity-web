@@ -24,6 +24,18 @@ describe('project-impact', () => {
     jest.resetAllMocks()
   })
 
+  it('page loads successfully, with all the options', async () => {
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-impact`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Will the project improve the productivity and profitability of your business?')
+    expect(response.payload).toContain('Yes')
+    expect(response.payload).toContain('No')
+  })
   it('no option is selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',

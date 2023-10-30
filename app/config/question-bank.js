@@ -1893,9 +1893,10 @@ const questionBank = {
             isDisplay: true
           },
           order: 350,
-          title: 'Will your project use data analytics to improve productivity on the farm?',
+          title: 'Will your project use data analytics to improve productivity?',
           hint: {
-            text: 'Software automating data analysis to improve efficiency (for example, analysing white blood cell counts in dairy)'
+            text: `Software that automates the analysis of the data it collects to improve 
+            efficiency (for example, analysing white blood cell counts in dairy)`
           },
           pageTitle: '',
           url: 'data-analytics',
