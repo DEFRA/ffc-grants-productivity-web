@@ -1526,7 +1526,7 @@ const questionBank = {
           preValidationKeys: ['technologyItems'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: 'Automatic items must fit at least 2 criteria to be eligible for grant funding.',
+            messageContent: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
@@ -1583,21 +1583,15 @@ const questionBank = {
         {
           key: 'robotic-eligibility',
           order: 376,
-          title: `Does your robotic {{_technologyItems_}} fit the eligibility criteria??`,
+          title: `Does your robotic {{_technologyItems_}} fit the eligibility criteria?`,
           pageTitle: '',
           replace: true,
           url: 'robotic-eligibility',
           baseUrl: 'robotic-eligibility',
           backUrl: 'robotic-automatic',
+          nextUrl: 'technology-description',
           preValidationKeys: ['technologyItems'],
           eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: 'Automatic items must fit at least 2 criteria to be eligible for grant funding.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           minAnswerCount: 1,
@@ -1618,13 +1612,12 @@ const questionBank = {
           ineligibleContent: {
             heading: 'You cannot apply for grant funding for this item',
             messageContent: `RPA will only fund robotic technology that:
-            <ul class="govuk-list govuk-list--bullet">
-              <li>have a sensing system and can understand its environment</li>
-              <li>make decisions and plan</li>
-              <li>be able to control its actuators (the devices that move robot joints)</li>
-              <li>work in a continuous loop</li>
-            </ul>
-            `,
+                            <ul class="govuk-list govuk-list--bullet">
+                              <li>have a sensing system and can understand its environment</li>
+                              <li>make decisions and plan</li>
+                              <li>be able to control its actuators (the devices that move robot joints)</li>
+                              <li>work in a continuous loop</li>
+                            </ul>`,
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
