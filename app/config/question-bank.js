@@ -1475,7 +1475,8 @@ const questionBank = {
           hint: {
             html: 
             ` <div id="roboticAutomatic" class="govuk-hint">
-                <p class="govuk-body">To be eligible, your robotic technology must:</P>
+                There are 4 eligibility criteria for grant funding.<br/><br/>
+                Eligible technology should:
                   <ul>
                     <li>have a sensing system and can understand its environment</li>
                     <li>make decisions and plan</li>
@@ -1489,9 +1490,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `There are 4 eligibility criteria for grant funding.</br></br>
-                        Robotic items must meet all 4 criteria to be eligible.<br/><br/>
-                        Automatic items must meet at least 2 criteria to be eligible. `
+                para: `Robotic items must meet all 4 criteria to be eligible.\n\n
+                      Automatic items must meet at least 2 criteria to be eligible.`
               }]
             }]
           },
@@ -2181,7 +2181,7 @@ const questionBank = {
           preValidationKeys: ['technologyItems'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
+            messageContent: 'Automatic items must fit at least 2 criteria to be eligible for grant funding.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
@@ -2223,6 +2223,9 @@ const questionBank = {
             {
               key: 'automatic-eligibility-A4',
               value: 'Works in a continuous loop'
+            },
+            {
+              value: 'divider'
             },
             {
               key: 'automatic-eligibility-A5',
