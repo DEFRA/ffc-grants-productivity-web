@@ -1515,6 +1515,150 @@ const questionBank = {
           yarKey: 'roboticAutomatic'
         },
         {
+          key: 'automatic-eligibility',
+          order: 375,
+          title: `Which eligibility criteria does your automatic {{_technologyItems_}} meet?`,
+          pageTitle: '',
+          replace: true,
+          url: 'automatic-eligibility',
+          baseUrl: 'automatic-eligibility',
+          backUrl: 'robotic-automatic',
+          preValidationKeys: ['technologyItems'],
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: 'Automatic items must fit at least 2 criteria to be eligible for grant funding.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          hint: {
+            text: 'Select all that apply'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select what eligibility criteria your automatic technology meets'
+            },
+          ],
+          answers: [
+            {
+              key: 'automatic-eligibility-A1',
+              value: 'Has sensing system that can understand its environment '
+            },
+            {
+              key: 'automatic-eligibility-A2',
+              value: 'Makes decisions and plans'
+            },
+            {
+              key: 'automatic-eligibility-A3',
+              value: 'Can control its actuators (the devices that move robotic joints)'
+            },
+            {
+              key: 'automatic-eligibility-A4',
+              value: 'Works in a continuous loop'
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'automatic-eligibility-A5',
+              value: 'None of the above',
+              notEligible: true
+            }
+          ],
+          yarKey: 'automaticEligibility'
+        },
+        {
+          key: 'robotic-eligibility',
+          order: 376,
+          title: `Does your robotic {{_technologyItems_}} fit the eligibility criteria??`,
+          pageTitle: '',
+          replace: true,
+          url: 'robotic-eligibility',
+          baseUrl: 'robotic-eligibility',
+          backUrl: 'robotic-automatic',
+          preValidationKeys: ['technologyItems'],
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: 'Automatic items must fit at least 2 criteria to be eligible for grant funding.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'single-answer',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          minAnswerCount: 1,
+          id: 'roboticEligibility',
+          hint: {
+            html: 
+            ` <div id="roboticEligibility">
+                To be eligible, your robotic technology must:
+                  <ul>
+                    <li>have a sensing system and can understand its environment</li>
+                    <li>make decisions and plan</li>
+                    <li>be able to control its actuators (the devices that move robot joints)</li>
+                    <li>work in a continuous loop</li>
+                  <ul>
+              </div>
+            `
+          },
+          ineligibleContent: {
+            heading: 'You cannot apply for grant funding for this item',
+            messageContent: `RPA will only fund robotic technology that:
+            <ul class="govuk-list govuk-list--bullet">
+              <li>have a sensing system and can understand its environment</li>
+              <li>make decisions and plan</li>
+              <li>be able to control its actuators (the devices that move robot joints)</li>
+              <li>work in a continuous loop</li>
+            </ul>
+            `,
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'Robotic items must meet all 4 criteria to be eligible.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if your robotic technology fits the eligibility criteria'
+            },
+          ],
+          answers: [
+            {
+              key: 'robotic-eligibility-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'robotic-eligibility-A2',
+              value: 'No',
+              notEligible: true
+            }
+          ],
+          yarKey: 'roboticEligibility'
+        },
+        {
           key: 'other-robotic-technology',
           order: 305,
           title: 'What is your other robotic technology?',
@@ -2169,73 +2313,6 @@ const questionBank = {
           ],
           yarKey: 'technologyUse'
         },
-        {
-          key: 'automatic-eligibility',
-          order: 375,
-          title: `Which eligibility criteria does your automatic {{_technologyItems_}} meet?`,
-          pageTitle: '',
-          replace: true,
-          url: 'automatic-eligibility',
-          baseUrl: 'automatic-eligibility',
-          backUrl: 'robotic-automatic',
-          preValidationKeys: ['technologyItems'],
-          eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: 'Automatic items must fit at least 2 criteria to be eligible for grant funding.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          type: 'multi-answer',
-          minAnswerCount: 1,
-          hint: {
-            text: 'Select all that apply'
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
-                items: []
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select what eligibility criteria your automatic technology meets'
-            },
-          ],
-          answers: [
-            {
-              key: 'automatic-eligibility-A1',
-              value: 'Has sensing system that can understand its environment '
-            },
-            {
-              key: 'automatic-eligibility-A2',
-              value: 'Makes decisions and plans'
-            },
-            {
-              key: 'automatic-eligibility-A3',
-              value: 'Can control its actuators (the devices that move robotic joints)'
-            },
-            {
-              key: 'automatic-eligibility-A4',
-              value: 'Works in a continuous loop'
-            },
-            {
-              value: 'divider'
-            },
-            {
-              key: 'automatic-eligibility-A5',
-              value: 'None of the above',
-              notEligible: true
-            }
-          ],
-          yarKey: 'automaticEligibility'
-        },
-
         /// ////// ***************** ROBOTICS END  ************************************/////////////////////
         {
           key: 'answers',
