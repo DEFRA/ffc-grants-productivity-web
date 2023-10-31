@@ -731,7 +731,7 @@ const questionBank = {
         {
           key: 'solar-technologies',
           order: 61,
-          title: 'What solar technologies does your project need?',
+          title: 'What solar project items does your project need?',
           pageTitle: '',
           url: 'solar-technologies',
           baseUrl: 'solar-technologies',
@@ -1020,7 +1020,7 @@ const questionBank = {
           },
           id: 'projectCost',
           label: {
-            text: 'What is the total estimated cost of the solar PV system?',
+            text: 'What is the total estimated cost of the solar project items?',
             classes: 'govuk-label--l',
             isPageHeading: true,
             for: 'projectCost'

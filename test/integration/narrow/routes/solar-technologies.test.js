@@ -24,7 +24,7 @@ describe('Page: /solar-technologies', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What solar technologies does your project need?')
+    expect(response.payload).toContain('What solar project items does your project need?')
     expect(response.payload).toContain('An electrical grid connection')
     expect(response.payload).toContain('Solar panels')
     expect(response.payload).toContain('An inverter')
