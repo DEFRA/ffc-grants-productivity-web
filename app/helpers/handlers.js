@@ -65,7 +65,7 @@ const getContractorFarmerModel = (data, question, request, conditionalHtml) => {
 }
 const getPage = async (question, request, h) => {
   const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationObject, replace } = question
-  const backUrl = getUrl(backUrlObject, question.backUrl, request)
+  let backUrl = getUrl(backUrlObject, question.backUrl, request)
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject)
   if (isRedirect) {
@@ -75,9 +75,9 @@ const getPage = async (question, request, h) => {
 
   if(url === 'item-conditional') { 
     if(getYarValue(request, 'projectItemsList')?.length === 1) {
-      question.backUrl = `${urlPrefix}/other-item`
+      backUrl = `${urlPrefix}/other-item`
     } else {
-      question.backUrl = `${urlPrefix}/project-items-summary`
+      backUrl = `${urlPrefix}/project-items-summary`
     }
   }
 
