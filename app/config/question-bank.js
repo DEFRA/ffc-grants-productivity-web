@@ -1631,7 +1631,6 @@ const questionBank = {
           },
           yarKey: 'otherRoboticsConditional'
         },
-
         {
           key: 'other-item',
           order: 308,
@@ -1640,20 +1639,6 @@ const questionBank = {
           url: 'other-item',
           baseUrl: 'other-item',
           backUrl: 'technology-description',
-          // preValidationObject: {
-          //   preValidationKeys: ['projectStart'],
-          //   preValidationAnswer: ['project-start-A2'],
-          //   preValidationRule: 'NOT',
-          //   preValidationUrls: ['project-start']
-          // },
-          dependantNextUrl: {
-            dependentQuestionYarKey: 'projectSubject',
-            dependentAnswerKeysArray: ['project-subject-A2'],
-            urlOptions: {
-              thenUrl: 'existing-solar',
-              elseUrl: 'project-items'
-            }
-          },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
