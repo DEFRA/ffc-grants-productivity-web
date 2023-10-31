@@ -1,11 +1,13 @@
 const { crumbToken } = require('./test-helper')
 describe('Cookies page', () => {
   const varList = { farmerDetails: 'someValue', contractorsDetails: 'someValue' }
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return 'Error'
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
     }
   }))
   it('page loads successfully, with all the options', async () => {

@@ -9,11 +9,13 @@ describe('technology-items', () => {
     tenancy: 'Yes',
     projectItems: 'Robotic equipment item'
   }
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return 'Error'
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
     }
   }))
   it('page loads successfully, with all the options', async () => {
@@ -24,8 +26,8 @@ describe('technology-items', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const htmlPage = createPage(response.payload)
-    const heading = getQuestionH1(htmlPage)
-    const questionAnswers = getQuestionRadios(htmlPage)
+    const heading = getPageHeading(htmlPage)
+    const questionAnswers = getPageRadios(htmlPage)
     expect(extractCleanText(heading)).toBe('What technology does your project need?')
     expect(questionAnswers.length).toBe(9)
     expect(questionAnswers[0].value).toBe('Harvesting technology')
@@ -48,7 +50,7 @@ describe('technology-items', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const questionErrors = getQuestionErrors(htmlPage)
+    const questionErrors = getPageErrors(htmlPage)
     const targetError = getTargetByText(questionErrors, 'Select what technology your project needs')
     expect(targetError.length).toBe(1)
   })

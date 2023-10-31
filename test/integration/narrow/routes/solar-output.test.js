@@ -5,11 +5,13 @@ describe('Page: /solar-output', () => {
     solarOutput: 'randomData'
   }
 
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return null
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
     }
   }))
 
@@ -88,6 +90,9 @@ describe('Page: /solar-output', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"solar-installation\" class=\"govuk-back-link\">Back</a>')
+    const htmlPage = createPage(response.payload)
+    const backLink = getBackLink(htmlPage)
+    expect(backLink.href).toEqual('solar-installation')
+    expect(extractCleanText(backLink)).toEqual('Back')
   })
 })

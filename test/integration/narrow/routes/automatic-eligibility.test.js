@@ -5,11 +5,13 @@ describe('Page: /automatic-eligibility', () => {
     technologyItems: 'Harvesting technology',
     roboticAutomatic: 'Automatic'
   }
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
     }
   }))
   it('page loads successfully with all the options', async () => {
@@ -23,7 +25,7 @@ describe('Page: /automatic-eligibility', () => {
     const page = createPage(response.payload)
     const h1s = page.querySelectorAll('h1.govuk-heading-l')
     const mainH1 = getTargetByText(h1s, 'Which eligibility criteria does your automatic harvesting technology meet?')
-    const checkboxes = getQuestionCheckboxes(page)
+    const checkboxes = getPageCheckboxes(page)
     expect(mainH1).not.toBeNull()
     expect(checkboxes.length).toBe(5)
     expect(checkboxes[0].value).toBe('Has sensing system that can understand its environment')
@@ -42,7 +44,7 @@ describe('Page: /automatic-eligibility', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errors = getQuestionErrors(page)
+    const errors = getPageErrors(page)
     const error = getTargetByText(errors, 'Select what eligibility criteria your automatic technology meets')
     expect(error.length).toBe(1)
   })
@@ -116,7 +118,7 @@ describe('Page: /automatic-eligibility', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const page = createPage(response.payload)
-    const h1 = getQuestionH1(page)
+    const h1 = getPageHeading(page)
     expect(h1).not.toBeNull()
     expect(extractCleanText(h1)).toBe('Which eligibility criteria does your other automatic technology meet?')
   })

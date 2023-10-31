@@ -6,11 +6,13 @@ describe('Page: /robotic-automatic', () => {
     technologyItems: 'Harvesting technology'
   }
 
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
     }
   }))
 
@@ -85,6 +87,9 @@ describe('Page: /robotic-automatic', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"technology-items\" class=\"govuk-back-link\">Back</a>')
+    const htmlPage = createPage(response.payload)
+    const backLink = getBackLink(htmlPage)
+    expect(backLink.href).toBe('technology-items')
+    expect(extractCleanText(backLink)).toBe('Back')
   })
 })

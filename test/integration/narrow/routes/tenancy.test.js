@@ -6,11 +6,13 @@ describe('Page: /tenancy', () => {
     projectSubject: 'randomData'
   }
 
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
     }
   }))
 
@@ -90,6 +92,9 @@ describe('Page: /tenancy', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"project-start\" class=\"govuk-back-link\">Back</a>')
+    const page = createPage(response.payload)
+    const backLink = getBackLink(page)
+    expect(backLink.href).toEqual('/project-items')
+    expect(extractCleanText(backLink)).toEqual('Back')
   })
 })

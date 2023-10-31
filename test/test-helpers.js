@@ -1,19 +1,19 @@
 const createPage = (textContent) => {
   return new JSDOM(textContent).window.document
 }
-const getQuestionH1 = (htmlPage) => {
+const getPageHeading = (htmlPage) => {
   return htmlPage.querySelector('h1.govuk-fieldset__heading')
 }
-const getQuestionCheckboxes = (htmlPage) => {
+const getPageCheckboxes = (htmlPage) => {
   return htmlPage.querySelectorAll('input.govuk-checkboxes__input')
 }
-const getQuestionRadios = (htmlPage) => {
+const getPageRadios = (htmlPage) => {
   return htmlPage.querySelectorAll('input.govuk-radios__input')
 }
-const getQuestionLabels = (htmlPage) => {
+const getPageLabels = (htmlPage) => {
   return htmlPage.querySelectorAll('label.govuk-label')
 }
-const getQuestionErrors = (htmlPage) => {
+const getPageErrors = (htmlPage) => {
   return htmlPage
     .querySelector('ul.govuk-error-summary__list')
     .querySelectorAll('li')
@@ -38,11 +38,11 @@ const findButton = (htmlPage, value) => {
 
 module.exports = {
   createPage,
-  getQuestionH1,
-  getQuestionCheckboxes,
-  getQuestionRadios,
-  getQuestionLabels,
-  getQuestionErrors,
+  getPageHeading,
+  getPageCheckboxes,
+  getPageRadios,
+  getPageLabels,
+  getPageErrors,
   getTargetByText,
   getBackLink,
   extractCleanText,

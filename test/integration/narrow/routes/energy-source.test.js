@@ -3,11 +3,13 @@ describe('Robotics Energy Source Page', () => {
   const varList = {
     energySource: ['Biofuels', 'another source']
   }
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
     }
   }))
   it('should returns error message if no option is selected', async () => {

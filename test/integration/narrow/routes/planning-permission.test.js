@@ -5,11 +5,13 @@ describe('Page: /planning-permission', () => {
     inEngland: 'Yes',
     planningPermission: 'Should be in place by the time I make my full application'
   }
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
     }
   }))
   it('page loads successfully, with all the options', async () => {
@@ -84,6 +86,9 @@ describe('Page: /planning-permission', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"country\" class=\"govuk-back-link\">Back</a>')
+    const htmlPage = createPage(response.payload)
+    const backLink = getBackLink(htmlPage)
+    expect(backLink.href).toBe('country')
+    expect(extractCleanText(backLink)).toBe('Back')
   })
 })

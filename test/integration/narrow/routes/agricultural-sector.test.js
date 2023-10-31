@@ -1,11 +1,13 @@
 const { crumbToken } = require('./test-helper')
 describe('robotics agricultural sector page', () => {
   const varList = { }
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
     }
   }))
   it('page loads successfully, with all the options', async () => {
@@ -16,8 +18,8 @@ describe('robotics agricultural sector page', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const htmlPage = createPage(response.payload)
-    const questionH1 = getQuestionH1(htmlPage)
-    const questionAnswers = getQuestionCheckboxes(htmlPage)
+    const questionH1 = getPageHeading(htmlPage)
+    const questionAnswers = getPageCheckboxes(htmlPage)
     expect(questionAnswers.length).toBe(4)
     expect(extractCleanText(questionH1)).toBe('Which agricultural sector is your project in?')
     expect(questionAnswers[0].value).toBe('Horticulture')
@@ -35,7 +37,7 @@ describe('robotics agricultural sector page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const questionErrors = getQuestionErrors(htmlPage)
+    const questionErrors = getPageErrors(htmlPage)
     const targetError = getTargetByText(questionErrors, 'Select up to 2 sectors your project is in')
     expect(targetError.length).toBe(1)
   })

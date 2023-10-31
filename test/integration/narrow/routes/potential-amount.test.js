@@ -8,11 +8,13 @@ describe('Page: /potential-amount', () => {
   }
   const eligiblePageText = 'You may be able to apply for a grant of up to £15,000, based on the estimated cost of £37,500.'
 
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
     }
   }))
 

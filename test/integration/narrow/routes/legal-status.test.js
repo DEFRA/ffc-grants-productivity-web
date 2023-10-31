@@ -5,14 +5,15 @@ const varListTemplate = {
   businessLocation: 'Yes'
 }
 let varList
-const mockSession = {
-  setYarValue: (request, key, value) => null,
-  getYarValue: (request, key) => {
-    if (Object.keys(varList).includes(key)) return varList[key]
-    else return undefined
+jest.mock('grants-helpers', () => ({
+  functions: {
+    setYarValue: (request, key, value) => null,
+    getYarValue: (request, key) => {
+      if (varList[key]) return varList[key]
+      else return null
+    }
   }
-}
-jest.mock('../../../../app/helpers/functions/session', () => mockSession)
+}))
 describe('Legal status page', () => {
   beforeEach(() => {
     varList = { ...varListTemplate }
@@ -28,11 +29,11 @@ describe('Legal status page', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const page = createPage(response.payload)
-    const heading = getQuestionH1(page)
+    const heading = getPageHeading(page)
     expect(extractCleanText(heading)).toEqual(
       'What is the legal status of the business?'
     )
-    const radios = getQuestionRadios(page)
+    const radios = getPageRadios(page)
     expect(radios.length).toEqual(12)
     expect(radios[0].value).toBe('Sole trader')
     expect(radios[1].value).toBe('Partnership')
@@ -71,7 +72,7 @@ describe('Legal status page', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const page = createPage(response.payload)
-    const errors = getQuestionErrors(page)
+    const errors = getPageErrors(page)
     expect(errors.length).toBe(1)
     expect(extractCleanText(errors[0])).toBe(
       'Select the legal status of the business'

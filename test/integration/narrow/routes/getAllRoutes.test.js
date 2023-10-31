@@ -28,11 +28,13 @@ ALL_QUESTIONS.forEach(question => {
     })
   }
 })
-jest.doMock('../../../../app/helpers/functions/session', () => ({
-  setYarValue: (request, key, value) => null,
-  getYarValue: (request, key) => {
-    if (varList[key]) return varList[key]
-    else return undefined
+jest.doMock('grants-helpers', () => ({
+  functions: {
+    setYarValue: (request, key, value) => null,
+    getYarValue: (request, key) => {
+      if (varList[key]) return varList[key]
+      else return null
+    }
   }
 }))
 

@@ -4,11 +4,11 @@ const { JSDOM } = jsdom
 const {
   createPage,
   extractCleanText,
-  getQuestionH1,
-  getQuestionCheckboxes,
-  getQuestionRadios,
-  getQuestionLabels,
-  getQuestionErrors,
+  getPageHeading,
+  getPageCheckboxes,
+  getPageRadios,
+  getPageLabels,
+  getPageErrors,
   getTargetByText,
   getBackLink,
   findParagraphs,
@@ -24,11 +24,6 @@ beforeEach(async () => {
     updatePolicy: (request, h, analytics) => null,
     validSession: (request) => global.__VALIDSESSION__ ?? true,
     sessionIgnorePaths: []
-  }
-
-  // if global environment variable CLEANLOGS is set to true, then silence console.log
-  if (process.env.CLEANLOGS === 'true') {
-    console.log = jest.fn().mockImplementation(() => {})
   }
 
   jest.mock('../app/cookies/index', () => mockSession)
@@ -58,11 +53,11 @@ beforeEach(async () => {
   global.JSDOM = JSDOM
   global.createPage = createPage
   global.extractCleanText = extractCleanText
-  global.getQuestionH1 = getQuestionH1
-  global.getQuestionCheckboxes = getQuestionCheckboxes
-  global.getQuestionRadios = getQuestionRadios
-  global.getQuestionLabels = getQuestionLabels
-  global.getQuestionErrors = getQuestionErrors
+  global.getPageHeading = getPageHeading
+  global.getPageCheckboxes = getPageCheckboxes
+  global.getPageRadios = getPageRadios
+  global.getPageLabels = getPageLabels
+  global.getPageErrors = getPageErrors
   global.getTargetByText = getTargetByText
   global.getBackLink = getBackLink
   global.findParagraphs = findParagraphs

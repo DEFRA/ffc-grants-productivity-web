@@ -3,7 +3,7 @@ const { getDesirabilityAnswers } = require('../messaging/create-msg')
 
 const { ALL_QUESTIONS } = require('../config/question-bank')
 // const pollingConfig = require('../config/polling')
-const { setYarValue } = require('../helpers/functions/session')
+const { setYarValue } = require('grants-helpers').functions
 const gapiService = require('../services/gapi-service')
 const { getProdScoring } = require('../messaging/application')
 

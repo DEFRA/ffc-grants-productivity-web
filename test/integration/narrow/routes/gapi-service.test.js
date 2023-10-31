@@ -3,13 +3,16 @@ appInsights.logException = jest.fn((req, event) => {
   return null
 })
 
-jest.mock('../../../../app/helpers/functions/session', () => {
-  const original = jest.requireActual('../../../../app/helpers/functions/session')
-  return {
-    ...original,
-    setYarValue: jest.fn((a, b, c) => {})
+const varList = {}
+jest.mock('grants-helpers', () => ({
+  functions: {
+    setYarValue: (request, key, value) => null,
+    getYarValue: (request, key) => {
+      if (varList[key]) return varList[key]
+      else return null
+    }
   }
-})
+}))
 
 jest.mock('../../../../app/services/protective-monitoring-service', () => {
   const original = jest.requireActual('../../../../app/services/protective-monitoring-service')

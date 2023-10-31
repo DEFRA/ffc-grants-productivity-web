@@ -1,17 +1,18 @@
-const { getBackLink, getQuestionErrors, getTargetByText } = require('../../../test-helpers')
+const { getBackLink, getPageErrors, getTargetByText } = require('../../../test-helpers')
 const { crumbToken } = require('./test-helper')
 const varListTemplate = {
   projectSubject: 'Slurry Acidification'
 }
 let varList
-const mockSession = {
-  setYarValue: (request, key, value) => null,
-  getYarValue: (request, key) => {
-    if (Object.keys(varList).includes(key)) return varList[key]
-    else return 'Error'
+jest.mock('grants-helpers', () => ({
+  functions: {
+    setYarValue: (request, key, value) => null,
+    getYarValue: (request, key) => {
+      if (varList[key]) return varList[key]
+      else return null
+    }
   }
-}
-jest.mock('../../../../app/helpers/functions/session', () => mockSession)
+}))
 describe('Project and business details page', () => {
   beforeEach(() => {
     varList = { ...varListTemplate }
@@ -45,7 +46,6 @@ describe('Project and business details page', () => {
     expect(extractCleanText(hint)).toBe(
       'For example, Browns Hill Farm robotic milking'
     )
-    // expect(response.payload).toContain('For example, Browns Hill Farm robotic milking')
   })
   it('should diaplay Back to details buton if the user came from check details page ', async () => {
     varList.reachedCheckDetails = true
@@ -60,6 +60,7 @@ describe('Project and business details page', () => {
     expect(extractCleanText(backLink)).toBe('Back')
     expect(backLink.href).toBe('score')
     // back to details button
+    expect(response.payload).toContain('Back to details')
     const allButtons = page.querySelectorAll('button.govuk-button')
     const backToDetailsButton = getTargetByText(allButtons, 'Back to details')
     expect(backToDetailsButton.length).toBe(1)
@@ -77,7 +78,7 @@ describe('Project and business details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errorSummary = getQuestionErrors(page)
+    const errorSummary = getPageErrors(page)
     expect(errorSummary.length).toBe(4)
     expect(extractCleanText(errorSummary[0])).toBe('Enter a project name')
     expect(extractCleanText(errorSummary[1])).toBe('Enter a business name')
@@ -106,7 +107,7 @@ describe('Project and business details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errorSummary = getQuestionErrors(page)
+    const errorSummary = getPageErrors(page)
     console.log(errorSummary)
     expect(errorSummary.length).toBe(1)
     expect(extractCleanText(errorSummary[0])).toBe(
@@ -131,7 +132,7 @@ describe('Project and business details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errorSummary = getQuestionErrors(page)
+    const errorSummary = getPageErrors(page)
     expect(errorSummary.length).toBe(1)
     expect(extractCleanText(errorSummary[0])).toBe(
       'Number must be between 1-9999999'
@@ -155,7 +156,7 @@ describe('Project and business details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errorSummary = getQuestionErrors(page)
+    const errorSummary = getPageErrors(page)
     expect(errorSummary.length).toBe(1)
     expect(extractCleanText(errorSummary[0])).toBe(
       'Number must be between 1-9999999'
@@ -179,7 +180,7 @@ describe('Project and business details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errorSummary = getQuestionErrors(page)
+    const errorSummary = getPageErrors(page)
     expect(errorSummary.length).toBe(1)
     expect(extractCleanText(errorSummary[0])).toBe(
       'Business turnover must be a whole number, like 100000'
@@ -203,7 +204,7 @@ describe('Project and business details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errorSummary = getQuestionErrors(page)
+    const errorSummary = getPageErrors(page)
     expect(errorSummary.length).toBe(1)
     expect(extractCleanText(errorSummary[0])).toBe(
       'Number must be between 1-999999999'
@@ -227,7 +228,7 @@ describe('Project and business details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errorSummary = getQuestionErrors(page)
+    const errorSummary = getPageErrors(page)
     expect(errorSummary.length).toBe(1)
     expect(extractCleanText(errorSummary[0])).toBe(
       'Number must be between 1-999999999'
@@ -252,7 +253,7 @@ describe('Project and business details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errorSummary = getQuestionErrors(page)
+    const errorSummary = getPageErrors(page)
     expect(errorSummary.length).toBe(1)
     expect(extractCleanText(errorSummary[0])).toBe(
       'SBI number must have 9 characters, like 011115678'
@@ -277,7 +278,7 @@ describe('Project and business details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errorSummary = getQuestionErrors(page)
+    const errorSummary = getPageErrors(page)
     expect(errorSummary.length).toBe(1)
     expect(extractCleanText(errorSummary[0])).toBe(
       'SBI number must have 9 characters, like 011115678'
@@ -302,7 +303,7 @@ describe('Project and business details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errorSummary = getQuestionErrors(page)
+    const errorSummary = getPageErrors(page)
     expect(errorSummary.length).toBe(1)
     expect(extractCleanText(errorSummary[0])).toBe(
       'SBI number must have 9 characters, like 011115678'
@@ -327,7 +328,7 @@ describe('Project and business details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errorSummary = getQuestionErrors(page)
+    const errorSummary = getPageErrors(page)
     expect(errorSummary.length).toBe(1)
     expect(extractCleanText(errorSummary[0])).toBe(
       'SBI number must have 9 characters, like 011115678'

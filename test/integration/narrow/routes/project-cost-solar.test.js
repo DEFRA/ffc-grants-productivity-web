@@ -8,15 +8,15 @@ const varListTemplate = {
 }
 
 let varList
-const mockSession = {
-  setYarValue: (request, key, value) => null,
-  getYarValue: (request, key) => {
-    if (Object.keys(varList).includes(key)) return varList[key]
-    else return undefined
+jest.mock('grants-helpers', () => ({
+  functions: {
+    setYarValue: (request, key, value) => null,
+    getYarValue: (request, key) => {
+      if (varList[key]) return varList[key]
+      else return null
+    }
   }
-}
-
-jest.mock('../../../../app/helpers/functions/session', () => mockSession)
+}))
 
 describe('Project cost solar page', () => {
   beforeEach(() => {

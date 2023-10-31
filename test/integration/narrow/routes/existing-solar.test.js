@@ -5,11 +5,13 @@ describe('Page: /existing-solar', () => {
     projectSubject: 'Solar technologies',
     projectResponsibility: 'Yes, I plan to take full responsibility for my project'
   }
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return null
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
     }
   }))
   it('page loads successfully, with all the options', async () => {
@@ -20,9 +22,9 @@ describe('Page: /existing-solar', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const page = createPage(response.payload)
-    const heading = getQuestionH1(page)
+    const heading = getPageHeading(page)
     expect(extractCleanText(heading)).toBe('Does your farm have an existing solar PV system?')
-    const radios = getQuestionRadios(page)
+    const radios = getPageRadios(page)
     expect(radios.length).toBe(2)
     expect(radios[0].value).toBe('Yes')
     expect(radios[1].value).toBe('No')
@@ -37,7 +39,7 @@ describe('Page: /existing-solar', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errors = getQuestionErrors(page)
+    const errors = getPageErrors(page)
     expect(errors.length).toBe(1)
     expect(extractCleanText(errors[0])).toBe('Select yes if your farm has an existing solar PV system')
   })

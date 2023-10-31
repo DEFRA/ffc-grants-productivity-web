@@ -6,11 +6,13 @@ describe('project-start', () => {
     applicant: 'Farmer'
   }
 
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return 'Error'
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
     }
   }))
   it('no option is selected -> return error message', async () => {
@@ -26,7 +28,7 @@ describe('project-start', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errors = getQuestionErrors(page)
+    const errors = getPageErrors(page)
     const error = getTargetByText(errors, 'Select the option that applies to your project')
     expect(error.length).toBe(1)
   })

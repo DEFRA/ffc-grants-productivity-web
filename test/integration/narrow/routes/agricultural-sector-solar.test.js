@@ -3,11 +3,13 @@ describe('agricultural sector solar page', () => {
   const varList = {
     remainingCosts: 120000
   }
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return null
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (varList[key]) return varList[key]
+        else return null
+      }
     }
   }))
   it('page loads successfully, with all the options', async () => {
@@ -18,8 +20,8 @@ describe('agricultural sector solar page', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const htmlPage = createPage(response.payload)
-    const h1 = getQuestionH1(htmlPage)
-    const checkboxes = getQuestionCheckboxes(htmlPage)
+    const h1 = getPageHeading(htmlPage)
+    const checkboxes = getPageCheckboxes(htmlPage)
     expect(h1.textContent.trim()).toEqual(
       'Which agricultural sector is your project in?'
     )
@@ -43,7 +45,7 @@ describe('agricultural sector solar page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const errors = getQuestionErrors(htmlPage)
+    const errors = getPageErrors(htmlPage)
     expect(errors.length).toEqual(1)
     expect(errors[0].textContent.trim()).toEqual(
       'Select up to 2 sectors your project is in'
@@ -62,7 +64,7 @@ describe('agricultural sector solar page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const errors = getQuestionErrors(htmlPage)
+    const errors = getPageErrors(htmlPage)
     expect(errors.length).toEqual(1)
     expect(errors[0].textContent.trim()).toEqual(
       'Select up to 2 sectors your project is in'

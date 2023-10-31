@@ -4,14 +4,15 @@ const varListTemplate = {
 const senders = require('../../../../app/messaging/senders')
 require('dotenv').config()
 let varList
-const mockSession = {
-  setYarValue: (request, key, value) => null,
-  getYarValue: (request, key) => {
-    if (Object.keys(varList).includes(key)) return varList[key]
-    else return 'Error'
+jest.mock('grants-helpers', () => ({
+  functions: {
+    setYarValue: (request, key, value) => null,
+    getYarValue: (request, key) => {
+      if (varList[key]) return varList[key]
+      else return null
+    }
   }
-}
-jest.mock('../../../../app/helpers/functions/session', () => mockSession)
+}))
 describe('Reference number page', () => {
   beforeEach(() => {
     varList = { ...varListTemplate }
