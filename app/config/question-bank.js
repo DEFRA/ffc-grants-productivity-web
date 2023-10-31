@@ -1664,7 +1664,26 @@ const questionBank = {
           ],
           yarKey: 'otherItem'
         },
-
+        {
+          key: 'item-conditional',
+          title: 'Your technology might get a grant from this scheme',
+          order: 309,
+          url: 'item-conditional',
+          baseUrl: 'item-conditional',
+          backUrl: 'other-item',
+          nextUrl: 'project-cost',
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Your other technology might get a grant from this scheme',
+            messageContent: `RPA will assess your technology and whether they will fund it.<br/><br/>
+            They will let you know if the technology is eligible before the application window opens and projects are invited to apply.`,
+            warning: {
+              text: 'There’s no guarantee your item will be funded.',
+              iconFallbackText: 'Warning'
+            }
+          },
+          yarKey: 'itemConditional'
+        },  
         {
           key: 'project-cost',
           order: 310,

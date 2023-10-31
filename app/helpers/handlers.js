@@ -72,6 +72,15 @@ const getPage = async (question, request, h) => {
     return h.redirect(startPageUrl)
   }
   let confirmationId = ''
+
+  if(url === 'item-conditional') { 
+    if(getYarValue(request, 'projectItemsList')?.length === 1) {
+      question.backUrl = `${urlPrefix}/other-item`
+    } else {
+      question.backUrl = `${urlPrefix}/project-items-summary`
+    }
+  }
+
   if (question.maybeEligible) {
     let { maybeEligibleContent } = question
     maybeEligibleContent.title = question.title
