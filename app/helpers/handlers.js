@@ -446,6 +446,41 @@ const showPostPage = (currentQuestion, request, h) => {
           return h.redirect(`${urlPrefix}/other-item`)
         }
       }
+
+      // Zac said to leave it here for now
+
+      // case 'technology-description': {
+      //   let tempArray = getYarValue(request, 'projectItemsList') ?? []
+      //   let tempObject = {
+      //     item: getYarValue(request, 'technologyItems'),
+      //     type: getYarValue(request, 'roboticAutomatic'),
+      //     criteria: getYarValue(request, 'automaticEligibility') || 
+      //     getYarValue(request, 'roboticEligibility'),
+      //     description: getYarValue(request, 'itemDescription')
+      //   }
+       
+      //   tempArray.push(tempObject)
+      //   setYarValue(request, 'projectItemsList', tempArray)
+      // }
+      case 'other-item': {
+        let tempArray = getYarValue(request, 'projectItemsList') ?? []
+        let tempObject = {
+          item: getYarValue(request, 'technologyItems'),
+          type: getYarValue(request, 'roboticAutomatic'),
+          criteria: getYarValue(request, 'automaticEligibility') || 
+          getYarValue(request, 'roboticEligibility'),
+          description: getYarValue(request, 'itemDescription')
+        }
+       
+        tempArray.push(tempObject)
+        setYarValue(request, 'projectItemsList', tempArray)
+        
+        if(getYarValue(request, 'projectItemsList')?.length === 1) {
+          return h.redirect(`${urlPrefix}/item-conditional`)
+        } else {
+          return h.redirect(`${urlPrefix}/project-items-summary`)
+        }
+      } 
     default:
       break
   }
