@@ -777,7 +777,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select what solar technologies your project needs'
+              error: 'Select what solar project items your project needs'
             }
           ],
           answers: [
