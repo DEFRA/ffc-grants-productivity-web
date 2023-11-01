@@ -3325,12 +3325,16 @@ const questionBank = {
             warning: {
               text: 'You must not start the project'
             },
+            insertText: {
+              text: 'Scotland, Wales and Northern Ireland have other grants available.'
+            },
             extraMessageContent: `<p>Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement will invalidate your application.</p> 
             <p>Before you start the project, you can:</p>
             <ul>
               <li>get quotes from suppliers</li>
               <li>apply for planning permission</li>
-            </ul>`,
+            </ul>
+            <p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`,
           },
           // ineligibleContent: {
           //   messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
