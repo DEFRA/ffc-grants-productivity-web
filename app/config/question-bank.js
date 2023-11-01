@@ -3325,25 +3325,20 @@ const questionBank = {
             warning: {
               text: 'You must not start the project'
             },
-            insertText: {
-              text: 'Scotland, Wales and Northern Ireland have other grants available.'
-            },
             extraMessageContent: `<p>Starting the project or committing to any costs (such as placing orders) before you receive a funding agreement will invalidate your application.</p> 
             <p>Before you start the project, you can:</p>
             <ul>
               <li>get quotes from suppliers</li>
               <li>apply for planning permission</li>
-            </ul>
-            <p class="govuk-body"><a class="govuk-link" href="${process.env.SURVEY_LINK}" target="_blank" rel="noopener noreferrer">What do you think of this service? (opens in a new tab)</a></p>`,
+            </ul>`,
+            insertText: {
+              text: 'If you want your landlord to underwrite your project, you will need them to sign a letter of assurance. This letter will say your landlord agrees to take over your project, including conditions in the Grant Funding Agreement, if your tenancy ends. You should discuss and agree this with your landlord before you begin your full application.'
+            },
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'What do you think of this service?'
+            },
           },
-          // ineligibleContent: {
-          //   messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
-          //   insertText: { text: 'If you want your landlord to underwrite your project, you will need them to sign a letter of assurance. This letter will say your landlord agrees to take over your project, including conditions in the Grant Funding Agreement, if your tenancy ends. You should discuss and agree this with your landlord before you begin your full application.' },
-          //   },
-          //   messageLink: {
-          //     url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-          //     title: 'What do you think of this service?'
-          //   },
           fundingPriorities: '',
           type: '',
           minAnswerCount: 1,
