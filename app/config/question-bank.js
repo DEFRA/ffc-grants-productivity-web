@@ -1642,6 +1642,59 @@ const questionBank = {
           yarKey: 'otherRoboticsConditional'
         },
         {
+          key: 'other-item',
+          order: 308,
+          title: 'Do you need to add another robotic or automatic item?',
+          pageTitle: '',
+          url: 'other-item',
+          baseUrl: 'other-item',
+          backUrl: 'technology-description',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: ' govuk-radios--inline govuk-fieldset__legend--l',
+          minAnswerCount: 1,
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select if you need to add another robotic or automatic item'
+            }
+          ],
+          answers: [
+            {
+              key: 'other-item-A1',
+              value: 'Yes',
+              redirectUrl: 'technology-items'
+            },
+            {
+              key: 'other-item-A2',
+              value: 'No',
+            }
+          ],
+          yarKey: 'otherItem'
+        },
+        {
+          key: 'item-conditional',
+          title: 'Your technology might get a grant from this scheme',
+          order: 309,
+          url: 'item-conditional',
+          baseUrl: 'item-conditional',
+          backUrl: 'other-item',
+          nextUrl: 'project-cost',
+          maybeEligible: true,
+          maybeEligibleContent: {
+            messageHeader: 'Your other technology might get a grant from this scheme',
+            messageContent: `RPA will assess your technology and whether they will fund it.<br/><br/>
+            They will let you know if the technology is eligible before the application window opens and projects are invited to apply.`,
+            warning: {
+              text: 'There’s no guarantee your item will be funded.',
+              iconFallbackText: 'Warning'
+            }
+          },
+          yarKey: 'itemConditional'
+        },  
+        {
           key: 'project-cost',
           order: 310,
           pageTitle: '',
@@ -3354,7 +3407,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost']
+const YAR_KEYS = ['projectPostcode', 'remainingCost'] // project-items-list
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,
