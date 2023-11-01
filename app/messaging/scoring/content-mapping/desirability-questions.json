@@ -104,7 +104,8 @@
         "solar-output-A2": "51kW to 100kW",
         "solar-output-A3": "101kW to 150kW",
         "solar-output-A4": "151kW to 200kW",
-        "solar-output-A5": "More than 201kW"
+        "solar-output-A5": "More than 201kW",
+        "solar-output-A6": "Solar panels not chosen"
       }
     }
   ]

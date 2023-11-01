@@ -10,7 +10,8 @@ function getUserAnswer (answers, userInput) {
     return [userInput].flat().map(answer =>
       ({ key: Object.keys(answers).find(key => answers[key] === answer), value: answer }))
   } else {
-    return [{ key: null, value: userInput }]
+    // if solar panels not selected, set solar output to 'Solar panels not chosen' for scoring
+    return [{ key: 'solar-output-A6', value: 'Solar panels not chosen' }]
   }
 }
 
@@ -33,7 +34,6 @@ function getDesirabilityDetails (questionKey, userInput) {
 
 function desirability (userInput) {
   const isSolar = userInput.projectSubject === PROJECT_SUBJECT_SOLAR
-  console.log(isSolar,'-----', userInput, '---', PROJECT_SUBJECT_SOLAR)
   const key = isSolar ? 'PROD01' : 'PROD02'
   const validKeys = key === 'PROD01' ? desirabilityQuestions : desirabilityRoboticsQuestions
   const grantScheme = grantSchemeConfig.filter(g => g.key === key)[0]
