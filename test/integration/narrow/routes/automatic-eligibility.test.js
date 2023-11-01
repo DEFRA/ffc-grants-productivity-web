@@ -97,7 +97,6 @@ describe('Page: /automatic-eligibility', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Which eligibility criteria does your other automatic technology meet?')
   })
-
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
