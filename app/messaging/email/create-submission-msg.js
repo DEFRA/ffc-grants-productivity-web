@@ -206,7 +206,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       dataAnalytics: submission.dataAnalytics ?? ' ',
       dataAnalyticsScore: submission.dataAnalytics && submission.projectSubject !== PROJECT_SUBJECT_SLURRY ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-data-analytics') : ' ',
       energySource: submission.energySource ? [submission.energySource].flat().join('|') : ' ',
-      energySourceScore: submission.projectSubject !== PROJECT_SUBJECT_SLURRY ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'energy-source') : ' ',
+      energySourceScore: submission.projectSubject !== PROJECT_SUBJECT_SLURRY ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-energy-source') : ' ',
       agriculturalSector: submission.agriculturalSector ? [submission.agriculturalSector].flat().join('|') : ' ',
       agriculturalSectorScore: submission.projectSubject !== PROJECT_SUBJECT_SLURRY ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-agricultural-sector') : ' ',
       isTechnology: submission.technology ? 'Yes' : 'No',
