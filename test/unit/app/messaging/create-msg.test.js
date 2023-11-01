@@ -23,14 +23,15 @@ describe('create-msg', () => {
       energySource: ['value'],
       agriculturalSector: ['value'],
       dataAnalytics: 'testing',
-      technologyUse: 'testing'
+      technology: 'testing'
     }
     expect(getDesirabilityAnswers({})).toEqual({
       projectSubject: 'Robotics and Innovation',
       projectImpacts: 'hello',
-      // energySource: ['value'],
-      // agriculturalSector: ['value'],
-      // dataAnalytics: 'testing'
+      energySource: ['value'],
+      agriculturalSector: ['value'],
+      dataAnalytics: 'testing',
+      roboticProjectImpacts: 'testing'
     })
 
     dict = {
@@ -42,9 +43,10 @@ describe('create-msg', () => {
     expect(getDesirabilityAnswers({})).toEqual({
       projectSubject: 'Robotics and Innovation',
       projectImpacts: 'hello',
-      // energySource: ['value'],
-      // agriculturalSector: ['value'],
-      // dataAnalytics: 'testing'
+      energySource: ['value'],
+      agriculturalSector: ['value'],
+      dataAnalytics: 'testing',
+      roboticProjectImpacts: 'testing'
     })
 
     dict = {
