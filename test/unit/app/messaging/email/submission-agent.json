@@ -99,5 +99,7 @@
   "score-calculated": true,
   "tenancyLength": null,
   "landOwnership": "Yes",
-  "technologyItems": "Harvesting technology"
+  "technologyItems": "Harvesting technology",
+  "roboticAutomatic": "Automatic",
+  "automaticEligibility": ["Has sensing system that can understand its environment", "Makes decisions and plans"]
 }
