@@ -1,6 +1,8 @@
 const emailConfig = require('./config/email')
 const spreadsheetConfig = require('./config/spreadsheet')
-const PROJECT_SUBJECT_SLURRY = 'Slurry Acidification'
+const { getQuestionAnswer } = require('../../helpers/utils')
+
+const PROJECT_SUBJECT_SOLAR = getQuestionAnswer('project-subject', 'project-subject-A2')
 
 function getQuestionScoreBand (questions, questionKey) {
   return questions.find(question => question.key === questionKey).rating.band
@@ -74,7 +76,7 @@ function generateExcelFilename (scheme, projectName, businessName, referenceNumb
 function getSpreadsheetDetails (submission, desirabilityScore) {
   const today = new Date()
   const todayStr = today.toLocaleDateString('en-GB')
-  const schemeName = submission.projectSubject === PROJECT_SUBJECT_SLURRY ? 'Slurry' : 'Robotics'
+  const schemeName = submission.projectSubject === PROJECT_SUBJECT_SOLAR ? 'Slurry' : 'Robotics'
   const subScheme = `FTF-${schemeName}`
   const farmerContractorDetails = submission.farmerDetails ?? submission.contractorsDetails
   return {
@@ -185,8 +187,8 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       overallRating: desirabilityScore.desirability.overallRating.band,
       scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band),
       projectSubject: submission.projectSubject,
-      isSlurry: submission.projectSubject === PROJECT_SUBJECT_SLURRY ? 'Yes' : 'No',
-      isRobotics: submission.projectSubject === PROJECT_SUBJECT_SLURRY ? 'No' : 'Yes',
+      isSlurry: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? 'Yes' : 'No',
+      isRobotics: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? 'No' : 'Yes',
       legalStatus: submission.legalStatus,
       location: `England ${farmerContractorDetails.projectPostcode ?? farmerContractorDetails.postcode}`,
       planningPermission: submission.planningPermission,
@@ -204,14 +206,14 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       projectImpact: submission.projectImpact ?? ' ',
       isDataAnalytics: submission.dataAnalytics ? 'Yes' : 'No',
       dataAnalytics: submission.dataAnalytics ?? ' ',
-      dataAnalyticsScore: submission.dataAnalytics && submission.projectSubject !== PROJECT_SUBJECT_SLURRY ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-data-analytics') : ' ',
+      dataAnalyticsScore: submission.dataAnalytics && submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-data-analytics') : ' ',
       energySource: submission.energySource ? [submission.energySource].flat().join('|') : ' ',
-      energySourceScore: submission.projectSubject !== PROJECT_SUBJECT_SLURRY ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-energy-source') : ' ',
+      energySourceScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-energy-source') : ' ',
       agriculturalSector: submission.agriculturalSector ? [submission.agriculturalSector].flat().join('|') : ' ',
-      agriculturalSectorScore: submission.projectSubject !== PROJECT_SUBJECT_SLURRY ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-agricultural-sector') : ' ',
+      agriculturalSectorScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-agricultural-sector') : ' ',
       isTechnology: submission.technology ? 'Yes' : 'No',
       technology: submission.technology ?? ' ',
-      technologyScore: submission.projectSubject !== PROJECT_SUBJECT_SLURRY ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-technology') : ' ',
+      technologyScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-technology') : ' ',
       projectName: submission.businessDetails.projectName,
       businessName: submission.businessDetails.businessName,
       isFarmer: submission.farmerDetails ? 'Yes' : 'No',
@@ -223,7 +225,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       agentName: submission.agentsDetails?.firstName ?? ' ',
       agentSurname: submission.agentsDetails?.lastName ?? ' ',
       agentEmail: submission.agentsDetails?.emailAddress ?? ' ',
-      projectImpactsScore: submission.projectSubject === PROJECT_SUBJECT_SLURRY ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'project-impacts') : ' ',
+      projectImpactsScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'project-impacts') : ' ',
       contactConsent: submission.consentOptional ? 'Yes' : 'No',
       scoreDate: new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })
 

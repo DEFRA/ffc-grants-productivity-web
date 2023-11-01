@@ -23,7 +23,7 @@ const getQuestionByKey = (questionKey) => ALL_QUESTIONS.find(({ key }) => (key =
 
 const getQuestionAnswer = (questionKey, answerKey) => {
   const question = getQuestionByKey(questionKey)
-  return (question.answers.find(({ key }) => (key === answerKey)).value)
+  return (question.answers.find(({ key }) => (key === answerKey))?.value)
 }
 
 const allAnswersSelected = (request, questionKey, answerKeyList) => {

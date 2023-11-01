@@ -1,10 +1,10 @@
 const grantSchemeConfig = require('./config/grant-scheme')
 const { desirabilityQuestions: questionContent } = require('./content-mapping')
-const desirabilityQuestions = ['projectSubject', 'projectImpacts']
-const desirabilityRoboticsQuestions = ['projectSubject', 'dataAnalytics', 'energySource', 'agriculturalSector', 'roboticProjectImpacts']
-const PROJECT_SUBJECT_SLURRY = 'Slurry Acidification'
+const { getQuestionAnswer } = require('../../helpers/utils')
 
-// update to replace slurry with solar
+const desirabilityQuestions = ['solarTechnologies', 'solarOutput', 'agriculturalSector']
+const desirabilityRoboticsQuestions = ['projectSubject', 'dataAnalytics', 'energySource', 'agriculturalSector', 'roboticProjectImpacts']
+const PROJECT_SUBJECT_SOLAR = getQuestionAnswer('project-subject', 'project-subject-A2')
 
 function getUserAnswer (answers, userInput) {
   if (answers) {
@@ -33,8 +33,8 @@ function getDesirabilityDetails (questionKey, userInput) {
 }
 
 function desirability (userInput) {
-  const isSlurry = userInput.projectSubject === PROJECT_SUBJECT_SLURRY
-  const key = isSlurry ? 'PROD01' : 'PROD02'
+  const isSolar = userInput.projectSubject === PROJECT_SUBJECT_SOLAR
+  const key = isSolar ? 'PROD01' : 'PROD02'
   const validKeys = key === 'PROD01' ? desirabilityQuestions : desirabilityRoboticsQuestions
   const grantScheme = grantSchemeConfig.filter(g => g.key === key)[0]
   const answeredQuestions = []

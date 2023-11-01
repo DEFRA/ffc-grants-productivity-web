@@ -1,6 +1,7 @@
 const { YAR_KEYS } = require('../config/question-bank')
 const Joi = require('joi')
 const { getYarValue } = require('../helpers/session')
+const { getQuestionAnswer } = require('../helpers/utils')
 
 function getAllDetails (request, confirmationId) {
   return YAR_KEYS.reduce(
@@ -13,19 +14,22 @@ function getAllDetails (request, confirmationId) {
 }
 
 const desirabilityAnswersSchema = Joi.object({
-  projectSubject: Joi.string(),
+  projectSubject: Joi.string().allow(null),
   projectImpacts: Joi.string().allow(null),
   dataAnalytics: Joi.string().allow(null),
   energySource: Joi.array().allow(null).items(Joi.string()),
-  agriculturalSector: Joi.array().allow(null).items(Joi.string()),
-  roboticProjectImpacts: Joi.string().allow(null)
+  agriculturalSectorRobotics: Joi.array().allow(null).items(Joi.string()),
+  roboticProjectImpacts: Joi.string().allow(null),
+  agriculturalSectorSolar: Joi.array().allow(null).items(Joi.string()),
+  solarTechnologies: Joi.array().allow(null).items(Joi.string()),
+  solarOutput: Joi.string().allow(null)
 })
 
 function getDesirabilityAnswers (request) {
   try {
     let val = {}
     const projectSubject = getYarValue(request, 'projectSubject')
-    if (projectSubject === 'Robotics and Innovation') {
+    if (projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1')) {
       const energySource = []
       if (!Array.isArray(getYarValue(request, 'energySource'))) {
         energySource.push(getYarValue(request, 'energySource'))
@@ -39,13 +43,15 @@ function getDesirabilityAnswers (request) {
         projectImpacts: getYarValue(request, 'projectImpacts'),
         dataAnalytics: getYarValue(request, 'dataAnalytics'),
         energySource: energySource.length > 0 ? energySource : getYarValue(request, 'energySource'),
-        agriculturalSector: agriculturalSector.length > 0 ? agriculturalSector : getYarValue(request, 'agriculturalSector'),
+        agriculturalSectorRobotics: agriculturalSector.length > 0 ? agriculturalSector : getYarValue(request, 'agriculturalSector'),
         roboticProjectImpacts: getYarValue(request, 'technology')
+        
       }
     } else {
       val = {
-        projectSubject: getYarValue(request, 'projectSubject'),
-        projectImpacts: getYarValue(request, 'projectImpacts')
+        agriculturalSectorSolar: agriculturalSector.length > 0 ? agriculturalSector : getYarValue(request, 'agriculturalSector'),
+        solarTechnologies: getYarValue(request, 'solarTechnologies'),
+        solarOutput: getYarValue(request, 'solarOutput')
       }
     }
     const result = desirabilityAnswersSchema.validate(val, {

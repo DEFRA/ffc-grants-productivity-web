@@ -5,7 +5,10 @@ module.exports = {
     projectImpacts: 'project-impacts',
     dataAnalytics: 'robotics-data-analytics',
     energySource: 'robotics-energy-source',
-    agriculturalSector: 'robotics-agricultural-sector',
-    roboticProjectImpacts: 'robotics-project-impact'
+    agriculturalSectorRobotics: 'agricultural-sector',
+    roboticProjectImpacts: 'robotics-project-impact',
+    agriculturalSectorSolar: 'agricultural-sector-solar',
+    solarTechnologies: 'solar-technologies',
+    solarOutput: 'solar-output'
   }
 }

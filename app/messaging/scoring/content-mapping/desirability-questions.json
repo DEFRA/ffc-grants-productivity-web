@@ -5,7 +5,7 @@
       "title": "Project subject",
       "answers": {
         "project-subject-A1": "Robotics and Innovation",
-        "project-subject-A2": "Slurry Acidification"
+        "project-subject-A2": "Solar Technologies"
       }
     }
   ],
@@ -41,7 +41,7 @@
         }  
     } 
   ],
-  "agriculturalSector": [
+  "agriculturalSectorRobotics": [
     {
       "key": "robotics-agricultural-sector",
       "title": "Agricultural sector",
@@ -63,5 +63,50 @@
         "robotics-technology-A3": "No, we haven’t used it yet" 
       }
     }
+  ],
+  "agriculturalSectorSolar": [
+    {
+      "key": "agricultural-sector-solar",
+      "title": "Agricultural Sector",
+      "answers": {
+        "agricultural-sector-solar-A1": "Arable",
+        "agricultural-sector-solar-A2": "Beef",
+        "agricultural-sector-solar-A3": "Dairy livestock",
+        "agricultural-sector-solar-A4": "Horticulture",
+        "agricultural-sector-solar-A5": "Mixed livestock",
+        "agricultural-sector-solar-A6": "Pig",
+        "agricultural-sector-solar-A7": "Poultry",
+        "agricultural-sector-solar-A8": "Sheep"
+        
+      }
+    }
+  ],
+  "solarTechnologies": [
+    {
+      "key": "solar-technologies",
+      "title": "Solar Technologies",
+      "answers": {
+        "solar-technology-A1": "An electrical grid connection",
+        "solar-technology-A2": "Solar panels",
+        "solar-technology-A3": "An inverter",
+        "solar-technology-A4": "A utility meter",
+        "solar-technology-A5": "A battery",
+        "solar-technology-A6": "Limit-loading power diverter to heat or cold store"
+      }
+    }
+  ],
+  "solarOutput": [
+    {
+      "key": "solar-output",
+      "title": "Solar Output",
+      "answers": {
+        "solar-output-A1": "Up to 50kW",
+        "solar-output-A2": "51kW to 100kW",
+        "solar-output-A3": "101kW to 150kW",
+        "solar-output-A4": "151kW to 200kW",
+        "solar-output-A5": "More than 201kW"
+      }
+    }
   ]
+
 }

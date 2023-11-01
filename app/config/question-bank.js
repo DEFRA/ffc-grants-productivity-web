@@ -729,6 +729,11 @@ const questionBank = {
           order: 61,
           title: 'What solar technologies does your project need?',
           pageTitle: '',
+          scheme: 'solar',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           url: 'solar-technologies',
           baseUrl: 'solar-technologies',
           backUrl: 'existing-solar',
@@ -934,6 +939,11 @@ const questionBank = {
           title: 'How much energy will your solar PV system output?',
           hint: {
             html: 'The size of your solar PV system'
+          },
+          scheme: 'solar',
+          score: {
+            isScore: true,
+            isDisplay: true
           },
           pageTitle: '',
           url: 'solar-output',
