@@ -701,10 +701,10 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `Applicants who already have a solar 
-                PV system can still apply for this 
-                grant. For example, you can apply 
-                for a battery to add to your existing 
+                para: `Applicants who already have a solar
+                PV system can still apply for this
+                grant. For example, you can apply
+                for a battery to add to your existing
                 solar PV panels.`,
                 items: []
               }]
@@ -1678,7 +1678,6 @@ const questionBank = {
               <li>name</li>
               <li>brand and model (if available)</li>
               <li>number of items</li>
-              <li>the benefit to your business</li>
             </ul>`
           },
           sidebar: {
@@ -2366,7 +2365,7 @@ const questionBank = {
               heading: 'Funding priorities',
               content: [{
                 para: 'RPA wants to fund sectors that:',
-                items: ['have significant labour shortages', 'have not received many grants in the past, such as horticulture']
+                items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
               }]
             }]
           },

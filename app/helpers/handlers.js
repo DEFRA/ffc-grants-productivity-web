@@ -459,17 +459,11 @@ const showPostPage = (currentQuestion, request, h) => {
       }
     case 'automatic-eligibility': {
         const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
-        const technologyItemsAnswer = getYarValue(request, 'technologyItems')
-        const roboticAutomaticAnswer = getYarValue(request, 'roboticAutomatic')
-        const isTechnologyItemsA9 = getQuestionAnswer('technology-items', 'technology-items-A9')
-        const isRoboticAutomaticA2 = getQuestionAnswer('robotic-automatic', 'robotic-automatic-A2')
-        
+      
         if (automaticEligibilityAnswer.length === 1) {
           return h.view('not-eligible', NOT_ELIGIBLE)
-        } else if (technologyItemsAnswer === isTechnologyItemsA9 && roboticAutomaticAnswer === isRoboticAutomaticA2) {
-          return h.redirect(`${urlPrefix}/other-automatic-technology`)
-        } else {
-          return h.redirect(`${urlPrefix}/other-item`)
+        }  else {
+          return h.redirect(`${urlPrefix}/technology-description`)
         }
       }
 
