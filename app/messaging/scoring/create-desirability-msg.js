@@ -1,7 +1,6 @@
 const grantSchemeConfig = require('./config/grant-scheme')
 const { desirabilityQuestions: questionContent } = require('./content-mapping')
 const { getQuestionAnswer } = require('../../helpers/utils')
-
 const desirabilityQuestions = ['solarTechnologies', 'solarOutput', 'agriculturalSector']
 const desirabilityRoboticsQuestions = ['projectSubject', 'dataAnalytics', 'energySource', 'agriculturalSector', 'roboticProjectImpacts']
 const PROJECT_SUBJECT_SOLAR = getQuestionAnswer('project-subject', 'project-subject-A2')
@@ -34,6 +33,7 @@ function getDesirabilityDetails (questionKey, userInput) {
 
 function desirability (userInput) {
   const isSolar = userInput.projectSubject === PROJECT_SUBJECT_SOLAR
+  console.log(isSolar,'-----', userInput, '---', PROJECT_SUBJECT_SOLAR)
   const key = isSolar ? 'PROD01' : 'PROD02'
   const validKeys = key === 'PROD01' ? desirabilityQuestions : desirabilityRoboticsQuestions
   const grantScheme = grantSchemeConfig.filter(g => g.key === key)[0]

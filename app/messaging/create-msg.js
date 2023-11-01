@@ -27,16 +27,16 @@ const desirabilityAnswersSchema = Joi.object({
 
 function getDesirabilityAnswers (request) {
   try {
+    const agriculturalSector = []
+    if (!Array.isArray(getYarValue(request, 'agriculturalSector'))) {
+      agriculturalSector.push(getYarValue(request, 'agriculturalSector'))
+    }
     let val = {}
     const projectSubject = getYarValue(request, 'projectSubject')
     if (projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1')) {
       const energySource = []
       if (!Array.isArray(getYarValue(request, 'energySource'))) {
         energySource.push(getYarValue(request, 'energySource'))
-      }
-      const agriculturalSector = []
-      if (!Array.isArray(getYarValue(request, 'agriculturalSector'))) {
-        agriculturalSector.push(getYarValue(request, 'agriculturalSector'))
       }
       val = {
         projectSubject: getYarValue(request, 'projectSubject'),
@@ -45,13 +45,13 @@ function getDesirabilityAnswers (request) {
         energySource: energySource.length > 0 ? energySource : getYarValue(request, 'energySource'),
         agriculturalSectorRobotics: agriculturalSector.length > 0 ? agriculturalSector : getYarValue(request, 'agriculturalSector'),
         roboticProjectImpacts: getYarValue(request, 'technology')
-        
       }
     } else {
       val = {
         agriculturalSectorSolar: agriculturalSector.length > 0 ? agriculturalSector : getYarValue(request, 'agriculturalSector'),
         solarTechnologies: getYarValue(request, 'solarTechnologies'),
-        solarOutput: getYarValue(request, 'solarOutput')
+        solarOutput: getYarValue(request, 'solarOutput'),
+        projectSubject: getYarValue(request, 'projectSubject')
       }
     }
     const result = desirabilityAnswersSchema.validate(val, {
