@@ -2,7 +2,7 @@
 const msgData = { // update to be solar
   grantScheme: {
     key: 'PROD001',
-    name: 'Prod Grant Slury'
+    name: 'Prod Grant Solar'
   },
   desirability: {
     questions: [

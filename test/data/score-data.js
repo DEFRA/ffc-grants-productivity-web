@@ -26,14 +26,14 @@ const msgData = {
         }
       },
       {
-        key: 'robotics-technology',
+        key: 'robotics-project-impacts',
         answers: [
           {
-            key: 'robotics-technology',
+            key: 'robotics-project-impacts',
             title: 'Robotics Technology',
             input: [
               {
-                key: 'robotics-technology-A1',
+                key: 'robotics-project-impacts-A1',
                 value: 'Yes, we’re using it now'
               }
             ]
@@ -102,14 +102,14 @@ const msgData = {
         }
       },
       {
-        key: 'robotics-agricultural-sector',
+        key: 'agricultural-sector',
         answers: [
           {
-            key: 'robotics-agricultural-sector',
+            key: 'agricultural-sector',
             title: 'Robotics Agricultural Sector',
             input: [
               {
-                key: 'robotics-agricultural-sector-A1',
+                key: 'agricultural-sector-A1',
                 value: 'Horticulture'
               }
             ]
@@ -131,8 +131,8 @@ const msgData = {
     projectImpacts: 'project-impacts',
     dataAnalytics: 'robotics-data-analytics',
     energySource: 'robotics-energy-source',
-    agriculturalSector: 'robotics-agricultural-sector',
-    roboticProjectImpacts: 'robotics-technology'
+    agriculturalSectorRobotics: 'agricultural-sector',
+    roboticProjectImpacts: 'robotics-project-impact'
   }
 }
 module.exports = msgData
