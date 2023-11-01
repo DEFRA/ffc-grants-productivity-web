@@ -453,7 +453,7 @@ const showPostPage = (currentQuestion, request, h) => {
         } else if (technologyItemsAnswer === isTechnologyItemsA9 && roboticAutomaticAnswer === isRoboticAutomaticA2) {
           return h.redirect(`${urlPrefix}/other-automatic-technology`)
         } else {
-          return h.redirect(`${urlPrefix}/other-item`)
+          return h.redirect(`${urlPrefix}/technology-description`)
         }
       }
 
