@@ -53,7 +53,7 @@ describe('Page: /robotic-eligibility', () => {
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('RPA will only fund robotic technology that:')
   })
-  it('user selects \'Other robotics or automatic technology\' -> title should be \'Which eligibility criteria does your other automatic technology meet?\'', async () => {
+  it('user selects \'Other robotics or automatic technology\' -> title should be \'Does your robotic technology fit the eligibility criteria?\'', async () => {
     varList.technologyItems = 'Other robotics or automatic technology'
     const options = {
       method: 'GET',

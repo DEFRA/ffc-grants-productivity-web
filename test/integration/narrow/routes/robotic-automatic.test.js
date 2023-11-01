@@ -65,7 +65,7 @@ describe('Page: /robotic-automatic', () => {
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('automatic-eligibility')
   })
-  it('user selects \'Other robotics or automatic technology\' -> title should be \'Which eligibility criteria does your other automatic technology meet?\'', async () => {
+  it('user selects \'Other robotics or automatic technology\' -> title should be \'Is the other technology robotic or automatic?\'', async () => {
     varList.technologyItems = 'Other robotics or automatic technology'
     const options = {
       method: 'GET',
