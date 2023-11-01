@@ -1678,7 +1678,6 @@ const questionBank = {
               <li>name</li>
               <li>brand and model (if available)</li>
               <li>number of items</li>
-              <li>the benefit to your business</li>
             </ul>`
           },
           sidebar: {
