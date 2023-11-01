@@ -3307,15 +3307,17 @@ const questionBank = {
               html: 'Your reference number<br><strong>{{_confirmationId_}}</strong>',
               surveyLink: process.env.SURVEY_LINK
             },
-            messageContent: `You will get an email with a record of your answers.<br/><br/>
-            If you do not get an email within 72 hours, please call the RPA helpline and follow the options for the Farming Transformation Fund scheme:<br/><br/>
+            messageContent: `We have sent you a confirmation email with a record of your answers.<br/><br/>
+            If you do not get an email within 72 hours, contact the RPA helpline and follow the options for Farming Transformation Fund scheme.<br/><br/>
+            {{_part_}}
+
             Telephone: 03000 200 301<br/>
             <br/>Monday to Friday, 9am to 5pm (except public holidays)<br/>
             <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in new tab)</a></p>
             
-            Email: <a class="govuk-link" title="Send email to RPA" target="_blank" href="mailto:ftf@rpa.gov.uk" rel="noopener noreferrer">FTF@rpa.gov.uk</a>
-            
-            <p>RPA will be in touch when the full application period opens. They'll tell you about the application form and any guidance you need to submit a full application.</p>`,
+            Email: <a class="govuk-link" title="Send email to RPA" target="_blank" href="mailto:ftf@rpa.gov.uk" rel="noopener noreferrer">FTF@rpa.gov.uk</a>`,
+            messageContentPartRobotics: `<p> You can check if you can apply for a grant for <a class="govuk-link" href="https://grants-prototype2.herokuapp.com/robotics/current/farming-type" rel="noopener noreferrer">solar project items</a>. The minimum grant is £15,000 (25% of £60,000). The maximum grant amount for both projects together is £500,000.</p>`,
+            messageContentPartSolar: `<p>You can check if you can apply for a grant for <a class="govuk-link" href="https://grants-prototype2.herokuapp.com/robotics/current/farming-type" rel="noopener noreferrer">farm productivity project items</a>. The minimum grant is £25,000 (40% of £62,500). The maximum grant amount for both projects together is £500,000. </p>`,
             warning: {
               text: 'You must not start the project'
             },

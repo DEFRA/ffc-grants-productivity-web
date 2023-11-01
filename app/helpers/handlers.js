@@ -184,6 +184,14 @@ const getPage = async (question, request, h) => {
     }
   }
 
+  if(url === 'confirmation') {
+    const projectSubject = getYarValue(request, 'projectSubject')
+    const isSolar = projectSubject === 'Solar technologies'
+    let messageContent = question.maybeEligibleContent.messageContent
+    messageContent = messageContent.replace('{{_part_}}', isSolar ? question.maybeEligibleContent.messageContentPartSolar : question.maybeEligibleContent.messageContentPartRobotics)
+    question.maybeEligibleContent.messageContent = messageContent
+  }
+
   const data = getYarValue(request, yarKey) || null
   let conditionalHtml
   // if (question?.conditionalKey && question?.conditionalLabelData) {
