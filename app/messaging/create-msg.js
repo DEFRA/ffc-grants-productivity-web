@@ -47,9 +47,13 @@ function getDesirabilityAnswers (request) {
         roboticProjectImpacts: getYarValue(request, 'technology')
       }
     } else {
+      const solarTechnologies = []
+      if (!Array.isArray(getYarValue(request, 'solarTechnologies'))) {
+        solarTechnologies.push(getYarValue(request, 'solarTechnologies'))
+      }
       val = {
         agriculturalSectorSolar: agriculturalSector.length > 0 ? agriculturalSector : getYarValue(request, 'agriculturalSector'),
-        solarTechnologies: getYarValue(request, 'solarTechnologies'),
+        solarTechnologies: solarTechnologies.length > 0 ? solarTechnologies : getYarValue(request, 'solarTechnologies'),
         solarOutput: getYarValue(request, 'solarOutput'),
         projectSubject: getYarValue(request, 'projectSubject')
       }

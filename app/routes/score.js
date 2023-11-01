@@ -104,30 +104,6 @@ module.exports = [{
           return null
         })
         questions = questions.filter(a => a !== null)
-        // Add extra questions
-        ALL_QUESTIONS.filter(q => q.score && q.score.isDisplay === true && q.scheme === scheme && scheme === 'solar').forEach(bankQuestion => {
-          if (questions.filter(qD => qD.key !== bankQuestion.key).length > 0 && getYarValue(request, bankQuestion.yarKey) !== null) { // Add extra question in result
-            let addQuestionToResult = true
-            if (bankQuestion.score.dependentAnswerKey) {
-              addQuestionToResult = !(bankQuestion.score.dependentAnswerKey && getYarValue(request, bankQuestion.score.dependentAnswerKey.yarKey) === bankQuestion.score.dependentAnswerKey.value)
-            }
-            if (addQuestionToResult) {
-              const displayQuestion = {}
-              displayQuestion.key = bankQuestion.key
-              displayQuestion.answers = []
-              displayQuestion.title = bankQuestion.title ?? bankQuestion.answers[0].title
-              const unit = bankQuestion.suffix ? bankQuestion.suffix.html : ''
-              displayQuestion.answers.push({ title: displayQuestion.title, input: [{ value: getYarValue(request, bankQuestion.yarKey), unit: unit }] })
-              displayQuestion.desc = bankQuestion.desc ?? ''
-              displayQuestion.url = `${urlPrefix}/${bankQuestion.url}`
-              displayQuestion.order = bankQuestion.order
-              displayQuestion.unit = unit
-              displayQuestion.pageTitle = bankQuestion.pageTitle
-              displayQuestion.fundingPriorities = bankQuestion.fundingPriorities
-              questions.push(displayQuestion)
-            }
-          }
-        })
         let scoreChance
         switch (msgData.desirability.overallRating.band.toLowerCase()) {
           case 'strong':

@@ -86,12 +86,12 @@
       "key": "solar-technologies",
       "title": "Solar Technologies",
       "answers": {
-        "solar-technology-A1": "An electrical grid connection",
-        "solar-technology-A2": "Solar panels",
-        "solar-technology-A3": "An inverter",
-        "solar-technology-A4": "A utility meter",
-        "solar-technology-A5": "A battery",
-        "solar-technology-A6": "Limit-loading power diverter to heat or cold store"
+        "solar-technologies-A1": "An electrical grid connection",
+        "solar-technologies-A2": "Solar panels",
+        "solar-technologies-A3": "An inverter",
+        "solar-technologies-A4": "A utility meter",
+        "solar-technologies-A5": "A battery",
+        "solar-technologies-A6": "Limit-loading power diverter to heat or cold store"
       }
     }
   ],
