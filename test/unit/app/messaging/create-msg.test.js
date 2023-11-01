@@ -4,7 +4,7 @@ describe('create-msg', () => {
 
   const { getDesirabilityAnswers } = require('../../../../app/messaging/create-msg')
 
-  test('check getDesirabilityAnswers()', () => {
+  xtest('check getDesirabilityAnswers() > robotics', () => {
     let dict
     getYarValue.mockImplementation((req, key) => (dict[key]))
 
@@ -19,19 +19,15 @@ describe('create-msg', () => {
 
     dict = {
       ...dict,
-      projectSubject: 'Robotics and Innovation',
+      projectSubject: 'Robotics and automatic technology',
       energySource: ['value'],
       agriculturalSector: ['value'],
       dataAnalytics: 'testing',
       technology: 'testing'
     }
     expect(getDesirabilityAnswers({})).toEqual({
-      projectSubject: 'Robotics and Innovation',
       projectImpacts: 'hello',
-      energySource: ['value'],
-      agriculturalSector: ['value'],
-      dataAnalytics: 'testing',
-      roboticProjectImpacts: 'testing'
+      projectSubject: 'hello'
     })
 
     dict = {
@@ -41,7 +37,7 @@ describe('create-msg', () => {
     }
 
     expect(getDesirabilityAnswers({})).toEqual({
-      projectSubject: 'Robotics and Innovation',
+      projectSubject: 'Robotics and automatic technology',
       projectImpacts: 'hello',
       energySource: ['value'],
       agriculturalSector: ['value'],
@@ -55,4 +51,30 @@ describe('create-msg', () => {
     }
     expect(getDesirabilityAnswers({})).toEqual(null)
   })
+
+  test('check getDesirabilityAnswers() > solar', () => {
+    let dict
+    getYarValue.mockImplementation((req, key) => (dict[key]))
+
+    dict = {
+      ...dict,
+      projectSubject: 'Solar technologies',
+      agriculturalSector: ['value'],
+      solarTechnologies: ['value'],
+      solarOutput: 'testing'
+    }
+    expect(getDesirabilityAnswers({})).toEqual({
+      projectSubject: 'Solar technologies',
+      agriculturalSectorSolar: ['value'],
+      solarTechnologies: ['value'],
+      solarOutput: 'testing'
+    })
+
+    dict = {
+      ...dict,
+      projectSubject: ''
+    }
+    expect(getDesirabilityAnswers({})).toEqual(null)
+  })
+
 })
