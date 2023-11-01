@@ -2,7 +2,8 @@ const { crumbToken } = require('./test-helper')
 
 describe('Robotics Energy Source Page', () => {
   const varList = { 
-    energySource: ['Biofuels', 'another source']
+    energySource: ['Biofuels', 'another source'],
+    projectItems: ['Wavelength-specific LED lighting for horticultural crops', 'Advanced ventilation control units']
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -65,5 +66,24 @@ describe('Robotics Energy Source Page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('fossil-fuel-conditional')
+  })
+  it('page loads with correct back link', async () => {
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/energy-source`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"project-impact\" class=\"govuk-back-link\">Back</a>')
+  })
+  it('page loads with correct back link', async () => {
+    varList.projectItems = 'Robotic and automatic technology'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/energy-source`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"data-analytics\" class=\"govuk-back-link\">Back</a>')
   })
 })
