@@ -756,7 +756,7 @@ const questionBank = {
                     `
           },
           ineligibleContent: {
-            messageContent: 'You must have solar PV panels to be eligible for funding for other solar technology.',
+            messageContent: 'If you do not have an existing solar PV system, you must apply for funding for solar PV panels to be eligible for this grant.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
