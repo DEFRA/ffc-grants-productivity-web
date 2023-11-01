@@ -2126,7 +2126,7 @@ const questionBank = {
               heading: 'Funding priorities',
               content: [{
                 para: 'RPA wants to fund sectors that:',
-                items: ['have significant labour shortages', 'have not received many grants in the past, such as horticulture']
+                items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
               }]
             }]
           },
