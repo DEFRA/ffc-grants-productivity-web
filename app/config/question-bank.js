@@ -3307,17 +3307,21 @@ const questionBank = {
               html: 'Your reference number<br><strong>{{_confirmationId_}}</strong>',
               surveyLink: process.env.SURVEY_LINK
             },
-            messageContent: `We have sent you a confirmation email with a record of your answers.<br/><br/>
-            If you do not get an email within 72 hours, contact the RPA helpline and follow the options for Farming Transformation Fund scheme.<br/><br/>
-            {{_part_}}
-
-            Telephone: 03000 200 301<br/>
-            <br/>Monday to Friday, 9am to 5pm (except public holidays)<br/>
-            <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in new tab)</a></p>
-            
-            Email: <a class="govuk-link" title="Send email to RPA" target="_blank" href="mailto:ftf@rpa.gov.uk" rel="noopener noreferrer">FTF@rpa.gov.uk</a>`,
+            messageContentBeforeConditional: `We have sent you a confirmation email with a record of your answers.<br/><br/>
+            If you do not get an email within 72 hours, contact the RPA helpline and follow the options for Farming Transformation Fund scheme.<br/><br/>`,
             messageContentPartRobotics: `<p> You can check if you can apply for a grant for <a class="govuk-link" href="https://grants-prototype2.herokuapp.com/robotics/current/farming-type" rel="noopener noreferrer">solar project items</a>. The minimum grant is £15,000 (25% of £60,000). The maximum grant amount for both projects together is £500,000.</p>`,
             messageContentPartSolar: `<p>You can check if you can apply for a grant for <a class="govuk-link" href="https://grants-prototype2.herokuapp.com/robotics/current/farming-type" rel="noopener noreferrer">farm productivity project items</a>. The minimum grant is £25,000 (40% of £62,500). The maximum grant amount for both projects together is £500,000. </p>`,
+            messageContentPostConditional: `<h2 class="govuk-heading-m">RPA helpline</h2>
+            <h3 class="govuk-heading-s">Telephone</h3>
+            Telephone: 03000 200 301<br/>
+            Monday to Friday, 9am to 5pm (except public holidays)<br/>
+            <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in a new tab)</a></p>
+            <h3 class="govuk-heading-s">Email</h3>
+            <a class="govuk-link" title="Send email to RPA" target="_blank" rel="noopener noreferrer" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a><br/><br/>
+            <h2 class="govuk-heading-m">What happens next</h2>
+            <p>1. RPA will be in touch when the full application period opens. They will tell you if your project scored well enough to get the full application form.</p>
+            <p>2. If you submit an application, RPA will assess it against other projects and value for money. You will not automatically get a grant. The grant is expected to be highly competitive and you are competing against other projects.</p>
+            <p>3. If your application is successful, you’ll be sent a funding agreement and can begin work on the project.</p>`,
             warning: {
               text: 'You must not start the project'
             },
@@ -3326,9 +3330,16 @@ const questionBank = {
             <ul>
               <li>get quotes from suppliers</li>
               <li>apply for planning permission</li>
-            </ul>
-            <p><b>You will not automatically get a grant.</b> The grant is expected to be highly competitive and you are competing against other projects.</p>`
+            </ul>`,
           },
+          // ineligibleContent: {
+          //   messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
+          //   insertText: { text: 'If you want your landlord to underwrite your project, you will need them to sign a letter of assurance. This letter will say your landlord agrees to take over your project, including conditions in the Grant Funding Agreement, if your tenancy ends. You should discuss and agree this with your landlord before you begin your full application.' },
+          //   },
+          //   messageLink: {
+          //     url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+          //     title: 'What do you think of this service?'
+          //   },
           fundingPriorities: '',
           type: '',
           minAnswerCount: 1,

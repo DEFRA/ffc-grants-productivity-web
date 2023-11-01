@@ -113,8 +113,17 @@ const getPage = async (question, request, h) => {
           )
         }
       }
+      
+      if(getYarValue(request, 'projectSubject') === 'Solar technologies') {
+        maybeEligibleContent.additionalParagraph = maybeEligibleContent.messageContentPartSolar
+      } else {
+        maybeEligibleContent.additionalParagraph = maybeEligibleContent.messageContentPartRobotics
+      }
+
+      maybeEligibleContent.messageContent = maybeEligibleContent.messageContentBeforeConditional + maybeEligibleContent.additionalParagraph + maybeEligibleContent.messageContentPostConditional
+      
       request.yar.reset()
-    }
+    } 
 
     maybeEligibleContent = {
       ...maybeEligibleContent,
@@ -144,6 +153,33 @@ const getPage = async (question, request, h) => {
         )
       }
     }
+
+    // if(url === 'confirmation') {
+    //   console.log(maybeEligibleContent.messageContentPartSolar, 'maybeEligibleContent.messageContentPartSolar')
+    //   console.log(getYarValue(request, 'projectSubject'), 'getYarValue(request, projectSubject) === Solar technologies')
+    //     setYarValue(request, 'part', null)
+    //     if(getYarValue(request, 'projectSubject') === null){
+    //       console.log('HELLO')
+    //       maybeEligibleContent = {
+    //         ...maybeEligibleContent,
+    //         messageContent: maybeEligibleContent.messageContent.replace(
+    //           SELECT_VARIABLE_TO_REPLACE, (_ignore, part) => (
+    //             maybeEligibleContent.messageContentPartSolar
+    //           )
+    //         )
+    //     }
+    //     console.log(maybeEligibleContent, 'TWO')
+    //   }else{
+    //     maybeEligibleContent = {
+    //       ...maybeEligibleContent,
+    //       messageContent: maybeEligibleContent.messageContent.replace(
+    //         SELECT_VARIABLE_TO_REPLACE, (_ignore, part) => (
+    //           maybeEligibleContent.messageContentPartRobotics
+    //         )
+    //       )
+    //   }
+    //   }
+    // }
 
     const MAYBE_ELIGIBLE = { ...maybeEligibleContent, consentOptionalData, url, nextUrl, backUrl }
     return h.view('maybe-eligible', MAYBE_ELIGIBLE)
