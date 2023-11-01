@@ -40,17 +40,17 @@ const mockQuestionContent = {
   ],
   agriculturalSectorRobotics: [
     {
-      key: 'agricultural-sector',
+      key: 'robotics-agricultural-sector',
       title: 'agriculturalSector title',
       answers: {
-        'agricultural-sector-A1': 'agriculturalSector answer 1',
-        'agricultural-sector-A2': 'agriculturalSector answer 2'
+        'robotics-agricultural-sector-A1': 'agriculturalSector answer 1',
+        'robotics-agricultural-sector-A2': 'agriculturalSector answer 2'
       }
     }
   ],
   roboticProjectImpacts: [
     {
-      key: 'robotics-project-impact',
+      key: 'robotics-technology',
       title: 'roboticProjectImpacts title',
       answers: {
         'robotic-project-impacts-A1': 'roboticProjectImpacts answer 1',
@@ -132,8 +132,8 @@ describe('Create desirability message tests', () => {
           projectImpacts: 'project-impacts',
           dataAnalytics: 'robotics-data-analytics',
           energySource: 'robotics-energy-source',
-          agriculturalSector: 'robotics-agricultural-sector',
-          projectImpact: 'robotics-project-impact'
+          agriculturalSectorRobotics: 'robotics-agricultural-sector',
+          roboticProjectImpacts: 'robotics-project-impact'
         }
       }))
       createMsg = require('../../../../../app/messaging/scoring/create-desirability-msg')
@@ -221,7 +221,6 @@ describe('Create desirability message tests', () => {
     })
 
     test('adds desirability property with questions > solar', () => {
-      console.log(msgSolar, 'dsbfhjgsdyhksdgyvh')
       expect(msgSolar.desirability).toBeDefined()
       expect(msgSolar.desirability.questions).toBeDefined()
     })
