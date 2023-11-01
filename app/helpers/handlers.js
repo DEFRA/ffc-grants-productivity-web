@@ -65,13 +65,22 @@ const getContractorFarmerModel = (data, question, request, conditionalHtml) => {
 }
 const getPage = async (question, request, h) => {
   const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationObject, replace } = question
-  const backUrl = getUrl(backUrlObject, question.backUrl, request)
+  let backUrl = getUrl(backUrlObject, question.backUrl, request)
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject)
   if (isRedirect) {
     return h.redirect(startPageUrl)
   }
   let confirmationId = ''
+
+  if(url === 'item-conditional') { 
+    if(getYarValue(request, 'projectItemsList')?.length === 1) {
+      backUrl = `${urlPrefix}/other-item`
+    } else {
+      backUrl = `${urlPrefix}/project-items-summary`
+    }
+  }
+
   if (question.maybeEligible) {
     let { maybeEligibleContent } = question
     maybeEligibleContent.title = question.title
@@ -194,10 +203,22 @@ const getPage = async (question, request, h) => {
     }
   }
   if(replace) {
-    if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ){
+    if(getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'robotic-automatic'){
       question = {
         ...question,
         title: 'Is the other technology robotic or automatic?'
+      }
+    }else if(getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9')) {
+        if(url === 'automatic-eligibility'){
+          question = {
+            ...question,
+            title: 'Which eligibility criteria does your other automatic technology meet?'
+          }
+        }else if(url === 'robotic-eligibility'){
+          question = {
+            ...question,
+            title: 'Does your robotic technology fit the eligibility criteria?'
+        }
       }
     }else {
       question = {
@@ -205,17 +226,6 @@ const getPage = async (question, request, h) => {
         title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
             getYarValue(request, additionalYarKeyName).toLowerCase()
         )
-      };
-    }
-  }
-  // change title on /automatic-eligibility page if 'Other robotics or automatic technology' option is selected on /technology-items
-  if(url === 'automatic-eligibility') {
-    const technologyItemsAnswer = getYarValue(request, 'technologyItems')
-    const isTechnologyItemsA9 = getQuestionAnswer('technology-items', 'technology-items-A9')
-    if(technologyItemsAnswer === isTechnologyItemsA9) {
-      question = {
-        ...question,
-        title: 'Which eligibility criteria does your other automatic technology meet?'
       };
     }
   }
@@ -376,7 +386,7 @@ const showPostPage = (currentQuestion, request, h) => {
   }
   
   if (replace) {
-    if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ){
+    if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' && baseUrl === 'robotic-automatic'){
       currentQuestion = {
         ...currentQuestion,
         title: 'Is the other technology robotic or automatic?',
@@ -477,19 +487,48 @@ const showPostPage = (currentQuestion, request, h) => {
       }
     case 'automatic-eligibility': {
         const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
-        const technologyItemsAnswer = getYarValue(request, 'technologyItems')
-        const roboticAutomaticAnswer = getYarValue(request, 'roboticAutomatic')
-        const isTechnologyItemsA9 = getQuestionAnswer('technology-items', 'technology-items-A9')
-        const isRoboticAutomaticA2 = getQuestionAnswer('robotic-automatic', 'robotic-automatic-A2')
-        
+      
         if (automaticEligibilityAnswer.length === 1) {
           return h.view('not-eligible', NOT_ELIGIBLE)
-        } else if (technologyItemsAnswer === isTechnologyItemsA9 && roboticAutomaticAnswer === isRoboticAutomaticA2) {
-          return h.redirect(`${urlPrefix}/other-automatic-technology`)
-        } else {
-          return h.redirect(`${urlPrefix}/other-item`)
+        }  else {
+          return h.redirect(`${urlPrefix}/technology-description`)
         }
       }
+
+      // Zac said to leave it here for now
+
+      // case 'technology-description': {
+      //   let tempArray = getYarValue(request, 'projectItemsList') ?? []
+      //   let tempObject = {
+      //     item: getYarValue(request, 'technologyItems'),
+      //     type: getYarValue(request, 'roboticAutomatic'),
+      //     criteria: getYarValue(request, 'automaticEligibility') || 
+      //     getYarValue(request, 'roboticEligibility'),
+      //     description: getYarValue(request, 'itemDescription')
+      //   }
+       
+      //   tempArray.push(tempObject)
+      //   setYarValue(request, 'projectItemsList', tempArray)
+      // }
+      case 'other-item': {
+        let tempArray = getYarValue(request, 'projectItemsList') ?? []
+        let tempObject = {
+          item: getYarValue(request, 'technologyItems'),
+          type: getYarValue(request, 'roboticAutomatic'),
+          criteria: getYarValue(request, 'automaticEligibility') || 
+          getYarValue(request, 'roboticEligibility'),
+          description: getYarValue(request, 'itemDescription')
+        }
+       
+        tempArray.push(tempObject)
+        setYarValue(request, 'projectItemsList', tempArray)
+        
+        if(getYarValue(request, 'projectItemsList')?.length === 1) {
+          return h.redirect(`${urlPrefix}/item-conditional`)
+        } else {
+          return h.redirect(`${urlPrefix}/project-items-summary`)
+        }
+      } 
     default:
       break
   }

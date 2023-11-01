@@ -26,14 +26,14 @@ const msgData = {
         }
       },
       {
-        key: 'robotics-technology',
+        key: 'technology-use',
         answers: [
           {
-            key: 'robotics-technology',
+            key: 'technology-use',
             title: 'Robotics Technology',
             input: [
               {
-                key: 'robotics-technology-A1',
+                key: 'technology-use-A1',
                 value: 'Yes, we’re using it now'
               }
             ]
@@ -45,14 +45,14 @@ const msgData = {
         }
       },
       {
-        key: 'robotics-data-analytics',
+        key: 'data-analytics',
         answers: [
           {
-            key: 'robotics-data-analytics',
+            key: 'data-analytics',
             title: 'Robotics Data Analytics',
             input: [
               {
-                key: 'robotics-data-analytics-A1',
+                key: 'data-analytics-A1',
                 value: 'Yes, we have the technology already'
               }
             ]
@@ -64,14 +64,14 @@ const msgData = {
         }
       },
       {
-        key: 'robotics-data-analytics',
+        key: 'data-analytics',
         answers: [
           {
-            key: 'robotics-data-analytics',
+            key: 'data-analytics',
             title: 'Robotics Data Analytics',
             input: [
               {
-                key: 'robotics-data-analyticsa-A1',
+                key: 'data-analyticsa-A1',
                 value: 'Yes, we have the technology already'
               }
             ]
@@ -83,14 +83,14 @@ const msgData = {
         }
       },
       {
-        key: 'robotics-energy-source',
+        key: 'energy-source',
         answers: [
           {
-            key: 'robotics-energy-source',
+            key: 'energy-source',
             title: 'Robotics Energy Source',
             input: [
               {
-                key: 'robotics-energy-source-A1',
+                key: 'energy-source-A1',
                 value: 'Electricity – derived from renewable generation on farm'
               }
             ]
@@ -102,14 +102,14 @@ const msgData = {
         }
       },
       {
-        key: 'robotics-agricultural-sector',
+        key: 'agricultural-sector',
         answers: [
           {
-            key: 'robotics-agricultural-sector',
+            key: 'agricultural-sector',
             title: 'Robotics Agricultural Sector',
             input: [
               {
-                key: 'robotics-agricultural-sector-A1',
+                key: 'agricultural-sector-A1',
                 value: 'Horticulture'
               }
             ]
@@ -129,10 +129,10 @@ const msgData = {
   questionMapping: {
     projectSubject: 'project-subject',
     projectImpacts: 'project-impacts',
-    dataAnalytics: 'robotics-data-analytics',
-    energySource: 'robotics-energy-source',
-    agriculturalSector: 'robotics-agricultural-sector',
-    roboticProjectImpacts: 'robotics-technology'
+    dataAnalytics: 'data-analytics',
+    energySource: 'energy-source',
+    agriculturalSector: 'agricultural-sector',
+    roboticProjectImpacts: 'technology-use'
   }
 }
 module.exports = msgData
