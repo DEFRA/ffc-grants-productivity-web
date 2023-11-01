@@ -76,6 +76,19 @@ describe('Page: /robotic-automatic', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Is the other technology robotic or automatic?')
   })
+  it('no option selected when technologyItems is Other robotics or automatic technology  -> show error message', async () => {
+    varList.technologyItems = 'Other robotics or automatic technology'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/robotic-automatic`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { roboticAutomatic: '', crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Select if your other technology is robotic or automatic')
+  })
 
   it('page loads with correct back link', async () => {
     const options = {
