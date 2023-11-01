@@ -65,13 +65,22 @@ const getContractorFarmerModel = (data, question, request, conditionalHtml) => {
 }
 const getPage = async (question, request, h) => {
   const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationObject, replace } = question
-  const backUrl = getUrl(backUrlObject, question.backUrl, request)
+  let backUrl = getUrl(backUrlObject, question.backUrl, request)
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject)
   if (isRedirect) {
     return h.redirect(startPageUrl)
   }
   let confirmationId = ''
+
+  if(url === 'item-conditional') { 
+    if(getYarValue(request, 'projectItemsList')?.length === 1) {
+      backUrl = `${urlPrefix}/other-item`
+    } else {
+      backUrl = `${urlPrefix}/project-items-summary`
+    }
+  }
+
   if (question.maybeEligible) {
     let { maybeEligibleContent } = question
     maybeEligibleContent.title = question.title
@@ -447,6 +456,41 @@ const showPostPage = (currentQuestion, request, h) => {
           return h.redirect(`${urlPrefix}/other-item`)
         }
       }
+
+      // Zac said to leave it here for now
+
+      // case 'technology-description': {
+      //   let tempArray = getYarValue(request, 'projectItemsList') ?? []
+      //   let tempObject = {
+      //     item: getYarValue(request, 'technologyItems'),
+      //     type: getYarValue(request, 'roboticAutomatic'),
+      //     criteria: getYarValue(request, 'automaticEligibility') || 
+      //     getYarValue(request, 'roboticEligibility'),
+      //     description: getYarValue(request, 'itemDescription')
+      //   }
+       
+      //   tempArray.push(tempObject)
+      //   setYarValue(request, 'projectItemsList', tempArray)
+      // }
+      case 'other-item': {
+        let tempArray = getYarValue(request, 'projectItemsList') ?? []
+        let tempObject = {
+          item: getYarValue(request, 'technologyItems'),
+          type: getYarValue(request, 'roboticAutomatic'),
+          criteria: getYarValue(request, 'automaticEligibility') || 
+          getYarValue(request, 'roboticEligibility'),
+          description: getYarValue(request, 'itemDescription')
+        }
+       
+        tempArray.push(tempObject)
+        setYarValue(request, 'projectItemsList', tempArray)
+        
+        if(getYarValue(request, 'projectItemsList')?.length === 1) {
+          return h.redirect(`${urlPrefix}/item-conditional`)
+        } else {
+          return h.redirect(`${urlPrefix}/project-items-summary`)
+        }
+      } 
     default:
       break
   }
