@@ -1,4 +1,4 @@
-const { getYarValue } = require('./session')
+const { getYarValue } = require('grants-helpers')
 
 function isChecked (data, option) {
   return !!data && data.includes(option)

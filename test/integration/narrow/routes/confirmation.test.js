@@ -1,20 +1,21 @@
+const senders = require('../../../../app/messaging/senders')
+require('dotenv').config()
 const varListTemplate = {
   consentMain: true
 }
-const senders = require('../../../../app/messaging/senders')
-require('dotenv').config()
-let varList
-const mockSession = {
-  setYarValue: (request, key, value) => null,
-  getYarValue: (request, key) => {
-    if (Object.keys(varList).includes(key)) return varList[key]
-    else return 'Error'
+let mockVarList
+jest.mock('grants-helpers', () => ({
+  functions: {
+    setYarValue: (request, key, value) => null,
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
+    }
   }
-}
-jest.mock('../../../../app/helpers/functions/session', () => mockSession)
+}))
 describe('Reference number page', () => {
   beforeEach(() => {
-    varList = { ...varListTemplate }
+    mockVarList = { ...varListTemplate }
   })
   afterAll(() => {
     jest.resetAllMocks()
@@ -30,7 +31,7 @@ describe('Reference number page', () => {
     expect(getResponse.payload).toContain('Details submitted')
   })
   it('load page successfully with the solar Reference ID', async () => {
-    varList.projectSubject = 'Solar technologies'
+    mockVarList.projectSubject = 'Solar technologies'
     const getOtions = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/confirmation`
@@ -41,7 +42,7 @@ describe('Reference number page', () => {
     expect(getResponse.payload).toContain('Details submitted')
   })
   it('it redirects to start page if no conscent is given', async () => {
-    varList.consentMain = null
+    mockVarList.consentMain = null
     const getOtions = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/confirmation`

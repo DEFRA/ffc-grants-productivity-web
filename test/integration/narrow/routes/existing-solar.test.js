@@ -1,17 +1,30 @@
 const { crumbToken } = require('./test-helper')
-describe('Page: /existing-solar', () => {
-  const varList = {
-    existingSolar: 'randomData',
-    projectSubject: 'Solar technologies',
-    projectResponsibility: 'Yes, I plan to take full responsibility for my project'
-  }
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
+const varListTemplate = {
+  existingSolar: 'randomData',
+  projectSubject: 'Solar technologies',
+  projectResponsibility: 'Yes, I plan to take full responsibility for my project'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
+      if (mockVarList[key]) return mockVarList[key]
       else return null
     }
-  }))
+  }
+})
+describe('Page: /existing-solar', () => {
+  beforeEach(() => {
+    mockVarList = { ...varListTemplate }
+  })
+  afterAll(() => {
+    jest.resetAllMocks()
+  })
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -20,9 +33,9 @@ describe('Page: /existing-solar', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const page = createPage(response.payload)
-    const heading = getQuestionH1(page)
+    const heading = getPageHeading(page)
     expect(extractCleanText(heading)).toBe('Does your farm have an existing solar PV system?')
-    const radios = getQuestionRadios(page)
+    const radios = getPageRadios(page)
     expect(radios.length).toBe(2)
     expect(radios[0].value).toBe('Yes')
     expect(radios[1].value).toBe('No')
@@ -37,7 +50,7 @@ describe('Page: /existing-solar', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errors = getQuestionErrors(page)
+    const errors = getPageErrors(page)
     expect(errors.length).toBe(1)
     expect(extractCleanText(errors[0])).toBe('Select yes if your farm has an existing solar PV system')
   })
@@ -64,7 +77,7 @@ describe('Page: /existing-solar', () => {
     expect(postResponse.headers.location).toBe('solar-technologies')
   })
   it('page loads with correct back link', async () => {
-    varList.tenancy = 'Yes'
+    mockVarList.tenancy = 'Yes'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/existing-solar`
@@ -77,7 +90,7 @@ describe('Page: /existing-solar', () => {
     expect(backLink.href).toBe('/productivity/tenancy')
   })
   it('page loads with correct back link', async () => {
-    varList.tenancy = 'No'
+    mockVarList.tenancy = 'No'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/existing-solar`

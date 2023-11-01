@@ -1,20 +1,32 @@
 const { crumbToken } = require('./test-helper')
-
-describe('Page: /solar-technologies', () => {
-  const varList = {
-    solarTechnologies: 'randomData',
-    existingSolar: 'Yes',
-    projectSubject: 'Solar technologies',
-    tenancy: 'Yes'
-  }
-
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
+const varListTemplate = {
+  solarTechnologies: 'randomData',
+  existingSolar: 'Yes',
+  projectSubject: 'Solar technologies',
+  tenancy: 'Yes'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
+      if (mockVarList[key]) return mockVarList[key]
       else return null
     }
-  }))
+  }
+})
+
+describe('Page: /solar-technologies', () => {
+  beforeEach(() => {
+    mockVarList = { ...varListTemplate }
+  })
+  afterAll(() => {
+    jest.clearAllMocks()
+  })
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -47,7 +59,7 @@ describe('Page: /solar-technologies', () => {
   })
 
   it('user selects \'Solar panels\' option -> store user response and redirect to /solar-installation', async () => {
-    varList.solarTechnologies = 'Solar panels'
+    mockVarList.solarTechnologies = 'Solar panels'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-technologies`,
@@ -61,7 +73,7 @@ describe('Page: /solar-technologies', () => {
   })
 
   it('user selects any option AND \'Solar panels\' -> store user response and redirect to /solar-installation', async () => {
-    varList.solarTechnologies = ['Solar panels', 'An electrical grid connection']
+    mockVarList.solarTechnologies = ['Solar panels', 'An electrical grid connection']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-technologies`,
@@ -75,8 +87,8 @@ describe('Page: /solar-technologies', () => {
   })
 
   it('user selects one option WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost-solar', async () => {
-    varList.existingSolar = 'Yes'
-    varList.solarTechnologies = 'A utility meter'
+    mockVarList.existingSolar = 'Yes'
+    mockVarList.solarTechnologies = 'A utility meter'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-technologies`,
@@ -90,8 +102,8 @@ describe('Page: /solar-technologies', () => {
   })
 
   it('user selects multiple options WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost-solar', async () => {
-    varList.solarTechnologies = ['An inverter', 'A battery']
-    varList.existingSolar = 'No'
+    mockVarList.solarTechnologies = ['An inverter', 'A battery']
+    mockVarList.existingSolar = 'No'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-technologies`,

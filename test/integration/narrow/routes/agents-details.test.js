@@ -1,16 +1,30 @@
 const { crumbToken } = require('./test-helper')
-describe('Agent details page', () => {
-  const varList = {
-    applicant: 'Farmer',
-    applying: 'Agent'
-  }
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
+const varListTemplate = {
+  applicant: 'Farmer',
+  applying: 'Agent'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return 'Error'
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('Agent details page', () => {
+  beforeEach(() => {
+    mockVarList = { ...varListTemplate }
+  })
+  afterAll(() => {
+    jest.resetAllMocks()
+  })
+
   it('should load page successfully', async () => {
     const options = {
       method: 'GET',
@@ -29,7 +43,7 @@ describe('Agent details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const errors = getQuestionErrors(htmlPage)
+    const errors = getPageErrors(htmlPage)
     console.log('here: ', errors)
     expect(errors.length).toBe(10)
     expect(extractCleanText(errors[0])).toContain('Enter your first name')
@@ -62,7 +76,7 @@ describe('Agent details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const errors = getQuestionErrors(htmlPage)
+    const errors = getPageErrors(htmlPage)
     const targetError = getTargetByText(
       errors,
       'Name must only include letters, hyphens and apostrophes'
@@ -82,7 +96,7 @@ describe('Agent details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const errors = getQuestionErrors(htmlPage)
+    const errors = getPageErrors(htmlPage)
     const targetError = getTargetByText(
       errors,
       'Name must only include letters, hyphens and apostrophes'
@@ -102,7 +116,7 @@ describe('Agent details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const errors = getQuestionErrors(htmlPage)
+    const errors = getPageErrors(htmlPage)
     const targetError = getTargetByText(
       errors,
       'Enter an email address in the correct format, like name@example.com'
@@ -122,7 +136,7 @@ describe('Agent details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const errors = getQuestionErrors(htmlPage)
+    const errors = getPageErrors(htmlPage)
     const targetError = getTargetByText(errors,
       'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
     )
@@ -141,7 +155,7 @@ describe('Agent details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const errors = getQuestionErrors(htmlPage)
+    const errors = getPageErrors(htmlPage)
     const targetError = getTargetByText(errors,
       'Enter a telephone number, like 01632 960 001, 07700 900 982 or +44 0808 157 0192'
     )
@@ -160,7 +174,7 @@ describe('Agent details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const errors = getQuestionErrors(htmlPage)
+    const errors = getPageErrors(htmlPage)
     const targetError = getTargetByText(errors,
       'Address must only include letters, numbers, hyphens and apostrophes'
     )
@@ -179,7 +193,7 @@ describe('Agent details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const errors = getQuestionErrors(htmlPage)
+    const errors = getPageErrors(htmlPage)
     const targetError = getTargetByText(errors,
       'Address must only include letters, numbers, hyphens and apostrophes'
     )
@@ -198,7 +212,7 @@ describe('Agent details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const errors = getQuestionErrors(htmlPage)
+    const errors = getPageErrors(htmlPage)
     const targetError = getTargetByText(errors,
       'Enter a postcode, like AA1 1AA'
     )
@@ -250,7 +264,7 @@ describe('Agent details page', () => {
     expect(postResponse.headers.location).toBe('/productivity/farmers-details')
   })
   it('should store user response and redirects to contractor details page, if the applicant is contractor', async () => {
-    varList.applicant = 'Contractor'
+    mockVarList.applicant = 'Contractor'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/agents-details`,
@@ -296,7 +310,7 @@ describe('Agent details page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const errors = getQuestionErrors(htmlPage)
+    const errors = getPageErrors(htmlPage)
     const targetError1 = getTargetByText(errors,
       'Enter a mobile number (if you do not have a mobile, enter your landline number)'
     )

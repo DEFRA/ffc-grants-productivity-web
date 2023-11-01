@@ -1,23 +1,35 @@
 const { crumbToken } = require('./test-helper')
+const varListTemplate = {
+  projectSubject: 'Robotics and automatic technology',
+  applicant: 'Farmer',
+  legalStatus: 'Sole trader',
+  planningPermission: 'Secured',
+  projectStart: 'Yes, preparatory work',
+  tenancy: 'Yes',
+  projectItems: 'Robotic equipment item'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
+    }
+  }
+})
 
 describe('Robotics project items page', () => {
-  const varList = {
-    projectSubject: 'Robotics and automatic technology',
-    applicant: 'Farmer',
-    legalStatus: 'Sole trader',
-    planningPermission: 'Secured',
-    projectStart: 'Yes, preparatory work',
-    tenancy: 'Yes',
-    projectItems: 'Robotic equipment item'
-  }
-
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return 'Error'
-    }
-  }))
+  beforeEach(() => {
+    mockVarList = { ...varListTemplate }
+  })
+  afterAll(() => {
+    jest.resetAllMocks()
+  })
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -44,7 +56,7 @@ describe('Robotics project items page', () => {
     expect(postResponse.payload).toContain('Select which items your project needs')
   })
   it('when we select /technology-items/ should store user response and redirects to technology-items', async () => {
-    varList.projectItems = ['Wavelength-specific LED lighting for horticultural crops', 'Robotic and automatic technology']
+    mockVarList.projectItems = ['Wavelength-specific LED lighting for horticultural crops', 'Robotic and automatic technology']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-items`,
@@ -58,7 +70,7 @@ describe('Robotics project items page', () => {
   })
 
   it('should store user response and redirects to project cost page', async () => {
-    varList.projectItems = ['Advanced ventilation control units', 'Wavelength-specific LED lighting for horticultural crops']
+    mockVarList.projectItems = ['Advanced ventilation control units', 'Wavelength-specific LED lighting for horticultural crops']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-items`,
@@ -80,8 +92,8 @@ describe('Robotics project items page', () => {
     expect(response.payload).toContain('<a href="tenancy" class="govuk-back-link">Back</a>')
   })
   it('page loads with correct back link when tenancy is "No" ', async () => {
-    varList.tenancy = 'No'
-    varList.projectResponsibility = 'Yes, I plan to take full responsibility for my project'
+    mockVarList.tenancy = 'No'
+    mockVarList.projectResponsibility = 'Yes, I plan to take full responsibility for my project'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-items`

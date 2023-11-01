@@ -1,6 +1,7 @@
+const { setYarValue, getYarValue } = require('grant-helpers')
 describe('Session', () => {
   test('setYarValue', () => {
-    const { setYarValue } = require('../../../../app/helpers/functions/session')
+    expect(setYarValue).toBeDefined()
     const dict = {}
 
     const mockRequest = {
@@ -17,7 +18,7 @@ describe('Session', () => {
   })
 
   test('getYarValue', () => {
-    const { getYarValue } = require('../../../../app/helpers/functions/session')
+    expect(getYarValue).toBeDefined()
     const dict = { MOCK_KEY: 'MOCK_VALUE' }
 
     let mockRequest = {}

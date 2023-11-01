@@ -1,18 +1,30 @@
 const { crumbToken } = require('./test-helper')
-
-describe('Page: /solar-installation', () => {
-  const varList = {
-    solarInstallation: 'randomData'
-  }
-
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
+const varListTemplate = {
+  solarInstallation: 'randomData'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
+      if (mockVarList[key]) return mockVarList[key]
       else return null
     }
-  }))
-
+  }
+})
+describe('Page: /solar-installation', () => {
+  beforeEach(() => {
+    mockVarList = {
+      ...varListTemplate
+    }
+  })
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -54,7 +66,7 @@ describe('Page: /solar-installation', () => {
   })
 
   it('user selects any option AND \'Solar panels\' -> store user response and redirect to /solar-installation', async () => {
-    varList.solarInstallation = ['Solar panels', 'An electrical grid connection']
+    mockVarList.solarInstallation = ['Solar panels', 'An electrical grid connection']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-installation`,

@@ -1,18 +1,31 @@
 const { crumbToken } = require('./test-helper')
-
-describe('Page: /tenancy', () => {
-  const varList = {
-    tenancy: 'randomData',
-    projectSubject: 'randomData'
-  }
-
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
+const varListTemplate = {
+  tenancy: 'randomData',
+  projectSubject: 'randomData'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('Page: /tenancy', () => {
+  beforeEach(() => {
+    mockVarList = {
+      ...varListTemplate
+    }
+  })
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -41,8 +54,8 @@ describe('Page: /tenancy', () => {
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /project-items', async () => {
-    varList.tenancy = 'Yes'
-    varList.projectSubject = 'Robotics and automatic technology'
+    mockVarList.tenancy = 'Yes'
+    mockVarList.projectSubject = 'Robotics and automatic technology'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tenancy`,
@@ -56,8 +69,8 @@ describe('Page: /tenancy', () => {
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /existing-solar', async () => {
-    varList.tenancy = 'Yes'
-    varList.projectSubject = 'Solar technologies'
+    mockVarList.tenancy = 'Yes'
+    mockVarList.projectSubject = 'Solar technologies'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tenancy`,
@@ -90,6 +103,9 @@ describe('Page: /tenancy', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"project-start\" class=\"govuk-back-link\">Back</a>')
+    const page = createPage(response.payload)
+    const backLink = getBackLink(page)
+    expect(backLink.href).toEqual('/project-items')
+    expect(extractCleanText(backLink)).toEqual('Back')
   })
 })

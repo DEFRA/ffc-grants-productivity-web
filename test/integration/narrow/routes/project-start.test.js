@@ -1,18 +1,31 @@
 const { crumbToken } = require('./test-helper')
-
-describe('project-start', () => {
-  const varList = {
-    projectSubject: 'Robotics and Innovation',
-    applicant: 'Farmer'
-  }
-
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
+const varListTemplate = {
+  projectSubject: 'Robotics and Innovation',
+  applicant: 'Farmer'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return 'Error'
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('project-start', () => {
+  beforeEach(() => {
+    mockVarList = {
+      ...varListTemplate
+    }
+  })
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
   it('no option is selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
@@ -26,7 +39,7 @@ describe('project-start', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const page = createPage(postResponse.payload)
-    const errors = getQuestionErrors(page)
+    const errors = getPageErrors(page)
     const error = getTargetByText(errors, 'Select the option that applies to your project')
     expect(error.length).toBe(1)
   })
@@ -47,7 +60,7 @@ describe('project-start', () => {
   })
 
   it('store user response and redirect to project items page if applicant is Contractor', async () => {
-    varList.applicant = 'Contractor'
+    mockVarList.applicant = 'Contractor'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-start`,

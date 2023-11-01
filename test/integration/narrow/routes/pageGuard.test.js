@@ -6,15 +6,20 @@ const varListTemplate = {
   projectSubject: 'Robotics and automatic technology',
   applicant: 'Farmer'
 }
-let varList
-const mockSession = {
-  setYarValue: (request, key, value) => null,
-  getYarValue: (request, key) => {
-    if (Object.keys(varList).includes(key)) return varList[key]
-    else return undefined
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
+    }
   }
-}
-jest.mock('../../../../app/helpers/functions/session', () => mockSession)
+})
 
 describe('Page Guard', () => {
   const OLD_ENV = process.env
@@ -23,7 +28,7 @@ describe('Page Guard', () => {
   beforeEach(async () => {
     jest.resetModules()
     process.env = { ...OLD_ENV }
-    varList = { ...varListTemplate }
+    mockVarList = { ...varListTemplate }
   })
 
   afterEach(() => {
@@ -49,7 +54,7 @@ describe('Page Guard', () => {
   })
 
   it('AND - should redirect to start page if no key found', async () => {
-    varList.projectSubject = 'random'
+    mockVarList.projectSubject = 'random'
 
     server = await createServer()
     const getOptions = {
@@ -63,7 +68,7 @@ describe('Page Guard', () => {
   })
 
   it('AND - should load normal page if all keys found (1 item)', async () => {
-    varList.projectSubject = 'Robotics and automatic technology'
+    mockVarList.projectSubject = 'Robotics and automatic technology'
 
     server = await createServer()
     const getOptions = {
@@ -77,8 +82,8 @@ describe('Page Guard', () => {
   })
 
   it('OR - should redirect to start page if no key found', async () => {
-    varList.projectSubject = 'random'
-    varList.applicant = 'random'
+    mockVarList.projectSubject = 'random'
+    mockVarList.applicant = 'random'
     server = await createServer()
     const getOptions = {
       method: 'GET',
@@ -91,7 +96,7 @@ describe('Page Guard', () => {
   })
 
   it('OR - should load normal page if any key found', async () => {
-    varList.businessLocation = 'Yes'
+    mockVarList.businessLocation = 'Yes'
 
     server = await createServer()
     const getOptions = {
@@ -105,7 +110,7 @@ describe('Page Guard', () => {
   })
 
   it('OR andCheck - should redirect to start page if projectSubject not correct', async () => {
-    varList.projectSubject = 'Robotics and automatic technology'
+    mockVarList.projectSubject = 'Robotics and automatic technology'
 
     server = await createServer()
     const getOptions = {
@@ -119,8 +124,8 @@ describe('Page Guard', () => {
   })
 
   it('OR andCheck - should load normal page if any key found as well as projectSubject', async () => {
-    varList.projectSubject = 'Solar technologies'
-    varList.tenancy = 'Yes'
+    mockVarList.projectSubject = 'Solar technologies'
+    mockVarList.tenancy = 'Yes'
 
     server = await createServer()
     const getOptions = {
@@ -134,7 +139,7 @@ describe('Page Guard', () => {
   })
 
   it('NOT - should redirect to start page if any key found', async () => {
-    varList.legalStatus = 'None of the above'
+    mockVarList.legalStatus = 'None of the above'
 
     server = await createServer()
     const getOptions = {
@@ -148,7 +153,7 @@ describe('Page Guard', () => {
   })
 
   it('NOT - should load normal page if key not found', async () => {
-    varList.legalStatus = 'asjhakh'
+    mockVarList.legalStatus = 'asjhakh'
 
     server = await createServer()
     const getOptions = {

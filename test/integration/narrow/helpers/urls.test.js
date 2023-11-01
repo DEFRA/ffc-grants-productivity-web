@@ -1,20 +1,33 @@
 const urlPrefix = require('../../../../app/config/server').urlPrefix
+const varListTemplate = {
+  projectSubject: 'Slurry Acidification'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
+    }
+  }
+})
 describe('getUrl()', () => {
-  jest.mock('../../../../app/helpers/functions/session')
-  const { getYarValue } = require('../../../../app/helpers/functions/session')
-
-  const { getUrl } = require('../../../../app/helpers/functions/urls')
-  let urlObject = null
-  let secBtn = 'Back to score'
-  let dict = {}
   beforeEach(() => {
-    getYarValue.mockImplementation((req, key) => {
-      return dict[key]
-    })
+    mockVarList = {
+      ...varListTemplate
+    }
   })
   afterEach(() => {
     jest.resetAllMocks()
   })
+  const { getUrl } = require('../../../../app/helpers/functions/urls')
+  let urlObject = null
+  let secBtn = 'Back to score'
   it('should return url if urlObject is empty', () => {
     expect(getUrl(urlObject, 'mock-url', {}, secBtn, '')).toEqual(
       `${urlPrefix}/score`
@@ -31,7 +44,7 @@ describe('getUrl()', () => {
         elseUrl: 'elseUrl'
       }
     }
-    dict = {
+    mockVarList = {
       tenancy: 'No'
     }
     const selectedURL = getUrl(urlObject, 'mock-url', {}, '', '')
@@ -46,7 +59,7 @@ describe('getUrl()', () => {
         elseUrl: 'elseUrl'
       }
     }
-    dict = {
+    mockVarList = {
       tenancy: 'Yes'
     }
     expect(getUrl(urlObject, 'mock-url', {}, '', '')).toEqual('thenUrl')
@@ -61,24 +74,24 @@ describe('getUrl()', () => {
         elseUrl: 'elseUrl'
       }
     }
-    dict = {
+    mockVarList = {
       tenancy: 'Yes',
       applicant: 'Not The Answer We Are Looking For'
     }
     expect(getUrl(urlObject, 'mock-url', {}, '', '')).toEqual('thenUrl')
-    dict = {
+    mockVarList = {
       tenancy: 'Not an answer we are looking for',
       applicant: 'Contractor'
     }
     expect(getUrl(urlObject, 'mock-url', {}, '', '')).toEqual('thenUrl2')
-    dict = {
+    mockVarList = {
       businessLocation: 'Yes'
     }
     expect(getUrl(urlObject, 'mock-url', {}, '', '')).toEqual('thenUrl3')
   })
   it('should return secBtnPath if secBtn is "Back to score"', () => {
     urlObject = null
-    dict = {
+    mockVarList = {
       dependentQuestionYarKey: 'dependentAnswerKeysArray'
     }
     expect(getUrl(urlObject, 'mock-url', {}, 'Back to score', '')).toEqual(
@@ -88,7 +101,7 @@ describe('getUrl()', () => {
 
   it('should default to /check-details if secBtn is not "Back to score" and current url is not a building or planning page', () => {
     urlObject = null
-    dict = {
+    mockVarList = {
       dependentQuestionYarKey: 'dependentAnswerKeysArray'
     }
     expect(

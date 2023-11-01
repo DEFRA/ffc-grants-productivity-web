@@ -1,18 +1,28 @@
 const { crumbToken } = require('./test-helper')
-
-describe('Page: /robotic-automatic', () => {
-  const varList = {
-    projectSubject: 'Robotics and automatic technology',
-    technologyItems: 'Harvesting technology'
-  }
-
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
+const varListTemplate = {
+  projectSubject: 'Robotics and automatic technology'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('Page: /robotic-automatic', () => {
+  beforeEach(() => {
+    mockVarList = { ...varListTemplate }
+  })
+  afterAll(() => {
+    jest.resetAllMocks()
+  })
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -40,7 +50,7 @@ describe('Page: /robotic-automatic', () => {
     expect(postResponse.payload).toContain('Select if your harvesting technology is robotic or automatic')
   })
   it('user selects \'Robotic\' and Other robotic or automatic technology from tech items -> store user response and redirect to /other-robotic-technology', async () => {
-    varList.technologyItems = 'Other robotics or automatic technology'
+    mockVarList.technologyItems = 'Other robotics or automatic technology'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotic-automatic`,
@@ -53,7 +63,7 @@ describe('Page: /robotic-automatic', () => {
     expect(postResponse.headers.location).toBe('other-robotic-technology')
   })
   it('user selects \'Robotic\' and except Other robotic or automatic technology from tech items -> store user response and redirect to /other-item', async () => {
-    varList.technologyItems = 'Spraying technology'
+    mockVarList.technologyItems = 'Spraying technology'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotic-automatic`,
@@ -85,6 +95,9 @@ describe('Page: /robotic-automatic', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"technology-items\" class=\"govuk-back-link\">Back</a>')
+    const htmlPage = createPage(response.payload)
+    const backLink = getBackLink(htmlPage)
+    expect(backLink.href).toBe('technology-items')
+    expect(extractCleanText(backLink)).toBe('Back')
   })
 })

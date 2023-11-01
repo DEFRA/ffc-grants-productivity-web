@@ -1,21 +1,36 @@
 const { crumbToken } = require('./test-helper')
-describe('technology-items', () => {
-  const varList = {
-    projectSubject: 'Robotics and automatic technology',
-    applicant: 'Farmer',
-    legalStatus: 'Sole trader',
-    planningPermission: 'Secured',
-    projectStart: 'Yes, preparatory work',
-    tenancy: 'Yes',
-    projectItems: 'Robotic equipment item'
-  }
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
+const varListTemplate = {
+  projectSubject: 'Robotics and automatic technology',
+  applicant: 'Farmer',
+  legalStatus: 'Sole trader',
+  planningPermission: 'Secured',
+  projectStart: 'Yes, preparatory work',
+  tenancy: 'Yes',
+  projectItems: 'Robotic equipment item'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return 'Error'
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('technology-items', () => {
+  beforeEach(() => {
+    mockVarList = {
+      ...varListTemplate
+    }
+  })
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -24,8 +39,8 @@ describe('technology-items', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const htmlPage = createPage(response.payload)
-    const heading = getQuestionH1(htmlPage)
-    const questionAnswers = getQuestionRadios(htmlPage)
+    const heading = getPageHeading(htmlPage)
+    const questionAnswers = getPageRadios(htmlPage)
     expect(extractCleanText(heading)).toBe('What technology does your project need?')
     expect(questionAnswers.length).toBe(9)
     expect(questionAnswers[0].value).toBe('Harvesting technology')
@@ -48,7 +63,7 @@ describe('technology-items', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     const htmlPage = createPage(postResponse.payload)
-    const questionErrors = getQuestionErrors(htmlPage)
+    const questionErrors = getPageErrors(htmlPage)
     const targetError = getTargetByText(questionErrors, 'Select what technology your project needs')
     expect(targetError.length).toBe(1)
   })

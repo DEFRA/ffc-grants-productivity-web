@@ -1,13 +1,28 @@
 const { crumbToken } = require('./test-helper')
-describe('confirm page', () => {
-  const varList = { farmerDetails: 'someValue', contractorsDetails: 'someValue' }
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
+const varListTemplate = { farmerDetails: 'someValue', contractorsDetails: 'someValue' }
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return 'Error'
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('confirm page', () => {
+  beforeEach(() => {
+    mockVarList = {
+      ...varListTemplate
+    }
+  })
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
   it('should load page successfully with all details', async () => {
     const options = {
       method: 'GET',

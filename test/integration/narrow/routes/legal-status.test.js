@@ -4,18 +4,23 @@ const varListTemplate = {
   applicant: 'Farmer',
   businessLocation: 'Yes'
 }
-let varList
-const mockSession = {
-  setYarValue: (request, key, value) => null,
-  getYarValue: (request, key) => {
-    if (Object.keys(varList).includes(key)) return varList[key]
-    else return undefined
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
+    }
   }
-}
-jest.mock('../../../../app/helpers/functions/session', () => mockSession)
+})
 describe('Legal status page', () => {
   beforeEach(() => {
-    varList = { ...varListTemplate }
+    mockVarList = { ...varListTemplate }
   })
   afterEach(() => {
     jest.clearAllMocks()
@@ -28,11 +33,11 @@ describe('Legal status page', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const page = createPage(response.payload)
-    const heading = getQuestionH1(page)
+    const heading = getPageHeading(page)
     expect(extractCleanText(heading)).toEqual(
       'What is the legal status of the business?'
     )
-    const radios = getQuestionRadios(page)
+    const radios = getPageRadios(page)
     expect(radios.length).toEqual(12)
     expect(radios[0].value).toBe('Sole trader')
     expect(radios[1].value).toBe('Partnership')
@@ -71,15 +76,15 @@ describe('Legal status page', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     const page = createPage(response.payload)
-    const errors = getQuestionErrors(page)
+    const errors = getPageErrors(page)
     expect(errors.length).toBe(1)
     expect(extractCleanText(errors[0])).toBe(
       'Select the legal status of the business'
     )
   })
   it('page loads with back link to /project-subject if user selected Solar', async () => {
-    varList.applicant = null
-    varList.projectSubject = 'Solar technologies'
+    mockVarList.applicant = null
+    mockVarList.projectSubject = 'Solar technologies'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/legal-status`
@@ -92,7 +97,7 @@ describe('Legal status page', () => {
     expect(backLink.href).toBe('project-subject')
   })
   it('page loads with correct back link - if applicant was a farmer', async () => {
-    varList.applicant = 'Farmer'
+    mockVarList.applicant = 'Farmer'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/legal-status`
@@ -105,7 +110,7 @@ describe('Legal status page', () => {
     expect(backLink.href).toBe('applicant')
   })
   it('page loads with correct back link - if applicant was a contractor', async () => {
-    varList.applicant = 'Contractor'
+    mockVarList.applicant = 'Contractor'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/legal-status`

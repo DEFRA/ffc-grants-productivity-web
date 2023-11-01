@@ -1,18 +1,29 @@
 const { crumbToken } = require('./test-helper')
-
-describe('Page: /potential-amount-conditional', () => {
-  const varList = {
-    roboticAutomatic: 'Robotic'
-  }
-  const eligiblePageText = 'RPA will assess your item and whether they will fund it.'
-
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
+const varListTemplate = {
+  roboticAutomatic: 'Robotic'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('Page: /potential-amount-conditional', () => {
+  const eligiblePageText = 'RPA will assess your item and whether they will fund it.'
+  beforeEach(() => {
+    mockVarList = { ...varListTemplate }
+  })
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
 
   it('page loads successfully, with all the Eligible options', async () => {
     const options = {
@@ -49,7 +60,7 @@ describe('Page: /potential-amount-conditional', () => {
     expect(response.payload).toContain('<a href="other-robotic-technology" class="govuk-back-link" id="linkBack">Back</a>')
   })
   it('page loads with correct back link when robotic automatic page is Automatic', async () => {
-    varList.roboticAutomatic = 'Automatic'
+    mockVarList.roboticAutomatic = 'Automatic'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/other-conditional`

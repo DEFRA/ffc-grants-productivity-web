@@ -1,18 +1,40 @@
 const { crumbToken } = require('./test-helper')
-
-describe('Page: /potential-amount', () => {
-  const varList = {
-    projectCost: 37500,
-    calculatedGrant: 15000,
-    calculatedGrantSolarPreCap: 34567
-  }
-  const eligiblePageText = 'You may be able to apply for a grant of up to £15,000, based on the estimated cost of £37,500.'
-
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
+const varListTemplate = {
+  projectCost: 37500,
+  calculatedGrant: 15000,
+  calculatedGrantSolarPreCap: 34567
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
+    }
+  }
+})
+describe('Page: /potential-amount', () => {
+  const eligiblePageText = 'You may be able to apply for a grant of up to £15,000, based on the estimated cost of £37,500.'
+  beforeEach(() => {
+    mockVarList = {
+      ...varListTemplate
+    }
+  })
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
+  jest.mock('grants-helpers', () => ({
+    functions: {
+      setYarValue: (request, key, value) => null,
+      getYarValue: (request, key) => {
+        if (mockVarList[key]) return mockVarList[key]
+        else return null
+      }
     }
   }))
 

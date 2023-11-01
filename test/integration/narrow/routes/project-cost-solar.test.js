@@ -7,20 +7,24 @@ const varListTemplate = {
   projectCost: '12345678'
 }
 
-let varList
-const mockSession = {
-  setYarValue: (request, key, value) => null,
-  getYarValue: (request, key) => {
-    if (Object.keys(varList).includes(key)) return varList[key]
-    else return undefined
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
+    }
   }
-}
-
-jest.mock('../../../../app/helpers/functions/session', () => mockSession)
+})
 
 describe('Project cost solar page', () => {
   beforeEach(() => {
-    varList = { ...varListTemplate }
+    mockVarList = { ...varListTemplate }
   })
 
   afterEach(() => {
@@ -36,7 +40,7 @@ describe('Project cost solar page', () => {
     expect(response.statusCode).toBe(200)
   })
   it('should load page successfully if no projectCost', async () => {
-    varList = {
+    mockVarList = {
       projectCost: undefined
     }
 
@@ -49,7 +53,7 @@ describe('Project cost solar page', () => {
     expect(response.statusCode).toBe(200)
   })
   it('should return an error message if no option is selected', async () => {
-    varList['current-score'] = null
+    mockVarList['current-score'] = null
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-cost-solar`,
@@ -126,8 +130,8 @@ describe('Project cost solar page', () => {
   })
 
   it('page loads with correct back link when solar technologies is /Solar panels/ ', async () => {
-    varList.solarTechnologies = 'Solar panels'
-    varList.solarInstallation = 'On an existing hardstanding area'
+    mockVarList.solarTechnologies = 'Solar panels'
+    mockVarList.solarInstallation = 'On an existing hardstanding area'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-cost-solar`

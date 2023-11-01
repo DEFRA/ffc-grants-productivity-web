@@ -4,20 +4,24 @@ const varListTemplate = {
   projectItems: ['Other robotic equipment']
 }
 const CHARS_OVER_18 = 'FAKEDATAFAKEDATAFAKEDATAFAKEDATAFAKEDATAFAKEDATAFAKEDATA'
-let varList
-const mockSession = {
-  setYarValue: (request, key, value) => null,
-  getYarValue: (request, key) => {
-    if (Object.keys(varList).includes(key)) return varList[key]
-    else return 'Error'
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
+    }
   }
-}
-
-jest.mock('../../../../app/helpers/functions/session', () => mockSession)
+})
 
 describe('other Robotics Equipment', () => {
   beforeEach(() => {
-    varList = { ...varListTemplate }
+    mockVarList = { ...varListTemplate }
   })
 
   afterAll(() => {

@@ -1,17 +1,30 @@
 const { crumbToken } = require('./test-helper')
-
-describe('Page: /solar-output', () => {
-  const varList = {
-    solarOutput: 'randomData'
-  }
-
-  jest.mock('../../../../app/helpers/functions/session', () => ({
-    setYarValue: (request, key, value) => null,
+const varListTemplate = {
+  solarOutput: 'randomData'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
+      if (mockVarList[key]) return mockVarList[key]
       else return null
     }
-  }))
+  }
+})
+describe('Page: /solar-output', () => {
+  beforeEach(() => {
+    mockVarList = {
+      ...varListTemplate
+    }
+  })
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -88,6 +101,9 @@ describe('Page: /solar-output', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"solar-installation\" class=\"govuk-back-link\">Back</a>')
+    const htmlPage = createPage(response.payload)
+    const backLink = getBackLink(htmlPage)
+    expect(backLink.href).toEqual('solar-installation')
+    expect(extractCleanText(backLink)).toEqual('Back')
   })
 })

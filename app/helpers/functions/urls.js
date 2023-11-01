@@ -1,5 +1,5 @@
 const urlPrefix = require('../../config/server').urlPrefix
-const { getYarValue } = require('./session')
+const { getYarValue } = require('grants-helpers')
 const { ALL_QUESTIONS } = require('../../config/question-bank')
 
 const getUrl = (urlObject, url, request, secBtn) => {
