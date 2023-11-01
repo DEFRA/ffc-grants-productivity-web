@@ -1,20 +1,29 @@
 const { crumbToken } = require('./test-helper')
-
-describe('Page: /project-responsibility', () => {
-  const varList = {
-    projectSubject: 'randomData',
-    tenancy: 'No'
-  }
-
-  jest.mock('grants-helpers', () => ({
-    functions: {
-      setYarValue: (request, key, value) => null,
-      getYarValue: (request, key) => {
-        if (varList[key]) return varList[key]
-        else return null
-      }
+const varListTemplate = {
+  projectSubject: 'randomData',
+  tenancy: 'No'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('Page: /project-responsibility', () => {
+  beforeEach(() => {
+    mockVarList = { ...varListTemplate }
+  })
+  afterAll(() => {
+    jest.clearAllMocks()
+  })
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -43,8 +52,8 @@ describe('Page: /project-responsibility', () => {
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /existing-solar', async () => {
-    varList.projectSubject = 'Solar technologies'
-    varList.tenancy = 'Yes'
+    mockVarList.projectSubject = 'Solar technologies'
+    mockVarList.tenancy = 'Yes'
 
     const postOptions = {
       method: 'POST',
@@ -58,8 +67,8 @@ describe('Page: /project-responsibility', () => {
   })
 
   it('user selects \'No\' -> store user response and redirect to /existing-solar', async () => {
-    varList.tenancy = 'No'
-
+    mockVarList.tenancy = 'No'
+    mockVarList.projectSubject = 'Solar technologies'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-responsibility`,
@@ -73,7 +82,7 @@ describe('Page: /project-responsibility', () => {
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /project-items', async () => {
-    varList.projectSubject = 'Robotics and automatic technology'
+    mockVarList.projectSubject = 'Robotics and automatic technology'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-responsibility`,
@@ -87,7 +96,7 @@ describe('Page: /project-responsibility', () => {
   })
 
   it('user selects \'No\' -> store user response and redirect to /project-items', async () => {
-    varList.projectSubject = 'Robotics and automatic technology'
+    mockVarList.projectSubject = 'Robotics and automatic technology'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-responsibility`,

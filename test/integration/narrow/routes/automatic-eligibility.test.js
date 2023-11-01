@@ -1,19 +1,30 @@
 const { crumbToken } = require('./test-helper')
-describe('Page: /automatic-eligibility', () => {
-  const varList = {
-    automaticEligibility: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop', 'None of the above'],
-    technologyItems: 'Harvesting technology',
-    roboticAutomatic: 'Automatic'
-  }
-  jest.mock('grants-helpers', () => ({
-    functions: {
-      setYarValue: (request, key, value) => null,
-      getYarValue: (request, key) => {
-        if (varList[key]) return varList[key]
-        else return null
-      }
+const varListTemplate = {
+  automaticEligibility: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop', 'None of the above'],
+  technologyItems: 'Harvesting technology',
+  roboticAutomatic: 'Automatic'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('Page: /automatic-eligibility', () => {
+  beforeEach(() => {
+    mockVarList = { ...varListTemplate }
+  })
+  afterAll(() => {
+    jest.resetAllMocks()
+  })
   it('page loads successfully with all the options', async () => {
     expect.assertions(8)
     const options = {
@@ -49,7 +60,7 @@ describe('Page: /automatic-eligibility', () => {
     expect(error.length).toBe(1)
   })
   it('should display ineligible page when user response is \'None of the above\'', async () => {
-    varList.automaticEligibility = ['None of the above']
+    mockVarList.automaticEligibility = ['None of the above']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/automatic-eligibility`,
@@ -66,7 +77,7 @@ describe('Page: /automatic-eligibility', () => {
     expect(paragraph).not.toBeNull()
   })
   it('should display ineligible page when user selects only one option', async () => {
-    varList.automaticEligibility = ['Makes decisions and plans']
+    mockVarList.automaticEligibility = ['Makes decisions and plans']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/automatic-eligibility`,
@@ -83,9 +94,9 @@ describe('Page: /automatic-eligibility', () => {
     expect(paragraph).not.toBeNull()
   })
   it('user selects two eligible options and \'Automatic\' and \'Other robotic or automatic technology\' from tech items -> store user response and redirect to /other-automatic-technology', async () => {
-    varList.technologyItems = 'Other robotics or automatic technology'
-    varList.automaticEligibility = ['Has sensing system that can understand its environment', 'Makes decisions and plans']
-    varList.roboticAutomatic = 'Automatic'
+    mockVarList.technologyItems = 'Other robotics or automatic technology'
+    mockVarList.automaticEligibility = ['Has sensing system that can understand its environment', 'Makes decisions and plans']
+    mockVarList.roboticAutomatic = 'Automatic'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/automatic-eligibility`,
@@ -97,8 +108,8 @@ describe('Page: /automatic-eligibility', () => {
     expect(postResponse.headers.location).toContain('/productivity/other-automatic-technology')
   })
   it('user selects two eligible options and \'Harvesting technology\' -> store user response and redirect to /other-item', async () => {
-    varList.automaticEligibilityItem = ['Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
-    varList.technologyItems = 'Harvesting technology'
+    mockVarList.automaticEligibilityItem = ['Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
+    mockVarList.technologyItems = 'Harvesting technology'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/automatic-eligibility`,
@@ -110,7 +121,7 @@ describe('Page: /automatic-eligibility', () => {
     expect(postResponse.headers.location).toBe('/productivity/other-item')
   })
   it('user selects \'Other robotics or automatic technology\' -> title should be \'Which eligibility criteria does your other automatic technology meet?\'', async () => {
-    varList.technologyItems = 'Other robotics or automatic technology'
+    mockVarList.technologyItems = 'Other robotics or automatic technology'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/automatic-eligibility`

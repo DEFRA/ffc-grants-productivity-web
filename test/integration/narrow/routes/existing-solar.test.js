@@ -1,19 +1,30 @@
 const { crumbToken } = require('./test-helper')
-describe('Page: /existing-solar', () => {
-  const varList = {
-    existingSolar: 'randomData',
-    projectSubject: 'Solar technologies',
-    projectResponsibility: 'Yes, I plan to take full responsibility for my project'
-  }
-  jest.mock('grants-helpers', () => ({
-    functions: {
-      setYarValue: (request, key, value) => null,
-      getYarValue: (request, key) => {
-        if (varList[key]) return varList[key]
-        else return null
-      }
+const varListTemplate = {
+  existingSolar: 'randomData',
+  projectSubject: 'Solar technologies',
+  projectResponsibility: 'Yes, I plan to take full responsibility for my project'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('Page: /existing-solar', () => {
+  beforeEach(() => {
+    mockVarList = { ...varListTemplate }
+  })
+  afterAll(() => {
+    jest.resetAllMocks()
+  })
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -66,7 +77,7 @@ describe('Page: /existing-solar', () => {
     expect(postResponse.headers.location).toBe('solar-technologies')
   })
   it('page loads with correct back link', async () => {
-    varList.tenancy = 'Yes'
+    mockVarList.tenancy = 'Yes'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/existing-solar`
@@ -79,7 +90,7 @@ describe('Page: /existing-solar', () => {
     expect(backLink.href).toBe('/productivity/tenancy')
   })
   it('page loads with correct back link', async () => {
-    varList.tenancy = 'No'
+    mockVarList.tenancy = 'No'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/existing-solar`

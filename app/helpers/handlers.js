@@ -1,6 +1,6 @@
-const grantsHelpers = require('grants-helpers')
-const { getYarValue, setYarValue, formatUKCurrency } = grantsHelpers.functions
-const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = grantsHelpers.constants
+// const grantsHelpers =
+const { getYarValue, setYarValue, formatUKCurrency } = require('grants-helpers')
+const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('grants-helpers')
 const { getModel } = require('./functions/models')
 const { checkErrors } = require('../helpers/functions/errorSummaryHandlers')
 const { getGrantValues } = require('./functions/grants-info')

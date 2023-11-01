@@ -1,15 +1,29 @@
 const { crumbToken } = require('./test-helper')
-describe('robotics agricultural sector page', () => {
-  const varList = { }
-  jest.mock('grants-helpers', () => ({
-    functions: {
-      setYarValue: (request, key, value) => null,
-      getYarValue: (request, key) => {
-        if (varList[key]) return varList[key]
-        else return null
-      }
+const varListTemplate = {
+  projectSubject: 'Slurry Acidification'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('robotics agricultural sector page', () => {
+  beforeEach(() => {
+    mockVarList = { ...varListTemplate }
+  })
+
+  afterAll(() => {
+    jest.clearAllMocks()
+  })
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',
@@ -75,7 +89,7 @@ describe('robotics agricultural sector page', () => {
     expect(postResponse.headers.location).toBe('technology-use')
   })
   it('page loads with correct back link when energy source is ains electricity', async () => {
-    varList.energySource = 'Mains electricity'
+    mockVarList.energySource = 'Mains electricity'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/agricultural-sector`
@@ -88,7 +102,7 @@ describe('robotics agricultural sector page', () => {
     expect(backLink.href).toBe('energy-source')
   })
   it('page loads with correct back link  when energy source is Fossil fuels', async () => {
-    varList.energySource = 'Fossil fuels'
+    mockVarList.energySource = 'Fossil fuels'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/agricultural-sector`

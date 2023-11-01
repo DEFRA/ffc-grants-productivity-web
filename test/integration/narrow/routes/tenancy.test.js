@@ -1,20 +1,31 @@
 const { crumbToken } = require('./test-helper')
-
-describe('Page: /tenancy', () => {
-  const varList = {
-    tenancy: 'randomData',
-    projectSubject: 'randomData'
-  }
-
-  jest.mock('grants-helpers', () => ({
-    functions: {
-      setYarValue: (request, key, value) => null,
-      getYarValue: (request, key) => {
-        if (varList[key]) return varList[key]
-        else return null
-      }
+const varListTemplate = {
+  tenancy: 'randomData',
+  projectSubject: 'randomData'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('Page: /tenancy', () => {
+  beforeEach(() => {
+    mockVarList = {
+      ...varListTemplate
+    }
+  })
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
 
   it('page loads successfully, with all the options', async () => {
     const options = {
@@ -43,8 +54,8 @@ describe('Page: /tenancy', () => {
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /project-items', async () => {
-    varList.tenancy = 'Yes'
-    varList.projectSubject = 'Robotics and automatic technology'
+    mockVarList.tenancy = 'Yes'
+    mockVarList.projectSubject = 'Robotics and automatic technology'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tenancy`,
@@ -58,8 +69,8 @@ describe('Page: /tenancy', () => {
   })
 
   it('user selects \'Yes\' -> store user response and redirect to /existing-solar', async () => {
-    varList.tenancy = 'Yes'
-    varList.projectSubject = 'Solar technologies'
+    mockVarList.tenancy = 'Yes'
+    mockVarList.projectSubject = 'Solar technologies'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tenancy`,

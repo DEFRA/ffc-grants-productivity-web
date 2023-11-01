@@ -1,18 +1,30 @@
 const { crumbToken } = require('./test-helper')
-describe('Agent details page', () => {
-  const varList = {
-    applicant: 'Farmer',
-    applying: 'Agent'
-  }
-  jest.mock('grants-helpers', () => ({
-    functions: {
-      setYarValue: (request, key, value) => null,
-      getYarValue: (request, key) => {
-        if (varList[key]) return varList[key]
-        else return null
-      }
+const varListTemplate = {
+  applicant: 'Farmer',
+  applying: 'Agent'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('Agent details page', () => {
+  beforeEach(() => {
+    mockVarList = { ...varListTemplate }
+  })
+  afterAll(() => {
+    jest.resetAllMocks()
+  })
+
   it('should load page successfully', async () => {
     const options = {
       method: 'GET',
@@ -252,7 +264,7 @@ describe('Agent details page', () => {
     expect(postResponse.headers.location).toBe('/productivity/farmers-details')
   })
   it('should store user response and redirects to contractor details page, if the applicant is contractor', async () => {
-    varList.applicant = 'Contractor'
+    mockVarList.applicant = 'Contractor'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/agents-details`,

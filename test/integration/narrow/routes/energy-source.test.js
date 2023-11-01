@@ -1,17 +1,30 @@
 const { crumbToken } = require('./test-helper')
-describe('Robotics Energy Source Page', () => {
-  const varList = {
-    energySource: ['Biofuels', 'another source']
-  }
-  jest.mock('grants-helpers', () => ({
-    functions: {
-      setYarValue: (request, key, value) => null,
-      getYarValue: (request, key) => {
-        if (varList[key]) return varList[key]
-        else return null
-      }
+const varListTemplate = {
+  energySource: ['Biofuels', 'another source']
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('Robotics Energy Source Page', () => {
+  beforeEach(() => {
+    mockVarList = {
+      ...varListTemplate
+    }
+  })
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
   it('should returns error message if no option is selected', async () => {
     const postOptions = {
       method: 'POST',
@@ -48,7 +61,7 @@ describe('Robotics Energy Source Page', () => {
     expect(postResponse.headers.location).toBe('agricultural-sector')
   })
   it('should store user response and redirects to project cost page', async () => {
-    varList.energySource = ['Fossil fuels', 'Mains electricity']
+    mockVarList.energySource = ['Fossil fuels', 'Mains electricity']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/energy-source`,

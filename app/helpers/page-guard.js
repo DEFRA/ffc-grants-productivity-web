@@ -1,4 +1,4 @@
-const { getYarValue } = require('./functions/session')
+const { getYarValue } = require('grants-helpers')
 const {
   startPageUrl,
   serviceEndDate,

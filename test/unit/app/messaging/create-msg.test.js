@@ -1,14 +1,24 @@
 describe('create-msg', () => {
-  jest.mock('../../../../app/helpers/functions/session')
-  const { getYarValue } = require('../../../../app/helpers/functions/session')
-
+  let mockVarList
+  jest.mock('grants-helpers', () => {
+    const originalModule = jest.requireActual('grants-helpers')
+    return {
+      ...originalModule,
+      setYarValue: (request, key, value) => {
+        mockVarList[key] = value
+      },
+      getYarValue: (request, key) => {
+        if (mockVarList[key]) return mockVarList[key]
+        else return null
+      }
+    }
+  })
+  afterAll(() => {
+    jest.resetAllMocks()
+  })
   const { getDesirabilityAnswers } = require('../../../../app/messaging/create-msg')
-
   test('check getDesirabilityAnswers()', () => {
-    let dict
-    getYarValue.mockImplementation((req, key) => (dict[key]))
-
-    dict = {
+    mockVarList = {
       projectImpacts: 'hello',
       projectSubject: 'hello'
     }
@@ -16,9 +26,8 @@ describe('create-msg', () => {
       projectImpacts: 'hello',
       projectSubject: 'hello'
     })
-
-    dict = {
-      ...dict,
+    mockVarList = {
+      ...mockVarList,
       projectSubject: 'Robotics and Innovation',
       energySource: ['value'],
       agriculturalSector: ['value'],
@@ -33,13 +42,11 @@ describe('create-msg', () => {
       dataAnalytics: 'testing',
       roboticProjectImpacts: 'testing'
     })
-
-    dict = {
-      ...dict,
+    mockVarList = {
+      ...mockVarList,
       energySource: 'value',
       agriculturalSector: 'value'
     }
-
     expect(getDesirabilityAnswers({})).toEqual({
       projectSubject: 'Robotics and Innovation',
       projectImpacts: 'hello',
@@ -48,10 +55,7 @@ describe('create-msg', () => {
       dataAnalytics: 'testing',
       roboticProjectImpacts: 'testing'
     })
-
-    dict = {
-      ...dict,
-      projectImpacts: ''
+    mockVarList = {
     }
     expect(getDesirabilityAnswers({})).toEqual(null)
   })

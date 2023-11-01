@@ -1,23 +1,36 @@
 const { crumbToken } = require('./test-helper')
-describe('technology-items', () => {
-  const varList = {
-    projectSubject: 'Robotics and automatic technology',
-    applicant: 'Farmer',
-    legalStatus: 'Sole trader',
-    planningPermission: 'Secured',
-    projectStart: 'Yes, preparatory work',
-    tenancy: 'Yes',
-    projectItems: 'Robotic equipment item'
-  }
-  jest.mock('grants-helpers', () => ({
-    functions: {
-      setYarValue: (request, key, value) => null,
-      getYarValue: (request, key) => {
-        if (varList[key]) return varList[key]
-        else return null
-      }
+const varListTemplate = {
+  projectSubject: 'Robotics and automatic technology',
+  applicant: 'Farmer',
+  legalStatus: 'Sole trader',
+  planningPermission: 'Secured',
+  projectStart: 'Yes, preparatory work',
+  tenancy: 'Yes',
+  projectItems: 'Robotic equipment item'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('technology-items', () => {
+  beforeEach(() => {
+    mockVarList = {
+      ...varListTemplate
+    }
+  })
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
   it('page loads successfully, with all the options', async () => {
     const options = {
       method: 'GET',

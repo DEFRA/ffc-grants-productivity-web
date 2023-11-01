@@ -1,16 +1,26 @@
 const { crumbToken } = require('./test-helper')
-describe('Page: /fossil-fuel-conditional', () => {
-  const varList = { energySource: 'Fossil fuels' }
-  const eligiblePageText = 'I confirm I understand fossil fuel technology will only be funded where there is no commercially available electric or renewable energy alternative.'
-  jest.mock('grants-helpers', () => ({
-    functions: {
-      setYarValue: (request, key, value) => null,
-      getYarValue: (request, key) => {
-        if (varList[key]) return varList[key]
-        else return null
-      }
+const mockVarList = { energySource: 'Fossil fuels' }
+const eligiblePageText = 'I confirm I understand fossil fuel technology will only be funded where there is no commercially available electric or renewable energy alternative.'
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
     }
-  }))
+  }
+})
+describe('Page: /fossil-fuel-conditional', () => {
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
+  afterAll(() => {
+    jest.resetModules()
+  })
   it('page loads successfully, with all the Eligible options', async () => {
     const options = {
       method: 'GET',

@@ -1,26 +1,29 @@
-const { getBackLink, getPageErrors, getTargetByText } = require('../../../test-helpers')
 const { crumbToken } = require('./test-helper')
 const varListTemplate = {
   projectSubject: 'Slurry Acidification'
 }
-let varList
-jest.mock('grants-helpers', () => ({
-  functions: {
-    setYarValue: (request, key, value) => null,
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
+      if (mockVarList[key]) return mockVarList[key]
       else return null
     }
   }
-}))
+})
 describe('Project and business details page', () => {
   beforeEach(() => {
-    varList = { ...varListTemplate }
+    mockVarList = { ...varListTemplate }
   })
   afterAll(() => {
     jest.resetAllMocks()
   })
-  it('should diaplay correct hint text for project name, in case of slurry journey ', async () => {
+  it('should diaplay correct hint text for project name, in case of slurry journey', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/business-details`
@@ -33,8 +36,8 @@ describe('Project and business details page', () => {
       'For example, Browns Hill Farm slurry acidification'
     )
   })
-  it('should diaplay correct hint text for project name, in case of robotics journey ', async () => {
-    varList.projectSubject = 'Robotics and Innovation'
+  it('should diaplay correct hint text for project name, in case of robotics journey', async () => {
+    mockVarList.projectSubject = 'Robotics and Innovation'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/business-details`
@@ -48,7 +51,7 @@ describe('Project and business details page', () => {
     )
   })
   it('should diaplay Back to details buton if the user came from check details page ', async () => {
-    varList.reachedCheckDetails = true
+    mockVarList.reachedCheckDetails = true
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/business-details`

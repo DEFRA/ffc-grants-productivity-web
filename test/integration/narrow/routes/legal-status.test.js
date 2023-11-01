@@ -4,19 +4,23 @@ const varListTemplate = {
   applicant: 'Farmer',
   businessLocation: 'Yes'
 }
-let varList
-jest.mock('grants-helpers', () => ({
-  functions: {
-    setYarValue: (request, key, value) => null,
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
+      if (mockVarList[key]) return mockVarList[key]
       else return null
     }
   }
-}))
+})
 describe('Legal status page', () => {
   beforeEach(() => {
-    varList = { ...varListTemplate }
+    mockVarList = { ...varListTemplate }
   })
   afterEach(() => {
     jest.clearAllMocks()
@@ -79,8 +83,8 @@ describe('Legal status page', () => {
     )
   })
   it('page loads with back link to /project-subject if user selected Solar', async () => {
-    varList.applicant = null
-    varList.projectSubject = 'Solar technologies'
+    mockVarList.applicant = null
+    mockVarList.projectSubject = 'Solar technologies'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/legal-status`
@@ -93,7 +97,7 @@ describe('Legal status page', () => {
     expect(backLink.href).toBe('project-subject')
   })
   it('page loads with correct back link - if applicant was a farmer', async () => {
-    varList.applicant = 'Farmer'
+    mockVarList.applicant = 'Farmer'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/legal-status`
@@ -106,7 +110,7 @@ describe('Legal status page', () => {
     expect(backLink.href).toBe('applicant')
   })
   it('page loads with correct back link - if applicant was a contractor', async () => {
-    varList.applicant = 'Contractor'
+    mockVarList.applicant = 'Contractor'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/legal-status`

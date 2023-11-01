@@ -10,19 +10,19 @@ const varListTemplate = {
   },
   projectCost: '12345678'
 }
-let varList
+let mockVarList
 jest.mock('grants-helpers', () => ({
   functions: {
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
+      if (mockVarList[key]) return mockVarList[key]
       else return null
     }
   }
 }))
 describe('Project subject page', () => {
   beforeEach(() => {
-    varList = { ...varListTemplate }
+    mockVarList = { ...varListTemplate }
   })
   afterEach(() => {
     jest.clearAllMocks()

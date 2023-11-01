@@ -1,9 +1,31 @@
 const { getOptions, setOptionsLabel } = require('../../../../app/helpers/functions/answer-options')
-
+const varListTemplate = {
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
+    }
+  }
+})
 // jest.mock('../../../../app/helpers/standardised-grant-amounts-array', () => ({
 //   formatAnswerArray: (a, b, c, d) => ([ 'answer-1', 'answer-2' ]),
 // }));
+
 describe('answer-options', () => {
+  beforeEach(() => {
+    mockVarList = { ...varListTemplate }
+  })
+  afterAll(() => {
+    jest.resetAllMocks()
+  })
   test('check getOptions()', () => {
     let question = {
       costDataType: 'cost-data-type',

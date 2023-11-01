@@ -1,5 +1,5 @@
 const { ALL_QUESTIONS } = require('../../config/question-bank')
-const { getYarValue } = require('./session')
+const { getYarValue } = require('grants-helpers')
 
 const answerContainsSelection = (answer, selection) => (
   (typeof (answer) === 'string' && answer === selection) ||

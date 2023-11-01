@@ -1,6 +1,6 @@
 const { getModel } = require('./models')
 const { getHtml } = require('./conditionalHTML')
-const { getYarValue } = require('./session')
+const { getYarValue } = require('grants-helpers')
 const { getQuestionAnswer } = require('./utils')
 
 const validateAnswerField = (value, validationType, details, payload) => {

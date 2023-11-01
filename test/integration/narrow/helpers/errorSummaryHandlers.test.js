@@ -1,13 +1,29 @@
+const varListTemplate = {
+  projectSubject: 'Slurry Acidification'
+}
+let mockVarList
+jest.mock('grants-helpers', () => {
+  const originalModule = jest.requireActual('grants-helpers')
+  return {
+    ...originalModule,
+    setYarValue: (request, key, value) => {
+      mockVarList[key] = value
+    },
+    getYarValue: (request, key) => {
+      if (mockVarList[key]) return mockVarList[key]
+      else return null
+    }
+  }
+})
 describe('Get & Post Handlers', () => {
-  jest.mock('../../../../app/helpers/functions/session', () => {
-    const original = jest.requireActual('../../../../app/helpers/functions/session')
-    return {
-      ...original,
-      getYarValue: jest.fn()
+  beforeEach(() => {
+    mockVarList = {
+      ...varListTemplate
     }
   })
-  const { getYarValue } = require('../../../../app/helpers/functions/session')
-
+  afterEach(() => {
+    jest.resetAllMocks()
+  })
   jest.mock('../../../../app/helpers/functions/conditionalHTML')
   const {
     getHtml
@@ -24,7 +40,7 @@ describe('Get & Post Handlers', () => {
 
   test('check customiseErrorText()', () => {
     mockH = { view: jest.fn() }
-    getYarValue.mockReturnValue('mock-yar-value')
+    // getYarValue.mockReturnValue('mock-yar-value')
     getHtml.mockReturnValue('mock-html')
     getModel.mockReturnValue({ items: ['item1', 'item2'] })
 
