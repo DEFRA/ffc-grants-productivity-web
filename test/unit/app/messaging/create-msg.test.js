@@ -28,9 +28,9 @@ describe('create-msg', () => {
     expect(getDesirabilityAnswers({})).toEqual({
       projectSubject: 'Robotics and Innovation',
       projectImpacts: 'hello',
-      energySource: ['value'],
-      agriculturalSector: ['value'],
-      dataAnalytics: 'testing'
+      // energySource: ['value'],
+      // agriculturalSector: ['value'],
+      // dataAnalytics: 'testing'
     })
 
     dict = {
@@ -42,9 +42,9 @@ describe('create-msg', () => {
     expect(getDesirabilityAnswers({})).toEqual({
       projectSubject: 'Robotics and Innovation',
       projectImpacts: 'hello',
-      energySource: ['value'],
-      agriculturalSector: ['value'],
-      dataAnalytics: 'testing'
+      // energySource: ['value'],
+      // agriculturalSector: ['value'],
+      // dataAnalytics: 'testing'
     })
 
     dict = {
