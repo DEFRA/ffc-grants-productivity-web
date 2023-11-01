@@ -1879,6 +1879,30 @@ const questionBank = {
           yarKey: 'otherItem'
         },
         {
+          key: 'project-items-summary',
+          order: 153,
+          title: 'Your Project items',
+          hint: {
+            text: 'You can add or remove items you will be using on your project'
+          },
+          pageTitle: 'project-items-summary',
+          url: 'project-items-summary',
+          baseUrl: 'project-items-summary',
+          backUrl: 'other-item',
+          nextUrl: 'item-conditional',
+          // preValidationKeys: ['otherItem'],
+          ineligibleContent: {},
+          pageData: {
+            technologyItemsLink: 'technology-items',
+            roboticAutomaticLink: 'robotic-automatic',
+
+          },
+          fundingPriorities: '',
+          type: '',
+          minAnswerCount: 1,
+          answers: []
+        },
+        {
           key: 'item-conditional',
           title: 'Your technology might get a grant from this scheme',
           order: 309,

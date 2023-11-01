@@ -14,6 +14,10 @@ const createMsg = require('../messaging/create-msg')
 const gapiService = require('../services/gapi-service')
 const { startPageUrl, urlPrefix } = require('../config/server')
 const { ALL_QUESTIONS } = require('../config/question-bank')
+const {
+  getCheckDetailsModel,
+  getEvidenceSummaryModel
+} = require('./pageHelpers')
 
 const emailFormatting = require('./../messaging/email/process-submission')
 const { validate } = require('uuid')
@@ -282,6 +286,18 @@ const getPage = async (question, request, h) => {
     case 'contractors-details': {
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
+    // case 'project-items-summary': {
+    //   const evidenceSummaryModel = getEvidenceSummaryModel(
+    //     request,
+    //     question,
+    //     backUrl,
+    //     nextUrl
+    //   )
+    //   if (evidenceSummaryModel.redirect) {
+    //     return h.redirect(startPageUrl)
+    //   }
+    //   return h.view('evidence-summary', evidenceSummaryModel)
+    // }
     case 'legal-status':
       if (getYarValue(request, 'projectSubject') === 'Solar technologies') {
         setYarValue(request, 'applicant', null)

@@ -1,0 +1,74 @@
+{% extends '.layout.njk' %}
+
+{% from "govuk/components/back-link/macro.njk" import govukBackLink %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "./components/macro.njk" import crumbToken %}
+{% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+
+{% block pageTitle %}
+    Check your details - {{siteTitle}}
+{% endblock %}
+
+{% block beforeContent %}
+{{ govukBackLink({
+    text: "Back",
+    href: backUrl,
+	attributes: {id: 'linkBack'}
+}) }}
+{% endblock %}
+
+{% block content %}
+<div class="govuk-body">
+    <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Your project items</h1>
+        <span class="govuk-hint">You can add or remove items you will be using on your project</span>
+        
+        <div>
+        <h2 class="govuk-heading-m check-detail-heading">item</h2>
+        <hr/>
+        </div>
+
+        {% set technologyItems = {
+                key: {
+                text: "OS grid reference"
+                },
+                value: {
+                text: technologyItemsLink
+                },
+                actions: {
+                    items: [
+                    {
+                        href: technologyItemsLink,
+                        text: "Remove",
+                        attributes: {
+                            title: "Remove technology item"
+                        },
+                        visuallyHiddenText: "technology item"
+                    }
+                    ]
+                }
+            }
+        %}
+
+        {% set tableResult = [technologyItems] %}
+
+
+        {{ govukSummaryList({
+            rows: tableResult
+        })
+        }}
+
+    <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <form method="POST" action="{{ formActionPage }}" autocomplete="off" novalidate>
+        {{ crumbToken(crumb)}}
+        {{ govukButton({
+            text: 'Add another item',
+            attributes: {id: "btnResults"}
+        }) }}
+        </form>
+    </div>
+    </div>
+</div>
+{% endblock %}
