@@ -3,7 +3,7 @@ const createServer = require('../../../../app/server')
 require('dotenv').config()
 
 const varListTemplate = {
-  projectSubject: 'Robotics and automatic technology',
+  projectSubject: 'Farm productivity project items',
   applicant: 'Farmer'
 }
 let varList
@@ -67,7 +67,7 @@ describe('Page Guard', () => {
 
   it('AND - should load normal page if all keys found (1 item)', async () => {
 
-    varList.projectSubject = 'Robotics and automatic technology'
+    varList.projectSubject = 'Farm productivity project items'
 
     server = await createServer()
     const getOptions = {
@@ -111,7 +111,7 @@ describe('Page Guard', () => {
 
   it('OR andCheck - should redirect to start page if projectSubject not correct', async () => {
 
-    varList.projectSubject = 'Robotics and automatic technology'
+    varList.projectSubject = 'Farm productivity project items'
 
     server = await createServer()
     const getOptions = {
@@ -126,7 +126,7 @@ describe('Page Guard', () => {
 
   it('OR andCheck - should load normal page if any key found as well as projectSubject', async () => {
 
-    varList.projectSubject = 'Solar technologies'
+    varList.projectSubject = 'Solar project items'
     varList.tenancy = 'Yes'
 
     server = await createServer()

@@ -5,7 +5,7 @@
       "title": "Project subject",
       "answers": {
         "project-subject-A1": "Robotics and Innovation",
-        "project-subject-A2": "Solar Technologies"
+        "project-subject-A2": "Solar project items"
       }
     }
   ],
@@ -84,7 +84,7 @@
   "solarTechnologies": [
     {
       "key": "solar-technologies",
-      "title": "Solar Technologies",
+      "title": "Solar project items",
       "answers": {
         "solar-technologies-A1": "An electrical grid connection",
         "solar-technologies-A2": "Solar panels",
