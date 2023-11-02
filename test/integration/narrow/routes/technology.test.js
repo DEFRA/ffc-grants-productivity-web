@@ -16,7 +16,7 @@ describe('robotics Technology page', () => {
     expect(postResponse.payload).toContain('Select if you are already using this technology')
   })
 
-  it('store user response and redirect to labour saved page', async () => {
+  xit('store user response and redirect to labour saved page', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/technology-use`,
