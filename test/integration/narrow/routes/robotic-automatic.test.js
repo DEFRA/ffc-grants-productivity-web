@@ -2,7 +2,7 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /robotic-automatic', () => {
   const varList = {
-    projectSubject: 'Robotics and automatic technology',
+    projectSubject: 'Farm productivity project items',
     technologyItems: 'Harvesting technology',
     roboticAutomatic: 'Robotic'
   }

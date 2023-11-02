@@ -4,7 +4,7 @@ describe('Page: /solar-technologies', () => {
   let varList = {
     solarTechnologies: 'randomData',
     existingSolar: 'Yes',
-    projectSubject: 'Solar technologies',
+    projectSubject: 'Solar project items',
     tenancy: 'Yes'
   }
 
