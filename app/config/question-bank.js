@@ -803,7 +803,7 @@ const questionBank = {
             },
             {
               key: 'solar-technologies-A6',
-              value: 'Limit-loading power diverter to heat or cold store'
+              value: 'Limit-loading power diverter to heat stores'
             }
           ],
           yarKey: 'solarTechnologies'
