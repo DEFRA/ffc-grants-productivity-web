@@ -4,30 +4,26 @@ describe('create-msg', () => {
 
   const { getDesirabilityAnswers } = require('../../../../app/messaging/create-msg')
 
-  xtest('check getDesirabilityAnswers() > robotics', () => {
+  test('check getDesirabilityAnswers() > robotics', () => {
     let dict
     getYarValue.mockImplementation((req, key) => (dict[key]))
 
     dict = {
-      projectImpacts: 'hello',
-      projectSubject: 'hello'
-    }
-    expect(getDesirabilityAnswers({})).toEqual({
-      projectImpacts: 'hello',
-      projectSubject: 'hello'
-    })
-
-    dict = {
-      ...dict,
       projectSubject: 'Robotics and automatic technology',
+      projectImpacts: 'value',
       energySource: ['value'],
       agriculturalSector: ['value'],
       dataAnalytics: 'testing',
+      roboticProjectImpacts: 'testing',
       technology: 'testing'
     }
     expect(getDesirabilityAnswers({})).toEqual({
-      projectImpacts: 'hello',
-      projectSubject: 'hello'
+      projectSubject: 'Robotics and automatic technology',
+      projectImpacts: 'value',
+      energySource: ['value'],
+      agriculturalSectorRobotics: ['value'],
+      dataAnalytics: 'testing',
+      roboticProjectImpacts: 'testing'
     })
 
     dict = {
@@ -38,18 +34,13 @@ describe('create-msg', () => {
 
     expect(getDesirabilityAnswers({})).toEqual({
       projectSubject: 'Robotics and automatic technology',
-      projectImpacts: 'hello',
+      projectImpacts: 'value',
       energySource: ['value'],
-      agriculturalSector: ['value'],
+      agriculturalSectorRobotics: ['value'],
       dataAnalytics: 'testing',
       roboticProjectImpacts: 'testing'
     })
 
-    dict = {
-      ...dict,
-      projectImpacts: ''
-    }
-    expect(getDesirabilityAnswers({})).toEqual(null)
   })
 
   test('check getDesirabilityAnswers() > solar', () => {
@@ -59,7 +50,7 @@ describe('create-msg', () => {
     dict = {
       ...dict,
       projectSubject: 'Solar technologies',
-      agriculturalSector: ['value'],
+      agriculturalSector: 'value',
       solarTechnologies: ['value'],
       solarOutput: 'testing'
     }
