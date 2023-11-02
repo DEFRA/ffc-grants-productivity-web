@@ -2443,6 +2443,59 @@ const questionBank = {
           ],
           yarKey: 'technologyUse'
         },
+        {
+          key: 'labour-replaced',
+          order: 381,
+          title: 'How much manual labour will this technology replace?',
+          pageTitle: '',
+          url: 'labour-replaced',
+          baseUrl: 'labour-replaced',
+          backUrl: 'technology-use',
+          nextUrl: 'score-summary',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: 'govuk-radios govuk-fieldset__legend--l',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Manual labour shortage',
+              content: [{
+                para: 'Using robotic or automatic technologies can reduce the need to find manual labour.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select how much manual labour the technology will replace'
+            }
+          ],
+          answers: [
+            {
+              key: 'labour-replaced-A1',
+              value: '1 to 2 jobs'
+            },
+            {
+              key: 'labour-replaced-A2',
+              value: '3 to 4 jobs',
+            },
+            {
+              key: 'labour-replaced-A3',
+              value: '5 or more jobs',
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'labour-replaced-A4',
+              value: 'None of the above',
+            }
+          ],
+          yarKey: 'labourReplaced'
+        },
         /// ////// ***************** ROBOTICS END  ************************************/////////////////////
         {
           key: 'answers',
