@@ -48,13 +48,13 @@ describe('create-msg', () => {
 
     dict = {
       ...dict,
-      projectSubject: 'Solar technologies',
+      projectSubject: 'Solar project items',
       agriculturalSector: ['value'],
       solarTechnologies: ['value'],
       solarOutput: 'testing'
     }
     expect(getDesirabilityAnswers({})).toEqual({
-      projectSubject: 'Solar technologies',
+      projectSubject: 'Solar project items',
       agriculturalSectorSolar: ['value'],
       solarTechnologies: ['value'],
       solarOutput: 'testing'
@@ -67,7 +67,7 @@ describe('create-msg', () => {
 
     }
     expect(getDesirabilityAnswers({})).toEqual({
-      projectSubject: 'Solar technologies',
+      projectSubject: 'Solar project items',
       agriculturalSectorSolar: ['value'],
       solarTechnologies: ['value'],
       solarOutput: 'testing'
