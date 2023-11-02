@@ -24,49 +24,43 @@
         <h1 class="govuk-heading-l">Your project items</h1>
         <span class="govuk-hint">You can add or remove items you will be using on your project</span>
         {% if projectItemsList %}
-        <h2 class="govuk-heading-m">Hello</h2>
+            <table class="govuk-table govuk-body govuk-!-font-size-16">
+                <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header ">Item</th>
+                    <th scope="col" class="govuk-table__header govuk-!-width-one-third">Type</th>
+                    <th scope="col" class="govuk-table__header govuk-!-width-one-third">Criteria</th>
+                    <th scope="col" class="govuk-table__header govuk-!-width-one-third"></th>
+                </tr>
+                </thead>
+            {% for item in projectItemsList %}
+                <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">
+                        {{ item.item }}
+                    </th>
+                    <td class="govuk-table__cell">
+                        {{ item.type }}
+                    </td>
+                    <td class="govuk-table__cell">
+                        {{ item.description }}
+                    </td>
+                    <td class="govuk-table__cell">
+                        <a class="govuk-link">Remove</a>
+                    </td>
+                    </tr>
+                </tbody>
+            </table>
+            {% endfor %}
 
         {% endif %}
-        <div>
-        <h2 class="govuk-heading-m check-detail-heading">item</h2>
-        <hr/>
-        </div>
-        {% set technologyItems = {
-                key: {
-                text: "OS grid reference"
-                },
-                value: {
-                text: technologyItemsLink
-                },
-                actions: {
-                    items: [
-                    {
-                        href: technologyItemsLink,
-                        text: "Remove",
-                        attributes: {
-                            title: "Remove technology item"
-                        },
-                        visuallyHiddenText: "technology item"
-                    }
-                    ]
-                }
-            }
-        %}
-
-        {% set tableResult = [technologyItems] %}
-
-
-        {{ govukSummaryList({
-            rows: tableResult
-        })
-        }}
-
+    <div>
     <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <form method="POST" action="{{ formActionPage }}" autocomplete="off" novalidate>
         {{ crumbToken(crumb)}}
         {{ govukButton({
-            text: 'Add another item',
+            text: 'continue',
             attributes: {id: "btnResults"}
         }) }}
         </form>
