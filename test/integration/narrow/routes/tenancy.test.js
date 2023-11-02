@@ -42,7 +42,7 @@ describe('Page: /tenancy', () => {
 
   it('user selects \'Yes\' -> store user response and redirect to /project-items', async () => {
     varList.tenancy = 'Yes'
-    varList.projectSubject = 'Robotics and automatic technology'
+    varList.projectSubject = 'Farm productivity project items'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tenancy`,
@@ -57,7 +57,7 @@ describe('Page: /tenancy', () => {
 
   it('user selects \'Yes\' -> store user response and redirect to /existing-solar', async () => {
     varList.tenancy = 'Yes'
-    varList.projectSubject = 'Solar technologies'
+    varList.projectSubject = 'Solar project items'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/tenancy`,

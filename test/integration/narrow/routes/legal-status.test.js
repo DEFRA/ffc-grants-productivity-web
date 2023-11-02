@@ -1,6 +1,6 @@
 const { crumbToken } = require('./test-helper')
 const varListTemplate = {
-  projectSubject: 'Robotics and automatic technology',
+  projectSubject: 'Farm productivity project items',
   applicant: 'Farmer',
   businessLocation: 'Yes'
 }
@@ -67,7 +67,7 @@ describe('Legal status page', () => {
   })
   it('page loads with back link to /project-subject if user selected Solar', async () => {
     varList.applicant = null,
-    varList.projectSubject = 'Solar technologies'
+    varList.projectSubject = 'Solar project items'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/legal-status`
