@@ -1945,8 +1945,8 @@ const questionBank = {
           hint: {
             html: `
               You can only apply for a grant of up to 40% of the estimated costs.
-              <br/>The minimum grant you can apply for this project is £25,000 (40% of 
-              £62,500). The maximum grant is £500,000 (40% of £1.25 million).
+              <br/>The minimum grant you can apply for this project is £25,000 (40% of £62,500).
+              <br/>The maximum grant is £500,000 (40% of £1.25 million).
               <br/><br/>Do not include VAT.
               <br/><br/>Enter amount, for example 95,000`
           },
