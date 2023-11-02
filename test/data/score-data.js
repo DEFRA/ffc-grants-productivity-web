@@ -102,14 +102,14 @@ const msgData = {
         }
       },
       {
-        key: 'agricultural-sector',
+        key: 'robotics-agricultural-sector',
         answers: [
           {
-            key: 'agricultural-sector',
+            key: 'robotics-agricultural-sector',
             title: 'Robotics Agricultural Sector',
             input: [
               {
-                key: 'agricultural-sector-A1',
+                key: 'robotics-agricultural-sector-A1',
                 value: 'Horticulture'
               }
             ]
