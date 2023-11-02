@@ -51,7 +51,7 @@ describe('Page: /robotic-automatic', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('other-robotic-technology')
+    expect(postResponse.headers.location).toBe('robotic-eligibility')
   })
   it('user selects \'Robotic\' and except Other robotic or automatic technology from tech items -> store user response and redirect to /other-item', async () => {
     varList.technologyItems = 'Spraying technology'
@@ -64,7 +64,7 @@ describe('Page: /robotic-automatic', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('other-item')
+    expect(postResponse.headers.location).toBe('robotic-eligibility')
   })
   it('user selects \'Automatic\' -> store user response and redirect to /automatic-eligibility', async () => {
     const postOptions = {
