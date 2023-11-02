@@ -1553,7 +1553,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
+                para: 'Automatic items must fit at least 2 criteria to be eligible for grant funding.',
                 items: []
               }]
             }]

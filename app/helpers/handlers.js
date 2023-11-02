@@ -184,7 +184,7 @@ const getPage = async (question, request, h) => {
         if(url === 'automatic-eligibility'){
           question = {
             ...question,
-            title: 'Which eligibility criteria does your other automatic technology meet?'
+            title: 'Which eligibility criteria does your automatic technology meet?'
           }
         }else if(url === 'robotic-eligibility'){
           question = {

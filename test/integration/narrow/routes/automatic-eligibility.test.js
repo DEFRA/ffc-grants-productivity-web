@@ -103,7 +103,7 @@ describe('Page: /automatic-eligibility', () => {
     expect(postResponse.headers.location).toBe('/productivity/other-item')
   })
 
-  it('user selects \'Other robotics or automatic technology\' -> title should be \'Which eligibility criteria does your other automatic technology meet?\'', async () => {
+  it('user selects \'Other robotics or automatic technology\' -> title should be \'Which eligibility criteria does your automatic technology meet?\'', async () => {
     varList.technologyItems = 'Other robotics or automatic technology'
     const options = {
       method: 'GET',
@@ -112,7 +112,7 @@ describe('Page: /automatic-eligibility', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Which eligibility criteria does your other automatic technology meet?')
+    expect(response.payload).toContain('Which eligibility criteria does your automatic technology meet?')
   })
 
   it('page loads with correct back link', async () => {
