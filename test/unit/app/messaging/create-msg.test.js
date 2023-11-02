@@ -49,7 +49,7 @@ describe('create-msg', () => {
     dict = {
       ...dict,
       projectSubject: 'Solar technologies',
-      agriculturalSector: 'value',
+      agriculturalSector: ['value'],
       solarTechnologies: ['value'],
       solarOutput: 'testing'
     }
@@ -63,6 +63,8 @@ describe('create-msg', () => {
     dict = {
       ...dict,
       solarTechnologies: 'value',
+      agriculturalSector: 'value',
+
     }
     expect(getDesirabilityAnswers({})).toEqual({
       projectSubject: 'Solar technologies',
