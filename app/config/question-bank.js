@@ -101,7 +101,9 @@ const questionBank = {
           ga: [{ journeyStart: true }],
           hint: {
             html: `
-              If you want to apply for funding for both a robotics and a solar project, you must submit 2 separate applications. The maximum grant amount for both projects together is £500,000.
+              If you want to apply for both a farm productivity project and a solar project, you must submit 2 separate applications. 
+              <br/>
+              The maximum grant amount for both projects together is £500,000.
               <br/>
               <br/>
               Select one option
@@ -116,13 +118,13 @@ const questionBank = {
           answers: [
             {
               key: 'project-subject-A1',
-              value: 'Robotics and automatic technology',
-              text: 'Robotics and automatic technology'
+              value: 'Farm productivity project items',
+              text: 'Farm productivity project items'
             },
             {
               key: 'project-subject-A2',
-              value: 'Solar technologies',
-              text: 'Solar technologies',
+              value: 'Solar project items',
+              text: 'Solar project items',
               redirectUrl: 'legal-status'
             }
           ],

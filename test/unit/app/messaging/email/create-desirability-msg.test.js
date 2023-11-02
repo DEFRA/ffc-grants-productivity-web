@@ -84,7 +84,7 @@ const mockQuestionContentSolar = {
       title: 'projectSubject title',
       answers: {
         'project-subject-A1': 'projectSubject answer 1',
-        'project-subject-A2': 'Solar technologies'
+        'project-subject-A2': 'Solar project items'
       }
     }
   ],
@@ -121,7 +121,7 @@ const mockQuestionContentSolar = {
 }
 
 const mockUserInputSolar = {
-  projectSubject: 'Solar technologies',
+  projectSubject: 'Solar project items',
   agriculturalSectorSolar: ['agricultural-sector-solar-A1', 'agricultural-sector-solar-A2'],
   solarTechnologies: ['solar-technologies-A1'],
   solarOutput: 'solar-output-A3'
@@ -252,7 +252,7 @@ describe('Create desirability message tests', () => {
       const agriculturalSectorAnswers = agriculturalSector.answers.find(a => a.key === 'agricultural-sector-solar')
 
       expect(solarTechnologies.answers.length).toEqual(1)
-      expect(solarTechnologiesAnswers.title).toEqual('Solar Technologies')
+      expect(solarTechnologiesAnswers.title).toEqual('Solar project items')
       expect(solarTechnologiesAnswers.input.length).toEqual(mockUserInputSolar.solarTechnologies.length)
       expect(solarTechnologiesAnswers.input[0].value).toEqual(mockUserInputSolar.solarTechnologies[0])
 

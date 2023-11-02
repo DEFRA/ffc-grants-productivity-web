@@ -1,7 +1,7 @@
 const { crumbToken } = require('./test-helper')
 
 const varListTemplate = {
-  projectSubject: 'Robotics and automatic technology',
+  projectSubject: 'Farm productivity project items',
   legalStatus: 'fale status',
   projectItems: 'Advanced ventilation control units',
   projectCost: '12345678'
@@ -137,7 +137,7 @@ expect(response.statusCode).toBe(200)
 expect(response.payload).toContain('<a href=\"project-items\" class=\"govuk-back-link\">Back</a>')
 })
 
-// it('page loads with correct back link when solar technologies is /Solar panels/ ', async () => {
+// it('page loads with correct back link when Solar project items is /Solar panels/ ', async () => {
 //   varList.solarTechnologies = 'Solar panels'
 //   varList.solarInstallation = 'On an existing hardstanding area'
 //   const options = {
