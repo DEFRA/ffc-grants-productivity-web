@@ -6,6 +6,7 @@
 {% from "govuk/components/input/macro.njk" import govukInput %}
 {% from "govuk/components/panel/macro.njk" import govukPanel %}
 {% from "./components/macro.njk" import crumbToken %}
+{% from "govuk/components/inset-text/macro.njk" import govukInsetText %}
 
 {% block pageTitle %}   
   {{siteTitle}} - {{title}}
@@ -84,6 +85,14 @@
 
       {% if extraMessageContent %}
         <p class="govuk-body">{{ extraMessageContent | safe}}</p>
+      {% endif %}
+
+      {% if insertText %} 
+        {{ govukInsetText(insertText) }}
+      {% endif %}
+
+      {% if messageLink %}
+        <p class="govuk-body"><a href="{{messageLink.url}}" class="govuk-link">{{messageLink.title}}</a></p>
       {% endif %}
 
         {% if isFossilFuel %}
