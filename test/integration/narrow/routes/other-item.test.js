@@ -28,6 +28,19 @@ it('page loads successfully, with all options', async () => {
     expect(response.payload).toContain('Continue')
 })
 
+it('should return error message if no option is selected', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/other-item`,
+      payload: { crumb: crumbToken },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    expect(postResponse.payload).toContain('Select yes if you need to add another robotic or automatic item')
+  })
+
 it('should redirect to /technology-items when user selects Yes', async () => {
     varList.otherItem = 'Yes'
     const postOptions = {
