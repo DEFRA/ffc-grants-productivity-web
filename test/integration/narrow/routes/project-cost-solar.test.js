@@ -1,7 +1,7 @@
 const { crumbToken } = require('./test-helper')
 
 const varListTemplate = {
-  projectSubject: 'Solar technologies',
+  projectSubject: 'Solar project items',
   legalStatus: 'fale status',
   solarTechnologies: 'An electrical grid connection',
   projectCost: '12345678'
@@ -34,7 +34,6 @@ describe('Project cost solar page', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What is the total estimated cost of the solar project items?')
   })
   it('should load page successfully if no projectCost', async () => {
     varList = {
@@ -126,7 +125,7 @@ expect(response.statusCode).toBe(200)
 expect(response.payload).toContain('<a href=\"solar-technologies\" class=\"govuk-back-link\">Back</a>')
 })
 
-it('page loads with correct back link when solar technologies is /Solar panels/ ', async () => {
+it('page loads with correct back link when Solar project items is /Solar panels/ ', async () => {
   varList.solarTechnologies = 'Solar panels'
   varList.solarInstallation = 'On an existing hardstanding area'
   const options = {

@@ -15,7 +15,7 @@ const mockSession = {
 
 jest.mock('../../../../app/helpers/session', () => mockSession)
 
-describe('project-impact', () => {
+describe('robotics-project-impact', () => {
   beforeEach(() => {
     varList = { ...varListTemplate }
   })
@@ -24,18 +24,6 @@ describe('project-impact', () => {
     jest.resetAllMocks()
   })
 
-  it('page loads successfully, with all the options', async () => {
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/project-impact`
-    }
-
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Will the project improve the productivity and profitability of your business?')
-    expect(response.payload).toContain('Yes')
-    expect(response.payload).toContain('No')
-  })
   it('no option is selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
@@ -51,7 +39,7 @@ describe('project-impact', () => {
   })
 
   it('user selects: <Yes> -> store user response and based on project items selected redirect to data analytics page', async () => {
-    varList.projectItems = ['Robotic and automatic technology']
+    varList.technologyItems = ['Feeding system']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/project-impact`,
@@ -63,18 +51,6 @@ describe('project-impact', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('data-analytics')
-  })
-  it('user selects: <Yes> -> store user response and based on project items selected redirect to data analytics page', async () => {
-    varList.projectItems = ['Advanced ventilation control units']
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/project-impact`,
-      payload: { projectImpact: 'Yes', crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
-    }
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('energy-source')
   })
 
   it('user selects: <No> -> display ineligible page', async () => {

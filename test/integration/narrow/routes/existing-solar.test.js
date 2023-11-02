@@ -3,7 +3,7 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /existing-solar', () => {
   const varList = {
     existingSolar: 'randomData',
-    projectSubject: 'Solar technologies',
+    projectSubject: 'Solar project items',
     projectResponsibility: 'Yes, I plan to take full responsibility for my project'
   }
 
