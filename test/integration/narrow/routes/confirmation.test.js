@@ -40,7 +40,7 @@ describe('Reference number page', () => {
   })
 
   it('load page successfully with the solar Reference ID', async () => {
-    varList.projectSubject = 'Solar technologies'
+    varList.projectSubject ='Solar project items'
     const getOtions = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/confirmation`
