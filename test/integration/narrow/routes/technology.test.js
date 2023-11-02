@@ -1,11 +1,11 @@
 const { crumbToken } = require('./test-helper')
 
-describe('robotics data analytics page', () => {
+describe('robotics Technology page', () => {
   it('no option is selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/data-analytics`,
-      payload: { canPayRemainingCost: '', crumb: crumbToken },
+      url: `${global.__URLPREFIX__}/technology-use`,
+      payload: { crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
@@ -13,14 +13,14 @@ describe('robotics data analytics page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select whether your project will use data analytics to improve farm productivity')
+    expect(postResponse.payload).toContain('Select yes if you have used this technology on your farm')
   })
 
   it('store user response and redirect to energy source page', async () => {
     const postOptions = {
       method: 'POST',
-      url: `${global.__URLPREFIX__}/data-analytics`,
-      payload: { dataAnalytics: 'some fake answer', crumb: crumbToken },
+      url: `${global.__URLPREFIX__}/technology-use`,
+      payload: { technology: 'some fake technology', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
@@ -28,6 +28,6 @@ describe('robotics data analytics page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('energy-source')
+    expect(postResponse.headers.location).toBe('/score')
   })
 })

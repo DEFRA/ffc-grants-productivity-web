@@ -1,4 +1,4 @@
-const desirabilityQuestions = ['project-subject', 'data-analytics', 'energy-source', 'agricultural-sector', 'technology-use']
+const desirabilityQuestions = ['project-subject', 'robotics-data-analytics', 'robotics-energy-source', 'robotics-agricultural-sector', 'robotics-technology']
 
 const mockQuestionContent = {
   projectSubject: [
@@ -22,27 +22,27 @@ const mockQuestionContent = {
   ],
   dataAnalytics: [
     {
-      key: 'data-analytics',
+      key: 'robotics-data-analytics',
       title: 'dataAnalytics title',
       answers: {
-        'data-analytics-A1': 'dataAnalytics answer',
-        'data-analytics-A2': 'dataAnalytics answer'
+        'robotics-data-analytics-A1': 'dataAnalytics answer',
+        'robotics-data-analytics-A2': 'dataAnalytics answer'
       }
     }
   ],
   energySource: [
     {
-      key: 'energy-source',
+      key: 'robotics-energy-source',
       title: 'energySource title',
       answers: {
         'energy-source-A1': 'energySource answer',
-        'energy-sourceb-A1': 'energySource answer'
+        'energy-sourceb-A1': 'energySourceb answer'
       }
     }
   ],
   agriculturalSector: [
     {
-      key: 'agricultural-sector',
+      key: 'robotics-agricultural-sector',
       title: 'agriculturalSector title',
       answers: {
         'agricultural-sector-A1': 'agriculturalSector answer 1',
@@ -50,32 +50,22 @@ const mockQuestionContent = {
       }
     }
   ],
-  projectImpacts: [
+  roboticProjectImpacts: [
     {
-      key: 'project-impacts',
-      title: 'projectImpacts title',
+      key: 'robotics-project-impact',
+      title: 'roboticProjectImpacts title',
       answers: {
-        'project-impacts-A1': 'projectImpacts answer 1',
-        'project-impacts-A2': 'projectImpacts answer 2'
+        'robotic-project-impacts-A1': 'roboticProjectImpacts answer 1',
+        'robotic-project-impacts-A2': 'roboticProjectImpacts answer 2'
       }
-    }],
-    technologyUse: [
-      {
-        key: 'technology-use',
-        title: 'technologyUse title',
-        answers: {
-          'technology-use-A1': 'technologyUse answer 1',
-          'technology-use-A2': 'technologyUse answer 2'
-        }
-      }]
+    }]
 }
 const mockUserInput = {
   projectSubject: 'project-subject-A1',
   dataAnalytics: 'data-analytics-A1',
   energySource: ['energy-source-A1', 'energy-source-A2'],
   agriculturalSector: ['agricultural-sector-A1', 'agricultural-sector-A2'],
-  projectImpacts: 'project-impacts-A1',
-  technologyUse: 'technology-use-A1'
+  roboticProjectImpacts: 'robotic-project-impacts-A1'
 }
 
 describe('Create desirability message', () => {
@@ -88,11 +78,10 @@ describe('Create desirability message', () => {
       desirabilityInputQuestionMapping: {
         projectSubject: 'project-subject',
         projectImpacts: 'project-impacts',
-        dataAnalytics: 'data-analytics',
-        energySource: 'energy-source',
-        agriculturalSector: 'agricultural-sector',
-        projectImpact: 'project-impact',
-        technologyUse: 'technology-use'
+        dataAnalytics: 'robotics-data-analytics',
+        energySource: 'robotics-energy-source',
+        agriculturalSector: 'robotics-agricultural-sector',
+        projectImpact: 'robotics-project-impact'
       }
     }))
     createMsg = require('../../../../../app/messaging/scoring/create-desirability-msg')
@@ -113,13 +102,14 @@ describe('Create desirability message', () => {
   test('contains the correct answers', () => {
     const questions = msg.desirability.questions
     const projectSubject = questions.find(q => q.key === 'project-subject')
-    const dataAnalytics = questions.find(q => q.key === 'data-analytics')
-    const energySource = questions.find(q => q.key === 'energy-source')
-    const agriculturalSector = questions.find(q => q.key === 'agricultural-sector')
-    const technologyUse = questions.find(q => q.key === 'technology-use')
-    const dataAnalyticsAnswers = dataAnalytics.answers.find(a => a.key === 'data-analytics')
-    const energySourceAnswers = energySource.answers.find(a => a.key === 'energy-source')
-    const agriculturalSectorAnswers = agriculturalSector.answers.find(a => a.key === 'agricultural-sector')
+    const dataAnalytics = questions.find(q => q.key === 'robotics-data-analytics')
+    const energySource = questions.find(q => q.key === 'robotics-energy-source')
+    const agriculturalSector = questions.find(q => q.key === 'robotics-agricultural-sector')
+    const roboticProjectImpacts = questions.find(q => q.key === 'robotics-technology')
+
+    const dataAnalyticsAnswers = dataAnalytics.answers.find(a => a.key === 'robotics-data-analytics')
+    const energySourceAnswers = energySource.answers.find(a => a.key === 'robotics-energy-source')
+    const agriculturalSectorAnswers = agriculturalSector.answers.find(a => a.key === 'robotics-agricultural-sector')
 
     expect(projectSubject.answers.length).toEqual(1)
     expect(projectSubject.answers[0].title).toEqual('Project subject')
@@ -142,10 +132,10 @@ describe('Create desirability message', () => {
     expect(agriculturalSectorAnswers.input).toEqual(expect.arrayContaining([expect.objectContaining({ value: mockUserInput.agriculturalSector[0] })]))
     expect(agriculturalSectorAnswers.input).toEqual(expect.arrayContaining([expect.objectContaining({ value: mockUserInput.agriculturalSector[1] })]))
 
-    expect(technologyUse.answers.length).toEqual(1)
-    expect(technologyUse.answers[0].title).toEqual('Technology')
-    expect(technologyUse.answers[0].input.length).toEqual(1)
-    expect(technologyUse.answers[0].input[0].value).toEqual(mockUserInput.technologyUse)
+    expect(roboticProjectImpacts.answers.length).toEqual(1)
+    expect(roboticProjectImpacts.answers[0].title).toEqual('Technology')
+    expect(roboticProjectImpacts.answers[0].input.length).toEqual(1)
+    expect(roboticProjectImpacts.answers[0].input[0].value).toEqual(mockUserInput.roboticProjectImpacts)
   })
 
   test('adds rating to each question', () => {

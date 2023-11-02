@@ -71,19 +71,36 @@ describe('Page: /automatic-eligibility', () => {
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
     expect(postResponse.payload).toContain('Automatic items must meet at least 2 criteria to be eligible for grant funding.')
   })
+
+  it('user selects two eligible options and \'Automatic\' and \'Other robotic or automatic technology\' from tech items -> store user response and redirect to /other-automatic-technology', async () => {
+    varList.technologyItems = 'Other robotics or automatic technology'
+    varList.automaticEligibility = ['Has sensing system that can understand its environment', 'Makes decisions and plans']
+    varList.roboticAutomatic = 'Automatic'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/automatic-eligibility`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { automaticEligibility: ['Has sensing system that can understand its environment', 'Makes decisions and plans'], crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toContain('/productivity/other-automatic-technology')
+  })
+
   it('user selects two eligible options and \'Harvesting technology\' -> store user response and redirect to /other-item', async () => {
-    varList.automaticEligibility = ['Makes decisions and plans', 'Has sensing system that can understand its environment']
+    varList.automaticEligibilityItem = ['Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
     varList.technologyItems = 'Harvesting technology'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/automatic-eligibility`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { automaticEligibility: ['Makes decisions and plans', 'Has sensing system that can understand its environment'], crumb: crumbToken }
+      payload: { automaticEligibility: ['Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop'], crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/productivity/technology-description')
+    expect(postResponse.headers.location).toBe('/productivity/other-item')
   })
 
   it('user selects \'Other robotics or automatic technology\' -> title should be \'Which eligibility criteria does your other automatic technology meet?\'', async () => {
@@ -97,6 +114,7 @@ describe('Page: /automatic-eligibility', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Which eligibility criteria does your other automatic technology meet?')
   })
+
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',

@@ -24,7 +24,7 @@ describe('Page: /solar-technologies', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What solar project items does your project need?')
+    expect(response.payload).toContain('What solar technologies does your project need?')
     expect(response.payload).toContain('An electrical grid connection')
     expect(response.payload).toContain('Solar panels')
     expect(response.payload).toContain('An inverter')
@@ -43,7 +43,7 @@ describe('Page: /solar-technologies', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select what solar project items your project needs')
+    expect(postResponse.payload).toContain('Select what solar technologies your project needs')
   })
 
   it('user selects \'Solar panels\' option -> store user response and redirect to /solar-installation', async () => {
