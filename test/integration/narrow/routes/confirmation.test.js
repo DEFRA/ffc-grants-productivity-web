@@ -54,8 +54,8 @@ describe('Reference number page', () => {
     expect(getResponse.payload).toContain('You can check if you can apply for a grant for <a class="govuk-link" href="https://grants-prototype2.herokuapp.com/robotics/current/farming-type" rel="noopener noreferrer">farm productivity project items</a>. The minimum grant is £25,000 (40% of £62,500). The maximum grant amount for both projects together is £500,000.')
   })
 
-  it('load page successfully with the robotic Reference ID', async () => {
-    varList.projectSubject = 'Robotics and automatic technology'
+  it('load page successfully with the Farm productivity project items Reference ID', async () => {
+    varList.projectSubject = 'Farm productivity project items'
     const getOtions = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/confirmation`
