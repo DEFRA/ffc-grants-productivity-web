@@ -4,32 +4,23 @@ describe('create-msg', () => {
 
   const { getDesirabilityAnswers } = require('../../../../app/messaging/create-msg')
 
-  test('check getDesirabilityAnswers()', () => {
+  test('check getDesirabilityAnswers() > robotics', () => {
     let dict
     getYarValue.mockImplementation((req, key) => (dict[key]))
 
     dict = {
-      projectImpacts: 'hello',
-      projectSubject: 'hello'
-    }
-    expect(getDesirabilityAnswers({})).toEqual({
-      projectImpacts: 'hello',
-      projectSubject: 'hello'
-    })
-
-    dict = {
-      ...dict,
-      projectSubject: 'Robotics and Innovation',
+      projectSubject: 'Robotics and automatic technology',
+      projectImpacts: 'value',
       energySource: ['value'],
       agriculturalSector: ['value'],
       dataAnalytics: 'testing',
       technology: 'testing'
     }
     expect(getDesirabilityAnswers({})).toEqual({
-      projectSubject: 'Robotics and Innovation',
-      projectImpacts: 'hello',
+      projectSubject: 'Robotics and automatic technology',
+      projectImpacts: 'value',
       energySource: ['value'],
-      agriculturalSector: ['value'],
+      agriculturalSectorRobotics: ['value'],
       dataAnalytics: 'testing',
       roboticProjectImpacts: 'testing'
     })
@@ -41,18 +32,52 @@ describe('create-msg', () => {
     }
 
     expect(getDesirabilityAnswers({})).toEqual({
-      projectSubject: 'Robotics and Innovation',
-      projectImpacts: 'hello',
+      projectSubject: 'Robotics and automatic technology',
+      projectImpacts: 'value',
       energySource: ['value'],
-      agriculturalSector: ['value'],
+      agriculturalSectorRobotics: ['value'],
       dataAnalytics: 'testing',
       roboticProjectImpacts: 'testing'
     })
 
+  })
+
+  test('check getDesirabilityAnswers() > solar', () => {
+    let dict
+    getYarValue.mockImplementation((req, key) => (dict[key]))
+
     dict = {
       ...dict,
-      projectImpacts: ''
+      projectSubject: 'Solar technologies',
+      agriculturalSector: ['value'],
+      solarTechnologies: ['value'],
+      solarOutput: 'testing'
+    }
+    expect(getDesirabilityAnswers({})).toEqual({
+      projectSubject: 'Solar technologies',
+      agriculturalSectorSolar: ['value'],
+      solarTechnologies: ['value'],
+      solarOutput: 'testing'
+    })
+
+    dict = {
+      ...dict,
+      solarTechnologies: 'value',
+      agriculturalSector: 'value',
+
+    }
+    expect(getDesirabilityAnswers({})).toEqual({
+      projectSubject: 'Solar technologies',
+      agriculturalSectorSolar: ['value'],
+      solarTechnologies: ['value'],
+      solarOutput: 'testing'
+    })
+
+    dict = {
+      ...dict,
+      projectSubject: ''
     }
     expect(getDesirabilityAnswers({})).toEqual(null)
   })
+
 })

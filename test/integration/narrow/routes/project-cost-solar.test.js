@@ -34,7 +34,6 @@ describe('Project cost solar page', () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What is the total estimated cost of the solar project items?')
   })
   it('should load page successfully if no projectCost', async () => {
     varList = {

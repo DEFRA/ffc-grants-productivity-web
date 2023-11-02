@@ -1,5 +1,5 @@
 const scoreDataRobotics = require('../../../data/score-data')
-const scoreDataSlurry = require('../../../data/score-data-slurry')
+const scoreDataSlurry = require('../../../data/score-data-solar')
 describe('Score page', () => {
   let crumCookie
   const { getCookieHeader, getCrumbCookie, crumbToken } = require('./test-helper')
