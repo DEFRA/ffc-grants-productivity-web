@@ -2,8 +2,9 @@
 
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
-{% from "./components/macro.njk" import crumbToken %}
+{% from "./components/macro.njk" import crumbToken, multiSideBar, conditionalButtons %}
 {% from "govuk/components/summary-list/macro.njk" import govukSummaryList %}
+
 
 {% block pageTitle %}
     Check your details - {{siteTitle}}
@@ -21,6 +22,8 @@
 <div class="govuk-body">
     <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+    <form method="POST" action="{{ formActionPage }}" autocomplete="off" novalidate>
+    {{ crumbToken(crumb)}}
         <h1 class="govuk-heading-l">Your project items</h1>
         <span class="govuk-hint">You can add or remove items you will be using on your project</span>
         <br/><br/>
@@ -58,17 +61,12 @@
                 </tbody>
             </table>
                 {% endif %}
-    <div>
-    <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-    <form method="POST" action="{{ formActionPage }}" autocomplete="off" novalidate>
-    {{ crumbToken(crumb)}}
-    {{ govukButton({
-        text: 'Continue',
-        attributes: {id: "btnResults"}
-    })}}
+    {{ conditionalButtons(true, 'Continue', 'Add another item') }}
     </form>
     </div>
+    {%if sideBarText %}
+        {{ multiSideBar(sideBarText) }}
+    {%endif%}
     </div>
 </div>
 {% endblock %}

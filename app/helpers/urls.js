@@ -5,9 +5,16 @@ const { ALL_QUESTIONS } = require('../config/question-bank')
 const getUrl = (urlObject, url, request, secBtn) => {
   const scorePath = `${urlPrefix}/score`
   const chekDetailsPath = `${urlPrefix}/check-details`
-  const secBtnPath = secBtn === 'Back to score' ? scorePath : chekDetailsPath
+  let secBtnPath = secBtn === 'Back to score' ? scorePath : chekDetailsPath
+
+  if(secBtn ==='Add another item'){
+    console.log('here two')
+    secBtnPath = `${urlPrefix}/technology-items`
+  }
+  console.log('secBtn', secBtn)
 
   if (!urlObject || secBtn) {
+    console.log('here')
     return secBtn ? secBtnPath : url
   }
   const { dependentQuestionYarKey, dependentAnswerKeysArray, urlOptions } = urlObject
