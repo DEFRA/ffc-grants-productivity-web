@@ -23,6 +23,7 @@
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">Your project items</h1>
         <span class="govuk-hint">You can add or remove items you will be using on your project</span>
+        <br/><br/>
         {% if projectItemsList %}
             <table class="govuk-table govuk-body govuk-!-font-size-16">
                 <thead class="govuk-table__head">
@@ -60,13 +61,13 @@
     <div>
     <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-        <form method="POST" action="{{ formActionPage }}" autocomplete="off" novalidate>
-        {{ crumbToken(crumb)}}
-        {{ govukButton({
-            text: 'Continue',
-            attributes: {id: "btnResults"}
-        }) }}
-        </form>
+    <form method="POST" action="{{ formActionPage }}" autocomplete="off" novalidate>
+    {{ crumbToken(crumb)}}
+    {{ govukButton({
+        text: 'Continue',
+        attributes: {id: "btnResults"}
+    })}}
+    </form>
     </div>
     </div>
 </div>
