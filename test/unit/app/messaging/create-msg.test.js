@@ -9,7 +9,7 @@ describe('create-msg', () => {
     getYarValue.mockImplementation((req, key) => (dict[key]))
 
     dict = {
-      projectSubject: 'Robotics and automatic technology',
+      projectSubject: 'Farm productivity project items',
       projectImpacts: 'value',
       energySource: ['value'],
       agriculturalSector: ['value'],
@@ -17,7 +17,7 @@ describe('create-msg', () => {
       technology: 'testing'
     }
     expect(getDesirabilityAnswers({})).toEqual({
-      projectSubject: 'Robotics and automatic technology',
+      projectSubject: 'Farm productivity project items',
       projectImpacts: 'value',
       energySource: ['value'],
       agriculturalSectorRobotics: ['value'],
@@ -32,7 +32,7 @@ describe('create-msg', () => {
     }
 
     expect(getDesirabilityAnswers({})).toEqual({
-      projectSubject: 'Robotics and automatic technology',
+      projectSubject: 'Farm productivity project items',
       projectImpacts: 'value',
       energySource: ['value'],
       agriculturalSectorRobotics: ['value'],
