@@ -33,34 +33,37 @@
                     <th scope="col" class="govuk-table__header govuk-!-width-one-third"></th>
                 </tr>
                 </thead>
-            {% for item in projectItemsList %}
                 <tbody class="govuk-table__body">
-                    <tr class="govuk-table__row">
-                    <th scope="row" class="govuk-table__header">
-                        {{ item.item }}
-                    </th>
-                    <td class="govuk-table__cell">
-                        {{ item.type }}
-                    </td>
-                    <td class="govuk-table__cell">
-                        {{ item.description }}
-                    </td>
-                    <td class="govuk-table__cell">
-                        <a class="govuk-link">Remove</a>
-                    </td>
-                    </tr>
+                    {% for item in projectItemsList %}
+                        <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">
+                            {{ item.item }}
+                        </th>
+                        <td class="govuk-table__cell">
+                            {{ item.type }}
+                        </td>
+                        <td class="govuk-table__cell">
+                            <ul class="govuk-list govuk-list--bullet">
+                            {% for listItem in item.criteria %}
+                                <li>{{ listItem }}</li>
+                            {% endfor %}
+                            </ul>
+                        </td>
+                        <td class="govuk-table__cell">
+                            <a class="govuk-link">Remove</a>
+                        </td>
+                        </tr>
+                        {% endfor %}
                 </tbody>
             </table>
-            {% endfor %}
-
-        {% endif %}
+                {% endif %}
     <div>
     <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <form method="POST" action="{{ formActionPage }}" autocomplete="off" novalidate>
         {{ crumbToken(crumb)}}
         {{ govukButton({
-            text: 'continue',
+            text: 'Continue',
             attributes: {id: "btnResults"}
         }) }}
         </form>
