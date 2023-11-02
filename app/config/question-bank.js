@@ -701,11 +701,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `Applicants who already have a solar
-                PV system can still apply for this
-                grant. For example, you can apply
-                for a battery to add to your existing
-                solar PV panels.`,
+                para: 'Applicants who already have a solar PV system can still apply for this grant. For example, you can apply for a battery to add to your existing solar PV panels.',
                 items: []
               }]
             }]
@@ -731,8 +727,13 @@ const questionBank = {
         {
           key: 'solar-technologies',
           order: 61,
-          title: 'What solar project items does your project need?',
+          title: 'What solar technologies does your project need?',
           pageTitle: '',
+          scheme: 'solar',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           url: 'solar-technologies',
           baseUrl: 'solar-technologies',
           backUrl: 'existing-solar',
@@ -756,7 +757,7 @@ const questionBank = {
                     `
           },
           ineligibleContent: {
-            messageContent: 'If you do not have an existing solar PV system, you must apply for funding for solar PV panels to be eligible for this grant.',
+            messageContent: 'You must have solar PV panels to be eligible for funding for other solar technology.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
@@ -777,7 +778,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select what solar project items your project needs'
+              error: 'Select what solar technologies your project needs'
             }
           ],
           answers: [
@@ -939,6 +940,11 @@ const questionBank = {
           hint: {
             html: 'The size of your solar PV system'
           },
+          scheme: 'solar',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           pageTitle: '',
           url: 'solar-output',
           baseUrl: 'solar-output',
@@ -1020,7 +1026,7 @@ const questionBank = {
           },
           id: 'projectCost',
           label: {
-            text: 'What is the total estimated cost of the solar project items?',
+            text: 'What is the total estimated cost of the solar PV system?',
             classes: 'govuk-label--l',
             isPageHeading: true,
             for: 'projectCost'
@@ -1336,8 +1342,8 @@ const questionBank = {
               elseUrl: 'project-cost'
             }
           },
-          id: 'projectItems',
-          name: 'projectItems',
+          id: 'roboticsProjectItems',
+          name: 'roboticsProjectItems',
           hint: {
             html: 'Select all the items your project needs'
           },
@@ -1461,11 +1467,11 @@ const questionBank = {
           backUrl: 'technology-items',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           dependantNextUrl: {
-            dependentQuestionYarKey: 'roboticAutomatic',
-            dependentAnswerKeysArray: ['robotic-automatic-A1'],
+            dependentQuestionYarKey: 'technologyItems',
+            dependentAnswerKeysArray: ['technology-items-A9'],
             urlOptions: {
-              thenUrl: 'robotic-eligibility',
-              elseUrl: 'automatic-eligibility'
+              thenUrl: 'other-robotic-technology',
+              elseUrl: 'other-item'
             }
           },
           fundingPriorities: '',
@@ -1475,8 +1481,7 @@ const questionBank = {
           hint: {
             html: 
             ` <div id="roboticAutomatic" class="govuk-hint">
-                There are 4 eligibility criteria for grant funding.<br/><br/>
-                Eligible technology should:
+                <p class="govuk-body">To be eligible, your robotic technology must:</P>
                   <ul>
                     <li>have a sensing system and can understand its environment</li>
                     <li>make decisions and plan</li>
@@ -1490,8 +1495,9 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `Robotic items must meet all 4 criteria to be eligible.\n\n
-                      Automatic items must meet at least 2 criteria to be eligible.`
+                para: `There are 4 eligibility criteria for grant funding.</br></br>
+                        Robotic items must meet all 4 criteria to be eligible.<br/><br/>
+                        Automatic items must meet at least 2 criteria to be eligible. `
               }]
             }]
           },
@@ -1513,215 +1519,6 @@ const questionBank = {
             }
           ],
           yarKey: 'roboticAutomatic'
-        },
-        {
-          key: 'automatic-eligibility',
-          order: 375,
-          title: `Which eligibility criteria does your automatic {{_technologyItems_}} meet?`,
-          pageTitle: '',
-          replace: true,
-          url: 'automatic-eligibility',
-          baseUrl: 'automatic-eligibility',
-          backUrl: 'robotic-automatic',
-          preValidationKeys: ['technologyItems'],
-          eliminationAnswerKeys: '',
-          ineligibleContent: {
-            messageContent: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          type: 'multi-answer',
-          minAnswerCount: 1,
-          hint: {
-            text: 'Select all that apply'
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
-                items: []
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select what eligibility criteria your automatic technology meets'
-            },
-          ],
-          answers: [
-            {
-              key: 'automatic-eligibility-A1',
-              value: 'Has sensing system that can understand its environment '
-            },
-            {
-              key: 'automatic-eligibility-A2',
-              value: 'Makes decisions and plans'
-            },
-            {
-              key: 'automatic-eligibility-A3',
-              value: 'Can control its actuators (the devices that move robotic joints)'
-            },
-            {
-              key: 'automatic-eligibility-A4',
-              value: 'Works in a continuous loop'
-            },
-            {
-              value: 'divider'
-            },
-            {
-              key: 'automatic-eligibility-A5',
-              value: 'None of the above',
-              notEligible: true
-            }
-          ],
-          yarKey: 'automaticEligibility'
-        },
-        {
-          key: 'robotic-eligibility',
-          order: 376,
-          title: `Does your robotic {{_technologyItems_}} fit the eligibility criteria?`,
-          pageTitle: '',
-          replace: true,
-          url: 'robotic-eligibility',
-          baseUrl: 'robotic-eligibility',
-          backUrl: 'robotic-automatic',
-          nextUrl: 'technology-description',
-          preValidationKeys: ['technologyItems'],
-          eliminationAnswerKeys: '',
-          type: 'single-answer',
-          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
-          minAnswerCount: 1,
-          id: 'roboticEligibility',
-          hint: {
-            html: 
-            ` <div id="roboticEligibility">
-                To be eligible, your robotic technology must:
-                  <ul>
-                    <li>have a sensing system and can understand its environment</li>
-                    <li>make decisions and plan</li>
-                    <li>be able to control its actuators (the devices that move robot joints)</li>
-                    <li>work in a continuous loop</li>
-                  <ul>
-              </div>
-            `
-          },
-          ineligibleContent: {
-            heading: 'You cannot apply for grant funding for this item',
-            messageContent: `RPA will only fund robotic technology that:
-                            <ul class="govuk-list govuk-list--bullet">
-                              <li>have a sensing system and can understand its environment</li>
-                              <li>make decisions and plan</li>
-                              <li>be able to control its actuators (the devices that move robot joints)</li>
-                              <li>work in a continuous loop</li>
-                            </ul>`,
-            messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
-              title: 'See other grants you may be eligible for.'
-            }
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'Robotic items must meet all 4 criteria to be eligible.',
-                items: []
-              }]
-            }]
-          },
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if your robotic technology fits the eligibility criteria'
-            },
-          ],
-          answers: [
-            {
-              key: 'robotic-eligibility-A1',
-              value: 'Yes'
-            },
-            {
-              key: 'robotic-eligibility-A2',
-              value: 'No',
-              notEligible: true
-            }
-          ],
-          yarKey: 'roboticEligibility'
-        },
-        {
-          key: 'technology-description',
-          order: 305,
-          title: 'What is your other robotic technology?',
-          pageTitle: '',
-          nextUrl: 'other-item',
-          url: 'technology-description',
-          baseUrl: 'technology-description',
-          backUrlObject: {
-            dependentQuestionYarKey: ['roboticAutomatic'],
-            dependentAnswerKeysArray: ['robotic-automatic-A2'],
-            urlOptions: {
-              thenUrl: 'automatic-eligibility',
-              elseUrl: 'robotic-eligibility'
-            }
-          },
-          // preValidationKeys: ['roboticAutomatic'],
-          fundingPriorities: '',
-          minAnswerCount: 1,
-          hint: {
-            html: `Technology powered by fossil fuels will only be funded where there is no 
-            commercially available electric or renewable energy alternative.<br/><br/>
-            <p class="govuk-body">Enter a brief description of the technology including:</p>
-            <ul class="govuk-list govuk-list--bullet">
-              <li>name</li>
-              <li>brand and model (if available)</li>
-              <li>number of items</li>
-            </ul>`
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'To be eligible for grant funding, your robotic technology must:',
-                items: ['have a sensing system and can understand their environment', 'make decisions and plan', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop'],
-                additionalPara: 'Automatic technology must fit at least 2 of these eligibility criteria. '
-              }]
-            }]
-          },
-          type: 'multi-input',
-          allFields: [
-            {
-              yarKey: 'description',
-              id: "description",
-              name: "description",
-              type: 'textarea',
-              maxlength: 250,
-              label: {
-                text: '',
-                classes: 'govuk-label',
-                for: 'description'
-              },
-              validate: [
-                {
-                  type: 'NOT_EMPTY',
-                  error: 'Enter a brief description of your technology'
-                },
-                {
-                  type: 'REGEX',
-                  regex: CHARS_MIN_10,
-                  error: 'Description must be 10 characters or more'
-                },
-                {
-                  type: 'REGEX',
-                  regex: CHARS_MAX_250,
-                  error: 'Description must be 250 characters or less'
-                }
-              ]
-            }
-          ],
-          yarKey: 'technologyDescription'
         },
         {
           key: 'other-robotic-technology',
@@ -2097,12 +1894,12 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'remaining-costs-A1',
+              key: 'robotics-remaining-costs-A1',
               value: 'Yes'
 
             },
             {
-              key: 'remaining-costs-A2',
+              key: 'robotics-remaining-costs-A2',
               value: 'No',
               notEligible: true
             }
@@ -2110,7 +1907,7 @@ const questionBank = {
           yarKey: 'canPayRemainingCost'
         },
         {
-          key: 'project-impact',
+          key: 'robotics-project-impact',
           order: 340,
           title: 'Will the project improve the productivity and profitability of your business?',
           pageTitle: '',
@@ -2122,8 +1919,8 @@ const questionBank = {
             { dimension: 'cm2', value: { type: 'journey-time' } }
           ],
           dependantNextUrl: {
-            dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['project-items-A3'],
+            dependentQuestionYarKey: 'technologyItems',
+            dependentAnswerKeysArray: ['technology-items-A1', 'technology-items-A2', 'technology-items-A3', 'technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7', 'technology-items-A8'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'energy-source'
@@ -2159,12 +1956,12 @@ const questionBank = {
           ],
           answers: [
             {
-              key: 'project-impact-A1',
+              key: 'robotics-project-impact-A1',
               value: 'Yes'
 
             },
             {
-              key: 'project-impact-A2',
+              key: 'robotics-project-impact-A2',
               value: 'No',
               notEligible: true
             }
@@ -2172,17 +1969,16 @@ const questionBank = {
           yarKey: 'projectImpact'
         },
         {
-          key: 'data-analytics',
+          key: 'robotics-data-analytics',
           scheme: 'robotics',
           score: {
             isScore: true,
             isDisplay: true
           },
           order: 350,
-          title: 'Will your project use data analytics to improve productivity?',
+          title: 'Will your project use data analytics to improve productivity on the farm?',
           hint: {
-            text: `Software that automates the analysis of the data it collects to improve 
-            efficiency (for example, analysing white blood cell counts in dairy)`
+            text: 'Software automating data analysis to improve efficiency (for example, analysing white blood cell counts in dairy)'
           },
           pageTitle: '',
           url: 'data-analytics',
@@ -2213,18 +2009,18 @@ const questionBank = {
 
           answers: [
             {
-              key: 'data-analytics-A1',
+              key: 'robotics-data-analytics-A1',
               value: 'Yes, we have the technology already'
             },
             {
-              key: 'data-analytics-A2',
+              key: 'robotics-data-analytics-A2',
               value: 'Yes, we’ll buy the technology as part of the project',
               hint: {
                 text: 'Software licences cannot be paid for by the grant'
               }
             },
             {
-              key: 'data-analytics-A3',
+              key: 'robotics-data-analytics-A3',
               value: 'No, we will not use any data analytics'
             }
           ],
@@ -2242,10 +2038,10 @@ const questionBank = {
           pageTitle: '',
           url: 'energy-source',
           baseUrl: 'energy-source',
-          // preValidationKeys: ['projectItems'],
+          // preValidationKeys: ['projectImpact'],
           backUrlObject: {
-            dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['project-items-A3'],
+            dependentQuestionYarKey: 'technologyItems',
+            dependentAnswerKeysArray: ['technology-items-A1', 'technology-items-A2', 'technology-items-A3', 'technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7', 'technology-items-A8'],
             urlOptions: {
               thenUrl: 'data-analytics',
               elseUrl: 'project-impact'
@@ -2266,15 +2062,14 @@ const questionBank = {
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
-            html: `Technology powered by fossil fuels will only be funded where there is no 
-                  commercially available electric or renewable energy alternative.<br/><br/>
-                  Select up to 2 options`
+            html: 'Select up to 2 options'
           },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA wants to fund projects that improve the environment'
+                para: 'RPA wants to fund projects that:',
+                items: ['improve the environment']
               }]
             }]
           },
@@ -2365,7 +2160,7 @@ const questionBank = {
               heading: 'Funding priorities',
               content: [{
                 para: 'RPA wants to fund sectors that:',
-                items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
+                items: ['have significant labour shortages', 'have not received many grants in the past, such as horticulture']
               }]
             }]
           },
@@ -2413,7 +2208,7 @@ const questionBank = {
           url: 'technology-use',
           baseUrl: 'technology-use',
           backUrl: 'agricultural-sector',
-          nextUrl: 'labour-saved',
+          nextUrl: '/score',
           // preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -2424,7 +2219,61 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: 'RPA wants to fund projects that introduce innovation',
+                para: 'RPA wants to fund projects that:',
+                items: ['introduce innovation']
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you have used this technology on your farm'
+            }
+          ],
+          answers: [
+            {
+              key: 'robotics-technology-A1',
+              value: 'Yes, we’re using it now'
+            },
+            {
+              key: 'robotics-technology-A2',
+              value: 'Yes, as a pilot, demonstration or trial'
+            },
+            {
+              key: 'robotics-technology-A3',
+              value: 'No, we haven’t used it yet'
+            }
+          ],
+          yarKey: 'technology'
+        },
+        {
+          key: 'automatic-eligibility',
+          order: 375,
+          title: `Which eligibility criteria does your automatic {{_technologyItems_}} meet?`,
+          pageTitle: '',
+          replace: true,
+          url: 'automatic-eligibility',
+          baseUrl: 'automatic-eligibility',
+          backUrl: 'robotic-automatic',
+          preValidationKeys: ['technologyItems'],
+          eliminationAnswerKeys: '',
+          ineligibleContent: {
+            messageContent: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
+          type: 'multi-answer',
+          minAnswerCount: 1,
+          hint: {
+            text: 'Select all that apply'
+          },
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
                 items: []
               }]
             }]
@@ -2432,29 +2281,35 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select if you are already using this technology'
-            }
+              error: 'Select what eligibility criteria your automatic technology meets'
+            },
           ],
           answers: [
             {
-              key: 'technology-use-A1',
-              value: 'Yes, we’re using it now'
+              key: 'automatic-eligibility-A1',
+              value: 'Has sensing system that can understand its environment '
             },
             {
-              key: 'technology-use-A2',
-              value: 'Yes, we’re using it now but want to upgrade'
+              key: 'automatic-eligibility-A2',
+              value: 'Makes decisions and plans'
             },
             {
-              key: 'technology-use-A3',
-              value: 'Yes, as a pilot, demonstration or trial'
+              key: 'automatic-eligibility-A3',
+              value: 'Can control its actuators (the devices that move robotic joints)'
             },
             {
-              key: 'technology-use-A4',
-              value: 'No, we haven’t used it yet'
+              key: 'automatic-eligibility-A4',
+              value: 'Works in a continuous loop'
+            },
+            {
+              key: 'automatic-eligibility-A5',
+              value: 'None of the above',
+              notEligible: true
             }
           ],
-          yarKey: 'technologyUse'
+          yarKey: 'automaticEligibility'
         },
+
         /// ////// ***************** ROBOTICS END  ************************************/////////////////////
         {
           key: 'answers',

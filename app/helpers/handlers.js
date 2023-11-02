@@ -171,22 +171,10 @@ const getPage = async (question, request, h) => {
     }
   }
   if(replace) {
-    if(getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'robotic-automatic'){
+    if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ){
       question = {
         ...question,
         title: 'Is the other technology robotic or automatic?'
-      }
-    }else if(getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9')) {
-        if(url === 'automatic-eligibility'){
-          question = {
-            ...question,
-            title: 'Which eligibility criteria does your other automatic technology meet?'
-          }
-        }else if(url === 'robotic-eligibility'){
-          question = {
-            ...question,
-            title: 'Does your robotic technology fit the eligibility criteria?'
-        }
       }
     }else {
       question = {
@@ -194,6 +182,17 @@ const getPage = async (question, request, h) => {
         title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
             getYarValue(request, additionalYarKeyName).toLowerCase()
         )
+      };
+    }
+  }
+  // change title on /automatic-eligibility page if 'Other robotics or automatic technology' option is selected on /technology-items
+  if(url === 'automatic-eligibility') {
+    const technologyItemsAnswer = getYarValue(request, 'technologyItems')
+    const isTechnologyItemsA9 = getQuestionAnswer('technology-items', 'technology-items-A9')
+    if(technologyItemsAnswer === isTechnologyItemsA9) {
+      question = {
+        ...question,
+        title: 'Which eligibility criteria does your other automatic technology meet?'
       };
     }
   }
@@ -358,7 +357,7 @@ const showPostPage = (currentQuestion, request, h) => {
   }
   
   if (replace) {
-    if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' && baseUrl === 'robotic-automatic'){
+    if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ){
       currentQuestion = {
         ...currentQuestion,
         title: 'Is the other technology robotic or automatic?',
@@ -459,11 +458,17 @@ const showPostPage = (currentQuestion, request, h) => {
       }
     case 'automatic-eligibility': {
         const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
-      
+        const technologyItemsAnswer = getYarValue(request, 'technologyItems')
+        const roboticAutomaticAnswer = getYarValue(request, 'roboticAutomatic')
+        const isTechnologyItemsA9 = getQuestionAnswer('technology-items', 'technology-items-A9')
+        const isRoboticAutomaticA2 = getQuestionAnswer('robotic-automatic', 'robotic-automatic-A2')
+        
         if (automaticEligibilityAnswer.length === 1) {
           return h.view('not-eligible', NOT_ELIGIBLE)
-        }  else {
-          return h.redirect(`${urlPrefix}/technology-description`)
+        } else if (technologyItemsAnswer === isTechnologyItemsA9 && roboticAutomaticAnswer === isRoboticAutomaticA2) {
+          return h.redirect(`${urlPrefix}/other-automatic-technology`)
+        } else {
+          return h.redirect(`${urlPrefix}/other-item`)
         }
       }
 
