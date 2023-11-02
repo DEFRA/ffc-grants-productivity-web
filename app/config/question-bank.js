@@ -3398,7 +3398,7 @@ const questionBank = {
               text: 'If you want your landlord to underwrite your project, you will need them to sign a letter of assurance. This letter will say your landlord agrees to take over your project, including conditions in the Grant Funding Agreement, if your tenancy ends. You should discuss and agree this with your landlord before you begin your full application.'
             },
             messageLink: {
-              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              url: 'https://defragroup.eu.qualtrics.com/jfe/preview/SV_9ugumqZO9w4M20e?Q_CHL=preview&Q_SurveyVersionID=current',
               title: 'What do you think of this service?'
             },
           },
