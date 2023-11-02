@@ -285,6 +285,15 @@ const getPage = async (question, request, h) => {
     case 'contractors-details': {
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
+    case 'project-items-summary':{
+      let projectItemsModel = getModel(data, question, request, conditionalHtml)
+      const projectItemsList = getYarValue(request, 'projectItemsList')
+      projectItemsModel = {
+        ...projectItemsModel,
+        projectItemsList
+      } 
+      return h.view('project-items-summary', projectItemsModel)
+    }
     // case 'project-items-summary': {
     //   const evidenceSummaryModel = getEvidenceSummaryModel(
     //     request,

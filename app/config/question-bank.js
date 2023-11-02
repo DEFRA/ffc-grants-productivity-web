@@ -1687,12 +1687,16 @@ const questionBank = {
           backUrl: 'other-item',
           nextUrl: 'item-conditional',
           // preValidationKeys: ['otherItem'],
-          ineligibleContent: {},
-          pageData: {
-            technologyItemsLink: 'technology-items',
-            roboticAutomaticLink: 'robotic-automatic',
-
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `Automatic items must fit at least 2 criteria to be eligible for funding. \n\n 
+                      Robotic items must fit all 4 criteria to be eligible for funding.`
+              }]
+            }]
           },
+          ineligibleContent: {},
           fundingPriorities: '',
           type: '',
           minAnswerCount: 1,

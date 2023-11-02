@@ -23,12 +23,14 @@
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">Your project items</h1>
         <span class="govuk-hint">You can add or remove items you will be using on your project</span>
-        
+        {% if projectItemsList %}
+        <h2 class="govuk-heading-m">Hello</h2>
+
+        {% endif %}
         <div>
         <h2 class="govuk-heading-m check-detail-heading">item</h2>
         <hr/>
         </div>
-
         {% set technologyItems = {
                 key: {
                 text: "OS grid reference"
