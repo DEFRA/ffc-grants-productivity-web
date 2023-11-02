@@ -30,7 +30,7 @@ describe('Page: /solar-technologies', () => {
     expect(response.payload).toContain('An inverter')
     expect(response.payload).toContain('A utility meter')
     expect(response.payload).toContain('A battery')
-    expect(response.payload).toContain('Limit-loading power diverter to heat or cold store')
+    expect(response.payload).toContain('Limit-loading power diverter to heat stores')
   })
 
   it('no option selected -> show error message', async () => {
