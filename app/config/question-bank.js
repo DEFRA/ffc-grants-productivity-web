@@ -1660,7 +1660,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select if you need to add another robotic or automatic item'
+              error: 'Select yes if you need to add another robotic or automatic item'
             }
           ],
           answers: [
@@ -1686,7 +1686,7 @@ const questionBank = {
           nextUrl: 'project-cost',
           maybeEligible: true,
           maybeEligibleContent: {
-            messageHeader: 'Your other technology might get a grant from this scheme',
+            messageHeader: 'Your technology might get a grant from this scheme',
             messageContent: `RPA will assess your technology and whether they will fund it.<br/><br/>
             They will let you know if the technology is eligible before the application window opens and projects are invited to apply.`,
             warning: {
