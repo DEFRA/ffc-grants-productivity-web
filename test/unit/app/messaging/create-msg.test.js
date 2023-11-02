@@ -62,6 +62,17 @@ describe('create-msg', () => {
 
     dict = {
       ...dict,
+      solarTechnologies: 'value',
+    }
+    expect(getDesirabilityAnswers({})).toEqual({
+      projectSubject: 'Solar technologies',
+      agriculturalSectorSolar: ['value'],
+      solarTechnologies: ['value'],
+      solarOutput: 'testing'
+    })
+
+    dict = {
+      ...dict,
       projectSubject: ''
     }
     expect(getDesirabilityAnswers({})).toEqual(null)
