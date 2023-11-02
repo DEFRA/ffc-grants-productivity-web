@@ -37,12 +37,6 @@
   "irrigationCurrent": [
     "Trickle"
   ],
-  "projectItems": [
-    "acid storage",
-    "dosing equipment",
-    "mixing tank",
-    "pump"
-  ],
   "waterSourcePlanned": [
     "Rain water harvesting",
     "Summer water surface abstraction"
@@ -91,5 +85,11 @@
   "payRemainingCosts": "Yes",
   "score-calculated": true,
   "tenancyLength": null,
-  "landOwnership": "Yes"
+  "landOwnership": "Yes",
+  "projectItems": "Robotic and automatic technology",
+  "technologyItems": "Other robotics or automatic technology",
+  "roboticAutomatic": "Robotic",
+  "roboticEligibility": "Yes",
+  "technologyDescription": "FAKE DATA FAKE DATA FAKE DATA FAKE DATA",
+  "otherItem": "No"
 }

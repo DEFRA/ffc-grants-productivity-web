@@ -53,9 +53,9 @@ const msgData = { // update to be solar
   questionMapping: {
     projectSubject: 'project-subject',
     projectImpacts: 'project-impacts',
-    dataAnalytics: 'robotics-data-analytics',
-    energySource: 'robotics-energy-source',
-    agriculturalSector: 'robotics-agricultural-sector',
+    dataAnalytics: 'data-analytics',
+    energySource: 'energy-source',
+    agriculturalSector: 'agricultural-sector',
     projectImpact: 'robotics-project-impact'
   }
 }

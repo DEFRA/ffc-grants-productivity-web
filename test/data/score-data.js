@@ -45,14 +45,14 @@ const msgData = {
         }
       },
       {
-        key: 'robotics-data-analytics',
+        key: 'data-analytics',
         answers: [
           {
-            key: 'robotics-data-analytics',
+            key: 'data-analytics',
             title: 'Robotics Data Analytics',
             input: [
               {
-                key: 'robotics-data-analytics-A1',
+                key: 'data-analytics-A1',
                 value: 'Yes, we have the technology already'
               }
             ]
@@ -64,14 +64,14 @@ const msgData = {
         }
       },
       {
-        key: 'robotics-data-analytics',
+        key: 'data-analytics',
         answers: [
           {
-            key: 'robotics-data-analytics',
+            key: 'data-analytics',
             title: 'Robotics Data Analytics',
             input: [
               {
-                key: 'robotics-data-analyticsa-A1',
+                key: 'data-analyticsa-A1',
                 value: 'Yes, we have the technology already'
               }
             ]
@@ -83,14 +83,14 @@ const msgData = {
         }
       },
       {
-        key: 'robotics-energy-source',
+        key: 'energy-source',
         answers: [
           {
-            key: 'robotics-energy-source',
+            key: 'energy-source',
             title: 'Robotics Energy Source',
             input: [
               {
-                key: 'robotics-energy-source-A1',
+                key: 'energy-source-A1',
                 value: 'Electricity – derived from renewable generation on farm'
               }
             ]

@@ -20,47 +20,48 @@
     }
   ],
   "dataAnalytics": [{
-    "key": "robotics-data-analytics",
+    "key": "data-analytics",
     "title": "Data analytics",
     "answers":
     {
-      "robotics-data-analytics-A1": "Yes, we have the technology already",
-      "robotics-data-analytics-A2": "Yes, we’ll buy the technology as part of the project",
-      "robotics-data-analytics-A3": "No, we will not use any data analytics"
+      "data-analytics-A1": "Yes, we have the technology already",
+      "data-analytics-A2": "Yes, we’ll buy the technology as part of the project",
+      "data-analytics-A3": "No, we will not use any data analytics"
     }}
   ],
   "energySource": [
     {
-      "key": "robotics-energy-source",
+      "key": "energy-source",
       "title": "Energy source",
       "answers": {
-        "robotics-energy-source-A1": "Mains electricity",
-        "robotics-energy-source-A2": "Renewable electricity generated on the farm",
-        "robotics-energy-source-A3": "Biofuels",
-        "robotics-energy-source-A4": "Fossil fuels"
+        "energy-source-A1": "Mains electricity",
+        "energy-source-A2": "Renewable electricity generated on the farm",
+        "energy-source-A3": "Biofuels",
+        "energy-source-A4": "Fossil fuels"
         }  
     } 
   ],
   "agriculturalSectorRobotics": [
     {
-      "key": "robotics-agricultural-sector",
+      "key": "agricultural-sector",
       "title": "Agricultural sector",
       "answers": {
-        "robotics-agricultural-sector-A1": "Horticulture",
-        "robotics-agricultural-sector-A2": "Arable",
-        "robotics-agricultural-sector-A3": "Dairy livestock",
-        "robotics-agricultural-sector-A4": "Non-dairy livestock"
+        "agricultural-sector-A1": "Horticulture",
+        "agricultural-sector-A2": "Arable",
+        "agricultural-sector-A3": "Dairy livestock",
+        "agricultural-sector-A4": "Non-dairy livestock"
       }
     }
   ],
-  "roboticProjectImpacts": [
+  "technologyUse": [
     {
-      "key": "robotics-technology",
+      "key": "technology-use",
       "title": "Technology",
       "answers": {
-        "robotics-technology-A1": "Yes, we’re using it now",
-        "robotics-technology-A2": "Yes, as a pilot, demonstration or trial",
-        "robotics-technology-A3": "No, we haven’t used it yet" 
+        "technology-use-A1": "Yes, we’re using it now",
+        "technology-use-A2": "Yes, we’re using it now but want to upgrade",
+        "technology-use-A3": "Yes, as a pilot, demonstration or trial",
+        "technology-use-A4": "No, we haven’t used it yet" 
       }
     }
   ],
