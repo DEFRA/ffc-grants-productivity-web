@@ -26,14 +26,14 @@ const msgData = {
         }
       },
       {
-        key: 'technology-use',
+        key: 'robotics-project-impacts',
         answers: [
           {
-            key: 'technology-use',
+            key: 'robotics-project-impacts',
             title: 'Robotics Technology',
             input: [
               {
-                key: 'technology-use-A1',
+                key: 'robotics-project-impacts-A1',
                 value: 'Yes, we’re using it now'
               }
             ]
@@ -45,14 +45,14 @@ const msgData = {
         }
       },
       {
-        key: 'data-analytics',
+        key: 'robotics-data-analytics',
         answers: [
           {
-            key: 'data-analytics',
+            key: 'robotics-data-analytics',
             title: 'Robotics Data Analytics',
             input: [
               {
-                key: 'data-analytics-A1',
+                key: 'robotics-data-analytics-A1',
                 value: 'Yes, we have the technology already'
               }
             ]
@@ -64,14 +64,14 @@ const msgData = {
         }
       },
       {
-        key: 'data-analytics',
+        key: 'robotics-data-analytics',
         answers: [
           {
-            key: 'data-analytics',
+            key: 'robotics-data-analytics',
             title: 'Robotics Data Analytics',
             input: [
               {
-                key: 'data-analyticsa-A1',
+                key: 'robotics-data-analyticsa-A1',
                 value: 'Yes, we have the technology already'
               }
             ]
@@ -83,14 +83,14 @@ const msgData = {
         }
       },
       {
-        key: 'energy-source',
+        key: 'robotics-energy-source',
         answers: [
           {
-            key: 'energy-source',
+            key: 'robotics-energy-source',
             title: 'Robotics Energy Source',
             input: [
               {
-                key: 'energy-source-A1',
+                key: 'robotics-energy-source-A1',
                 value: 'Electricity – derived from renewable generation on farm'
               }
             ]
@@ -102,14 +102,14 @@ const msgData = {
         }
       },
       {
-        key: 'agricultural-sector',
+        key: 'robotics-agricultural-sector',
         answers: [
           {
-            key: 'agricultural-sector',
+            key: 'robotics-agricultural-sector',
             title: 'Robotics Agricultural Sector',
             input: [
               {
-                key: 'agricultural-sector-A1',
+                key: 'robotics-agricultural-sector-A1',
                 value: 'Horticulture'
               }
             ]
@@ -129,10 +129,10 @@ const msgData = {
   questionMapping: {
     projectSubject: 'project-subject',
     projectImpacts: 'project-impacts',
-    dataAnalytics: 'data-analytics',
-    energySource: 'energy-source',
-    agriculturalSector: 'agricultural-sector',
-    roboticProjectImpacts: 'technology-use'
+    dataAnalytics: 'robotics-data-analytics',
+    energySource: 'robotics-energy-source',
+    agriculturalSectorRobotics: 'agricultural-sector',
+    roboticProjectImpacts: 'robotics-project-impact'
   }
 }
 module.exports = msgData
