@@ -8,7 +8,7 @@ const varListTemplate = {
     planningAuthority: 'some planning',
     planningReferenceNumber: '123456-ref'
   },
-  projectSubject: 'Robotics and automatic technology',
+  projectSubject: 'Farm productivity project items',
   applicant: 'Contractor',
   businessLocation: 'Yes',
   inEngland: 'Yes',
@@ -50,9 +50,9 @@ describe('All default GET routes', () => {
     it(`should load ${question.key} page successfully`, async () => {
 
       if (question.key === 'existing-solar') {
-        varList.projectSubject = 'Solar technologies'
+        varList.projectSubject = 'Solar project items'
       } else if (question.key === 'robotics-project-items') {
-        varList.projectSubject = 'Robotics and automatic technology'
+        varList.projectSubject = 'Farm productivity project items'
     
       }
 

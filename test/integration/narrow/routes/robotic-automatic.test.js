@@ -2,8 +2,9 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /robotic-automatic', () => {
   const varList = {
-    projectSubject: 'Robotics and automatic technology',
-    technologyItems: 'Harvesting technology'
+    projectSubject: 'Farm productivity project items',
+    technologyItems: 'Harvesting technology',
+    roboticAutomatic: 'Robotic'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({

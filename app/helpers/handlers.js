@@ -30,7 +30,7 @@ const resetYarValues = (applying, request) => {
 }
 
 const getConfirmationId = (guid, journey) => {
-  const prefix = journey.toLowerCase() === 'solar technologies' ? 'SO' : 'RI'
+  const prefix = journey.toLowerCase() === 'solar project items' ? 'SO' : 'RI'
   console.log(journey, prefix, 'confirmationId')
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
 }
@@ -307,7 +307,7 @@ const getPage = async (question, request, h) => {
     //   return h.view('evidence-summary', evidenceSummaryModel)
     // }
     case 'legal-status':
-      if (getYarValue(request, 'projectSubject') === 'Solar technologies') {
+      if (getYarValue(request, 'projectSubject') === 'Solar project items') {
         setYarValue(request, 'applicant', null)
       }
     default:
