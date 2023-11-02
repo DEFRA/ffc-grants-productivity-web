@@ -3,10 +3,12 @@ module.exports = {
   desirabilityInputQuestionMapping: {
     projectSubject: 'project-subject',
     projectImpacts: 'project-impacts',
-    dataAnalytics: 'data-analytics',
-    energySource: 'energy-source',
-    agriculturalSector: 'agricultural-sector',
+    dataAnalytics: 'robotics-data-analytics',
+    energySource: 'robotics-energy-source',
+    agriculturalSectorRobotics: 'agricultural-sector',
     roboticProjectImpacts: 'robotics-project-impact',
-    technologyUse: 'technology-use'
+    agriculturalSectorSolar: 'agricultural-sector-solar',
+    solarTechnologies: 'solar-technologies',
+    solarOutput: 'solar-output'
   }
 }

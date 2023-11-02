@@ -2,7 +2,7 @@
 const msgData = { // update to be solar
   grantScheme: {
     key: 'PROD001',
-    name: 'Prod Grant Slury'
+    name: 'Prod Grant Solar'
   },
   desirability: {
     questions: [
@@ -53,9 +53,9 @@ const msgData = { // update to be solar
   questionMapping: {
     projectSubject: 'project-subject',
     projectImpacts: 'project-impacts',
-    dataAnalytics: 'data-analytics',
-    energySource: 'energy-source',
-    agriculturalSector: 'agricultural-sector',
+    dataAnalytics: 'robotics-data-analytics',
+    energySource: 'robotics-energy-source',
+    agriculturalSector: 'robotics-agricultural-sector',
     projectImpact: 'robotics-project-impact'
   }
 }
