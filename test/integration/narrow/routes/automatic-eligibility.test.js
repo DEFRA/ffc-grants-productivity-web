@@ -78,7 +78,7 @@ describe('Page: /automatic-eligibility', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/automatic-eligibility`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { automaticEligibility: ['Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop'], crumb: crumbToken }
+      payload: { automaticEligibility: ['Makes decisions and plans', 'Has sensing system that can understand its environment'], crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
