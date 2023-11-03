@@ -1,5 +1,5 @@
 const { crumbToken } = require('./test-helper')
-
+const { projectItemsSummaryData } = require('../../../data/projectItems-data')
 const varListTemplate = {
 projectItems: ['Wavelength-specific LED lighting for horticultural crops', 'Robotic and automatic technology'],
 technologyItems: 'Harvesting technology',
@@ -8,6 +8,7 @@ roboticEligibility: 'Yes',
 technologyDescription: {
     description: 'some fake description some fake description'
 },
+projectItemsList: projectItemsSummaryData
 
 }
 

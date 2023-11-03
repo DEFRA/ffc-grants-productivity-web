@@ -18,6 +18,6 @@ const projectItemsSummaryData = [
         criteria: [ 'sensing system', 'makes decisions' ],
         description: 'some fake description some fake description'
         }
-    ]
+]
 
 module.exports = projectItemsSummaryData
