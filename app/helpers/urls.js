@@ -7,10 +7,10 @@ const getUrl = (urlObject, url, request, secBtn) => {
   const chekDetailsPath = `${urlPrefix}/check-details`
   let secBtnPath = secBtn === 'Back to score' ? scorePath : chekDetailsPath
 
-  if (secBtn === 'Add another item') {
+  if(secBtn ==='Add another item'){
     secBtnPath = `${urlPrefix}/technology-items`
   }
-
+  
   if (!urlObject || secBtn) {
     return secBtn ? secBtnPath : url
   }
