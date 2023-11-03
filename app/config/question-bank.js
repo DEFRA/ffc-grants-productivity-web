@@ -1587,8 +1587,7 @@ const questionBank = {
             },
             {
               key: 'automatic-eligibility-A5',
-              value: 'None of the above',
-              notEligible: true
+              value: 'None of the above'
             }
           ],
           yarKey: 'automaticEligibility'

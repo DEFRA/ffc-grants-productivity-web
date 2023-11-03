@@ -458,7 +458,8 @@ const showPostPage = (currentQuestion, request, h) => {
         const isRoboticAutomaticA2 = getQuestionAnswer('robotic-automatic', 'robotic-automatic-A2')
         
         if (automaticEligibilityAnswer.length === 1) {
-          if(getYarValue(request, 'projectItemsList')?.length <= 1) {
+          const projectItemsList = getYarValue(request, 'projectItemsList') ?? []
+          if (projectItemsList.length <= 1) {
             NOT_ELIGIBLE.primaryBtn = {
               text: 'Add another item',
               url: `${urlPrefix}/technology-items`
