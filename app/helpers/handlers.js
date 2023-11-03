@@ -459,7 +459,7 @@ const showPostPage = (currentQuestion, request, h) => {
         
         if (automaticEligibilityAnswer.length === 1) {
           const projectItemsList = getYarValue(request, 'projectItemsList') ?? []
-          if (projectItemsList.length <= 1) {
+          if(projectItemsList.length <= 1) {
             NOT_ELIGIBLE.primaryBtn = {
               text: 'Add another item',
               url: `${urlPrefix}/technology-items`
