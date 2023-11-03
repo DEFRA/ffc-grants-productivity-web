@@ -1908,7 +1908,7 @@ const questionBank = {
             }
           },
           yarKey: 'itemConditional'
-        },  
+        },
         {
           key: 'project-cost',
           order: 310,
@@ -1946,7 +1946,7 @@ const questionBank = {
             html: `
               You can only apply for a grant of up to 40% of the estimated costs.
               <br/>The minimum grant you can apply for this project is £25,000 (40% of £62,500).
-              <br/>The maximum grant is £500,000.
+              <br/>The maximum grant is £500,000 (40% of £1.25 million).
               <br/><br/>Do not include VAT.
               <br/><br/>Enter amount, for example 95,000`
           },
@@ -2002,7 +2002,7 @@ const questionBank = {
             dependentWarningQuestionKey: 'other-robotic-technology',
             dependentWarningAnswerKeysArray: ['other-robotic-technology-A1'],
             ConditionalWarningMsg: {
-              text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
+              text: 'RPA will assess your technology and whether they can fund it. There’s no guarantee your technology will be funded.',
               iconFallbackText: 'Warning'
             }
           },
