@@ -289,19 +289,35 @@ const getPage = async (question, request, h) => {
     case 'contractors-details': {
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
-    case 'project-items-summary':{
+    case 'project-items-summary': {
       let projectItemsModel = getModel(data, question, request, conditionalHtml)
       const projectItemsList = getYarValue(request, 'projectItemsList')
+      if (projectItemsList.length > 1 ) {
+        if(getYarValue(request, 'roboticEligibility') === 'No'){
+          backUrl = `${urlPrefix}/robotic-eligibility`
+            // return h.view('not-eligible', NOT_ELIGIBLE)  
+        }
+        if([getYarValue(request, 'automaticEligibility')].flat().length < 2){
+          backUrl = `${urlPrefix}/automatic-eligibility`
+            // return h.view('not-eligible', NOT_ELIGIBLE)  
+        }
+      }
       projectItemsModel = {
         ...projectItemsModel,
         projectItemsList
       } 
       return h.view('project-items-summary', projectItemsModel)
     }
+    case 'remove-item': {
+      if(getYarValue(request, 'projectItemsList').length < 1 ){
+        return h.redirect(`${urlPrefix}/robotic-automatic`)
+      }
+
+    }
     case 'legal-status':
       if (getYarValue(request, 'projectSubject') === 'Solar project items') {
         setYarValue(request, 'applicant', null)
-      }
+      } 
     default:
       break
   }
@@ -465,22 +481,28 @@ const showPostPage = (currentQuestion, request, h) => {
           return h.redirect(`${urlPrefix}/technology-description`)
         }
       }
-
-      case 'technology-description': {
+    case 'technology-description': {
+        let roboticArr = ['sensing system', 'makes decisions', 'control actuators', 'continuous loop']
+        let automaticFinalArr = []
+        if(getYarValue(request, 'automaticEligibility')){
+          automaticFinalArr = getYarValue(request, 'automaticEligibility').map((item) =>   item.includes('sensing system') ? 'sensing system' : item.includes('Makes decisions') ? 'makes decisions' : item.includes('actuators') ? 'control actuators' : item.includes('continuous loop') ? 'continuous loop' : '')
+        }
         let tempArray = getYarValue(request, 'projectItemsList') ?? []
         let tempObject = {
-          item: getYarValue(request, 'technologyItems'),
+          index: tempArray.length + 1,
+          item: getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ? 'Other technology' : getYarValue(request, 'technologyItems'),
           type: getYarValue(request, 'roboticAutomatic'),
-          criteria: getYarValue(request, 'automaticEligibility') || 
-          getYarValue(request, 'roboticEligibility'),
+          criteria: getYarValue(request, 'automaticEligibility') ? automaticFinalArr : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArr : null,
           description: getYarValue(request, 'technologyDescription').description
         }
-
+        
         tempArray.push(tempObject)
+        setYarValue(request, 'roboticEligibility', null)
+        setYarValue(request, 'automaticEligibility', null)
         setYarValue(request, 'projectItemsList', tempArray)
         break
       }
-      case 'other-item': {  
+    case 'other-item': {  
         if(getYarValue(request, 'projectItemsList')?.length === 1) {
           return h.redirect(`${urlPrefix}/item-conditional`)
         } else {

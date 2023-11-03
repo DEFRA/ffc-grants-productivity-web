@@ -1797,7 +1797,7 @@ const questionBank = {
         },
         {
           key: 'project-items-summary',
-          order: 153,
+          order: 310,
           title: 'Your Project items',
           hint: {
             text: 'You can add or remove items you will be using on your project'
@@ -1822,6 +1822,30 @@ const questionBank = {
           type: '',
           minAnswerCount: 1,
           answers: []
+        },
+        {
+          key: 'remove-item',
+          order: 320,
+          title: 'Are you sure you want to remove {{_technologyItems}}?',
+          pageTitle: '',
+          backUrl: 'project-items-summary',
+          nextUrl: 'project-items-summary',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          url: 'remove-item',
+          baseUrl: 'remove-item',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          answers: [
+            {
+              key: 'remove-item-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'remove-item-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'removeItem'
         },
         {
           key: 'item-conditional',
