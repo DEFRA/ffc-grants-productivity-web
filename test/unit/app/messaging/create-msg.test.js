@@ -64,13 +64,14 @@ describe('create-msg', () => {
       ...dict,
       solarTechnologies: 'value',
       agriculturalSector: 'value',
+      solarOutput: null
 
     }
     expect(getDesirabilityAnswers({})).toEqual({
       projectSubject: 'Solar project items',
       agriculturalSectorSolar: ['value'],
       solarTechnologies: ['value'],
-      solarOutput: 'testing'
+      solarOutput: 'solar-output-A6'
     })
 
     dict = {

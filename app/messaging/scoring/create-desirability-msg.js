@@ -7,19 +7,18 @@ const desirabilityRoboticsQuestions = ['energySource', 'agriculturalSector', 'te
 const PROJECT_SUBJECT_SOLAR = getQuestionAnswer('project-subject', 'project-subject-A2')
 
 function getUserAnswer (answers, userInput) {
-  console.log('checkechekch', userInput)
   if (answers) {
     return [userInput].flat().map(answer =>
       ({ key: Object.keys(answers).find(key => answers[key] === answer), value: answer }))
   } else {
-    // if solar-output and solar panels not selected, set solar output to 'Solar panels not chosen' for scoring
-    // UPDATE TO MAKE SURE ELIGIBILITY-CRITERIA HAS eligibility-criteria-A5 IF ANSWER NOT FOUND
-    return [{ key: 'solar-output-A6', value: 'Solar panels not chosen' }]
+    return [{ key: null, value: null }]
   }
 }
 
 function getDesirabilityDetails (questionKey, userInput) {
   const content = questionContent[questionKey]
+  // needs to loop for eligibility-criteria for each array in answers array
+  console.log('content', questionContent[questionKey], questionKey)
   return {
     key: content[0].key,
     answers: content.map(({ key, title, answers }) => ({
