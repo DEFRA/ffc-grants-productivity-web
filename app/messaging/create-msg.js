@@ -14,12 +14,12 @@ function getAllDetails (request, confirmationId) {
 }
 
 const desirabilityAnswersSchema = Joi.object({
-  projectSubject: Joi.string().allow(null),
-  projectImpacts: Joi.string().allow(null),
   dataAnalytics: Joi.string().allow(null),
   energySource: Joi.array().allow(null).items(Joi.string()),
+  technologyUse: Joi.string().allow(null),
+  labourReplaced: Joi.string().allow(null),
+  eligibilityCriteria: Joi.array().allow(null).items(Joi.array.items(Joi.string())),
   agriculturalSectorRobotics: Joi.array().allow(null).items(Joi.string()),
-  roboticProjectImpacts: Joi.string().allow(null),
   agriculturalSectorSolar: Joi.array().allow(null).items(Joi.string()),
   solarTechnologies: Joi.array().allow(null).items(Joi.string()),
   solarOutput: Joi.string().allow(null)
@@ -38,11 +38,21 @@ function getDesirabilityAnswers (request) {
       if (!Array.isArray(getYarValue(request, 'energySource'))) {
         energySource.push(getYarValue(request, 'energySource'))
       }
+      // if projectItemsList exists, for each item add projectItemsList.criteria individually
+      // if doesn't exist, add one answer with 'Not applicable'
+
+      // const eligibilityCriteria = []
+      // if (getYarValue(request, 'projectItemsList') === undefined) {
+      //   eligibilityCriteria.push('Not applicable')
+      // } else if (!Array.isArray(getYarValue(request, 'projectItemsList'))) {
+      //   eligibilityCriteria.push(getYarValue(request, 'projectItemsList'))
+      // }
       val = {
-        projectSubject: getYarValue(request, 'projectSubject'),
-        projectImpacts: getYarValue(request, 'projectImpacts'),
         dataAnalytics: getYarValue(request, 'dataAnalytics'),
         energySource: energySource.length > 0 ? energySource : getYarValue(request, 'energySource'),
+        technologyUse: getYarValue(request, 'technologyUse'),
+        labourReplaced: getYarValue(request, 'labourReplaced'),
+        // eligibilityCriteria: eligibilityCriteria.length > 0 ? eligibilityCriteria : getYarValue(request, 'projectItemsList'),
         agriculturalSectorRobotics: agriculturalSector.length > 0 ? agriculturalSector : getYarValue(request, 'agriculturalSector'),
         roboticProjectImpacts: getYarValue(request, 'technology')
       }

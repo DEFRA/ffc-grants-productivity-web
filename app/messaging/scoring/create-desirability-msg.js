@@ -2,15 +2,18 @@ const grantSchemeConfig = require('./config/grant-scheme')
 const { desirabilityQuestions: questionContent } = require('./content-mapping')
 const { getQuestionAnswer } = require('../../helpers/utils')
 const desirabilityQuestions = ['solarTechnologies', 'solarOutput', 'agriculturalSectorSolar']
-const desirabilityRoboticsQuestions = ['projectSubject', 'dataAnalytics', 'energySource', 'agriculturalSectorRobotics', 'roboticProjectImpacts']
+const desirabilityRoboticsQuestions = ['energySource', 'agriculturalSector', 'technologyUse', 'labourReplaced', 'dataAnalytics', 'projectItemsList']
+
 const PROJECT_SUBJECT_SOLAR = getQuestionAnswer('project-subject', 'project-subject-A2')
 
 function getUserAnswer (answers, userInput) {
+  console.log('checkechekch', userInput)
   if (answers) {
     return [userInput].flat().map(answer =>
       ({ key: Object.keys(answers).find(key => answers[key] === answer), value: answer }))
   } else {
-    // if solar panels not selected, set solar output to 'Solar panels not chosen' for scoring
+    // if solar-output and solar panels not selected, set solar output to 'Solar panels not chosen' for scoring
+    // UPDATE TO MAKE SURE ELIGIBILITY-CRITERIA HAS eligibility-criteria-A5 IF ANSWER NOT FOUND
     return [{ key: 'solar-output-A6', value: 'Solar panels not chosen' }]
   }
 }
