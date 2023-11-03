@@ -480,6 +480,22 @@ const showPostPage = (currentQuestion, request, h) => {
     case 'automatic-eligibility': {
         const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
         if (automaticEligibilityAnswer.length === 1) {
+          const projectItemsList = getYarValue(request, 'projectItemsList') ?? []
+          if(projectItemsList.length <= 1) {
+            NOT_ELIGIBLE.primaryBtn = {
+              text: 'Add another item',
+              url: `${urlPrefix}/technology-items`
+            }
+          } else {
+            NOT_ELIGIBLE.primaryBtn = {
+              text: 'Continue with eligible items',
+              url: `${urlPrefix}/project-items-summary`
+            }
+            NOT_ELIGIBLE.secondaryBtn = {
+              text: 'Add another item',
+              url: `${urlPrefix}/technology-items`
+            }
+          }
           return h.view('not-eligible', NOT_ELIGIBLE)
         }else {
           return h.redirect(`${urlPrefix}/technology-description`)
