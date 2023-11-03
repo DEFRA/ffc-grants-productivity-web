@@ -177,13 +177,13 @@ const getPage = async (question, request, h) => {
         ...question,
         title: 'Is the other technology robotic or automatic?'
       }
-    }else if(getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9')) {
+    } else if(getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9')) {
         if(url === 'automatic-eligibility'){
           question = {
             ...question,
             title: 'Which eligibility criteria does your automatic technology meet?'
           }
-        }else if(url === 'robotic-eligibility'){
+        } else {
           question = {
             ...question,
             title: 'Does your robotic technology fit the eligibility criteria?'
@@ -289,27 +289,21 @@ const getPage = async (question, request, h) => {
     case 'project-items-summary': {
       let projectItemsModel = getModel(data, question, request, conditionalHtml)
       const projectItemsList = getYarValue(request, 'projectItemsList')
-      if (projectItemsList.length > 1 ) {
-        if(getYarValue(request, 'roboticEligibility') === 'No'){
-          backUrl = `${urlPrefix}/robotic-eligibility`
-            // return h.view('not-eligible', NOT_ELIGIBLE)  
-        }
-        if([getYarValue(request, 'automaticEligibility')].flat().length < 2){
-          backUrl = `${urlPrefix}/automatic-eligibility`
-            // return h.view('not-eligible', NOT_ELIGIBLE)  
-        }
-      }
+      // if (projectItemsList.length > 1 ) {
+      //   if(getYarValue(request, 'roboticEligibility') === 'No'){
+      //     backUrl = `${urlPrefix}/robotic-eligibility`
+      //       // return h.view('not-eligible', NOT_ELIGIBLE)  
+      //   }
+      //   if([getYarValue(request, 'automaticEligibility')].flat().length < 2){
+      //     backUrl = `${urlPrefix}/automatic-eligibility`
+      //       // return h.view('not-eligible', NOT_ELIGIBLE)  
+      //   }
+      // }
       projectItemsModel = {
         ...projectItemsModel,
         projectItemsList
       } 
       return h.view('project-items-summary', projectItemsModel)
-    }
-    case 'remove-item': {
-      if(getYarValue(request, 'projectItemsList').length < 1 ){
-        return h.redirect(`${urlPrefix}/robotic-automatic`)
-      }
-
     }
     case 'legal-status':
       if (getYarValue(request, 'projectSubject') === 'Solar project items') {
@@ -462,7 +456,7 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'projectCost', projectCost)
     console.log(calculatedGrant, remainingCost, projectCost, 'calculatedGrant, remainingCost, projectCost')
   }
-
+console.log(baseUrl, 'baseUrl')
   switch (baseUrl) {
     case 'solar-technologies':
       if([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){
@@ -533,7 +527,12 @@ const showPostPage = (currentQuestion, request, h) => {
         } else {
           return h.redirect(`${urlPrefix}/project-items-summary`)
         }
-      } 
+      }
+      // case 'remove-item': {
+      //   if(getYarValue(request, 'projectItemsList').length < 1 ){
+      //     return h.redirect(`${urlPrefix}/robotic-automatic`)
+      //   }
+      // }
     default:
       break
   }

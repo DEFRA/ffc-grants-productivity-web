@@ -7,14 +7,17 @@ describe('Technology description', () => {
     projectItems: ['Robotic and automatic technology'],
     technologyItems: 'Harvesting technology',
     roboticAutomatic: 'Automatic',
-    automaticEligibility: ['Has sensing system that can understand its environment', 'Makes decisions and plans'],
+    automaticEligibility: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop'],
+    projectItemsList: ['Harvesting technology', 'Other robotics or automatic technology'],
+    roboticEligibility: 'Fake data',
+    technologyDescription: 'some fake description some fake description',
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
       if (varList[key]) return varList[key]
-      else return 'Error'
+      else return undefined
     }
   }))
   it('page loads successfully, with all the fields', async () => {
@@ -63,18 +66,33 @@ describe('Technology description', () => {
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Description must be 10 characters or more')
   })
-  // it('should store user response and redirects to other-item page', async () => {
-  //   const postOptions = {
-  //     method: 'POST',
-  //     url: `${global.__URLPREFIX__}/technology-description`,
-  //     payload: { technologyDescription: { description: 'this is fake description this is fake description' }, crumb: crumbToken },
-  //     headers: { cookie: 'crumb=' + crumbToken }
-  //   }
+  it('should store user response and redirects to other-item page', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/technology-description`,
+      payload: { description: 'this is fake description this is fake description', crumb: crumbToken },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
 
-  //   const postResponse = await global.__SERVER__.inject(postOptions)
-  //   expect(postResponse.statusCode).toBe(302)
-  //   expect(postResponse.headers.location).toBe('other-item')
-  // })
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('other-item')
+  })
+
+  it('should store user response and redirects to other-item page > robotic item only', async () => {
+    varList.automaticEligibility = null
+    varList.technologyItems = 'Other robotics or automatic technology'
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/technology-description`,
+      payload: { description: 'this is fake description this is fake description', crumb: crumbToken },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('other-item')
+  })
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
