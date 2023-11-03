@@ -1874,14 +1874,13 @@ const questionBank = {
           url: 'project-cost',
           baseUrl: 'project-cost',
           backUrlObject: {
-            dependentQuestionYarKey: ['technologyItems', 'projectItems'],
-            dependentAnswerKeysArray: ['technology-items-A8', 'project-items-A3'],
+            dependentQuestionYarKey: 'projectItems',
+            dependentAnswerKeysArray: ['project-items-A3'],
             urlOptions: {
-              thenUrl: ['other-robotic-technology', 'technology-items'],
+              thenUrl: 'technology-conditional',
               elseUrl: 'project-items'
             }
           },
-          backUrl:'other-conditional',
           nextUrl: 'potential-amount',
           // preValidationKeys: [],
           classes: 'govuk-input--width-10',
@@ -1956,13 +1955,9 @@ const questionBank = {
               error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],
-          warningConditional: {
-            dependentWarningQuestionKey: 'other-robotic-technology',
-            dependentWarningAnswerKeysArray: ['other-robotic-technology-A1'],
-            ConditionalWarningMsg: {
-              text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
-              iconFallbackText: 'Warning'
-            }
+          warning: {
+            text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
+            iconFallbackText: 'Warning'
           },
           answers: [],
           yarKey: 'projectCost'

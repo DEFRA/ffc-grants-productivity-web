@@ -4,7 +4,8 @@ const varListTemplate = {
   projectSubject: 'Farm productivity project items',
   legalStatus: 'fale status',
   projectItems: 'Advanced ventilation control units',
-  projectCost: '12345678'
+  projectCost: '12345678',
+  technologyItems: '12345'
 }
 
 let varList

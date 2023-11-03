@@ -329,6 +329,7 @@ const getPage = async (question, request, h) => {
 
 const showPostPage = (currentQuestion, request, h) => {
   const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields, replace } = currentQuestion
+
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   let thisAnswer
@@ -453,8 +454,11 @@ const showPostPage = (currentQuestion, request, h) => {
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }
+
+  console.log('here instead?')
   
   if (yarKey === 'projectCost' ) {
+    console.log('here?')
     const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
