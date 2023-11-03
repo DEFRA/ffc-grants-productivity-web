@@ -1821,12 +1821,13 @@ const questionBank = {
           fundingPriorities: '',
           type: '',
           minAnswerCount: 1,
-          answers: []
+          answers: [],
+          yarKey: 'projectItemsSummary'
         },
         {
           key: 'remove-item',
           order: 320,
-          title: 'Are you sure you want to remove {{_technologyItems}}?',
+          title: 'Are you sure you want to remove {{_item_}}?',
           pageTitle: '',
           backUrl: 'project-items-summary',
           nextUrl: 'project-items-summary',
