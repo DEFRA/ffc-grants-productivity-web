@@ -8,6 +8,9 @@ describe('Technology description', () => {
     technologyItems: 'Harvesting technology',
     roboticAutomatic: 'Automatic',
     automaticEligibility: ['Has sensing system that can understand its environment', 'Makes decisions and plans'],
+    projectItemsList: ['Harvesting technology', 'Other robotics or automatic technology'],
+    roboticEligibility: 'Fake data',
+    technologyDescription: 'some fake description some fake description',
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -63,18 +66,18 @@ describe('Technology description', () => {
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Description must be 10 characters or more')
   })
-  // it('should store user response and redirects to other-item page', async () => {
-  //   const postOptions = {
-  //     method: 'POST',
-  //     url: `${global.__URLPREFIX__}/technology-description`,
-  //     payload: { technologyDescription: { description: 'this is fake description this is fake description' }, crumb: crumbToken },
-  //     headers: { cookie: 'crumb=' + crumbToken }
-  //   }
+  it('should store user response and redirects to other-item page', async () => {
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/technology-description`,
+      payload: { description: 'this is fake description this is fake description', crumb: crumbToken },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
 
-  //   const postResponse = await global.__SERVER__.inject(postOptions)
-  //   expect(postResponse.statusCode).toBe(302)
-  //   expect(postResponse.headers.location).toBe('other-item')
-  // })
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('other-item')
+  })
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
