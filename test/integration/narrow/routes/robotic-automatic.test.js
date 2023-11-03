@@ -48,7 +48,7 @@ describe('Page: /robotic-automatic', () => {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotic-automatic`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { roboticAutomatic: '', crumb: crumbToken }
+      payload: { crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
