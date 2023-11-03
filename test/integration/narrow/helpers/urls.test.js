@@ -86,6 +86,16 @@ describe("getUrl()", () => {
     );
   });
 
+  it('should return secBtnPath if secBtn is Add another item', () => {
+    urlObject = null;
+    dict = {
+      dependentQuestionYarKey: "dependentAnswerKeysArray",
+    };
+    expect(getUrl(urlObject, "mock-url", {}, "Add another item", "")).toEqual(
+      `${urlPrefix}/technology-items`
+    );
+  });
+
   it('should default to /check-details if secBtn is not "Back to score" and current url is not a building or planning page', () => {
     urlObject = null;
     dict = {

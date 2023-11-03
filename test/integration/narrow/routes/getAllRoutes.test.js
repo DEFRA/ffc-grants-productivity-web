@@ -18,6 +18,9 @@ const varListTemplate = {
   farmersDetails: 'voila',
   consentMain: 'lalal',
   technologyItems: 'Solar panels',
+  projectItems: 'Advanced ventilation control units',
+  projectItemsList: ['value', 'value2']
+
 }
 
 let varList

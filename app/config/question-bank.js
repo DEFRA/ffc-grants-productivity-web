@@ -1490,7 +1490,7 @@ const questionBank = {
                 There are 4 eligibility criteria for grant funding.<br/><br/>
                 Eligible technology should:
                   <ul>
-                    <li>have a sensing system and can understand its environment</li>
+                    <li>have a sensing system and be able to understand its environment</li>
                     <li>make decisions and plan</li>
                     <li>be able to control its actuators (the devices that move robot joints)</li>
                     <li>work in a continuous loop</li>
@@ -1510,7 +1510,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select if your {{_technologyItems_}} is robotic or automatic'
+              error: 'Select if your technology is robotic or automatic'
             }
           ],
           answers: [
@@ -1553,7 +1553,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
+                para: 'Automatic items must fit at least 2 criteria to be eligible for grant funding.',
                 items: []
               }]
             }]
@@ -1666,7 +1666,7 @@ const questionBank = {
         {
           key: 'technology-description',
           order: 305,
-          title: 'What is your other robotic technology?',
+          title: 'What is your technology?',
           pageTitle: '',
           nextUrl: 'other-item',
           url: 'technology-description',
@@ -1697,7 +1697,7 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: 'To be eligible for grant funding, your robotic technology must:',
-                items: ['have a sensing system and can understand their environment', 'make decisions and plan', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop'],
+                items: ['have a sensing system and can understand their environment', 'make decisions and plans', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop'],
                 additionalPara: 'Automatic technology must fit at least 2 of these eligibility criteria. '
               }]
             }]
@@ -1734,100 +1734,6 @@ const questionBank = {
             }
           ],
           yarKey: 'technologyDescription'
-        },
-        {
-          key: 'other-robotic-technology',
-          order: 305,
-          title: 'What is your other robotic technology?',
-          pageTitle: '',
-          backUrl: 'robotic-automatic',
-          nextUrl: 'other-conditional',
-          url: 'other-robotic-technology',
-          baseUrl: 'other-robotic-technology',
-          // preValidationKeys: ['projectItems'],
-          fundingPriorities: '',
-          minAnswerCount: 1,
-          hint: {
-            text: `Technology powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative`
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'To be eligible for grant funding, your robotic technology must:',
-                items: ['have a sensing system and can understand their environment', 'make decisions and plan', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop']
-              }]
-            }]
-          },
-          type: 'multi-input',
-          allFields: [
-            {
-              yarKey: 'brand',
-              type: 'input',
-              classes: 'govuk-input--width-10',
-              id: "brand",
-              name: "brand",
-              label: {
-                text: 'Brand',
-                classes: 'govuk-label'
-              },
-              validate: [
-                  {
-                    type: 'REGEX',
-                    regex: CHARS_MAX_18,
-                    error: 'Brand must be 18 characters or less'
-                  }
-              ]
-            },
-            {
-              yarKey: 'model',
-              type: 'input',
-              classes: 'govuk-input--width-10',
-              id: "model",
-              name: "model",
-              label: {
-                text: 'Model',
-                classes: 'govuk-label',
-                for: 'model'
-              },
-              validate: [
-                {
-                  type: 'REGEX',
-                  regex: CHARS_MAX_18,
-                  error: 'Model must be 18 characters or less'
-                }
-            ]
-            },
-            {
-              yarKey: 'description',
-              id: "description",
-              name: "description",
-              type: 'textarea',
-              maxlength: 250,
-              label: {
-                text: 'Enter a brief description of the item and the benefit to your business',
-                classes: 'govuk-label',
-                for: 'description'
-              },
-              validate: [
-                {
-                  type: 'NOT_EMPTY',
-                  error: 'Enter the description of your other robotic technology'
-                },
-                {
-                  type: 'REGEX',
-                  regex: CHARS_MIN_10,
-                  error: 'Description must be 10 characters or more'
-                },
-                {
-                  type: 'REGEX',
-                  regex: CHARS_MAX_250,
-                  error: 'Description must be 250 characters or less'
-                }
-              ]
-            }
-          ],
-          yarKey: 'otherRoboticTechnology'
         },
         {
           key: 'other-conditional',
@@ -1890,6 +1796,58 @@ const questionBank = {
           yarKey: 'otherItem'
         },
         {
+          key: 'project-items-summary',
+          order: 310,
+          title: 'Your Project items',
+          hint: {
+            text: 'You can add or remove items you will be using on your project'
+          },
+          pageTitle: 'project-items-summary',
+          url: 'project-items-summary',
+          baseUrl: 'project-items-summary',
+          backUrl: 'other-item',
+          nextUrl: 'item-conditional',
+          // preValidationKeys: ['otherItem'],
+          sidebar: {
+            values: [{
+              heading: 'Eligibility',
+              content: [{
+                para: `Automatic items must fit at least 2 criteria to be eligible for funding. \n\n 
+                      Robotic items must fit all 4 criteria to be eligible for funding.`
+              }]
+            }]
+          },
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: '',
+          minAnswerCount: 1,
+          answers: []
+        },
+        {
+          key: 'remove-item',
+          order: 320,
+          title: 'Are you sure you want to remove {{_technologyItems}}?',
+          pageTitle: '',
+          backUrl: 'project-items-summary',
+          nextUrl: 'project-items-summary',
+          classes: 'govuk-radios--inline govuk-fieldset__legend--l',
+          url: 'remove-item',
+          baseUrl: 'remove-item',
+          type: 'single-answer',
+          minAnswerCount: 1,
+          answers: [
+            {
+              key: 'remove-item-A1',
+              value: 'Yes'
+            },
+            {
+              key: 'remove-item-A2',
+              value: 'No'
+            }
+          ],
+          yarKey: 'removeItem'
+        },
+        {
           key: 'item-conditional',
           title: 'Your technology might get a grant from this scheme',
           order: 309,
@@ -1916,14 +1874,13 @@ const questionBank = {
           url: 'project-cost',
           baseUrl: 'project-cost',
           backUrlObject: {
-            dependentQuestionYarKey: ['technologyItems', 'projectItems'],
-            dependentAnswerKeysArray: ['technology-items-A8', 'project-items-A3'],
+            dependentQuestionYarKey: 'projectItems',
+            dependentAnswerKeysArray: ['project-items-A3'],
             urlOptions: {
-              thenUrl: ['other-robotic-technology', 'technology-items'],
+              thenUrl: 'technology-conditional',
               elseUrl: 'project-items'
             }
           },
-          backUrl:'other-conditional',
           nextUrl: 'potential-amount',
           // preValidationKeys: [],
           classes: 'govuk-input--width-10',
@@ -1998,13 +1955,9 @@ const questionBank = {
               error: 'Enter a whole number with a maximum of 7 digits'
             }
           ],
-          warningConditional: {
-            dependentWarningQuestionKey: 'other-robotic-technology',
-            dependentWarningAnswerKeysArray: ['other-robotic-technology-A1'],
-            ConditionalWarningMsg: {
-              text: 'RPA will assess your technology and whether they can fund it. There’s no guarantee your technology will be funded.',
-              iconFallbackText: 'Warning'
-            }
+          warning: {
+            text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
+            iconFallbackText: 'Warning'
           },
           answers: [],
           yarKey: 'projectCost'
