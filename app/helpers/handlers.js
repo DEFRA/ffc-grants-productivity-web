@@ -198,8 +198,9 @@ const getPage = async (question, request, h) => {
       question = {
         ...question,
         title: 'Which eligibility criteria does your other automatic technology meet?'
-      };
+      }
     }
+
   }
 
   const data = getYarValue(request, yarKey) || null
@@ -457,6 +458,21 @@ const showPostPage = (currentQuestion, request, h) => {
         const isRoboticAutomaticA2 = getQuestionAnswer('robotic-automatic', 'robotic-automatic-A2')
         
         if (automaticEligibilityAnswer.length === 1) {
+          if(getYarValue(request, 'projectItemsList')?.length <= 1) {
+            NOT_ELIGIBLE.primaryBtn = {
+              text: 'Add another item',
+              url: `${urlPrefix}/technology-items`
+            }
+          } else {
+            NOT_ELIGIBLE.primaryBtn = {
+              text: 'Continue with eligible items',
+              url: `${urlPrefix}/project-items-summary`
+            }
+            NOT_ELIGIBLE.secondaryBtn = {
+              text: 'Add another item',
+              url: `${urlPrefix}/technology-items`
+            }
+          }
           return h.view('not-eligible', NOT_ELIGIBLE)
         } else if (technologyItemsAnswer === isTechnologyItemsA9 && roboticAutomaticAnswer === isRoboticAutomaticA2) {
           return h.redirect(`${urlPrefix}/other-automatic-technology`)

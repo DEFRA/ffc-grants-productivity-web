@@ -1538,7 +1538,8 @@ const questionBank = {
           preValidationKeys: ['technologyItems'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: 'Automatic items must meet at least 2 criteria to be eligible for grant funding.',
+            title: 'You cannot apply for a grant funding for this item',
+            messageContent: 'Automatic technology must fit at a least 2 criteria to be eligible for grant funding.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'

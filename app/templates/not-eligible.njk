@@ -22,7 +22,11 @@
 
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">You cannot apply for a grant from this scheme</h1>
+      {% if title %}
+        <h1 class="govuk-heading-l">{{ title }}</h1>
+      {% else %}
+        <h1 class="govuk-heading-l">You cannot apply for a grant from this scheme</h1>
+      {% endif %}
       <p class="govuk-body">
         {{ messageContent | safe}}
       </p>
@@ -46,6 +50,19 @@
 
       {% if warning %} 
         {{ govukWarningText(warning) }}
+      {% endif %}
+
+      {% if primaryBtn %}
+        <div class="govuk-button-group">
+          <a href="{{primaryBtn.url}}" class="govuk-button govuk-button--primary" data-module="govuk-button">
+            {{primaryBtn.text}}
+          </a>
+        {% if secondaryBtn %}
+          <a href="{{secondaryBtn.url}}" class="govuk-button govuk-button--secondary" data-module="govuk-button">
+            {{secondaryBtn.text}}
+          </a>
+        {% endif %}
+        </div>
       {% endif %}
 
       {% if messageLink %}
