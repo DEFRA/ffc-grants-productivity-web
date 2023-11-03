@@ -1908,7 +1908,7 @@ const questionBank = {
             }
           },
           yarKey: 'itemConditional'
-        },  
+        },
         {
           key: 'project-cost',
           order: 310,
@@ -1946,7 +1946,7 @@ const questionBank = {
             html: `
               You can only apply for a grant of up to 40% of the estimated costs.
               <br/>The minimum grant you can apply for this project is £25,000 (40% of £62,500).
-              <br/>The maximum grant is £500,000.
+              <br/>The maximum grant is £500,000 (40% of £1.25 million).
               <br/><br/>Do not include VAT.
               <br/><br/>Enter amount, for example 95,000`
           },
@@ -2002,7 +2002,7 @@ const questionBank = {
             dependentWarningQuestionKey: 'other-robotic-technology',
             dependentWarningAnswerKeysArray: ['other-robotic-technology-A1'],
             ConditionalWarningMsg: {
-              text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
+              text: 'RPA will assess your technology and whether they can fund it. There’s no guarantee your technology will be funded.',
               iconFallbackText: 'Warning'
             }
           },
@@ -2401,7 +2401,7 @@ const questionBank = {
           url: 'technology-use',
           baseUrl: 'technology-use',
           backUrl: 'agricultural-sector',
-          nextUrl: 'labour-saved',
+          nextUrl: 'labour-replaced',
           // preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -2442,6 +2442,59 @@ const questionBank = {
             }
           ],
           yarKey: 'technologyUse'
+        },
+        {
+          key: 'labour-replaced',
+          order: 381,
+          title: 'How much manual labour will this technology replace?',
+          pageTitle: '',
+          url: 'labour-replaced',
+          baseUrl: 'labour-replaced',
+          backUrl: 'technology-use',
+          nextUrl: 'score-summary',
+          eliminationAnswerKeys: '',
+          ineligibleContent: {},
+          fundingPriorities: '',
+          type: 'single-answer',
+          classes: 'govuk-radios govuk-fieldset__legend--l',
+          minAnswerCount: 1,
+          sidebar: {
+            values: [{
+              heading: 'Manual labour shortage',
+              content: [{
+                para: 'Using robotic or automatic technologies can reduce the need to find manual labour.',
+                items: []
+              }]
+            }]
+          },
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select how much manual labour the technology will replace'
+            }
+          ],
+          answers: [
+            {
+              key: 'labour-replaced-A1',
+              value: '1 to 2 jobs'
+            },
+            {
+              key: 'labour-replaced-A2',
+              value: '3 to 4 jobs',
+            },
+            {
+              key: 'labour-replaced-A3',
+              value: '5 or more jobs',
+            },
+            {
+              value: 'divider'
+            },
+            {
+              key: 'labour-replaced-A4',
+              value: 'None of the above',
+            }
+          ],
+          yarKey: 'labourReplaced'
         },
         /// ////// ***************** ROBOTICS END  ************************************/////////////////////
         {
