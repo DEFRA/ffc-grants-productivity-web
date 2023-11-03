@@ -28,6 +28,21 @@ describe('Page: /robotic-automatic', () => {
     expect(response.payload).toContain('Automatic')
   })
 
+  it('page loads successfully, with all the options > other page', async () => {
+
+    varList.technologyItems = 'Other robotics or automatic technology'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/robotic-automatic`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Is the other technology robotic or automatic?')
+    expect(response.payload).toContain('Robotic')
+    expect(response.payload).toContain('Automatic')
+  })
+
   it('no option selected -> show error message', async () => {
     const postOptions = {
       method: 'POST',

@@ -5,7 +5,8 @@ describe('Page: /solar-technologies', () => {
     solarTechnologies: 'randomData',
     existingSolar: 'Yes',
     projectSubject: 'Solar project items',
-    tenancy: 'Yes'
+    tenancy: 'Yes',
+    technologyItems: 'Other robotic or automatic technology'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
