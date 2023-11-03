@@ -1666,7 +1666,7 @@ const questionBank = {
         {
           key: 'technology-description',
           order: 305,
-          title: 'What is your other robotic technology?',
+          title: 'What is your technology?',
           pageTitle: '',
           nextUrl: 'other-item',
           url: 'technology-description',
@@ -1697,7 +1697,7 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: 'To be eligible for grant funding, your robotic technology must:',
-                items: ['have a sensing system and can understand their environment', 'make decisions and plan', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop'],
+                items: ['have a sensing system and can understand their environment', 'make decisions and plans', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop'],
                 additionalPara: 'Automatic technology must fit at least 2 of these eligibility criteria. '
               }]
             }]
@@ -1734,100 +1734,6 @@ const questionBank = {
             }
           ],
           yarKey: 'technologyDescription'
-        },
-        {
-          key: 'other-robotic-technology',
-          order: 305,
-          title: 'What is your other robotic technology?',
-          pageTitle: '',
-          backUrl: 'robotic-automatic',
-          nextUrl: 'other-conditional',
-          url: 'other-robotic-technology',
-          baseUrl: 'other-robotic-technology',
-          // preValidationKeys: ['projectItems'],
-          fundingPriorities: '',
-          minAnswerCount: 1,
-          hint: {
-            text: `Technology powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative`
-          },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'To be eligible for grant funding, your robotic technology must:',
-                items: ['have a sensing system and can understand their environment', 'make decisions and plan', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop']
-              }]
-            }]
-          },
-          type: 'multi-input',
-          allFields: [
-            {
-              yarKey: 'brand',
-              type: 'input',
-              classes: 'govuk-input--width-10',
-              id: "brand",
-              name: "brand",
-              label: {
-                text: 'Brand',
-                classes: 'govuk-label'
-              },
-              validate: [
-                  {
-                    type: 'REGEX',
-                    regex: CHARS_MAX_18,
-                    error: 'Brand must be 18 characters or less'
-                  }
-              ]
-            },
-            {
-              yarKey: 'model',
-              type: 'input',
-              classes: 'govuk-input--width-10',
-              id: "model",
-              name: "model",
-              label: {
-                text: 'Model',
-                classes: 'govuk-label',
-                for: 'model'
-              },
-              validate: [
-                {
-                  type: 'REGEX',
-                  regex: CHARS_MAX_18,
-                  error: 'Model must be 18 characters or less'
-                }
-            ]
-            },
-            {
-              yarKey: 'description',
-              id: "description",
-              name: "description",
-              type: 'textarea',
-              maxlength: 250,
-              label: {
-                text: 'Enter a brief description of the item and the benefit to your business',
-                classes: 'govuk-label',
-                for: 'description'
-              },
-              validate: [
-                {
-                  type: 'NOT_EMPTY',
-                  error: 'Enter the description of your other robotic technology'
-                },
-                {
-                  type: 'REGEX',
-                  regex: CHARS_MIN_10,
-                  error: 'Description must be 10 characters or more'
-                },
-                {
-                  type: 'REGEX',
-                  regex: CHARS_MAX_250,
-                  error: 'Description must be 250 characters or less'
-                }
-              ]
-            }
-          ],
-          yarKey: 'otherRoboticTechnology'
         },
         {
           key: 'other-conditional',

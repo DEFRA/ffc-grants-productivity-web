@@ -10,8 +10,7 @@ const getUrl = (urlObject, url, request, secBtn) => {
   if(secBtn ==='Add another item'){
     secBtnPath = `${urlPrefix}/technology-items`
   }
-  console.log('secBtn', secBtn)
-
+  
   if (!urlObject || secBtn) {
     return secBtn ? secBtnPath : url
   }
