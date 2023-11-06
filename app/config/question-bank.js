@@ -1543,7 +1543,7 @@ const questionBank = {
           eliminationAnswerKeys: '',
           ineligibleContent: {
             title: 'You cannot apply for a grant funding for this item',
-            messageContent: 'Automatic technology must fit at a least 2 criteria to be eligible for grant funding.',
+            messageContent: 'Automatic technology must fit at least 2 criteria to be eligible for grant funding.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
               title: 'See other grants you may be eligible for.'
@@ -1968,7 +1968,7 @@ const questionBank = {
             }
           ],
           warning: {
-            text: 'RPA will assess your other robotic technology and whether they can fund it. There’s no guarantee your item will be funded',
+            text: 'RPA will assess your technology and whether they can fund it. There’s no guarantee your technology will be funded.',
             iconFallbackText: 'Warning'
           },
           answers: [],
