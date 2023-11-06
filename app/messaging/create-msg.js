@@ -49,18 +49,9 @@ function getDesirabilityAnswers (request) {
         eligibilityCriteria.push(['Not applicable'])
       } else {
         projectItemsList.forEach((projectItem) => {
-          console.log(projectItem, 'dohhhhhhhhhh')
-          console.log(projectItemsList ,'dohhhhhhhhhh 33333')
-
           eligibilityCriteria.push(projectItem.criteriaScoring)
         })
-
-      //   for (item in projectItemsList) {
-      //     eligibilityCriteria.push(projectItemsList[item].criteriaScore)
-      //   }
       }
-
-      console.log(eligibilityCriteria, 'eligibilityCriteria')
 
       let labourReplaced = ''
       if (getYarValue(request, 'labourReplaced') === null) {
