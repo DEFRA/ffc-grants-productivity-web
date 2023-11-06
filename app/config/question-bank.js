@@ -13,8 +13,10 @@ const {
   NAME_ONLY_REGEX,
   PHONE_REGEX,
   EMAIL_REGEX,
-  ADDRESS_REGEX
+  ADDRESS_REGEX,
 } = require('../helpers/regex')
+
+const urlPrefix = require('../config/server').urlPrefix
 
 const { LIST_COUNTIES } = require('../helpers/all-counties')
 
@@ -3545,8 +3547,8 @@ const questionBank = {
             },
             messageContentBeforeConditional: `We have sent you a confirmation email with a record of your answers.<br/><br/>
             If you do not get an email within 72 hours, contact the RPA helpline and follow the options for Farming Transformation Fund scheme.<br/><br/>`,
-            messageContentPartRobotics: `<p> You can check if you can apply for a grant for <a class="govuk-link" href="https://grants-prototype2.herokuapp.com/robotics/current/farming-type" rel="noopener noreferrer">solar project items</a>. The minimum grant is £15,000 (25% of £60,000). The maximum grant amount for both projects together is £500,000.</p>`,
-            messageContentPartSolar: `<p>You can check if you can apply for a grant for <a class="govuk-link" href="https://grants-prototype2.herokuapp.com/robotics/current/farming-type" rel="noopener noreferrer">farm productivity project items</a>. The minimum grant is £25,000 (40% of £62,500). The maximum grant amount for both projects together is £500,000. </p>`,
+            messageContentPartRobotics: `<p> You can check if you can apply for a grant for <a class="govuk-link" href="${urlPrefix}/project-subject" rel="noopener noreferrer">solar project items</a>. The minimum grant is £15,000 (25% of £60,000). The maximum grant amount for both projects together is £500,000.</p>`,
+            messageContentPartSolar: `<p>You can check if you can apply for a grant for <a class="govuk-link" href="${urlPrefix}/project-subject" rel="noopener noreferrer">farm productivity project items</a>. The minimum grant is £25,000 (40% of £62,500). The maximum grant amount for both projects together is £500,000. </p>`,
             messageContentPostConditional: `<h2 class="govuk-heading-m">RPA helpline</h2>
             <h3 class="govuk-heading-s">Telephone</h3>
             Telephone: 03000 200 301<br/>
