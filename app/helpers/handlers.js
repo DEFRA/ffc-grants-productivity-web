@@ -372,13 +372,7 @@ const showPostPage = (currentQuestion, request, h) => {
     if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' && baseUrl === 'robotic-automatic'){
       currentQuestion = {
         ...currentQuestion,
-        title: 'Is the other technology robotic or automatic?',
-        validate: [
-          {
-            type: 'NOT_EMPTY',
-            error: 'Select if your other technology is robotic or automatic'
-          }
-        ],
+        title: 'Is the other technology robotic or automatic?'
       }
     }else {
       currentQuestion = {
