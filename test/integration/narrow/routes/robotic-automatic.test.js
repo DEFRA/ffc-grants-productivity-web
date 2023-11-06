@@ -28,17 +28,32 @@ describe('Page: /robotic-automatic', () => {
     expect(response.payload).toContain('Automatic')
   })
 
+  it('page loads successfully, with all the options > other page', async () => {
+
+    varList.technologyItems = 'Other robotics or automatic technology'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/robotic-automatic`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Is the other technology robotic or automatic?')
+    expect(response.payload).toContain('Robotic')
+    expect(response.payload).toContain('Automatic')
+  })
+
   it('no option selected -> show error message', async () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/robotic-automatic`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { roboticAutomatic: '', crumb: crumbToken }
+      payload: { crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select if your harvesting technology is robotic or automatic')
+    expect(postResponse.payload).toContain('Select if your other technology is robotic or automatic')
   })
   it('user selects \'Robotic\' and Other robotic or automatic technology from tech items -> store user response and redirect to /other-robotic-technology', async () => {
     varList.technologyItems = 'Other robotics or automatic technology'
