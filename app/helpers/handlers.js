@@ -338,6 +338,14 @@ const showPostPage = (currentQuestion, request, h) => {
       payloadValue = key === 'projectPostcode' ? payloadValue.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : payloadValue
       setYarValue(request, key, payloadValue)
     }
+
+    if (yarKey === 'projectItems' && !value.includes(getQuestionAnswer('project-items', 'project-items-A3'))) {
+      setYarValue(request, 'projectItemsList', [])
+      setYarValue(request, 'labourReplaced', null)  
+    } else if (yarKey === 'solarTechnologies' && !value.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2'))) {
+      setYarValue(request, 'solarOutput', null)
+      setYarValue(request, 'solarInstallation', null)
+    }
   }
   if (type === 'multi-input') {
     allFields.forEach(field => {
@@ -448,14 +456,13 @@ const showPostPage = (currentQuestion, request, h) => {
 
   
   if (yarKey === 'projectCost') {
-    console.log('here?')
     const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
     setYarValue(request, 'projectCost', projectCost)
     console.log(calculatedGrant, remainingCost, projectCost, 'calculatedGrant, remainingCost, projectCost')
   }
-console.log(baseUrl, 'baseUrl')
+
   switch (baseUrl) {
     case 'solar-technologies':
       if([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){
