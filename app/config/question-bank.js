@@ -1535,6 +1535,8 @@ const questionBank = {
           url: 'automatic-eligibility',
           baseUrl: 'automatic-eligibility',
           backUrl: 'robotic-automatic',
+          id: 'automaticEligibility',
+          name: 'automaticEligibility',
           preValidationKeys: ['technologyItems'],
           eliminationAnswerKeys: '',
           ineligibleContent: {

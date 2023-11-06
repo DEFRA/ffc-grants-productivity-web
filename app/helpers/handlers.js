@@ -367,7 +367,13 @@ const showPostPage = (currentQuestion, request, h) => {
       ))
     }
   }
-  
+
+  const errors = checkErrors(payload, currentQuestion, h, request)
+  if (errors) {
+    gapiService.sendValidationDimension(request)
+    return errors
+  }
+
   if (replace) {
     if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' && baseUrl === 'robotic-automatic'){
       currentQuestion = {
@@ -390,12 +396,6 @@ const showPostPage = (currentQuestion, request, h) => {
         ],
       };
     }
-  }
-
-  const errors = checkErrors(payload, currentQuestion, h, request)
-  if (errors) {
-    gapiService.sendValidationDimension(request)
-    return errors
   }
 
   if (thisAnswer?.notEligible ||
