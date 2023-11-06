@@ -2405,7 +2405,7 @@ const questionBank = {
           url: 'labour-replaced',
           baseUrl: 'labour-replaced',
           backUrl: 'technology-use',
-          nextUrl: 'score-summary',
+          nextUrl: 'score',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',

@@ -57,7 +57,7 @@ function getDesirabilityAnswers (request) {
 
       let labourReplaced = ''
       if (getYarValue(request, 'labourReplaced') === null) {
-        labourReplaced = 'labour-replaced-A5'
+        labourReplaced = 'Not applicable'
       }
 
       val = {
@@ -76,7 +76,7 @@ function getDesirabilityAnswers (request) {
 
       let solarOutput = ''
       if (getYarValue(request, 'solarOutput') === null) {
-        solarOutput = 'solar-output-A6'
+        solarOutput = 'Solar panels not chosen'
       }
 
       val = {
