@@ -2063,14 +2063,7 @@ const questionBank = {
           ga: [
             { dimension: 'cm2', value: { type: 'journey-time' } }
           ],
-          dependantNextUrl: {
-            dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['project-items-A3'],
-            urlOptions: {
-              thenUrl: 'data-analytics',
-              elseUrl: 'energy-source'
-            }
-          },
+          nextUrl: 'data-analytics',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'Your project must improve the productivity and profitability of your main agricultural or horticultural business.',

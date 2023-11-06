@@ -446,9 +446,8 @@ const showPostPage = (currentQuestion, request, h) => {
     return h.redirect(thisAnswer?.redirectUrl)
   }
 
-  console.log('here instead?')
   
-  if (yarKey === 'projectCost' ) {
+  if (yarKey === 'projectCost') {
     console.log('here?')
     const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
     setYarValue(request, 'calculatedGrant', calculatedGrant)

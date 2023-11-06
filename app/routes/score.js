@@ -27,10 +27,6 @@ function createModel (data, request) {
   }
 }
 
-function getDisplayValue (yarKey) {
-  return getYarValue(request, yarKey) ? true : false
-}
-
 // async function getResult (correlationId) {
 //   const url = `${pollingConfig.host}/desirability-score?correlationId=${correlationId}`
 //   console.log('polling Url: ', url)
@@ -90,9 +86,8 @@ module.exports = [{
       setYarValue(request, 'overAllScore', msgData)
       console.log('msgData', msgData)
       if (msgData) {
-        const scheme = getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A1') ? 'robotics' : 'solar'
         let questions = msgData.desirability.questions.map(desirabilityQuestion => {
-          const bankQuestion = ALL_QUESTIONS.filter(bankQuestionD => bankQuestionD.score && getDisplayValue(bankQuestionD.yarKey) === true && bankQuestionD.key === desirabilityQuestion.key)[0]
+          const bankQuestion = ALL_QUESTIONS.filter(bankQuestionD => bankQuestionD.score && !!getYarValue(request, bankQuestionD.yarKey) === true && bankQuestionD.key === desirabilityQuestion.key)[0]
           if (bankQuestion) {
             desirabilityQuestion.title = bankQuestion.title
             desirabilityQuestion.desc = bankQuestion.desc ?? ''
