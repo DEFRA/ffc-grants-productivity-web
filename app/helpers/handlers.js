@@ -448,8 +448,6 @@ const showPostPage = (currentQuestion, request, h) => {
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }
-
-  console.log('here instead?')
   
   if (yarKey === 'projectCost' ) {
     console.log('here?')
@@ -459,7 +457,7 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'projectCost', projectCost)
     console.log(calculatedGrant, remainingCost, projectCost, 'calculatedGrant, remainingCost, projectCost')
   }
-console.log(baseUrl, 'baseUrl')
+
   switch (baseUrl) {
     case 'solar-technologies':
       if([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){

@@ -1564,6 +1564,14 @@ const questionBank = {
               type: 'NOT_EMPTY',
               error: 'Select what eligibility criteria your automatic technology meets'
             },
+            {
+              type: 'STANDALONE_ANSWER',
+              error: 'You cannot select that combination of options',
+              standaloneObject: {
+                questionKey: 'automatic-eligibility',
+                answerKey: 'automatic-eligibility-A5'
+              }
+            }
           ],
           answers: [
             {
