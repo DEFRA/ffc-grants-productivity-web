@@ -2,6 +2,18 @@ const { crumbToken } = require('./test-helper')
 
 describe('Robotics technology-use page', () => {
 
+  const varList = {
+    projectItems: 'randomData'
+  }
+
+  jest.mock('../../../../app/helpers/session', () => ({
+    setYarValue: (request, key, value) => null,
+    getYarValue: (request, key) => {
+      if (varList[key]) return varList[key]
+      else return null
+    }
+  }))
+
   test('loads page successfully', async () => {
     const options = {
       method: 'GET',
