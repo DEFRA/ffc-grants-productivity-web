@@ -2355,7 +2355,14 @@ const questionBank = {
           url: 'technology-use',
           baseUrl: 'technology-use',
           backUrl: 'agricultural-sector',
-          nextUrl: 'labour-replaced',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectItems',
+            dependentAnswerKeysArray: ['project-items-A3'],
+            urlOptions: {
+              thenUrl: 'labour-replaced',
+              elseUrl: 'score'
+            }
+          },
           // preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
