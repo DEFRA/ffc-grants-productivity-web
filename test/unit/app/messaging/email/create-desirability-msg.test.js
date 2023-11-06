@@ -58,15 +58,15 @@ const mockQuestionContent = {
         'project-impacts-A2': 'projectImpacts answer 2'
       }
     }],
-    technologyUse: [
-      {
-        key: 'technology-use',
-        title: 'technologyUse title',
-        answers: {
-          'technology-use-A1': 'technologyUse answer 1',
-          'technology-use-A2': 'technologyUse answer 2'
-        }
-      }]
+  technologyUse: [
+    {
+      key: 'technology-use',
+      title: 'technologyUse title',
+      answers: {
+        'technology-use-A1': 'technologyUse answer 1',
+        'technology-use-A2': 'technologyUse answer 2'
+      }
+    }]
 }
 
 const mockUserInput = {
@@ -131,7 +131,7 @@ describe('Create desirability message tests', () => {
   describe('Create desirability message > robotics', () => {
     let createMsg
     let msg
-    const desirabilityQuestions = ['project-subject', 'robotics-data-analytics', 'robotics-energy-source', 'robotics-agricultural-sector', 'robotics-technology']
+    const desirabilityQuestions = ['project-subject', 'data-analytics', 'robotics-energy-source', 'robotics-agricultural-sector', 'robotics-technology']
 
 
     beforeEach(() => {
@@ -140,7 +140,7 @@ describe('Create desirability message tests', () => {
         desirabilityInputQuestionMapping: {
           projectSubject: 'project-subject',
           projectImpacts: 'project-impacts',
-          dataAnalytics: 'robotics-data-analytics',
+          dataAnalytics: 'data-analytics',
           energySource: 'robotics-energy-source',
           agriculturalSectorRobotics: 'robotics-agricultural-sector',
           roboticProjectImpacts: 'robotics-project-impact'
@@ -164,12 +164,12 @@ describe('Create desirability message tests', () => {
     test('contains the correct answers > robotics', () => {
       const questions = msg.desirability.questions
       const projectSubject = questions.find(q => q.key === 'project-subject')
-      const dataAnalytics = questions.find(q => q.key === 'robotics-data-analytics')
+      const dataAnalytics = questions.find(q => q.key === 'data-analytics')
       const energySource = questions.find(q => q.key === 'robotics-energy-source')
       const agriculturalSector = questions.find(q => q.key === 'robotics-agricultural-sector')
       const roboticProjectImpacts = questions.find(q => q.key === 'robotics-technology')
 
-      const dataAnalyticsAnswers = dataAnalytics.answers.find(a => a.key === 'robotics-data-analytics')
+      const dataAnalyticsAnswers = dataAnalytics.answers.find(a => a.key === 'data-analytics')
       const energySourceAnswers = energySource.answers.find(a => a.key === 'robotics-energy-source')
       const agriculturalSectorAnswers = agriculturalSector.answers.find(a => a.key === 'robotics-agricultural-sector')
 

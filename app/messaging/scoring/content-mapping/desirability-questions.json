@@ -49,13 +49,13 @@
     }
   ],
   "dataAnalytics": [{
-    "key": "robotics-data-analytics",
+    "key": "data-analytics",
     "title": "Data analytics",
     "answers":
     {
-      "robotics-data-analytics-A1": "Yes, we have the technology already",
-      "robotics-data-analytics-A2": "Yes, we’ll buy the technology as part of the project",
-      "robotics-data-analytics-A3": "No, we will not use any data analytics"
+      "data-analytics-A1": "Yes, we have the technology already",
+      "data-analytics-A2": "Yes, we’ll buy the technology as part of the project",
+      "data-analytics-A3": "No, we will not use any data analytics"
     }}
   ],
   "eligibilityCriteria": [

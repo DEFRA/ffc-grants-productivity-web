@@ -48,9 +48,16 @@ function getDesirabilityAnswers (request) {
       if (projectItemsList === null) {
         eligibilityCriteria.push(['Not applicable'])
       } else {
-        for (item in projectItemsList) {
-          eligibilityCriteria.push(projectItemsList[item].criteriaScore)
-        }
+        projectItemsList.forEach((projectItem) => {
+          console.log(projectItem, 'dohhhhhhhhhh')
+          console.log(projectItemsList ,'dohhhhhhhhhh 33333')
+
+          eligibilityCriteria.push(projectItem.criteriaScoring)
+        })
+
+      //   for (item in projectItemsList) {
+      //     eligibilityCriteria.push(projectItemsList[item].criteriaScore)
+      //   }
       }
 
       console.log(eligibilityCriteria, 'eligibilityCriteria')

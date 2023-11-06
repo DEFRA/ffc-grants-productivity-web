@@ -45,14 +45,14 @@ const msgData = {
         }
       },
       {
-        key: 'robotics-data-analytics',
+        key: 'data-analytics',
         answers: [
           {
-            key: 'robotics-data-analytics',
+            key: 'data-analytics',
             title: 'Robotics Data Analytics',
             input: [
               {
-                key: 'robotics-data-analytics-A1',
+                key: 'data-analytics-A1',
                 value: 'Yes, we have the technology already'
               }
             ]
@@ -64,14 +64,14 @@ const msgData = {
         }
       },
       {
-        key: 'robotics-data-analytics',
+        key: 'data-analytics',
         answers: [
           {
-            key: 'robotics-data-analytics',
+            key: 'data-analytics',
             title: 'Robotics Data Analytics',
             input: [
               {
-                key: 'robotics-data-analyticsa-A1',
+                key: 'data-analyticsa-A1',
                 value: 'Yes, we have the technology already'
               }
             ]
@@ -129,7 +129,7 @@ const msgData = {
   questionMapping: {
     projectSubject: 'project-subject',
     projectImpacts: 'project-impacts',
-    dataAnalytics: 'robotics-data-analytics',
+    dataAnalytics: 'data-analytics',
     energySource: 'robotics-energy-source',
     agriculturalSectorRobotics: 'agricultural-sector',
     roboticProjectImpacts: 'robotics-project-impact'
