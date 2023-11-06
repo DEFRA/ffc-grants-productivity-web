@@ -17,10 +17,8 @@ const currentPath = `${urlPrefix}/${viewTemplate}`
 const nextPath = `${urlPrefix}/business-details`
 
 function createModel (data, request) {
-  // Add in when labour-saved page exists
-  // const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A1') ? 'labour-saved' : 'agriculturual-sector-solar'}` 
-
-  const previousPath = 'agriculturual-sector-solar'
+  const previousPathRobotics = getYarValue(request, 'projectItems')?.includes(getQuestionAnswer('project-items', 'project-items-A3')) ? 'labour-replaced' : 'technology-use'
+  const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A1') ? previousPathRobotics : 'agricultural-sector-solar'}`
 
   return {
     backLink: previousPath,
@@ -88,9 +86,8 @@ module.exports = [{
       setYarValue(request, 'overAllScore', msgData)
       console.log('msgData', msgData)
       if (msgData) {
-        const scheme = getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A1') ? 'robotics' : 'solar'
         let questions = msgData.desirability.questions.map(desirabilityQuestion => {
-          const bankQuestion = ALL_QUESTIONS.filter(bankQuestionD => bankQuestionD.score && bankQuestionD.score.isDisplay === true && bankQuestionD.key === desirabilityQuestion.key)[0]
+          const bankQuestion = ALL_QUESTIONS.filter(bankQuestionD => bankQuestionD.score && !!getYarValue(request, bankQuestionD.yarKey) === true && bankQuestionD.key === desirabilityQuestion.key)[0]
           if (bankQuestion) {
             desirabilityQuestion.title = bankQuestion.title
             desirabilityQuestion.desc = bankQuestion.desc ?? ''

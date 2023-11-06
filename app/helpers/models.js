@@ -71,7 +71,7 @@ const getBackUrl = (hasScore, backUrlObject, backUrl, request) => {
 }
 
 const getModel = (data, question, request, conditionalHtml = '') => {
-  const { type, backUrl, key, backUrlObject, sidebar, score, label, warning, warningConditional, hint } = question
+  const { type, backUrl, key, backUrlObject, sidebar, score, label, warning, warningConditional, hint, nextUrl, dependantNextUrl } = question
   const hasScore = !!getYarValue(request, 'current-score')
   const title = question.title ?? label?.text
 
@@ -95,6 +95,7 @@ const getModel = (data, question, request, conditionalHtml = '') => {
     key,
     title,
     backUrl: getBackUrl(hasScore, backUrlObject, backUrl, request),
+    nextUrl: getUrl(dependantNextUrl, nextUrl, request),
     items: getOptions(data, question, conditionalHtml, request),
     sideBarText,
     ...(warningDetails ? ({ warning: warningDetails }) : {}),

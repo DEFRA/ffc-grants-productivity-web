@@ -2074,14 +2074,7 @@ const questionBank = {
           ga: [
             { dimension: 'cm2', value: { type: 'journey-time' } }
           ],
-          dependantNextUrl: {
-            dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['project-items-A3'],
-            urlOptions: {
-              thenUrl: 'data-analytics',
-              elseUrl: 'energy-source'
-            }
-          },
+          nextUrl: 'data-analytics',
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: 'Your project must improve the productivity and profitability of your main agricultural or horticultural business.',
@@ -2366,7 +2359,14 @@ const questionBank = {
           url: 'technology-use',
           baseUrl: 'technology-use',
           backUrl: 'agricultural-sector',
-          nextUrl: 'labour-replaced',
+          dependantNextUrl: {
+            dependentQuestionYarKey: 'projectItems',
+            dependentAnswerKeysArray: ['project-items-A3'],
+            urlOptions: {
+              thenUrl: 'labour-replaced',
+              elseUrl: 'score'
+            }
+          },
           // preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
@@ -2416,11 +2416,16 @@ const questionBank = {
           url: 'labour-replaced',
           baseUrl: 'labour-replaced',
           backUrl: 'technology-use',
-          nextUrl: 'score-summary',
+          nextUrl: 'score',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'single-answer',
+          scheme: 'robotics',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           classes: 'govuk-radios govuk-fieldset__legend--l',
           minAnswerCount: 1,
           sidebar: {

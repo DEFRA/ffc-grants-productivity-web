@@ -2,7 +2,8 @@ const grantSchemeConfig = require('./config/grant-scheme')
 const { desirabilityQuestions: questionContent } = require('./content-mapping')
 const { getQuestionAnswer } = require('../../helpers/utils')
 const desirabilityQuestions = ['solarTechnologies', 'solarOutput', 'agriculturalSectorSolar']
-const desirabilityRoboticsQuestions = ['projectSubject', 'dataAnalytics', 'energySource', 'agriculturalSectorRobotics', 'roboticProjectImpacts']
+const desirabilityRoboticsQuestions = ['energySource', 'agriculturalSectorRobotics', 'technologyUse', 'labourReplaced', 'dataAnalytics', 'eligibilityCriteria']
+
 const PROJECT_SUBJECT_SOLAR = getQuestionAnswer('project-subject', 'project-subject-A2')
 
 function getUserAnswer (answers, userInput) {
@@ -10,24 +11,55 @@ function getUserAnswer (answers, userInput) {
     return [userInput].flat().map(answer =>
       ({ key: Object.keys(answers).find(key => answers[key] === answer), value: answer }))
   } else {
-    // if solar panels not selected, set solar output to 'Solar panels not chosen' for scoring
-    return [{ key: 'solar-output-A6', value: 'Solar panels not chosen' }]
+    return [{ key: null, value: null }]
   }
 }
 
 function getDesirabilityDetails (questionKey, userInput) {
   const content = questionContent[questionKey]
-  return {
-    key: content[0].key,
-    answers: content.map(({ key, title, answers }) => ({
-      key,
-      title,
-      input: getUserAnswer(answers, userInput[questionKey])
-    })),
-    rating: {
-      score: null,
-      band: null,
-      importance: null
+  // needs to loop for eligibility-criteria for each array in answers array
+  console.log('content', questionContent[questionKey], questionKey, userInput[questionKey])
+
+  if (questionKey === 'eligibilityCriteria') {
+    let loopLists = []
+    for (item in userInput[questionKey]) {
+
+      loopLists.push({
+       answers: content.map(({ key, title, answers }) => ({
+          key,
+          title,
+          input: getUserAnswer(answers, userInput[questionKey][item])
+        })),
+        rating: {
+          score: null,
+          band: null,
+          importance: null
+        }
+      })
+    }
+    return {
+      key: content[0].key,
+      answers: loopLists,
+      rating: {
+        score: null,
+        band: null,
+        importance: null
+      }
+    }
+
+  } else {
+    return {
+      key: content[0].key,
+      answers: content.map(({ key, title, answers }) => ({
+        key,
+        title,
+        input: getUserAnswer(answers, userInput[questionKey])
+      })),
+      rating: {
+        score: null,
+        band: null,
+        importance: null
+      }
     }
   }
 }
