@@ -1502,8 +1502,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `Robotic items must meet all 4 criteria to be eligible.\n\n
-                      Automatic items must meet at least 2 criteria to be eligible.`
+                para: `Robotic items must fit all 4 criteria to be eligible.\n\n
+                      Automatic items must fit at least 2 criteria to be eligible.`
               }]
             }]
           },
@@ -1622,12 +1622,12 @@ const questionBank = {
             `
           },
           ineligibleContent: {
-            heading: 'You cannot apply for grant funding for this item',
+            title: 'You cannot apply for grant funding for this item',
             messageContent: `RPA will only fund robotic technology that:
                             <ul class="govuk-list govuk-list--bullet">
-                              <li>have a sensing system and can understand its environment</li>
+                              <li>have a sensing system and can understand their environment</li>
                               <li>make decisions and plan</li>
-                              <li>be able to control its actuators (the devices that move robot joints)</li>
+                              <li>can control its actuators (the devices that move robot joints)</li>
                               <li>work in a continuous loop</li>
                             </ul>`,
             messageLink: {
@@ -1658,7 +1658,6 @@ const questionBank = {
             {
               key: 'robotic-eligibility-A2',
               value: 'No',
-              notEligible: true
             }
           ],
           yarKey: 'roboticEligibility'
@@ -3588,7 +3587,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost'] // project-items-list
+const YAR_KEYS = ['projectPostcode', 'remainingCost', 'projectItemsList'] // project-items-list
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,

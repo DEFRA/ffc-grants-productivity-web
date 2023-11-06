@@ -122,7 +122,7 @@ const getPage = async (question, request, h) => {
       
       if(getYarValue(request, 'projectSubject') === 'Solar project items') {
         maybeEligibleContent.additionalParagraph = maybeEligibleContent.messageContentPartSolar
-      }else{
+      } else {
         maybeEligibleContent.additionalParagraph = maybeEligibleContent.messageContentPartRobotics
       }
       maybeEligibleContent.messageContent = maybeEligibleContent.messageContentBeforeConditional + maybeEligibleContent.additionalParagraph + maybeEligibleContent.messageContentPostConditional
@@ -488,6 +488,33 @@ console.log(baseUrl, 'baseUrl')
           }
           return h.view('not-eligible', NOT_ELIGIBLE)
         }else {
+          return h.redirect(`${urlPrefix}/technology-description`)
+        }
+      }
+      case 'robotic-eligibility': {
+        const roboticEligibilityAnswer = getYarValue(request, 'roboticEligibility')
+
+        if(roboticEligibilityAnswer === 'No') {
+          const projectItemsList = getYarValue(request, 'projectItemsList') ?? []
+
+          if(projectItemsList.length === 0) {
+            NOT_ELIGIBLE.primaryBtn = {
+              text: 'Add another item',
+              url: `${urlPrefix}/technology-items`
+            }
+          } else {
+            NOT_ELIGIBLE.primaryBtn = {
+              text: 'Continue with eligible items',
+              url: `${urlPrefix}/project-items-summary`
+            }
+            NOT_ELIGIBLE.secondaryBtn = {
+              text: 'Add another item',
+              url: `${urlPrefix}/technology-items`
+            }
+          }
+          return h.view('not-eligible', NOT_ELIGIBLE)
+        } 
+        else {
           return h.redirect(`${urlPrefix}/technology-description`)
         }
       }
