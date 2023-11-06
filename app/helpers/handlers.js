@@ -125,7 +125,7 @@ const getPage = async (question, request, h) => {
       
       if(getYarValue(request, 'projectSubject') === 'Solar project items') {
         maybeEligibleContent.additionalParagraph = maybeEligibleContent.messageContentPartSolar
-      }else{
+      } else {
         maybeEligibleContent.additionalParagraph = maybeEligibleContent.messageContentPartRobotics
       }
       maybeEligibleContent.messageContent = maybeEligibleContent.messageContentBeforeConditional + maybeEligibleContent.additionalParagraph + maybeEligibleContent.messageContentPostConditional
