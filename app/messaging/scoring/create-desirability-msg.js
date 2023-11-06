@@ -2,7 +2,7 @@ const grantSchemeConfig = require('./config/grant-scheme')
 const { desirabilityQuestions: questionContent } = require('./content-mapping')
 const { getQuestionAnswer } = require('../../helpers/utils')
 const desirabilityQuestions = ['solarTechnologies', 'solarOutput', 'agriculturalSectorSolar']
-const desirabilityRoboticsQuestions = ['energySource', 'agriculturalSector', 'technologyUse', 'labourReplaced', 'dataAnalytics', 'eligibilityCriteria']
+const desirabilityRoboticsQuestions = ['energySource', 'agriculturalSectorRobotics', 'technologyUse', 'labourReplaced', 'dataAnalytics', 'eligibilityCriteria']
 
 const PROJECT_SUBJECT_SOLAR = getQuestionAnswer('project-subject', 'project-subject-A2')
 

@@ -18,9 +18,10 @@ const nextPath = `${urlPrefix}/business-details`
 
 function createModel (data, request) {
   // Add in when labour-saved page exists
-  // const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A1') ? 'labour-saved' : 'agriculturual-sector-solar'}` 
+  const previousPathRobotics = getYarValue(request, 'projectItems')?.includes(getQuestionAnswer('project-items', 'project-items-A3')) ? 'labour-replaced' : 'technology-use'
+  const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A1') ? previousPathRobotics : 'agricultural-sector-solar'}`
 
-  const previousPath = 'agriculturual-sector-solar'
+  // const previousPath = 'agriculturual-sector-solar'
 
   return {
     backLink: previousPath,
