@@ -1502,8 +1502,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `Robotic items must meet all 4 criteria to be eligible.\n\n
-                      Automatic items must meet at least 2 criteria to be eligible.`
+                para: `Robotic items must fit all 4 criteria to be eligible.\n\n
+                      Automatic items must fit at least 2 criteria to be eligible.`
               }]
             }]
           },
