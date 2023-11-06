@@ -10,34 +10,44 @@ describe('create-msg', () => {
 
     dict = {
       projectSubject: 'Farm productivity project items',
-      projectImpacts: 'value',
       energySource: ['value'],
       agriculturalSector: ['value'],
       dataAnalytics: 'testing',
-      technology: 'testing'
+      technologyUse: 'testing',
+      labourReplaced: 'testing',
+      projectItemsList: [
+        {
+          criteriaScoring: ['value', 'value']
+        },
+        {
+          criteriaScoring: ['value']
+        }
+      ]
     }
     expect(getDesirabilityAnswers({})).toEqual({
-      projectSubject: 'Farm productivity project items',
-      projectImpacts: 'value',
       energySource: ['value'],
       agriculturalSectorRobotics: ['value'],
       dataAnalytics: 'testing',
-      roboticProjectImpacts: 'testing'
+      technologyUse: 'testing',
+      labourReplaced: 'testing',
+      eligibilityCriteria: [['value', 'value'], ['value']]
     })
 
     dict = {
       ...dict,
       energySource: 'value',
-      agriculturalSector: 'value'
+      agriculturalSector: 'value',
+      labourReplaced: null,
+      projectItemsList: null
     }
 
     expect(getDesirabilityAnswers({})).toEqual({
-      projectSubject: 'Farm productivity project items',
-      projectImpacts: 'value',
       energySource: ['value'],
       agriculturalSectorRobotics: ['value'],
       dataAnalytics: 'testing',
-      roboticProjectImpacts: 'testing'
+      technologyUse: 'testing',
+      labourReplaced: 'Not applicable',
+      eligibilityCriteria: [['Not applicable']]
     })
 
   })
@@ -64,13 +74,14 @@ describe('create-msg', () => {
       ...dict,
       solarTechnologies: 'value',
       agriculturalSector: 'value',
+      solarOutput: null
 
     }
     expect(getDesirabilityAnswers({})).toEqual({
       projectSubject: 'Solar project items',
       agriculturalSectorSolar: ['value'],
       solarTechnologies: ['value'],
-      solarOutput: 'testing'
+      solarOutput: 'Solar panels not chosen'
     })
 
     dict = {

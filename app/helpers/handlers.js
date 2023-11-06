@@ -4,19 +4,16 @@ const { checkErrors } = require('../helpers/errorSummaryHandlers')
 const { getGrantValues } = require('../helpers/grants-info')
 const { formatUKCurrency } = require('../helpers/data-formats')
 const { SELECT_VARIABLE_TO_REPLACE, DELETE_POSTCODE_CHARS_REGEX } = require('../helpers/regex')
-const { getHtml } = require('../helpers/conditionalHTML')
 const { getUrl } = require('../helpers/urls')
 const { guardPage } = require('../helpers/page-guard')
 const { setOptionsLabel } = require('../helpers/answer-options')
-const { notUniqueSelection, uniqueSelection, getQuestionAnswer, getQuestionByKey } = require('../helpers/utils')
+const { getQuestionAnswer } = require('../helpers/utils')
 const senders = require('../messaging/senders')
 const createMsg = require('../messaging/create-msg')
 const gapiService = require('../services/gapi-service')
 const { startPageUrl, urlPrefix } = require('../config/server')
-const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const emailFormatting = require('./../messaging/email/process-submission')
-const { validate } = require('uuid')
 
 const resetYarValues = (applying, request) => {
   setYarValue(request, 'agentsDetails', null)
@@ -341,6 +338,14 @@ const showPostPage = (currentQuestion, request, h) => {
       payloadValue = key === 'projectPostcode' ? payloadValue.replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase() : payloadValue
       setYarValue(request, key, payloadValue)
     }
+
+    if (yarKey === 'projectItems' && !value.includes(getQuestionAnswer('project-items', 'project-items-A3'))) {
+      setYarValue(request, 'projectItemsList', [])
+      setYarValue(request, 'labourReplaced', null)  
+    } else if (yarKey === 'solarTechnologies' && !value.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2'))) {
+      setYarValue(request, 'solarOutput', null)
+      setYarValue(request, 'solarInstallation', null)
+    }
   }
   if (type === 'multi-input') {
     allFields.forEach(field => {
@@ -449,17 +454,15 @@ const showPostPage = (currentQuestion, request, h) => {
     return h.redirect(thisAnswer?.redirectUrl)
   }
 
-  console.log('here instead?')
   
-  if (yarKey === 'projectCost' ) {
-    console.log('here?')
+  if (yarKey === 'projectCost') {
     const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
     setYarValue(request, 'projectCost', projectCost)
     console.log(calculatedGrant, remainingCost, projectCost, 'calculatedGrant, remainingCost, projectCost')
   }
-console.log(baseUrl, 'baseUrl')
+
   switch (baseUrl) {
     case 'solar-technologies':
       if([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){
@@ -524,6 +527,7 @@ console.log(baseUrl, 'baseUrl')
       }
     case 'technology-description': {
         let roboticArr = ['sensing system', 'makes decisions', 'control actuators', 'continuous loop']
+        let roboticArrScore = ['Has sensing system that can understand its environment ', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
         let automaticFinalArr = []
         if(getYarValue(request, 'automaticEligibility')){
           automaticFinalArr = getYarValue(request, 'automaticEligibility').map((item) =>   item.includes('sensing system') ? 'sensing system' : item.includes('Makes decisions') ? 'makes decisions' : item.includes('actuators') ? 'control actuators' : item.includes('continuous loop') ? 'continuous loop' : '')
@@ -534,12 +538,19 @@ console.log(baseUrl, 'baseUrl')
           item: getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ? 'Other technology' : getYarValue(request, 'technologyItems'),
           type: getYarValue(request, 'roboticAutomatic'),
           criteria: getYarValue(request, 'automaticEligibility') ? automaticFinalArr : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArr : null,
+          criteriaScoring: getYarValue(request, 'automaticEligibility') ? getYarValue(request, 'automaticEligibility') : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArrScore : null,
           description: getYarValue(request, 'technologyDescription').description
         }
         
         tempArray.push(tempObject)
+        // reset all yars after item added
+        setYarValue(request, 'technologyItems', null)
+        setYarValue(request, 'roboticAutomatic', null)
         setYarValue(request, 'roboticEligibility', null)
         setYarValue(request, 'automaticEligibility', null)
+        setYarValue(request, 'technologyDescription', null)
+
+        // add item to projectItemsList
         setYarValue(request, 'projectItemsList', tempArray)
         break
       }
