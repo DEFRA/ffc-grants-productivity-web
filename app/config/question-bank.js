@@ -2417,6 +2417,11 @@ const questionBank = {
           ineligibleContent: {},
           fundingPriorities: '',
           type: 'single-answer',
+          scheme: 'robotics',
+          score: {
+            isScore: true,
+            isDisplay: true
+          },
           classes: 'govuk-radios govuk-fieldset__legend--l',
           minAnswerCount: 1,
           sidebar: {
