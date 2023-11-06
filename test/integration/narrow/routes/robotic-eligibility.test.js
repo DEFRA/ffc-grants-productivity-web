@@ -4,7 +4,8 @@ describe('Page: /robotic-eligibility', () => {
 const varList = {
 roboticEligibility: 'Yes',
 technologyItems: 'Harvesting technology',
-roboticAutomatic: 'Robotic'
+roboticAutomatic: 'Robotic',
+projectItemsList: []
 }
 
 jest.mock('../../../../app/helpers/session', () => ({
@@ -41,7 +42,21 @@ expect(postResponse.statusCode).toBe(200)
 expect(postResponse.payload).toContain('Select yes if your robotic technology fits the eligibility criteria')
 })
 
+it('should redirect to /technology-description page when user response is \'Yes\'', async () => {
+  varList.roboticEligibility = 'Yes'
+  const postOptions = {
+    method: 'POST',
+    url: `${global.__URLPREFIX__}/robotic-eligibility`,
+    headers: { cookie: 'crumb=' + crumbToken },
+    payload: { roboticEligibility: 'Yes', crumb: crumbToken }
+  }
+
+  const postResponse = await global.__SERVER__.inject(postOptions)
+  expect(postResponse.headers.location).toBe('/productivity/technology-description')
+}) 
+
 it('should display ineligible page when user response is \'No\'', async () => {
+varList.roboticEligibility = 'No'
 const postOptions = {
     method: 'POST',
     url: `${global.__URLPREFIX__}/robotic-eligibility`,
@@ -50,9 +65,10 @@ const postOptions = {
 }
 
 const postResponse = await global.__SERVER__.inject(postOptions)
-expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
+expect(postResponse.payload).toContain('You cannot apply for grant funding for this item')
 expect(postResponse.payload).toContain('RPA will only fund robotic technology that:')
 })
+
 it('user selects \'Other robotics or automatic technology\' -> title should be \'Does your robotic technology fit the eligibility criteria?\'', async () => {
 varList.technologyItems = 'Other robotics or automatic technology'
 const options = {
@@ -64,18 +80,23 @@ const response = await global.__SERVER__.inject(options)
 expect(response.statusCode).toBe(200)
 expect(response.payload).toContain('Does your robotic technology fit the eligibility criteria?')
 })
-it('user selects eligible option, store user response and redirect to /technology-description', async () => {
-const postOptions = {
+
+it('should display ineligible page with "Add another item" and "Continue with eligible items" buttons, if user selects No for the second project item', async () => {
+  varList.projectItemsList = ['Harvesting technology', 'Other robotics or automatic technology']
+  varList.roboticEligibility = 'No'
+  const postOptions = {
     method: 'POST',
     url: `${global.__URLPREFIX__}/robotic-eligibility`,
     headers: { cookie: 'crumb=' + crumbToken },
-    payload: { roboticEligibility: 'Yes', crumb: crumbToken }
-}
+    payload: { roboticEligibility: 'No', crumb: crumbToken }
+  }
 
-const postResponse = await global.__SERVER__.inject(postOptions)
-expect(postResponse.statusCode).toBe(302)
-expect(postResponse.headers.location).toContain('technology-description')
-})
+  const postResponse = await global.__SERVER__.inject(postOptions)
+  expect(postResponse.payload).toContain('You cannot apply for grant funding for this item')
+  expect(postResponse.payload).toContain('RPA will only fund robotic technology that:')
+  expect(postResponse.payload).toContain('Add another item')
+  expect(postResponse.payload).toContain('Continue with eligible items')
+}) 
 
 it('page loads with correct back link', async () => {
 const options = {
