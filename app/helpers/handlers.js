@@ -481,9 +481,35 @@ const showPostPage = (currentQuestion, request, h) => {
           return h.redirect(`${urlPrefix}/other-item`)
         }
       }
+      case 'robotic-eligibility': {
+        const roboticEligibilityAnswer = getYarValue(request, 'roboticEligibility')
+
+        if(roboticEligibilityAnswer === 'No') {
+          const projectItemsList = getYarValue(request, 'projectItemsList') ?? []
+
+          if(projectItemsList.length === 0) {
+            NOT_ELIGIBLE.primaryBtn = {
+              text: 'Add another item',
+              url: `${urlPrefix}/technology-items`
+            }
+          } else {
+            NOT_ELIGIBLE.primaryBtn = {
+              text: 'Continue with eligible items',
+              url: `${urlPrefix}/project-items-summary`
+            }
+            NOT_ELIGIBLE.secondaryBtn = {
+              text: 'Add another item',
+              url: `${urlPrefix}/technology-items`
+            }
+          }
+          return h.view('not-eligible', NOT_ELIGIBLE)
+        } 
+        else {
+          return h.redirect(`${urlPrefix}/technology-description`)
+        }
+      }
 
       // Zac said to leave it here for now
-
       // case 'technology-description': {
       //   let tempArray = getYarValue(request, 'projectItemsList') ?? []
       //   let tempObject = {
@@ -491,11 +517,12 @@ const showPostPage = (currentQuestion, request, h) => {
       //     type: getYarValue(request, 'roboticAutomatic'),
       //     criteria: getYarValue(request, 'automaticEligibility') || 
       //     getYarValue(request, 'roboticEligibility'),
-      //     description: getYarValue(request, 'itemDescription')
+      //     description: getYarValue(request, 'technologyDescription')
       //   }
        
       //   tempArray.push(tempObject)
       //   setYarValue(request, 'projectItemsList', tempArray)
+      //   return h.redirect(`${urlPrefix}/other-item`)
       // }
       case 'other-item': {
         let tempArray = getYarValue(request, 'projectItemsList') ?? []
@@ -504,7 +531,7 @@ const showPostPage = (currentQuestion, request, h) => {
           type: getYarValue(request, 'roboticAutomatic'),
           criteria: getYarValue(request, 'automaticEligibility') || 
           getYarValue(request, 'roboticEligibility'),
-          description: getYarValue(request, 'itemDescription')
+          description: getYarValue(request, 'technologyDescription')
         }
        
         tempArray.push(tempObject)

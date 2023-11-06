@@ -107,7 +107,7 @@ describe('Page: /automatic-eligibility', () => {
   })
 
   it('user selects two eligible options and \'Harvesting technology\' -> store user response and redirect to /other-item', async () => {
-    varList.automaticEligibilityItem = ['Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
+    varList.automaticEligibility = ['Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
     varList.technologyItems = 'Harvesting technology'
     const postOptions = {
       method: 'POST',
