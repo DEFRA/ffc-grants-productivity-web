@@ -372,18 +372,18 @@ const showPostPage = (currentQuestion, request, h) => {
       ))
     }
   }
-  
+
+  const errors = checkErrors(payload, currentQuestion, h, request)
+  if (errors) {
+    gapiService.sendValidationDimension(request)
+    return errors
+  }
+
   if (replace) {
     if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' && baseUrl === 'robotic-automatic'){
       currentQuestion = {
         ...currentQuestion,
-        title: 'Is the other technology robotic or automatic?',
-        validate: [
-          {
-            type: 'NOT_EMPTY',
-            error: 'Select if your other technology is robotic or automatic'
-          }
-        ],
+        title: 'Is the other technology robotic or automatic?'
       }
     }else {
       currentQuestion = {
@@ -401,12 +401,6 @@ const showPostPage = (currentQuestion, request, h) => {
         ],
       };
     }
-  }
-
-  const errors = checkErrors(payload, currentQuestion, h, request)
-  if (errors) {
-    gapiService.sendValidationDimension(request)
-    return errors
   }
 
   if (thisAnswer?.notEligible ||
@@ -453,7 +447,6 @@ const showPostPage = (currentQuestion, request, h) => {
   } else if (thisAnswer?.redirectUrl) {
     return h.redirect(thisAnswer?.redirectUrl)
   }
-
   
   if (yarKey === 'projectCost') {
     const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
