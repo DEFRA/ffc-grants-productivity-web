@@ -6,6 +6,46 @@
   "desirability": {
     "questions": [
       {
+        "key": "technologyUse",
+        "answers": [
+          {
+            "key": "technologyUse",
+            "title": "Are you already using this technology?",
+            "input": [
+              {
+                "key": "technology-use-A1",
+                "value": "Yes, we’re using it now"
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": 1,
+          "band": "Weak",
+          "importance": null
+        }
+      },
+      {
+        "key": "labourReplaced",
+        "answers": [
+          {
+            "key": "labourReplaced",
+            "title": "How much manual labour will this technology replace?",
+            "input": [
+              {
+                "key": "labour-replaced-A1",
+                "value": "1 to 2 jobs"
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": 1,
+          "band": "Weak",
+          "importance": null
+        }
+      },
+      {
         "key": "project-subject",
         "answers": [
           {

@@ -5,7 +5,11 @@ const { getQuestionAnswer } = require('../../helpers/utils')
 const PROJECT_SUBJECT_SOLAR = getQuestionAnswer('project-subject', 'project-subject-A2')
 
 function getQuestionScoreBand (questions, questionKey) {
-  return questions.find(question => question.key === questionKey).rating.band
+  const result = questions.find(question => question.key === questionKey)
+  if (!result) {
+    throw new Error(`Question ${questionKey} not found`)
+  }
+  return result.rating.band
 }
 
 function generateRow (rowNumber, name, value, bold = false) {
@@ -218,17 +222,17 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       agriculturalSectorScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'agriculturalSector') : ' ',
 
       isTechnology: submission.technology ? 'Yes' : 'No',
-      technology: submission.technology ?? ' ',
-      technologyScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-project-impact') : ' ',
+      technologyUse: submission.technologyUse ?? ' ',
+      technologyUseScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'technologyUse') : ' ',
 
       labourReplaced: submission?.labourReplaced || null,
-      labourReplacedScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'labour-replaced') : ' ',
+      labourReplacedScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'labourReplaced') : ' ',
 
       solarTechnologies: submission.solarTechnologies ? [submission.solarTechnologies].flat().join('|') : ' ',
-      solarTechnologiesScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'solar-technologies') : ' ',
+      solarTechnologiesScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'solarTechnologies') : ' ',
 
       solarOutput: submission.solarOutput ?? ' ',
-      solarOutputScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'solar-output') : ' ',
+      solarOutputScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'solarOutput') : ' ',
 
       projectName: submission.businessDetails.projectName,
       businessName: submission.businessDetails.businessName,

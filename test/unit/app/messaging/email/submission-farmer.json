@@ -1,4 +1,7 @@
 {
+  "energySource": "Mains electricity",
+  "agriculturalSector": "Horticulture",
+  "technologyUse": "No, we haven’t used it yet",
   "confirmationId": "WM-CE7-201",
   "abstractionLicence": "Expected to have by 31st December 2021",
   "agentDetails": null,
