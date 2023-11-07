@@ -14,7 +14,7 @@ describe('Start page', () => {
     expect(response.payload).toContain('You can apply if:')
     expect(response.payload).toContain('you are a farmer or agricultural contractor')
     expect(response.payload).toContain('your business is registered in England or you will do the grant-funded work in England')
-    expect(response.payload).toContain('Agricultural contractors can only use the grant for buying robotic and automatic technology.')
+    expect(response.payload).toContain('Agricultural contractors can only use the grant for buying farm productivity project items.')
     expect(response.payload).toContain('You can apply for up to:')
     expect(response.payload).toContain('40% of estimated costs of farm productivity project items')
     expect(response.payload).toContain('25% of estimated costs for solar project items')
@@ -22,7 +22,7 @@ describe('Start page', () => {
       'For farm productivity project items, the maximum grant you can claim is £500,000. The minimum grant is £25,000 (40% of £62,500).'
     )
     expect(response.payload).toContain(
-      'For solar project items, the maximum grant you can claim is £100,000. The minimum grant is £15,000 (25% of £60,000). You can apply for grant funding to add technology (for example a battery) to a solar PV system you already have or to buy a new solar PV system.'
+      'For solar project items, the maximum grant you can claim is £100,000. The minimum grant is £15,000 (25% of £60,000). You can apply for grant funding to add solar project items (for example a battery) to a solar PV system you already have or to buy a new solar PV system.'
     )
     expect(response.payload).toContain(
       'If you want to apply for both farm productivity and solar project grant funding, you must submit 2 separate applications. The maximum grant amount for both projects together is £500,000.'
