@@ -5,11 +5,7 @@ const { getQuestionAnswer } = require('../../helpers/utils')
 const PROJECT_SUBJECT_SOLAR = getQuestionAnswer('project-subject', 'project-subject-A2')
 
 function getQuestionScoreBand (questions, questionKey) {
-  const result = questions.find(question => question.key === questionKey)
-  if (!result) {
-    throw new Error(`Question ${questionKey} not found`)
-  }
-  return result.rating.band
+  return questions.find(question => question.key === questionKey).rating.band
 }
 
 function generateRow (rowNumber, name, value, bold = false) {
