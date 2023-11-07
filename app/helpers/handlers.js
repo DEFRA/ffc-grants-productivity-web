@@ -289,16 +289,6 @@ const getPage = async (question, request, h) => {
     case 'project-items-summary': {
       let projectItemsModel = getModel(data, question, request, conditionalHtml)
       const projectItemsList = getYarValue(request, 'projectItemsList')
-      // if (projectItemsList.length > 1 ) {
-      //   if(getYarValue(request, 'roboticEligibility') === 'No'){
-      //     backUrl = `${urlPrefix}/robotic-eligibility`
-      //       // return h.view('not-eligible', NOT_ELIGIBLE)  
-      //   }
-      //   if([getYarValue(request, 'automaticEligibility')].flat().length < 2){
-      //     backUrl = `${urlPrefix}/automatic-eligibility`
-      //       // return h.view('not-eligible', NOT_ELIGIBLE)  
-      //   }
-      // }
       projectItemsModel = {
         ...projectItemsModel,
         projectItemsList
@@ -453,7 +443,6 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
     setYarValue(request, 'projectCost', projectCost)
-    console.log(calculatedGrant, remainingCost, projectCost, 'calculatedGrant, remainingCost, projectCost')
   }
 
   switch (baseUrl) {
