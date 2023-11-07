@@ -20,14 +20,12 @@ function guardPage (request, guardData) {
 
     for(let i=0; i < guardData.preValidationKeys.length; i++) {
       preValidationList.push({
-       key: guardData.preValidationKeys[i], 
+       key: guardData.preValidationKeys[i],
        values: (guardData.preValidationAnswer.filter((answer) => answer.startsWith(guardData.preValidationUrls[i]))),
        url: guardData.preValidationUrls[i]
       }
       );
     }
-
-    console.log('should be a formatted list combining all answewrs and relevant values in one object', preValidationList)
 
     // should format preValidations as below
     // [{

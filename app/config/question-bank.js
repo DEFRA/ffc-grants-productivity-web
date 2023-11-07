@@ -1570,7 +1570,7 @@ const questionBank = {
           answers: [
             {
               key: 'automatic-eligibility-A1',
-              value: 'Has sensing system that can understand its environment '
+              value: 'Has sensing system that can understand its environment'
             },
             {
               key: 'automatic-eligibility-A2',
@@ -1828,7 +1828,8 @@ const questionBank = {
         {
           key: 'remove-item',
           order: 320,
-          title: 'Are you sure you want to remove {{_item_}}?',
+          title: 'Are you sure you want to remove {{_confirmItem_}}?',
+          replace: true,
           pageTitle: '',
           backUrl: 'project-items-summary',
           nextUrl: 'project-items-summary',
