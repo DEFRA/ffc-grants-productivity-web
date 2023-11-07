@@ -72,16 +72,8 @@ const getPage = async (question, request, h) => {
 
   if (url === 'remove-item') {
     const queryParams = new URLSearchParams(request.raw.req.url.split('?')[1])
-    const item = queryParams.get('item')
-    const index = queryParams.get('index')
-
-    console.log('oioioioi', queryParams, 'PPPPPP', item, index)
-    console.log(request)
-    request.res.redirect(url.parse(request.url).pathname)
-    //history.replaceState({}, null, "/index.html")
-    // getYarValue(request, 'projectItemsList')?.splice(index, 1)
-console.log(getYarValue(request, 'projectItemsList'))
-    setYarValue(request, 'confirmItem', item)
+    setYarValue(request, 'confirmItem', queryParams.get('item'))
+    setYarValue(request, 'index', queryParams.get('index'))
   }
 
   if (url === 'item-conditional') {
@@ -378,7 +370,6 @@ const showPostPage = (currentQuestion, request, h) => {
       ))
     }
   }
-
   if (replace) {
     if (getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' && baseUrl === 'robotic-automatic') {
       currentQuestion = {
@@ -392,6 +383,10 @@ const showPostPage = (currentQuestion, request, h) => {
         ]
       }
     } else {
+      if (getYarValue(request, 'removeItem') === 'Yes' && baseUrl === 'remove-item') {
+        getYarValue(request, 'projectItemsList')?.splice(getYarValue(request, 'index'), 1)
+      }
+      console.log('inside ELSE ----')
       currentQuestion = {
         ...currentQuestion,
         title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
@@ -408,7 +403,7 @@ const showPostPage = (currentQuestion, request, h) => {
       }
     }
   }
-
+console.log('AFTER REPLACE ------')
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
     gapiService.sendValidationDimension(request)

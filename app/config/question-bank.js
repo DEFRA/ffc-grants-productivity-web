@@ -1838,6 +1838,12 @@ const questionBank = {
           baseUrl: 'remove-item',
           type: 'single-answer',
           minAnswerCount: 1,
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you need to add another robotic or automatic item'
+            }
+          ],
           answers: [
             {
               key: 'remove-item-A1',
