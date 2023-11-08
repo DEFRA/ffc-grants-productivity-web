@@ -202,9 +202,6 @@ const getPage = async (question, request, h) => {
   //     request
   //   )
   // }
-  if (question.ga) {
-    await gapiService.processGA(request, question.ga, confirmationId)
-  }
   if (url === 'check-details') {
     setYarValue(request, 'reachedCheckDetails', true)
     const applying = getYarValue(request, 'applying')
