@@ -3,7 +3,13 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /other-item', () => {
     const varList = {
         otherItem: 'randomData',
-        projectItemsList: []
+        projectItemsList: [],
+        projectItems: ['Robotic and automatic technology'],
+        technologyItems: 'Harvesting technology',
+        roboticAutomatic: 'Automatic',
+        automaticEligibility: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop'],
+        roboticEligibility: 'Fake data',
+        technologyDescription: 'some fake description some fake description',
     }
 
     jest.mock('../../../../app/helpers/session', () => ({
