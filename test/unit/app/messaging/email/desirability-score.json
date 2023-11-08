@@ -6,7 +6,7 @@
   "desirability": {
     "questions": [
       {
-        "key": "technologyUse",
+        "key": "technology-use",
         "answers": [
           {
             "key": "technologyUse",
@@ -26,10 +26,10 @@
         }
       },
       {
-        "key": "labourReplaced",
+        "key": "labour-replaced",
         "answers": [
           {
-            "key": "labourReplaced",
+            "key": "labour-replaced",
             "title": "How much manual labour will this technology replace?",
             "input": [
               {
@@ -96,7 +96,7 @@
         }
       },
       {
-        "key": "dataAnalytics",
+        "key": "data-analytics",
         "answers": [
           {
             "key": "dataAnalyticsa",
@@ -125,7 +125,7 @@
         }
       },
       {
-        "key": "energySource",
+        "key": "energy-source",
         "answers": [
           {
             "key": "energySource",
@@ -145,7 +145,7 @@
         }
       },
       {
-        "key": "agriculturalSector",
+        "key": "agricultural-sector",
         "answers": [
           {
             "key": "agriculturalSector",
