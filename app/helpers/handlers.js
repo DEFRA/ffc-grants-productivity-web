@@ -544,10 +544,10 @@ const showPostPage = (currentQuestion, request, h) => {
       let tempObject = {
         index: tempArray.length + 1,
         item: getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ? 'Other technology' : getYarValue(request, 'technologyItems'),
-        type: getYarValue(request, 'roboticAutomatic'),
+        type: getYarValue(request, 'roboticAutomatic') ? getYarValue(request, 'roboticAutomatic') : null,
         criteria: getYarValue(request, 'automaticEligibility') ? automaticFinalArr : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArr : null,
         criteriaScoring: getYarValue(request, 'automaticEligibility') ? getYarValue(request, 'automaticEligibility') : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArrScore : null,
-        description: getYarValue(request, 'technologyDescription').description
+        description: getYarValue(request, 'technologyDescription') ?  getYarValue(request, 'technologyDescription').description  : null
       }
       Object.keys(tempObject).every(item => tempObject[item]) ? tempArray.push(tempObject) : null
 
@@ -561,12 +561,14 @@ const showPostPage = (currentQuestion, request, h) => {
         setYarValue(request, 'automaticEligibility', null)
         setYarValue(request, 'technologyDescription', null)
 
-        if(getYarValue(request, 'projectItemsList')?.length === 1) {
-          return h.redirect(`${urlPrefix}/item-conditional`)
-        } else {
-          return h.redirect(`${urlPrefix}/project-items-summary`)
-        }
+        if(getYarValue(request, 'otherItem') === 'No') {
+          if(getYarValue(request, 'projectItemsList')?.length === 1){
+            return h.redirect(`${urlPrefix}/item-conditional`)
+          }else {
+            return h.redirect(`${urlPrefix}/project-items-summary`)
+          }
       }
+    }
       // case 'remove-item': {
       //   if(getYarValue(request, 'projectItemsList').length < 1 ){
       //     return h.redirect(`${urlPrefix}/robotic-automatic`)
