@@ -1,9 +1,9 @@
-const appInsights = jest.mock('../../../../app/services/app-insights')
+const appInsights = jest.mock('../../app/services/app-insights')
 appInsights.logException = jest.fn((req, event) => {
   return null
 })
-jest.mock('../../../../app/helpers/session', () => {
-  const original = jest.requireActual('../../../../app/helpers/session')
+jest.mock('../../app/helpers/session', () => {
+  const original = jest.requireActual('../../app/helpers/session')
   const varList = {
     'journey-start-time': (new Date()).getTime(),
     'current-score': 'some mock score'
@@ -17,14 +17,14 @@ jest.mock('../../../../app/helpers/session', () => {
     }
   }
 })
-jest.mock('../../../../app/services/protective-monitoring-service', () => {
-  const original = jest.requireActual('../../../../app/services/protective-monitoring-service')
+jest.mock('../../app/services/protective-monitoring-service', () => {
+  const original = jest.requireActual('../../app/services/protective-monitoring-service')
   return {
     ...original,
     sendMonitoringEvent: jest.fn().mockResolvedValue(undefined)
   }
 })
-const gapiService = require('../../../../app/services/gapi-service')
+const gapiService = require('../../app/services/gapi-service')
 const eventSuccess = jest.fn(async (obj) => {
   return 'ok'
 })
@@ -82,11 +82,11 @@ describe('get gapiService setup', () => {
     expect(result).toBe(undefined)
   })
   test('test isBlockDefaultPageView() -> false', () => {
-    const result = gapiService.isBlockDefaultPageView('/water/country')
+    const result = gapiService.isBlockDefaultPageView('/productivity/country')
     expect(result).toBe(false)
   })
   test('test isBlockDefaultPageView()-> true', () => {
-    const result = gapiService.isBlockDefaultPageView('/water/applying')
+    const result = gapiService.isBlockDefaultPageView('/productivity/applying')
     expect(result).toBe(true)
   })
 })
