@@ -85,13 +85,12 @@ function formatProjectItems (projectItemsList, normalItems) {
     projectItems.push(getQuestionAnswer('project-items', 'project-items-A2'))
   }
 
-  for (i = 0; i < projectItemsList.length; i++) {
-    if (projectItemsList[i].type === getQuestionAnswer('robotic-automatic', 'robotic-automatic-A1')) {
-      projectItems.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ Yes`)
-    } else {
+  if (normalItems.includes(getQuestionAnswer('project-items', 'project-items-A3'))) {
+
+    for (i = 0; i < projectItemsList.length; i++) {
       projectItems.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')}`)
+    
     }
-  
   }
   
   return projectItems.join('|')
@@ -103,11 +102,7 @@ function formatDescriptions(projectItemsList) {
   const descriptionList = []
 
   for (i = 0; i < projectItemsList.length; i++) {
-    if (projectItemsList[i].type === getQuestionAnswer('robotic-automatic', 'robotic-automatic-A1')) {
-      descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ Yes ~ ${projectItemsList[i].description}`)
-    } else {
-      descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')} ~ ${projectItemsList[i].description}`)
-    }
+    descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')} ~ ${projectItemsList[i].description}`)
   
   }
   
@@ -157,26 +152,23 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(41, 'Owner', 'RD'),
           generateRow(341, 'Grant Launch Date', ''),
           generateRow(385, 'Applicant Type', submission.projectSubject === getQuestionAnswer('project-type', 'project-type-A1') ? submission.applicant : ''),
-          // business in england, submission.applicant === getQuestionAnswer('applicant', 'applicant-A2') ? submission.businessLocation : 'N/A'
-          // inEngland, submission.inEngland,
+          
           generateRow(23, 'Status of applicant', submission.legalStatus),
           generateRow(45, 'Applicant Business or Project Postcode', farmerContractorDetails.projectPostcode ?? farmerContractorDetails.postcode),
           generateRow(376, 'Project Started', submission.projectStart),
           generateRow(342, 'Land owned by Farm', submission.tenancy ?? ''),
-          // dont think tenancy length exists anymore
-          // generateRow(343, 'Tenancy for next 5 years', submission.tenancyLength ?? ''),
 
           // robotics project items
           generateRow(448, 'Project Responsibility', submisison.tenancy === getQuestionAnswer('tenancy', 'tenancy-A2') ? submission.projectResponsibility : 'N/A'),
-          generateRow(44, 'Projectitems', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatProjectItems(submission.projectItemsList, submission.projectItems) : 'N/A'), // replace Yes with all 4 criteria?
-          generateRow(458, 'Technology Description', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatDescriptions(submission.projectItemsList) : 'N/A'), // same q about robotic criteria
+          generateRow(44, 'Projectitems', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatProjectItems(submission.projectItemsList, submission.projectItems) : 'N/A'),
+          generateRow(458, 'Technology Description', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatDescriptions(submission.projectItemsList) : 'N/A'), 
           generateRow(456, 'Improve Productivity', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? submission.projectImpact : 'N/A'),
 
           generateRow(452, 'Existing Solar PV System', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A2') ? submission.existingSolar : 'N/A'),
           generateRow(453, 'Solar PV Panel Location', submission.solarTechnologies.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2')) ? submission.solarInstallation : 'N/A'),
 
           generateRow(55, 'Total project expenditure', String(submission.projectCost).replace(/,/g, '')),
-          generateRow(57, 'Grant rate', '40'), // check rate
+          generateRow(57, 'Grant rate', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? '40' : '25'),
           generateRow(56, 'Grant amount requested', submission.calculatedGrant),
           generateRow(345, 'Remaining Cost to Farmer', submission.remainingCost),
           generateRow(346, 'Planning Permission Status', getPlanningPermissionDoraValue(submission.planningPermission)),
@@ -220,7 +212,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(54, 'Electronic OA received date ', todayStr),
           generateRow(370, 'Status', 'Pending RPA review'),
           generateRow(85, 'Full Application Submission Date', (new Date(today.setMonth(today.getMonth() + 6))).toLocaleDateString('en-GB')),
-          generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)), // check calc
+          generateRow(375, 'OA percent', String( desirabilityScore.desirability.overallRating.score / (submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? 600 : 300) * 100)), // calculate percentage for robotics or solar based on project
           ...addAgentDetails(submission.agentsDetails)
         ]
       }
