@@ -114,14 +114,12 @@ module.exports = [{
             break
         }
         setYarValue(request, 'current-score', msgData.desirability.overallRating.band)
-        await gapiService.sendDimensionOrMetrics(request, [{
-          dimensionOrMetric: gapiService.dimensions.SCORE,
-          value: msgData.desirability.overallRating.band
-        },
-        {
-          dimensionOrMetric: gapiService.metrics.SCORE,
-          value: 'TIME'
-        }])
+        await gapiService.sendGAEvent(request, {
+          name: gapiService.eventTypes.SCORE,
+          params: {
+            score: msgData.desirability.overallRating.band
+          }
+        })
         return h.view(viewTemplate, createModel({
           titleText: msgData.desirability.overallRating.band,
           scoreData: msgData,
@@ -129,7 +127,12 @@ module.exports = [{
           scoreChance: scoreChance
         }, request))
       } else {
-        await gapiService.sendEvent(request, gapiService.categories.EXCEPTION, 'Error')
+        await gapiService.sendGAEvent(request, {
+          name: gapiService.eventTypes.EXCEPTION,
+          params: {
+            exceptionDescription: 'Score not received'
+          }
+        })
         throw new Error('Score not received.')
       }
     } catch (error) {

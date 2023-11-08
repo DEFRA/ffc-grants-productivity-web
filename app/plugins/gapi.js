@@ -11,29 +11,27 @@ exports.plugin = {
      */
   register: async (server, options) => {
     const analytics = new Analytics(options)
-
     server.decorate('request', 'ga', request => analytics.ga(request), { apply: true })
 
     server.ext('onPreResponse', async (request, h) => {
       try {
         const response = request.response
         const statusFamily = Math.floor(response.statusCode / 100)
-
-        if (statusFamily === 2 && response.variety === 'view' && !gapiService.isBlockDefaultPageView(request.url)) {
-          await gapiService.sendDimensionOrMetric(request, { dimensionOrMetric: gapiService.dimensions.PRIMARY, value: true })
+        if (statusFamily === 2 && response.variety === 'view' && !gapiService.isBlockDefaultPageView(request.url.pathname)) {
+          await gapiService.sendGAEvent(request, {
+            name: gapiService.eventTypes.PAGEVIEW,
+            params: {
+              page_path: request.route.path
+            }
+          })
         }
         if (statusFamily === 5) {
           await request.ga.event({ category: 'Exception', action: request.route.path, label: response.statusCode })
         }
-      } catch {
-        // ignore any error
+      } catch (error) {
+        console.log(`[THIS IS GA ERROR: ${error}]`)
       }
       return h.continue
-    })
-
-    server.ext('onPostStop', async () => {
-      await analytics.shutdown()
-      server.log(['hapi-gapi'], 'All buffered events sent to the Google Analytics Measurement Protocol API.')
     })
   }
 }
