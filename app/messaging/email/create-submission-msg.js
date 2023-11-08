@@ -73,6 +73,59 @@ function generateExcelFilename (scheme, projectName, businessName, referenceNumb
   return `${scheme}_${projectName}_${businessName}_${referenceNumber}_${dateTime}.xlsx`
 }
 
+function formatProjectItems (projectItemsList, normalItems) {
+// format list of project items for excel
+  const projectItems = []
+
+  if (normalItems.includes(getQuestionAnswer('project-items', 'project-items-A1'))) {
+    projectItems.push(getQuestionAnswer('project-items', 'project-items-A1'))
+  }
+
+  if (normalItems.includes(getQuestionAnswer('project-items', 'project-items-A2'))) {
+    projectItems.push(getQuestionAnswer('project-items', 'project-items-A2'))
+  }
+
+  for (i = 0; i < projectItemsList.length; i++) {
+    if (projectItemsList[i].type === getQuestionAnswer('robotic-automatic', 'robotic-automatic-A1')) {
+      projectItems.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ Yes`)
+    } else {
+      projectItems.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')}`)
+    }
+  
+  }
+  
+  return projectItems.join('|')
+
+}
+
+function formatDescriptions(projectItemsList) {
+
+  const descriptionList = []
+
+  for (i = 0; i < projectItemsList.length; i++) {
+    if (projectItemsList[i].type === getQuestionAnswer('robotic-automatic', 'robotic-automatic-A1')) {
+      descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ Yes ~ ${projectItemsList[i].description}`)
+    } else {
+      descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')} ~ ${projectItemsList[i].description}`)
+    }
+  
+  }
+  
+  return descriptionList.join('|')
+
+}
+
+const getPlanningPermissionDoraValue = (planningPermission) => {
+  switch (planningPermission) {
+    case 'Applied for but not yet approved':
+      return 'Applied for'
+    case 'Not yet applied for but expected to be secured before I submit my full application':
+      return 'Not yet applied for'
+    default:
+      return 'Approved'
+  }
+}
+
 function getSpreadsheetDetails (submission, desirabilityScore) {
   const today = new Date()
   const todayStr = today.toLocaleDateString('en-GB')
@@ -98,29 +151,45 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(1, 'Field Name', 'Field Value', true),
           generateRow(2, 'FA or OA', 'Outline Application'),
           generateRow(40, 'Scheme', 'Farming Transformation Fund'),
-          generateRow(39, 'Sub scheme', 'FTF-Productivity'),
-          generateRow(43, 'Theme', submission.projectSubject),
+          generateRow(39, 'Sub scheme', 'FTF-Productivity Round 2'),
+          generateRow(43, 'Theme', 'Robotics, automation and solar'),
           generateRow(90, 'Project type', submission.projectSubject),
           generateRow(41, 'Owner', 'RD'),
           generateRow(341, 'Grant Launch Date', ''),
+          generateRow(385, 'Applicant Type', submission.projectSubject === getQuestionAnswer('project-type', 'project-type-A1') ? submission.applicant : ''),
+          // business in england, submission.applicant === getQuestionAnswer('applicant', 'applicant-A2') ? submission.businessLocation : 'N/A'
+          // inEngland, submission.inEngland,
           generateRow(23, 'Status of applicant', submission.legalStatus),
-          generateRow(45, 'Location of project (postcode)', farmerContractorDetails.projectPostcode ?? farmerContractorDetails.postcode),
+          generateRow(45, 'Applicant Business or Project Postcode', farmerContractorDetails.projectPostcode ?? farmerContractorDetails.postcode),
           generateRow(376, 'Project Started', submission.projectStart),
           generateRow(342, 'Land owned by Farm', submission.tenancy ?? ''),
-          generateRow(343, 'Tenancy for next 5 years', submission.tenancyLength ?? ''),
+          // dont think tenancy length exists anymore
+          // generateRow(343, 'Tenancy for next 5 years', submission.tenancyLength ?? ''),
+
+          // robotics project items
+          generateRow(448, 'Project Responsibility', submisison.tenancy === getQuestionAnswer('tenancy', 'tenancy-A2') ? submission.projectResponsibility : 'N/A'),
+          generateRow(44, 'Projectitems', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatProjectItems(submission.projectItemsList, submission.projectItems) : 'N/A'), // replace Yes with all 4 criteria?
+          generateRow(458, 'Technology Description', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatDescriptions(submission.projectItemsList) : 'N/A'), // same q about robotic criteria
+          generateRow(456, 'Improve Productivity', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? submission.projectImpact : 'N/A'),
+
+          generateRow(452, 'Existing Solar PV System', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A2') ? submission.existingSolar : 'N/A'),
+          generateRow(453, 'Solar PV Panel Location', submission.solarTechnologies.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2')) ? submission.solarInstallation : 'N/A'),
+
           generateRow(55, 'Total project expenditure', String(submission.projectCost).replace(/,/g, '')),
-          generateRow(57, 'Grant rate', '40'),
+          generateRow(57, 'Grant rate', '40'), // check rate
           generateRow(56, 'Grant amount requested', submission.calculatedGrant),
           generateRow(345, 'Remaining Cost to Farmer', submission.remainingCost),
-          generateRow(346, 'Planning Permission Status', submission.planningPermission),
-          generateRow(382, 'First Adoption', submission.projectImpacts ?? ''),
-          generateRow(383, 'Current Slurry Acidify Volume', submission.slurryCurrentlyTreated ?? ''),
-          generateRow(384, 'Future Slurry Acidify Volume', submission.slurryToBeTreated ?? ''),
-          generateRow(378, 'Data Analytics', submission.dataAnalytics ?? ''),
-          generateRow(379, 'Energy Type', [submission.energySource].flat().join('|') ?? ''),
+          generateRow(346, 'Planning Permission Status', getPlanningPermissionDoraValue(submission.planningPermission)),
+
+          generateRow(378, 'Data Analytics', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? submission.dataAnalytics : 'N/A'),
+          generateRow(379, 'Energy Type', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? [submission.energySource].flat().join('|') : 'N/A'),
           generateRow(380, 'Agricultural Sector for Grant Item', [submission.agriculturalSector].flat().join('|') ?? ''),
-          generateRow(381, 'Currently using Grant Item', submission.technology ?? ''),
-          // generateRow(354, 'Irrigation Hectare Score', getQuestionScoreBand(desirabilityScore.desirability.questions, 'projectImpact')),
+          generateRow(381, 'Currently Technology Usage', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? submission.technologyUse : 'N/A'),
+          generateRow(457, 'Labour Replaced', submission.projectItems.includes(getQuestionAnswer('project-items', 'project-items-A3')) ? submission.labourReplaced : 'N/A'),
+
+          generateRow(454, 'Solar Technology', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A2') ? submission.solarTechnologies : 'N/A'),
+          generaterow(455, 'Solar PV System Output', submission.solarTechnologies.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2')) ? submission.solarOutput : 'N/A'),
+
           generateRow(365, 'OA score', desirabilityScore.desirability.overallRating.band),
           generateRow(366, 'Date of OA decision', ''),
           generateRow(42, 'Project name', submission.businessDetails.projectName),
@@ -129,13 +198,13 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(367, 'Annual Turnover', submission.businessDetails.businessTurnover),
           generateRow(22, 'Employees', submission.businessDetails.numberEmployees),
           generateRow(20, 'Business size', calculateBusinessSize(submission.businessDetails.numberEmployees, submission.businessDetails.businessTurnover)),
-          // generateRow(44, 'Project Items', getProjectItems(submission.projectItems, submission.roboticTechnology, submission.technologyItems)),
+
           generateRow(91, 'Are you an AGENT applying on behalf of your customer', submission.applying === 'Agent' ? 'Yes' : 'No'),
           generateRow(5, 'Surname', farmerContractorDetails.lastName),
           generateRow(6, 'Forename', farmerContractorDetails.firstName),
           generateRow(8, 'Address line 1', farmerContractorDetails.address1),
           generateRow(9, 'Address line 2', farmerContractorDetails.address2),
-          generateRow(10, 'Address line 3', ''),
+
           generateRow(11, 'Address line 4 (town)', farmerContractorDetails.town),
           generateRow(12, 'Address line 5 (county)', farmerContractorDetails.county),
           generateRow(13, 'Postcode (use capitals)', farmerContractorDetails.postcode),
@@ -151,7 +220,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(54, 'Electronic OA received date ', todayStr),
           generateRow(370, 'Status', 'Pending RPA review'),
           generateRow(85, 'Full Application Submission Date', (new Date(today.setMonth(today.getMonth() + 6))).toLocaleDateString('en-GB')),
-          generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)),
+          generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)), // check calc
           ...addAgentDetails(submission.agentsDetails)
         ]
       }
