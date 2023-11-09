@@ -6,6 +6,26 @@
   "desirability": {
     "questions": [
       {
+        "key": "solar-technologies",
+        "answers": [
+          {
+            "key": "solarTechnologies",
+            "title": "What solar project items does your project need?",
+            "input": [
+              {
+                "key": "solar-technologies-A1",
+                "value": "An electrical grid connection"
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": 1,
+          "band": "Weak",
+          "importance": null
+        }
+      },
+      {
         "key": "technology-use",
         "answers": [
           {
