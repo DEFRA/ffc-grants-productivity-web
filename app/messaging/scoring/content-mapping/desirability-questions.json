@@ -1,37 +1,7 @@
 {
-  "projectSubject": [
-    {
-      "key": "project-subject",
-      "title": "Project subject",
-      "answers": {
-        "project-subject-A1": "Robotics and Innovation",
-        "project-subject-A2": "Slurry Acidification"
-      }
-    }
-  ],
-  "projectImpacts": [
-    {
-      "key": "project-impacts",
-      "title": "Project impact",
-      "answers": {
-        "project-impacts-A1": "Introduce acidification for the first time",
-        "project-impacts-A2": "Add additional acidification installations"
-      }
-    }
-  ],
-  "dataAnalytics": [{
-    "key": "robotics-data-analytics",
-    "title": "Data analytics",
-    "answers":
-    {
-      "robotics-data-analytics-A1": "Yes, we have the technology already",
-      "robotics-data-analytics-A2": "Yes, we’ll buy the technology as part of the project",
-      "robotics-data-analytics-A3": "No, we will not use any data analytics"
-    }}
-  ],
   "energySource": [
     {
-      "key": "robotics-energy-source",
+      "key": "energy-source",
       "title": "Energy source",
       "answers": {
         "robotics-energy-source-A1": "Mains electricity",
@@ -41,9 +11,9 @@
         }  
     } 
   ],
-  "agriculturalSector": [
+  "agriculturalSectorRobotics": [
     {
-      "key": "robotics-agricultural-sector",
+      "key": "agricultural-sector",
       "title": "Agricultural sector",
       "answers": {
         "robotics-agricultural-sector-A1": "Horticulture",
@@ -53,15 +23,98 @@
       }
     }
   ],
-  "roboticProjectImpacts": [
+  "technologyUse": [
     {
-      "key": "robotics-technology",
-      "title": "Technology",
+      "key": "technology-use",
+      "title": "Technology use",
       "answers": {
-        "robotics-technology-A1": "Yes, we’re using it now",
-        "robotics-technology-A2": "Yes, as a pilot, demonstration or trial",
-        "robotics-technology-A3": "No, we haven’t used it yet" 
+        "technology-use-A1": "Yes, we’re using it now",
+        "technology-use-A2": "Yes, we’re using it now but want to upgrade",
+        "technology-use-A3": "Yes, as a pilot, demonstration or trial",
+        "technology-use-A4": "No, we haven’t used it yet"
+      }
+    }
+  ],
+  "labourReplaced": [
+    {
+      "key": "labour-replaced",
+      "title": "Labour replaced",
+      "answers": {
+        "labour-replaced-A1": "1 to 2 jobs",
+        "labour-replaced-A2": "3 to 4 jobs",
+        "labour-replaced-A3": "5 or more jobs",
+        "labour-replaced-A4": "None of the above",
+        "labour-replaced-A5": "Not applicable"
+      }
+    }
+  ],
+  "dataAnalytics": [{
+    "key": "data-analytics",
+    "title": "Data analytics",
+    "answers":
+    {
+      "data-analytics-A1": "Yes, we have the technology already",
+      "data-analytics-A2": "Yes, we’ll buy the technology as part of the project",
+      "data-analytics-A3": "No, we will not use any data analytics"
+    }}
+  ],
+  "eligibilityCriteria": [
+    {
+      "key": "eligibility-criteria",
+      "title": "Eligibility criteria",
+      "answers": {
+        "eligibility-criteria-A1": "Has sensing system that can understand its environment ",
+        "eligibility-criteria-A2": "Makes decisions and plans",
+        "eligibility-criteria-A3": "Can control its actuators (the devices that move robotic joints)",
+        "eligibility-criteria-A4": "Works in a continuous loop",
+        "eligibility-criteria-A5": "Not applicable"
+      }
+    }
+  ],
+  "solarTechnologies": [
+    {
+      "key": "solar-technologies",
+      "title": "Solar project items",
+      "answers": {
+        "solar-technologies-A1": "An electrical grid connection",
+        "solar-technologies-A2": "Solar panels",
+        "solar-technologies-A3": "An inverter",
+        "solar-technologies-A4": "A utility meter",
+        "solar-technologies-A5": "A battery",
+        "solar-technologies-A6": "Limit-loading power diverter to heat or cold store"
+      }
+    }
+  ],
+  "solarOutput": [
+    {
+      "key": "solar-output",
+      "title": "Solar Output",
+      "answers": {
+        "solar-output-A1": "Up to 50kW",
+        "solar-output-A2": "51kW to 100kW",
+        "solar-output-A3": "101kW to 150kW",
+        "solar-output-A4": "151kW to 200kW",
+        "solar-output-A5": "More than 201kW",
+        "solar-output-A6": "Solar panels not chosen"
+      }
+    }
+  ],
+  "agriculturalSectorSolar": [
+    {
+      "key": "agricultural-sector-solar",
+      "title": "Agricultural Sector",
+      "answers": {
+        "agricultural-sector-solar-A1": "Arable",
+        "agricultural-sector-solar-A2": "Beef",
+        "agricultural-sector-solar-A3": "Dairy livestock",
+        "agricultural-sector-solar-A4": "Horticulture",
+        "agricultural-sector-solar-A5": "Mixed livestock",
+        "agricultural-sector-solar-A6": "Pig",
+        "agricultural-sector-solar-A7": "Poultry",
+        "agricultural-sector-solar-A8": "Sheep"
+        
       }
     }
   ]
+
 }

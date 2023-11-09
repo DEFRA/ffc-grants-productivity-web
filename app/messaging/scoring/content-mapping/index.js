@@ -1,11 +1,14 @@
 module.exports = {
   desirabilityQuestions: require('./desirability-questions'),
   desirabilityInputQuestionMapping: {
-    projectSubject: 'project-subject',
-    projectImpacts: 'project-impacts',
-    dataAnalytics: 'robotics-data-analytics',
-    energySource: 'robotics-energy-source',
-    agriculturalSector: 'robotics-agricultural-sector',
-    roboticProjectImpacts: 'robotics-project-impact'
+    dataAnalytics: 'data-analytics',
+    energySource: 'energy-source',
+    technologyUse: 'technology-use',
+    labourReplaced: 'labour-replaced',
+    eligibilityCriteria: 'eligibility-criteria',
+    agriculturalSectorRobotics: 'agricultural-sector',
+    agriculturalSectorSolar: 'agricultural-sector-solar',
+    solarTechnologies: 'solar-technologies',
+    solarOutput: 'solar-output'
   }
 }

@@ -6,6 +6,7 @@ const pollingConfig = require('../config/polling')
 const { setYarValue, getYarValue } = require('../helpers/session')
 const gapiService = require('../services/gapi-service')
 const { getProdScoring } = require('../messaging/application')
+const { getQuestionAnswer } = require('../helpers/utils')
 
 const createMsg = require('./../messaging/scoring/create-desirability-msg')
 
@@ -16,9 +17,8 @@ const currentPath = `${urlPrefix}/${viewTemplate}`
 const nextPath = `${urlPrefix}/business-details`
 
 function createModel (data, request) {
-  // const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'technology' : 'slurry-to-be-treated'}` // update for solar
-
-const previousPath = 'technology'
+  const previousPathRobotics = getYarValue(request, 'projectItems')?.includes(getQuestionAnswer('project-items', 'project-items-A3')) ? 'labour-replaced' : 'technology-use'
+  const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A1') ? previousPathRobotics : 'agricultural-sector-solar'}`
 
   return {
     backLink: previousPath,
@@ -86,9 +86,8 @@ module.exports = [{
       setYarValue(request, 'overAllScore', msgData)
       console.log('msgData', msgData)
       if (msgData) {
-        // const scheme = getYarValue(request, 'projectSubject') === 'Robotics and Innovation' ? 'robotics' : 'slurry'
         let questions = msgData.desirability.questions.map(desirabilityQuestion => {
-          const bankQuestion = ALL_QUESTIONS.filter(bankQuestionD => bankQuestionD.score && bankQuestionD.score.isDisplay === true && bankQuestionD.key === desirabilityQuestion.key)[0]
+          const bankQuestion = ALL_QUESTIONS.filter(bankQuestionD => bankQuestionD.score && !!getYarValue(request, bankQuestionD.yarKey) === true && bankQuestionD.key === desirabilityQuestion.key)[0]
           if (bankQuestion) {
             desirabilityQuestion.title = bankQuestion.title
             desirabilityQuestion.desc = bankQuestion.desc ?? ''
@@ -102,30 +101,6 @@ module.exports = [{
           return null
         })
         questions = questions.filter(a => a !== null)
-        // Add extra questions
-        // ALL_QUESTIONS.filter(q => q.score && q.score.isDisplay === true && q.scheme === scheme && scheme === 'solar').forEach(bankQuestion => {
-        //   if (questions.filter(qD => qD.key !== bankQuestion.key).length > 0 && getYarValue(request, bankQuestion.yarKey) !== null) { // Add extra question in result
-        //     let addQuestionToResult = true
-        //     if (bankQuestion.score.dependentAnswerKey) {
-        //       addQuestionToResult = !(bankQuestion.score.dependentAnswerKey && getYarValue(request, bankQuestion.score.dependentAnswerKey.yarKey) === bankQuestion.score.dependentAnswerKey.value)
-        //     }
-        //     if (addQuestionToResult) {
-        //       const displayQuestion = {}
-        //       displayQuestion.key = bankQuestion.key
-        //       displayQuestion.answers = []
-        //       displayQuestion.title = bankQuestion.title ?? bankQuestion.answers[0].title
-        //       const unit = bankQuestion.suffix ? bankQuestion.suffix.html : ''
-        //       displayQuestion.answers.push({ title: displayQuestion.title, input: [{ value: getYarValue(request, bankQuestion.yarKey), unit: unit }] })
-        //       displayQuestion.desc = bankQuestion.desc ?? ''
-        //       displayQuestion.url = `${urlPrefix}/${bankQuestion.url}`
-        //       displayQuestion.order = bankQuestion.order
-        //       displayQuestion.unit = unit
-        //       displayQuestion.pageTitle = bankQuestion.pageTitle
-        //       displayQuestion.fundingPriorities = bankQuestion.fundingPriorities
-        //       questions.push(displayQuestion)
-        //     }
-        //   }
-        // })
         let scoreChance
         switch (msgData.desirability.overallRating.band.toLowerCase()) {
           case 'strong':

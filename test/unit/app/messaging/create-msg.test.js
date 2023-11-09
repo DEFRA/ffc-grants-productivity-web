@@ -4,55 +4,91 @@ describe('create-msg', () => {
 
   const { getDesirabilityAnswers } = require('../../../../app/messaging/create-msg')
 
-  test('check getDesirabilityAnswers()', () => {
+  test('check getDesirabilityAnswers() > robotics', () => {
     let dict
     getYarValue.mockImplementation((req, key) => (dict[key]))
 
     dict = {
-      projectImpacts: 'hello',
-      projectSubject: 'hello'
-    }
-    expect(getDesirabilityAnswers({})).toEqual({
-      projectImpacts: 'hello',
-      projectSubject: 'hello'
-    })
-
-    dict = {
-      ...dict,
-      projectSubject: 'Robotics and Innovation',
+      projectSubject: 'Farm productivity project items',
       energySource: ['value'],
       agriculturalSector: ['value'],
       dataAnalytics: 'testing',
-      technology: 'testing'
+      technologyUse: 'testing',
+      labourReplaced: 'testing',
+      projectItemsList: [
+        {
+          criteriaScoring: ['value', 'value']
+        },
+        {
+          criteriaScoring: ['value']
+        }
+      ]
     }
     expect(getDesirabilityAnswers({})).toEqual({
-      projectSubject: 'Robotics and Innovation',
-      projectImpacts: 'hello',
       energySource: ['value'],
-      agriculturalSector: ['value'],
+      agriculturalSectorRobotics: ['value'],
       dataAnalytics: 'testing',
-      roboticProjectImpacts: 'testing'
+      technologyUse: 'testing',
+      labourReplaced: 'testing',
+      eligibilityCriteria: [['value', 'value'], ['value']]
     })
 
     dict = {
       ...dict,
       energySource: 'value',
-      agriculturalSector: 'value'
+      agriculturalSector: 'value',
+      labourReplaced: null,
+      projectItemsList: null
     }
 
     expect(getDesirabilityAnswers({})).toEqual({
-      projectSubject: 'Robotics and Innovation',
-      projectImpacts: 'hello',
       energySource: ['value'],
-      agriculturalSector: ['value'],
+      agriculturalSectorRobotics: ['value'],
       dataAnalytics: 'testing',
-      roboticProjectImpacts: 'testing'
+      technologyUse: 'testing',
+      labourReplaced: 'Not applicable',
+      eligibilityCriteria: [['Not applicable']]
+    })
+
+  })
+
+  test('check getDesirabilityAnswers() > solar', () => {
+    let dict
+    getYarValue.mockImplementation((req, key) => (dict[key]))
+
+    dict = {
+      ...dict,
+      projectSubject: 'Solar project items',
+      agriculturalSector: ['value'],
+      solarTechnologies: ['value'],
+      solarOutput: 'testing'
+    }
+    expect(getDesirabilityAnswers({})).toEqual({
+      projectSubject: 'Solar project items',
+      agriculturalSectorSolar: ['value'],
+      solarTechnologies: ['value'],
+      solarOutput: 'testing'
     })
 
     dict = {
       ...dict,
-      projectImpacts: ''
+      solarTechnologies: 'value',
+      agriculturalSector: 'value',
+      solarOutput: null
+
+    }
+    expect(getDesirabilityAnswers({})).toEqual({
+      projectSubject: 'Solar project items',
+      agriculturalSectorSolar: ['value'],
+      solarTechnologies: ['value'],
+      solarOutput: 'Solar panels not chosen'
+    })
+
+    dict = {
+      ...dict,
+      projectSubject: ''
     }
     expect(getDesirabilityAnswers({})).toEqual(null)
   })
+
 })
