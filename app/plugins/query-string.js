@@ -1,15 +1,24 @@
-const { cookieOptions, urlPrefix, surveyLink } = require('../config/server')
 const { ALL_URLS } = require('../config/question-bank')
 const cacheConfig = require('../config/cache')
+const { getYarValue, setYarValue } = require('../helpers/session')
+
 
 module.exports = {
   plugin: {
-    name: 'cookies',
+    name: 'queryString',
     register: (server, options) => {
       server.ext('onRequest', (request, h) => {
-        console.log(request.path)
+        if (request.path === '/productivity/remove-item') {
+          console.log(request.raw.req.url, 'I AM INSIDE THE PLUGIN',)
+          request.setUrl('/productivity/remove-item')
+          // const queryParams = new URLSearchParams(request.raw.req.url.split('?')[1])
+          // console.log(queryParams.get('item'),'IIIIIIIIIIII')
+          // request.yar.set('confirmItem', queryParams.get('item'))
+          // console.log(getYarValue(request, 'confirmItem'),'PPPPPPPPPPPPPPPPPPP')
+    // setYarValue(request, 'index', queryParams.get('index'))
+  }
         return h.continue
-       })
+      })
     }
   }
 }

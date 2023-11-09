@@ -74,6 +74,9 @@ const getPage = async (question, request, h) => {
     const queryParams = new URLSearchParams(request.raw.req.url.split('?')[1])
     setYarValue(request, 'confirmItem', queryParams.get('item'))
     setYarValue(request, 'index', queryParams.get('index'))
+    // const PAGE_MODEL = getModel(data, question, request, conditionalHtml)
+
+    // return h.view('page', PAGE_MODEL)
   }
 
   if (url === 'item-conditional') {
@@ -246,10 +249,10 @@ const getPage = async (question, request, h) => {
         ...farmerDetails,
         ...(farmerDetails
           ? {
-              name: `${farmerDetails.firstName} ${farmerDetails.lastName}`,
-              contact: farmerContact.join('<br/>'),
-              address: farmerAddress.join('<br/>')
-            }
+            name: `${farmerDetails.firstName} ${farmerDetails.lastName}`,
+            contact: farmerContact.join('<br/>'),
+            address: farmerAddress.join('<br/>')
+          }
           : {}
         )
       },
@@ -257,10 +260,10 @@ const getPage = async (question, request, h) => {
         ...agentDetails,
         ...(agentDetails
           ? {
-              name: `${agentDetails.firstName} ${agentDetails.lastName}`,
-              contact: agentContact.join('<br/>'),
-              address: agentAddress.join('<br/>')
-            }
+            name: `${agentDetails.firstName} ${agentDetails.lastName}`,
+            contact: agentContact.join('<br/>'),
+            address: agentAddress.join('<br/>')
+          }
           : {}
         )
       },
@@ -268,10 +271,10 @@ const getPage = async (question, request, h) => {
         ...contractorDetails,
         ...(contractorDetails
           ? {
-              name: `${contractorDetails.firstName} ${contractorDetails.lastName}`,
-              contact: contractorContact.join('<br/>'),
-              address: contractorAddress.join('<br/>')
-            }
+            name: `${contractorDetails.firstName} ${contractorDetails.lastName}`,
+            contact: contractorContact.join('<br/>'),
+            address: contractorAddress.join('<br/>')
+          }
           : {}
         )
       }
@@ -386,7 +389,6 @@ const showPostPage = (currentQuestion, request, h) => {
       if (getYarValue(request, 'removeItem') === 'Yes' && baseUrl === 'remove-item') {
         getYarValue(request, 'projectItemsList')?.splice(getYarValue(request, 'index'), 1)
       }
-      console.log('inside ELSE ----')
       currentQuestion = {
         ...currentQuestion,
         title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
@@ -403,7 +405,6 @@ const showPostPage = (currentQuestion, request, h) => {
       }
     }
   }
-console.log('AFTER REPLACE ------')
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
     gapiService.sendValidationDimension(request)
@@ -411,7 +412,7 @@ console.log('AFTER REPLACE ------')
   }
 
   if (thisAnswer?.notEligible ||
-      (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)
+    (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)
   ) {
     gapiService.sendEligibilityEvent(request, !!thisAnswer?.notEligible)
 

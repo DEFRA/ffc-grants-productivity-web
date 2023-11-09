@@ -3596,7 +3596,7 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost', 'projectItemsList'] // project-items-list
+const YAR_KEYS = ['projectPostcode', 'remainingCost', 'projectItemsList', 'confirmItem'] // project-items-list
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,

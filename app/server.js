@@ -31,8 +31,8 @@ async function createServer () {
   await server.register(inert)
   await server.register(vision)
   await server.register(require('./plugins/cookies'))
-  await server.register(require('./plugins/error-pages'))
   await server.register(require('./plugins/query-string'))
+  await server.register(require('./plugins/error-pages'))
   await server.register({
     plugin: require('./plugins/header'),
     options: {
