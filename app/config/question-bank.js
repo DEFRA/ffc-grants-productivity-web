@@ -772,7 +772,7 @@ const questionBank = {
             }
           },
           eliminationAnswerKeys: '',
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>Include batteries</li></ul>',          
           type: 'multi-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -961,7 +961,7 @@ const questionBank = {
           nextUrl: 'project-cost-solar',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>Smaller solar PV systems</li></ul>',          
           type: 'single-answer',
           classes: 'govuk-radios govuk-fieldset__legend--l',
           minAnswerCount: 1,
@@ -1178,7 +1178,7 @@ const questionBank = {
           preValidationKeys: ['remainingCosts'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',          
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
@@ -2138,7 +2138,7 @@ const questionBank = {
           // preValidationKeys: ['projectImpact'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>improve productivity</li><li>introduce innovation</li></ul>',
+          fundingPriorities: '<ul><li>Improve productivity</li><li>Introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -2208,7 +2208,7 @@ const questionBank = {
           nextUrl: 'agricultural-sector',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>improve the environment</li></ul>',
+          fundingPriorities: '<ul><li>Improve the environment</li></ul>',
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
@@ -2300,7 +2300,7 @@ const questionBank = {
           // preValidationKeys: ['energySource'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
@@ -2370,7 +2370,7 @@ const questionBank = {
           // preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>introduce innovation</li></ul>',
+          fundingPriorities: '<ul><li>Introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -2419,7 +2419,7 @@ const questionBank = {
           nextUrl: 'score',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>Replace manual labour</li></ul>',
           type: 'single-answer',
           scheme: 'robotics',
           score: {
