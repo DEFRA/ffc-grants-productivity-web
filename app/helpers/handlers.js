@@ -23,7 +23,7 @@ const resetYarValues = (applying, request) => {
 }
 
 const getConfirmationId = (guid, journey) => {
-  const prefix = journey.toLowerCase() === 'solar project items' ? 'SO' : 'RI'
+  const prefix = journey.toLowerCase() === 'solar project items' ? 'S' : 'R'
   console.log(journey, prefix, 'confirmationId')
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
 }
