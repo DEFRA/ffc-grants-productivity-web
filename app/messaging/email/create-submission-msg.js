@@ -220,7 +220,6 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       agriculturalSector: submission.agriculturalSector ? [submission.agriculturalSector].flat().join('|') : '',
       agriculturalSectorScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'agricultural-sector') : '',
 
-      isTechnology: submission.technology ? 'Yes' : 'No',
       technologyUse: submission.technologyUse ?? '',
       technologyUseScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'technology-use') : '',
 
@@ -229,6 +228,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
 
       solarTechnologies: submission.solarTechnologies ? [submission.solarTechnologies].flat().join('|') : '',
       solarTechnologiesScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'solar-technologies') : '',
+      solarInstallation: submission.solarInstallation ?? '',
 
       solarOutput: submission.solarOutput ?? '',
       solarOutputScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'solar-output') : '',
@@ -245,8 +245,8 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       agentEmail: submission.agentsDetails?.emailAddress ?? '',
       projectImpactsScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'project-impacts') : '',
       contactConsent: submission.consentOptional ? 'Yes' : 'No',
-      scoreDate: new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })
-
+      scoreDate: new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }),
+      farmerType: submission.applicant ?? ''
     }
   }
 }
