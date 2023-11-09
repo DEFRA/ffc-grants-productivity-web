@@ -772,7 +772,7 @@ const questionBank = {
             }
           },
           eliminationAnswerKeys: '',
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>Include batteries</li></ul>',          
           type: 'multi-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -881,17 +881,13 @@ const questionBank = {
             },
             {
               key: 'solar-installation-A2',
-              value: 'On an existing hardstanding area'
-            },
-            {
-              key: 'solar-installation-A3',
               value: 'Floating (on a reservoir)'
             },
             {
               value: 'divider'
             },
             {
-              key: 'solar-installation-A4',
+              key: 'solar-installation-A3',
               value: 'None of the above',
               notEligible: true
             }
@@ -961,7 +957,7 @@ const questionBank = {
           nextUrl: 'project-cost-solar',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>Smaller solar PV systems</li></ul>',          
           type: 'single-answer',
           classes: 'govuk-radios govuk-fieldset__legend--l',
           minAnswerCount: 1,
@@ -1178,7 +1174,7 @@ const questionBank = {
           preValidationKeys: ['remainingCosts'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',          
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
@@ -1935,7 +1931,7 @@ const questionBank = {
                 content: [{
                   para: '',
                   items: [],
-                  dependentAnswerExceptThese: ['project-items-A3', 'technology-items-A8']
+                  dependentAnswerExceptThese: ['technology-items-A8']
                 }]
               },
               {
@@ -2138,7 +2134,7 @@ const questionBank = {
           // preValidationKeys: ['projectImpact'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>improve productivity</li><li>introduce innovation</li></ul>',
+          fundingPriorities: '<ul><li>Improve productivity</li><li>Introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -2208,7 +2204,7 @@ const questionBank = {
           nextUrl: 'agricultural-sector',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>improve the environment</li></ul>',
+          fundingPriorities: '<ul><li>Improve the environment</li></ul>',
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
@@ -2300,7 +2296,7 @@ const questionBank = {
           // preValidationKeys: ['energySource'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
@@ -2370,7 +2366,7 @@ const questionBank = {
           // preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>introduce innovation</li></ul>',
+          fundingPriorities: '<ul><li>Introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -2419,7 +2415,7 @@ const questionBank = {
           nextUrl: 'score',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '',
+          fundingPriorities: '<ul><li>Replace manual labour</li></ul>',
           type: 'single-answer',
           scheme: 'robotics',
           score: {
@@ -3556,7 +3552,7 @@ const questionBank = {
             messageContentPartSolar: `<p>You can check if you can apply for a grant for <a class="govuk-link" href="${urlPrefix}/project-subject" rel="noopener noreferrer">farm productivity project items</a>. The minimum grant is £25,000 (40% of £62,500). The maximum grant amount for both projects together is £500,000. </p>`,
             messageContentPostConditional: `<h2 class="govuk-heading-m">RPA helpline</h2>
             <h3 class="govuk-heading-s">Telephone</h3>
-            Telephone: 03000 200 301<br/>
+            Telephone: 0300 0200 301<br/>
             Monday to Friday, 9am to 5pm (except public holidays)<br/>
             <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in a new tab)</a></p>
             <h3 class="govuk-heading-s">Email</h3>
@@ -3579,7 +3575,8 @@ const questionBank = {
             },
             messageLink: {
               url: 'https://defragroup.eu.qualtrics.com/jfe/preview/SV_9ugumqZO9w4M20e?Q_CHL=preview&Q_SurveyVersionID=current',
-              title: 'What do you think of this service?'
+              title: 'What do you think of this service?',
+              target: '_blank'
             },
           },
           fundingPriorities: '',
