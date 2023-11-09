@@ -881,17 +881,13 @@ const questionBank = {
             },
             {
               key: 'solar-installation-A2',
-              value: 'On an existing hardstanding area'
-            },
-            {
-              key: 'solar-installation-A3',
               value: 'Floating (on a reservoir)'
             },
             {
               value: 'divider'
             },
             {
-              key: 'solar-installation-A4',
+              key: 'solar-installation-A3',
               value: 'None of the above',
               notEligible: true
             }
