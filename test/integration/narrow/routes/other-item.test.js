@@ -3,7 +3,13 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /other-item', () => {
     const varList = {
         otherItem: 'randomData',
-        projectItemsList: []
+        projectItemsList: [],
+        projectItems: ['Robotic and automatic technology'],
+        technologyItems: 'Harvesting technology',
+        roboticAutomatic: 'Automatic',
+        automaticEligibility: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop'],
+        roboticEligibility: 'Yes',
+        technologyDescription: 'some fake description some fake description',
     }
 
     jest.mock('../../../../app/helpers/session', () => ({
@@ -85,6 +91,26 @@ it('should redirect to /project-items-summary when user selects No and chosen mo
     expect(postResponse.headers.location).toContain('project-items-summary')
 })
 
+
+it('should redirect to /project-items-summary when user selects No and chosen more than 1 option', async () => {
+    varList.otherItem = 'No'
+    varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
+    varList.roboticEligibility = 'No'
+    varList.technologyItems = 'Other robotics or automatic technology'
+    varList.automaticEligibility = null
+    varList.roboticAutomatic = null
+    varList.technologyDescription = null
+    const postOptions = {
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/other-item`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { otherItem: 'No', projectItemsList: ['Harvesting technology', "Weeding technology"], crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toContain('project-items-summary')
+})
 it('page loads with correct back link', async () => {
     const options = {
         method: 'GET',
