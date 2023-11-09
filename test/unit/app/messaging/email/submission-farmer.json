@@ -1,95 +1,70 @@
 {
-  "confirmationId": "WM-CE7-201",
+  "confirmationId": "WM-71A-79E",
   "abstractionLicence": "Expected to have by 31st December 2021",
   "agentDetails": null,
   "applying": "Farmer",
   "isArable": null,
   "businessDetails": {
-    "projectName": "Farm reservoir",
+    "projectName": "Bleak Farm reservoir",
     "businessName": "My Farm",
-    "numberEmployees": "30",
-    "businessTurnover": "5000000",
-    "sbi": ""
+    "numberEmployees": "10",
+    "businessTurnover": "1000000",
+    "sbi": "123456789"
   },
   "businessName": null,
-  "collaboration": "Yes",
+  "collaboration": "No",
   "consentMain": true,
-  "consentOptional": false,
+  "consentOptional": true,
   "emailAddress": null,
-  "projectPostcode": "AB12 4QQ",
+  "projectPostcode": "EC1A 1BB",
   "farmerDetails": {
-    "title": "Mr",
-    "firstName": "Geoff",
-    "lastName": "Hopkin",
-    "emailAddress": "me@me.com",
-    "landline": "",
-    "mobile": "08871 554024",
+    "title": "Mrs",
+    "firstName": "Mary",
+    "lastName": "Jones",
+    "emailAddress": "test@test.com",
+    "landline": "01888 123665",
+    "mobile": "08870 554024",
     "address1": "123 Road",
-    "address2": "",
+    "address2": "Fulford",
     "town": "York",
     "county": "North Yorkshire",
     "postcode": "YO33 4FF"
   },
-  "farmingType": "Crops for the food industry",
-  "irrigatedCrops": "Field-scale crops",
-  "irrigatedLandCurrent": "0",
-  "irrigatedLandTarget": "20",
-  "irrigationCurrent": [
-    "Trickle"
-  ],
-  "projectItems": [
-    "acid storage",
-    "dosing equipment",
-    "mixing tank",
-    "pump"
-  ],
-  "waterSourcePlanned": [
-    "Rain water harvesting",
-    "Summer water surface abstraction"
-  ],
-  "legalStatus": "Sole Trader",
+  "farmingType": "Horticulture (including ornamentals)",
+  "legalStatus": "Limited Liability Partnership",
   "planningPermission": "Not needed",
-  "productivity": [
-    "Introduce or expand protected crops"
-  ],
   "projectCost": 100000,
   "calculatedGrant": "40000.00",
   "remainingCost": "60000.00",
-  "project": [
-    "Improve irrigation efficiency"
+  "projectSubject":"Solar project items",
+  "applicant": "Farmer",
+  "businessLocation": "Yes",
+  "inEngland": "Yes",
+  "projectStart": "Yes, preparatory work",
+  "tenancy": "No",
+  "projectResponsibility": null,
+  "tenancyLength": null, 
+  "projectItems": null,
+  "projectItemsList": null,
+  "projectImpact": null,
+  "dataAnalytics": null,
+  "energySource": null,
+  "agriculturalSector": null,
+  "technologyUse": null,
+  "labourReplaced": null,
+  "solarTechnologies": [
+    "An electrical grid connection",
+    "Solar panels",
+    "An inverter"
   ],
-  "projectInfrastucture": [
-    "Irrigation pump(s) and controls",
-    "Electricity installation for pump house"
+  "solarOutput": "Up to 50kW",
+  "solarInstallation": [
+    "On a rooftop",
+    "Floating (on a reservoir)"
   ],
-  "projectEquipment": [
-    "Ebb and flow"
-  ],
-  "projectTechnology": [
-    "Software and sensors to optimise water application"
-  ],
-  "projectItemsList": [
-    "Irrigation pump(s) and controls",
-    "Electricity installation for pump house",
-    "Ebb and flow",
-    "Software and sensors to optimise water application"
-  ],
-  "ProductivitySourceCurrent": [
-    "Irrigation pump(s) and controls",
-    "Electricity installation for pump house",
-    "Ebb and flow",
-    "Software and sensors to optimise water application"
-  ],
-  "ProductivitySourcePlanned": [
-    "Irrigation pump(s) and controls",
-    "Electricity installation for pump house",
-    "Ebb and flow",
-    "Software and sensors to optimise water application"
-  ],
-  "projectSubject":"Slurry Acidification",
+  "solarUsage": "Yes",
   "projectStarted": "No",
   "payRemainingCosts": "Yes",
   "score-calculated": true,
-  "tenancyLength": null,
   "landOwnership": "Yes"
 }
