@@ -1931,7 +1931,7 @@ const questionBank = {
                 content: [{
                   para: '',
                   items: [],
-                  dependentAnswerExceptThese: ['project-items-A3', 'technology-items-A8']
+                  dependentAnswerExceptThese: ['technology-items-A8']
                 }]
               },
               {
