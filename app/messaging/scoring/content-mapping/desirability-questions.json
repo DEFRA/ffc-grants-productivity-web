@@ -74,7 +74,7 @@
   "solarTechnologies": [
     {
       "key": "solar-technologies",
-      "title": "Solar project items",
+      "title": "Solar technology",
       "answers": {
         "solar-technologies-A1": "An electrical grid connection",
         "solar-technologies-A2": "Solar panels",
@@ -88,7 +88,7 @@
   "solarOutput": [
     {
       "key": "solar-output",
-      "title": "Solar Output",
+      "title": "Solar PV system size",
       "answers": {
         "solar-output-A1": "Up to 50kW",
         "solar-output-A2": "51kW to 100kW",
