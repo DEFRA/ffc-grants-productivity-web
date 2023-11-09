@@ -8,7 +8,7 @@ describe('Page: /other-item', () => {
         technologyItems: 'Harvesting technology',
         roboticAutomatic: 'Automatic',
         automaticEligibility: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop'],
-        roboticEligibility: 'Fake data',
+        roboticEligibility: 'Yes',
         technologyDescription: 'some fake description some fake description',
     }
 
@@ -91,6 +91,24 @@ it('should redirect to /project-items-summary when user selects No and chosen mo
     expect(postResponse.headers.location).toContain('project-items-summary')
 })
 
+
+it('should redirect to /project-items-summary when user selects No and chosen more than 1 option', async () => {
+    varList.otherItem = 'No'
+    varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
+    varList.roboticEligibility = 'No'
+    varList.technologyItems = 'Other robotics or automatic technology'
+    varList.automaticEligibility = []
+    const postOptions = {
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/other-item`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { otherItem: 'No', projectItemsList: ['Harvesting technology', "Weeding technology"], crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toContain('project-items-summary')
+})
 it('page loads with correct back link', async () => {
     const options = {
         method: 'GET',
