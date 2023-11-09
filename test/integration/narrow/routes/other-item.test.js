@@ -99,6 +99,7 @@ it('should redirect to /project-items-summary when user selects No and chosen mo
     varList.technologyItems = 'Other robotics or automatic technology'
     varList.automaticEligibility = null
     varList.roboticAutomatic = null
+    varList.technologyDescription = null
     const postOptions = {
         method: 'POST',
         url: `${global.__URLPREFIX__}/other-item`,
