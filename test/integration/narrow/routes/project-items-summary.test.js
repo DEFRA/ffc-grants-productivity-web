@@ -44,43 +44,16 @@ it('should load page successfully', async () => {
 })
 
 
-// it('click continue redirects to item-conditional page', async () => {
-// const postOptions = {
-//     method: 'POST',
-//     url: `${global.__URLPREFIX__}/project-items-summary`,
-//     payload: { businessLocation: 'Yes', crumb: crumbToken },
-//     headers: { cookie: 'crumb=' + crumbToken }
-// }
+it('click continue redirects to item-conditional page', async () => {
+const postOptions = {
+    method: 'POST',
+    url: `${global.__URLPREFIX__}/project-items-summary`,
+    payload: { crumb: crumbToken },
+    headers: { cookie: 'crumb=' + crumbToken }
+}
 
-// const postResponse = await global.__SERVER__.inject(postOptions)
-// expect(postResponse.statusCode).toBe(302)
-// expect(postResponse.headers.location).toBe('item-conditional')
-// })
-
-// it('click continue redirects to item-conditional page', async () => {
-//     const postOptions = {
-//         method: 'POST',
-//         url: `${global.__URLPREFIX__}/project-items-summary`,
-//         payload: { businessLocation: 'Yes', crumb: crumbToken },
-//         headers: { cookie: 'crumb=' + crumbToken }
-//     }
-    
-//     const postResponse = await global.__SERVER__.inject(postOptions)
-//     expect(postResponse.statusCode).toBe(302)
-//     expect(postResponse.headers.location).toBe('item-conditional')
-// })
-
-// it('click remove to harvesting technology redirects to remove-item page', async () => {
-//     const postOptions = {
-//         method: 'POST',
-//         url: `${global.__URLPREFIX__}/project-items-summary`,
-//         payload: { businessLocation: 'Yes', crumb: crumbToken },
-//         headers: { cookie: 'crumb=' + crumbToken }
-//     }
-    
-//     const postResponse = await global.__SERVER__.inject(postOptions)
-//     expect(postResponse.statusCode).toBe(302)
-//     expect(postResponse.headers.location).toBe('remove-item')
-// })
-
+const postResponse = await global.__SERVER__.inject(postOptions)
+expect(postResponse.statusCode).toBe(302)
+expect(postResponse.headers.location).toBe('item-conditional')
+})
 })

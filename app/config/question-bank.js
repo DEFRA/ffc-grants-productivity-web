@@ -1889,7 +1889,7 @@ const questionBank = {
             dependentQuestionYarKey: 'projectItems',
             dependentAnswerKeysArray: ['project-items-A3'],
             urlOptions: {
-              thenUrl: 'technology-conditional',
+              thenUrl: 'item-conditional',
               elseUrl: 'project-items'
             }
           },
