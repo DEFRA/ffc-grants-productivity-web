@@ -8,13 +8,14 @@ describe('Start page', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Check if you can apply for a Farming Transformation Fund Improving Farm Productivity Grant')
     expect(response.payload).toContain('Use this service to:')
-    expect(response.payload).toContain('check if you can apply for a grant for your project (takes about 5 minutes)')
-    expect(response.payload).toContain('estimate how much grant funding you could get (takes about 15 minutes if you have all the project details)')
+    expect(response.payload).toContain('check if you are eligible to apply for a grant for your project (takes about 5 minutes)')
+    expect(response.payload).toContain('check how well your project fits the funding priorities (takes about 15 minutes if you have all the project details)')
     expect(response.payload).toContain('Who can apply')
     expect(response.payload).toContain('You can apply if:')
     expect(response.payload).toContain('you are a farmer or agricultural contractor')
     expect(response.payload).toContain('your business is registered in England or you will do the grant-funded work in England')
-    expect(response.payload).toContain('Agricultural contractors can only use the grant for buying farm productivity project items.')
+    expect(response.payload).toContain('Agricultural contractors can only apply for grant funding for robotic or automatic technology (farm productivity project items).')
+    expect(response.payload).toContain('What you can apply for')
     expect(response.payload).toContain('You can apply for up to:')
     expect(response.payload).toContain('40% of estimated costs of farm productivity project items')
     expect(response.payload).toContain('25% of estimated costs for solar project items')
@@ -22,7 +23,7 @@ describe('Start page', () => {
       'For farm productivity project items, the maximum grant you can claim is £500,000. The minimum grant is £25,000 (40% of £62,500).'
     )
     expect(response.payload).toContain(
-      'For solar project items, the maximum grant you can claim is £100,000. The minimum grant is £15,000 (25% of £60,000). You can apply for grant funding to add solar project items (for example a battery) to a solar PV system you already have or to buy a new solar PV system.'
+      'For solar project items, the maximum grant you can claim is £100,000. The minimum grant is £15,000 (25% of £60,000). You can apply for grant funding to add solar project items (for example a battery) to a solar photovoltaic (PV) system you already have or to buy a new solar PV system.'
     )
     expect(response.payload).toContain(
       'If you want to apply for both farm productivity and solar project grant funding, you must submit 2 separate applications. The maximum grant amount for both projects together is £500,000.'
