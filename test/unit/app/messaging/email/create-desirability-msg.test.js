@@ -205,7 +205,7 @@ describe('Create desirability message tests', () => {
       expect(agriculturalSectorAnswers.input).toEqual(expect.arrayContaining([expect.objectContaining({ value: mockUserInput.agriculturalSectorRobotics[1] })]))
 
       expect(technologyUse.answers.length).toEqual(1)
-      expect(technologyUseAnswers.title).toEqual('Technology use')
+      expect(technologyUseAnswers.title).toEqual('Technology')
       expect(technologyUseAnswers.input.length).toEqual(1)
       expect(technologyUseAnswers.input[0].value).toEqual(mockUserInput.technologyUse)
 
