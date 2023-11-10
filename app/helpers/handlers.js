@@ -74,12 +74,15 @@ const getPage = async (question, request, h) => {
     const queryParams = new URLSearchParams(request.raw.req.url.split('?')[1])
     setYarValue(request, 'confirmItem', queryParams.get('item'))
     setYarValue(request, 'index', queryParams.get('index'))
+    console.log('url[0]: ', request.raw.req.url.split('?')[0]);
+    request.raw.req.url = request.raw.req.url.split('?')[0]
+    console.log('req url: ', request.raw.req.url);
+    // console.log('here: ', yarKey, question);
+    // let removeData = getYarValue(request, yarKey) || null
+    // console.log('removeData: ', removeData);
+    // const PAGE_MODEL = getModel(removeData, question, request, conditionalHtml)
 
-    let removeData = getYarValue(request, yarKey) || null
-
-    const PAGE_MODEL = getModel(removeData, question, request, conditionalHtml)
-
-    return h.view('page', PAGE_MODEL)
+    // return h.view('page', PAGE_MODEL)
   }
 
   if (url === 'item-conditional') {
@@ -208,9 +211,17 @@ const getPage = async (question, request, h) => {
           getYarValue(request, additionalYarKeyName).toLowerCase()
         )
       }
+      let removeData = getYarValue(request, yarKey) || null
+      console.log('removeData: ', removeData);
+      const PAGE_MODEL = getModel(removeData, question, request, "")
+      console.log('model with rm data: ', JSON.stringify(PAGE_MODEL.items));
+      return h.view('page', PAGE_MODEL)
+
     }
   }
   const data = getYarValue(request, yarKey) || null
+  console.log('here: ', yarKey, getYarValue(request, yarKey));
+  console.log('data: ', data);
   let conditionalHtml
   // if (question?.conditionalKey && question?.conditionalLabelData) {
   //   const conditional = question.conditionalKey
@@ -316,7 +327,7 @@ const getPage = async (question, request, h) => {
   }
 
   const PAGE_MODEL = getModel(data, question, request, conditionalHtml)
-
+  console.log('PAGE_MODEL: ', PAGE_MODEL);
   return h.view('page', PAGE_MODEL)
 }
 
