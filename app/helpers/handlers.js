@@ -560,6 +560,8 @@ const showPostPage = (currentQuestion, request, h) => {
       }
       if (getYarValue(request, 'addToItemList') === true) {
         Object.keys(tempObject).every(item => tempObject[item]) ? tempArray.push(tempObject) : null
+        setYarValue(request, 'addToItemList', false)
+
       }
 
         // add item to projectItemsList
@@ -573,7 +575,6 @@ const showPostPage = (currentQuestion, request, h) => {
           setYarValue(request, 'roboticEligibility', null)
           setYarValue(request, 'automaticEligibility', null)
           setYarValue(request, 'technologyDescription', null)
-          setYarValue(request, 'addToItemList', false)
         } else {
 
           if(getYarValue(request, 'projectItemsList')?.length === 1){
