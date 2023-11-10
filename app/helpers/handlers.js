@@ -192,9 +192,9 @@ const getPage = async (question, request, h) => {
     }else {
       question = {
         ...question,
-        title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-            getYarValue(request, additionalYarKeyName).toLowerCase()
-        )
+        title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+            getYarValue(request, additionalYarKeyName).toLowerCase() || ''
+        ))
       };
     }
   }
@@ -372,15 +372,15 @@ const showPostPage = (currentQuestion, request, h) => {
     }else if(baseUrl === 'automatic-eligibility') {
       currentQuestion = {
         ...currentQuestion,
-        title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-            getYarValue(request, additionalYarKeyName).toLowerCase()
-        ),
+        title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+            getYarValue(request, additionalYarKeyName).toLowerCase() || ''
+        )),
         validate: [
           {
             type: "NOT_EMPTY",
-            error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-                getYarValue(request, additionalYarKeyName).toLowerCase()
-            )
+            error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+                getYarValue(request, additionalYarKeyName).toLowerCase() || ''
+            ))
           },
           {
             type: 'STANDALONE_ANSWER',
@@ -396,15 +396,15 @@ const showPostPage = (currentQuestion, request, h) => {
       {
         currentQuestion = {
           ...currentQuestion,
-          title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-              getYarValue(request, additionalYarKeyName).toLowerCase()
-          ),
+          title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+              getYarValue(request, additionalYarKeyName).toLowerCase() || ''
+          )),
           validate: [
             {
               type: "NOT_EMPTY",
-              error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-                  getYarValue(request, additionalYarKeyName).toLowerCase()
-              )
+              error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
+                  getYarValue(request, additionalYarKeyName).toLowerCase() || ''
+                  ))
             }
           ],
         };
