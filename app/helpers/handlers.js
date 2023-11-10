@@ -577,7 +577,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
     case 'other-item': {
 
-      if(getYarValue(request, 'projectItemsList')?.length === 1){
+      if(getYarValue(request, 'projectItemsList')?.length <= 1){
         return h.redirect(`${urlPrefix}/item-conditional`)
       }else {
         return h.redirect(`${urlPrefix}/project-items-summary`)
