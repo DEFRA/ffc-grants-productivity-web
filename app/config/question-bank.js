@@ -2638,10 +2638,10 @@ const questionBank = {
           backUrl: 'business-details',
           dependantNextUrl: {
             dependentQuestionYarKey: 'applicant',
-            dependentAnswerKeysArray: ['applicant-A1'],
+            dependentAnswerKeysArray: ['applicant-A2'],
             urlOptions: {
-              thenUrl: '/productivity/farmers-details',
-              elseUrl: '/productivity/contractors-details'
+              thenUrl: '/productivity/contractors-details',
+              elseUrl: '/productivity/farmers-details'
             }
           },
           // preValidationKeys: ['businessDetails'],
