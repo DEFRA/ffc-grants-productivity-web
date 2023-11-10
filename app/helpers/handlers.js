@@ -335,6 +335,13 @@ const showPostPage = (currentQuestion, request, h) => {
     } else if (yarKey === 'solarTechnologies' && !value.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2'))) {
       setYarValue(request, 'solarOutput', null)
       setYarValue(request, 'solarInstallation', null)
+    } else if (yarKey === 'otherItem' && value == 'Yes') {
+      setYarValue(request, 'technologyItems', null)
+      setYarValue(request, 'roboticAutomatic', null)
+      setYarValue(request, 'roboticEligibility', null)
+      setYarValue(request, 'automaticEligibility', null)
+      setYarValue(request, 'technologyDescription', null)
+      setYarValue(request, 'addToItemList', false)
     }
   }
   if (type === 'multi-input') {
@@ -558,30 +565,19 @@ const showPostPage = (currentQuestion, request, h) => {
         criteriaScoring: getYarValue(request, 'automaticEligibility') ? getYarValue(request, 'automaticEligibility') : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArrScore : null,
         description: getYarValue(request, 'technologyDescription') ?  getYarValue(request, 'technologyDescription').description  : null
       }
+
+      tempArray.push(tempObject)
+
       if (getYarValue(request, 'addToItemList') === true) {
-        Object.keys(tempObject).every(item => tempObject[item]) ? tempArray.push(tempObject) : null
         setYarValue(request, 'addToItemList', false)
+        setYarValue(request, 'projectItemsList', tempArray)
 
       }
 
-        // add item to projectItemsList
-        setYarValue(request, 'projectItemsList', tempArray)
-
-        if (getYarValue(request, 'otherItem') === 'Yes') {
-
-          // reset all yars after item added
-          setYarValue(request, 'technologyItems', null)
-          setYarValue(request, 'roboticAutomatic', null)
-          setYarValue(request, 'roboticEligibility', null)
-          setYarValue(request, 'automaticEligibility', null)
-          setYarValue(request, 'technologyDescription', null)
-        } else {
-
-          if(getYarValue(request, 'projectItemsList')?.length === 1){
-            return h.redirect(`${urlPrefix}/item-conditional`)
-          }else {
-            return h.redirect(`${urlPrefix}/project-items-summary`)
-          }
+      if(getYarValue(request, 'projectItemsList')?.length === 1){
+        return h.redirect(`${urlPrefix}/item-conditional`)
+      }else {
+        return h.redirect(`${urlPrefix}/project-items-summary`)
       }
     }
       // case 'remove-item': {

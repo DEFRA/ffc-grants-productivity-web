@@ -10,6 +10,7 @@ describe('Page: /other-item', () => {
         automaticEligibility: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop'],
         roboticEligibility: 'Yes',
         technologyDescription: 'some fake description some fake description',
+        addToItemList: true
     }
 
     jest.mock('../../../../app/helpers/session', () => ({
@@ -63,7 +64,7 @@ it('should redirect to /technology-items when user selects Yes', async () => {
 
 it('should redirect to /item-conditional when user selects No and only chosen 1 item', async () => {
     varList.otherItem = 'No'
-    varList.projectItemsList = ['item']
+    varList.projectItemsList = []
     const postOptions = {
         method: 'POST',
         url: `${global.__URLPREFIX__}/other-item`,
@@ -76,7 +77,7 @@ it('should redirect to /item-conditional when user selects No and only chosen 1 
     expect(postResponse.headers.location).toContain('/item-conditional')
 })
 
-it('should redirect to /project-items-summary when user selects No and chosen more than 1 option', async () => {
+it('should redirect to /project-items-summary when user selects No and chosen more than 1 option - normal vals', async () => {
     varList.otherItem = 'No'
     varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
     const postOptions = {
@@ -91,8 +92,7 @@ it('should redirect to /project-items-summary when user selects No and chosen mo
     expect(postResponse.headers.location).toContain('project-items-summary')
 })
 
-
-it('should redirect to /project-items-summary when user selects No and chosen more than 1 option', async () => {
+it('should redirect to /project-items-summary when user selects No and chosen more than 1 option - null values', async () => {
     varList.otherItem = 'No'
     varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
     varList.roboticEligibility = 'No'
