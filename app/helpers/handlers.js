@@ -472,6 +472,9 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   switch (baseUrl) {
+    case 'project-subject':
+      setYarValue(request, 'addToItemList', false)
+      break
     case 'solar-technologies':
       if (payload.secBtn === 'Back to score'){
         break
@@ -484,6 +487,10 @@ const showPostPage = (currentQuestion, request, h) => {
           return  h.view('not-eligible', NOT_ELIGIBLE)
         }
       }
+    case 'technology-item': {
+      setYarValue(request, 'addToItemList', true)
+      break
+    }
     case 'automatic-eligibility': {
         const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
         if (automaticEligibilityAnswer.length === 1 || automaticEligibilityAnswer.includes('None of the above')) {
@@ -551,19 +558,24 @@ const showPostPage = (currentQuestion, request, h) => {
         criteriaScoring: getYarValue(request, 'automaticEligibility') ? getYarValue(request, 'automaticEligibility') : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArrScore : null,
         description: getYarValue(request, 'technologyDescription') ?  getYarValue(request, 'technologyDescription').description  : null
       }
-      Object.keys(tempObject).every(item => tempObject[item]) ? tempArray.push(tempObject) : null
+      if (getYarValue(request, 'addToItemList') === true) {
+        Object.keys(tempObject).every(item => tempObject[item]) ? tempArray.push(tempObject) : null
+      }
 
         // add item to projectItemsList
         setYarValue(request, 'projectItemsList', tempArray)
 
-        // reset all yars after item added
-        setYarValue(request, 'technologyItems', null)
-        setYarValue(request, 'roboticAutomatic', null)
-        setYarValue(request, 'roboticEligibility', null)
-        setYarValue(request, 'automaticEligibility', null)
-        setYarValue(request, 'technologyDescription', null)
+        if (getYarValue(request, 'otherItem') === 'Yes') {
 
-        if(getYarValue(request, 'otherItem') === 'No') {
+          // reset all yars after item added
+          setYarValue(request, 'technologyItems', null)
+          setYarValue(request, 'roboticAutomatic', null)
+          setYarValue(request, 'roboticEligibility', null)
+          setYarValue(request, 'automaticEligibility', null)
+          setYarValue(request, 'technologyDescription', null)
+          setYarValue(request, 'addToItemList', false)
+        } else {
+
           if(getYarValue(request, 'projectItemsList')?.length === 1){
             return h.redirect(`${urlPrefix}/item-conditional`)
           }else {
