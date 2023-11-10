@@ -588,6 +588,15 @@ const showPostPage = (currentQuestion, request, h) => {
       //     return h.redirect(`${urlPrefix}/robotic-automatic`)
       //   }
       // }
+
+    case 'project-items-summary':
+      setYarValue(request, 'technologyItems', null)
+      setYarValue(request, 'roboticAutomatic', null)
+      setYarValue(request, 'roboticEligibility', null)
+      setYarValue(request, 'automaticEligibility', null)
+      setYarValue(request, 'technologyDescription', null)
+      setYarValue(request, 'addToItemList', false)
+      break
     default:
       break
   }
