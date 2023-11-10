@@ -5,7 +5,11 @@ const { getQuestionAnswer } = require('../../helpers/utils')
 const PROJECT_SUBJECT_SOLAR = getQuestionAnswer('project-subject', 'project-subject-A2')
 
 function getQuestionScoreBand (questions, questionKey) {
-  return questions.find(question => question.key === questionKey).rating.band
+  const result = questions.find(question => question.key === questionKey)
+  if (!result) {
+    throw new Error(`Question ${questionKey} not found`)
+  }
+  return result.rating.band
 }
 
 function generateRow (rowNumber, name, value, bold = false) {
@@ -235,9 +239,20 @@ function getScoreChance (rating) {
   }
 }
 
+function displayObject (projectItemsList) {
+  const descriptionList = []
+
+  for (i = 0; i < projectItemsList.length; i++) {
+    descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')} ~ ${projectItemsList[i].description}`)
+  
+  }
+  
+  return descriptionList.join('\n')
+
+}
 function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail = false) {
   const farmerContractorDetails = submission.farmerDetails ?? submission.contractorsDetails
-  const email = isAgentEmail ? submission.agentsDetails.emailAddress : farmerContractorDetails.emailAddress
+  const email = isAgentEmail ? submission.agentsDetails.emailAddress : farmerContractorDetails.emailAddress  
   return {
     notifyTemplate: emailConfig.notifyTemplate,
     emailAddress: rpaEmail || email,
@@ -248,48 +263,72 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       overallRating: desirabilityScore.desirability.overallRating.band,
       scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band),
       projectSubject: submission.projectSubject,
-      // isSlurry: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? 'Yes' : 'No',
-      // isRobotics: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? 'No' : 'Yes',
-      legalStatus: submission.legalStatus,
+      isSolar: submission.projectSubject === PROJECT_SUBJECT_SOLAR,
+      isRobotics: submission.projectSubject !== PROJECT_SUBJECT_SOLAR,
+      isContractor: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && submission.applicant === 'Contractor',
+      isNotTenancy: submission.tenancy === getQuestionAnswer('tenancy', 'tenancy-A2'),
+      legalStatus: submission.legalStatus ?? '',
+      inEngland: submission.inEngland ?? '',
+      businessLocation: submission?.businessLocation ?? '',
       location: `England ${farmerContractorDetails.projectPostcode ?? farmerContractorDetails.postcode}`,
       planningPermission: submission.planningPermission,
       projectStart: submission.projectStart,
-      tenancy: submission.tenancy ?? ' ',
+      tenancy: submission.tenancy ?? '',
       isTenancyLength: submission.tenancyLength ? 'Yes' : 'No',
-      tenancyLength: submission.tenancyLength ?? ' ',
-      // projectItems: submission.projectItems ? getProjectItems(submission.projectItems, submission.roboticTechnology, submission.technologyItems) : ' ',
+      tenancyLength: submission.tenancyLength ?? '',
+      projectResponsibility: submission.projectResponsibility ?? '',
+      projectItems: submission.projectItems ? [submission.projectItems].flat().join('\n') : '',
+      technologyItems: submission.projectItemsList ? displayObject(submission.projectItemsList) : '',
+      isTechnologyItems: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')),
+      projectImpact: submission.projectImpact ?? '',
+      existingSolar: submission.existingSolar ?? '',
       projectCost: getCurrencyFormat(submission.projectCost),
-      potentialFunding: getCurrencyFormat(submission.calculatedGrant),
+      potentialFunding: getCurrencyFormat(Number(submission.calculatedGrant)),
       remainingCost: getCurrencyFormat(submission.remainingCost),
-      slurryCurrentlyTreated: submission.slurryCurrentlyTreated ?? ' ',
-      slurryToBeTreated: submission.slurryToBeTreated ?? ' ',
-      projectImpacts: submission.projectImpacts ?? ' ',
-      projectImpact: submission.projectImpact ?? ' ',
-      isDataAnalytics: submission.dataAnalytics ? 'Yes' : 'No',
-      dataAnalytics: submission.dataAnalytics ?? ' ',
-      // dataAnalyticsScore: submission.dataAnalytics && submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'dataAnalytics') : ' ',
-      energySource: submission.energySource ? [submission.energySource].flat().join('|') : ' ',
-      // energySourceScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'energySource') : ' ',
-      agriculturalSector: submission.agriculturalSector ? [submission.agriculturalSector].flat().join('|') : ' ',
-      // agriculturalSectorScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'agriculturalSector') : ' ',
-      isTechnology: submission.technology ? 'Yes' : 'No',
-      technology: submission.technology ?? ' ',
-      // technologyScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'robotics-project-impact') : ' ',
+
+      dataAnalytics: submission.dataAnalytics ?? '',
+      dataAnalyticsScore: submission.dataAnalytics && submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'data-analytics') : '',
+
+      energySource: submission.energySource ? [submission.energySource].flat().join(' | ') : '',
+      energySourceScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'energy-source') : '',
+
+      agriculturalSectorRobotics: ( submission.agriculturalSector && submission.projectSubject !== PROJECT_SUBJECT_SOLAR ) ? [submission.agriculturalSector].flat().join(' | ') : '',
+      agriculturalSectorRoboticsScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'agricultural-sector') : '',
+
+      technologyUse: submission.technologyUse ?? '',
+      technologyUseScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'technology-use') : '',
+
+      labourReplaced:  submission?.labourReplaced ?? '',
+      labourReplacedScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'labour-replaced') : '',
+      isLabourReplaced: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')),
+
+      solarTechnologies: submission.solarTechnologies ? [submission.solarTechnologies].flat().join(' | ') : '',
+      solarTechnologiesScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'solar-technologies') : '',
+
+      isSolarPanels: submission.projectSubject === PROJECT_SUBJECT_SOLAR && submission.solarTechnologies?.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2')),
+      solarInstallation: submission.solarInstallation ?? '',
+
+      solarOutput: submission.solarOutput ?? '',
+      solarOutputScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR && submission.solarTechnologies?.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2')) ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'solar-output') : '',
+
+      agriculturalSectorSolar: ( submission.agriculturalSector && submission.projectSubject === PROJECT_SUBJECT_SOLAR ) ? [submission.agriculturalSector].flat().join(' | ') : '',
+      agriculturalSectorSolarScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'agricultural-sector-solar') : '',
+
+      grantRate: submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? 'Up to 40%' : 'Up to 25%',
+
       projectName: submission.businessDetails.projectName,
       businessName: submission.businessDetails.businessName,
       isFarmer: submission.farmerDetails ? 'Yes' : 'No',
-      isContractor: submission.contractorsDetails ? 'Yes' : 'No',
       farmerName: farmerContractorDetails.firstName,
       farmerSurname: farmerContractorDetails.lastName,
       farmerEmail: farmerContractorDetails.emailAddress,
       isAgent: submission.agentsDetails ? 'Yes' : 'No',
-      agentName: submission.agentsDetails?.firstName ?? ' ',
-      agentSurname: submission.agentsDetails?.lastName ?? ' ',
-      agentEmail: submission.agentsDetails?.emailAddress ?? ' ',
-      // projectImpactsScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'project-impacts') : ' ',
+      agentName: submission.agentsDetails?.firstName ?? '',
+      agentSurname: submission.agentsDetails?.lastName ?? '',
+      agentEmail: submission.agentsDetails?.emailAddress ?? '',
       contactConsent: submission.consentOptional ? 'Yes' : 'No',
-      scoreDate: new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' })
-
+      scoreDate: new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }),
+      farmerType: submission.applicant ?? ''
     }
   }
 }
@@ -299,8 +338,12 @@ function spreadsheet (submission, desirabilityScore) {
 }
 
 module.exports = function (submission, desirabilityScore) {
+  console.log('submission: ', submission)
+  console.log('desirabilityScore: ', desirabilityScore)
+  const emailDetails = getEmailDetails(submission, desirabilityScore, false)
+  console.log('emailDetails: ', emailDetails)
   return {
-    applicantEmail: getEmailDetails(submission, desirabilityScore, false),
+    applicantEmail: emailDetails,
     agentEmail: submission.applying === 'Agent' ? getEmailDetails(submission, desirabilityScore, false, true) : null,
     rpaEmail: spreadsheetConfig.sendEmailToRpa ? getEmailDetails(submission, desirabilityScore, spreadsheetConfig.rpaEmail) : null,
     spreadsheet: spreadsheet(submission, desirabilityScore)
