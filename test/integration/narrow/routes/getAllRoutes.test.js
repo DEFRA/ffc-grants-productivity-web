@@ -19,7 +19,8 @@ const varListTemplate = {
   consentMain: 'lalal',
   technologyItems: 'Solar panels',
   projectItems: 'Advanced ventilation control units',
-  projectItemsList: ['value', 'value2']
+  projectItemsList: ['value', 'value2'],
+  confirmItem: 'Hello'
 
 }
 
