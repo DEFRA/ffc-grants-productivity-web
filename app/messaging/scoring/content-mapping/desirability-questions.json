@@ -99,6 +99,23 @@
       }
     }
   ],
+  "agriculturalSectorSolar": [
+    {
+      "key": "agricultural-sector-solar",
+      "title": "Agricultural Sector",
+      "answers": {
+        "agricultural-sector-solar-A1": "Arable",
+        "agricultural-sector-solar-A2": "Beef",
+        "agricultural-sector-solar-A3": "Dairy livestock",
+        "agricultural-sector-solar-A4": "Horticulture",
+        "agricultural-sector-solar-A5": "Mixed livestock",
+        "agricultural-sector-solar-A6": "Pig",
+        "agricultural-sector-solar-A7": "Poultry",
+        "agricultural-sector-solar-A8": "Sheep"
+
+      }
+    }
+  ],
   "labourReplaced": [
     {
       "key": "labour-replaced",
