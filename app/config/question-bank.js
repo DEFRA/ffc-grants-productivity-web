@@ -1575,7 +1575,7 @@ const questionBank = {
           answers: [
             {
               key: 'automatic-eligibility-A1',
-              value: 'Has sensing system that can understand its environment '
+              value: 'Has sensing system that can understand its environment'
             },
             {
               key: 'automatic-eligibility-A2',
@@ -1833,7 +1833,8 @@ const questionBank = {
         {
           key: 'remove-item',
           order: 320,
-          title: 'Are you sure you want to remove {{_item_}}?',
+          title: 'Are you sure you want to remove {{_confirmItem_}}?',
+          replace: true,
           pageTitle: '',
           backUrl: 'project-items-summary',
           nextUrl: 'project-items-summary',
@@ -1842,6 +1843,12 @@ const questionBank = {
           baseUrl: 'remove-item',
           type: 'single-answer',
           minAnswerCount: 1,
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you need to add another robotic or automatic item'
+            }
+          ],
           answers: [
             {
               key: 'remove-item-A1',
@@ -3595,7 +3602,8 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost', 'projectItemsList', 'calculatedGrant'] // project-items-list
+const YAR_KEYS = ['projectPostcode', 'remainingCost', 'projectItemsList', 'calculatedGrant', 'confirmItem'] 
+
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,

@@ -112,7 +112,43 @@
         "agricultural-sector-solar-A6": "Pig",
         "agricultural-sector-solar-A7": "Poultry",
         "agricultural-sector-solar-A8": "Sheep"
-        
+
+      }
+    }
+  ],
+  "labourReplaced": [
+    {
+      "key": "labour-replaced",
+      "title": "Labour replaced",
+      "answers": {
+        "labour-replaced-A1": "1 to 2 jobs",
+        "labour-replaced-A2": "3 to 4 jobs",
+        "labour-replaced-A3": "5 or more jobs",
+        "labour-replaced-A4": "None of the above",
+        "labour-replaced-A5": "Not applicable"
+      }
+    }
+  ],
+  "dataAnalytics": [{
+    "key": "data-analytics",
+    "title": "Data analytics",
+    "answers":
+    {
+      "data-analytics-A1": "Yes, we have the technology already",
+      "data-analytics-A2": "Yes, we’ll buy the technology as part of the project",
+      "data-analytics-A3": "No, we will not use any data analytics"
+    }}
+  ],
+  "eligibilityCriteria": [
+    {
+      "key": "eligibility-criteria",
+      "title": "Eligibility criteria",
+      "answers": {
+        "eligibility-criteria-A1": "Has sensing system that can understand its environment ",
+        "eligibility-criteria-A2": "Makes decisions and plans",
+        "eligibility-criteria-A3": "Can control its actuators (the devices that move robotic joints)",
+        "eligibility-criteria-A4": "Works in a continuous loop",
+        "eligibility-criteria-A5": "Not applicable"
       }
     }
   ]

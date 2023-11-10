@@ -1,6 +1,6 @@
 {
   "name": "ffc-grants-productivity-web",
-  "version": "2.45.4",
+  "version": "2.46.0",
   "description": "Web frontend for FTF productivity scheme",
   "homepage": "https://github.com/DEFRA/ffc-grants-productivity-web",
   "main": "app/index.js",

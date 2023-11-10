@@ -38,6 +38,8 @@
                 </tr>
                 </thead>
                 <tbody class="govuk-table__body">
+                    {% set counter = 0 %}
+
                     {% for item in projectItemsList %}
                         <tr class="govuk-table__row">
                         <th scope="row" class="govuk-table__header">
@@ -54,10 +56,11 @@
                             </ul>
                         </td>
                         <td class="govuk-table__cell">
-                            <a class="govuk-link" href="remove-item" title="Remove {{item.item}}">
+                            <a class="govuk-link" href="remove-item?item={{item.item}}&index={{counter}}" title="Remove {{item.item}}">
                                 Remove <span class="govuk-visually-hidden">{{item.item}}</span></a>
                         </td>
                         </tr>
+                        {% set counter = counter +1 %}
                         {% endfor %}
                 </tbody>
             </table>
