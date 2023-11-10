@@ -24,8 +24,6 @@ function getDesirabilityDetails (questionKey, userInput) {
     let loopLists = []
     for (item in userInput[questionKey]) {
 
-      console.log('eligibility criteria item to be added', userInput[questionKey], userInput[questionKey][item])
-
       loopLists.push({
        answers: content.map(({ key, title, answers }) => ({
           key,
@@ -41,7 +39,12 @@ function getDesirabilityDetails (questionKey, userInput) {
     }
     return {
       key: content[0].key,
-      answers: loopLists
+      answers: loopLists,
+      rating: {
+        score: null,
+        band: null,
+        importance: null
+      }
     }
 
   } else {

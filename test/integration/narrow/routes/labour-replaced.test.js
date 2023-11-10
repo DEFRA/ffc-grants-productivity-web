@@ -53,7 +53,7 @@ it('should redirect to /score-summary when an option is selected', async () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('score-summary')
+    expect(postResponse.headers.location).toBe('score')
 })
 
 
