@@ -2,7 +2,8 @@ const { crumbToken } = require('./test-helper')
 
 describe('Remove item page', () => {
     const varList = {
-        confirmItem: 'Hello'
+        confirmItem: 'Hello',
+        removeItem: 'Yes'
     }
 
     jest.mock('../../../../app/helpers/session', () => ({
@@ -37,6 +38,7 @@ expect(postResponse.headers.location).toBe('project-items-summary')
 })
 
 it('should store user response and redirects to project-items-summary page -No', async () => {
+    varList.removeItem = 'No'
     const postOptions = {
         method: 'POST',
         url: `${global.__URLPREFIX__}/remove-item`,
