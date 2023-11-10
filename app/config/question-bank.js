@@ -856,7 +856,7 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: 'Solar panels must be installed:',
-                items: ['on a rooftop', 'on an existing hardstanding area', 'floating (on a reservoir)']
+                items: ['on a rooftop', 'floating (on a reservoir)']
               }]
             }]
           },
