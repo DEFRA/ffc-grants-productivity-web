@@ -6,6 +6,86 @@
   "desirability": {
     "questions": [
       {
+        "key": "solar-output",
+        "answers": [
+          {
+            "key": "solarOutput",
+            "title": "How much energy will your solar PV system output?",
+            "input": [
+              {
+                "key": "solar-output-A1",
+                "value": "Up to 50kW"
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": 1,
+          "band": "Weak",
+          "importance": null
+        }
+      },
+      {
+        "key": "solar-technologies",
+        "answers": [
+          {
+            "key": "solarTechnologies",
+            "title": "What solar project items does your project need?",
+            "input": [
+              {
+                "key": "solar-technologies-A1",
+                "value": "An electrical grid connection"
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": 1,
+          "band": "Weak",
+          "importance": null
+        }
+      },
+      {
+        "key": "technology-use",
+        "answers": [
+          {
+            "key": "technologyUse",
+            "title": "Are you already using this technology?",
+            "input": [
+              {
+                "key": "technology-use-A1",
+                "value": "Yes, we’re using it now"
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": 1,
+          "band": "Weak",
+          "importance": null
+        }
+      },
+      {
+        "key": "labour-replaced",
+        "answers": [
+          {
+            "key": "labour-replaced",
+            "title": "How much manual labour will this technology replace?",
+            "input": [
+              {
+                "key": "labour-replaced-A1",
+                "value": "1 to 2 jobs"
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": 1,
+          "band": "Weak",
+          "importance": null
+        }
+      },
+      {
         "key": "project-subject",
         "answers": [
           {
@@ -56,7 +136,7 @@
         }
       },
       {
-        "key": "dataAnalytics",
+        "key": "data-analytics",
         "answers": [
           {
             "key": "dataAnalyticsa",
@@ -85,7 +165,7 @@
         }
       },
       {
-        "key": "energySource",
+        "key": "energy-source",
         "answers": [
           {
             "key": "energySource",
@@ -105,7 +185,7 @@
         }
       },
       {
-        "key": "agriculturalSector",
+        "key": "agricultural-sector",
         "answers": [
           {
             "key": "agriculturalSector",
@@ -118,6 +198,30 @@
               {
                 "key": "agriculturalSector-A2",
                 "value": "Increased yield per hectare"
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": 0.5,
+          "band": "Weak",
+          "importance": null
+        }
+      },
+      {
+        "key": "agricultural-sector-solar",
+        "answers": [
+          {
+            "key": "agriculturalSector",
+            "title": "How will the project improve productivity?",
+            "input": [
+              {
+                "key": "agricultural-sector-solar-A1",
+                "value": "Arable"
+              },
+              {
+                "key": "agricultural-sector-solar-A2",
+                "value": "Beef"
               }
             ]
           }
