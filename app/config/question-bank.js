@@ -772,7 +772,7 @@ const questionBank = {
             }
           },
           eliminationAnswerKeys: '',
-          fundingPriorities: '<ul><li>Include batteries</li></ul>',          
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Include batteries</li></ul>',          
           type: 'multi-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -856,7 +856,7 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: 'Solar panels must be installed:',
-                items: ['on a rooftop', 'on an existing hardstanding area', 'floating (on a reservoir)']
+                items: ['on a rooftop', 'floating (on a reservoir)']
               }]
             }]
           },
@@ -957,7 +957,7 @@ const questionBank = {
           nextUrl: 'project-cost-solar',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Smaller solar PV systems</li></ul>',          
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Smaller solar PV systems</li></ul>',          
           type: 'single-answer',
           classes: 'govuk-radios govuk-fieldset__legend--l',
           minAnswerCount: 1,
@@ -1174,7 +1174,7 @@ const questionBank = {
           preValidationKeys: ['remainingCosts'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',          
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',          
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
@@ -2141,7 +2141,7 @@ const questionBank = {
           // preValidationKeys: ['projectImpact'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Improve productivity</li><li>Introduce innovation</li></ul>',
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Improve productivity</li><li>Introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -2211,7 +2211,7 @@ const questionBank = {
           nextUrl: 'agricultural-sector',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Improve the environment</li></ul>',
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Improve the environment</li></ul>',
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
@@ -2303,7 +2303,7 @@ const questionBank = {
           // preValidationKeys: ['energySource'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
@@ -2373,7 +2373,7 @@ const questionBank = {
           // preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Introduce innovation</li></ul>',
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -2422,7 +2422,7 @@ const questionBank = {
           nextUrl: 'score',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Replace manual labour</li></ul>',
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Replace manual labour</li></ul>',
           type: 'single-answer',
           scheme: 'robotics',
           score: {
@@ -2645,10 +2645,10 @@ const questionBank = {
           backUrl: 'business-details',
           dependantNextUrl: {
             dependentQuestionYarKey: 'applicant',
-            dependentAnswerKeysArray: ['applicant-A1'],
+            dependentAnswerKeysArray: ['applicant-A2'],
             urlOptions: {
-              thenUrl: '/productivity/farmers-details',
-              elseUrl: '/productivity/contractors-details'
+              thenUrl: '/productivity/contractors-details',
+              elseUrl: '/productivity/farmers-details'
             }
           },
           // preValidationKeys: ['businessDetails'],

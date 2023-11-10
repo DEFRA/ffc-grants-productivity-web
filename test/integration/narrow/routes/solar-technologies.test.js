@@ -104,6 +104,20 @@ describe('Page: /solar-technologies', () => {
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
   })
 
+
+  it('store user response and redirect to score page if score', async () => {
+    varList['current-score'] = true
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/solar-technologies`,
+      payload: { solarTechnologies: ['An inverter', 'A battery'], secBtn: 'Back to score', crumb: crumbToken },
+      headers: { cookie: 'crumb=' + crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('/productivity/score')
+  })
   it('page loads with correct back link', async () => {
     const options = {
       method: 'GET',
