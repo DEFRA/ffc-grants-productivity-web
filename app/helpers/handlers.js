@@ -494,7 +494,7 @@ const showPostPage = (currentQuestion, request, h) => {
           return  h.view('not-eligible', NOT_ELIGIBLE)
         }
       }
-    case 'technology-item': {
+    case 'technology-items': {
       setYarValue(request, 'addToItemList', true)
       break
     }
