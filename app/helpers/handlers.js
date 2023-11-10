@@ -566,10 +566,9 @@ const showPostPage = (currentQuestion, request, h) => {
         description: getYarValue(request, 'technologyDescription') ?  getYarValue(request, 'technologyDescription').description  : null
       }
 
-      tempArray.push(tempObject)
-
       if (getYarValue(request, 'addToItemList') === true) {
         setYarValue(request, 'addToItemList', false)
+        Object.keys(tempObject).every(item => tempObject[item]) ? tempArray.push(tempObject) : null
         setYarValue(request, 'projectItemsList', tempArray)
 
       }
