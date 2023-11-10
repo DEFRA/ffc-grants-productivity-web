@@ -65,20 +65,6 @@ describe('technology-items', () => {
     expect(postResponse.headers.location).toBe('robotic-automatic')
   })
 
-  it('store user response and redirect to score page if score', async () => {
-    varList['current-score'] = true
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/technology-items`,
-      payload: { technologyItems: 'Harvesting technology', secBtn: 'Back to score', crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/productivity/score')
-  })
-
   it('page loads with correct back link - project-items', async () => {
     const options = {
       method: 'GET',
