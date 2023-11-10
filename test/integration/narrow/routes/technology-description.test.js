@@ -29,10 +29,7 @@ it('page loads successfully, with all options', async () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Do you need to add another robotic or automatic item?')
-    expect(response.payload).toContain('Yes')
-    expect(response.payload).toContain('No')
-    expect(response.payload).toContain('Continue')
+    expect(response.payload).toContain('What is your technology?')
 })
 
 it('should return error message if no option is selected', async () => {
@@ -45,54 +42,25 @@ it('should return error message if no option is selected', async () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Select yes if you need to add another robotic or automatic item')
+    expect(postResponse.payload).toContain('Enter a brief description of your technology')
 })
 
-it('should redirect to /technology-items when user selects Yes', async () => {
-    varList.otherItem = 'Yes'
-    const postOptions = {
-        method: 'POST',
-        url: `${global.__URLPREFIX__}/technology-description`,
-        headers: { cookie: 'crumb=' + crumbToken },
-        payload: { otherItem: 'Yes', crumb: crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('technology-items')
-})
-
-it('should redirect to /item-conditional when user selects No and only chosen 1 item', async () => {
-    varList.otherItem = 'No'
-    varList.projectItemsList = []
-    const postOptions = {
-        method: 'POST',
-        url: `${global.__URLPREFIX__}/technology-description`,
-        headers: { cookie: 'crumb=' + crumbToken },
-        payload: { otherItem: 'No', crumb: crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toContain('/item-conditional')
-})
-
-it('should redirect to /project-items-summary when user selects No and chosen more than 1 option - normal vals', async () => {
+it('should redirect to /other-items - normal vals', async () => {
     varList.otherItem = 'No'
     varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
     const postOptions = {
         method: 'POST',
         url: `${global.__URLPREFIX__}/technology-description`,
         headers: { cookie: 'crumb=' + crumbToken },
-        payload: { otherItem: 'No', projectItemsList: ['Harvesting technology', "Weeding technology"], crumb: crumbToken }
+        payload: { description: 'fakeDescription', projectItemsList: ['Harvesting technology', "Weeding technology"], crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toContain('project-items-summary')
+    expect(postResponse.headers.location).toContain('other-item')
 })
 
-it('should redirect to /project-items-summary when user selects No and chosen more than 1 option - null values', async () => {
+it('should redirect to /other-items - null values', async () => {
     varList.otherItem = 'No'
     varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
     varList.roboticEligibility = 'No'
@@ -104,15 +72,18 @@ it('should redirect to /project-items-summary when user selects No and chosen mo
         method: 'POST',
         url: `${global.__URLPREFIX__}/technology-description`,
         headers: { cookie: 'crumb=' + crumbToken },
-        payload: { otherItem: 'No', projectItemsList: ['Harvesting technology', "Weeding technology"], crumb: crumbToken }
+        payload: { description: 'fake description', projectItemsList: ['Harvesting technology', "Weeding technology"], crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toContain('project-items-summary')
+    expect(postResponse.headers.location).toContain('other-item')
 })
 it('page loads with correct back link > automatic', async () => {
-    const options = {
+  varList.roboticEligibility = null
+  varList.automaticEligibility = 'value'
+  varList.roboticAutomatic = 'Automatic'  
+  const options = {
         method: 'GET',
         url: `${global.__URLPREFIX__}/technology-description`
     }
