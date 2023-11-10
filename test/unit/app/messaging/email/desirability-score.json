@@ -207,6 +207,30 @@
           "band": "Weak",
           "importance": null
         }
+      },
+      {
+        "key": "agricultural-sector-solar",
+        "answers": [
+          {
+            "key": "agriculturalSector",
+            "title": "How will the project improve productivity?",
+            "input": [
+              {
+                "key": "agricultural-sector-solar-A1",
+                "value": "Arable"
+              },
+              {
+                "key": "agricultural-sector-solar-A2",
+                "value": "Beef"
+              }
+            ]
+          }
+        ],
+        "rating": {
+          "score": 0.5,
+          "band": "Weak",
+          "importance": null
+        }
       }
     ],
     "overallRating": {
