@@ -38,6 +38,7 @@ describe('Page: /robotic-automatic', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select if your technology is robotic or automatic')
+    expect(postResponse.payload).toContain('Is the harvesting technology robotic or automatic?')
   })
   it('page loads successfully, with all the options > other page', async () => {
 

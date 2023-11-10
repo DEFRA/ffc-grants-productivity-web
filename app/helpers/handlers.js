@@ -23,7 +23,7 @@ const resetYarValues = (applying, request) => {
 }
 
 const getConfirmationId = (guid, journey) => {
-  const prefix = journey.toLowerCase() === 'solar project items' ? 'SO' : 'RI'
+  const prefix = journey.toLowerCase() === 'solar project items' ? 'S' : 'R'
   console.log(journey, prefix, 'confirmationId')
   return `${prefix}-${guid.substr(0, 3)}-${guid.substr(3, 3)}`.toUpperCase()
 }
@@ -363,19 +363,13 @@ const showPostPage = (currentQuestion, request, h) => {
     }
   }
 
-  const errors = checkErrors(payload, currentQuestion, h, request)
-  if (errors) {
-    gapiService.sendValidationDimension(request)
-    return errors
-  }
-
   if (replace) {
     if(getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' && baseUrl === 'robotic-automatic'){
       currentQuestion = {
         ...currentQuestion,
         title: 'Is the other technology robotic or automatic?'
       }
-    }else {
+    }else if(baseUrl === 'automatic-eligibility') {
       currentQuestion = {
         ...currentQuestion,
         title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
@@ -386,12 +380,44 @@ const showPostPage = (currentQuestion, request, h) => {
             type: "NOT_EMPTY",
             error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
                 getYarValue(request, additionalYarKeyName).toLowerCase()
-            ),
+            )
           },
+          {
+            type: 'STANDALONE_ANSWER',
+            error: 'You cannot select that combination of options',
+            standaloneObject: {
+              questionKey: 'automatic-eligibility',
+              answerKey: 'automatic-eligibility-A5'
+            }
+          }
         ],
-      };
+      }
+    }else{
+      {
+        currentQuestion = {
+          ...currentQuestion,
+          title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+              getYarValue(request, additionalYarKeyName).toLowerCase()
+          ),
+          validate: [
+            {
+              type: "NOT_EMPTY",
+              error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+                  getYarValue(request, additionalYarKeyName).toLowerCase()
+              )
+            }
+          ],
+        };
+      }
     }
   }
+
+  const errors = checkErrors(payload, currentQuestion, h, request)
+  if (errors) {
+    gapiService.sendValidationDimension(request)
+    return errors
+  }
+
 
   if (thisAnswer?.notEligible ||
       (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)
@@ -458,7 +484,7 @@ const showPostPage = (currentQuestion, request, h) => {
       }
     case 'automatic-eligibility': {
         const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
-        if (automaticEligibilityAnswer.length === 1) {
+        if (automaticEligibilityAnswer.length === 1 || automaticEligibilityAnswer.includes('None of the above')) {
           const projectItemsList = getYarValue(request, 'projectItemsList') ?? []
           if(projectItemsList.length === 0) {
             NOT_ELIGIBLE.primaryBtn = {
@@ -507,24 +533,27 @@ const showPostPage = (currentQuestion, request, h) => {
           return h.redirect(`${urlPrefix}/technology-description`)
         }
       }
-    case 'technology-description': {
-        let roboticArr = ['sensing system', 'makes decisions', 'control actuators', 'continuous loop']
-        let roboticArrScore = ['Has sensing system that can understand its environment ', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
-        let automaticFinalArr = []
-        if(getYarValue(request, 'automaticEligibility')){
-          automaticFinalArr = getYarValue(request, 'automaticEligibility').map((item) =>   item.includes('sensing system') ? 'sensing system' : item.includes('Makes decisions') ? 'makes decisions' : item.includes('actuators') ? 'control actuators' : item.includes('continuous loop') ? 'continuous loop' : '')
-        }
-        let tempArray = getYarValue(request, 'projectItemsList') ?? []
-        let tempObject = {
-          index: tempArray.length + 1,
-          item: getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ? 'Other technology' : getYarValue(request, 'technologyItems'),
-          type: getYarValue(request, 'roboticAutomatic'),
-          criteria: getYarValue(request, 'automaticEligibility') ? automaticFinalArr : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArr : null,
-          criteriaScoring: getYarValue(request, 'automaticEligibility') ? getYarValue(request, 'automaticEligibility') : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArrScore : null,
-          description: getYarValue(request, 'technologyDescription').description
-        }
-        
-        tempArray.push(tempObject)
+    case 'other-item': {  
+      let roboticArr = ['sensing system', 'makes decisions', 'control actuators', 'continuous loop']
+      let roboticArrScore = ['Has sensing system that can understand its environment ', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
+      let automaticFinalArr = []
+      if(getYarValue(request, 'automaticEligibility')){
+        automaticFinalArr = getYarValue(request, 'automaticEligibility').map((item) =>   item.includes('sensing system') ? 'sensing system' : item.includes('Makes decisions') ? 'makes decisions' : item.includes('actuators') ? 'control actuators' : item.includes('continuous loop') ? 'continuous loop' : '')
+      }
+      let tempArray = getYarValue(request, 'projectItemsList') ?? []
+      let tempObject = {
+        index: tempArray.length + 1,
+        item: getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ? 'Other technology' : getYarValue(request, 'technologyItems'),
+        type: getYarValue(request, 'roboticAutomatic') ? getYarValue(request, 'roboticAutomatic') : null,
+        criteria: getYarValue(request, 'automaticEligibility') ? automaticFinalArr : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArr : null,
+        criteriaScoring: getYarValue(request, 'automaticEligibility') ? getYarValue(request, 'automaticEligibility') : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArrScore : null,
+        description: getYarValue(request, 'technologyDescription') ?  getYarValue(request, 'technologyDescription').description  : null
+      }
+      Object.keys(tempObject).every(item => tempObject[item]) ? tempArray.push(tempObject) : null
+
+        // add item to projectItemsList
+        setYarValue(request, 'projectItemsList', tempArray)
+
         // reset all yars after item added
         setYarValue(request, 'technologyItems', null)
         setYarValue(request, 'roboticAutomatic', null)
@@ -532,17 +561,14 @@ const showPostPage = (currentQuestion, request, h) => {
         setYarValue(request, 'automaticEligibility', null)
         setYarValue(request, 'technologyDescription', null)
 
-        // add item to projectItemsList
-        setYarValue(request, 'projectItemsList', tempArray)
-        break
+        if(getYarValue(request, 'otherItem') === 'No') {
+          if(getYarValue(request, 'projectItemsList')?.length === 1){
+            return h.redirect(`${urlPrefix}/item-conditional`)
+          }else {
+            return h.redirect(`${urlPrefix}/project-items-summary`)
+          }
       }
-    case 'other-item': {  
-        if(getYarValue(request, 'projectItemsList')?.length === 1) {
-          return h.redirect(`${urlPrefix}/item-conditional`)
-        } else {
-          return h.redirect(`${urlPrefix}/project-items-summary`)
-        }
-      }
+    }
       // case 'remove-item': {
       //   if(getYarValue(request, 'projectItemsList').length < 1 ){
       //     return h.redirect(`${urlPrefix}/robotic-automatic`)

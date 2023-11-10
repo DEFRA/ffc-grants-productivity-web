@@ -70,6 +70,7 @@ describe('Page: /automatic-eligibility', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.payload).toContain('You cannot select that combination of options')
+    expect(postResponse.payload).toContain('Which eligibility criteria does your automatic harvesting technology meet?')
   })
 
   it('should display ineligible page when user selects only one option', async () => {
