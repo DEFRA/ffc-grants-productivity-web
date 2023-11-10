@@ -74,9 +74,12 @@ const getPage = async (question, request, h) => {
     const queryParams = new URLSearchParams(request.raw.req.url.split('?')[1])
     setYarValue(request, 'confirmItem', queryParams.get('item'))
     setYarValue(request, 'index', queryParams.get('index'))
-    // const PAGE_MODEL = getModel(data, question, request, conditionalHtml)
 
-    // return h.view('page', PAGE_MODEL)
+    let removeData = getYarValue(request, yarKey) || null
+
+    const PAGE_MODEL = getModel(removeData, question, request, conditionalHtml)
+
+    return h.view('page', PAGE_MODEL)
   }
 
   if (url === 'item-conditional') {
