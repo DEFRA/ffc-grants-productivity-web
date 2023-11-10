@@ -842,7 +842,6 @@ const questionBank = {
                     <p class="govuk-body">Solar panels must be installed:</p>
                           <ul>
                             <li>on a rooftop</li>
-                            <li>on an existing hardstanding area</li>
                             <li>floating (on a reservoir)</li>
                           </ul>
                     </div>`,
