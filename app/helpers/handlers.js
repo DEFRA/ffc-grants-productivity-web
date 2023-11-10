@@ -549,7 +549,7 @@ const showPostPage = (currentQuestion, request, h) => {
           return h.redirect(`${urlPrefix}/technology-description`)
         }
       }
-    case 'other-item': {  
+    case 'technology-description': {  
       let roboticArr = ['sensing system', 'makes decisions', 'control actuators', 'continuous loop']
       let roboticArrScore = ['Has sensing system that can understand its environment ', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
       let automaticFinalArr = []
@@ -572,6 +572,10 @@ const showPostPage = (currentQuestion, request, h) => {
         setYarValue(request, 'projectItemsList', tempArray)
 
       }
+      break
+    }
+
+    case 'other-item': {
 
       if(getYarValue(request, 'projectItemsList')?.length === 1){
         return h.redirect(`${urlPrefix}/item-conditional`)

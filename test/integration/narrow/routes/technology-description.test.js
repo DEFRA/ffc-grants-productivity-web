@@ -1,118 +1,137 @@
 const { crumbToken } = require('./test-helper')
-const fakeDescription = 'fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description fake description '
 
-
-describe('Technology description', () => {
-  const varList = {
-    projectItems: ['Robotic and automatic technology'],
-    technologyItems: 'Harvesting technology',
-    roboticAutomatic: 'Automatic',
-    automaticEligibility: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop'],
-    projectItemsList: ['Harvesting technology', 'Other robotics or automatic technology'],
-    roboticEligibility: 'Fake data',
-    technologyDescription: 'some fake description some fake description',
-  }
-
-  jest.mock('../../../../app/helpers/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return undefined
+describe('Page: /technology-description', () => {
+    const varList = {
+        otherItem: 'randomData',
+        projectItemsList: [],
+        projectItems: ['Robotic and automatic technology'],
+        technologyItems: 'Harvesting technology',
+        roboticAutomatic: 'Automatic',
+        automaticEligibility: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop'],
+        roboticEligibility: 'Yes',
+        technologyDescription: 'some fake description some fake description',
+        addToItemList: true
     }
-  }))
-  it('page loads successfully, with all the fields', async () => {
+
+    jest.mock('../../../../app/helpers/session', () => ({
+        setYarValue: (request, key, value) => null,
+        getYarValue: (request, key) => {
+            if (varList[key]) return varList[key]
+            else return undefined
+    }
+}))
+
+it('page loads successfully, with all options', async () => {
     const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/technology-description`
+        method: 'GET',
+        url: `${global.__URLPREFIX__}/technology-description`
     }
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What is your technology?')
-  })
-  it('should returns error message if no value entered', async () => {
+    expect(response.payload).toContain('Do you need to add another robotic or automatic item?')
+    expect(response.payload).toContain('Yes')
+    expect(response.payload).toContain('No')
+    expect(response.payload).toContain('Continue')
+})
+
+it('should return error message if no option is selected', async () => {
     const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/technology-description`,
-      payload: { crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/technology-description`,
+        payload: { crumb: crumbToken },
+        headers: { cookie: 'crumb=' + crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter a brief description of your technology')
-  })
-  it('should returns error message if description is more than 250', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/technology-description`,
-      payload: { description: fakeDescription, crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
-    }
+    expect(postResponse.payload).toContain('Select yes if you need to add another robotic or automatic item')
+})
 
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Description must be 250 characters or less')
-  })
-  it('should returns error message if description is less than 10 chars.', async () => {
+it('should redirect to /technology-items when user selects Yes', async () => {
+    varList.otherItem = 'Yes'
     const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/technology-description`,
-      payload: { description: 'fake data', crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Description must be 10 characters or more')
-  })
-  it('should store user response and redirects to other-item page', async () => {
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/technology-description`,
-      payload: { description: 'this is fake description this is fake description', crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/technology-description`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { otherItem: 'Yes', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('other-item')
-  })
+    expect(postResponse.headers.location).toBe('technology-items')
+})
 
-  it('should store user response and redirects to other-item page > robotic item only', async () => {
-    varList.automaticEligibility = null
+it('should redirect to /item-conditional when user selects No and only chosen 1 item', async () => {
+    varList.otherItem = 'No'
+    varList.projectItemsList = []
+    const postOptions = {
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/technology-description`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { otherItem: 'No', crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toContain('/item-conditional')
+})
+
+it('should redirect to /project-items-summary when user selects No and chosen more than 1 option - normal vals', async () => {
+    varList.otherItem = 'No'
+    varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
+    const postOptions = {
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/technology-description`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { otherItem: 'No', projectItemsList: ['Harvesting technology', "Weeding technology"], crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toContain('project-items-summary')
+})
+
+it('should redirect to /project-items-summary when user selects No and chosen more than 1 option - null values', async () => {
+    varList.otherItem = 'No'
+    varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
+    varList.roboticEligibility = 'No'
     varList.technologyItems = 'Other robotics or automatic technology'
+    varList.automaticEligibility = null
+    varList.roboticAutomatic = null
+    varList.technologyDescription = null
     const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/technology-description`,
-      payload: { description: 'this is fake description this is fake description', crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/technology-description`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { otherItem: 'No', projectItemsList: ['Harvesting technology', "Weeding technology"], crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('other-item')
-  })
-  it('page loads with correct back link', async () => {
+    expect(postResponse.headers.location).toContain('project-items-summary')
+})
+it('page loads with correct back link > automatic', async () => {
     const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/technology-description`
+        method: 'GET',
+        url: `${global.__URLPREFIX__}/technology-description`
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"automatic-eligibility\" class=\"govuk-back-link\">Back</a>')
-  })
-  it('page loads with correct back link', async () => {
-    varList.roboticAutomatic = 'Robotic'
-    varList.roboticEligibility = 'Yes'
-    varList.automaticEligibility = null
+    expect(response.payload).toContain('<a href=\"automatic-eligibility\" class=\"govuk-back-link\">Back</a>' )
+    })
 
-    const options = {
+
+it('page loads with correct back link > robotic', async () => {
+  varList.roboticEligibility = 'value'
+  varList.automaticEligibility = null
+  varList.roboticAutomatic = 'Robotic'
+  const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/technology-description`
-    }
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"robotic-eligibility\" class=\"govuk-back-link\">Back</a>')
+  }
+  const response = await global.__SERVER__.inject(options)
+  expect(response.statusCode).toBe(200)
+  expect(response.payload).toContain('<a href=\"robotic-eligibility\" class=\"govuk-back-link\">Back</a>' )
   })
 })
