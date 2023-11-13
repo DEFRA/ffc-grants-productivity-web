@@ -487,7 +487,6 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   if (yarKey === 'projectCost') {
-    console.log('here?')
     const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
