@@ -196,12 +196,6 @@ const getPage = async (question, request, h) => {
           getYarValue(request, additionalYarKeyName).toLowerCase()
         )
       }
-      let removeData = getYarValue(request, yarKey) || null
-      console.log('removeData: ', removeData);
-      const PAGE_MODEL = getModel(removeData, question, request, "")
-      console.log('model with rm data: ', JSON.stringify(PAGE_MODEL));
-      return h.view('page', PAGE_MODEL)
-
     }
   }
   const data = getYarValue(request, yarKey) || null

@@ -19,9 +19,12 @@ const varListTemplate = {
   consentMain: 'lalal',
   technologyItems: 'Solar panels',
   projectItems: 'Advanced ventilation control units',
-  projectItemsList: ['value', 'value2']
+  projectItemsList: ['value', 'value2'],
+  confirmItem: 'Hello'
 
 }
+
+// confirm item added for remove-item
 
 let varList
 ALL_QUESTIONS.forEach(question => {

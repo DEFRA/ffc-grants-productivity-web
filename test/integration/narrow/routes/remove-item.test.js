@@ -1,18 +1,30 @@
 const { crumbToken } = require('./test-helper')
 
 describe('Remove item page', () => {
+    const varList = {
+        confirmItem: 'Hello',
+        removeItem: 'Yes'
+    }
 
-// it('should load page successfully', async () => {
-//     const options = {
-//         method: 'GET',
-//         url: `${global.__URLPREFIX__}/remove-item`
-//     }
+    jest.mock('../../../../app/helpers/session', () => ({
+        setYarValue: (request, key, value) => null,
+        getYarValue: (request, key) => {
+            if (varList[key]) return varList[key]
+            else return undefined
+        }
+        }))
 
-//     const response = await global.__SERVER__.inject(options)
-//     expect(response.statusCode).toBe(200)
-//     expect(response.payload).toContain('Are you sure you want to remove 0?')
-// })
-it('should store user response and redirects to project-items-summary page', async () => {
+it('should load page successfully', async () => {
+    const options = {
+        method: 'GET',
+        url: `${global.__URLPREFIX__}/remove-item`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Are you sure you want to remove hello?')
+})
+it('should store user response and redirects to project-items-summary page - Yes', async () => {
 const postOptions = {
     method: 'POST',
     url: `${global.__URLPREFIX__}/remove-item`,
@@ -25,7 +37,8 @@ expect(postResponse.statusCode).toBe(302)
 expect(postResponse.headers.location).toBe('project-items-summary')
 })
 
-it('should store user response and redirects to project-items-summary page', async () => {
+it('should store user response and redirects to project-items-summary page -No', async () => {
+    varList.removeItem = 'No'
     const postOptions = {
         method: 'POST',
         url: `${global.__URLPREFIX__}/remove-item`,
