@@ -322,6 +322,13 @@ const showPostPage = (currentQuestion, request, h) => {
   const payload = request.payload
   let thisAnswer
   let dataObject
+  if (yarKey === 'removeItem') {
+    const { item, index } = request.payload
+    setYarValue(request, 'confirmItem', item)
+    setYarValue(request, 'index', index)
+    return h.redirect(`${urlPrefix}/remove-item`)
+  }
+
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
