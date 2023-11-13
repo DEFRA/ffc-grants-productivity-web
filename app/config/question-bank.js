@@ -1836,7 +1836,6 @@ const questionBank = {
           title: 'Are you sure you want to remove {{_confirmItem_}}?',
           replace: true,
           pageTitle: '',
-          backUrl: 'project-items-summary',
           nextUrl: 'project-items-summary',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'remove-item',

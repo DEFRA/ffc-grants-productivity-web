@@ -594,11 +594,11 @@ const showPostPage = (currentQuestion, request, h) => {
         return h.redirect(`${urlPrefix}/project-items-summary`)
       }
     }
-      // case 'remove-item': {
-      //   if(getYarValue(request, 'projectItemsList').length < 1 ){
-      //     return h.redirect(`${urlPrefix}/robotic-automatic`)
-      //   }
-      // }
+    case 'remove-item': {
+      if (getYarValue(request, 'projectItemsList').length < 1) {
+        return h.redirect(`${urlPrefix}/technology-items`)
+      }
+    }
 
     case 'project-items-summary':
       setYarValue(request, 'technologyItems', null)
