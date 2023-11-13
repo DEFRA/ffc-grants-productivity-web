@@ -99,7 +99,7 @@ const getModel = (data, question, request, conditionalHtml = '') => {
     items: getOptions(data, question, conditionalHtml, request),
     sideBarText,
     ...(warningDetails ? ({ warning: warningDetails }) : {}),
-    diaplaySecondryBtn: hasScore && score?.isDisplay
+    diaplaySecondryBtn: hasScore && score?.isDisplay && key !== 'solar-technologies'
   }
 }
 
