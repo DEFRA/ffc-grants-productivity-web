@@ -199,6 +199,7 @@ describe('Agent details page', () => {
     expect(postResponse.headers.location).toBe('/productivity/farmers-details')
   })
   it('should store user response and redirects to farmer details page, if the applicant is farmer', async () => {
+    varList.projectSubject = 'Solar project items'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/agents-details`,
@@ -224,6 +225,8 @@ describe('Agent details page', () => {
 
   it('should store user response and redirects to contractor details page, if the applicant is contractor', async () => {
     varList.applicant = 'Contractor'
+    varList.projectSubject = 'Farm productvity'
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/agents-details`,
