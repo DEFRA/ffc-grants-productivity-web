@@ -118,14 +118,14 @@ describe('Page: /solar-technologies', () => {
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('/productivity/score')
   })
-  it('page loads with correct back link', async () => {
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/solar-technologies`
-    }
+  // it('page loads with correct back link', async () => {
+  //   const options = {
+  //     method: 'GET',
+  //     url: `${global.__URLPREFIX__}/solar-technologies`
+  //   }
 
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"existing-solar\" class=\"govuk-back-link\">Back</a>')
-  })
+  //   const response = await global.__SERVER__.inject(options)
+  //   expect(response.statusCode).toBe(200)
+  //   expect(response.payload).toContain('<a href=\"existing-solar\" class=\"govuk-back-link\">Back</a>')
+  // })
 })

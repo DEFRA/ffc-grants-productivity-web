@@ -275,10 +275,15 @@ const getPage = async (question, request, h) => {
   }
   switch (url) {
     case 'score':
-    case 'business-details':
     case 'agents-details': {
+        if (getYarValue(request, 'projectSubject') === 'Solar project items' ) {
+          question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/farmers-details`
+        }else{
+          question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/contractors-details`
+        }
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
+    case 'business-details':
     case 'farmers-details': {
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
@@ -294,7 +299,7 @@ const getPage = async (question, request, h) => {
       }
       return h.view('project-items-summary', projectItemsModel)
     }
-    case 'legal-status':
+    case 'legal-status': 
       if (getYarValue(request, 'projectSubject') === 'Solar project items') {
         setYarValue(request, 'applicant', null)
       }
@@ -482,7 +487,6 @@ const showPostPage = (currentQuestion, request, h) => {
   }
 
   if (yarKey === 'projectCost') {
-    console.log('here?')
     const { calculatedGrant, remainingCost, projectCost } = getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo)
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)

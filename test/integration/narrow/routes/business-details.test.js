@@ -43,7 +43,7 @@ describe('Project and business details page', () => {
     expect(response.payload).toContain('For example, Browns Hill Farm robotic milking')
   })
 
-  it('should diaplay Back to details buton if the user came from check details page ', async () => {
+  it('should display Back to details buton if the user came from check details page ', async () => {
     varList.reachedCheckDetails = true
     const options = {
       method: 'GET',
