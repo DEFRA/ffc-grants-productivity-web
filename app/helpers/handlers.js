@@ -315,8 +315,6 @@ const showPostPage = (currentQuestion, request, h) => {
   let thisAnswer
   let dataObject
   if (yarKey === 'removeItem' && request?.payload?.item) {
-    console.log('POST remove-items: ', request.payload);
-    console.log('here!!! projectItemsList: ', getYarValue(request, 'projectItemsList'));
     const { item, index } = request.payload
     setYarValue(request, 'confirmItem', item)
     setYarValue(request, 'index', index)
