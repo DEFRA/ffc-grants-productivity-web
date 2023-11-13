@@ -69,14 +69,6 @@ const getPage = async (question, request, h) => {
     return h.redirect(startPageUrl)
   }
   let confirmationId = ''
-
-  if (url === 'remove-item') {
-    const queryParams = new URLSearchParams(request.raw.req.url.split('?')[1])
-    setYarValue(request, 'confirmItem', queryParams.get('item'))
-    setYarValue(request, 'index', queryParams.get('index'))
-
-  }
-
   if (url === 'item-conditional') {
     if (getYarValue(request, 'projectItemsList')?.length === 1) {
       backUrl = `${urlPrefix}/other-item`
@@ -322,6 +314,13 @@ const showPostPage = (currentQuestion, request, h) => {
   const payload = request.payload
   let thisAnswer
   let dataObject
+  if (yarKey === 'removeItem' && request?.payload?.item) {
+    const { item, index } = request.payload
+    setYarValue(request, 'confirmItem', item)
+    setYarValue(request, 'index', index)
+    return h.redirect(`${urlPrefix}/remove-item`)
+  }
+
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
@@ -385,6 +384,7 @@ const showPostPage = (currentQuestion, request, h) => {
       }
     } else if (getYarValue(request, 'removeItem') === 'Yes' && baseUrl === 'remove-item')  {
       {
+        console.log('here!!! projectItemsList: ', getYarValue(request, 'projectItemsList'));
         getYarValue(request, 'projectItemsList')?.splice(getYarValue(request, 'index'), 1)
       }
     } else if(baseUrl === 'automatic-eligibility') {
@@ -415,13 +415,13 @@ const showPostPage = (currentQuestion, request, h) => {
         currentQuestion = {
           ...currentQuestion,
           title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-              getYarValue(request, additionalYarKeyName).toLowerCase()
+              getYarValue(request, additionalYarKeyName)?.toLowerCase()
           ),
           validate: [
             {
               type: "NOT_EMPTY",
               error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-                  getYarValue(request, additionalYarKeyName).toLowerCase()
+                  getYarValue(request, additionalYarKeyName)?.toLowerCase()
               )
             }
           ],
@@ -594,11 +594,11 @@ const showPostPage = (currentQuestion, request, h) => {
         return h.redirect(`${urlPrefix}/project-items-summary`)
       }
     }
-      // case 'remove-item': {
-      //   if(getYarValue(request, 'projectItemsList').length < 1 ){
-      //     return h.redirect(`${urlPrefix}/robotic-automatic`)
-      //   }
-      // }
+    case 'remove-item': {
+      if (getYarValue(request, 'projectItemsList').length < 1) {
+        return h.redirect(`${urlPrefix}/technology-items`)
+      }
+    }
 
     case 'project-items-summary':
       setYarValue(request, 'technologyItems', null)
