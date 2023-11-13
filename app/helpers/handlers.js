@@ -70,21 +70,6 @@ const getPage = async (question, request, h) => {
   }
   let confirmationId = ''
 
-  if (url === 'remove-item') {
-    const queryParams = new URLSearchParams(request.raw.req.url.split('?')[1])
-    setYarValue(request, 'confirmItem', queryParams.get('item'))
-    setYarValue(request, 'index', queryParams.get('index'))
-    console.log('url[0]: ', request.raw.req.url.split('?')[0]);
-    request.raw.req.url = request.raw.req.url.split('?')[0]
-    console.log('req url: ', request.raw.req.url);
-    // console.log('here: ', yarKey, question);
-    // let removeData = getYarValue(request, yarKey) || null
-    // console.log('removeData: ', removeData);
-    // const PAGE_MODEL = getModel(removeData, question, request, conditionalHtml)
-
-    // return h.view('page', PAGE_MODEL)
-  }
-
   if (url === 'item-conditional') {
     if (getYarValue(request, 'projectItemsList')?.length === 1) {
       backUrl = `${urlPrefix}/other-item`
@@ -214,7 +199,7 @@ const getPage = async (question, request, h) => {
       let removeData = getYarValue(request, yarKey) || null
       console.log('removeData: ', removeData);
       const PAGE_MODEL = getModel(removeData, question, request, "")
-      console.log('model with rm data: ', JSON.stringify(PAGE_MODEL.items));
+      console.log('model with rm data: ', JSON.stringify(PAGE_MODEL));
       return h.view('page', PAGE_MODEL)
 
     }
@@ -338,6 +323,22 @@ const showPostPage = (currentQuestion, request, h) => {
   const payload = request.payload
   let thisAnswer
   let dataObject
+  if (yarKey === 'removeItem') {
+    // const queryParams = new URLSearchParams(request.raw.req.url.split('?')[1])
+    // setYarValue(request, 'confirmItem', queryParams.get('item'))
+    // setYarValue(request, 'index', queryParams.get('index'))
+    // console.log('here: ', yarKey, question);
+    // let removeData = getYarValue(request, yarKey) || null
+    // console.log('removeData: ', removeData);
+    // const PAGE_MODEL = getModel(removeData, question, request, conditionalHtml)
+
+    // return h.view('page', PAGE_MODEL)
+    console.log('here: ', 'remove-item POST', request.payload);
+    const { item, index } = request.payload
+    setYarValue(request, 'confirmItem', item)
+    setYarValue(request, 'index', index)
+    return h.redirect(`${urlPrefix}/remove-item`)
+  }
   if (yarKey === 'consentOptional' && !Object.keys(payload).includes(yarKey)) {
     setYarValue(request, yarKey, '')
   }
