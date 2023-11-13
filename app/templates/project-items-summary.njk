@@ -55,7 +55,7 @@
                         </td>
                         <td class="govuk-table__cell">
                             <form action="remove-item" method="POST">
-                                 {{ crumbToken(crumb)}}
+                                {{ crumbToken(crumb)}}
                                 <input type="hidden" name="item" value="{{item.item}}" />
                                 <input type="hidden" name="index" value="{{counter}}" />
                                 <a href="#" onclick="this.parentNode.submit()" class="govuk-link" title="Remove {{item.item}}">Remove <span class="govuk-visually-hidden">{{item.item}}</span></a></a>
