@@ -57,4 +57,17 @@ describe('Remove item page', () => {
         expect(postResponse.statusCode).toBe(302)
         expect(postResponse.headers.location).toBe('project-items-summary')
     })
+
+    it('click continue redirects to remove-item page if item and index', async () => {
+        const postOptions = {
+            method: 'POST',
+            url: `${global.__URLPREFIX__}/remove-item`,
+            payload: { item: 'hello', index: 'hello', crumb: crumbToken },
+            headers: { cookie: 'crumb=' + crumbToken }
+        }
+        
+        const postResponse = await global.__SERVER__.inject(postOptions)
+        expect(postResponse.statusCode).toBe(302)
+        expect(postResponse.headers.location).toBe('/productivity/remove-item')
+        })
 })
