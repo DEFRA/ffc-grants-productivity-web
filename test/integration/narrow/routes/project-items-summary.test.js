@@ -56,4 +56,17 @@ const postResponse = await global.__SERVER__.inject(postOptions)
 expect(postResponse.statusCode).toBe(302)
 expect(postResponse.headers.location).toBe('item-conditional')
 })
+
+it('click continue redirects to remove-item page if item and index', async () => {
+    const postOptions = {
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/project-items-summary`,
+        payload: { item: '', index: '', crumb: crumbToken },
+        headers: { cookie: 'crumb=' + crumbToken }
+    }
+    
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('item-conditional')
+    })
 })
