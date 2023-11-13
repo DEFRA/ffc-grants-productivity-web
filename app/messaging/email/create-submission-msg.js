@@ -154,7 +154,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(43, 'Theme', 'Robotics, automation and solar'),
           generateRow(90, 'Project type', submission.projectSubject),
           generateRow(41, 'Owner', 'RD'),
-          generateRow(341, 'Grant Launch Date', ''),
+          generateRow(341, 'Grant Launch Date', (new Date('2024-01-08')).toLocaleDateString('en-GB')),
           generateRow(385, 'Applicant Type', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? submission.applicant : ''),
           
           generateRow(23, 'Status of applicant', submission.legalStatus),
@@ -164,7 +164,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
 
           // robotics project items
           generateRow(448, 'Project Responsibility', submission.tenancy === getQuestionAnswer('tenancy', 'tenancy-A2') ? submission.projectResponsibility : 'N/A'),
-          generateRow(44, 'Projectitems', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatProjectItems(submission.projectItemsList, submission.projectItems) : 'N/A'),
+          generateRow(44, 'Project Items', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatProjectItems(submission.projectItemsList, submission.projectItems) : 'N/A'),
           generateRow(458, 'Technology Description', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatDescriptions(submission.projectItemsList) : 'N/A'), 
           generateRow(456, 'Improve Productivity', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? submission.projectImpact : 'N/A'),
 
@@ -178,8 +178,8 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(346, 'Planning Permission Status', getPlanningPermissionDoraValue(submission.planningPermission)),
 
           generateRow(378, 'Data Analytics', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? submission.dataAnalytics : 'N/A'),
-          generateRow(379, 'Energy Type', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? [submission.energySource].flat().join('|') : 'N/A'),
-          generateRow(380, 'Agricultural Sector for Grant Item', [submission.agriculturalSector].flat().join('|') ?? ''),
+          generateRow(379, 'Electricity Source', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? [submission.energySource].flat().join('|') : 'N/A'),
+          generateRow(380, 'Agricultural Sector', [submission.agriculturalSector].flat().join('|') ?? ''),
           generateRow(381, 'Currently Technology Usage', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? submission.technologyUse : 'N/A'),
           generateRow(457, 'Labour Replaced', submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')) ? submission.labourReplaced : 'N/A'),
 
@@ -216,7 +216,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(54, 'Electronic OA received date ', todayStr),
           generateRow(370, 'Status', 'Pending RPA review'),
           generateRow(85, 'Full Application Submission Date', (new Date(today.setMonth(today.getMonth() + 6))).toLocaleDateString('en-GB')),
-          generateRow(375, 'OA percent', String( desirabilityScore.desirability.overallRating.score / (submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? 600 : 300) * 100)), // calculate percentage for robotics or solar based on project
+          generateRow(375, 'OA percent', String(( desirabilityScore.desirability.overallRating.score / (submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? 600 : 300) * 100).toFixed(2))), // calculate percentage for robotics or solar based on project
           ...addAgentDetails(submission.agentsDetails)
         ]
       }
