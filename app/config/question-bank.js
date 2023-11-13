@@ -2645,8 +2645,8 @@ const questionBank = {
             dependentQuestionYarKey: 'applicant',
             dependentAnswerKeysArray: ['applicant-A2'],
             urlOptions: {
-              thenUrl: '/productivity/contractors-details',
-              elseUrl: '/productivity/farmers-details'
+              thenUrl: 'contractors-details',
+              elseUrl: 'farmers-details'
             }
           },
           // preValidationKeys: ['businessDetails'],
@@ -2669,7 +2669,7 @@ const questionBank = {
             {
               key: 'applying-A2',
               value: 'Agent',
-              redirectUrl: '/productivity/agents-details'
+              redirectUrl: 'agents-details'
             }
           ],
           yarKey: 'applying'
