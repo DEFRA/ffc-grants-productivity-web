@@ -275,7 +275,6 @@ const getPage = async (question, request, h) => {
   }
   switch (url) {
     case 'score': {} break
-    case 'business-details': {} break
     case 'agents-details': {
         if (getYarValue(request, 'projectSubject') === 'Solar project items' ) {
           question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/farmers-details`
@@ -284,6 +283,7 @@ const getPage = async (question, request, h) => {
         }
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
+    case 'business-details':
     case 'farmers-details': {
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
