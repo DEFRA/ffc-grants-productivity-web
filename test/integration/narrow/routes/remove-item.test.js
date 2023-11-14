@@ -2,8 +2,7 @@ const { crumbToken } = require('./test-helper')
 describe('Remove item page', () => {
     const varList = {
         confirmItem: 'Hello',
-        removeItem: 'Yes',
-        errorForRemove: 'hello'
+        removeItem: 'Yes'
 
     }
     jest.mock('../../../../app/helpers/session', () => ({

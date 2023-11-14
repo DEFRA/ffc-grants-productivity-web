@@ -182,10 +182,25 @@ const getPage = async (question, request, h) => {
           ...question,
           title: 'Which eligibility criteria does your automatic technology meet?'
         }
-      } else {
+      } else if (url === 'robotic-eligibility'){
         question = {
           ...question,
           title: 'Does your robotic technology fit the eligibility criteria?'
+        }
+      } else {
+        let index = getYarValue(request, 'index')
+        let itemType = getYarValue(request, 'projectItemsList')[index].type
+        if (getYarValue(request, 'confirmItem') === 'Other technology' && itemType === 'Automatic') {
+          setYarValue(request, 'confirmItem', 'the automatic technology')
+        } else if (getYarValue(request, 'confirmItem') === 'Other technology' && itemType === 'Robotic') {
+          setYarValue(request, 'confirmItem', 'the robotic technology')
+    
+        } 
+        question = {
+          ...question,
+          title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+            getYarValue(request, additionalYarKeyName).toLowerCase()
+          )
         }
       }
     } else {
@@ -323,15 +338,6 @@ const showPostPage = (currentQuestion, request, h) => {
     const { item, index } = request.payload
     setYarValue(request, 'confirmItem', item)
     setYarValue(request, 'index', index)
-    let itemType = getYarValue(request, 'projectItemsList')[index].type
-    if (getYarValue(request, 'confirmItem') === 'Other technology' && itemType === 'Automatic') {
-      setYarValue(request, 'errorForRemove', 'the automatic technology')
-    } else if (getYarValue(request, 'confirmItem') === 'Other technology' && itemType === 'Robotic') {
-      setYarValue(request, 'errorForRemove', 'the robotic technology')
-
-    } else {
-      setYarValue(request, 'errorForRemove', getYarValue(request, 'confirmItem'))
-    }
 
     return h.redirect(`${urlPrefix}/remove-item`)
   }
