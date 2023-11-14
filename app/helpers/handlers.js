@@ -323,6 +323,25 @@ const showPostPage = (currentQuestion, request, h) => {
     const { item, index } = request.payload
     setYarValue(request, 'confirmItem', item)
     setYarValue(request, 'index', index)
+    if (getYarValue(request, 'confirmItem') === 'Other robotics or automatic technology' && getYarValue(request, 'projectItemsList')[index].type === 'Automatic') {
+      setYarValue(request, 'errorForRemove', 'the automatic technology')
+    } else if (getYarValue(request, 'confirmItem') === 'Other robotics or automatic technology' && getYarValue(request, 'projectItemsList')[index].type === 'Robotics') {
+      setYarValue(request, 'errorForRemove', 'the robotic technology')
+
+    } else {
+      setYarValue(request, 'errorForRemove', getYarValue(request, 'confirmItem').toLowerCase())
+    }
+    currentQuestion = {
+      ...currentQuestion,
+      validate: [
+        {
+          type: "NOT_EMPTY",
+          error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+              getYarValue(request, additionalYarKeyName).toLowerCase()
+          )
+        }
+      ]
+    }
     return h.redirect(`${urlPrefix}/remove-item`)
   }
 
@@ -389,8 +408,8 @@ const showPostPage = (currentQuestion, request, h) => {
       }
     } else if (getYarValue(request, 'removeItem') === 'Yes' && baseUrl === 'remove-item')  {
       {
-        console.log('here!!! projectItemsList: ', getYarValue(request, 'projectItemsList'));
         getYarValue(request, 'projectItemsList')?.splice(getYarValue(request, 'index'), 1)
+        
       }
     } else if(baseUrl === 'automatic-eligibility') {
       currentQuestion = {
