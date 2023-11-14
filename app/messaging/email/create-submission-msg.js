@@ -325,6 +325,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       isAgent: submission.agentsDetails ? 'Yes' : 'No',
       agentName: submission.agentsDetails?.firstName ?? '',
       agentSurname: submission.agentsDetails?.lastName ?? '',
+      agentBusinessName: submission.agentsDetails?.businessName ?? '',
       agentEmail: submission.agentsDetails?.emailAddress ?? '',
       contactConsent: submission.consentOptional ? 'Yes' : 'No',
       scoreDate: new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }),
