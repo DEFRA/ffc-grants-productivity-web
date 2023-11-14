@@ -67,7 +67,7 @@ const getDependentSideBar = (sidebar, request) => {
 
 const getBackUrl = (hasScore, backUrlObject, backUrl, request) => {
   const url = getUrl(backUrlObject, backUrl, request)
-  return hasScore && (url === 'project-impact' || url === 'SSSI') ? null : url
+  return hasScore && (url === 'project-impact' || url === 'SSSI' || url === 'existing-solar') ? '' : url
 }
 
 const getModel = (data, question, request, conditionalHtml = '') => {
@@ -99,7 +99,7 @@ const getModel = (data, question, request, conditionalHtml = '') => {
     items: getOptions(data, question, conditionalHtml, request),
     sideBarText,
     ...(warningDetails ? ({ warning: warningDetails }) : {}),
-    diaplaySecondryBtn: hasScore && score?.isDisplay
+    diaplaySecondryBtn: hasScore && score?.isDisplay && key !== 'solar-technologies'
   }
 }
 

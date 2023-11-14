@@ -772,7 +772,7 @@ const questionBank = {
             }
           },
           eliminationAnswerKeys: '',
-          fundingPriorities: '<ul><li>Include batteries</li></ul>',          
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Include batteries</li></ul>',          
           type: 'multi-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -842,7 +842,6 @@ const questionBank = {
                     <p class="govuk-body">Solar panels must be installed:</p>
                           <ul>
                             <li>on a rooftop</li>
-                            <li>on an existing hardstanding area</li>
                             <li>floating (on a reservoir)</li>
                           </ul>
                     </div>`,
@@ -856,7 +855,7 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: 'Solar panels must be installed:',
-                items: ['on a rooftop', 'on an existing hardstanding area', 'floating (on a reservoir)']
+                items: ['on a rooftop', 'floating (on a reservoir)']
               }]
             }]
           },
@@ -957,7 +956,7 @@ const questionBank = {
           nextUrl: 'project-cost-solar',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Smaller solar PV systems</li></ul>',          
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Smaller solar PV systems</li></ul>',          
           type: 'single-answer',
           classes: 'govuk-radios govuk-fieldset__legend--l',
           minAnswerCount: 1,
@@ -1174,7 +1173,7 @@ const questionBank = {
           preValidationKeys: ['remainingCosts'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',          
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',          
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
@@ -1576,7 +1575,7 @@ const questionBank = {
           answers: [
             {
               key: 'automatic-eligibility-A1',
-              value: 'Has sensing system that can understand its environment '
+              value: 'Has sensing system that can understand its environment'
             },
             {
               key: 'automatic-eligibility-A2',
@@ -1834,15 +1833,21 @@ const questionBank = {
         {
           key: 'remove-item',
           order: 320,
-          title: 'Are you sure you want to remove {{_item_}}?',
+          title: 'Are you sure you want to remove {{_errorForRemove_}}?',
+          replace: true,
           pageTitle: '',
-          backUrl: 'project-items-summary',
           nextUrl: 'project-items-summary',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'remove-item',
           baseUrl: 'remove-item',
           type: 'single-answer',
           minAnswerCount: 1,
+          validate: [
+            {
+              type: 'NOT_EMPTY',
+              error: 'Select yes if you want to remove {{_errorForRemove_}}'
+            }
+          ],
           answers: [
             {
               key: 'remove-item-A1',
@@ -2134,7 +2139,7 @@ const questionBank = {
           // preValidationKeys: ['projectImpact'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Improve productivity</li><li>Introduce innovation</li></ul>',
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Improve productivity</li><li>Introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -2204,7 +2209,7 @@ const questionBank = {
           nextUrl: 'agricultural-sector',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Improve the environment</li></ul>',
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Improve the environment</li></ul>',
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
@@ -2296,7 +2301,7 @@ const questionBank = {
           // preValidationKeys: ['energySource'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',
           type: 'multi-answer',
           minAnswerCount: 1,
           hint: {
@@ -2366,7 +2371,7 @@ const questionBank = {
           // preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Introduce innovation</li></ul>',
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Introduce innovation</li></ul>',
           type: 'single-answer',
           minAnswerCount: 1,
           sidebar: {
@@ -2415,7 +2420,7 @@ const questionBank = {
           nextUrl: 'score',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
-          fundingPriorities: '<ul><li>Replace manual labour</li></ul>',
+          fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Replace manual labour</li></ul>',
           type: 'single-answer',
           scheme: 'robotics',
           score: {
@@ -2638,10 +2643,10 @@ const questionBank = {
           backUrl: 'business-details',
           dependantNextUrl: {
             dependentQuestionYarKey: 'applicant',
-            dependentAnswerKeysArray: ['applicant-A1'],
+            dependentAnswerKeysArray: ['applicant-A2'],
             urlOptions: {
-              thenUrl: '/productivity/farmers-details',
-              elseUrl: '/productivity/contractors-details'
+              thenUrl: 'contractors-details',
+              elseUrl: 'farmers-details'
             }
           },
           // preValidationKeys: ['businessDetails'],
@@ -2664,7 +2669,7 @@ const questionBank = {
             {
               key: 'applying-A2',
               value: 'Agent',
-              redirectUrl: '/productivity/agents-details'
+              redirectUrl: 'agents-details'
             }
           ],
           yarKey: 'applying'
@@ -3596,7 +3601,8 @@ questionBank.sections.forEach(({ questions }) => {
 const ALL_URLS = []
 ALL_QUESTIONS.forEach(question => ALL_URLS.push(question.url))
 
-const YAR_KEYS = ['projectPostcode', 'remainingCost', 'projectItemsList'] // project-items-list
+const YAR_KEYS = ['projectPostcode', 'remainingCost', 'projectItemsList', 'calculatedGrant', 'confirmItem'] 
+
 ALL_QUESTIONS.forEach(question => question.yarKey && YAR_KEYS.push(question.yarKey))
 module.exports = {
   questionBank,

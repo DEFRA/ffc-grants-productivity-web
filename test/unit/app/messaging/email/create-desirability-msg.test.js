@@ -269,12 +269,12 @@ describe('Create desirability message tests', () => {
       const agriculturalSectorAnswers = agriculturalSector.answers.find(a => a.key === 'agricultural-sector-solar')
 
       expect(solarTechnologies.answers.length).toEqual(1)
-      expect(solarTechnologiesAnswers.title).toEqual('Solar project items')
+      expect(solarTechnologiesAnswers.title).toEqual('Solar technology')
       expect(solarTechnologiesAnswers.input.length).toEqual(mockUserInputSolar.solarTechnologies.length)
       expect(solarTechnologiesAnswers.input[0].value).toEqual(mockUserInputSolar.solarTechnologies[0])
 
       expect(solarOutput.answers.length).toEqual(1)
-      expect(solarOutputAnswers.title).toEqual('Solar Output')
+      expect(solarOutputAnswers.title).toEqual('Solar PV system size')
       expect(solarOutputAnswers.input.length).toEqual(1)
       expect(solarOutputAnswers.input[0].value).toEqual(mockUserInputSolar.solarOutput)
 

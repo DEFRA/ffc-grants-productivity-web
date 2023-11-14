@@ -40,6 +40,7 @@ const postOptions = {
 const postResponse = await global.__SERVER__.inject(postOptions)
 expect(postResponse.statusCode).toBe(200)
 expect(postResponse.payload).toContain('Select yes if your robotic technology fits the eligibility criteria')
+expect(postResponse.payload).toContain('Does your robotic harvesting technology fit the eligibility criteria?')
 })
 
 it('should redirect to /technology-description page when user response is \'Yes\'', async () => {
