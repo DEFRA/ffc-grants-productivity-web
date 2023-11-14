@@ -1845,7 +1845,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if you need to add another robotic or automatic item'
+              error: 'Select yes if you want to remove {{_confirmItem_}}'
             }
           ],
           answers: [
