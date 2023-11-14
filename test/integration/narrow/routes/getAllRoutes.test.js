@@ -20,7 +20,8 @@ const varListTemplate = {
   technologyItems: 'Solar panels',
   projectItems: 'Advanced ventilation control units',
   projectItemsList: ['value', 'value2'],
-  confirmItem: 'Hello'
+  confirmItem: 'Hello',
+  errorForRemove: 'hello'
 
 }
 
