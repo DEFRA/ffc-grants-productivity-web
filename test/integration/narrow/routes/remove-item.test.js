@@ -3,7 +3,20 @@ describe('Remove item page', () => {
     const varList = {
         confirmItem: 'Hello',
         removeItem: 'Yes',
-        errorForRemove: 'hello'
+        errorForRemove: 'hello',
+        projectItemsList: [
+            {
+                item: 'hello',
+                type: 'aaaaaaaa',
+                index: 0
+            },
+            {
+                item: 'hello',
+                type: 'sdjfhaf',
+                index: 1
+            }
+        ],
+        index: 1
 
     }
     jest.mock('../../../../app/helpers/session', () => ({
@@ -13,17 +26,9 @@ describe('Remove item page', () => {
             else return undefined
         }
         }))
-    it('should load page successfully', async () => {
-        const options = {
-            method: 'GET',
-            url: `${global.__URLPREFIX__}/remove-item`
-        }
-        const response = await global.__SERVER__.inject(options)
-        expect(response.statusCode).toBe(200)
-        expect(response.payload).toContain('Are you sure you want to remove hello?')
-    })
 
-    it('load remove item page - normal item', async () => {
+
+    it('should load page successfully - normal item', async () => {
         varList.projectItemsList = [
             {
                 item: 'Harvesting technology',
@@ -31,7 +36,7 @@ describe('Remove item page', () => {
                 type: 'Robotic'
             },
             {
-                item: 'Other technology',
+                item: 'Harvesting technology',
                 index: 2,
                 type: 'Robotic'
             },
@@ -42,7 +47,7 @@ describe('Remove item page', () => {
             }
         ]
         varList.confirmItem = 'Harvesting tech'
-        varList.index = 0
+        varList.index = 1
         varList.errorForRemove = 'Harvesting tech'
         const Options = {
             method: 'GET',
@@ -56,7 +61,7 @@ describe('Remove item page', () => {
         expect(response.payload).toContain('Are you sure you want to remove harvesting tech?')
     })
 
-    it('load remove item page - other robo item', async () => {
+    it('should load page successfully - other robo item', async () => {
         varList.projectItemsList = [
             {
                 item: 'Harvesting technology',
@@ -71,11 +76,11 @@ describe('Remove item page', () => {
             {
                 item: 'Other technology',
                 index: 3,
-                type: 'Automatic'
+                type: 'Robotic'
             }
         ]
         varList.confirmItem = 'Other technology'
-        varList.index = 1
+        varList.index = 2
         varList.errorForRemove = 'the other robotic technology'
         const Options = {
             method: 'GET',
@@ -89,7 +94,7 @@ describe('Remove item page', () => {
         expect(response.payload).toContain('Are you sure you want to remove the other robotic technology?')
     })
 
-    it('load remove item page - other auto item', async () => {
+    it('should load page successfully - other auto item', async () => {
         varList.projectItemsList = [
             {
                 item: 'Harvesting technology',
@@ -108,7 +113,7 @@ describe('Remove item page', () => {
             }
         ]
         varList.confirmItem = 'Other technology'
-        varList.index = 1
+        varList.index = 2
         varList.errorForRemove = 'the other automatic technology'
         const Options = {
             method: 'GET',
