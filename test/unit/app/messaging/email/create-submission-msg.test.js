@@ -73,7 +73,7 @@ describe('Create submission message', () => {
       , 'legalStatus', 'location', 'planningPermission', 'projectStart', 'tenancy', 'tenancyLength', 'projectItems', 'projectCost'
       , 'potentialFunding', 'remainingCost', 'slurryCurrentlyTreated', 'slurryToBeTreated', 'projectImpacts'
       , 'dataAnalytics', 'dataAnalyticsScore', 'energySourceScore', 'agriculturalSector', 'agriculturalSectorScore', 'technology', 'technologyScore'
-      , 'projectName', 'businessName', 'farmerName', 'farmerSurname', 'farmerEmail', 'agentName', 'agentSurname', 'agentEmail', 'projectImpactsScore'
+      , 'projectName', 'businessName', 'farmerName', 'farmerSurname', 'farmerEmail', 'agentName', 'agentSurname', 'agentBusinessName', 'agentEmail', 'projectImpactsScore'
       , 'contactConsent', 'scoreDate'
     )
   })

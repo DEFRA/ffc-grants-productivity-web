@@ -323,9 +323,10 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       farmerSurname: farmerContractorDetails.lastName,
       farmerEmail: farmerContractorDetails.emailAddress,
       isAgent: submission.agentsDetails ? 'Yes' : 'No',
-      agentName: submission.agentsDetails?.firstName ?? '',
+      agentName: submission.agentsDetails?.firstName ?? 'N/A',
       agentSurname: submission.agentsDetails?.lastName ?? '',
-      agentEmail: submission.agentsDetails?.emailAddress ?? '',
+      agentBusinessName: submission.agentsDetails?.businessName ?? 'N/A',
+      agentEmail: submission.agentsDetails?.emailAddress ?? 'N/A',
       contactConsent: submission.consentOptional ? 'Yes' : 'No',
       scoreDate: new Date().toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }),
       farmerType: submission.applicant ?? ''
