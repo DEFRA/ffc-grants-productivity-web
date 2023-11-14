@@ -176,17 +176,33 @@ const getPage = async (question, request, h) => {
         ...question,
         title: 'Is the other technology robotic or automatic?'
       }
-    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9')) {
-      if (url === 'automatic-eligibility') {
+    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'automatic-eligibility') {
         question = {
           ...question,
           title: 'Which eligibility criteria does your automatic technology meet?'
         }
-      } else {
+    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'robotic-eligibility'){
         question = {
           ...question,
           title: 'Does your robotic technology fit the eligibility criteria?'
         }
+    } else if (url === 'remove-item') {
+      let index = getYarValue(request, 'index')
+      let itemType = getYarValue(request, 'projectItemsList')[index].type
+      if (getYarValue(request, 'confirmItem') === 'Other technology' && itemType === 'Automatic') {
+        setYarValue(request, 'errorForRemove', 'the other automatic technology')
+        
+      } else if (getYarValue(request, 'confirmItem') === 'Other technology' && itemType === 'Robotic') {
+        setYarValue(request, 'errorForRemove', 'the other robotic technology')
+  
+      } else {
+        setYarValue(request, 'errorForRemove', getYarValue(request, 'confirmItem'))
+      }
+      question = {
+        ...question,
+        title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+          getYarValue(request, additionalYarKeyName).toLowerCase()
+        )
       }
     } else {
       question = {
@@ -323,6 +339,7 @@ const showPostPage = (currentQuestion, request, h) => {
     const { item, index } = request.payload
     setYarValue(request, 'confirmItem', item)
     setYarValue(request, 'index', index)
+
     return h.redirect(`${urlPrefix}/remove-item`)
   }
 
@@ -389,8 +406,8 @@ const showPostPage = (currentQuestion, request, h) => {
       }
     } else if (getYarValue(request, 'removeItem') === 'Yes' && baseUrl === 'remove-item')  {
       {
-        console.log('here!!! projectItemsList: ', getYarValue(request, 'projectItemsList'));
         getYarValue(request, 'projectItemsList')?.splice(getYarValue(request, 'index'), 1)
+        
       }
     } else if(baseUrl === 'automatic-eligibility') {
       currentQuestion = {
