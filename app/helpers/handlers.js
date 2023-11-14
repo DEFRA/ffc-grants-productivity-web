@@ -323,25 +323,16 @@ const showPostPage = (currentQuestion, request, h) => {
     const { item, index } = request.payload
     setYarValue(request, 'confirmItem', item)
     setYarValue(request, 'index', index)
-    if (getYarValue(request, 'confirmItem') === 'Other robotics or automatic technology' && getYarValue(request, 'projectItemsList')[index].type === 'Automatic') {
+    let itemType = getYarValue(request, 'projectItemsList')[index].type
+    if (getYarValue(request, 'confirmItem') === 'Other technology' && itemType === 'Automatic') {
       setYarValue(request, 'errorForRemove', 'the automatic technology')
-    } else if (getYarValue(request, 'confirmItem') === 'Other robotics or automatic technology' && getYarValue(request, 'projectItemsList')[index].type === 'Robotics') {
+    } else if (getYarValue(request, 'confirmItem') === 'Other technology' && itemType === 'Robotic') {
       setYarValue(request, 'errorForRemove', 'the robotic technology')
 
     } else {
-      setYarValue(request, 'errorForRemove', getYarValue(request, 'confirmItem').toLowerCase())
+      setYarValue(request, 'errorForRemove', getYarValue(request, 'confirmItem'))
     }
-    currentQuestion = {
-      ...currentQuestion,
-      validate: [
-        {
-          type: "NOT_EMPTY",
-          error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-              getYarValue(request, additionalYarKeyName).toLowerCase()
-          )
-        }
-      ]
-    }
+
     return h.redirect(`${urlPrefix}/remove-item`)
   }
 
