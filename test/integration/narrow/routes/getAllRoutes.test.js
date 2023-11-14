@@ -21,8 +21,8 @@ const varListTemplate = {
   projectItems: 'Advanced ventilation control units',
   projectItemsList: ['value', 'value2'],
   confirmItem: 'Hello',
-  errorForRemove: 'hello'
-
+  errorForRemove: 'hello',
+  index: 0
 }
 
 // confirm item added for remove-item
