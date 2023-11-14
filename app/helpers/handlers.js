@@ -191,11 +191,14 @@ const getPage = async (question, request, h) => {
         let index = getYarValue(request, 'index')
         let itemType = getYarValue(request, 'projectItemsList')[index].type
         if (getYarValue(request, 'confirmItem') === 'Other technology' && itemType === 'Automatic') {
-          setYarValue(request, 'confirmItem', 'the automatic technology')
+          setYarValue(request, 'errorForRemove', 'the other automatic technology')
+          
         } else if (getYarValue(request, 'confirmItem') === 'Other technology' && itemType === 'Robotic') {
-          setYarValue(request, 'confirmItem', 'the robotic technology')
+          setYarValue(request, 'errorForRemove', 'the other robotic technology')
     
-        } 
+        } else {
+          setYarValue(request, 'errorForRemove', getYarValue(request, 'confirmItem'))
+        }
         question = {
           ...question,
           title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>

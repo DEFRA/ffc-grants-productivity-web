@@ -1833,7 +1833,7 @@ const questionBank = {
         {
           key: 'remove-item',
           order: 320,
-          title: 'Are you sure you want to remove {{_confirmItem_}}?',
+          title: 'Are you sure you want to remove {{_errorForRemove_}}?',
           replace: true,
           pageTitle: '',
           nextUrl: 'project-items-summary',
@@ -1845,7 +1845,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select yes if you want to remove {{_confirmItem_}}'
+              error: 'Select yes if you want to remove {{_errorForRemove_}}'
             }
           ],
           answers: [
