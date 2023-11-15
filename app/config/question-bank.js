@@ -205,7 +205,9 @@ const questionBank = {
               content: [{
                 para: 'This grant is only for businesses registered in England. \n \n Scotland, Wales and Northern Ireland have other grants available.',
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -273,7 +275,9 @@ const questionBank = {
               content: [{
                 para: 'Public organisations and local authorities cannot apply for this grant.',
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -373,7 +377,9 @@ const questionBank = {
               content: [{
                 para: 'This grant is only for projects in England. \n \n Scotland, Wales and Northern Ireland have other grants available.',
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -427,7 +433,9 @@ const questionBank = {
                 para: `You must have secured planning permission before you submit a full application.
                 \n\n The application deadline is 31 April 2024.`,
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -516,7 +524,9 @@ const questionBank = {
               content: [{
                 para: 'You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement.\n \n Before you start the project, you can:',
                 items: ['get quotes from suppliers', 'apply for planning permissions (this can take a long time)']
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -589,7 +599,9 @@ const questionBank = {
               content: [{
                 para: 'If you are a tenant farmer, you will have the option to ask your landlord to underwrite your agreement.',
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -650,7 +662,9 @@ const questionBank = {
                     para: 'You must complete your project and keep the grant-funded items fit for purpose for 5 years after the date you receive your final grant payment.',
                     items: []
                   }
-                ]
+                ],
+                show: true
+
               }
             ]
           },
@@ -711,7 +725,9 @@ const questionBank = {
                 for a battery to add to your existing 
                 solar PV panels.`,
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -780,7 +796,9 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: 'If you do not have an existing solar PV system you must select solar PV panels to be eligible for this grant.'
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -856,7 +874,9 @@ const questionBank = {
               content: [{
                 para: 'Solar panels must be installed:',
                 items: ['on a rooftop', 'floating (on a reservoir)']
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -915,7 +935,9 @@ const questionBank = {
               content: [{
                 para: 'RPA wants to fund projects that improve the environment.',
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -966,7 +988,9 @@ const questionBank = {
               content: [{
                 para: 'RPA wants to fund projects that need smaller solar PV systems.',
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -1132,7 +1156,9 @@ const questionBank = {
                     'overdrafts',
                     'the Basic Payment Scheme'
                   ]
-                }]
+                }],
+                show: true
+
               }
             ]
           },
@@ -1185,7 +1211,9 @@ const questionBank = {
               content: [{
                 para: 'RPA wants to fund sectors that:',
                 items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -1263,7 +1291,9 @@ const questionBank = {
               content: [{
                 para: 'The land must be owned or have a tenancy in place until 2027 before starting the project.',
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -1409,7 +1439,9 @@ const questionBank = {
               content: [{
                 para: 'RPA will consider items that:',
                 items: ['have a sensing system and can understand their environment', 'make decisions and plans', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop']
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -1501,7 +1533,9 @@ const questionBank = {
               content: [{
                 para: `Robotic items must fit all 4 criteria to be eligible.\n\n
                       Automatic items must fit at least 2 criteria to be eligible.`
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -1555,7 +1589,9 @@ const questionBank = {
               content: [{
                 para: 'Automatic items must fit at least 2 criteria to be eligible for grant funding.',
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -1648,7 +1684,9 @@ const questionBank = {
               content: [{
                 para: 'Robotic items must meet all 4 criteria to be eligible.',
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -1705,7 +1743,9 @@ const questionBank = {
                 para: 'To be eligible for grant funding, your robotic technology must:',
                 items: ['have a sensing system and can understand their environment', 'make decisions and plans', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop'],
                 additionalPara: 'Automatic technology must fit at least 2 of these eligibility criteria. '
-              }]
+              }],
+              show: true
+
             }]
           },
           type: 'multi-input',
@@ -1820,7 +1860,9 @@ const questionBank = {
               content: [{
                 para: `Automatic items must fit at least 2 criteria to be eligible for funding. \n\n 
                       Robotic items must fit all 4 criteria to be eligible for funding.`
-              }]
+              }],
+              show: true
+
             }]
           },
           ineligibleContent: {},
@@ -1935,21 +1977,20 @@ const questionBank = {
                 heading: 'Eligible items selected',
                 content: [{
                   para: '',
-                  items: [],
-                  dependentAnswerExceptThese: ['technology-items-A8']
-                }]
+                  items: []
+                }],
+                show:true
               },
               {
                 heading: 'Not yet eligible items',
                 content: [{
                   para: '',
-                  items: [],
-                  dependentAnswerOnlyThese: ['technology-items-A8']
-                }]
+                  items: []
+                }],
+                show: true
               }
             ],
-            dependentYarKeys: ['projectItems', 'technologyItems'],
-            dependentQuestionKeys: ['project-items', 'technology-items']
+            dependentYarKeys: ['projectItems'] // just needed to trigger sidebar code
           },
           validate: [
             {
@@ -2039,7 +2080,8 @@ const questionBank = {
                     'overdrafts',
                     'the Basic Payment Scheme'
                   ]
-                }]
+                }],
+                show: true
               }
             ]
           },
@@ -2095,7 +2137,9 @@ const questionBank = {
                 para: `Your project must improve the productivity and profitability of your main agricultural or horticultural business.
                 \n\n Your project’s positive environmental benefit will be assessed at full application stage.`,
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -2148,7 +2192,9 @@ const questionBank = {
               content: [{
                 para: 'RPA wants to fund projects that:',
                 items: ['improve productivity', 'introduce innovation']
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -2222,7 +2268,9 @@ const questionBank = {
               heading: 'Funding priorities',
               content: [{
                 para: 'RPA wants to fund projects that improve the environment'
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -2313,7 +2361,9 @@ const questionBank = {
               content: [{
                 para: 'RPA wants to fund sectors that:',
                 items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -2380,7 +2430,9 @@ const questionBank = {
               content: [{
                 para: 'RPA wants to fund projects that introduce innovation',
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [
@@ -2435,7 +2487,9 @@ const questionBank = {
               content: [{
                 para: 'Using robotic or automatic technologies can reduce the need to find manual labour.',
                 items: []
-              }]
+              }],
+              show: true
+
             }]
           },
           validate: [

@@ -1,69 +1,61 @@
 const { getUrl } = require('../helpers/urls')
 const { getOptions } = require('../helpers/answer-options')
 const { getYarValue } = require('../helpers/session')
-const { getQuestionByKey, allAnswersSelected } = require('../helpers/utils')
+const { getQuestionByKey, allAnswersSelected, getQuestionAnswer } = require('../helpers/utils')
 
 const getDependentSideBar = (sidebar, request) => {
   // sidebar contains values of a previous page
 
-  const { values, dependentYarKeys, dependentQuestionKeys } = sidebar
-  // for each dependentQuestionKeys
-  const updatedValues = []
-  let addUpdatedValue
-  let updatedContent
-  dependentQuestionKeys.forEach((dependentQuestionKey, index) => {
-    const questionAnswers = getQuestionByKey(dependentQuestionKey).answers
-    const yarValue = getYarValue(request, dependentYarKeys[index]) || []
+  let sidebarEligibleItems = []
+  let sidebarIneligibleItems = []
 
-    values.forEach((thisValue) => {
-      addUpdatedValue = false
-      updatedContent = thisValue.content.map(thisContent => {
-        let formattedSidebarValues = []
+  if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A1'))) {
+    sidebarEligibleItems.push(getQuestionAnswer('project-items', 'project-items-A1'))
+  } 
 
-        if (thisContent?.dependentAnswerExceptThese?.length) {
-          const avoidThese = thisContent.dependentAnswerExceptThese
+  if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A2'))) {
+    sidebarEligibleItems.push(getQuestionAnswer('project-items', 'project-items-A2'))
+  } 
 
-          questionAnswers.forEach(({ key, value }) => {
-            if (!avoidThese.includes(key) && yarValue?.includes(value)) {
-              if (updatedValues.length && updatedValues[0].heading === thisValue.heading) {
-                updatedValues[0].content[0].items.push(value)
-              } else {
-                addUpdatedValue = true
-                formattedSidebarValues.push(value)
-              }
-            }
-          })
-        } else if (thisContent?.dependentAnswerOnlyThese?.length) {
-          const addThese = thisContent.dependentAnswerOnlyThese
-
-          questionAnswers.forEach(({ key, value }) => {
-            if (addThese.includes(key) && yarValue?.includes(value)) {
-              addUpdatedValue = true
-              formattedSidebarValues.push(value)
-            }
-          })
+  if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A3'))) {
+    let itemsList = getYarValue(request, 'projectItemsList')
+    for (item in itemsList) {
+      if (itemsList[item].item.startsWith('Other')) {
+        if (itemsList[item].type === 'Robotic') {
+          sidebarIneligibleItems.push('Other robotic technology')
         } else {
-          formattedSidebarValues = [].concat(yarValue)
+          sidebarIneligibleItems.push('Other automatic technology')
+
         }
-        return {
-          ...thisContent,
-          items: formattedSidebarValues
-        }
-      })
-      if (addUpdatedValue) {
-        updatedValues.push({
-          ...thisValue,
-          content: updatedContent
-        })
+      } else {
+        sidebarEligibleItems.push(itemsList[item].type + ' ' + itemsList[item].item.toLowerCase())
       }
-    })
-  })
+    }
+  }
+
+  if (sidebarEligibleItems.length > 0) {
+    sidebar.values[0].content[0].items = sidebarEligibleItems
+    sidebar.values[0].show = true
+  } else {
+    sidebar.values[0].show = false
+
+  }
+
+  if (sidebarIneligibleItems.length > 0) {
+    sidebar.values[1].content[0].items = sidebarIneligibleItems
+    sidebar.values[1].show = true
+  } else {
+    sidebar.values[1].show = false
+
+  }
 
   return {
-    ...sidebar,
-    values: updatedValues
+    ...sidebar
   }
-}
+
+} 
+
+
 
 const getBackUrl = (hasScore, backUrlObject, backUrl, request) => {
   const url = getUrl(backUrlObject, backUrl, request)
