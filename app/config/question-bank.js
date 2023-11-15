@@ -1990,8 +1990,7 @@ const questionBank = {
                 show: true
               }
             ],
-            dependentYarKeys: ['projectItems'],
-            dependentQuestionKeys: ['project-items']
+            dependentYarKeys: ['projectItems'] // just needed to trigger sidebar code
           },
           validate: [
             {
