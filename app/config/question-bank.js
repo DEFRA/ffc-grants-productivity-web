@@ -149,12 +149,7 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'applicant',
           baseUrl: 'applicant',
-          preValidationObject: {
-              preValidationKeys: ['projectSubject'],
-              preValidationAnswer: ['project-subject-A1'],
-              preValidationRule: 'AND',
-              preValidationUrls: ['project-subject']
-          },
+          preValidationKeys: ['projectSubject'],
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -3512,7 +3507,7 @@ const questionBank = {
           url: 'confirm',
           backUrl: 'check-details',
           nextUrl: 'confirmation',
-          // preValidationKeys: ['farmerDetails', 'contractorsDetails'],
+          preValidationKeys: ['applying'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -3538,7 +3533,13 @@ const questionBank = {
           pageTitle: '',
           url: 'confirmation',
           baseUrl: 'confirmation',
-          // preValidationKeys: ['consentOptional'],
+          preValidationKeys: ['consentMain'],
+        //   preValidationObject: {
+        //     preValidationKeys: ['consentOptional'],
+        //     preValidationAnswer: ['key1', 'key2'],
+        //     preValidationRule: 'AND',
+        //     preValidationUrls: ['project-subject']
+        // },
           ga: [
             { dimension: 'cd2', value: { type: 'score' } },
             { dimension: 'cd5', value: { type: 'confirmationId' } },

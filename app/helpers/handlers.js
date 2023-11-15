@@ -61,7 +61,8 @@ const getContractorFarmerModel = (data, question, request, conditionalHtml) => {
   return MODEL
 }
 const getPage = async (question, request, h) => {
-  const { url, backUrlObject, dependantNextUrl, type, title, yarKey, preValidationObject, replace } = question
+  const { url, backUrlObject, dependantNextUrl, type, title, yarKey, replace } = question
+  const preValidationObject = question.preValidationObject ?? question.preValidationKeys
   let backUrl = getUrl(backUrlObject, question.backUrl, request)
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject)
@@ -228,9 +229,9 @@ const getPage = async (question, request, h) => {
     await gapiService.processGA(request, question.ga, confirmationId)
   }
   if (url === 'check-details') {
-    if(getYarValue(request, 'projectSubject') === 'Solar project items') {
+    if (getYarValue(request, 'projectSubject') === 'Solar project items') {
       question.backUrlObject.urlOptions.elseUrl = `farmers-details`
-    }else{
+    }else {
       question.backUrlObject.urlOptions.elseUrl = `contractors-details`
     }
     setYarValue(request, 'reachedCheckDetails', true)
@@ -299,7 +300,7 @@ const getPage = async (question, request, h) => {
     case 'agents-details': {
         if (getYarValue(request, 'projectSubject') === 'Solar project items' ) {
           question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/farmers-details`
-        }else{
+        }else {
           question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/contractors-details`
         }
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
@@ -414,7 +415,7 @@ const showPostPage = (currentQuestion, request, h) => {
         getYarValue(request, 'projectItemsList')?.splice(getYarValue(request, 'index'), 1)
         
       }
-    } else if(baseUrl === 'automatic-eligibility') {
+    } else if (baseUrl === 'automatic-eligibility') {
       currentQuestion = {
         ...currentQuestion,
         title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
@@ -437,7 +438,7 @@ const showPostPage = (currentQuestion, request, h) => {
           }
         ],
       }
-    }else{
+    } else {
       {
         currentQuestion = {
           ...currentQuestion,
@@ -522,7 +523,7 @@ const showPostPage = (currentQuestion, request, h) => {
     case 'solar-technologies':
       if (payload.secBtn === 'Back to score'){
         break
-      } else if([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){
+      } else if ([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')){
         return h.redirect(`${urlPrefix}/solar-installation`)
       } else {
         if (getYarValue(request, 'existingSolar') === 'Yes') {
@@ -539,7 +540,7 @@ const showPostPage = (currentQuestion, request, h) => {
         const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
         if (automaticEligibilityAnswer.length === 1 || automaticEligibilityAnswer.includes('None of the above')) {
           const projectItemsList = getYarValue(request, 'projectItemsList') ?? []
-          if(projectItemsList.length === 0) {
+          if (projectItemsList.length === 0) {
             NOT_ELIGIBLE.primaryBtn = {
               text: 'Add another item',
               url: `${urlPrefix}/technology-items`
@@ -555,17 +556,17 @@ const showPostPage = (currentQuestion, request, h) => {
             }
           }
           return h.view('not-eligible', NOT_ELIGIBLE)
-        }else {
+        } else {
           return h.redirect(`${urlPrefix}/technology-description`)
         }
       }
       case 'robotic-eligibility': {
         const roboticEligibilityAnswer = getYarValue(request, 'roboticEligibility')
 
-        if(roboticEligibilityAnswer === 'No') {
+        if (roboticEligibilityAnswer === 'No') {
           const projectItemsList = getYarValue(request, 'projectItemsList') ?? []
 
-          if(projectItemsList.length === 0) {
+          if (projectItemsList.length === 0) {
             NOT_ELIGIBLE.primaryBtn = {
               text: 'Add another item',
               url: `${urlPrefix}/technology-items`
@@ -590,7 +591,7 @@ const showPostPage = (currentQuestion, request, h) => {
       let roboticArr = ['sensing system', 'makes decisions', 'control actuators', 'continuous loop']
       let roboticArrScore = ['Has sensing system that can understand its environment ', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
       let automaticFinalArr = []
-      if(getYarValue(request, 'automaticEligibility')){
+      if (getYarValue(request, 'automaticEligibility')){
         automaticFinalArr = getYarValue(request, 'automaticEligibility').map((item) =>   item.includes('sensing system') ? 'sensing system' : item.includes('Makes decisions') ? 'makes decisions' : item.includes('actuators') ? 'control actuators' : item.includes('continuous loop') ? 'continuous loop' : '')
       }
       let tempArray = getYarValue(request, 'projectItemsList') ?? []
@@ -614,9 +615,9 @@ const showPostPage = (currentQuestion, request, h) => {
 
     case 'other-item': {
 
-      if(getYarValue(request, 'projectItemsList')?.length <= 1){
+      if (getYarValue(request, 'projectItemsList')?.length <= 1){
         return h.redirect(`${urlPrefix}/item-conditional`)
-      }else {
+      } else {
         return h.redirect(`${urlPrefix}/project-items-summary`)
       }
     }
