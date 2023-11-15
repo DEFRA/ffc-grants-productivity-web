@@ -1206,7 +1206,7 @@ const questionBank = {
           baseUrl: 'agricultural-sector-solar',
           backUrl: 'remaining-costs-solar',
           nextUrl: 'score',
-          // preValidationKeys: ['remainingCosts'],
+          preValidationKeys: ['remainingCosts'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',          
