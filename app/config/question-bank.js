@@ -1502,8 +1502,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `Robotic technology fit all 4 criteria to be eligible.\n\n
-                Automatic technology fit at least 2 criteria to be eligible.`
+                para: `Robotic technology must fit all 4 criteria to be eligible.\n\n
+                Automatic technology must fit at least 2 criteria to be eligible.`
               }]
             }]
           },
