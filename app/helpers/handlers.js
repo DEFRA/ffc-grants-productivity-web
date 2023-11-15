@@ -228,11 +228,6 @@ const getPage = async (question, request, h) => {
     await gapiService.processGA(request, question.ga, confirmationId)
   }
   if (url === 'check-details') {
-    if(getYarValue(request, 'projectSubject') === 'Solar project items') {
-      question.backUrlObject.urlOptions.elseUrl = `farmers-details`
-    }else{
-      question.backUrlObject.urlOptions.elseUrl = `contractors-details`
-    }
     setYarValue(request, 'reachedCheckDetails', true)
     const applying = getYarValue(request, 'applying')
     const applicant = getYarValue(request, 'applicant')
@@ -304,13 +299,6 @@ const getPage = async (question, request, h) => {
         }
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
-    case 'check-details:' : {
-      if(getYarValue(request, 'projectSubject') === 'Solar project items') {
-        question.backUrlObject.urlOptions.elseUrl = `farmers-details`
-      }else{
-        question.backUrlObject.urlOptions.elseUrl = `contractors-details`
-      }
-  }
     case 'business-details':
     case 'farmers-details': {
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
