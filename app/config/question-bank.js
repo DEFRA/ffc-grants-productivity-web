@@ -1190,21 +1190,22 @@ const questionBank = {
             isDisplay: true
           },
           order: 245,
-          title: 'Which agricultural sector is your project in?',
+          hint: {
+            html: `Your main farm enterprises<br/><br/>
+                  Select up to 2 options`
+          },
+          title: 'What do you farm mainly?',
           pageTitle: '',
           url: 'agricultural-sector-solar',
           baseUrl: 'agricultural-sector-solar',
           backUrl: 'remaining-costs-solar',
           nextUrl: 'score',
-          preValidationKeys: ['remainingCosts'],
+          // preValidationKeys: ['remainingCosts'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',          
           type: 'multi-answer',
           minAnswerCount: 1,
-          hint: {
-            text: 'Select up to 2 options'
-          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
