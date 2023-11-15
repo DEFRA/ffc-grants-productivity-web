@@ -839,10 +839,10 @@ const questionBank = {
           ineligibleContent: {
             messageContent: `
                     <div class="govuk-list govuk-list--bullet">
-                    <p class="govuk-body">Solar panels must be installed:</p>
+                    <p class="govuk-body">Solar PV panels must be installed:</p>
                           <ul>
                             <li>on a rooftop</li>
-                            <li>floating (on a reservoir)</li>
+                            <li>floating on an irrigation reservoir</li>
                           </ul>
                     </div>`,
             messageLink: {
