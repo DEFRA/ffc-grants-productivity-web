@@ -30,21 +30,23 @@
     <hr class="sideBarColor"/>
 
     {% for sidebar in sideBars.values %}
-      <h2 class="govuk-heading-s" id="subsection-title">
-        {{ sidebar.heading }}
-      </h2>
+      {% if sidebar.show %}
+        <h2 class="govuk-heading-s" id="subsection-title">
+          {{ sidebar.heading }}
+        </h2>
 
-      {% for content in sidebar.content %}
-        <p>{{content.para  | striptags(true) | escape | nl2br }}</p>
-        <ul class="govuk-list govuk-list--bullet">
-          {% for item in content.items %}
-            <li>{{ item }}</li>
-          {% endfor %}
-        </ul>
-        {% if content.additionalPara %}
-          <p>{{ content.additionalPara  | striptags(true) | escape | nl2br }}</p>
-        {% endif %}
-      {% endfor %}
+        {% for content in sidebar.content %}
+          <p>{{content.para  | striptags(true) | escape | nl2br }}</p>
+          <ul class="govuk-list govuk-list--bullet">
+            {% for item in content.items %}
+              <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+          {% if content.additionalPara %}
+            <p>{{ content.additionalPara  | striptags(true) | escape | nl2br }}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
     {% endfor %}
 
     {% if sideBars.details %} 

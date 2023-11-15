@@ -228,11 +228,6 @@ const getPage = async (question, request, h) => {
     await gapiService.processGA(request, question.ga, confirmationId)
   }
   if (url === 'check-details') {
-    if(getYarValue(request, 'projectSubject') === 'Solar project items') {
-      question.backUrlObject.urlOptions.elseUrl = `farmers-details`
-    }else{
-      question.backUrlObject.urlOptions.elseUrl = `contractors-details`
-    }
     setYarValue(request, 'reachedCheckDetails', true)
     const applying = getYarValue(request, 'applying')
     const applicant = getYarValue(request, 'applicant')
@@ -588,7 +583,7 @@ const showPostPage = (currentQuestion, request, h) => {
       }
     case 'technology-description': {  
       let roboticArr = ['sensing system', 'makes decisions', 'control actuators', 'continuous loop']
-      let roboticArrScore = ['Has sensing system that can understand its environment ', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
+      let roboticArrScore = ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
       let automaticFinalArr = []
       if(getYarValue(request, 'automaticEligibility')){
         automaticFinalArr = getYarValue(request, 'automaticEligibility').map((item) =>   item.includes('sensing system') ? 'sensing system' : item.includes('Makes decisions') ? 'makes decisions' : item.includes('actuators') ? 'control actuators' : item.includes('continuous loop') ? 'continuous loop' : '')

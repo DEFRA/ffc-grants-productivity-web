@@ -63,7 +63,7 @@
       "key": "eligibility-criteria",
       "title": "Eligibility criteria",
       "answers": {
-        "eligibility-criteria-A1": "Has sensing system that can understand its environment ",
+        "eligibility-criteria-A1": "Has sensing system that can understand its environment",
         "eligibility-criteria-A2": "Makes decisions and plans",
         "eligibility-criteria-A3": "Can control its actuators (the devices that move robotic joints)",
         "eligibility-criteria-A4": "Works in a continuous loop",
@@ -144,7 +144,7 @@
       "key": "eligibility-criteria",
       "title": "Eligibility criteria",
       "answers": {
-        "eligibility-criteria-A1": "Has sensing system that can understand its environment ",
+        "eligibility-criteria-A1": "Has sensing system that can understand its environment",
         "eligibility-criteria-A2": "Makes decisions and plans",
         "eligibility-criteria-A3": "Can control its actuators (the devices that move robotic joints)",
         "eligibility-criteria-A4": "Works in a continuous loop",
