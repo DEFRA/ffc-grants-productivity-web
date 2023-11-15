@@ -3592,7 +3592,10 @@ const questionBank = {
           pageTitle: '',
           url: 'confirmation',
           baseUrl: 'confirmation',
-          // preValidationKeys: ['consentOptional'],
+          preValidationObject: {
+            preValidationRule: 'EXISTS',
+            preValidationKeys: ['consentOptional']
+          },
           ga: [
             { dimension: 'cd2', value: { type: 'score' } },
             { dimension: 'cd5', value: { type: 'confirmationId' } },

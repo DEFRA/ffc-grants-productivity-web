@@ -16,6 +16,11 @@ function guardPage (request, guardData) {
   if (guardData) {
     // filter list of answers with keys?
 
+    if (guardData.preValidationRule === 'EXISTS') {
+      for (let i = 0; i< guardData.preValidationKeys.length; i++) {
+        return guardData.preValidationKeys.filter(yarKey => getYarValue(request, yarKey) === null).length > 0
+    }
+
     let preValidationList = []
 
     for(let i=0; i < guardData.preValidationKeys.length; i++) {
@@ -70,6 +75,7 @@ function guardPage (request, guardData) {
         }
 
         return false
+      
     }   
 
   }
