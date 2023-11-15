@@ -163,13 +163,13 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(342, 'Land owned by Farm', submission.tenancy ?? ''),
 
           // robotics project items
-          generateRow(448, 'Project Responsibility', submission.tenancy === getQuestionAnswer('tenancy', 'tenancy-A2') ? submission.projectResponsibility : 'N/A'),
+          generateRow(464, 'Project Responsibility', submission.tenancy === getQuestionAnswer('tenancy', 'tenancy-A2') ? submission.projectResponsibility : 'N/A'),
           generateRow(44, 'Project Items', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatProjectItems(submission.projectItemsList, submission.projectItems) : 'N/A'),
-          generateRow(458, 'Technology Description', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatDescriptions(submission.projectItemsList) : 'N/A'), 
-          generateRow(456, 'Improve Productivity', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? submission.projectImpact : 'N/A'),
+          generateRow(474, 'Technology Description', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatDescriptions(submission.projectItemsList) : 'N/A'), 
+          generateRow(472, 'Improve Productivity', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? submission.projectImpact : 'N/A'),
 
-          generateRow(452, 'Existing Solar PV System', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A2') ? submission.existingSolar : 'N/A'),
-          generateRow(453, 'Solar PV Panel Location',  submission.solarTechnologies?.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2')) ? submission.solarInstallation : 'N/A'),
+          generateRow(468, 'Existing Solar PV System', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A2') ? submission.existingSolar : 'N/A'),
+          generateRow(469, 'Solar PV Panel Location',  submission.solarTechnologies?.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2')) ? submission.solarInstallation : 'N/A'),
 
           generateRow(55, 'Total project expenditure', String(submission.projectCost).replace(/,/g, '')),
           generateRow(57, 'Grant rate', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? '40' : '25'),
@@ -181,10 +181,10 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(379, 'Electricity Source', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? [submission.energySource].flat().join('|') : 'N/A'),
           generateRow(380, 'Agricultural Sector', [submission.agriculturalSector].flat().join('|') ?? ''),
           generateRow(381, 'Currently Technology Usage', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? submission.technologyUse : 'N/A'),
-          generateRow(457, 'Labour Replaced', submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')) ? submission.labourReplaced : 'N/A'),
+          generateRow(473, 'Labour Replaced', submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')) ? submission.labourReplaced : 'N/A'),
 
-          generateRow(454, 'Solar Technology', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A2') ? submission.solarTechnologies : 'N/A'),
-          generateRow(455, 'Solar PV System Output', submission.solarTechnologies?.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2')) ? submission.solarOutput : 'N/A'),
+          generateRow(470, 'Solar Technology', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A2') ? submission.solarTechnologies : 'N/A'),
+          generateRow(471, 'Solar PV System Output', submission.solarTechnologies?.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2')) ? submission.solarOutput : 'N/A'),
 
           generateRow(365, 'OA score', desirabilityScore.desirability.overallRating.band),
           generateRow(366, 'Date of OA decision', ''),
