@@ -779,7 +779,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'If you do not have an existing solar PV system you must select solar PV panels to be eligible for this grant.'
+                para: 'If you do not have an existing solar PV system, you must apply for funding for solar PV panels to be eligible for this grant.'
               }]
             }]
           },
@@ -796,7 +796,7 @@ const questionBank = {
             },
             {
               key: 'solar-technologies-A2',
-              value: 'Solar panels'
+              value: 'Solar PV panels'
             },
             {
               key: 'solar-technologies-A3',
@@ -812,7 +812,10 @@ const questionBank = {
             },
             {
               key: 'solar-technologies-A6',
-              value: 'Limit-loading power diverter to heat stores'
+              value: 'Power diverter',
+              hint: {
+                text: 'Redirects excess solar energy to power storage (for example heat stores)'
+              }
             }
           ],
           yarKey: 'solarTechnologies'
