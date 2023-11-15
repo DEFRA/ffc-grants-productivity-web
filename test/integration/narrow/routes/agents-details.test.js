@@ -9,13 +9,14 @@ describe('Agent details page', () => {
   jest.mock('../../../../app/helpers/session', () => ({
     setYarValue: (request, key, value) => null,
     getYarValue: (request, key) => {
-      console.log(key, 'key')
       if (varList[key]) return varList[key]
       else return 'Error'
     }
   }))
 
-  it('should load page successfully', async () => {
+  it('should load page successfully - solar', async () => {
+    varList.projectSubject = 'Solar project items'
+
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/agents-details`
@@ -25,6 +26,17 @@ describe('Agent details page', () => {
     expect(response.statusCode).toBe(200)
   })
 
+  it('should load page successfully - robotics', async () => {
+    varList.projectSubject = 'farm productivity'
+
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/agents-details`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+  })
   it('should return various error messages if no data is entered', async () => {
     const postOptions = {
       method: 'POST',
@@ -224,6 +236,7 @@ describe('Agent details page', () => {
 
   it('should store user response and redirects to contractor details page, if the applicant is contractor', async () => {
     varList.applicant = 'Contractor'
+
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/agents-details`,

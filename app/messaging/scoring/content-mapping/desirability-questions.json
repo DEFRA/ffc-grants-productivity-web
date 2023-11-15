@@ -26,7 +26,7 @@
   "technologyUse": [
     {
       "key": "technology-use",
-      "title": "Technology use",
+      "title": "Technology",
       "answers": {
         "technology-use-A1": "Yes, we’re using it now",
         "technology-use-A2": "Yes, we’re using it now but want to upgrade",
@@ -74,21 +74,21 @@
   "solarTechnologies": [
     {
       "key": "solar-technologies",
-      "title": "Solar project items",
+      "title": "Solar technology",
       "answers": {
         "solar-technologies-A1": "An electrical grid connection",
         "solar-technologies-A2": "Solar panels",
         "solar-technologies-A3": "An inverter",
         "solar-technologies-A4": "A utility meter",
         "solar-technologies-A5": "A battery",
-        "solar-technologies-A6": "Limit-loading power diverter to heat or cold store"
+        "solar-technologies-A6": "Limit-loading power diverter to heat stores"
       }
     }
   ],
   "solarOutput": [
     {
       "key": "solar-output",
-      "title": "Solar Output",
+      "title": "Solar PV system size",
       "answers": {
         "solar-output-A1": "Up to 50kW",
         "solar-output-A2": "51kW to 100kW",
@@ -112,7 +112,43 @@
         "agricultural-sector-solar-A6": "Pig",
         "agricultural-sector-solar-A7": "Poultry",
         "agricultural-sector-solar-A8": "Sheep"
-        
+
+      }
+    }
+  ],
+  "labourReplaced": [
+    {
+      "key": "labour-replaced",
+      "title": "Labour replaced",
+      "answers": {
+        "labour-replaced-A1": "1 to 2 jobs",
+        "labour-replaced-A2": "3 to 4 jobs",
+        "labour-replaced-A3": "5 or more jobs",
+        "labour-replaced-A4": "None of the above",
+        "labour-replaced-A5": "Not applicable"
+      }
+    }
+  ],
+  "dataAnalytics": [{
+    "key": "data-analytics",
+    "title": "Data analytics",
+    "answers":
+    {
+      "data-analytics-A1": "Yes, we have the technology already",
+      "data-analytics-A2": "Yes, we’ll buy the technology as part of the project",
+      "data-analytics-A3": "No, we will not use any data analytics"
+    }}
+  ],
+  "eligibilityCriteria": [
+    {
+      "key": "eligibility-criteria",
+      "title": "Eligibility criteria",
+      "answers": {
+        "eligibility-criteria-A1": "Has sensing system that can understand its environment ",
+        "eligibility-criteria-A2": "Makes decisions and plans",
+        "eligibility-criteria-A3": "Can control its actuators (the devices that move robotic joints)",
+        "eligibility-criteria-A4": "Works in a continuous loop",
+        "eligibility-criteria-A5": "Not applicable"
       }
     }
   ]
