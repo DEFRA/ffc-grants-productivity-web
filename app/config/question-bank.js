@@ -192,12 +192,12 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'business-location',
           baseUrl: 'business-location',
-          // preValidationObject: {
-          //   preValidationKeys: ['applicant'],
-          //   preValidationAnswer: ['applicant-A2'],
-          //   preValidationRule: 'AND',
-          //   preValidationUrls: ['applicant']
-          // },
+          preValidationObject: {
+            preValidationKeys: ['applicant'],
+            preValidationAnswer: ['applicant-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['applicant']
+          },
           ineligibleContent: {
             messageContent: 'This grant is only for businesses registered in England.',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' }
