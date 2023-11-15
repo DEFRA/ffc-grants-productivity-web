@@ -23,7 +23,7 @@ describe('Page: /solar-installation', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Where will you install the solar PV panels?')
     expect(response.payload).toContain('On a rooftop')
-    expect(response.payload).toContain('Floating (on a reservoir)')
+    expect(response.payload).toContain('Floating on an irrigation reservoir ')
     expect(response.payload).toContain('None of the above')
   })
 

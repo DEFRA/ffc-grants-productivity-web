@@ -854,8 +854,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'Solar panels must be installed:',
-                items: ['on a rooftop', 'floating (on a reservoir)']
+                para: 'Solar PV panels must be installed:',
+                items: ['on a rooftop', 'floating on an irrigation reservoir']
               }]
             }]
           },
@@ -880,7 +880,7 @@ const questionBank = {
             },
             {
               key: 'solar-installation-A2',
-              value: 'Floating (on a reservoir)'
+              value: 'Floating on an irrigation reservoir '
             },
             {
               value: 'divider'
