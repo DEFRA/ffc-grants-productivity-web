@@ -304,6 +304,13 @@ const getPage = async (question, request, h) => {
         }
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
+    case 'check-details:' : {
+      if(getYarValue(request, 'projectSubject') === 'Solar project items') {
+        question.backUrlObject.urlOptions.elseUrl = `farmers-details`
+      }else{
+        question.backUrlObject.urlOptions.elseUrl = `contractors-details`
+      }
+  }
     case 'business-details':
     case 'farmers-details': {
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))

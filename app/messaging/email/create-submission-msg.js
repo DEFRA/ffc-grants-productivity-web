@@ -265,7 +265,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       projectSubject: submission.projectSubject,
       isSolar: submission.projectSubject === PROJECT_SUBJECT_SOLAR,
       isRobotics: submission.projectSubject !== PROJECT_SUBJECT_SOLAR,
-      isContractor: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && submission.applicant === 'Contractor',
+      isContractor: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && submission.applicant === 'Contractor' ? 'Yes' : 'No',
       isNotTenancy: submission.tenancy === getQuestionAnswer('tenancy', 'tenancy-A2'),
       legalStatus: submission.legalStatus ?? '',
       inEngland: submission.inEngland ?? '',
