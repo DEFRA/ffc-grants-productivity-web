@@ -3,9 +3,21 @@ const { crumbToken } = require('./test-helper')
 const varListTemplate = {
   projectSubject: 'Farm productivity project items',
   legalStatus: 'fale status',
-  projectItems: 'Advanced ventilation control units',
+  projectItems: ['Advanced ventilation control units', 'Wavelength-specific LED lighting for horticultural crops'],
   projectCost: '12345678',
-  technologyItems: '12345'
+  technologyItems: '12345',
+  projectItemsList: [
+    {
+        item: 'hello',
+        type: 'Robotic',
+        index: 0
+    },
+    {
+        item: 'hello',
+        type: 'sdjfhaf',
+        index: 1
+    }
+],
 }
 
 let varList
@@ -27,7 +39,7 @@ describe('Project cost robotics page', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
-  it('should load page successfully', async () => {
+  it('should load page successfully - eligible items', async () => {
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-cost`
@@ -36,10 +48,33 @@ describe('Project cost robotics page', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
   })
-  it('should load page successfully if no projectCost', async () => {
-    varList = {
-      projectCost: undefined
+
+  it('should load page successfully - only ineligble items', async () => {
+    varList.projectItems = 'Robotic and automatic technology'
+    varList.projectItemsList = [
+      {
+          item: 'Other item',
+          type: 'Robotic',
+          index: 0
+      },
+      {
+          item: 'Other item',
+          type: 'Automatic',
+          index: 1
+      }
+    ]
+
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-cost`
     }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+  })
+
+  it('should load page successfully if no projectCost', async () => {
+    varList.projectCost = undefined
 
     const options = {
       method: 'GET',
