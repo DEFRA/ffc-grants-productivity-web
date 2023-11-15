@@ -116,10 +116,10 @@ function formatDescriptions(projectItemsList) {
 
 const getPlanningPermissionDoraValue = (planningPermission) => {
   switch (planningPermission) {
-    case 'Applied for but not yet approved':
+    case 'Not needed':
+      return 'Not needed'
+    case 'Should be in place by the time I make my full application':
       return 'Applied for'
-    case 'Not yet applied for but expected to be secured before I submit my full application':
-      return 'Not yet applied for'
     default:
       return 'Approved'
   }
@@ -265,7 +265,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       projectSubject: submission.projectSubject,
       isSolar: submission.projectSubject === PROJECT_SUBJECT_SOLAR,
       isRobotics: submission.projectSubject !== PROJECT_SUBJECT_SOLAR,
-      isContractor: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && submission.applicant === 'Contractor',
+      isContractor: submission?.projectSubject !== PROJECT_SUBJECT_SOLAR && submission?.applicant === 'Contractor',
       isNotTenancy: submission.tenancy === getQuestionAnswer('tenancy', 'tenancy-A2'),
       legalStatus: submission.legalStatus ?? '',
       inEngland: submission.inEngland ?? '',
