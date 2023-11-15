@@ -1,10 +1,60 @@
 const { getUrl } = require('../helpers/urls')
 const { getOptions } = require('../helpers/answer-options')
 const { getYarValue } = require('../helpers/session')
-const { getQuestionByKey, allAnswersSelected } = require('../helpers/utils')
+const { getQuestionByKey, allAnswersSelected, getQuestionAnswer } = require('../helpers/utils')
 
 const getDependentSideBar = (sidebar, request) => {
   // sidebar contains values of a previous page
+
+  if (sidebar.values[0].heading === 'Eligible items selected') {
+    let sidebarEligibleItems = []
+    let sidebarIneligibleItems = []
+
+    if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A1'))) {
+      sidebarEligibleItems.push(getQuestionAnswer('project-items', 'project-items-A1'))
+    } 
+
+    if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A2'))) {
+      sidebarEligibleItems.push(getQuestionAnswer('project-items', 'project-items-A2'))
+    } 
+
+    if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A3'))) {
+      let itemsList = getYarValue(request, 'projectItemsList')
+      for (item in itemsList) {
+        if (itemsList[item].item.startsWith('Other')) {
+          if (itemsList[item].type === 'Robotic') {
+            sidebarIneligibleItems.push('Other robotic technology')
+          } else {
+            sidebarIneligibleItems.push('Other automatic technology')
+
+          }
+        } else {
+          sidebarEligibleItems.push(itemsList[item].type + ' ' + itemsList[item].item.toLowerCase())
+        }
+      }
+    }
+
+    if (sidebarEligibleItems.length > 0) {
+      sidebar.values[0].content[0].items = sidebarEligibleItems
+      sidebar.values[0].show = true
+    } else {
+      sidebar.values[0].show = false
+
+    }
+
+    if (sidebarIneligibleItems.length > 0) {
+      sidebar.values[1].content[0].items = sidebarIneligibleItems
+      sidebar.values[1].show = true
+    } else {
+      sidebar.values[1].show = false
+
+    }
+
+    return {
+      ...sidebar
+    }
+
+  } 
 
   const { values, dependentYarKeys, dependentQuestionKeys } = sidebar
   // for each dependentQuestionKeys
