@@ -27,7 +27,6 @@ async function createServer () {
   if (authConfig.enabled) {
     await server.register(require('./plugins/auth'))
   }
-
   await server.register(inert)
   await server.register(vision)
   await server.register(require('./plugins/cookies'))
