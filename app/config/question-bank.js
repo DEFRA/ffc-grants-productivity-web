@@ -241,10 +241,10 @@ const questionBank = {
           title: 'What is the legal status of the business?',
           pageTitle: '',
           backUrlObject: {
-            dependentQuestionYarKey: ['projectSubject', 'applicant'],
-            dependentAnswerKeysArray: ['project-subject-A2', 'applicant-A1'],
+            dependentQuestionYarKey: ['applicant'],
+            dependentAnswerKeysArray: ['applicant-A1'],
             urlOptions: {
-              thenUrl: ['project-subject', 'applicant'],
+              thenUrl: ['applicant'],
               elseUrl: 'business-location'
             }
           },

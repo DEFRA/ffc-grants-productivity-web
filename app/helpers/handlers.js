@@ -315,10 +315,6 @@ const getPage = async (question, request, h) => {
       }
       return h.view('project-items-summary', projectItemsModel)
     }
-    case 'legal-status': 
-      if (getYarValue(request, 'projectSubject') === 'Solar project items') {
-        setYarValue(request, 'applicant', null)
-      }
     default:
       break
   }
@@ -510,9 +506,11 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'projectCost', projectCost)
   }
   
+  let isSolar = getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A2')
+  let isContractor = getYarValue(request, 'applicant') === getQuestionAnswer('applicant','applicant-A2')
   switch (baseUrl) {
     case 'applicant': {
-      if(getYarValue(request, 'applicant') === getQuestionAnswer('applicant','applicant-A2') && getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A2')){
+      if(isContractor && isSolar ){
         return h.view('not-eligible', NOT_ELIGIBLE)
       }
       break
