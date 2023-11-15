@@ -126,8 +126,7 @@ const questionBank = {
             {
               key: 'project-subject-A2',
               value: 'Solar project items',
-              text: 'Solar project items',
-              redirectUrl: 'legal-status'
+              text: 'Solar project items'
             }
           ],
           yarKey: 'projectSubject'
@@ -151,9 +150,16 @@ const questionBank = {
           baseUrl: 'applicant',
           preValidationObject: {
               preValidationKeys: ['projectSubject'],
-              preValidationAnswer: ['project-subject-A1'],
+              preValidationAnswer: ['project-subject-A1', 'project-subject-A2'],
               preValidationRule: 'AND',
               preValidationUrls: ['project-subject']
+          },
+          ineligibleContent: {
+            messageContent: 'Contractors cannot apply for grant funding for solar project items.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -186,12 +192,12 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'business-location',
           baseUrl: 'business-location',
-          preValidationObject: {
-            preValidationKeys: ['applicant'],
-            preValidationAnswer: ['applicant-A2'],
-            preValidationRule: 'AND',
-            preValidationUrls: ['applicant']
-          },
+          // preValidationObject: {
+          //   preValidationKeys: ['applicant'],
+          //   preValidationAnswer: ['applicant-A2'],
+          //   preValidationRule: 'AND',
+          //   preValidationUrls: ['applicant']
+          // },
           ineligibleContent: {
             messageContent: 'This grant is only for businesses registered in England.',
             insertText: { text: 'Scotland, Wales and Northern Ireland have other grants available.' }

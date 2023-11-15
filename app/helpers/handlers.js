@@ -511,6 +511,12 @@ const showPostPage = (currentQuestion, request, h) => {
   }
   
   switch (baseUrl) {
+    case 'applicant': {
+      if(getYarValue(request, 'applicant') === getQuestionAnswer('applicant','applicant-A2') && getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A2')){
+        return h.view('not-eligible', NOT_ELIGIBLE)
+      }
+      break
+    }
     case 'project-subject':
       setYarValue(request, 'addToItemList', false)
       break
@@ -608,7 +614,6 @@ const showPostPage = (currentQuestion, request, h) => {
     }
 
     case 'other-item': {
-
       if(getYarValue(request, 'projectItemsList')?.length <= 1){
         return h.redirect(`${urlPrefix}/item-conditional`)
       }else {
