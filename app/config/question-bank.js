@@ -3537,10 +3537,10 @@ const questionBank = {
           pageTitle: 'Check details',
           url: 'check-details',
           backUrlObject: {
-            dependentQuestionYarKey: 'applicant',
-            dependentAnswerKeysArray: ['applicant-A1'],
+            dependentQuestionYarKey: ['applicant', 'projectSubject'],
+            dependentAnswerKeysArray: ['applicant-A1', 'project-subject-A2'],
             urlOptions: {
-              thenUrl: 'farmers-details',
+              thenUrl: ['farmers-details', 'farmers-details'],
               elseUrl: 'contractors-details'
             }
           },
