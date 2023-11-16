@@ -170,9 +170,9 @@ const getPage = async (question, request, h) => {
       ))
     }
     if (url === 'technology-description') {
-      if (getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology') {
-        console.log('technology-description: ', getYarValue(request, 'technologyItems'))
-        const descriptionTitle = title + getYarValue(request, 'technologyItems')
+      const techItem = getYarValue(request, 'technologyItems')
+      if (techItem === 'Other robotics or automatic technology') {
+        const descriptionTitle = title + techItem
         question = {
           ...question,
           title: descriptionTitle
@@ -398,6 +398,7 @@ const showPostPage = (currentQuestion, request, h) => {
       const payloadYarVal = payload[field.yarKey]
         ? payload[field.yarKey].replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
         : ''
+      
       dataObject = {
         ...dataObject,
         [field.yarKey]: (
