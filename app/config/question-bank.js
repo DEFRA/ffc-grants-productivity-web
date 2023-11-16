@@ -1530,7 +1530,7 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: `Robotic technology must fit all 4 criteria to be eligible.\n\n
-                      Automatic technology must fit at least 2 criteria to be eligible.`
+                Automatic technology must fit at least 2 criteria to be eligible.`
               }],
               show: true
 
@@ -1585,7 +1585,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'Automatic items must fit at least 2 criteria to be eligible for grant funding.',
+                para: 'Automatic technology must fit at least 2 criteria to be eligible for grant funding.',
                 items: []
               }],
               show: true
