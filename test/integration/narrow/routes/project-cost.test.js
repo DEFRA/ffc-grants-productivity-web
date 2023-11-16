@@ -172,6 +172,23 @@ const response = await global.__SERVER__.inject(options)
 expect(response.statusCode).toBe(200)
 expect(response.payload).toContain('<a href=\"project-items\" class=\"govuk-back-link\">Back</a>')
 })
+it('should display the "Robotic voluntary milking system" in the sidebar, if user selects "Voluntary robotic milking system"', async () => {
+  varList.projectItems = 'Robotic and automatic technology'
+  varList.projectItemsList = [
+    {
+        item: 'Voluntary robotic milking system',
+        type: 'Robotic',
+        index: 0
+    }
+  ]
+  const options = {
+    method: 'GET',
+    url: `${global.__URLPREFIX__}/project-cost`
+  }
+  const response = await global.__SERVER__.inject(options)
+  expect(response.statusCode).toBe(200)
+  expect(response.payload).toContain('Robotic voluntary milking system')
+})
 
 // it('page loads with correct back link when Solar project items is /Solar panels/ ', async () => {
 //   varList.solarTechnologies = 'Solar panels'
