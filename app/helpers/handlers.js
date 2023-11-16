@@ -582,7 +582,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
           if (projectItemsList.length === 0) {
             NOT_ELIGIBLE.primaryBtn = {
-              text: 'Add another item',
+              text: 'Add another technology',
               url: `${urlPrefix}/technology-items`
             }
           } else {
