@@ -33,7 +33,7 @@ describe('Project subject page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What would you like funding for?')
+    expect(response.payload).toContain('What do you need funding for?')
     expect(response.payload).toContain('If you want to apply for both a farm productivity project and a solar project, you must submit 2 separate applications.')
     expect(response.payload).toContain('The maximum grant amount for both projects together is £500,000.')
     expect(response.payload).toContain('Select one option')
@@ -66,6 +66,6 @@ describe('Project subject page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Select what you would like funding for')
+    expect(response.payload).toContain('Select what you need funding for')
   })
 })
