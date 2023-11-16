@@ -149,12 +149,7 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'applicant',
           baseUrl: 'applicant',
-          preValidationObject: {
-              preValidationKeys: ['projectSubject'],
-              preValidationAnswer: ['project-subject-A1'],
-              preValidationRule: 'AND',
-              preValidationUrls: ['project-subject']
-          },
+          preValidationKeys: ['projectSubject'],
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -1531,8 +1526,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `Robotic items must fit all 4 criteria to be eligible.\n\n
-                      Automatic items must fit at least 2 criteria to be eligible.`
+                para: `Robotic technology must fit all 4 criteria to be eligible.\n\n
+                Automatic technology must fit at least 2 criteria to be eligible.`
               }],
               show: true
 
@@ -1587,7 +1582,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'Automatic items must fit at least 2 criteria to be eligible for grant funding.',
+                para: 'Automatic technology must fit at least 2 criteria to be eligible for grant funding.',
                 items: []
               }],
               show: true
@@ -3566,7 +3561,7 @@ const questionBank = {
           url: 'confirm',
           backUrl: 'check-details',
           nextUrl: 'confirmation',
-          // preValidationKeys: ['farmerDetails', 'contractorsDetails'],
+          preValidationKeys: ['applying'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -3592,7 +3587,13 @@ const questionBank = {
           pageTitle: '',
           url: 'confirmation',
           baseUrl: 'confirmation',
-          // preValidationKeys: ['consentOptional'],
+          preValidationKeys: ['consentMain'],
+        //   preValidationObject: {
+        //     preValidationKeys: ['consentOptional'],
+        //     preValidationAnswer: ['key1', 'key2'],
+        //     preValidationRule: 'AND',
+        //     preValidationUrls: ['project-subject']
+        // },
           ga: [
             { dimension: 'cd2', value: { type: 'score' } },
             { dimension: 'cd5', value: { type: 'confirmationId' } },
