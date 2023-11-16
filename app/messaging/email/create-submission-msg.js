@@ -106,7 +106,7 @@ function formatDescriptions(projectItemsList) {
   const descriptionList = []
 
   for (i = 0; i < projectItemsList.length; i++) {
-    descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')} ~ ${projectItemsList[i].description}`)
+    descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')} ~ ${projectItemsList[i].itemName} ${projectItemsList[i].brand && ("~ " + projectItemsList[i].brand)}${projectItemsList[i].model && (" ~ " + projectItemsList[i].model)}${projectItemsList[i].numberOfItems && (" ~ " + projectItemsList[i].numberOfItems)}`)
   
   }
   
@@ -243,7 +243,7 @@ function displayObject (projectItemsList) {
   const descriptionList = []
 
   for (i = 0; i < projectItemsList.length; i++) {
-    descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')} ~ ${projectItemsList[i].description}`)
+    descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')} ~ ${projectItemsList[i].itemName} ~ ${projectItemsList[i].brand} ~ ${projectItemsList[i].model} ~ ${projectItemsList[i].numberOfItems}`) // here
   
   }
   
@@ -278,7 +278,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       tenancyLength: submission.tenancyLength ?? '',
       projectResponsibility: submission.projectResponsibility ?? '',
       projectItems: submission.projectItems ? [submission.projectItems].flat().join('\n') : '',
-      technologyItems: submission.projectItemsList ? displayObject(submission.projectItemsList) : '',
+      technologyItems: submission.projectItemsList ? displayObject(submission.projectItemsList) : '', //here
       isTechnologyItems: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')),
       projectImpact: submission.projectImpact ?? '',
       existingSolar: submission.existingSolar ?? '',
