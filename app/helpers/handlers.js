@@ -177,12 +177,12 @@ const getPage = async (question, request, h) => {
         ...question,
         title: 'Is the other technology robotic or automatic?'
       }
-    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'automatic-eligibility') {
+    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'automatic-eligibility') { // other technology automatic
         question = {
           ...question,
           title: 'Which eligibility criteria does your automatic technology meet?'
         }
-    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'robotic-eligibility') {
+    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'robotic-eligibility') { // other technology robotic
         question = {
           ...question,
           title: 'Does your robotic technology fit the eligibility criteria?'
@@ -210,6 +210,24 @@ const getPage = async (question, request, h) => {
           getYarValue(request, additionalYarKeyName).toLowerCase()
         )
       }
+    }
+    if (url === 'robotic-eligibility') {
+      const title_dict = {
+        'technology-items-A8': 'Do your slurry robots fit the eligibility criteria?',
+        'technology-items-A4': 'Does your driverless robotic tractor or platform fit the eligibility criteria?',
+        'technology-items-A5': 'Does your voluntary robotic milking system fit the eligibility criteria?',
+      }
+      const technologyItems = getYarValue(request, 'technologyItems')
+      console.log('HERE   technologyItems: ', technologyItems)
+      Object.keys(title_dict).forEach((value) => {
+        if (technologyItems === getQuestionAnswer('technology-items', value)) {
+          question = {
+            ...question,
+            title: title_dict[value]
+          }
+        }
+        console.log('new Title: ', question.title)
+      })
     }
   }
   const data = getYarValue(request, yarKey) || null
