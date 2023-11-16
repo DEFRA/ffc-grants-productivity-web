@@ -173,8 +173,8 @@ expect(response.statusCode).toBe(200)
 expect(response.payload).toContain('<a href=\"project-items\" class=\"govuk-back-link\">Back</a>')
 })
 
-// it('page loads with correct back link when Solar project items is /Solar panels/ ', async () => {
-//   varList.solarTechnologies = 'Solar panels'
+// it('page loads with correct back link when Solar project items is /Solar PV panels/ ', async () => {
+//   varList.solarTechnologies = 'Solar PV panels'
 //   varList.solarInstallation = 'On an existing hardstanding area'
 //   const options = {
 //       method: 'GET',

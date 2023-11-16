@@ -790,7 +790,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'If you do not have an existing solar PV system you must select solar PV panels to be eligible for this grant.'
+                para: 'If you do not have an existing solar PV system, you must apply for funding for solar PV panels to be eligible for this grant.'
               }],
               show: true
 
@@ -870,8 +870,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'Solar panels must be installed:',
-                items: ['on a rooftop', 'floating (on a reservoir)']
+                para: 'Solar PV panels must be installed:',
+                items: ['on a rooftop', 'floating on an irrigation reservoir']
               }],
               show: true
 

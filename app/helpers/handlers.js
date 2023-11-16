@@ -515,7 +515,7 @@ const showPostPage = (currentQuestion, request, h) => {
     case 'solar-technologies':
       if (payload.secBtn === 'Back to score') {
         break
-      } else if ([getYarValue(request, 'solarTechnologies')].flat().includes('Solar panels')) {
+      } else if ([getYarValue(request, 'solarTechnologies')].flat().includes('Solar PV panels')) {
         return h.redirect(`${urlPrefix}/solar-installation`)
       } else {
         if (getYarValue(request, 'existingSolar') === 'Yes') {

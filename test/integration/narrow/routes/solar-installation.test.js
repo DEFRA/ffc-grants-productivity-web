@@ -52,8 +52,8 @@ describe('Page: /solar-installation', () => {
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
   })
 
-  it('user selects any option AND \'Solar panels\' -> store user response and redirect to /solar-installation', async () => {
-    varList.solarInstallation = ['Solar panels', 'An electrical grid connection']
+  it('user selects any option AND \'Solar PV panels\' -> store user response and redirect to /solar-installation', async () => {
+    varList.solarInstallation = ['Solar PV panels', 'An electrical grid connection']
     const postOptions = {
         method: 'POST',
         url: `${global.__URLPREFIX__}/solar-installation`,
