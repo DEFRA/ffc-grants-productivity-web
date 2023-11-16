@@ -2464,6 +2464,9 @@ const questionBank = {
           order: 381,
           title: 'How much manual labour will this technology replace?',
           pageTitle: '',
+          hint: {
+            text: 'One job is equal to 30 hours or more per week'
+          },
           url: 'labour-replaced',
           baseUrl: 'labour-replaced',
           backUrl: 'technology-use',
@@ -2481,9 +2484,9 @@ const questionBank = {
           minAnswerCount: 1,
           sidebar: {
             values: [{
-              heading: 'Manual labour shortage',
+              heading: 'Funding priorities',
               content: [{
-                para: 'Using robotic or automatic technologies can reduce the need to find manual labour.',
+                para: 'RPA wants to fund the use of robotic or automatic technology due to the current manual labour shortage.',
                 items: []
               }],
               show: true
