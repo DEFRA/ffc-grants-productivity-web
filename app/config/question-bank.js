@@ -92,7 +92,7 @@ const questionBank = {
             isDisplay: false
           },
           order: 10,
-          title: 'What would you like funding for?',
+          title: 'What do you need funding for?',
           pageTitle: '',
           backUrl: 'start',
           nextUrl: 'applicant',
@@ -114,7 +114,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select what you would like funding for'
+              error: 'Select what you need funding for'
             }
           ],
           answers: [
@@ -432,7 +432,7 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: `You must have secured planning permission before you submit a full application.
-                \n\n The application deadline is 31 April 2024.`,
+                \n\n The application deadline is 31 October 2025.`,
                 items: []
               }],
               
@@ -483,7 +483,8 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place before you submit your full application. The application deadline is 31 October 2025.'
+            messageContent: `Any planning permission must be in place before you submit your full application.<br/><br/>
+                            The application deadline is 31 October 2025.`
           }
         },
         {
