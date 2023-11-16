@@ -77,11 +77,11 @@
       "title": "Solar technology",
       "answers": {
         "solar-technologies-A1": "An electrical grid connection",
-        "solar-technologies-A2": "Solar panels",
+        "solar-technologies-A2": "Solar PV panels",
         "solar-technologies-A3": "An inverter",
         "solar-technologies-A4": "A utility meter",
         "solar-technologies-A5": "A battery",
-        "solar-technologies-A6": "Limit-loading power diverter to heat stores"
+        "solar-technologies-A6": "Power diverter"
       }
     }
   ],
