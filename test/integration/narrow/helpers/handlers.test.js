@@ -10,7 +10,6 @@ const mockSet = jest.fn().mockImplementation((request, key, value) => varList[ke
 jest.mock('../../../../app/helpers/session', () => ({
   setYarValue: mockSet,
   getYarValue: (request, key) => {
-    console.log('here: ', key, 'from mock');
     if (varList[key]) return varList[key]
     else return null
   }

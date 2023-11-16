@@ -150,4 +150,10 @@ describe('Create submission message', () => {
 
     expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 20).values[2]).toBe('Large')
   })
+
+  it('should throw an error if a required key is missing', () => {
+    const farmerSubmission = require('./submission-farmer.json')
+    desirabilityScore.desirability.questions[0].key = 'some-other-key'
+    expect(() => createMsg(farmerSubmission, desirabilityScore)).toThrow('Question solar-output not found')
+  })
 })
