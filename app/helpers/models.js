@@ -20,7 +20,6 @@ const getDependentSideBar = (sidebar, request) => {
   if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A3'))) {
     let itemsList = getYarValue(request, 'projectItemsList')
     for (item in itemsList) {
-      console.log('itemsList[item]', itemsList[item].item)
       if (itemsList[item].item === getQuestionAnswer('technology-items', 'technology-items-A5')) {
         sidebarEligibleItems.push('Robotic voluntary milking system')
       } else if (itemsList[item].item.startsWith('Other')) {

@@ -177,12 +177,12 @@ const getPage = async (question, request, h) => {
         ...question,
         title: 'Is the other technology robotic or automatic?'
       }
-    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'automatic-eligibility') { // other technology automatic
+    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'automatic-eligibility') {
         question = {
           ...question,
           title: 'Which eligibility criteria does your automatic technology meet?'
         }
-    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'robotic-eligibility') { // other technology robotic
+    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'robotic-eligibility') {
         question = {
           ...question,
           title: 'Does your robotic technology fit the eligibility criteria?'
