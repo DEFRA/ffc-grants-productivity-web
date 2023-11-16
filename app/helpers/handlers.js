@@ -69,13 +69,13 @@ const getPage = async (question, request, h) => {
     return h.redirect(startPageUrl)
   }
   let confirmationId = ''
-  if (url === 'item-conditional') {
-    if (getYarValue(request, 'projectItemsList')?.length === 1) {
-      backUrl = `${urlPrefix}/other-item`
-    } else {
-      backUrl = `${urlPrefix}/project-items-summary`
-    }
-  }
+  // if (url === 'item-conditional') {
+  //   if (getYarValue(request, 'projectItemsList')?.length === 1) {
+  //     backUrl = `${urlPrefix}/other-item`
+  //   } else {
+  //     backUrl = `${urlPrefix}/project-items-summary`
+  //   }
+  // }
 
   if (question.maybeEligible) {
     let { maybeEligibleContent } = question
@@ -307,8 +307,14 @@ const getPage = async (question, request, h) => {
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
     case 'project-items-summary': {
-      let projectItemsModel = getModel(data, question, request, conditionalHtml)
       const projectItemsList = getYarValue(request, 'projectItemsList')
+      console.log('projectItemsList', projectItemsList)
+      if (projectItemsList.length === 5) {
+        question.showButton = false
+      } else {
+        question.showButton = true
+      }
+      let projectItemsModel = getModel(data, question, request, conditionalHtml)
       projectItemsModel = {
         ...projectItemsModel,
         projectItemsList
@@ -363,14 +369,15 @@ const showPostPage = (currentQuestion, request, h) => {
     } else if (yarKey === 'solarTechnologies' && !value.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2'))) {
       setYarValue(request, 'solarOutput', null)
       setYarValue(request, 'solarInstallation', null)
-    } else if (yarKey === 'otherItem' && value == 'Yes') {
-      setYarValue(request, 'technologyItems', null)
-      setYarValue(request, 'roboticAutomatic', null)
-      setYarValue(request, 'roboticEligibility', null)
-      setYarValue(request, 'automaticEligibility', null)
-      setYarValue(request, 'technologyDescription', null)
-      setYarValue(request, 'addToItemList', false)
-    }
+    } 
+    // else if (yarKey === 'otherItem' && value == 'Yes') {
+    //   setYarValue(request, 'technologyItems', null)
+    //   setYarValue(request, 'roboticAutomatic', null)
+    //   setYarValue(request, 'roboticEligibility', null)
+    //   setYarValue(request, 'automaticEligibility', null)
+    //   setYarValue(request, 'technologyDescription', null)
+    //   setYarValue(request, 'addToItemList', false)
+    // }
   }
   if (type === 'multi-input') {
     allFields.forEach(field => {
@@ -604,31 +611,24 @@ const showPostPage = (currentQuestion, request, h) => {
         setYarValue(request, 'projectItemsList', tempArray)
 
       }
+
       break
     }
 
-    case 'other-item': {
+    // case 'other-item': {
 
-      if(getYarValue(request, 'projectItemsList')?.length <= 1){
-        return h.redirect(`${urlPrefix}/item-conditional`)
-      }else {
-        return h.redirect(`${urlPrefix}/project-items-summary`)
-      }
-    }
+    //   if(getYarValue(request, 'projectItemsList')?.length <= 1){
+    //     return h.redirect(`${urlPrefix}/item-conditional`)
+    //   }else {
+    //     return h.redirect(`${urlPrefix}/project-items-summary`)
+    //   }
+    // }
     case 'remove-item': {
       if (getYarValue(request, 'projectItemsList').length < 1) {
         return h.redirect(`${urlPrefix}/technology-items`)
       }
     }
 
-    case 'project-items-summary':
-      setYarValue(request, 'technologyItems', null)
-      setYarValue(request, 'roboticAutomatic', null)
-      setYarValue(request, 'roboticEligibility', null)
-      setYarValue(request, 'automaticEligibility', null)
-      setYarValue(request, 'technologyDescription', null)
-      setYarValue(request, 'addToItemList', false)
-      break
     default:
       break
   }

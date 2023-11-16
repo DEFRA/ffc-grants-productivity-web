@@ -45,7 +45,7 @@ it('should return error message if no option is selected', async () => {
     expect(postResponse.payload).toContain('Enter a brief description of your technology')
 })
 
-it('should redirect to /other-items - normal vals', async () => {
+it('should redirect to /project-items-summary - normal vals', async () => {
     varList.otherItem = 'No'
     varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
     const postOptions = {
@@ -57,10 +57,10 @@ it('should redirect to /other-items - normal vals', async () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toContain('other-item')
+    expect(postResponse.headers.location).toContain('project-items-summary')
 })
 
-it('should redirect to /other-items - null values', async () => {
+it('should redirect to /project-items-summary - null values', async () => {
     varList.otherItem = 'No'
     varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
     varList.roboticEligibility = 'No'
@@ -77,7 +77,7 @@ it('should redirect to /other-items - null values', async () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toContain('other-item')
+    expect(postResponse.headers.location).toContain('project-items-summary')
 })
 it('page loads with correct back link > automatic', async () => {
   varList.roboticEligibility = null

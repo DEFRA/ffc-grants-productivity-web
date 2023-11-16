@@ -103,7 +103,7 @@ describe('Page: /automatic-eligibility', () => {
     expect(postResponse.payload).toContain('Add another item')
     expect(postResponse.payload).toContain('Continue with eligible items')
   })
-  it('user selects two eligible options and \'Harvesting technology\' -> store user response and redirect to /other-item', async () => {
+  it('user selects two eligible options and \'Harvesting technology\' -> store user response and redirect to /technology-description', async () => {
     varList.automaticEligibility = ['Makes decisions and plans', 'Has sensing system that can understand its environment']
     varList.technologyItems = 'Harvesting technology'
     const postOptions = {

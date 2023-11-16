@@ -46,7 +46,7 @@ it('page loads with correct back link when only 1 item was selected', async () =
    
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/productivity/other-item\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
+    expect(response.payload).toContain('<a href=\"/productivity/project-items-summary\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
     })
 
 it(`page loads with correct back link when more then 1 option was selected`, async () => {
