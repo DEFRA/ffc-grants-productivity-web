@@ -1854,7 +1854,7 @@ const questionBank = {
         {
           key: 'project-items-summary',
           order: 310,
-          title: 'Your Project items',
+          title: 'Your project technology',
           hint: {
             text: 'You can add or remove items you will be using on your project'
           },
@@ -1866,7 +1866,7 @@ const questionBank = {
           // preValidationKeys: ['otherItem'],
           sidebar: {
             values: [{
-              heading: 'Eligibility',
+              heading: 'Your project technology',
               content: [{
                 para: `Automatic items must fit at least 2 criteria to be eligible for funding. \n\n 
                       Robotic items must fit all 4 criteria to be eligible for funding.`
