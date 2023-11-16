@@ -26,11 +26,12 @@ describe('Page: /solar-technologies', () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('What solar project items does your project need?')
     expect(response.payload).toContain('An electrical grid connection')
-    expect(response.payload).toContain('Solar panels')
+    expect(response.payload).toContain('Solar PV panels')
     expect(response.payload).toContain('An inverter')
     expect(response.payload).toContain('A utility meter')
     expect(response.payload).toContain('A battery')
-    expect(response.payload).toContain('Limit-loading power diverter to heat stores')
+    expect(response.payload).toContain('Power diverter')
+    expect(response.payload).toContain('Redirects excess solar energy to power storage (for example heat stores)')
   })
 
   it('no option selected -> show error message', async () => {
@@ -46,13 +47,13 @@ describe('Page: /solar-technologies', () => {
     expect(postResponse.payload).toContain('Select what solar project items your project needs')
   })
 
-  it('user selects \'Solar panels\' option -> store user response and redirect to /solar-installation', async () => {
-    varList.solarTechnologies = 'Solar panels'
+  it('user selects \'Solar PV panels\' option -> store user response and redirect to /solar-installation', async () => {
+    varList.solarTechnologies = 'Solar PV panels'
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-technologies`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { solarTechnologies: 'Solar panels', crumb: crumbToken }
+      payload: { solarTechnologies: 'Solar PV panels', crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -60,13 +61,13 @@ describe('Page: /solar-technologies', () => {
     expect(postResponse.headers.location).toContain('solar-installation')
   })
 
-  it('user selects any option AND \'Solar panels\' -> store user response and redirect to /solar-installation', async () => {
-    varList.solarTechnologies = ['Solar panels', 'An electrical grid connection']
+  it('user selects any option AND \'Solar PV panels\' -> store user response and redirect to /solar-installation', async () => {
+    varList.solarTechnologies = ['Solar PV panels', 'An electrical grid connection']
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/solar-technologies`,
       headers: { cookie: 'crumb=' + crumbToken },
-      payload: { solarTechnologies: ['Solar panels', 'An electrical grid connection'], crumb: crumbToken }
+      payload: { solarTechnologies: ['Solar PV panels', 'An electrical grid connection'], crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -74,7 +75,7 @@ describe('Page: /solar-technologies', () => {
     expect(postResponse.headers.location).toContain('solar-installation')
   })
 
-  it('user selects one option WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost-solar', async () => {
+  it('user selects one option WITHOUT \'Solar PV panels\' -> store user response and redirect to /project-cost-solar', async () => {
     varList.existingSolar = 'Yes'
     varList.solarTechnologies = 'A utility meter'
     const postOptions = {
@@ -89,7 +90,7 @@ describe('Page: /solar-technologies', () => {
     expect(postResponse.headers.location).toContain('/productivity/project-cost-solar')
   })
 
-  it('user selects multiple options WITHOUT \'Solar panels\' -> store user response and redirect to /project-cost-solar', async () => {
+  it('user selects multiple options WITHOUT \'Solar PV panels\' -> store user response and redirect to /project-cost-solar', async () => {
     varList.solarTechnologies = ['An inverter', 'A battery']
     varList.existingSolar = 'No'
     const postOptions = {

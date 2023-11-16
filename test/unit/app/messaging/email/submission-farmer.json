@@ -54,13 +54,13 @@
   "labourReplaced": null,
   "solarTechnologies": [
     "An electrical grid connection",
-    "Solar panels",
+    "Solar PV panels",
     "An inverter"
   ],
   "solarOutput": "Up to 50kW",
   "solarInstallation": [
     "On a rooftop",
-    "Floating (on a reservoir)"
+    "Floating on an irrigation reservoir"
   ],
   "solarUsage": "Yes",
   "projectStarted": "No",

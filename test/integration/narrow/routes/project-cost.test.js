@@ -190,8 +190,8 @@ it('should display the "Robotic voluntary milking system" in the sidebar, if use
   expect(response.payload).toContain('Robotic voluntary milking system')
 })
 
-// it('page loads with correct back link when Solar project items is /Solar panels/ ', async () => {
-//   varList.solarTechnologies = 'Solar panels'
+// it('page loads with correct back link when Solar project items is /Solar PV panels/ ', async () => {
+//   varList.solarTechnologies = 'Solar PV panels'
 //   varList.solarInstallation = 'On an existing hardstanding area'
 //   const options = {
 //       method: 'GET',
