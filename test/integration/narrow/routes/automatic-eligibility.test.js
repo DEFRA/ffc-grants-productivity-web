@@ -54,7 +54,7 @@ describe('Page: /automatic-eligibility', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.payload).toContain('You cannot apply for a grant funding for this item')
+    expect(postResponse.payload).toContain('You cannot apply for a grant funding for this technology')
     expect(postResponse.payload).toContain('Automatic technology must fit at least 2 criteria to be eligible for grant funding.')
     expect(postResponse.payload).toContain('Add another item')
   })
@@ -83,7 +83,7 @@ describe('Page: /automatic-eligibility', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.payload).toContain('You cannot apply for a grant funding for this item')
+    expect(postResponse.payload).toContain('You cannot apply for a grant funding for this technology')
     expect(postResponse.payload).toContain('Automatic technology must fit at least 2 criteria to be eligible for grant funding.')
     expect(postResponse.payload).toContain('Add another item')
   })
@@ -98,7 +98,7 @@ describe('Page: /automatic-eligibility', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.payload).toContain('You cannot apply for a grant funding for this item')
+    expect(postResponse.payload).toContain('You cannot apply for a grant funding for this technology')
     expect(postResponse.payload).toContain('Automatic technology must fit at least 2 criteria to be eligible for grant funding.')
     expect(postResponse.payload).toContain('Add another item')
     expect(postResponse.payload).toContain('Continue with eligible items')

@@ -552,16 +552,16 @@ const showPostPage = (currentQuestion, request, h) => {
           const projectItemsList = getYarValue(request, 'projectItemsList') ?? []
           if (projectItemsList.length === 0) {
             NOT_ELIGIBLE.primaryBtn = {
-              text: 'Add another item',
+              text: 'Add another technology',
               url: `${urlPrefix}/technology-items`
             }
           } else {
             NOT_ELIGIBLE.primaryBtn = {
-              text: 'Continue with eligible items',
+              text: 'Continue with eligible technology',
               url: `${urlPrefix}/project-items-summary`
             }
             NOT_ELIGIBLE.secondaryBtn = {
-              text: 'Add another item',
+              text: 'Add another technology',
               url: `${urlPrefix}/technology-items`
             }
           }
