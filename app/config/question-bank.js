@@ -474,16 +474,17 @@ const questionBank = {
           url: 'planning-required-condition',
           backUrl: 'planning-permission',
           nextUrl: 'project-start',
-          preValidationObject: {
-            preValidationKeys: ['planningPermission'],
-            preValidationAnswer: ['planning-permission-A3'],
-            preValidationRule: 'AND',
-            preValidationUrls: ['planning-permission']
-          },
+          // preValidationObject: {
+          //   preValidationKeys: ['planningPermission'],
+          //   preValidationAnswer: ['planning-permission-A3'],
+          //   preValidationRule: 'AND',
+          //   preValidationUrls: ['planning-permission']
+          // },
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place before you submit your full application. The application deadline is 31 October 2025.'
+            messageContent: `Any planning permission must be in place before you submit your full application.<br/><br/>
+                            The application deadline is 31 October 2025.`
           }
         },
         {
