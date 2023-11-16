@@ -148,12 +148,7 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'applicant',
           baseUrl: 'applicant',
-          preValidationObject: {
-              preValidationKeys: ['projectSubject'],
-              preValidationAnswer: ['project-subject-A1', 'project-subject-A2'],
-              preValidationRule: 'AND',
-              preValidationUrls: ['project-subject']
-          },
+          preValidationKeys: ['projectSubject'],
           ineligibleContent: {
             messageContent: 'Contractors cannot apply for grant funding for solar project items.',
             messageLink: {
