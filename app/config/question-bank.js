@@ -3587,13 +3587,8 @@ const questionBank = {
           pageTitle: '',
           url: 'confirmation',
           baseUrl: 'confirmation',
-          preValidationKeys: ['consentMain'],
-        //   preValidationObject: {
-        //     preValidationKeys: ['consentOptional'],
-        //     preValidationAnswer: ['key1', 'key2'],
-        //     preValidationRule: 'AND',
-        //     preValidationUrls: ['project-subject']
-        // },
+          preValidationKeys: ['applying', 'consentOptional'],
+
           ga: [
             { dimension: 'cd2', value: { type: 'score' } },
             { dimension: 'cd5', value: { type: 'confirmationId' } },
