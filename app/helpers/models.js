@@ -7,8 +7,6 @@ const getDependentSideBar = (sidebar, request) => {
   // sidebar contains values of a previous page
 
   let sidebarEligibleItems = []
-  let sidebarIneligibleItems = []
-
   if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A1'))) {
     sidebarEligibleItems.push(getQuestionAnswer('project-items', 'project-items-A1'))
   } 
@@ -22,9 +20,9 @@ const getDependentSideBar = (sidebar, request) => {
     for (item in itemsList) {
       if (itemsList[item].item.startsWith('Other')) {
         if (itemsList[item].type === 'Robotic') {
-          sidebarIneligibleItems.push('Other robotic technology')
+          sidebarEligibleItems.push('Other robotic technology')
         } else {
-          sidebarIneligibleItems.push('Other automatic technology')
+          sidebarEligibleItems.push('Other automatic technology')
 
         }
       } else {
@@ -38,14 +36,6 @@ const getDependentSideBar = (sidebar, request) => {
     sidebar.values[0].show = true
   } else {
     sidebar.values[0].show = false
-
-  }
-
-  if (sidebarIneligibleItems.length > 0) {
-    sidebar.values[1].content[0].items = sidebarIneligibleItems
-    sidebar.values[1].show = true
-  } else {
-    sidebar.values[1].show = false
 
   }
 
