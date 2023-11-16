@@ -1581,7 +1581,7 @@ const questionBank = {
           preValidationKeys: ['technologyItems'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            title: 'You cannot apply for a grant funding for this item',
+            title: 'You cannot apply for a grant funding for this technology',
             messageContent: 'Automatic technology must fit at least 2 criteria to be eligible for grant funding.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
@@ -3598,7 +3598,6 @@ const questionBank = {
           url: 'confirmation',
           baseUrl: 'confirmation',
           preValidationKeys: ['applying', 'consentOptional'],
-
           ga: [
             { dimension: 'cd2', value: { type: 'score' } },
             { dimension: 'cd5', value: { type: 'confirmationId' } },
