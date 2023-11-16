@@ -3587,7 +3587,7 @@ const questionBank = {
           pageTitle: '',
           url: 'confirmation',
           baseUrl: 'confirmation',
-          preValidationKeys: ['applying'],
+          preValidationKeys: ['applying', 'consentOptional'],
 
           ga: [
             { dimension: 'cd2', value: { type: 'score' } },
