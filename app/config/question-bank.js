@@ -477,7 +477,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place before you submit your full application. The application deadline is 31 April 2024.'
+            messageContent: 'Any planning permission must be in place before you submit your full application. The application deadline is 31 October 2025.'
           }
         },
         {
@@ -790,7 +790,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'If you do not have an existing solar PV system you must select solar PV panels to be eligible for this grant.'
+                para: 'If you do not have an existing solar PV system, you must apply for funding for solar PV panels to be eligible for this grant.'
               }],
               show: true
 
@@ -809,7 +809,7 @@ const questionBank = {
             },
             {
               key: 'solar-technologies-A2',
-              value: 'Solar panels'
+              value: 'Solar PV panels'
             },
             {
               key: 'solar-technologies-A3',
@@ -825,7 +825,10 @@ const questionBank = {
             },
             {
               key: 'solar-technologies-A6',
-              value: 'Limit-loading power diverter to heat stores'
+              value: 'Power diverter',
+              hint: {
+                text: 'Redirects excess solar energy to power storage (for example heat stores)'
+              }
             }
           ],
           yarKey: 'solarTechnologies'
@@ -852,10 +855,10 @@ const questionBank = {
           ineligibleContent: {
             messageContent: `
                     <div class="govuk-list govuk-list--bullet">
-                    <p class="govuk-body">Solar panels must be installed:</p>
+                    <p class="govuk-body">Solar PV panels must be installed:</p>
                           <ul>
                             <li>on a rooftop</li>
-                            <li>floating (on a reservoir)</li>
+                            <li>floating on an irrigation reservoir</li>
                           </ul>
                     </div>`,
             messageLink: {
@@ -867,8 +870,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'Solar panels must be installed:',
-                items: ['on a rooftop', 'floating (on a reservoir)']
+                para: 'Solar PV panels must be installed:',
+                items: ['on a rooftop', 'floating on an irrigation reservoir']
               }],
               show: true
 
@@ -895,7 +898,7 @@ const questionBank = {
             },
             {
               key: 'solar-installation-A2',
-              value: 'Floating (on a reservoir)'
+              value: 'Floating on an irrigation reservoir '
             },
             {
               value: 'divider'
@@ -1526,8 +1529,8 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `Robotic items must fit all 4 criteria to be eligible.\n\n
-                      Automatic items must fit at least 2 criteria to be eligible.`
+                para: `Robotic technology must fit all 4 criteria to be eligible.\n\n
+                Automatic technology must fit at least 2 criteria to be eligible.`
               }],
               show: true
 
@@ -1582,7 +1585,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'Automatic items must fit at least 2 criteria to be eligible for grant funding.',
+                para: 'Automatic technology must fit at least 2 criteria to be eligible for grant funding.',
                 items: []
               }],
               show: true
