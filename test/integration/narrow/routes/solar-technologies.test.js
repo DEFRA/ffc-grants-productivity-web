@@ -16,7 +16,28 @@ describe('Page: /solar-technologies', () => {
     }
   }))
 
-  it('page loads successfully, with all the options', async () => {
+  it('page loads successfully, with all the options - score', async () => {
+    varList['current-score'] = true
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/solar-technologies`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('What solar project items does your project need?')
+    expect(response.payload).toContain('An electrical grid connection')
+    expect(response.payload).toContain('Solar PV panels')
+    expect(response.payload).toContain('An inverter')
+    expect(response.payload).toContain('A utility meter')
+    expect(response.payload).toContain('A battery')
+    expect(response.payload).toContain('Power diverter')
+    expect(response.payload).toContain('Redirects excess solar energy to power storage (for example heat stores)')
+  })
+
+  it('page loads successfully, with all the options - no score', async () => {
+    varList['current-score'] = false
+
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/solar-technologies`
