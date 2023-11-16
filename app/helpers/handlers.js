@@ -169,6 +169,28 @@ const getPage = async (question, request, h) => {
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }
+    if (url === 'technology-description') {
+      if (getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology') {
+        console.log('technology-description: ', getYarValue(request, 'technologyItems'))
+        const descriptionTitle = title + getYarValue(request, 'technologyItems')
+        question = {
+          ...question,
+          title: descriptionTitle
+        }
+      }
+
+      if (getYarValue(request, 'roboticAutomatic') === 'Robotic') {
+        question = {
+          ...question,
+          title: 'Describe the Robotic technology'
+        }
+      } else if (getYarValue(request, 'roboticAutomatic') === 'Automatic') {
+        question = {
+          ...question,
+          title: 'Describe the Automatic technology'
+        }
+      }
+    }
   }
 
   if (replace) {
