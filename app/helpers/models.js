@@ -15,12 +15,14 @@ const getDependentSideBar = (sidebar, request) => {
 
   if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A2'))) {
     sidebarEligibleItems.push(getQuestionAnswer('project-items', 'project-items-A2'))
-  } 
+  }
 
   if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A3'))) {
     let itemsList = getYarValue(request, 'projectItemsList')
     for (item in itemsList) {
-      if (itemsList[item].item.startsWith('Other')) {
+      if (itemsList[item].item === getQuestionAnswer('technology-items', 'technology-items-A5')) {
+        sidebarEligibleItems.push('Robotic voluntary milking system')
+      } else if (itemsList[item].item.startsWith('Other')) {
         if (itemsList[item].type === 'Robotic') {
           sidebarIneligibleItems.push('Other robotic technology')
         } else {
