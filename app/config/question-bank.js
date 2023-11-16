@@ -126,8 +126,7 @@ const questionBank = {
             {
               key: 'project-subject-A2',
               value: 'Solar project items',
-              text: 'Solar project items',
-              redirectUrl: 'legal-status'
+              text: 'Solar project items'
             }
           ],
           yarKey: 'projectSubject'
@@ -149,11 +148,13 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'applicant',
           baseUrl: 'applicant',
-          preValidationObject: {
-              preValidationKeys: ['projectSubject'],
-              preValidationAnswer: ['project-subject-A1'],
-              preValidationRule: 'AND',
-              preValidationUrls: ['project-subject']
+          preValidationKeys: ['projectSubject'],
+          ineligibleContent: {
+            messageContent: 'Contractors cannot apply for grant funding for solar project items.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
           },
           fundingPriorities: '',
           type: 'single-answer',
@@ -206,7 +207,7 @@ const questionBank = {
                 para: 'This grant is only for businesses registered in England. \n \n Scotland, Wales and Northern Ireland have other grants available.',
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -235,10 +236,10 @@ const questionBank = {
           title: 'What is the legal status of the business?',
           pageTitle: '',
           backUrlObject: {
-            dependentQuestionYarKey: ['projectSubject', 'applicant'],
-            dependentAnswerKeysArray: ['project-subject-A2', 'applicant-A1'],
+            dependentQuestionYarKey: ['applicant'],
+            dependentAnswerKeysArray: ['applicant-A1'],
             urlOptions: {
-              thenUrl: ['project-subject', 'applicant'],
+              thenUrl: ['applicant'],
               elseUrl: 'business-location'
             }
           },
@@ -276,7 +277,7 @@ const questionBank = {
                 para: 'Public organisations and local authorities cannot apply for this grant.',
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -378,7 +379,7 @@ const questionBank = {
                 para: 'This grant is only for projects in England. \n \n Scotland, Wales and Northern Ireland have other grants available.',
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -434,7 +435,7 @@ const questionBank = {
                 \n\n The application deadline is 31 April 2024.`,
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -482,7 +483,7 @@ const questionBank = {
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
-            messageContent: 'Any planning permission must be in place before you submit your full application. The application deadline is 31 April 2024.'
+            messageContent: 'Any planning permission must be in place before you submit your full application. The application deadline is 31 October 2025.'
           }
         },
         {
@@ -525,7 +526,7 @@ const questionBank = {
                 para: 'You will invalidate your application if you start the project or commit to any costs (such as placing orders) before you receive a funding agreement.\n \n Before you start the project, you can:',
                 items: ['get quotes from suppliers', 'apply for planning permissions (this can take a long time)']
               }],
-              show: true
+              
 
             }]
           },
@@ -600,7 +601,7 @@ const questionBank = {
                 para: 'If you are a tenant farmer, you will have the option to ask your landlord to underwrite your agreement.',
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -663,7 +664,7 @@ const questionBank = {
                     items: []
                   }
                 ],
-                show: true
+                
 
               }
             ]
@@ -726,7 +727,7 @@ const questionBank = {
                 solar PV panels.`,
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -795,9 +796,9 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'If you do not have an existing solar PV system you must select solar PV panels to be eligible for this grant.'
+                para: 'If you do not have an existing solar PV system, you must apply for funding for solar PV panels to be eligible for this grant.'
               }],
-              show: true
+              
 
             }]
           },
@@ -814,7 +815,7 @@ const questionBank = {
             },
             {
               key: 'solar-technologies-A2',
-              value: 'Solar panels'
+              value: 'Solar PV panels'
             },
             {
               key: 'solar-technologies-A3',
@@ -830,7 +831,10 @@ const questionBank = {
             },
             {
               key: 'solar-technologies-A6',
-              value: 'Limit-loading power diverter to heat stores'
+              value: 'Power diverter',
+              hint: {
+                text: 'Redirects excess solar energy to power storage (for example heat stores)'
+              }
             }
           ],
           yarKey: 'solarTechnologies'
@@ -857,10 +861,10 @@ const questionBank = {
           ineligibleContent: {
             messageContent: `
                     <div class="govuk-list govuk-list--bullet">
-                    <p class="govuk-body">Solar panels must be installed:</p>
+                    <p class="govuk-body">Solar PV panels must be installed:</p>
                           <ul>
                             <li>on a rooftop</li>
-                            <li>floating (on a reservoir)</li>
+                            <li>floating on an irrigation reservoir</li>
                           </ul>
                     </div>`,
             messageLink: {
@@ -872,10 +876,10 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'Solar panels must be installed:',
-                items: ['on a rooftop', 'floating (on a reservoir)']
+                para: 'Solar PV panels must be installed:',
+                items: ['on a rooftop', 'floating on an irrigation reservoir']
               }],
-              show: true
+              
 
             }]
           },
@@ -900,7 +904,7 @@ const questionBank = {
             },
             {
               key: 'solar-installation-A2',
-              value: 'Floating (on a reservoir)'
+              value: 'Floating on an irrigation reservoir '
             },
             {
               value: 'divider'
@@ -936,7 +940,7 @@ const questionBank = {
                 para: 'RPA wants to fund projects that improve the environment.',
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -989,7 +993,7 @@ const questionBank = {
                 para: 'RPA wants to fund projects that need smaller solar PV systems.',
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -1157,7 +1161,7 @@ const questionBank = {
                     'the Basic Payment Scheme'
                   ]
                 }],
-                show: true
+                
 
               }
             ]
@@ -1190,7 +1194,11 @@ const questionBank = {
             isDisplay: true
           },
           order: 245,
-          title: 'Which agricultural sector is your project in?',
+          hint: {
+            html: `Your main farm enterprises<br/><br/>
+                  Select up to 2 options`
+          },
+          title: 'What do you farm mainly?',
           pageTitle: '',
           url: 'agricultural-sector-solar',
           baseUrl: 'agricultural-sector-solar',
@@ -1202,9 +1210,6 @@ const questionBank = {
           fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',          
           type: 'multi-answer',
           minAnswerCount: 1,
-          hint: {
-            text: 'Select up to 2 options'
-          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -1212,7 +1217,7 @@ const questionBank = {
                 para: 'RPA wants to fund sectors that:',
                 items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
               }],
-              show: true
+              
 
             }]
           },
@@ -1292,7 +1297,7 @@ const questionBank = {
                 para: 'The land must be owned or have a tenancy in place until 2027 before starting the project.',
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -1440,7 +1445,7 @@ const questionBank = {
                 para: 'RPA will consider items that:',
                 items: ['have a sensing system and can understand their environment', 'make decisions and plans', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop']
               }],
-              show: true
+              
 
             }]
           },
@@ -1531,10 +1536,10 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: `Robotic items must fit all 4 criteria to be eligible.\n\n
-                      Automatic items must fit at least 2 criteria to be eligible.`
+                para: `Robotic technology must fit all 4 criteria to be eligible.\n\n
+                Automatic technology must fit at least 2 criteria to be eligible.`
               }],
-              show: true
+              
 
             }]
           },
@@ -1571,7 +1576,7 @@ const questionBank = {
           preValidationKeys: ['technologyItems'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            title: 'You cannot apply for a grant funding for this item',
+            title: 'You cannot apply for a grant funding for this technology',
             messageContent: 'Automatic technology must fit at least 2 criteria to be eligible for grant funding.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
@@ -1587,10 +1592,10 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'Automatic items must fit at least 2 criteria to be eligible for grant funding.',
+                para: 'Automatic technology must fit at least 2 criteria to be eligible for grant funding.',
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -1665,7 +1670,7 @@ const questionBank = {
             `
           },
           ineligibleContent: {
-            title: 'You cannot apply for grant funding for this item',
+            title: 'You cannot apply for grant funding for this technology',
             messageContent: `RPA will only fund robotic technology that:
                             <ul class="govuk-list govuk-list--bullet">
                               <li>have a sensing system and can understand their environment</li>
@@ -1685,7 +1690,7 @@ const questionBank = {
                 para: 'Robotic items must meet all 4 criteria to be eligible.',
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -1744,7 +1749,7 @@ const questionBank = {
                 items: ['have a sensing system and can understand their environment', 'make decisions and plans', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop'],
                 additionalPara: 'Automatic technology must fit at least 2 of these eligibility criteria. '
               }],
-              show: true
+              
 
             }]
           },
@@ -1817,7 +1822,7 @@ const questionBank = {
         {
           key: 'project-items-summary',
           order: 310,
-          title: 'Your Project items',
+          title: 'Your project technology',
           hint: {
             text: 'You can add or remove items you will be using on your project'
           },
@@ -1830,12 +1835,12 @@ const questionBank = {
           // preValidationKeys: ['otherItem'],
           sidebar: {
             values: [{
-              heading: 'Eligibility',
+              heading: 'Your project technology',
               content: [{
                 para: `Automatic items must fit at least 2 criteria to be eligible for funding. \n\n 
                       Robotic items must fit all 4 criteria to be eligible for funding.`
               }],
-              show: true
+              
 
             }]
           },
@@ -1948,20 +1953,12 @@ const questionBank = {
           sidebar: {
             values: [
               {
-                heading: 'Eligible items selected',
+                heading: 'Your eligible items',
                 content: [{
                   para: '',
                   items: []
                 }],
-                show:true
-              },
-              {
-                heading: 'Not yet eligible items',
-                content: [{
-                  para: '',
-                  items: []
-                }],
-                show: true
+                
               }
             ],
             dependentYarKeys: ['projectItems'] // just needed to trigger sidebar code
@@ -2055,7 +2052,7 @@ const questionBank = {
                     'the Basic Payment Scheme'
                   ]
                 }],
-                show: true
+                
               }
             ]
           },
@@ -2112,7 +2109,7 @@ const questionBank = {
                 \n\n Your project’s positive environmental benefit will be assessed at full application stage.`,
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -2167,7 +2164,7 @@ const questionBank = {
                 para: 'RPA wants to fund projects that:',
                 items: ['improve productivity', 'introduce innovation']
               }],
-              show: true
+              
 
             }]
           },
@@ -2243,7 +2240,7 @@ const questionBank = {
               content: [{
                 para: 'RPA wants to fund projects that improve the environment'
               }],
-              show: true
+              
 
             }]
           },
@@ -2336,7 +2333,7 @@ const questionBank = {
                 para: 'RPA wants to fund sectors that:',
                 items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
               }],
-              show: true
+              
 
             }]
           },
@@ -2405,7 +2402,7 @@ const questionBank = {
                 para: 'RPA wants to fund projects that introduce innovation',
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -2440,6 +2437,9 @@ const questionBank = {
           order: 381,
           title: 'How much manual labour will this technology replace?',
           pageTitle: '',
+          hint: {
+            text: 'One job is equal to 30 hours or more per week'
+          },
           url: 'labour-replaced',
           baseUrl: 'labour-replaced',
           backUrl: 'technology-use',
@@ -2457,12 +2457,12 @@ const questionBank = {
           minAnswerCount: 1,
           sidebar: {
             values: [{
-              heading: 'Manual labour shortage',
+              heading: 'Funding priorities',
               content: [{
-                para: 'Using robotic or automatic technologies can reduce the need to find manual labour.',
+                para: 'RPA wants to fund the use of robotic or automatic technology due to the current manual labour shortage.',
                 items: []
               }],
-              show: true
+              
 
             }]
           },
@@ -3540,7 +3540,7 @@ const questionBank = {
           url: 'confirm',
           backUrl: 'check-details',
           nextUrl: 'confirmation',
-          // preValidationKeys: ['farmerDetails', 'contractorsDetails'],
+          preValidationKeys: ['applying'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Confirm and send',
@@ -3566,7 +3566,7 @@ const questionBank = {
           pageTitle: '',
           url: 'confirmation',
           baseUrl: 'confirmation',
-          // preValidationKeys: ['consentOptional'],
+          preValidationKeys: ['applying', 'consentOptional'],
           ga: [
             { dimension: 'cd2', value: { type: 'score' } },
             { dimension: 'cd5', value: { type: 'confirmationId' } },

@@ -7,24 +7,24 @@ const getDependentSideBar = (sidebar, request) => {
   // sidebar contains values of a previous page
 
   let sidebarEligibleItems = []
-  let sidebarIneligibleItems = []
-
   if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A1'))) {
     sidebarEligibleItems.push(getQuestionAnswer('project-items', 'project-items-A1'))
   } 
 
   if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A2'))) {
     sidebarEligibleItems.push(getQuestionAnswer('project-items', 'project-items-A2'))
-  } 
+  }
 
   if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A3'))) {
     let itemsList = getYarValue(request, 'projectItemsList')
     for (item in itemsList) {
-      if (itemsList[item].item.startsWith('Other')) {
+      if (itemsList[item].item === getQuestionAnswer('technology-items', 'technology-items-A5')) {
+        sidebarEligibleItems.push('Robotic voluntary milking system')
+      } else if (itemsList[item].item.startsWith('Other')) {
         if (itemsList[item].type === 'Robotic') {
-          sidebarIneligibleItems.push('Other robotic technology')
+          sidebarEligibleItems.push('Other robotic technology')
         } else {
-          sidebarIneligibleItems.push('Other automatic technology')
+          sidebarEligibleItems.push('Other automatic technology')
 
         }
       } else {
@@ -38,14 +38,6 @@ const getDependentSideBar = (sidebar, request) => {
     sidebar.values[0].show = true
   } else {
     sidebar.values[0].show = false
-
-  }
-
-  if (sidebarIneligibleItems.length > 0) {
-    sidebar.values[1].content[0].items = sidebarIneligibleItems
-    sidebar.values[1].show = true
-  } else {
-    sidebar.values[1].show = false
 
   }
 
@@ -91,8 +83,8 @@ const getModel = (data, question, request, conditionalHtml = '') => {
     items: getOptions(data, question, conditionalHtml, request),
     sideBarText,
     ...(warningDetails ? ({ warning: warningDetails }) : {}),
-    diaplaySecondryBtn: hasScore && score?.isDisplay && key !== 'solar-technologies',
-    showButton: question?.showButton // only for project-items-summary
+    diaplaySecondryBtn: hasScore && score?.isDisplay && (key !== 'solar-technologies' && key !== 'energy-source'),
+    showButton: question?.showButton
   }
 }
 

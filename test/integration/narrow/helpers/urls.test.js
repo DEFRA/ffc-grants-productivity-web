@@ -85,23 +85,23 @@ describe("getUrl()", () => {
       `${urlPrefix}/score`
     );
   });
-  it('should set secBtnPath to technology-items if secBtn is "Add another item"', () => {
+  it('should set secBtnPath to technology-items if secBtn is "Add another technology"', () => {
     urlObject = null;
     dict = {
       dependentQuestionYarKey: "dependentAnswerKeysArray",
     };
-    expect(getUrl(urlObject, "mock-url", {}, "Add another item", "")).toEqual(
+    expect(getUrl(urlObject, "mock-url", {}, "Add another technology", "")).toEqual(
       `${urlPrefix}/technology-items`
     );
   });
 
 
-  it('should return secBtnPath if secBtn is Add another item', () => {
+  it('should return secBtnPath if secBtn is Add another technology', () => {
     urlObject = null;
     dict = {
       dependentQuestionYarKey: "dependentAnswerKeysArray",
     };
-    expect(getUrl(urlObject, "mock-url", {}, "Add another item", "")).toEqual(
+    expect(getUrl(urlObject, "mock-url", {}, "Add another technology", "")).toEqual(
       `${urlPrefix}/technology-items`
     );
   });

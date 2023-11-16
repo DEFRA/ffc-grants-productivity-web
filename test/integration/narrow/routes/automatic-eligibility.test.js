@@ -54,9 +54,9 @@ describe('Page: /automatic-eligibility', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.payload).toContain('You cannot apply for a grant funding for this item')
+    expect(postResponse.payload).toContain('You cannot apply for a grant funding for this technology')
     expect(postResponse.payload).toContain('Automatic technology must fit at least 2 criteria to be eligible for grant funding.')
-    expect(postResponse.payload).toContain('Add another item')
+    expect(postResponse.payload).toContain('Add another technology')
   })
 
   it('should display error message when user response are \'None of the above\' with other options', async () => {
@@ -83,9 +83,9 @@ describe('Page: /automatic-eligibility', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.payload).toContain('You cannot apply for a grant funding for this item')
+    expect(postResponse.payload).toContain('You cannot apply for a grant funding for this technology')
     expect(postResponse.payload).toContain('Automatic technology must fit at least 2 criteria to be eligible for grant funding.')
-    expect(postResponse.payload).toContain('Add another item')
+    expect(postResponse.payload).toContain('Add another technology')
   })
 
   it('should display ineligible page with "Continue with items" button, if user selects one option for the second project item', async () => {
@@ -98,10 +98,10 @@ describe('Page: /automatic-eligibility', () => {
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.payload).toContain('You cannot apply for a grant funding for this item')
+    expect(postResponse.payload).toContain('You cannot apply for a grant funding for this technology')
     expect(postResponse.payload).toContain('Automatic technology must fit at least 2 criteria to be eligible for grant funding.')
-    expect(postResponse.payload).toContain('Add another item')
-    expect(postResponse.payload).toContain('Continue with eligible items')
+    expect(postResponse.payload).toContain('Add another technology')
+    expect(postResponse.payload).toContain('Continue with eligible technology')
   })
   it('user selects two eligible options and \'Harvesting technology\' -> store user response and redirect to /technology-description', async () => {
     varList.automaticEligibility = ['Makes decisions and plans', 'Has sensing system that can understand its environment']

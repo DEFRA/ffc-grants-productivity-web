@@ -54,20 +54,6 @@ describe('Project subject page', () => {
     expect(response.statusCode).toBe(302)
     expect(response.headers.location).toBe('applicant')
   })
-  test('redirects to legal-status if user selects solar option', async () => {
-    const options = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/project-subject`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: {
-        crumb: crumbToken,
-        projectSubject: 'Solar project items'
-      }
-    }
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(302)
-    expect(response.headers.location).toBe('legal-status')
-  })
   test('shows error message if no option selected', async () => {
     const options = {
       method: 'POST',

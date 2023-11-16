@@ -7,8 +7,7 @@ const getUrl = (urlObject, url, request, secBtn) => {
   const chekDetailsPath = `${urlPrefix}/check-details`
   let secBtnPath = secBtn === 'Back to score' ? scorePath : chekDetailsPath
 
-  if(secBtn ==='Add another item'){
-    // reset if "Add another item" selected
+  if(secBtn ==='Add another technology'){    // reset if "Add another technology" selected
     setYarValue(request, 'technologyItems', null)
     setYarValue(request, 'roboticAutomatic', null)
     setYarValue(request, 'roboticEligibility', null)

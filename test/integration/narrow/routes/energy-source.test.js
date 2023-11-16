@@ -13,6 +13,40 @@ describe('Robotics Energy Source Page', () => {
     }
   }))
 
+  it('page loads successfully, with all the options - score', async () => {
+    varList['current-score'] = true
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/energy-source`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('What type of energy will you use?')
+    expect(response.payload).toContain('Mains electricity')
+    expect(response.payload).toContain('Renewable electricity generated on the farm')
+    expect(response.payload).toContain('Biofuels')
+    expect(response.payload).toContain('Fossil fuels')
+  
+  })
+
+  it('page loads successfully, with all the options - no score', async () => {
+    varList['current-score'] = false
+
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/energy-source`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('What type of energy will you use?')
+    expect(response.payload).toContain('Mains electricity')
+    expect(response.payload).toContain('Renewable electricity generated on the farm')
+    expect(response.payload).toContain('Biofuels')
+    expect(response.payload).toContain('Fossil fuels')
+  })
+
   it('should returns error message if no option is selected', async () => {
     const postOptions = {
       method: 'POST',
