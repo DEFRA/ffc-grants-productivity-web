@@ -635,6 +635,12 @@ const showPostPage = (currentQuestion, request, h) => {
     }
     case 'remove-item': {
       if (getYarValue(request, 'projectItemsList').length < 1) {
+        setYarValue(request, 'technologyItems', null)
+        setYarValue(request, 'roboticAutomatic', null)
+        setYarValue(request, 'roboticEligibility', null)
+        setYarValue(request, 'automaticEligibility', null)
+        setYarValue(request, 'technologyDescription', null)
+        setYarValue(request, 'addToItemList', true)
         return h.redirect(`${urlPrefix}/technology-items`)
       }
       break

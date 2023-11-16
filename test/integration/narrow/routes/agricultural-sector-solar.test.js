@@ -12,7 +12,29 @@ describe('agricultural sector solar page', () => {
       else return null
     }
   }))
-  it('page loads successfully, with all the options', async () => {
+  it('page loads successfully, with all the options - with score', async () => {
+    varList['current-score'] = true
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/agricultural-sector-solar`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Which agricultural sector is your project in?')
+    expect(response.payload).toContain('Arable')
+    expect(response.payload).toContain('Beef')
+    expect(response.payload).toContain('Dairy livestock')
+    expect(response.payload).toContain('Horticulture')
+    expect(response.payload).toContain('Mixed livestock')
+    expect(response.payload).toContain('Pig')
+    expect(response.payload).toContain('Poultry')
+    expect(response.payload).toContain('Sheep')
+  })
+
+  it('page loads successfully, with all the options - no score', async () => {
+    varList['current-score'] = false
+
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/agricultural-sector-solar`
