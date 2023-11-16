@@ -40,7 +40,7 @@ it('should load page successfully', async () => {
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Your project items')
+    expect(response.payload).toContain('Your project technology')
 })
 
 

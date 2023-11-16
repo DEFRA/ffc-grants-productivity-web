@@ -126,8 +126,7 @@ const questionBank = {
             {
               key: 'project-subject-A2',
               value: 'Solar project items',
-              text: 'Solar project items',
-              redirectUrl: 'legal-status'
+              text: 'Solar project items'
             }
           ],
           yarKey: 'projectSubject'
@@ -150,6 +149,13 @@ const questionBank = {
           url: 'applicant',
           baseUrl: 'applicant',
           preValidationKeys: ['projectSubject'],
+          ineligibleContent: {
+            messageContent: 'Contractors cannot apply for grant funding for solar project items.',
+            messageLink: {
+              url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
+              title: 'See other grants you may be eligible for.'
+            }
+          },
           fundingPriorities: '',
           type: 'single-answer',
           minAnswerCount: 1,
@@ -230,10 +236,10 @@ const questionBank = {
           title: 'What is the legal status of the business?',
           pageTitle: '',
           backUrlObject: {
-            dependentQuestionYarKey: ['projectSubject', 'applicant'],
-            dependentAnswerKeysArray: ['project-subject-A2', 'applicant-A1'],
+            dependentQuestionYarKey: ['applicant'],
+            dependentAnswerKeysArray: ['applicant-A1'],
             urlOptions: {
-              thenUrl: ['project-subject', 'applicant'],
+              thenUrl: ['applicant'],
               elseUrl: 'business-location'
             }
           },
@@ -1188,7 +1194,11 @@ const questionBank = {
             isDisplay: true
           },
           order: 245,
-          title: 'Which agricultural sector is your project in?',
+          hint: {
+            html: `Your main farm enterprises<br/><br/>
+                  Select up to 2 options`
+          },
+          title: 'What do you farm mainly?',
           pageTitle: '',
           url: 'agricultural-sector-solar',
           baseUrl: 'agricultural-sector-solar',
@@ -1200,9 +1210,6 @@ const questionBank = {
           fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',          
           type: 'multi-answer',
           minAnswerCount: 1,
-          hint: {
-            text: 'Select up to 2 options'
-          },
           sidebar: {
             values: [{
               heading: 'Funding priorities',
@@ -1569,7 +1576,7 @@ const questionBank = {
           preValidationKeys: ['technologyItems'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            title: 'You cannot apply for a grant funding for this item',
+            title: 'You cannot apply for a grant funding for this technology',
             messageContent: 'Automatic technology must fit at least 2 criteria to be eligible for grant funding.',
             messageLink: {
               url: 'https://www.gov.uk/government/collections/rural-payments-and-grants',
@@ -1663,7 +1670,7 @@ const questionBank = {
             `
           },
           ineligibleContent: {
-            title: 'You cannot apply for grant funding for this item',
+            title: 'You cannot apply for grant funding for this technology',
             messageContent: `RPA will only fund robotic technology that:
                             <ul class="govuk-list govuk-list--bullet">
                               <li>have a sensing system and can understand their environment</li>
@@ -1842,7 +1849,7 @@ const questionBank = {
         {
           key: 'project-items-summary',
           order: 310,
-          title: 'Your Project items',
+          title: 'Your project technology',
           hint: {
             text: 'You can add or remove items you will be using on your project'
           },
@@ -1854,7 +1861,7 @@ const questionBank = {
           // preValidationKeys: ['otherItem'],
           sidebar: {
             values: [{
-              heading: 'Eligibility',
+              heading: 'Your project technology',
               content: [{
                 para: `Automatic items must fit at least 2 criteria to be eligible for funding. \n\n 
                       Robotic items must fit all 4 criteria to be eligible for funding.`
@@ -2456,6 +2463,9 @@ const questionBank = {
           order: 381,
           title: 'How much manual labour will this technology replace?',
           pageTitle: '',
+          hint: {
+            text: 'One job is equal to 30 hours or more per week'
+          },
           url: 'labour-replaced',
           baseUrl: 'labour-replaced',
           backUrl: 'technology-use',
@@ -2473,9 +2483,9 @@ const questionBank = {
           minAnswerCount: 1,
           sidebar: {
             values: [{
-              heading: 'Manual labour shortage',
+              heading: 'Funding priorities',
               content: [{
-                para: 'Using robotic or automatic technologies can reduce the need to find manual labour.',
+                para: 'RPA wants to fund the use of robotic or automatic technology due to the current manual labour shortage.',
                 items: []
               }],
               
@@ -3583,7 +3593,6 @@ const questionBank = {
           url: 'confirmation',
           baseUrl: 'confirmation',
           preValidationKeys: ['applying', 'consentOptional'],
-
           ga: [
             { dimension: 'cd2', value: { type: 'score' } },
             { dimension: 'cd5', value: { type: 'confirmationId' } },

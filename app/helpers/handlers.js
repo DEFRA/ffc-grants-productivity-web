@@ -332,10 +332,6 @@ const getPage = async (question, request, h) => {
       }
       return h.view('project-items-summary', projectItemsModel)
     }
-    case 'legal-status': 
-      if (getYarValue(request, 'projectSubject') === 'Solar project items') {
-        setYarValue(request, 'applicant', null)
-      }
     default:
       break
   }
@@ -526,7 +522,15 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'projectCost', projectCost)
   }
   
+  let isSolar = getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A2')
+  let isContractor = getYarValue(request, 'applicant') === getQuestionAnswer('applicant','applicant-A2')
   switch (baseUrl) {
+    case 'applicant': {
+      if(isContractor && isSolar ){
+        return h.view('not-eligible', NOT_ELIGIBLE)
+      }
+      break
+    }
     case 'project-subject':
       setYarValue(request, 'addToItemList', false)
       break
@@ -552,16 +556,16 @@ const showPostPage = (currentQuestion, request, h) => {
           const projectItemsList = getYarValue(request, 'projectItemsList') ?? []
           if (projectItemsList.length === 0) {
             NOT_ELIGIBLE.primaryBtn = {
-              text: 'Add another item',
+              text: 'Add another technology',
               url: `${urlPrefix}/technology-items`
             }
           } else {
             NOT_ELIGIBLE.primaryBtn = {
-              text: 'Continue with eligible items',
+              text: 'Continue with eligible technology',
               url: `${urlPrefix}/project-items-summary`
             }
             NOT_ELIGIBLE.secondaryBtn = {
-              text: 'Add another item',
+              text: 'Add another technology',
               url: `${urlPrefix}/technology-items`
             }
           }
@@ -578,16 +582,16 @@ const showPostPage = (currentQuestion, request, h) => {
 
           if (projectItemsList.length === 0) {
             NOT_ELIGIBLE.primaryBtn = {
-              text: 'Add another item',
+              text: 'Add another technology',
               url: `${urlPrefix}/technology-items`
             }
           } else {
             NOT_ELIGIBLE.primaryBtn = {
-              text: 'Continue with eligible items',
+              text: 'Continue with eligible technology',
               url: `${urlPrefix}/project-items-summary`
             }
             NOT_ELIGIBLE.secondaryBtn = {
-              text: 'Add another item',
+              text: 'Add another technology',
               url: `${urlPrefix}/technology-items`
             }
           }
