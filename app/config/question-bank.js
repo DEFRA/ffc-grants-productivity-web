@@ -432,7 +432,7 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: `You must have secured planning permission before you submit a full application.
-                \n\n The application deadline is 31 April 2024.`,
+                \n\n The application deadline is 31 October 2025.`,
                 items: []
               }],
               
