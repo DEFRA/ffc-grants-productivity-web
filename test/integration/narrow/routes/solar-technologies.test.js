@@ -32,6 +32,7 @@ describe('Page: /solar-technologies', () => {
     expect(response.payload).toContain('A utility meter')
     expect(response.payload).toContain('A battery')
     expect(response.payload).toContain('Power diverter')
+    expect(response.payload).toContain('Redirects excess solar energy to power storage (for example heat stores)')
   })
 
   it('page loads successfully, with all the options - no score', async () => {
