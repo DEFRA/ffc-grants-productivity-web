@@ -92,7 +92,7 @@ const questionBank = {
             isDisplay: false
           },
           order: 10,
-          title: 'What would you like funding for?',
+          title: 'What do you need funding for?',
           pageTitle: '',
           backUrl: 'start',
           nextUrl: 'applicant',
@@ -114,7 +114,7 @@ const questionBank = {
           validate: [
             {
               type: 'NOT_EMPTY',
-              error: 'Select what you would like funding for'
+              error: 'Select what you need funding for'
             }
           ],
           answers: [
