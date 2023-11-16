@@ -1,4 +1,4 @@
-function setYarValue (request, key, value) {
+function setYarValue(request, key, value) {
   request.yar.set(key, value)
 }
 

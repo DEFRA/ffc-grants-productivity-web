@@ -1,4 +1,7 @@
 {
+  "energySource": "Mains electricity",
+  "agriculturalSector": "Horticulture",
+  "technologyUse": "No, we haven’t used it yet",
   "confirmationId": "WM-71A-79E",
   "abstractionLicence": "Expected to have by 31st December 2021",
   "agentsDetails": {
@@ -44,59 +47,72 @@
     "postcode": "YO33 4FF"
   },
   "farmingType": "Horticulture (including ornamentals)",
-  "irrigatedCrops": "Fruit",
-  "irrigatedLandCurrent": "0",
-  "irrigatedLandTarget": "2",
-  "projectItems": [
-    "acid storage",
-    "dosing equipment",
-    "mixing tank",
-    "pump"
-  ],
   "legalStatus": "Limited Liability Partnership",
-  "planningPermission": "Not needed",
-  "productivity": [
-    "Increased yield per hectare",
-    "Improved quality"
-  ],
+  "planningPermission": "Should be in place by the time I make my full application",
   "projectCost": 100000,
   "calculatedGrant": "40000.00",
   "remainingCost": "60000.00",
-  "project": [
-    "Change water source",
-    "Introduce irrigation"
-  ],
-  "projectInfrastucture": [
-    "Construction of reservoir",
-    "Water meter"
-  ],
-  "projectEquipment": [
-    "Ebb and flow"
-  ],
-  "projectTechnology": [
-    null
+  "projectSubject":"Farm productivity project items",
+  "applicant": "Contractor",
+  "businessLocation": "Yes",
+  "inEngland": "Yes",
+  "projectStart": "Yes, preparatory work",
+  "tenancy": "Yes",
+  "projectResponsibility": "Yes, I plan to take full responsibility for my project",
+  "tenancyLength": "Yes", 
+  "projectItems": [
+    "Advanced ventilation control units",
+    "Wavelength-specific LED lighting for horticultural crops",
+    "Robotic and automatic technology"
   ],
   "projectItemsList": [
-    "Construction of reservoir",
-    "Water meter",
-    "Ebb and flow"
+    {
+      "index": 0,
+      "item": "Other technology",
+      "type": "Robotic",
+      "criteria": [
+        "sensing system", 
+        "makes decisions", 
+        "control actuators", 
+        "continuous loop"
+      ],
+      "criteriaScoring": [
+        "Has sensing system that can understand its environment", 
+        "Makes decisions and plans", 
+        "Can control its actuators (the devices that move robotic joints)", 
+        "Works in a continuous loop"
+      ],
+      "description": " I am a tester woohoo"
+    },
+    {
+      "index": 1,
+      "item": "Harvesting technology",
+      "type": "Automatic",
+      "criteria": [
+        "sensing system", 
+        "makes decisions"
+      ],
+      "criteriaScoring": [
+        "Has sensing system that can understand its environment", 
+        "Makes decisions and plans"
+      ],
+      "description": " I am a tester woohoo"
+    }
   ],
-  "ProductivitySourceCurrent": [
-    "Irrigation pump(s) and controls",
-    "Electricity installation for pump house",
-    "Ebb and flow",
-    "Software and sensors to optimise water application"
+  "projectImpact": "Yes",
+  "dataAnalytics": "Yes, we’ll buy the technology as part of the project",
+  "energySource": "Mains electricity",
+  "agriculturalSector": [
+    "Horticulture"
   ],
-  "ProductivitySourcePlanned": [
-    "Irrigation pump(s) and controls",
-    "Electricity installation for pump house",
-    "Ebb and flow",
-    "Software and sensors to optimise water application"
-  ],
-  "projectSubject":"Slurry Acidification",
+  "technologyUse": "Yes, we’re using it now",
+  "labourReplaced": "5 or more jobs",
+  "solarTechnologies": null,
+  "solarOutput": null,
+  "solarInstallation": null,
+  "solarUsage":null,
   "projectStarted": "No",
   "payRemainingCosts": "Yes",
   "score-calculated": true,
-  "tenancyLength": null,
   "landOwnership": "Yes"
 }

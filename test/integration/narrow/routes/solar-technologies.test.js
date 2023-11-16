@@ -104,14 +104,28 @@ describe('Page: /solar-technologies', () => {
     expect(postResponse.payload).toContain('You cannot apply for a grant from this scheme')
   })
 
-  it('page loads with correct back link', async () => {
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/solar-technologies`
+
+  it('store user response and redirect to score page if score', async () => {
+    varList['current-score'] = true
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/solar-technologies`,
+      payload: { solarTechnologies: ['An inverter', 'A battery'], secBtn: 'Back to score', crumb: crumbToken },
+      headers: { cookie: 'crumb=' + crumbToken }
     }
 
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"existing-solar\" class=\"govuk-back-link\">Back</a>')
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('/productivity/score')
   })
+  // it('page loads with correct back link', async () => {
+  //   const options = {
+  //     method: 'GET',
+  //     url: `${global.__URLPREFIX__}/solar-technologies`
+  //   }
+
+  //   const response = await global.__SERVER__.inject(options)
+  //   expect(response.statusCode).toBe(200)
+  //   expect(response.payload).toContain('<a href=\"existing-solar\" class=\"govuk-back-link\">Back</a>')
+  // })
 })

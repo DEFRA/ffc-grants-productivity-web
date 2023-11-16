@@ -1,4 +1,5 @@
 module.exports = {
+  bail: 2,
   collectCoverage: true,
   collectCoverageFrom: [
     '**/*.js',

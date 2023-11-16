@@ -1,5 +1,6 @@
 const createServer = require('../../../../app/server')
 
+
 require('dotenv').config()
 
 const varListTemplate = {
@@ -52,12 +53,12 @@ describe('Page Guard', () => {
 
   it('AND - should redirect to start page if no key found', async () => {
 
-    varList.projectSubject = 'random'
+    varList.applicant = 'Farmer'
 
     server = await createServer()
     const getOptions = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/applicant`
+      url: `${global.__URLPREFIX__}/business-location`
     }
 
     const getResponse = await server.inject(getOptions)
@@ -67,17 +68,17 @@ describe('Page Guard', () => {
 
   it('AND - should load normal page if all keys found (1 item)', async () => {
 
-    varList.projectSubject = 'Farm productivity project items'
+    varList.applicant = 'Contractor'
 
     server = await createServer()
     const getOptions = {
       method: 'GET',
-      url: `${global.__URLPREFIX__}/applicant`
+      url: `${global.__URLPREFIX__}/business-location`
     }
 
     const getResponse = await server.inject(getOptions)
     expect(getResponse.statusCode).toBe(200)
-    expect(getResponse.payload).toContain('Who are you?')
+    expect(getResponse.payload).toContain('Is your business in England?')
   })
 
   it('OR - should redirect to start page if no key found', async () => { 
@@ -168,6 +169,32 @@ describe('Page Guard', () => {
     const getResponse = await server.inject(getOptions)
     expect(getResponse.statusCode).toBe(200)
     expect(getResponse.payload).toContain('Is the planned project in England?')
+  })
+
+   it('should redirect to start page if the user skip journey question - old way', async () => {
+    varList.projectSubject = null
+    server = await createServer()
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/applicant`
+    }
+
+    const response = await server.inject(getOptions)
+    expect(response.statusCode).toBe(302)
+    expect(response.headers.location).toBe(process.env.START_PAGE_URL)
+  })
+
+  it('should correct [age if user does not skip - old way', async () => {
+    varList.projectSubject = 'Solar project items'
+    server = await createServer()
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/applicant`
+    }
+
+    const response = await server.inject(getOptions)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Who are you?')
   })
 
 

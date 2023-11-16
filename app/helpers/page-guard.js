@@ -3,7 +3,7 @@ const { startPageUrl, serviceEndDate, serviceEndTime } = require('../config/serv
 const { getQuestionAnswer } = require('./utils')
 
 function guardPage (request, guardData) {
-  let result = false
+  const result = false
   const currentUrl = request.url.pathname.split('/').pop()
   const today = new Date(new Date().toDateString())
   const decomissionServiceDate = new Date(serviceEndDate)
@@ -12,36 +12,39 @@ function guardPage (request, guardData) {
   const expiringToday = (+today === +decomissionServiceDate) && (time > serviceEndTime)
   const serviceDecommissioned = expiringToday || dateExpired
   const isServiceDecommissioned = (request.url.pathname !== startPageUrl && currentUrl !== 'login' && serviceDecommissioned)
+
   if (isServiceDecommissioned) return isServiceDecommissioned
   if (guardData) {
+    if (Array.isArray(guardData)) {
+      return guardData.filter(dependcyKey => getYarValue(request, dependcyKey) === null).length > 0
+    }
     // filter list of answers with keys?
 
-    let preValidationList = []
+    const preValidationList = []
 
-    for(let i=0; i < guardData.preValidationKeys.length; i++) {
+    for (let i = 0; i < guardData.preValidationKeys.length; i++) {
       preValidationList.push({
-       key: guardData.preValidationKeys[i], 
-       values: (guardData.preValidationAnswer.filter((answer) => answer.startsWith(guardData.preValidationUrls[i]))),
-       url: guardData.preValidationUrls[i]
+        key: guardData.preValidationKeys[i],
+        values: (guardData?.preValidationAnswer.filter((answer) => answer.startsWith(guardData.preValidationUrls[i]))),
+        url: guardData.preValidationUrls[i]
       }
-      );
+      )
     }
 
-    console.log('should be a formatted list combining all answewrs and relevant values in one object', preValidationList)
-
     // should format preValidations as below
-    // [{
-    //   key: 'key name',
-    //   values: ['value 1', 'value 2'],
-    //   url: 'url'
-    // }]
+    //   preValidationObject: {
+    //     preValidationKeys: ['consentOptional'],
+    //     preValidationAnswer: ['key1', 'key2'], // make it optional in case of OR
+    //     preValidationRule: 'AND',
+    //     preValidationUrls: ['project-subject']
+    // },
 
-    switch (guardData.preValidationRule){
+    switch (guardData?.preValidationRule) {
       case 'AND':
         // check for all keys (that every key and value pair exists)
 
-        for (let i = 0; i< preValidationList.length; i++) {
-          if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length === 0) {
+        for (let i = 0; i < preValidationList.length; i++) {
+          if (preValidationList[i]?.values?.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length === 0) {
             return true
           }
         }
@@ -55,7 +58,7 @@ function guardPage (request, guardData) {
           return true
         }
 
-        for (let i = 0; i< preValidationList.length; i++) {
+        for (let i = 0; i < preValidationList.length; i++) {
           if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length > 0) {
             return false
           }
@@ -65,15 +68,14 @@ function guardPage (request, guardData) {
       case 'NOT':
         // check if answer exists in list (if key and value pair contains needed answer)
 
-         for (let i = 0; i< preValidationList.length; i++) {
+        for (let i = 0; i < preValidationList.length; i++) {
           if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length > 0) {
             return true
           }
         }
 
         return false
-    }   
-
+    }
   }
   return result
 }

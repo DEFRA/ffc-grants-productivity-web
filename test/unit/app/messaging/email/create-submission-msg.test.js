@@ -73,7 +73,7 @@ describe('Create submission message', () => {
       , 'legalStatus', 'location', 'planningPermission', 'projectStart', 'tenancy', 'tenancyLength', 'projectItems', 'projectCost'
       , 'potentialFunding', 'remainingCost', 'slurryCurrentlyTreated', 'slurryToBeTreated', 'projectImpacts'
       , 'dataAnalytics', 'dataAnalyticsScore', 'energySourceScore', 'agriculturalSector', 'agriculturalSectorScore', 'technology', 'technologyScore'
-      , 'projectName', 'businessName', 'farmerName', 'farmerSurname', 'farmerEmail', 'agentName', 'agentSurname', 'agentEmail', 'projectImpactsScore'
+      , 'projectName', 'businessName', 'farmerName', 'farmerSurname', 'farmerEmail', 'agentName', 'agentSurname', 'agentBusinessName', 'agentEmail', 'projectImpactsScore'
       , 'contactConsent', 'scoreDate'
     )
   })
@@ -91,7 +91,7 @@ describe('Create submission message', () => {
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('defaultColumnWidth')
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('protectPassword')
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('rows')
-    expect(msg.spreadsheet.worksheets[0].rows.length).toBe(67)
+    expect(msg.spreadsheet.worksheets[0].rows.length).toBe(72)
   })
 
   // test('Protect password property should not be set if config is false', () => {
