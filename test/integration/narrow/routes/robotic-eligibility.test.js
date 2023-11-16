@@ -66,7 +66,7 @@ const postOptions = {
 }
 
 const postResponse = await global.__SERVER__.inject(postOptions)
-expect(postResponse.payload).toContain('You cannot apply for grant funding for this item')
+expect(postResponse.payload).toContain('You cannot apply for grant funding for this technology')
 expect(postResponse.payload).toContain('RPA will only fund robotic technology that:')
 })
 
@@ -82,7 +82,7 @@ it('user selects \'Other robotics or automatic technology\' -> title should be \
   expect(response.payload).toContain('Does your robotic technology fit the eligibility criteria?')
 })
 
-it('should display ineligible page with "Add another item" and "Continue with eligible items" buttons, if user selects No for the second project item', async () => {
+it('should display ineligible page with "Add another technology" and "Continue with eligible technology" buttons, if user selects No for the second project item', async () => {
   varList.projectItemsList = ['Harvesting technology', 'Other robotics or automatic technology']
   varList.roboticEligibility = 'No'
   const postOptions = {
@@ -93,10 +93,10 @@ it('should display ineligible page with "Add another item" and "Continue with el
   }
 
   const postResponse = await global.__SERVER__.inject(postOptions)
-  expect(postResponse.payload).toContain('You cannot apply for grant funding for this item')
+  expect(postResponse.payload).toContain('You cannot apply for grant funding for this technology')
   expect(postResponse.payload).toContain('RPA will only fund robotic technology that:')
-  expect(postResponse.payload).toContain('Add another item')
-  expect(postResponse.payload).toContain('Continue with eligible items')
+  expect(postResponse.payload).toContain('Add another technology')
+  expect(postResponse.payload).toContain('Continue with eligible technology')
 }) 
 
 it('page loads with correct back link', async () => {

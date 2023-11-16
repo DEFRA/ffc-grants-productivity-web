@@ -1675,7 +1675,7 @@ const questionBank = {
             `
           },
           ineligibleContent: {
-            title: 'You cannot apply for grant funding for this item',
+            title: 'You cannot apply for grant funding for this technology',
             messageContent: `RPA will only fund robotic technology that:
                             <ul class="govuk-list govuk-list--bullet">
                               <li>have a sensing system and can understand their environment</li>
