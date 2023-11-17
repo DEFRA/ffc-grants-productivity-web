@@ -985,7 +985,12 @@ const questionBank = {
           url: 'solar-output',
           baseUrl: 'solar-output',
           backUrl: 'solar-installation',
-          // preValidationKeys: [],
+          preValidationObject: {
+            preValidationKeys: ['solarInstallation'],
+            preValidationAnswer: ['solar-installation-A3'],
+            preValidationRule: 'NOT',
+            preValidationUrls: ['solar-installation']
+          },
           nextUrl: 'project-cost-solar',
           eliminationAnswerKeys: '',
           ineligibleContent: {},
