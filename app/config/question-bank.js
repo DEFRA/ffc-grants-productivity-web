@@ -247,7 +247,7 @@ const questionBank = {
           url: 'legal-status',
           baseUrl: 'legal-status',
           preValidationObject: {
-            preValidationKeys: ['projectSubject', 'businessLocation', 'applicant',], 
+            preValidationKeys: ['projectSubject', 'businessLocation', 'applicant'], 
             preValidationAnswer: ['project-subject-A2', 'business-location-A1', 'applicant-A1'],
             preValidationRule: 'OR',
             preValidationUrls: ['project-subject', 'business-location', 'applicant']
