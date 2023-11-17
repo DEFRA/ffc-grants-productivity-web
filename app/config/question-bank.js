@@ -504,8 +504,8 @@ const questionBank = {
             dependentQuestionYarKey: 'planningPermission',
             dependentAnswerKeysArray: ['planning-permission-A3'],
             urlOptions: {
-              thenUrl: '/productivity/planning-required-condition',
-              elseUrl: '/productivity/planning-permission'
+              thenUrl: 'planning-required-condition',
+              elseUrl: 'planning-permission'
             }
           },
           nextUrl: 'tenancy',
@@ -700,8 +700,8 @@ const questionBank = {
             dependentQuestionYarKey: 'tenancy',
             dependentAnswerKeysArray: ['tenancy-A1'],
             urlOptions: {
-              thenUrl: '/productivity/tenancy',
-              elseUrl: '/productivity/project-responsibility'
+              thenUrl: 'tenancy',
+              elseUrl: 'project-responsibility'
             }
           },
           preValidationObject: {
@@ -2552,7 +2552,7 @@ const questionBank = {
           url: 'business-details',
           baseUrl: 'business-details',
           backUrl: 'score',
-          nextUrl: '/productivity/applying',
+          nextUrl: 'applying',
           // preValidationKeys: ['current-score'],
           ga: [
             { dimension: 'cd2', value: { type: 'score' } },
@@ -2743,8 +2743,8 @@ const questionBank = {
             dependentQuestionYarKey: 'applying',
             dependentAnswerKeysArray: ['applying-A2'],
             urlOptions: {
-              thenUrl: '/productivity/agents-details',
-              elseUrl: '/productivity/applying'
+              thenUrl: 'agents-details',
+              elseUrl: 'applying'
             }
           },
           fundingPriorities: '',
@@ -3019,8 +3019,8 @@ const questionBank = {
             dependentQuestionYarKey: 'applying',
             dependentAnswerKeysArray: ['applying-A1'],
             urlOptions: {
-              thenUrl: '/productivity/applying',
-              elseUrl: '/productivity/agents-details'
+              thenUrl: 'applying',
+              elseUrl: 'agents-details'
             }
           },
           fundingPriorities: '',
@@ -3270,8 +3270,8 @@ const questionBank = {
             dependentQuestionYarKey: 'applicant',
             dependentAnswerKeysArray: ['applicant-A1'],
             urlOptions: {
-              thenUrl: '/productivity/farmers-details',
-              elseUrl: '/productivity/contractors-details'
+              thenUrl: 'farmers-details',
+              elseUrl: 'contractors-details'
             }
           },
           // preValidationKeys: ['applying'],
