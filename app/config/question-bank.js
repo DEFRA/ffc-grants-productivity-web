@@ -1787,39 +1787,6 @@ const questionBank = {
           ],
           yarKey: 'technologyDescription'
         },
-        // {
-        //   key: 'other-item',
-        //   order: 308,
-        //   title: 'Do you need to add another robotic or automatic item?',
-        //   pageTitle: '',
-        //   url: 'other-item',
-        //   baseUrl: 'other-item',
-        //   backUrl: 'technology-description',
-        //   eliminationAnswerKeys: '',
-        //   ineligibleContent: {},
-        //   fundingPriorities: '',
-        //   type: 'single-answer',
-        //   classes: ' govuk-radios--inline govuk-fieldset__legend--l',
-        //   minAnswerCount: 1,
-        //   validate: [
-        //     {
-        //       type: 'NOT_EMPTY',
-        //       error: 'Select yes if you need to add another robotic or automatic item'
-        //     }
-        //   ],
-        //   answers: [
-        //     {
-        //       key: 'other-item-A1',
-        //       value: 'Yes',
-        //       redirectUrl: 'technology-items'
-        //     },
-        //     {
-        //       key: 'other-item-A2',
-        //       value: 'No',
-        //     }
-        //   ],
-        //   yarKey: 'otherItem'
-        // },
         {
           key: 'project-items-summary',
           order: 310,

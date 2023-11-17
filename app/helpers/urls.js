@@ -13,7 +13,7 @@ const getUrl = (urlObject, url, request, secBtn) => {
     setYarValue(request, 'roboticEligibility', null)
     setYarValue(request, 'automaticEligibility', null)
     setYarValue(request, 'technologyDescription', null)
-    setYarValue(request, 'addToItemList', false)
+    setYarValue(request, 'addToItemList', true)
     
     secBtnPath = `${urlPrefix}/technology-items`
   }
