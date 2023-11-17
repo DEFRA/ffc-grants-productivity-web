@@ -58,8 +58,8 @@ describe('Robotics project items page', () => {
     expect(postResponse.headers.location).toBe('technology-items')
   })
 
-  it('when we select /technology-items/ should store user response and redirects to technology-items - already looped', async () => {
-    varList.projectItemsList = ['hello']
+  it('when we select /technology-items/ should store user response and redirects to project-items-summary - already looped', async () => {
+    varList.projectItemsList = ['Robotic and automatic technology']
     varList.projectItems = ['Wavelength-specific LED lighting for horticultural crops', 'Robotic and automatic technology']
     const postOptions = {
       method: 'POST',
@@ -74,6 +74,7 @@ describe('Robotics project items page', () => {
   })
 
   it('should store user response and redirects to project cost page', async () => {
+    varList.projectItemsList = []
     varList.projectItems = ['Advanced ventilation control units', 'Wavelength-specific LED lighting for horticultural crops']
     const postOptions = {
       method: 'POST',

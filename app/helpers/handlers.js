@@ -591,7 +591,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
     case 'project-items':
       let projectItems = getYarValue(request, 'projectItemsList')
-      if (projectItems?.length > 0) {
+      if (projectItems?.length > 0 && projectItems?.includes('Robotic and automatic technology')) {
         setYarValue(request, 'backToItemsSummary', true)
         return h.redirect(`${urlPrefix}/project-items-summary`)
       } else {
