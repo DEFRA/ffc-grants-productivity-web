@@ -79,6 +79,21 @@ it('should redirect to /project-items-summary - null values', async () => {
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toContain('project-items-summary')
 })
+
+it('should redirect to /project-items-summary - addToItems false', async () => {
+    varList.addtoItemlist = false
+
+    const postOptions = {
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/technology-description`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { description: 'fake description', projectItemsList: [], crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toContain('project-items-summary')
+})
 it('page loads with correct back link > automatic', async () => {
   varList.roboticEligibility = null
   varList.automaticEligibility = 'value'
