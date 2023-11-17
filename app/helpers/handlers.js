@@ -78,6 +78,25 @@ const getPage = async (question, request, h) => {
     }
   }
 
+  if(url === 'technology-items') {
+    if(getYarValue(request, 'applicant') === 'Contractor') {
+
+      question = {
+        ...question,
+        answers: question.answers.filter((item) => item.contractorOnly)
+      }
+
+      if(getYarValue(request, 'tenancy') === 'Yes') {
+        question.backUrl = `${urlPrefix}/tenancy`
+      } else {
+        question.backUrl = `${urlPrefix}/project-responsibility`
+      }
+
+    } else {
+      question.backUrl = `${urlPrefix}/project-items`
+    }
+  }
+
   if (question.maybeEligible) {
     let { maybeEligibleContent } = question
     maybeEligibleContent.title = question.title
@@ -212,10 +231,18 @@ const getPage = async (question, request, h) => {
       }
     }
     if (url === 'robotic-eligibility') {
+      const selectedOption = getYarValue(request, 'technologyItems')
+      const shortListAnswers = ['technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7','technology-items-A8']
+      .map((item) => getQuestionAnswer('technology-items', item))
+
+        if(shortListAnswers.includes(selectedOption)) {
+          question.backUrl = `${urlPrefix}/technology-items`
+      }
+
       const title_dict = {
         'technology-items-A8': 'Do your slurry robots fit the eligibility criteria?',
         'technology-items-A4': 'Does your driverless robotic tractor or platform fit the eligibility criteria?',
-        'technology-items-A5': 'Does your voluntary robotic milking system fit the eligibility criteria?',
+        'technology-items-A6': 'Does your voluntary robotic milking system fit the eligibility criteria?',
       }
       const technologyItems = getYarValue(request, 'technologyItems')
       console.log('HERE   technologyItems: ', technologyItems)
