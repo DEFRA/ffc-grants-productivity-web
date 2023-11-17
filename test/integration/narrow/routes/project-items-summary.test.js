@@ -67,7 +67,7 @@ it('should load page successfully - 2 items, normal access', async () => {
 })
 
 it('should load page successfully - 5 items, backToSummary', async () => {
-    varList.backToSummary = true
+    varList.backToItemsSummary = true
     varList.projectItemsList = [{
         realItem: 'hello',
         type: 'Robotic',
