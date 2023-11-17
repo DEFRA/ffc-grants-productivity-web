@@ -81,13 +81,14 @@ it('should redirect to /project-items-summary - null values', async () => {
 })
 
 it('should redirect to /project-items-summary - addToItems false', async () => {
-    varList.addtoItemlist = false
+    varList.addtoItemList = false
+    varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
 
     const postOptions = {
         method: 'POST',
         url: `${global.__URLPREFIX__}/technology-description`,
         headers: { cookie: 'crumb=' + crumbToken },
-        payload: { description: 'fake description', projectItemsList: [], crumb: crumbToken }
+        payload: { description: 'fake description', projectItemsList: ['Harvesting technology', "Weeding technology"], crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
