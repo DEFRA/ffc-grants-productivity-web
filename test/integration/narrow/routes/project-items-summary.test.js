@@ -32,7 +32,9 @@ beforeEach(() => {
     jest.clearAllMocks()
     })
 
-it('should load page successfully', async () => {
+// add test for loading page after removing item (aka populating projectItemsList)
+    it('should load page successfully', async () => {
+    varList.projectItemsList = ['Harvesting technology', 'Weeding technology']
     const options = {
         method: 'GET',
         url: `${global.__URLPREFIX__}/project-items-summary`
