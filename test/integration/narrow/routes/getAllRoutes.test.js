@@ -11,7 +11,7 @@ const varListTemplate = {
   projectSubject: 'Farm productivity project items',
   applicant: 'Contractor',
   businessLocation: 'Yes',
-  inEngland: 'Yes',
+  country: 'Yes',
   tenancy: 'No',
   projectResponsibility: 'Yes, I plan to take full responsibility for my project',
   existingSolar: 'Yes',

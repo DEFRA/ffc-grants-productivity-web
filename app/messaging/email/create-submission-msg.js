@@ -268,7 +268,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       isContractor: submission?.projectSubject !== PROJECT_SUBJECT_SOLAR && submission?.applicant === 'Contractor',
       isNotTenancy: submission.tenancy === getQuestionAnswer('tenancy', 'tenancy-A2'),
       legalStatus: submission.legalStatus ?? '',
-      inEngland: submission.inEngland ?? '',
+      inEngland: submission.country ?? '',
       businessLocation: submission?.businessLocation ?? '',
       location: `England ${farmerContractorDetails.projectPostcode ?? farmerContractorDetails.postcode}`,
       planningPermission: submission.planningPermission,

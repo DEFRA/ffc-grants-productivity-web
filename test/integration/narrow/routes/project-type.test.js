@@ -2,7 +2,7 @@ const { crumbToken } = require('./test-helper')
 const varListTemplate = {
   farmingType: 'some fake crop',
   legalStatus: 'fale status',
-  inEngland: 'Yes',
+  country: 'Yes',
   projectStarted: 'No',
   landOwnership: 'Yes',
   projectItemsList: {

@@ -247,10 +247,10 @@ const questionBank = {
           url: 'legal-status',
           baseUrl: 'legal-status',
           preValidationObject: {
-            preValidationKeys: ['projectSubject', 'businessLocation', 'applicant'], 
-            preValidationAnswer: ['project-subject-A2', 'business-location-A1', 'applicant-A1'],
+            preValidationKeys: ['businessLocation', 'applicant'], 
+            preValidationAnswer: ['business-location-A1', 'applicant-A1'],
             preValidationRule: 'OR',
-            preValidationUrls: ['project-subject', 'business-location', 'applicant']
+            preValidationUrls: ['business-location', 'applicant']
           },          
           ineligibleContent: {
             messageContent: 'Your business does not have an eligible legal status.',
@@ -400,7 +400,7 @@ const questionBank = {
               notEligible: true
             }
           ],
-          yarKey: 'inEngland'
+          yarKey: 'country'
         },
         {
           key: 'planning-permission',
@@ -412,7 +412,7 @@ const questionBank = {
           backUrl: 'country',
           nextUrl: 'project-start',
           preValidationObject: {
-            preValidationKeys: ['inEngland'],
+            preValidationKeys: ['country'],
             preValidationAnswer: ['country-A1'],
             preValidationRule: 'AND',
             preValidationUrls: ['country']
