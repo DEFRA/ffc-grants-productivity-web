@@ -35,10 +35,35 @@ describe('Page: /technology-description', () => {
       expect(response.statusCode).toBe(200)
       let page = new JSDOM(response.payload).window.document
       const heading = page.querySelectorAll('.govuk-heading-l')[1]
-      expect(heading.textContent.trim()).toBe('Describe the Automatic technology')
+      expect(heading.textContent.trim()).toBe('Describe the automatic technology')
   })
+  it('page loads successfully, with robotic title', async () => {
+    varList.roboticAutomatic = 'Robotic'
+      const options = {
+          method: 'GET',
+          url: `${global.__URLPREFIX__}/technology-description`
+      }
 
+      const response = await global.__SERVER__.inject(options)
+      expect(response.statusCode).toBe(200)
+      let page = new JSDOM(response.payload).window.document
+      const heading = page.querySelectorAll('.govuk-heading-l')[1]
+      expect(heading.textContent.trim()).toBe('Describe the robotic technology')
+  })
+  it('page loads successfully, with item name title', async () => {
+    varList.technologyItems = 'Other robotics or automatic technology'
+    varList.roboticAutomatic = ''
+      const options = {
+          method: 'GET',
+          url: `${global.__URLPREFIX__}/technology-description`
+      }
 
+      const response = await global.__SERVER__.inject(options)
+      expect(response.statusCode).toBe(200)
+      let page = new JSDOM(response.payload).window.document
+      const heading = page.querySelectorAll('.govuk-heading-l')[1]
+      expect(heading.textContent.trim()).toBe('Describe the other robotics or automatic technology')
+  })
   it('should display an error message if itemName is missing', async () => {
       const postOptions = {
           method: 'POST',

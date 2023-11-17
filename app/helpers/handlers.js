@@ -172,22 +172,23 @@ const getPage = async (question, request, h) => {
     if (url === 'technology-description') {
       const techItem = getYarValue(request, 'technologyItems')
       if (techItem === 'Other robotics or automatic technology') {
-        const descriptionTitle = title + techItem
+        const descriptionTitle = title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+          getYarValue(request, additionalYarKeyName).toLowerCase()
+        )
         question = {
           ...question,
           title: descriptionTitle
         }
       }
-
       if (getYarValue(request, 'roboticAutomatic') === 'Robotic') {
         question = {
           ...question,
-          title: 'Describe the Robotic technology'
+          title: 'Describe the robotic technology'
         }
       } else if (getYarValue(request, 'roboticAutomatic') === 'Automatic') {
         question = {
           ...question,
-          title: 'Describe the Automatic technology'
+          title: 'Describe the automatic technology'
         }
       }
     }

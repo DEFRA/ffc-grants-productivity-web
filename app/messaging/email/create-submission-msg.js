@@ -211,7 +211,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(93, 'RAG date reviewed ', todayStr),
           generateRow(54, 'Electronic OA received date ', todayStr),
           generateRow(370, 'Status', 'Pending RPA review'),
-          generateRow(85, 'Full Application Submission Date', '31/10/2024'),
+          generateRow(85, 'Full Application Submission Date', (new Date('2024-10-31')).toLocaleDateString('en-GB')),
           generateRow(375, 'OA percent', String(( desirabilityScore.desirability.overallRating.score / (submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? 600 : 300) * 100).toFixed(2))), // calculate percentage for robotics or solar based on project
           ...addAgentDetails(submission.agentsDetails)
         ]

@@ -1716,7 +1716,7 @@ const questionBank = {
         {
           key: 'technology-description',
           order: 305,
-          title: 'Describe the ',
+          title: 'Describe the {{_technologyItems_}}',
           pageTitle: '',
           nextUrl: 'other-item',
           url: 'technology-description',
