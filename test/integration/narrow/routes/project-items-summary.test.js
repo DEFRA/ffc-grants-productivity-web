@@ -32,6 +32,17 @@ beforeEach(() => {
     jest.clearAllMocks()
     })
 
+    it('should load page successfully - 0 items, just for testing sake', async () => {
+        varList.projectItemsList = []
+        const options = {
+            method: 'GET',
+            url: `${global.__URLPREFIX__}/project-items-summary`
+        }
+    
+        const response = await global.__SERVER__.inject(options)
+        expect(response.statusCode).toBe(200)
+        expect(response.payload).toContain('Your project technology')
+    })
 it('should load page successfully - 2 items, normal access', async () => {
     varList.projectItemsList = [{
         realItem: 'hello',
@@ -56,6 +67,7 @@ it('should load page successfully - 2 items, normal access', async () => {
 })
 
 it('should load page successfully - 5 items, backToSummary', async () => {
+    varList.backToSummary = true
     varList.projectItemsList = [{
         realItem: 'hello',
         type: 'Robotic',
@@ -89,6 +101,7 @@ it('should load page successfully - 5 items, backToSummary', async () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Your project technology')
+    // can also chekc back link too if wanted
 })
 
 
