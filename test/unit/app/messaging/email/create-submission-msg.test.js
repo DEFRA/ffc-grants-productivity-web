@@ -151,6 +151,70 @@ describe('Create submission message', () => {
     expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 20).values[2]).toBe('Large')
   })
 
+  it('formats item descriptions', () => {
+    const farmerSubmission = require('./submission-farmer.json')
+    farmerSubmission.projectItemsList = [
+      {
+        item: 'item1',
+        type: 'type1',
+        itemName: 'Actual name of the item',
+        brand: 'brand1',
+        model: 'model1',
+        numberOfItems: '1',
+        criteria: [
+          "Criteria 1",
+          "Criteria 2"
+        ]
+      },
+      {
+        item: 'item2',
+        type: 'type2',
+        itemName: 'Farming drone',
+        brand: 'brand2',
+        model: 'model2',
+        numberOfItems: '2',
+        criteria: [
+          "Criteria 1",
+          "Criteria 2"
+        ]
+      }
+    ]
+    farmerSubmission.projectItems = 'Robotic and automatic technology'
+    let msg = createMsg(farmerSubmission, desirabilityScore)
+    // solar
+    expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 44).values[2]).toBe('N/A')
+    expect(msg.applicantEmail.details.technologyItems).toBe(
+      "item1 ~ type1 ~ Criteria 1, Criteria 2 ~ Actual name of the item ~ brand1 ~ model1 ~ 1\nitem2 ~ type2 ~ Criteria 1, Criteria 2 ~ Farming drone ~ brand2 ~ model2 ~ 2"
+    )
+    // robotics
+    farmerSubmission.projectSubject = 'Farm productivity project items'
+    msg = createMsg(farmerSubmission, desirabilityScore)
+    expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 44).values[2]).toBe('item1 ~ type1 ~ Criteria 1, Criteria 2 ~ Actual name of the item ~ brand1 ~ model1 ~ 1|item2 ~ type2 ~ Criteria 1, Criteria 2 ~ Farming drone ~ brand2 ~ model2 ~ 2')
+    expect(msg.applicantEmail.details.technologyItems).toBe(
+      "item1 ~ type1 ~ Criteria 1, Criteria 2 ~ Actual name of the item ~ brand1 ~ model1 ~ 1\nitem2 ~ type2 ~ Criteria 1, Criteria 2 ~ Farming drone ~ brand2 ~ model2 ~ 2"
+    )
+
+    // optional brand, model and number of items are empty
+    farmerSubmission.projectItemsList = [
+      {
+        item: 'item1',
+        type: 'type1',
+        itemName: 'some name',
+        brand: '',
+        model: '',
+        numberOfItems: '',
+        criteria: [
+          "Criteria 1",
+          "Criteria 2"
+        ]
+      }
+    ]
+    msg = createMsg(farmerSubmission, desirabilityScore)
+    expect(msg.spreadsheet.worksheets[0].rows.find(r => r.row === 44).values[2]).toBe('item1 ~ type1 ~ Criteria 1, Criteria 2 ~ some name')
+    expect(msg.applicantEmail.details.technologyItems).toBe(
+      "item1 ~ type1 ~ Criteria 1, Criteria 2 ~ some name"
+    )
+  })
   it('should throw an error if a required key is missing', () => {
     const farmerSubmission = require('./submission-farmer.json')
     desirabilityScore.desirability.questions[0].key = 'some-other-key'

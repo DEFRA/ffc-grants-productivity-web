@@ -92,26 +92,22 @@ function formatProjectItems (projectItemsList, normalItems) {
   if (normalItems.includes(getQuestionAnswer('project-items', 'project-items-A3'))) {
 
     for (i = 0; i < projectItemsList.length; i++) {
-      projectItems.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')}`)
-    
+      const { item, type, criteria, itemName, brand, model, numberOfItems, } = projectItemsList[i]
+      projectItems.push(`${item} ~ ${type} ~ ${criteria.join(', ')}${itemName && (" ~ " + itemName)}${brand && (" ~ " + brand)}${model && (" ~ " + model)}${numberOfItems && (" ~ " + numberOfItems)}`)
     }
   }
-  
-  return projectItems.join('|')
 
+  return projectItems.join('|')
 }
 
 function formatDescriptions(projectItemsList) {
-
   const descriptionList = []
-
   for (i = 0; i < projectItemsList.length; i++) {
-    descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')} ~ ${projectItemsList[i].itemName} ${projectItemsList[i].brand && ("~ " + projectItemsList[i].brand)}${projectItemsList[i].model && (" ~ " + projectItemsList[i].model)}${projectItemsList[i].numberOfItems && (" ~ " + projectItemsList[i].numberOfItems)}`)
-  
+    const { item, type, criteria, itemName, brand, model, numberOfItems, } = projectItemsList[i]
+    descriptionList.push(`${item} ~ ${type} ~ ${criteria.join(', ')}${itemName && (" ~ " + itemName)}${brand && (" ~ " + brand)}${model && (" ~ " + model)}${numberOfItems && (" ~ " + numberOfItems)}`)
   }
   
   return descriptionList.join('|')
-
 }
 
 const getPlanningPermissionDoraValue = (planningPermission) => {
@@ -241,15 +237,14 @@ function getScoreChance (rating) {
 
 function displayObject (projectItemsList) {
   const descriptionList = []
-
   for (i = 0; i < projectItemsList.length; i++) {
-    descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')} ~ ${projectItemsList[i].itemName} ~ ${projectItemsList[i].brand} ~ ${projectItemsList[i].model} ~ ${projectItemsList[i].numberOfItems}`) // here
-  
+    const { item, type, criteria, itemName, brand, model, numberOfItems, } = projectItemsList[i]
+    descriptionList.push(`${item} ~ ${type} ~ ${criteria.join(', ')}${itemName && (" ~ " + itemName)}${brand && (" ~ " + brand)}${model && (" ~ " + model)}${numberOfItems && (" ~ " + numberOfItems)}`)
   }
   
   return descriptionList.join('\n')
-
 }
+
 function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail = false) {
   const farmerContractorDetails = submission.farmerDetails ?? submission.contractorsDetails
   const email = isAgentEmail ? submission.agentsDetails.emailAddress : farmerContractorDetails.emailAddress  
@@ -339,10 +334,7 @@ function spreadsheet (submission, desirabilityScore) {
 }
 
 module.exports = function (submission, desirabilityScore) {
-  console.log('submission: ', submission)
-  console.log('desirabilityScore: ', desirabilityScore)
   const emailDetails = getEmailDetails(submission, desirabilityScore, false)
-  console.log('emailDetails: ', emailDetails)
   return {
     applicantEmail: emailDetails,
     agentEmail: submission.applying === 'Agent' ? getEmailDetails(submission, desirabilityScore, false, true) : null,
