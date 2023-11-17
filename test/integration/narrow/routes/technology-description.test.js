@@ -33,7 +33,9 @@ describe('Page: /technology-description', () => {
 
       const response = await global.__SERVER__.inject(options)
       expect(response.statusCode).toBe(200)
-      expect(response.payload).toContain('Describe the Automatic technology')
+      let page = new JSDOM(response.payload).window.document
+      const heading = page.querySelectorAll('.govuk-heading-l')[1]
+      expect(heading.textContent.trim()).toBe('Describe the Automatic technology')
   })
 
 
@@ -107,15 +109,19 @@ describe('Page: /technology-description', () => {
       const postResponse = await global.__SERVER__.inject(postOptions)
       expect(postResponse.statusCode).toBe(200)
       let page = new JSDOM(postResponse.payload).window.document
-      const errorSummary = page.querySelector('.govuk-error-summary__list')
-      const errors = errorSummary.querySelectorAll('li')
+      let errorSummary = page.querySelector('.govuk-error-summary__list')
+      let errors = errorSummary.querySelectorAll('li')
       expect(errors.length).toBe(1)
       expect(errors[0].textContent.trim()).toBe('Brand must be 18 characters or less')
       
       postOptions.payload.itemName = '12345678901234567890'
       const postResponse2 = await global.__SERVER__.inject(postOptions)
       expect(postResponse2.statusCode).toBe(200)
-      expect(postResponse2.payload).toContain('Brand must be 18 characters or less')
+      page = new JSDOM(postResponse.payload).window.document
+      errorSummary = page.querySelector('.govuk-error-summary__list')
+      errors = errorSummary.querySelectorAll('li')
+      expect(errors.length).toBe(1)
+      expect(errors[0].textContent.trim()).toBe('Brand must be 18 characters or less')
   })
 
   it('should redirect to /other-items - normal vals', async () => {
