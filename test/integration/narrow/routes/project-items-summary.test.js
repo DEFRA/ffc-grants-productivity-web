@@ -41,7 +41,8 @@ it('should load page successfully - 2 items, normal access', async () => {
     {
         realItem: 'hello',
         type: 'Automatic',
-        description: 'whyyyyyyyyyyy'
+        description: 'whyyyyyyyyyyy',
+        criteriaScoring: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
     }
     ]
     const options = {
