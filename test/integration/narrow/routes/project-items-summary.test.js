@@ -32,9 +32,18 @@ beforeEach(() => {
     jest.clearAllMocks()
     })
 
-// add test for loading page after removing item (aka populating projectItemsList)
-    it('should load page successfully', async () => {
-    varList.projectItemsList = ['Harvesting technology', 'Weeding technology']
+it('should load page successfully - 2 items, normal access', async () => {
+    varList.projectItemsList = [{
+        realItem: 'hello',
+        type: 'Automatic',
+        description: 'whyyyyyyyyyyy'
+    },
+    {
+        realItem: 'hello',
+        type: 'Automatic',
+        description: 'whyyyyyyyyyyy'
+    }
+    ]
     const options = {
         method: 'GET',
         url: `${global.__URLPREFIX__}/project-items-summary`
@@ -44,6 +53,43 @@ beforeEach(() => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Your project technology')
 })
+
+it('should load page successfully - 5 items, backToSummary', async () => {
+    varList.projectItemsList = [{
+        realItem: 'hello',
+        type: 'Robotic',
+        description: 'whyyyyyyyyyyy'
+    },
+    {
+        realItem: 'hello',
+        type: 'Robotic',
+        description: 'whyyyyyyyyyyy'
+    },
+    {
+        realItem: 'hello',
+        type: 'Robotic',
+        description: 'whyyyyyyyyyyy'
+    },
+    {
+        realItem: 'hello',
+        type: 'Robotic',
+        description: 'whyyyyyyyyyyy'
+    },
+    {
+        realItem: 'hello',
+        type: 'Robotic',
+        description: 'whyyyyyyyyyyy'
+    }]
+    const options = {
+        method: 'GET',
+        url: `${global.__URLPREFIX__}/project-items-summary`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Your project technology')
+})
+
 
 
 it('click continue redirects to item-conditional page', async () => {
