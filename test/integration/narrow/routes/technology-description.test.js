@@ -81,7 +81,7 @@ it('should redirect to /project-items-summary - null values', async () => {
 })
 
 it('should redirect to /project-items-summary - addToItems false', async () => {
-    varList.addtoItemList = false
+    varList.addToItemList = false
     varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
 
     const postOptions = {
