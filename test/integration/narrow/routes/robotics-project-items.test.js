@@ -8,7 +8,8 @@ describe('Robotics project items page', () => {
     planningPermission: 'Secured',
     projectStart: 'Yes, preparatory work',
     tenancy: 'Yes',
-    projectItems: 'Robotic equipment item'
+    projectItems: 'Robotic equipment item',
+    projectItemsList: []
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -43,7 +44,7 @@ describe('Robotics project items page', () => {
     expect(postResponse.statusCode).toBe(200)
     expect(postResponse.payload).toContain('Select which items your project needs')
   })
-  it('when we select /technology-items/ should store user response and redirects to technology-items', async () => {
+  it('when we select /technology-items/ should store user response and redirects to technology-items - no loops', async () => {
     varList.projectItems = ['Wavelength-specific LED lighting for horticultural crops', 'Robotic and automatic technology']
     const postOptions = {
       method: 'POST',
@@ -55,6 +56,21 @@ describe('Robotics project items page', () => {
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('technology-items')
+  })
+
+  it('when we select /technology-items/ should store user response and redirects to technology-items - already looped', async () => {
+    varList.projectItemsList = ['hello']
+    varList.projectItems = ['Wavelength-specific LED lighting for horticultural crops', 'Robotic and automatic technology']
+    const postOptions = {
+      method: 'POST',
+      url: `${global.__URLPREFIX__}/project-items`,
+      headers: { cookie: 'crumb=' + crumbToken },
+      payload: { projectItems: ['Wavelength-specific LED lighting for horticultural crops', 'Robotic and automatic technology'], crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toBe('/productivity/project-items-summary')
   })
 
   it('should store user response and redirects to project cost page', async () => {
