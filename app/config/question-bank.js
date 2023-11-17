@@ -496,7 +496,7 @@ const questionBank = {
           baseUrl: 'project-start',
           preValidationObject: {
             preValidationKeys: ['planningPermission'],
-            preValidationAnswer: ['pplanning-permission-A4'],
+            preValidationAnswer: ['planning-permission-A4'],
             preValidationRule: 'NOT',
             preValidationUrls: ['planning-permission']
           },
@@ -849,7 +849,12 @@ const questionBank = {
           baseUrl: 'solar-installation',
           backUrl: 'solar-technologies',
           nextUrl: 'solar-output',
-          // preValidationKeys: [],
+          preValidationObject: {
+            preValidationKeys: ['solarTechnologies'],
+            preValidationAnswer: ['solar-technologies-A2'],
+            preValidationRule: 'NOTINCLUDES',
+            preValidationUrls: ['solar-technologies']
+          },
           id: 'solarInstallation',
           name: 'solarInstallation',
           hint: {

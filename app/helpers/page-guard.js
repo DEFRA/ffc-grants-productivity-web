@@ -67,7 +67,6 @@ function guardPage (request, guardData) {
 
       case 'NOT':
         // check if answer exists in list (if key and value pair contains needed answer)
-
         for (let i = 0; i < preValidationList.length; i++) {
           if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length > 0) {
             return true
@@ -75,6 +74,16 @@ function guardPage (request, guardData) {
         }
 
         return false
+      
+        case 'NOTINCLUDES':
+          // check if answer exists in list (if key and value pair contains needed answer)
+          for (let i = 0; i < preValidationList.length; i++) {
+            if (preValidationList[i].values.filter((answer) => !getYarValue(request, preValidationList[i].key).includes(getQuestionAnswer(preValidationList[i].url, answer))).length > 0) {
+              return true
+            }
+          }
+  
+          return false
     }
   }
   return result
