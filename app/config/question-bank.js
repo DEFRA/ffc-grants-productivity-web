@@ -1056,7 +1056,12 @@ const questionBank = {
           },
           nextUrl: 'potential-amount-solar',
           fundingPriorities: '',
-          // preValidationKeys: [],
+          preValidationObject: {
+            preValidationKeys: ['solarTechnologies', 'solarOutput'],
+            preValidationAnswer: ['solar-technologies-A2'],
+            preValidationRule: 'BOTH',
+            preValidationUrls: ['solar-technologies', 'solar-output']
+          },
           grantInfo: {
             minGrant: MIN_GRANT,
             maxGrant: MAX_GRANT,

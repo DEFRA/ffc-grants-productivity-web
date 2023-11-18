@@ -74,9 +74,29 @@ function guardPage (request, guardData) {
         }
 
         return false
-      
-        case 'NOTINCLUDES':
+
+        case 'BOTH':
           // check if answer exists in list (if key and value pair contains needed answer)
+          console.log(preValidationList)
+        for (let i = 0; i < preValidationList.length; i++) {
+          if(getYarValue(request, preValidationList[i].key) === null){
+            return true
+          }else if (preValidationList[i].values.filter((answer) => getYarValue(request, preValidationList[i].key).includes(getQuestionAnswer(preValidationList[i].url, answer))).length > 0 ) {
+              if(getYarValue(request, preValidationList[i + 1].key)){
+                return false
+              }
+            }else{
+              if(getYarValue(request, preValidationList[i + 1].key) === null){
+                return false
+              }
+            }
+            return true
+          
+          }
+  
+
+        case 'NOTINCLUDES':
+          // check if answer is not exists in list (if key and value pair not contains needed answer)
           for (let i = 0; i < preValidationList.length; i++) {
             if (preValidationList[i].values.filter((answer) => !getYarValue(request, preValidationList[i].key).includes(getQuestionAnswer(preValidationList[i].url, answer))).length > 0) {
               return true
