@@ -68,7 +68,9 @@ function guardPage (request, guardData) {
       case 'NOT':
         // check if answer exists in list (if key and value pair contains needed answer)
         for (let i = 0; i < preValidationList.length; i++) {
-          if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length > 0) {
+          if(!getYarValue(request, preValidationList[i].key)){
+            return true
+          }else if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length > 0) {
             return true
           }
         }
@@ -97,7 +99,9 @@ function guardPage (request, guardData) {
         case 'NOTINCLUDES':
           // check if answer is not exists in list (if key and value pair not contains needed answer)
           for (let i = 0; i < preValidationList.length; i++) {
-            if (preValidationList[i].values.filter((answer) => !getYarValue(request, preValidationList[i].key).includes(getQuestionAnswer(preValidationList[i].url, answer))).length > 0) {
+            if(!getYarValue(request, preValidationList[i].key)){
+              return true
+            }if (preValidationList[i].values.filter((answer) => !getYarValue(request, preValidationList[i].key).includes(getQuestionAnswer(preValidationList[i].url, answer))).length > 0) {
               return true
             }
           }
