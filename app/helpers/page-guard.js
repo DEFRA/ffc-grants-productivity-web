@@ -75,9 +75,8 @@ function guardPage (request, guardData) {
 
         return false
 
-        case 'BOTH':
-          // check if answer exists in list (if key and value pair contains needed answer)
-          console.log(preValidationList)
+        case 'SPECIFICANDANY':
+          // check if first answer is specific and second is any of the list
         for (let i = 0; i < preValidationList.length; i++) {
           if(getYarValue(request, preValidationList[i].key) === null){
             return true

@@ -1059,7 +1059,7 @@ const questionBank = {
           preValidationObject: {
             preValidationKeys: ['solarTechnologies', 'solarOutput'],
             preValidationAnswer: ['solar-technologies-A2'],
-            preValidationRule: 'BOTH',
+            preValidationRule: 'SPECIFICANDANY',
             preValidationUrls: ['solar-technologies', 'solar-output']
           },
           grantInfo: {
