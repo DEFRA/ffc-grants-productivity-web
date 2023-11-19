@@ -71,32 +71,55 @@ describe('technology-items', () => {
     expect(postResponse.payload).toContain('Select what technology your project needs')
   })
 
-  it('store user response and redirect to robotic-automatic page', async () => {
-    varList.technologyItems = 'Weeding technology'
+
+  const testNextLink = async (option, destination) => { 
+    varList.technologyItems = option
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/technology-items`,
-      payload: { technologyItems: 'Weeding technology', crumb: crumbToken },
+      payload: { technologyItems: option, crumb: crumbToken },
       headers: { cookie: 'crumb=' + crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('robotic-automatic')
+    expect(postResponse.headers.location).toBe(destination)
+  }
+
+  it('store user response and redirect to /robotic-automatic page if \"Harvesting technology\" was chosen', async () => {
+    await testNextLink('Harvesting technology', 'robotic-automatic')
   })
 
-  it('store user response and redirect to robotic-eligibility page', async () => {
-    varList.technologyItems = ['Driverless robotic tractor or platform', 'Voluntary robotic milking system', 'Slurry robots', 'Robotic spraying technology', 'Feeding robots']
-    const postOptions = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/technology-items`,
-      payload: { technologyItems: 'Feeding robots', crumb: crumbToken },
-      headers: { cookie: 'crumb=' + crumbToken }
-    }
+  it('store user response and redirect to /robotic-automatic page if \"Transplanting technology\" was chosen', async () => {
+    await testNextLink('Transplanting technology', 'robotic-automatic')
+  })
 
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('robotic-eligibility')
+  it('store user response and redirect to /robotic-automatic page if \"Weeding technology\" was chosen', async () => {
+    await testNextLink('Weeding technology', 'robotic-automatic')
+  })
+
+  it('store user response and redirect to /robotic-automatic page if \"Other robotics or automatic technology\" was chosen', async () => {
+    await testNextLink('Other robotics or automatic technology', 'robotic-automatic')
+  })
+
+  it('store user response and redirect to /robotic-eligibility page if \"Driverless robotic tractor or platform\" was chosen', async () => {
+    await testNextLink('Driverless robotic tractor or platform', 'robotic-eligibility')
+  })
+
+  it('store user response and redirect to /robotic-eligibility page if \"Robotic spraying technology\" was chosen', async () => {
+    await testNextLink('Robotic spraying technology', 'robotic-eligibility')
+  })
+
+  it('store user response and redirect to /robotic-eligibility page if \"Voluntary robotic milking system\" was chosen', async () => {
+    await testNextLink('Voluntary robotic milking system', 'robotic-eligibility')
+  })
+
+  it('store user response and redirect to /robotic-eligibility page if \"Feeding robots\" was chosen', async () => {
+    await testNextLink('Feeding robots', 'robotic-eligibility')
+  })
+
+  it('store user response and redirect to /robotic-eligibility page if \"Slurry robots\" was chosen', async () => {
+    await testNextLink('Slurry robots', 'robotic-eligibility')
   })
 
   it('page loads with correct back link /project-items if applicant is Farmer', async () => {
