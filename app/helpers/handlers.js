@@ -228,10 +228,10 @@ const getPage = async (question, request, h) => {
     }
     if (url === 'robotic-eligibility') {
       const selectedOption = getYarValue(request, 'technologyItems')
-      const shortListAnswers = ['technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7','technology-items-A8']
-      .map((item) => getQuestionAnswer('technology-items', item))
+      const shortListAnswers = ['technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7', 'technology-items-A8']
+        .map((item) => getQuestionAnswer('technology-items', item))
 
-        if(shortListAnswers.includes(selectedOption)) {
+      if(shortListAnswers.includes(selectedOption)) {
           question.backUrl = `${urlPrefix}/technology-items`
       }
 
