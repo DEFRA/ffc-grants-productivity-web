@@ -80,10 +80,9 @@ const getPage = async (question, request, h) => {
 
   if(url === 'technology-items') {
     if(getYarValue(request, 'applicant') === 'Contractor') {
-
       question = {
         ...question,
-        answers: question.answers.filter((item) => item.contractorOnly)
+        answers: question.answers.filter((option) => option.contractorOnly)
       }
 
       if(getYarValue(request, 'tenancy') === 'Yes') {
@@ -91,10 +90,7 @@ const getPage = async (question, request, h) => {
       } else {
         question.backUrl = `${urlPrefix}/project-responsibility`
       }
-
-    } else {
-      question.backUrl = `${urlPrefix}/project-items`
-    }
+    } 
   }
 
   if (question.maybeEligible) {

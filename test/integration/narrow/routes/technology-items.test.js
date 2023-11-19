@@ -107,7 +107,7 @@ describe('technology-items', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/productivity/project-items\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"project-items\" class=\"govuk-back-link\">Back</a>')
   })
 
   it('page loads with correct back link /project-responsibility if applicant is Contractor and tenancy answer is No', async () => {
