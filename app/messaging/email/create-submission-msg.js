@@ -81,15 +81,15 @@ function formatProjectItems (projectItemsList, normalItems) {
 // format list of project items for excel
   const projectItems = []
 
-  if (normalItems.includes(getQuestionAnswer('project-items', 'project-items-A1'))) {
+  if (normalItems?.includes(getQuestionAnswer('project-items', 'project-items-A1'))) {
     projectItems.push(getQuestionAnswer('project-items', 'project-items-A1'))
   }
 
-  if (normalItems.includes(getQuestionAnswer('project-items', 'project-items-A2'))) {
+  if (normalItems?.includes(getQuestionAnswer('project-items', 'project-items-A2'))) {
     projectItems.push(getQuestionAnswer('project-items', 'project-items-A2'))
   }
 
-  if (normalItems.includes(getQuestionAnswer('project-items', 'project-items-A3'))) {
+  if (projectItemsList?.length > 0) {
 
     for (i = 0; i < projectItemsList.length; i++) {
       const { item, type, criteria, itemName, brand, model, numberOfItems, } = projectItemsList[i]
@@ -177,7 +177,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(379, 'Electricity Source', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? [submission.energySource].flat().join('|') : 'N/A'),
           generateRow(380, 'Agricultural Sector', [submission.agriculturalSector].flat().join('|') ?? ''),
           generateRow(381, 'Currently Technology Usage', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? submission.technologyUse : 'N/A'),
-          generateRow(473, 'Labour Replaced', submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')) ? submission.labourReplaced : 'N/A'),
+          generateRow(473, 'Labour Replaced', (submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')) || submission.projectItemsList?.length > 0) ? submission.labourReplaced : 'N/A'),
 
           generateRow(470, 'Solar Technology', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A2') ? submission.solarTechnologies : 'N/A'),
           generateRow(471, 'Solar PV System Output', submission.solarTechnologies?.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2')) ? submission.solarOutput : 'N/A'),
@@ -273,8 +273,9 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       tenancyLength: submission.tenancyLength ?? '',
       projectResponsibility: submission.projectResponsibility ?? '',
       projectItems: submission.projectItems ? [submission.projectItems].flat().join('\n') : '',
+      isProjectItems: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && submission.projectItems?.length > 0,
       technologyItems: submission.projectItemsList ? displayObject(submission.projectItemsList) : '', //here
-      isTechnologyItems: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')),
+      isTechnologyItems: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && (submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')) || submission.projectItemsList?.length > 0),
       projectImpact: submission.projectImpact ?? '',
       existingSolar: submission.existingSolar ?? '',
       projectCost: getCurrencyFormat(submission.projectCost),
@@ -295,7 +296,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
 
       labourReplaced:  submission?.labourReplaced ?? '',
       labourReplacedScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'labour-replaced') : '',
-      isLabourReplaced: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')),
+      isLabourReplaced: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && (submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')) || submission.projectItemsList?.length > 0),
 
       solarTechnologies: submission.solarTechnologies ? [submission.solarTechnologies].flat().join(' | ') : '',
       solarTechnologiesScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'solar-technologies') : '',
