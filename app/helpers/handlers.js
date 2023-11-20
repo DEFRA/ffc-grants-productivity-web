@@ -331,7 +331,7 @@ const getPage = async (question, request, h) => {
   return h.view('page', PAGE_MODEL)
 }
 
-const showPostPage = (currentQuestion, request, h) => {
+const showPostPage = async (currentQuestion, request, h) => {
   const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields, replace } = currentQuestion
 
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
@@ -517,6 +517,21 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'calculatedGrant', calculatedGrant)
     setYarValue(request, 'remainingCost', remainingCost)
     setYarValue(request, 'projectCost', projectCost)
+  }
+  if (yarKey === 'remainingCosts' && payload[Object.keys(payload)[0]] === getQuestionAnswer('remaining-costs', 'remaining-costs-A1')) {
+    // send solar eligibilty event
+    const metrics = {
+      name: gapiService.eventTypes.ELIGIBILITY,
+      params: {
+        action: 'Solar eligibility goal completion',
+        label: 'Remaining costs completed'
+      }
+    }
+    try {
+      await gapiService.sendGAEvent(request, metrics)
+    } catch (err) {
+      console.error('ERROR: ', err)
+    }
   }
   
   let isSolar = getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A2')
