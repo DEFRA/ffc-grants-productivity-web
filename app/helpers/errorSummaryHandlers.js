@@ -80,7 +80,7 @@ const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
   if (yarKey === 'technologyDescription') {
     const techItem = getYarValue(request, 'technologyItems')
     if (techItem === 'Other robotics or automatic technology') {
-      const descriptionTitle = title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+      const descriptionTitle = currentQuestion.title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
         getYarValue(request, additionalYarKeyName).toLowerCase()
       )
       currentQuestion = {

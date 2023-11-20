@@ -65,6 +65,10 @@ describe('Page: /technology-description', () => {
       expect(heading.textContent.trim()).toBe('Describe the other robotics or automatic technology')
   })
   it('should display an error message if itemName is missing', async () => {
+    varList.technologyItems = 'Harvesting technology',
+
+    varList.roboticAutomatic = 'Robotic'
+
       const postOptions = {
           method: 'POST',
           url: `${global.__URLPREFIX__}/technology-description`,
@@ -87,6 +91,8 @@ describe('Page: /technology-description', () => {
       expect(errors[0].textContent.trim()).toBe('Enter the name of the item')
   })
   it('should display an error message if itemName is is shorter than 4 or longer than 18', async () => {
+    varList.roboticAutomatic = 'Automatic'
+
       const postOptions = {
           method: 'POST',
           url: `${global.__URLPREFIX__}/technology-description`,
@@ -148,6 +154,31 @@ describe('Page: /technology-description', () => {
       expect(errors.length).toBe(1)
       expect(errors[0].textContent.trim()).toBe('Brand must be 18 characters or less')
   })
+
+  it('should display an error message if number of items field has value AND is longer than 100', async () => {
+    const postOptions = {
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/technology-description`,
+        payload: {
+          crumb: crumbToken,
+          itemName: '1234',
+          brand: '',
+          model: '',
+          numberOfItems: '101',
+        },
+        headers: { cookie: 'crumb=' + crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(200)
+    let page = new JSDOM(postResponse.payload).window.document
+    let errorSummary = page.querySelector('.govuk-error-summary__list')
+    let errors = errorSummary.querySelectorAll('li')
+    expect(errors.length).toBe(1)
+    expect(errors[0].textContent.trim()).toBe('Number of items must be between 1 and 100')
+
+})
+
 
   it('page loads with correct back link > automatic', async () => {
     varList.roboticEligibility = null
