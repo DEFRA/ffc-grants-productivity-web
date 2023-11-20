@@ -1361,7 +1361,12 @@ const questionBank = {
           url: 'technology-items',
           baseUrl: 'technology-items',
           backUrl: 'project-items',
-          // preValidationKeys: ['projectItems'],
+          preValidationObject: {
+            preValidationKeys: ['projectItems'],
+            preValidationAnswer: ['project-items-A3'],
+            preValidationRule: 'NOTINCLUDES',
+            preValidationUrls: ['project-items']
+          },
           nextUrl: 'robotic-automatic',
           id: 'technologyItems',
           name: 'technologyItems',
