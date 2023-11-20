@@ -92,8 +92,8 @@ function formatProjectItems (projectItemsList, normalItems) {
   if (projectItemsList?.length > 0) {
 
     for (i = 0; i < projectItemsList.length; i++) {
-      const { item, type, criteria, itemName, brand, model, numberOfItems, } = projectItemsList[i]
-      projectItems.push(`${item} ~ ${type} ~ ${criteria.join(', ')}${itemName && (" ~ " + itemName)}${brand && (" ~ " + brand)}${model && (" ~ " + model)}${numberOfItems && (" ~ " + numberOfItems)}`)
+      const { item, type, criteria, description } = projectItemsList[i]
+      projectItems.push(`${item} ~ ${type} ~ ${criteria.join(', ')}${description.itemName && (" ~ " + description.itemName)}${description.brand && (" ~ " + description.brand)}${description.model && (" ~ " + description.model)}${description.numberOfItems && (" ~ " + description.numberOfItems)}`)
     }
   }
 
@@ -103,8 +103,8 @@ function formatProjectItems (projectItemsList, normalItems) {
 function formatDescriptions(projectItemsList) {
   const descriptionList = []
   for (i = 0; i < projectItemsList.length; i++) {
-    const { item, type, criteria, itemName, brand, model, numberOfItems, } = projectItemsList[i]
-    descriptionList.push(`${item} ~ ${type} ~ ${criteria.join(', ')}${itemName && (" ~ " + itemName)}${brand && (" ~ " + brand)}${model && (" ~ " + model)}${numberOfItems && (" ~ " + numberOfItems)}`)
+    const { item, type, criteria, description } = projectItemsList[i]
+    descriptionList.push(`${item} ~ ${type} ~ ${criteria.join(', ')}${description.itemName && (" ~ " + description.itemName)}${description.brand && (" ~ " + description.brand)}${description.model && (" ~ " + description.model)}${description.numberOfItems && (" ~ " + description.numberOfItems)}`)
   }
   
   return descriptionList.join('|')
@@ -238,8 +238,8 @@ function getScoreChance (rating) {
 function displayObject (projectItemsList) {
   const descriptionList = []
   for (i = 0; i < projectItemsList.length; i++) {
-    const { item, type, criteria, itemName, brand, model, numberOfItems, } = projectItemsList[i]
-    descriptionList.push(`${item} ~ ${type} ~ ${criteria.join(', ')}${itemName && (" ~ " + itemName)}${brand && (" ~ " + brand)}${model && (" ~ " + model)}${numberOfItems && (" ~ " + numberOfItems)}`)
+    const { item, type, criteria, description } = projectItemsList[i]
+    descriptionList.push(`${item} ~ ${type} ~ ${criteria.join(', ')}${description.itemName && (" ~ " + description.itemName)}${description.brand && (" ~ " + description.brand)}${description.model && (" ~ " + description.model)}${description.numberOfItems && (" ~ " + description.numberOfItems)}`)
   }
   
   return descriptionList.join('\n')
