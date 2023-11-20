@@ -6,7 +6,10 @@ technologyItems: 'Harvesting technology',
 roboticAutomatic: 'Robotic',
 roboticEligibility: 'Yes',
 technologyDescription: {
-    description: 'some fake description some fake description'
+    itemName: '',
+    brand: '',
+    model: '',
+    numberOfItems: '',
 },
 projectItemsList: projectItemsSummaryData
 
@@ -32,7 +35,40 @@ beforeEach(() => {
     jest.clearAllMocks()
     })
 
-it('should load page successfully', async () => {
+    it('should load page successfully - 0 items, just for testing sake', async () => {
+        varList.projectItemsList = []
+        const options = {
+            method: 'GET',
+            url: `${global.__URLPREFIX__}/project-items-summary`
+        }
+    
+        const response = await global.__SERVER__.inject(options)
+        expect(response.statusCode).toBe(200)
+        expect(response.payload).toContain('Your project technology')
+    })
+it('should load page successfully - 2 items, normal access', async () => {
+    varList.projectItemsList = [{
+        realItem: 'hello',
+        type: 'Automatic',
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        }
+    },
+    {
+        realItem: 'hello',
+        type: 'Automatic',
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        },
+        criteriaScoring: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
+    }
+    ]
     const options = {
         method: 'GET',
         url: `${global.__URLPREFIX__}/project-items-summary`
@@ -42,6 +78,70 @@ it('should load page successfully', async () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Your project technology')
 })
+
+it('should load page successfully - 5 items, backToSummary', async () => {
+    varList.backToItemsSummary = true
+    varList.projectItemsList = [{
+        realItem: 'hello',
+        type: 'Robotic',
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        },
+    },
+    {
+        realItem: 'hello',
+        type: 'Robotic',
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        },
+    },
+    {
+        realItem: 'hello',
+        type: 'Robotic',
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        },
+    },
+    {
+        realItem: 'hello',
+        type: 'Robotic',
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        },
+    },
+    {
+        realItem: 'hello',
+        type: 'Robotic',
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        },
+    }]
+    const options = {
+        method: 'GET',
+        url: `${global.__URLPREFIX__}/project-items-summary`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('Your project technology')
+    // can also chekc back link too if wanted
+})
+
 
 
 it('click continue redirects to item-conditional page', async () => {
