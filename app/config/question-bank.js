@@ -1726,7 +1726,7 @@ const questionBank = {
         {
           key: 'technology-description',
           order: 305,
-          title: 'What is your technology?',
+          title: 'Describe the {{_technologyItems_}}',
           pageTitle: '',
           nextUrl: 'other-item',
           url: 'technology-description',
@@ -1743,14 +1743,7 @@ const questionBank = {
           fundingPriorities: '',
           minAnswerCount: 1,
           hint: {
-            html: `Technology powered by fossil fuels will only be funded where there is no 
-            commercially available electric or renewable energy alternative.<br/><br/>
-            <p class="govuk-body">Enter a brief description of the technology including:</p>
-            <ul class="govuk-list govuk-list--bullet">
-              <li>name</li>
-              <li>brand and model (if available)</li>
-              <li>number of items</li>
-            </ul>`
+            html: `Technology powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative<br/><br/>`
           },
           sidebar: {
             values: [{
@@ -1767,33 +1760,98 @@ const questionBank = {
           type: 'multi-input',
           allFields: [
             {
-              yarKey: 'description',
-              id: "description",
-              name: "description",
-              type: 'textarea',
+              yarKey: 'itemName',
+              id: "itemName",
+              name: "itemName",
+              type: 'input',
               maxlength: 250,
+              classes: 'govuk-input--width-10',
               label: {
-                text: '',
+                text: 'Name of item',
                 classes: 'govuk-label',
-                for: 'description'
+                for: 'itemName'
               },
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter a brief description of your technology'
+                  error: 'Enter the name of the item'
                 },
                 {
-                  type: 'REGEX',
-                  regex: CHARS_MIN_10,
-                  error: 'Description must be 10 characters or more'
-                },
-                {
-                  type: 'REGEX',
-                  regex: CHARS_MAX_250,
-                  error: 'Description must be 250 characters or less'
+                  type: 'MIN_MAX_CHARS',
+                  min: 4,
+                  max: 18,
+                  error: 'Name of item must be between 4 and 18 characters'
                 }
               ]
-            }
+            },
+            {
+              yarKey: 'brand',
+              id: "brand",
+              name: "brand",
+              type: 'input',
+              maxlength: 250,
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'Brand (optional)',
+                classes: 'govuk-label',
+                for: 'brand'
+              },
+              validate: [
+                {
+                  type: 'MIN_MAX_CHARS',
+                  min: 0,
+                  max: 18,
+                  error: 'Brand must be 18 characters or less'
+                }
+              ]
+            },
+            {
+              yarKey: 'model',
+              id: "model",
+              name: "model",
+              type: 'input',
+              maxlength: 250,
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'Model (optional)',
+                classes: 'govuk-label',
+                for: 'model'
+              },
+              validate: [
+                {
+                  type: 'MIN_MAX_CHARS',
+                  min: 0,
+                  max: 18,
+                  error: 'Model must be 18 characters or less'
+                }
+              ]
+            },
+            {
+              yarKey: 'numberOfItems',
+              id: "numberOfItems",
+              name: "numberOfItems",
+              type: 'input',
+              maxlength: 250,
+              classes: 'govuk-input--width-2',
+              label: {
+                text: 'Number of items, if you need funding for multiple (optional)',
+                classes: 'govuk-label',
+                for: 'numberOfItems'
+              },
+              validate: [
+                {
+                  type: 'REGEX',
+                  regex: WHOLE_NUMBER_REGEX,
+                  error: 'Number of items must be a number, like 18'
+                },
+                {
+                  type: 'MIN_MAX',
+                  min: 1,
+                  max: 100,
+                  error: 'Number of items must be between 1 and 100'
+                }
+              ]
+            },
           ],
           yarKey: 'technologyDescription'
         },
