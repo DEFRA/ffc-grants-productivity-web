@@ -1610,9 +1610,7 @@ const questionBank = {
               content: [{
                 para: 'Robotic items must meet all 4 criteria to be eligible.',
                 items: []
-              }],
-              
-
+              }]
             }]
           },
           validate: [
@@ -1649,7 +1647,12 @@ const questionBank = {
               elseUrl: 'robotic-eligibility'
             }
           },
-          // preValidationKeys: ['roboticEligibility'],
+          preValidationObject: {
+            preValidationKeys: ['automaticEligibility', 'roboticEligibility', ],
+            preValidationAnswer: ['automatic-eligibility-A5', 'robotic-eligibility-A2', ],
+            preValidationRule: 'NOTOR',
+            preValidationUrls: ['automatic-eligibility', 'robotic-eligibility', ]
+          },
           fundingPriorities: '',
           minAnswerCount: 1,
           hint: {

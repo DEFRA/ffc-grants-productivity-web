@@ -78,7 +78,7 @@ function guardPage (request, guardData) {
         return false
 
         case 'SPECIFICANDANY':
-          // check if first answer is specific and second is any of the list
+          // page guard take action if nothing has selected OR if first(spesific-checkbox) and second(any option - radiobox) preValidationAnswer not selected.
         for (let i = 0; i < preValidationList.length; i++) {
           if(getYarValue(request, preValidationList[i].key) === null){
             return true
@@ -94,7 +94,20 @@ function guardPage (request, guardData) {
             return true
           
           }
-  
+
+          case 'NOTOR':
+            // page guard take action if nothing has selected OR if first(checkbox) OR second(radiobox) preValidationAnswer selected.
+          for (let i = 0; i < preValidationList.length; i++) {
+            if(getYarValue(request, preValidationList[i].key) === null && getYarValue(request, preValidationList[i + 1].key) === null){
+              return true
+            }else if(getYarValue(request, preValidationList[i + 1].key) === getQuestionAnswer(preValidationList[i + 1].url, preValidationList[i + 1].values[i])) {
+              return true
+            }else if(preValidationList[i].values.filter((answer) => [getYarValue(request, preValidationList[i].key)].flat().includes(getQuestionAnswer(preValidationList[i].url, answer))).length > 0) {
+                return true
+            }else{
+                return false
+            }
+          }
 
         case 'NOTINCLUDES':
           // check if answer is not exists in list (if key and value pair not contains needed answer)
