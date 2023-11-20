@@ -92,26 +92,22 @@ function formatProjectItems (projectItemsList, normalItems) {
   if (normalItems.includes(getQuestionAnswer('project-items', 'project-items-A3'))) {
 
     for (i = 0; i < projectItemsList.length; i++) {
-      projectItems.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')}`)
-    
+      const { item, type, criteria, itemName, brand, model, numberOfItems, } = projectItemsList[i]
+      projectItems.push(`${item} ~ ${type} ~ ${criteria.join(', ')}${itemName && (" ~ " + itemName)}${brand && (" ~ " + brand)}${model && (" ~ " + model)}${numberOfItems && (" ~ " + numberOfItems)}`)
     }
   }
-  
-  return projectItems.join('|')
 
+  return projectItems.join('|')
 }
 
 function formatDescriptions(projectItemsList) {
-
   const descriptionList = []
-
   for (i = 0; i < projectItemsList.length; i++) {
-    descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')} ~ ${projectItemsList[i].description}`)
-  
+    const { item, type, criteria, itemName, brand, model, numberOfItems, } = projectItemsList[i]
+    descriptionList.push(`${item} ~ ${type} ~ ${criteria.join(', ')}${itemName && (" ~ " + itemName)}${brand && (" ~ " + brand)}${model && (" ~ " + model)}${numberOfItems && (" ~ " + numberOfItems)}`)
   }
   
   return descriptionList.join('|')
-
 }
 
 const getPlanningPermissionDoraValue = (planningPermission) => {
@@ -215,7 +211,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(93, 'RAG date reviewed ', todayStr),
           generateRow(54, 'Electronic OA received date ', todayStr),
           generateRow(370, 'Status', 'Pending RPA review'),
-          generateRow(85, 'Full Application Submission Date', (new Date(today.setMonth(today.getMonth() + 6))).toLocaleDateString('en-GB')),
+          generateRow(85, 'Full Application Submission Date', (new Date('2024-10-31')).toLocaleDateString('en-GB')),
           generateRow(375, 'OA percent', String(( desirabilityScore.desirability.overallRating.score / (submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? 600 : 300) * 100).toFixed(2))), // calculate percentage for robotics or solar based on project
           ...addAgentDetails(submission.agentsDetails)
         ]
@@ -241,15 +237,14 @@ function getScoreChance (rating) {
 
 function displayObject (projectItemsList) {
   const descriptionList = []
-
   for (i = 0; i < projectItemsList.length; i++) {
-    descriptionList.push(`${projectItemsList[i].item} ~ ${projectItemsList[i].type} ~ ${projectItemsList[i].criteria.join(', ')} ~ ${projectItemsList[i].description}`)
-  
+    const { item, type, criteria, itemName, brand, model, numberOfItems, } = projectItemsList[i]
+    descriptionList.push(`${item} ~ ${type} ~ ${criteria.join(', ')}${itemName && (" ~ " + itemName)}${brand && (" ~ " + brand)}${model && (" ~ " + model)}${numberOfItems && (" ~ " + numberOfItems)}`)
   }
   
   return descriptionList.join('\n')
-
 }
+
 function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail = false) {
   const farmerContractorDetails = submission.farmerDetails ?? submission.contractorsDetails
   const email = isAgentEmail ? submission.agentsDetails.emailAddress : farmerContractorDetails.emailAddress  
@@ -278,7 +273,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       tenancyLength: submission.tenancyLength ?? '',
       projectResponsibility: submission.projectResponsibility ?? '',
       projectItems: submission.projectItems ? [submission.projectItems].flat().join('\n') : '',
-      technologyItems: submission.projectItemsList ? displayObject(submission.projectItemsList) : '',
+      technologyItems: submission.projectItemsList ? displayObject(submission.projectItemsList) : '', //here
       isTechnologyItems: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')),
       projectImpact: submission.projectImpact ?? '',
       existingSolar: submission.existingSolar ?? '',
@@ -339,10 +334,7 @@ function spreadsheet (submission, desirabilityScore) {
 }
 
 module.exports = function (submission, desirabilityScore) {
-  console.log('submission: ', submission)
-  console.log('desirabilityScore: ', desirabilityScore)
   const emailDetails = getEmailDetails(submission, desirabilityScore, false)
-  console.log('emailDetails: ', emailDetails)
   return {
     applicantEmail: emailDetails,
     agentEmail: submission.applying === 'Agent' ? getEmailDetails(submission, desirabilityScore, false, true) : null,

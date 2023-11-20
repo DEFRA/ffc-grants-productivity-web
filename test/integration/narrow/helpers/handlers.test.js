@@ -1,14 +1,35 @@
 // const data = require('../../../../app/helpers/desirability-score.json')
 // const scoreData = require('../../../data/score-data')
+const varList = {
+  planningPermission: 'some fake value',
+  gridReference: 'grid-ref-num',
+  businessDetails: 'fake business',
+  applying: true
+}
+const mockSet = jest.fn().mockImplementation((request, key, value) => varList[key] = value)
+jest.mock('../../../../app/helpers/session', () => ({
+  setYarValue: mockSet,
+  getYarValue: (request, key) => {
+    if (varList[key]) return varList[key]
+    else return null
+  }
+}))
+
+
+jest.mock('../../../../app/helpers/page-guard', () => ({
+  guardPage: (a, b, c) => false
+}))
+
+jest.mock('../../../../app/helpers/urls', () => ({
+  getUrl: (a, b, c, d) => 'mock-url'
+}))
 
 describe('Get & Post Handlers', () => {
   const newSender = require('../../../../app/messaging/application')
   // const createMsg = require('../../../../app/messaging/create-msg')
-
   // const getUserScoreSpy = jest.spyOn(newSender, 'getUserScore').mockImplementation(() => {
   //   Promise.resolve(scoreData);
   // })
-
   // const getDesirabilityAnswersSpy = jest.spyOn(createMsg, 'getDesirabilityAnswers').mockImplementation(() => {
   //   return {
   //     test: 'test'
@@ -24,34 +45,11 @@ describe('Get & Post Handlers', () => {
     jest.clearAllMocks()
   })
 
-  const varList = {
-    planningPermission: 'some fake value',
-    gridReference: 'grid-ref-num',
-    businessDetails: 'fake business',
-    applying: true
-  }
-
-  jest.mock('../../../../app/helpers/page-guard', () => ({
-    guardPage: (a, b, c) => false
-  }))
-
-  jest.mock('../../../../app/helpers/urls', () => ({
-    getUrl: (a, b, c, d) => 'mock-url'
-  }))
-
-  jest.mock('../../../../app/helpers/session', () => ({
-    setYarValue: (request, key, value) => null,
-    getYarValue: (request, key) => {
-      if (varList[key]) return varList[key]
-      else return null
-    }
-  }))
-
   let question
   let mockH
   let mockRequest
 
-  const { getHandler, createModel } = require('../../../../app/helpers/handlers')
+  const { getHandler, getPostHandler, createModel } = require('../../../../app/helpers/handlers')
 
   // plannign permission summary not in code yet
   xtest('will redirect to start page if planning permission evidence is missing', async () => {
@@ -176,4 +174,34 @@ describe('Get & Post Handlers', () => {
       })
     })
   })
+
+  describe('getPostHandler', () => {
+    it('should reset consentOptional yarkey', async () => {
+      varList.consentOptional = true
+      question = {
+        yarKey: 'consentOptional',
+        url: 'score',
+        title: 'mock-title',
+        backUrl: 'test-back-link',
+        nextUrl: 'next-url'
+      }
+      mockH = {
+        view: jest.fn(),
+        redirect: jest.fn()
+      }
+      mockRequest = {
+        yar: {
+          id: 2,
+          get: jest.fn(),
+          set: jest.fn()
+        },
+        payload: {
+        }
+      }
+      await getPostHandler(question)(mockRequest, mockH)
+      expect(varList.consentOptional).toEqual('')
+      expect(mockSet).toHaveBeenCalledWith(mockRequest, 'consentOptional', '')
+    })
+  })
 })
+

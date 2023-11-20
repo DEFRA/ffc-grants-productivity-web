@@ -1437,7 +1437,7 @@ const questionBank = {
         {
           key: 'technology-items',
           order: 310,
-          title: 'What technology does your project need?',
+          title: 'What robotic or automatic technology does your project need?',
           pageTitle: '',
           url: 'technology-items',
           baseUrl: 'technology-items',
@@ -1475,39 +1475,49 @@ const questionBank = {
           answers: [
             {
               key: 'technology-items-A1',
-              value: 'Harvesting technology'
+              value: 'Harvesting technology',
+              contractorOnly: true
             },
             {
-              key: 'technology-items-A2',
-              value: 'Weeding technology'
-            },
-            {
-              key: 'technology-items-A3',
-              value: 'Spraying technology'
-            },
-            {
-              key: 'technology-items-A4',
-              value: 'Driverless tractor'
-            },
-            {
-              key: 'technology-items-A5',
-              value: 'Voluntary robotic milking system'
-            },
-            {
-              key: 'technology-items-A6',
-              value: 'Feeding system'
-            },
-            {
-              key: 'technology-items-A7',
+              key: 'technology-items-A2', 
               value: 'Transplanting technology'
             },
             {
+              key: 'technology-items-A3',
+              value: 'Weeding technology',
+              contractorOnly: true
+            },
+            {
+              key: 'technology-items-A4',
+              value: 'Driverless robotic tractor or platform', 
+              redirectUrl: 'robotic-eligibility', 
+              contractorOnly: true
+            },
+            {
+              key: 'technology-items-A5',
+              value: 'Robotic spraying technology',
+              redirectUrl: 'robotic-eligibility',
+              contractorOnly: true
+            },
+            {
+              key: 'technology-items-A6',
+              value: 'Voluntary robotic milking system',
+              redirectUrl: 'robotic-eligibility'
+            },
+            {
+              key: 'technology-items-A7',
+              value: 'Feeding robots',
+              redirectUrl: 'robotic-eligibility'
+            },
+            {
               key: 'technology-items-A8',
-              value: 'Slurry and manure management'
+              value: 'Slurry robots',
+              redirectUrl: 'robotic-eligibility'
             },
             {
               key: 'technology-items-A9',
-              value: 'Other robotics or automatic technology'
+              value: 'Other robotics or automatic technology',
+              contractorOnly: true
             }
           ],
           yarKey: 'technologyItems'
@@ -1732,7 +1742,7 @@ const questionBank = {
         {
           key: 'technology-description',
           order: 305,
-          title: 'What is your technology?',
+          title: 'Describe the {{_technologyItems_}}',
           pageTitle: '',
           nextUrl: 'other-item',
           url: 'technology-description',
@@ -1749,14 +1759,7 @@ const questionBank = {
           fundingPriorities: '',
           minAnswerCount: 1,
           hint: {
-            html: `Technology powered by fossil fuels will only be funded where there is no 
-            commercially available electric or renewable energy alternative.<br/><br/>
-            <p class="govuk-body">Enter a brief description of the technology including:</p>
-            <ul class="govuk-list govuk-list--bullet">
-              <li>name</li>
-              <li>brand and model (if available)</li>
-              <li>number of items</li>
-            </ul>`
+            html: `Technology powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative<br/><br/>`
           },
           sidebar: {
             values: [{
@@ -1773,33 +1776,98 @@ const questionBank = {
           type: 'multi-input',
           allFields: [
             {
-              yarKey: 'description',
-              id: "description",
-              name: "description",
-              type: 'textarea',
+              yarKey: 'itemName',
+              id: "itemName",
+              name: "itemName",
+              type: 'input',
               maxlength: 250,
+              classes: 'govuk-input--width-10',
               label: {
-                text: '',
+                text: 'Name of item',
                 classes: 'govuk-label',
-                for: 'description'
+                for: 'itemName'
               },
               validate: [
                 {
                   type: 'NOT_EMPTY',
-                  error: 'Enter a brief description of your technology'
+                  error: 'Enter the name of the item'
                 },
                 {
-                  type: 'REGEX',
-                  regex: CHARS_MIN_10,
-                  error: 'Description must be 10 characters or more'
-                },
-                {
-                  type: 'REGEX',
-                  regex: CHARS_MAX_250,
-                  error: 'Description must be 250 characters or less'
+                  type: 'MIN_MAX_CHARS',
+                  min: 4,
+                  max: 18,
+                  error: 'Name of item must be between 4 and 18 characters'
                 }
               ]
-            }
+            },
+            {
+              yarKey: 'brand',
+              id: "brand",
+              name: "brand",
+              type: 'input',
+              maxlength: 250,
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'Brand (optional)',
+                classes: 'govuk-label',
+                for: 'brand'
+              },
+              validate: [
+                {
+                  type: 'MIN_MAX_CHARS',
+                  min: 0,
+                  max: 18,
+                  error: 'Brand must be 18 characters or less'
+                }
+              ]
+            },
+            {
+              yarKey: 'model',
+              id: "model",
+              name: "model",
+              type: 'input',
+              maxlength: 250,
+              classes: 'govuk-input--width-10',
+              label: {
+                text: 'Model (optional)',
+                classes: 'govuk-label',
+                for: 'model'
+              },
+              validate: [
+                {
+                  type: 'MIN_MAX_CHARS',
+                  min: 0,
+                  max: 18,
+                  error: 'Model must be 18 characters or less'
+                }
+              ]
+            },
+            {
+              yarKey: 'numberOfItems',
+              id: "numberOfItems",
+              name: "numberOfItems",
+              type: 'input',
+              maxlength: 250,
+              classes: 'govuk-input--width-2',
+              label: {
+                text: 'Number of items, if you need funding for multiple (optional)',
+                classes: 'govuk-label',
+                for: 'numberOfItems'
+              },
+              validate: [
+                {
+                  type: 'REGEX',
+                  regex: WHOLE_NUMBER_REGEX,
+                  error: 'Number of items must be a number, like 18'
+                },
+                {
+                  type: 'MIN_MAX',
+                  min: 1,
+                  max: 100,
+                  error: 'Number of items must be between 1 and 100'
+                }
+              ]
+            },
           ],
           yarKey: 'technologyDescription'
         },
