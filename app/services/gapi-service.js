@@ -19,7 +19,8 @@ const eventTypes = {
   ELIGIBILITY: 'eligibility_passed',
   CONFIRMATION: 'confirmation',
   ELIMINATION: 'elimination',
-  EXCEPTION: 'exception'
+  EXCEPTION: 'exception',
+  SCORING: 'scoring'
 }
 
 const sendGAEvent = async (request, metrics) => {

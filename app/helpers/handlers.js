@@ -92,14 +92,8 @@ const getPage = async (question, request, h) => {
         const overAllScore = getYarValue(request, 'overAllScore')
         const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), overAllScore, correlationId: request.yar.id })
         await senders.sendDesirabilitySubmitted(emailData, request.yar.id)
-        await gapiService.sendGAEvent(request, {
-          name: gapiService.eventTypes.CONFIRMATION,
-          params: {
-            score: overAllScore
-          }
-        })
       } catch (err) {
-        console.log('ERROR: ', err)
+        console.error('ERROR: ', err)
       }
       maybeEligibleContent = {
         ...maybeEligibleContent,
@@ -298,6 +292,20 @@ const getPage = async (question, request, h) => {
   }
   switch (url) {
     case 'score':
+      const scoreData = getYarValue(request, 'overAllScore')
+      // send score to GA
+      try {
+        await gapiService.sendGAEvent(request, {
+          name: gapiService.eventTypes.SCORE,
+          params: {
+            score: scoreData.desirability.overallRating.band,
+            action: 'Score results presented',
+            label: getYarValue(request, 'projectSubject') // Solar project items or Robotics project items
+          }
+        })
+      } catch (err) {
+        console.error('ERROR: ', err)
+      }
     case 'agents-details': {
         if (getYarValue(request, 'projectSubject') === 'Solar project items' ) {
           question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/farmers-details`
