@@ -1454,7 +1454,12 @@ const questionBank = {
           pageTitle: '',
           url: 'robotic-automatic',
           baseUrl: 'robotic-automatic',
-          // preValidationKeys: ['technologyItems'],
+          preValidationObject: {
+            preValidationKeys: ['technologyItems'],
+            preValidationAnswer: ['technology-items-A1', 'technology-items-A2', 'technology-items-A3', 'technology-items-A9'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['technology-items']
+          },
           backUrl: 'technology-items',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           dependantNextUrl: {
@@ -1524,7 +1529,12 @@ const questionBank = {
           backUrl: 'robotic-automatic',
           id: 'automaticEligibility',
           name: 'automaticEligibility',
-          preValidationKeys: ['technologyItems'],
+          preValidationObject: {
+            preValidationKeys: ['roboticAutomatic'],
+            preValidationAnswer: ['robotic-automatic-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['robotic-automatic']
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {
             title: 'You cannot apply for a grant funding for this technology',
@@ -1601,7 +1611,12 @@ const questionBank = {
           baseUrl: 'robotic-eligibility',
           backUrl: 'robotic-automatic',
           nextUrl: 'technology-description',
-          preValidationKeys: ['technologyItems'],
+          preValidationObject: {
+            preValidationKeys: ['roboticAutomatic', 'technologyItems'],
+            preValidationAnswer: ['robotic-automatic-A1', 'technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7', 'technology-items-A8'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['robotic-automatic','technology-items']
+          },
           eliminationAnswerKeys: '',
           type: 'single-answer',
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
@@ -1679,7 +1694,7 @@ const questionBank = {
               elseUrl: 'robotic-eligibility'
             }
           },
-          // preValidationKeys: ['roboticAutomatic'],
+          // preValidationKeys: ['roboticEligibility'],
           fundingPriorities: '',
           minAnswerCount: 1,
           hint: {
