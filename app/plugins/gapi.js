@@ -21,7 +21,8 @@ exports.plugin = {
           await gapiService.sendGAEvent(request, {
             name: gapiService.eventTypes.PAGEVIEW,
             params: {
-              page_path: request.route.path
+              page_path: request.route.path,
+              scoreReached: getYarValue(request, 'onScorePage') ? 'Yes' : 'No',
             }
           })
         }

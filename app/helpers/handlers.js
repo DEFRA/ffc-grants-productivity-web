@@ -339,7 +339,9 @@ const getPage = async (question, request, h) => {
     const metrics = {
       name: gapiService.eventTypes.CONFIRMATION,
       params: {
-        action: 'Confirmation page reached'
+        action: 'Confirmation page reached',
+        label: getYarValue(request, 'projectSubject'), // Solar project items or Robotics project items
+        final_score: getYarValue(request, 'overAllScore').desirability.overallRating.band
       }
     }
     try {
