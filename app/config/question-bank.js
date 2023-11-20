@@ -1422,7 +1422,7 @@ const questionBank = {
         {
           key: 'technology-items',
           order: 310,
-          title: 'What technology does your project need?',
+          title: 'What robotic or automatic technology does your project need?',
           pageTitle: '',
           url: 'technology-items',
           baseUrl: 'technology-items',
@@ -1460,39 +1460,49 @@ const questionBank = {
           answers: [
             {
               key: 'technology-items-A1',
-              value: 'Harvesting technology'
+              value: 'Harvesting technology',
+              contractorOnly: true
             },
             {
-              key: 'technology-items-A2',
-              value: 'Weeding technology'
-            },
-            {
-              key: 'technology-items-A3',
-              value: 'Spraying technology'
-            },
-            {
-              key: 'technology-items-A4',
-              value: 'Driverless tractor'
-            },
-            {
-              key: 'technology-items-A5',
-              value: 'Voluntary robotic milking system'
-            },
-            {
-              key: 'technology-items-A6',
-              value: 'Feeding system'
-            },
-            {
-              key: 'technology-items-A7',
+              key: 'technology-items-A2', 
               value: 'Transplanting technology'
             },
             {
+              key: 'technology-items-A3',
+              value: 'Weeding technology',
+              contractorOnly: true
+            },
+            {
+              key: 'technology-items-A4',
+              value: 'Driverless robotic tractor or platform', 
+              redirectUrl: 'robotic-eligibility', 
+              contractorOnly: true
+            },
+            {
+              key: 'technology-items-A5',
+              value: 'Robotic spraying technology',
+              redirectUrl: 'robotic-eligibility',
+              contractorOnly: true
+            },
+            {
+              key: 'technology-items-A6',
+              value: 'Voluntary robotic milking system',
+              redirectUrl: 'robotic-eligibility'
+            },
+            {
+              key: 'technology-items-A7',
+              value: 'Feeding robots',
+              redirectUrl: 'robotic-eligibility'
+            },
+            {
               key: 'technology-items-A8',
-              value: 'Slurry and manure management'
+              value: 'Slurry robots',
+              redirectUrl: 'robotic-eligibility'
             },
             {
               key: 'technology-items-A9',
-              value: 'Other robotics or automatic technology'
+              value: 'Other robotics or automatic technology',
+              contractorOnly: true
             }
           ],
           yarKey: 'technologyItems'
