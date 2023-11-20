@@ -228,7 +228,7 @@ describe('Get & Post Handlers', () => {
     it('sends a confirmation event when the user confirms their eligibility', async () => {
       const confirmQuestion = ALL_QUESTIONS.find(q => q.url === 'confirmation')
       console.log('confirmQuestion: ', confirmQuestion.title)
-      delete confirmQuestion.maybeEligible
+      confirmQuestion.maybeEligible = false
       await getHandler(confirmQuestion)(mockRequest, mockH)
       expect(mockSendGAEvent).toHaveBeenCalledWith(mockRequest, {
         name: "confirmation",
