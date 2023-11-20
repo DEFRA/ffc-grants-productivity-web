@@ -22,6 +22,7 @@ const varListTemplate = {
   projectItemsList: [
     {
       realItem: 'hello',
+      item: 'hello',
       type: 'Automatic',
       description: {
           itemName: '',
@@ -32,6 +33,7 @@ const varListTemplate = {
   },
   {
       realItem: 'hello',
+      item: 'hello',
       type: 'Automatic',
       description: {
           itemName: '',
