@@ -1863,7 +1863,12 @@ const questionBank = {
             }
           },
           nextUrl: 'potential-amount',
-          // preValidationKeys: [],
+          preValidationObject: {
+            preValidationKeys: ['applicant', 'projectSubject'],
+            preValidationAnswer: ['applicant-A1', 'applicant-A2', 'project-subject-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['applicant', 'projectSubject' ]
+          },
           classes: 'govuk-input--width-10',
           id: 'projectCost',
           name: 'projectCost',
@@ -1942,7 +1947,7 @@ const questionBank = {
           baseUrl: 'potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
-          // preValidationKeys: ['projectCost'],
+          preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -1962,7 +1967,7 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'potential-amount',
           nextUrl: 'project-impact',
-          // preValidationKeys: ['projectCost'],
+          preValidationKeys: ['projectCost'],
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
@@ -2031,7 +2036,7 @@ const questionBank = {
           url: 'project-impact',
           baseUrl: 'project-impact',
           backUrl: 'remaining-costs',
-          // preValidationKeys: ['canPayRemainingCost'],
+          preValidationKeys: ['canPayRemainingCost'],
           ga: [
             { dimension: 'cm2', value: { type: 'journey-time' } }
           ],
