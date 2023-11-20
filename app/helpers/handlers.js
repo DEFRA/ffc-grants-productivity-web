@@ -412,6 +412,8 @@ const getPage = async (question, request, h) => {
       }
       return h.view('project-items-summary', projectItemsModel)
     }
+    case 'energy-source':
+      question.backUrl = true
     default:
       break
   }
