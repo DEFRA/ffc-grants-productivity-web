@@ -17,7 +17,7 @@ const varListTemplate = {
   existingSolar: 'Yes',
   farmersDetails: 'voila',
   consentMain: 'lalal',
-  technologyItems: 'Solar panels',
+  technologyItems: 'Solar PV panels',
   projectItems: 'Advanced ventilation control units',
   projectItemsList: [
     {
