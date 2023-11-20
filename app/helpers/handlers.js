@@ -518,21 +518,7 @@ const showPostPage = async (currentQuestion, request, h) => {
     setYarValue(request, 'remainingCost', remainingCost)
     setYarValue(request, 'projectCost', projectCost)
   }
-  if (yarKey === 'remainingCosts' && payload[Object.keys(payload)[0]] === getQuestionAnswer('remaining-costs', 'remaining-costs-A1')) {
-    // send solar eligibilty event
-    const metrics = {
-      name: gapiService.eventTypes.ELIGIBILITY,
-      params: {
-        action: 'Solar eligibility goal completion',
-        label: 'Remaining costs completed'
-      }
-    }
-    try {
-      await gapiService.sendGAEvent(request, metrics)
-    } catch (err) {
-      console.error('ERROR: ', err)
-    }
-  }
+
   
   let isSolar = getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A2')
   let isContractor = getYarValue(request, 'applicant') === getQuestionAnswer('applicant','applicant-A2')
@@ -668,6 +654,39 @@ const showPostPage = async (currentQuestion, request, h) => {
       break
     default:
       break
+  }
+
+  // GA events
+  if (baseUrl === 'remaining-costs-solar' && payload[Object.keys(payload)[0]] === getQuestionAnswer('remaining-costs', 'remaining-costs-A1')) {
+    // send solar eligibilty event
+    const metrics = {
+      name: gapiService.eventTypes.ELIGIBILITY,
+      params: {
+        action: 'Solar eligibility goal completion',
+        label: 'Remaining costs completed'
+      }
+    }
+    try {
+      await gapiService.sendGAEvent(request, metrics)
+    } catch (err) {
+      console.error('ERROR: ', err)
+    }
+  }
+  // if applying for solar and reached agricultural-sector-solar page
+  if (isSolar && baseUrl === 'agricultural-sector-solar') {
+    // send solar eligibilty event
+    const metrics = {
+      name: gapiService.eventTypes.ELIGIBILITY,
+      params: {
+        action: 'Solar scoring goal completion',
+        label: 'Agricultural sector reached'
+      }
+    }
+    try {
+      await gapiService.sendGAEvent(request, metrics)
+    } catch (err) {
+      console.error('ERROR: ', err)
+    }
   }
   return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.secBtn))
 }
