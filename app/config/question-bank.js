@@ -1780,16 +1780,14 @@ const questionBank = {
           baseUrl: 'project-items-summary',
           backUrl: 'technology-description',
           nextUrl: 'item-conditional',
-          // preValidationKeys: ['otherItem'],
+          preValidationKeys: ['projectItems'],
           sidebar: {
             values: [{
               heading: 'Your project technology',
               content: [{
                 para: `Automatic items must fit at least 2 criteria to be eligible for funding. \n\n 
                       Robotic items must fit all 4 criteria to be eligible for funding.`
-              }],
-              
-
+              }]
             }]
           },
           ineligibleContent: {},
@@ -1809,6 +1807,7 @@ const questionBank = {
           classes: 'govuk-radios--inline govuk-fieldset__legend--l',
           url: 'remove-item',
           baseUrl: 'remove-item',
+          preValidationKeys: ['projectItemsList'],
           type: 'single-answer',
           minAnswerCount: 1,
           validate: [
