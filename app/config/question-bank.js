@@ -2048,7 +2048,7 @@ const questionBank = {
           sidebar: {
             values: [
               {
-                heading: 'Your eligible items',
+                heading: 'Your project items',
                 content: [{
                   para: '',
                   items: []
