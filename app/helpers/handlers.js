@@ -356,7 +356,9 @@ const getPage = async (question, request, h) => {
 
 const showPostPage = async (currentQuestion, request, h) => {
   const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields, replace } = currentQuestion
-
+    if (baseUrl !== 'score') {
+    setYarValue(request, 'onScorePage', false)
+  }
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   let thisAnswer
