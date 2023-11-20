@@ -7,16 +7,17 @@ const getDependentSideBar = (sidebar, request) => {
   // sidebar contains values of a previous page
 
   let sidebarEligibleItems = []
-  if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A1'))) {
+  let itemsList = getYarValue(request, 'projectItemsList')
+
+  if (getYarValue(request, 'projectItems')?.includes(getQuestionAnswer('project-items', 'project-items-A1'))) {
     sidebarEligibleItems.push(getQuestionAnswer('project-items', 'project-items-A1'))
   } 
 
-  if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A2'))) {
+  if (getYarValue(request, 'projectItems')?.includes(getQuestionAnswer('project-items', 'project-items-A2'))) {
     sidebarEligibleItems.push(getQuestionAnswer('project-items', 'project-items-A2'))
   }
 
-  if (getYarValue(request, 'projectItems').includes(getQuestionAnswer('project-items', 'project-items-A3'))) {
-    let itemsList = getYarValue(request, 'projectItemsList')
+  if (getYarValue(request, 'projectItems')?.includes(getQuestionAnswer('project-items', 'project-items-A3')) || itemsList?.length > 0) {
     for (item in itemsList) {
       if (itemsList[item].item === getQuestionAnswer('technology-items', 'technology-items-A6')) {
         sidebarEligibleItems.push('Robotic voluntary milking system')

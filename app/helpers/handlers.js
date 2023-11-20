@@ -262,6 +262,8 @@ const getPage = async (question, request, h) => {
         'technology-items-A8': 'Do your slurry robots fit the eligibility criteria?',
         'technology-items-A4': 'Does your driverless robotic tractor or platform fit the eligibility criteria?',
         'technology-items-A6': 'Does your voluntary robotic milking system fit the eligibility criteria?',
+        'technology-items-A5': 'Does your robotic spraying technology fit the eligiblity Criteria?'
+
       }
       const technologyItems = getYarValue(request, 'technologyItems')
       console.log('HERE   technologyItems: ', technologyItems)
@@ -412,6 +414,8 @@ const getPage = async (question, request, h) => {
       }
       return h.view('project-items-summary', projectItemsModel)
     }
+    case 'energy-source':
+      question.backUrl = true
     default:
       break
   }
@@ -553,7 +557,6 @@ const showPostPage = (currentQuestion, request, h) => {
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
     gapiService.sendValidationDimension(request)
-    console.log('defo in here', errors)
     
     return errors
   }
@@ -601,6 +604,11 @@ const showPostPage = (currentQuestion, request, h) => {
 
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (thisAnswer?.redirectUrl) {
+
+    // add if here to populate robotic-automatic
+    if (yarKey === 'technologyItems') {
+      setYarValue(request, 'roboticAutomatic', 'Robotic')
+    }
     return h.redirect(thisAnswer?.redirectUrl)
   }
 
@@ -617,6 +625,20 @@ const showPostPage = (currentQuestion, request, h) => {
     case 'applicant': {
       if(isContractor && isSolar ){
         return h.view('not-eligible', NOT_ELIGIBLE)
+      }
+      break
+    }
+
+    case 'tenancy': {
+      if (isContractor && getYarValue(request, 'tenancy') === 'Yes') {
+        return h.redirect(`${urlPrefix}/technology-items`)
+      }
+      break
+    }
+
+    case 'project-responsibility': {
+      if (isContractor) {
+        return h.redirect(`${urlPrefix}/technology-items`)
       }
       break
     }
@@ -645,7 +667,7 @@ const showPostPage = (currentQuestion, request, h) => {
 
     case 'project-items':
       let projectItems = getYarValue(request, 'projectItemsList')
-      if (projectItems?.length > 0 && projectItems?.includes('Robotic and automatic technology')) {
+      if (projectItems?.length > 0 && getYarValue(request, 'projectItems')?.includes('Robotic and automatic technology')) {
         setYarValue(request, 'backToItemsSummary', true)
         return h.redirect(`${urlPrefix}/project-items-summary`)
       } else {

@@ -5,9 +5,6 @@ const nextPath = `${urlPrefix}/project-subject`
 module.exports = {
   method: 'GET',
   path: currentPath,
-  options: {
-    auth: false
-  },
   handler: (request, h) => {
     return h.view('home', { button: { nextLink: nextPath, text: 'Start now' } })
   }
