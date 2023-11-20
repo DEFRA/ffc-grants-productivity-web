@@ -227,7 +227,6 @@ describe('Get & Post Handlers', () => {
     }
     it('sends a confirmation event when the user confirms their eligibility', async () => {
       const confirmQuestion = ALL_QUESTIONS.find(q => q.url === 'confirmation')
-      console.log('confirmQuestion: ', confirmQuestion.title)
       confirmQuestion.maybeEligible = false
       await getHandler(confirmQuestion)(mockRequest, mockH)
       expect(mockSendGAEvent).toHaveBeenCalledWith(mockRequest, {
@@ -236,6 +235,25 @@ describe('Get & Post Handlers', () => {
          action: "Confirmation page reached",
          final_score: "Strong",
          label: null,
+       }
+      })
+    })
+    
+    it('sends a scoring event when the user reaches the score page', async () => {
+      varList.projectSubject = 'mock-project-subject'
+      const scoreQuestion = {
+        url: 'score',
+        backUrl: 'test-back-link',
+        answers: [],
+      }
+      scoreQuestion.maybeEligible = false
+      await getHandler(scoreQuestion)(mockRequest, mockH)
+      expect(mockSendGAEvent).toHaveBeenCalledWith(mockRequest, {
+        name: "scoring",
+        params:  {
+         action: "Score results presented",
+         score: "Strong",
+         label: "mock-project-subject",
        }
       })
     })

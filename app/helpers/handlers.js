@@ -338,13 +338,14 @@ const getPage = async (question, request, h) => {
 
     return h.view('check-details', MODEL)
   }
+  console.log('here: ', url, 1);
   switch (url) {
     case 'score':
       const scoreData = getYarValue(request, 'overAllScore')
       // send score to GA
       try {
         await gapiService.sendGAEvent(request, {
-          name: gapiService.eventTypes.SCORE,
+          name: gapiService.eventTypes.SCORING,
           params: {
             score: scoreData.desirability.overallRating.band,
             action: 'Score results presented',
@@ -354,6 +355,7 @@ const getPage = async (question, request, h) => {
       } catch (err) {
         console.error('ERROR: ', err)
       }
+      break
     case 'agents-details': {
         if (getYarValue(request, 'projectSubject') === 'Solar project items' ) {
           question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/farmers-details`
