@@ -1123,7 +1123,7 @@ const questionBank = {
           baseUrl: 'potential-amount-solar',
           backUrl: 'project-cost-solar',
           nextUrl: 'remaining-costs-solar',
-          // preValidationKeys: ['projectCost'],
+          preValidationKeys: ['projectCost'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -1142,7 +1142,7 @@ const questionBank = {
           baseUrl: 'remaining-costs-solar',
           backUrl: 'potential-amount-solar',
           nextUrl: 'agricultural-sector-solar',
-          // preValidationKeys: ['projectCost'],
+          preValidationKeys: ['projectCost'],
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
             insertText: {
