@@ -1317,10 +1317,10 @@ const questionBank = {
           baseUrl: 'technology-items',
           backUrl: 'project-items',
           preValidationObject: {
-            preValidationKeys: ['projectItems'],
-            preValidationAnswer: ['project-items-A3'],
-            preValidationRule: 'NOTINCLUDES',
-            preValidationUrls: ['project-items']
+            preValidationKeys: ['tenancy', 'applicant'],
+            preValidationAnswer: ['tenancy-A1', 'applicant-A1', 'applicant-A2'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['tenancy', 'applicant'],
           },
           nextUrl: 'robotic-automatic',
           id: 'technologyItems',
