@@ -21,21 +21,38 @@ const varListTemplate = {
   projectItems: 'Advanced ventilation control units',
   projectItemsList: [
     {
-        item: 'hello',
-        type: 'aaaaaaaa',
-        index: 0
-    },
-    {
-        item: 'hello',
-        type: 'sdjfhaf',
-        index: 1
-    }
+      realItem: 'hello',
+      type: 'Automatic',
+      description: {
+          itemName: '',
+          brand: '',
+          model: '',
+          numberOfItems: '',
+      }
+  },
+  {
+      realItem: 'hello',
+      type: 'Automatic',
+      description: {
+          itemName: '',
+          brand: '',
+          model: '',
+          numberOfItems: '',
+      },
+      criteriaScoring: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
+  }
   ],
   confirmItem: 'Other technology',
   errorForRemove: 'the other automatic technology',
   index: 1,
   itemType: 'Automatic',
-  removeItem: 'Yes'
+  removeItem: 'Yes',
+  technologyDescription: {
+    itemName: 'erer',
+    brand: '',
+    model: '',
+    numberOfItems: '',
+},
 }
 
 // confirm item added for remove-item

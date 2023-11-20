@@ -65,6 +65,10 @@ describe('Page: /technology-description', () => {
       expect(heading.textContent.trim()).toBe('Describe the other robotics or automatic technology')
   })
   it('should display an error message if itemName is missing', async () => {
+    varList.technologyItems = 'Harvesting technology',
+
+    varList.roboticAutomatic = 'Robotic'
+
       const postOptions = {
           method: 'POST',
           url: `${global.__URLPREFIX__}/technology-description`,
@@ -87,6 +91,8 @@ describe('Page: /technology-description', () => {
       expect(errors[0].textContent.trim()).toBe('Enter the name of the item')
   })
   it('should display an error message if itemName is is shorter than 4 or longer than 18', async () => {
+    varList.roboticAutomatic = 'Automatic'
+
       const postOptions = {
           method: 'POST',
           url: `${global.__URLPREFIX__}/technology-description`,
@@ -149,27 +155,31 @@ describe('Page: /technology-description', () => {
       expect(errors[0].textContent.trim()).toBe('Brand must be 18 characters or less')
   })
 
-  it('should redirect to /other-items - normal vals', async () => {
-      varList.otherItem = 'No'
-      varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
-      const postOptions = {
-          method: 'POST',
-          url: `${global.__URLPREFIX__}/technology-description`,
-          headers: { cookie: 'crumb=' + crumbToken },
-          payload: {
-              itemName: 'some item name',
-              brand: 'some brand',
-              model: 'some model',
-              numberOfItems: '15',
-              projectItemsList: ['Harvesting technology', "Weeding technology"],
-              crumb: crumbToken
-          }
-      }
+  it('should display an error message if number of items field has value AND is longer than 100', async () => {
+    const postOptions = {
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/technology-description`,
+        payload: {
+          crumb: crumbToken,
+          itemName: '1234',
+          brand: '',
+          model: '',
+          numberOfItems: '101',
+        },
+        headers: { cookie: 'crumb=' + crumbToken }
+    }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toContain('other-item')
-  })
+    expect(postResponse.statusCode).toBe(200)
+    let page = new JSDOM(postResponse.payload).window.document
+    let errorSummary = page.querySelector('.govuk-error-summary__list')
+    let errors = errorSummary.querySelectorAll('li')
+    expect(errors.length).toBe(1)
+    expect(errors[0].textContent.trim()).toBe('Number of items must be between 1 and 100')
+
+})
+
+
   it('page loads with correct back link > automatic', async () => {
     varList.roboticEligibility = null
     varList.automaticEligibility = 'value'
@@ -197,9 +207,95 @@ describe('Page: /technology-description', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    const page = new JSDOM(response.payload).window.document
-    const backLink = page.querySelector('.govuk-back-link')
-    expect(backLink.getAttribute('href')).toBe('robotic-eligibility')
-    expect(backLink.textContent).toBe('Back')
+    expect(response.payload).toContain('Describe the robotic technology')
+})
+
+it('should redirect to /project-items-summary - normal vals', async () => {
+    varList.otherItem = 'No'
+    varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
+    const postOptions = {
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/technology-description`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { itemName: '1234',
+            brand: '1234567',
+            model: '',
+            numberOfItems: '1', 
+            crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toContain('project-items-summary')
+})
+
+it('should redirect to /project-items-summary - null values', async () => {
+    varList.otherItem = 'No'
+    varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
+    varList.roboticEligibility = 'No'
+    varList.technologyItems = 'Other robotics or automatic technology'
+    varList.automaticEligibility = null
+    varList.roboticAutomatic = null
+    varList.technologyDescription = null
+    const postOptions = {
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/technology-description`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { itemName: '1234',
+            brand: '123456',
+            model: '',
+            numberOfItems: '1', 
+            crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toContain('project-items-summary')
+})
+
+it('should redirect to /project-items-summary - addToItems false', async () => {
+    varList.addToItemList = false
+    varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
+
+    const postOptions = {
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/technology-description`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { itemName: '1234',
+            brand: '123456',
+            model: '',
+            numberOfItems: '1', 
+            crumb: crumbToken }
+    }
+
+    const postResponse = await global.__SERVER__.inject(postOptions)
+    expect(postResponse.statusCode).toBe(302)
+    expect(postResponse.headers.location).toContain('project-items-summary')
+})
+it('page loads with correct back link > automatic', async () => {
+  varList.roboticEligibility = null
+  varList.automaticEligibility = 'value'
+  varList.roboticAutomatic = 'Automatic'  
+  const options = {
+        method: 'GET',
+        url: `${global.__URLPREFIX__}/technology-description`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"automatic-eligibility\" class=\"govuk-back-link\">Back</a>' )
+    })
+
+
+it('page loads with correct back link > robotic', async () => {
+  varList.roboticEligibility = 'value'
+  varList.automaticEligibility = null
+  varList.roboticAutomatic = 'Robotic'
+  const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/technology-description`
+  }
+  const response = await global.__SERVER__.inject(options)
+  expect(response.statusCode).toBe(200)
+  expect(response.payload).toContain('<a href=\"robotic-eligibility\" class=\"govuk-back-link\">Back</a>' )
   })
 })

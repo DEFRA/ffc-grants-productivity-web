@@ -1,5 +1,5 @@
 const urlPrefix = require('../config/server').urlPrefix
-const { getYarValue } = require('../helpers/session')
+const { getYarValue, setYarValue } = require('../helpers/session')
 const { ALL_QUESTIONS } = require('../config/question-bank')
 
 const getUrl = (urlObject, url, request, secBtn) => {
@@ -7,7 +7,14 @@ const getUrl = (urlObject, url, request, secBtn) => {
   const chekDetailsPath = `${urlPrefix}/check-details`
   let secBtnPath = secBtn === 'Back to score' ? scorePath : chekDetailsPath
 
-  if(secBtn ==='Add another technology'){
+  if(secBtn ==='Add another technology'){    // reset if "Add another technology" selected
+    setYarValue(request, 'technologyItems', null)
+    setYarValue(request, 'roboticAutomatic', null)
+    setYarValue(request, 'roboticEligibility', null)
+    setYarValue(request, 'automaticEligibility', null)
+    setYarValue(request, 'technologyDescription', null)
+    setYarValue(request, 'addToItemList', true)
+    
     secBtnPath = `${urlPrefix}/technology-items`
   }
   
