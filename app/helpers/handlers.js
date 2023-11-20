@@ -704,6 +704,23 @@ const showPostPage = async (currentQuestion, request, h) => {
       console.error('ERROR: ', err)
     }
   }
+  // if applying for robotics and reached labour-replaced or technology-use
+  if (!isSolar && (baseUrl === 'labour-replaced' || baseUrl === 'technology-use')) {
+    const metrics = {
+      name: gapiService.eventTypes.ELIGIBILITY,
+      params: {
+        action: 'Robotics scoring goal completion',
+        label: `${baseUrl} reached`
+      }
+    }
+
+    try {
+      await gapiService.sendGAEvent(request, metrics)
+    } catch (err) {
+      console.error('ERROR: ', err)
+    }
+  }
+
     
   return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.secBtn))
 }
