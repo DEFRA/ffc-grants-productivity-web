@@ -688,6 +688,23 @@ const showPostPage = async (currentQuestion, request, h) => {
       console.error('ERROR: ', err)
     }
   }
+  // if applying for robotics and reached project-impact and answered with yes
+  if (!isSolar && baseUrl === 'project-impact' && payload[Object.keys(payload)[0]] === getQuestionAnswer('project-impact', 'project-impact-A1')) {
+    // send robotics eligibilty event
+    const metrics = {
+      name: gapiService.eventTypes.ELIGIBILITY,
+      params: {
+        action: 'Robotics eligibility goal completion',
+        label: 'Project impact reached'
+      }
+    }
+    try {
+      await gapiService.sendGAEvent(request, metrics)
+    } catch (err) {
+      console.error('ERROR: ', err)
+    }
+  }
+    
   return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.secBtn))
 }
 
