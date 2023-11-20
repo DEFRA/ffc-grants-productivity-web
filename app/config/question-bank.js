@@ -13,7 +13,8 @@ const {
   NAME_ONLY_REGEX,
   PHONE_REGEX,
   EMAIL_REGEX,
-  ADDRESS_REGEX,
+  ADDRESS_REGEX
+
 } = require('../helpers/regex')
 
 const urlPrefix = require('../config/server').urlPrefix
@@ -1683,7 +1684,7 @@ const questionBank = {
           order: 305,
           title: 'Describe the {{_technologyItems_}}',
           pageTitle: '',
-          nextUrl: 'other-item',
+          nextUrl: 'project-items-summary',
           url: 'technology-description',
           baseUrl: 'technology-description',
           backUrlObject: {
@@ -1800,8 +1801,7 @@ const questionBank = {
                   error: 'Number of items must be a number, like 18'
                 },
                 {
-                  type: 'MIN_MAX',
-                  min: 1,
+                  type: 'MAX_ONLY',
                   max: 100,
                   error: 'Number of items must be between 1 and 100'
                 }
@@ -1811,76 +1811,17 @@ const questionBank = {
           yarKey: 'technologyDescription'
         },
         {
-          key: 'other-conditional',
-          title: 'Your other robotic technology might get a grant from this scheme',
-          order: 307,
-          url: 'other-conditional',
-          backUrlObject: {
-            dependentQuestionYarKey: ['roboticAutomatic'],
-            dependentAnswerKeysArray: ['robotic-automatic-A1'],
-            urlOptions: {
-              thenUrl: 'other-robotic-technology',
-              elseUrl: 'other-automatic-technology'
-            }
-          },
-          nextUrl: 'other-item',
-          // preValidationKeys: ['roboticAutomatic'],
-          maybeEligible: true,
-          maybeEligibleContent: {
-            messageHeader: 'Your other technology might get a grant from this scheme',
-            messageContent: `RPA will assess your item and whether they will fund it.<br/><br/>
-            They will let you know if the item is eligible before the application window opens and projects are invited to apply.`,
-            warning: {
-              text: 'There’s no guarantee your item will be funded.',
-              iconFallbackText: 'Warning'
-            }
-          },
-          yarKey: 'otherRoboticsConditional'
-        },
-        {
-          key: 'other-item',
-          order: 308,
-          title: 'Do you need to add another robotic or automatic item?',
-          pageTitle: '',
-          url: 'other-item',
-          baseUrl: 'other-item',
-          backUrl: 'technology-description',
-          eliminationAnswerKeys: '',
-          ineligibleContent: {},
-          fundingPriorities: '',
-          type: 'single-answer',
-          classes: ' govuk-radios--inline govuk-fieldset__legend--l',
-          minAnswerCount: 1,
-          validate: [
-            {
-              type: 'NOT_EMPTY',
-              error: 'Select yes if you need to add another robotic or automatic item'
-            }
-          ],
-          answers: [
-            {
-              key: 'other-item-A1',
-              value: 'Yes',
-              redirectUrl: 'technology-items'
-            },
-            {
-              key: 'other-item-A2',
-              value: 'No',
-            }
-          ],
-          yarKey: 'otherItem'
-        },
-        {
           key: 'project-items-summary',
           order: 310,
           title: 'Your project technology',
           hint: {
             text: 'You can add or remove items you will be using on your project'
           },
+          showButton: true,
           pageTitle: 'project-items-summary',
           url: 'project-items-summary',
           baseUrl: 'project-items-summary',
-          backUrl: 'other-item',
+          backUrl: 'technology-description',
           nextUrl: 'item-conditional',
           // preValidationKeys: ['otherItem'],
           sidebar: {
@@ -1937,7 +1878,7 @@ const questionBank = {
           order: 309,
           url: 'item-conditional',
           baseUrl: 'item-conditional',
-          backUrl: 'other-item',
+          backUrl: 'project-items-summary',
           nextUrl: 'project-cost',
           maybeEligible: true,
           maybeEligibleContent: {
