@@ -99,31 +99,70 @@ it('should display ineligible page with "Add another technology" and "Continue w
   expect(postResponse.payload).toContain('Continue with eligible technology')
 }) 
 
-it('page loads with correct back link', async () => {
-const options = {
-    method: 'GET',
-    url: `${global.__URLPREFIX__}/robotic-eligibility`
-}
-const response = await global.__SERVER__.inject(options)
-expect(response.statusCode).toBe(200)
-expect(response.payload).toContain('<a href=\"robotic-automatic\" class=\"govuk-back-link\">Back</a>')
-})
+    const title_dict = {
+      'Slurry robots': 'Do your slurry robots fit the eligibility criteria?',
+      'Driverless robotic tractor or platform': 'Does your driverless robotic tractor or platform fit the eligibility criteria?',
+      'Voluntary robotic milking system': 'Does your voluntary robotic milking system fit the eligibility criteria?',
+    }
+    Object.keys(title_dict).forEach(async (key) => {
+      it(`If user selected "${key}", title should change to "${title_dict[key]}"`, async () => {
+        varList.technologyItems = key
+        const options = {
+          method: 'GET',
+          url: `${global.__URLPREFIX__}/robotic-eligibility`
+        }
+        const response = await global.__SERVER__.inject(options)
+        expect(response.statusCode).toBe(200)
+        expect(response.payload).toContain(title_dict[key])
+      })
+    })
 
-const title_dict = {
-  'Slurry and manure management': 'Do your slurry robots fit the eligibility criteria?',
-  'Driverless tractor': 'Does your driverless robotic tractor or platform fit the eligibility criteria?',
-  'Voluntary robotic milking system': 'Does your voluntary robotic milking system fit the eligibility criteria?',
-}
-  Object.keys(title_dict).forEach(async (key) => {
-   it(`If user selected "${key}", title should change to "${title_dict[key]}"`, async () => {
-      varList.technologyItems = key
+    const testBackLink = async (option, destination) => { 
+      varList.technologyItems = option
       const options = {
         method: 'GET',
         url: `${global.__URLPREFIX__}/robotic-eligibility`
       }
+      
       const response = await global.__SERVER__.inject(options)
       expect(response.statusCode).toBe(200)
-      expect(response.payload).toContain(title_dict[key])
+      expect(response.payload).toContain(`<a href=\"${destination}\" class=\"govuk-back-link\">Back</a>`)
+    }
+    
+    it('page loads with correct back link if \"Driverless robotic tractor or platform option\" was chosen', async () => {
+      await testBackLink('Driverless robotic tractor or platform', '/productivity/technology-items')
     })
+  
+    it('page loads with correct back link if  \"Voluntary robotic milking system\" was chosen', async () => {
+      await testBackLink('Voluntary robotic milking system', '/productivity/technology-items')
+    })
+  
+    it('page loads with correct back link if \"Slurry robots\" was chosen', async () => {
+      await testBackLink('Slurry robots', '/productivity/technology-items')
+    })
+  
+    it('page loads with correct back link if \"Robotic spraying technology\" was chosen', async () => {
+      await testBackLink('Robotic spraying technology', '/productivity/technology-items')
+    })
+  
+    it('page loads with correct back link if \"Feeding robots\" was chosen', async () => {
+      await testBackLink('Feeding robots', '/productivity/technology-items')
+    })  
+
+    it('page loads with correct back link if \"Harvesting technology\" was chosen', async () => {
+      await testBackLink('Harvesting technology', 'robotic-automatic')
+    })
+      
+    it('page loads with correct back link if \"Transplanting technology\" was chosen', async () => {
+      await testBackLink('Transplanting technology ', 'robotic-automatic')
+    })
+      
+    it('page loads with correct back link if \"Weeding technology\" was chosen', async () => {
+      await testBackLink('Weeding technology', 'robotic-automatic')
+    })
+      
+    it('page loads with correct back link if \"Other robotics or automatic technology\" was chosen', async () => {
+      await testBackLink('Other robotics or automatic technology', 'robotic-automatic')
+    }) 
   })
-})
+  
