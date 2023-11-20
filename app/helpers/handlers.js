@@ -169,6 +169,29 @@ const getPage = async (question, request, h) => {
         formatUKCurrency(getYarValue(request, additionalYarKeyName) || 0)
       ))
     }
+    if (url === 'technology-description') {
+      const techItem = getYarValue(request, 'technologyItems')
+      if (techItem === 'Other robotics or automatic technology') {
+        const descriptionTitle = title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+          getYarValue(request, additionalYarKeyName).toLowerCase()
+        )
+        question = {
+          ...question,
+          title: descriptionTitle
+        }
+      }
+      if (getYarValue(request, 'roboticAutomatic') === 'Robotic') {
+        question = {
+          ...question,
+          title: 'Describe the robotic technology'
+        }
+      } else if (getYarValue(request, 'roboticAutomatic') === 'Automatic') {
+        question = {
+          ...question,
+          title: 'Describe the automatic technology'
+        }
+      }
+    }
   }
 
   if (replace) {
@@ -425,6 +448,7 @@ const showPostPage = (currentQuestion, request, h) => {
       const payloadYarVal = payload[field.yarKey]
         ? payload[field.yarKey].replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
         : ''
+      
       dataObject = {
         ...dataObject,
         [field.yarKey]: (
