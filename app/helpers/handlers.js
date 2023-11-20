@@ -15,12 +15,12 @@ const { startPageUrl, urlPrefix } = require('../config/server')
 
 const emailFormatting = require('./../messaging/email/process-submission')
 
-const resetYarValues = (applying, request) => {
-  setYarValue(request, 'agentsDetails', null)
-  setYarValue(request, 'contractorsDetails', null)
-  setYarValue(request, 'farmerDetails', null)
-  setYarValue(request, 'reachedCheckDetails', false)
-}
+// const resetYarValues = (applying, request) => {
+//   setYarValue(request, 'agentsDetails', null)
+//   setYarValue(request, 'contractorsDetails', null)
+//   setYarValue(request, 'farmerDetails', null)
+//   setYarValue(request, 'reachedCheckDetails', false)
+// }
 
 const getConfirmationId = (guid, journey) => {
   const prefix = journey.toLowerCase() === 'solar project items' ? 'S' : 'R'

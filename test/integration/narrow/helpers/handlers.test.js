@@ -1,5 +1,6 @@
 // const data = require('../../../../app/helpers/desirability-score.json')
 // const scoreData = require('../../../data/score-data')
+const { ALL_QUESTIONS } = require('../../../../app/config/question-bank')
 const varList = {
   planningPermission: 'some fake value',
   gridReference: 'grid-ref-num',
@@ -15,13 +16,19 @@ jest.mock('../../../../app/helpers/session', () => ({
   }
 }))
 
-
 jest.mock('../../../../app/helpers/page-guard', () => ({
   guardPage: (a, b, c) => false
 }))
 
 jest.mock('../../../../app/helpers/urls', () => ({
   getUrl: (a, b, c, d) => 'mock-url'
+}))
+const mockSendGAEvent = jest.fn().mockImplementation((request, metrics) => {
+  console.log('mockSendGAEvent called')
+})
+jest.mock('../../../../app/services/gapi-service', () => ({
+  ...jest.requireActual('../../../../app/services/gapi-service'),
+  sendGAEvent: mockSendGAEvent,
 }))
 
 describe('Get & Post Handlers', () => {
@@ -203,5 +210,35 @@ describe('Get & Post Handlers', () => {
       expect(mockSet).toHaveBeenCalledWith(mockRequest, 'consentOptional', '')
     })
   })
+
+  describe('GA events', () => { 
+    varList.overAllScore = {
+      desirability: {
+        overallRating: {
+          band: 'Strong'
+        },
+      }
+    }
+    mockH = {
+      view: jest.fn(),
+      redirect: jest.fn()
+    }
+    mockRequest = {
+    }
+    it('sends a confirmation event when the user confirms their eligibility', async () => {
+      const confirmQuestion = ALL_QUESTIONS.find(q => q.url === 'confirmation')
+      console.log('confirmQuestion: ', confirmQuestion.title)
+      delete confirmQuestion.maybeEligible
+      await getHandler(confirmQuestion)(mockRequest, mockH)
+      expect(mockSendGAEvent).toHaveBeenCalledWith(mockRequest, {
+        name: "confirmation",
+        params:  {
+         action: "Confirmation page reached",
+         final_score: "Strong",
+         label: null,
+       }
+      })
+    })
+   })
 })
 
