@@ -623,6 +623,20 @@ const showPostPage = (currentQuestion, request, h) => {
       break
     }
 
+    case 'tenancy': {
+      if (isContractor && getYarValue(request, 'tenancy') === 'Yes') {
+        return h.redirect(`${urlPrefix}/technology-items`)
+      }
+      break
+    }
+
+    case 'project-responsibility': {
+      if (isContractor) {
+        return h.redirect(`${urlPrefix}/technology-items`)
+      }
+      break
+    }
+
     case 'project-subject':
       setYarValue(request, 'addToItemList', false)
       break
