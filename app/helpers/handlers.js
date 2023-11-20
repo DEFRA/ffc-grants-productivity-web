@@ -372,7 +372,12 @@ const getPage = async (question, request, h) => {
         setYarValue(request, 'roboticAutomatic', projectItemsList.at(-1).type)
         setYarValue(request, 'roboticEligibility', projectItemsList.at(-1).type === 'Robotic' ? 'Yes' : null)
         setYarValue(request, 'automaticEligibility', projectItemsList.at(-1).type === 'Automatic' ? projectItemsList.at(-1).criteriaScoring : null)
-        setYarValue(request, 'technologyDescription', { description: projectItemsList.at(-1).description })
+        setYarValue(request, 'technologyDescription', { 
+          itemName: projectItemsList.at(-1).description.itemName,
+          brand: projectItemsList.at(-1).description.brand,
+          model: projectItemsList.at(-1).description.model,
+          numberOfItems: projectItemsList.at(-1).description.numberOfItems,
+         })
       }
 
       setYarValue(request, 'removeItem', null)
@@ -525,6 +530,8 @@ const showPostPage = (currentQuestion, request, h) => {
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
     gapiService.sendValidationDimension(request)
+    console.log('defo in here', errors)
+    
     return errors
   }
 
@@ -690,7 +697,7 @@ const showPostPage = (currentQuestion, request, h) => {
         type: getYarValue(request, 'roboticAutomatic') ? getYarValue(request, 'roboticAutomatic') : null,
         criteria: getYarValue(request, 'automaticEligibility') ? automaticFinalArr : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArr : null,
         criteriaScoring: getYarValue(request, 'automaticEligibility') ? getYarValue(request, 'automaticEligibility') : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArrScore : null,
-        description: getYarValue(request, 'technologyDescription') ?  getYarValue(request, 'technologyDescription').description  : null,
+        description: getYarValue(request, 'technologyDescription') ?  getYarValue(request, 'technologyDescription') : null,
         realItem: getYarValue(request, 'technologyItems')
       }
 

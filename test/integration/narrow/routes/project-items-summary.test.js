@@ -6,7 +6,10 @@ technologyItems: 'Harvesting technology',
 roboticAutomatic: 'Robotic',
 roboticEligibility: 'Yes',
 technologyDescription: {
-    description: 'some fake description some fake description'
+    itemName: '',
+    brand: '',
+    model: '',
+    numberOfItems: '',
 },
 projectItemsList: projectItemsSummaryData
 
@@ -47,12 +50,22 @@ it('should load page successfully - 2 items, normal access', async () => {
     varList.projectItemsList = [{
         realItem: 'hello',
         type: 'Automatic',
-        description: 'whyyyyyyyyyyy'
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        }
     },
     {
         realItem: 'hello',
         type: 'Automatic',
-        description: 'whyyyyyyyyyyy',
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        },
         criteriaScoring: ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
     }
     ]
@@ -71,27 +84,52 @@ it('should load page successfully - 5 items, backToSummary', async () => {
     varList.projectItemsList = [{
         realItem: 'hello',
         type: 'Robotic',
-        description: 'whyyyyyyyyyyy'
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        },
     },
     {
         realItem: 'hello',
         type: 'Robotic',
-        description: 'whyyyyyyyyyyy'
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        },
     },
     {
         realItem: 'hello',
         type: 'Robotic',
-        description: 'whyyyyyyyyyyy'
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        },
     },
     {
         realItem: 'hello',
         type: 'Robotic',
-        description: 'whyyyyyyyyyyy'
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        },
     },
     {
         realItem: 'hello',
         type: 'Robotic',
-        description: 'whyyyyyyyyyyy'
+        description: {
+            itemName: '',
+            brand: '',
+            model: '',
+            numberOfItems: '',
+        },
     }]
     const options = {
         method: 'GET',

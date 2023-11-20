@@ -51,6 +51,11 @@ const validateAnswerField = (value, validationType, details, payload) => {
       return (value >= min && value <= max)
     }
 
+    case 'MAX_ONLY': {
+      const { max } = details
+      return (value <= max)
+    }
+
     case 'MAX_SELECT': {
       const { max } = details
       return ([value].flat().length <= max)
@@ -71,6 +76,30 @@ const checkInputError = (validate, isconditionalAnswer, payload, yarKey) => {
 const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
   const { yarKey, type, conditionalKey, conditionalLabelData } = currentQuestion
   let conditionalHtml
+
+  if (yarKey === 'technologyDescription') {
+    const techItem = getYarValue(request, 'technologyItems')
+    if (techItem === 'Other robotics or automatic technology') {
+      const descriptionTitle = title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+        getYarValue(request, additionalYarKeyName).toLowerCase()
+      )
+      currentQuestion = {
+        ...currentQuestion,
+        title: descriptionTitle
+      }
+    }
+    if (getYarValue(request, 'roboticAutomatic') === 'Robotic') {
+      currentQuestion = {
+        ...currentQuestion,
+        title: 'Describe the robotic technology'
+      }
+    } else if (getYarValue(request, 'roboticAutomatic') === 'Automatic') {
+      currentQuestion = {
+        ...currentQuestion,
+        title: 'Describe the automatic technology'
+      }
+    }
+  }
 
   if (conditionalKey) {
     const conditionalFieldError = errorList.find(thisErrorHref => thisErrorHref.href.includes(conditionalKey))?.text

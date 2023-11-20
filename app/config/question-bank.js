@@ -13,7 +13,8 @@ const {
   NAME_ONLY_REGEX,
   PHONE_REGEX,
   EMAIL_REGEX,
-  ADDRESS_REGEX,
+  ADDRESS_REGEX
+
 } = require('../helpers/regex')
 
 const urlPrefix = require('../config/server').urlPrefix
@@ -1835,8 +1836,7 @@ const questionBank = {
                   error: 'Number of items must be a number, like 18'
                 },
                 {
-                  type: 'MIN_MAX',
-                  min: 1,
+                  type: 'MAX_ONLY',
                   max: 100,
                   error: 'Number of items must be between 1 and 100'
                 }

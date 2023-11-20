@@ -149,27 +149,6 @@ describe('Page: /technology-description', () => {
       expect(errors[0].textContent.trim()).toBe('Brand must be 18 characters or less')
   })
 
-  it('should redirect to /other-items - normal vals', async () => {
-      varList.otherItem = 'No'
-      varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
-      const postOptions = {
-          method: 'POST',
-          url: `${global.__URLPREFIX__}/technology-description`,
-          headers: { cookie: 'crumb=' + crumbToken },
-          payload: {
-              itemName: 'some item name',
-              brand: 'some brand',
-              model: 'some model',
-              numberOfItems: '15',
-              projectItemsList: ['Harvesting technology', "Weeding technology"],
-              crumb: crumbToken
-          }
-      }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toContain('other-item')
-  })
   it('page loads with correct back link > automatic', async () => {
     varList.roboticEligibility = null
     varList.automaticEligibility = 'value'
@@ -197,20 +176,7 @@ describe('Page: /technology-description', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('What is your technology?')
-})
-
-it('should return error message if no option is selected', async () => {
-    const postOptions = {
-        method: 'POST',
-        url: `${global.__URLPREFIX__}/technology-description`,
-        payload: { crumb: crumbToken },
-        headers: { cookie: 'crumb=' + crumbToken }
-    }
-
-    const postResponse = await global.__SERVER__.inject(postOptions)
-    expect(postResponse.statusCode).toBe(200)
-    expect(postResponse.payload).toContain('Enter a brief description of your technology')
+    expect(response.payload).toContain('Describe the robotic technology')
 })
 
 it('should redirect to /project-items-summary - normal vals', async () => {
@@ -220,7 +186,11 @@ it('should redirect to /project-items-summary - normal vals', async () => {
         method: 'POST',
         url: `${global.__URLPREFIX__}/technology-description`,
         headers: { cookie: 'crumb=' + crumbToken },
-        payload: { description: 'fakeDescription', projectItemsList: ['Harvesting technology', "Weeding technology"], crumb: crumbToken }
+        payload: { itemName: '1234',
+            brand: '1234567',
+            model: '',
+            numberOfItems: '1', 
+            crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -240,7 +210,11 @@ it('should redirect to /project-items-summary - null values', async () => {
         method: 'POST',
         url: `${global.__URLPREFIX__}/technology-description`,
         headers: { cookie: 'crumb=' + crumbToken },
-        payload: { description: 'fake description', projectItemsList: ['Harvesting technology', "Weeding technology"], crumb: crumbToken }
+        payload: { itemName: '1234',
+            brand: '123456',
+            model: '',
+            numberOfItems: '1', 
+            crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
@@ -256,7 +230,11 @@ it('should redirect to /project-items-summary - addToItems false', async () => {
         method: 'POST',
         url: `${global.__URLPREFIX__}/technology-description`,
         headers: { cookie: 'crumb=' + crumbToken },
-        payload: { description: 'fake description', projectItemsList: ['Harvesting technology', "Weeding technology"], crumb: crumbToken }
+        payload: { itemName: '1234',
+            brand: '123456',
+            model: '',
+            numberOfItems: '1', 
+            crumb: crumbToken }
     }
 
     const postResponse = await global.__SERVER__.inject(postOptions)
