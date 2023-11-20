@@ -1944,10 +1944,10 @@ const questionBank = {
           url: 'project-cost',
           baseUrl: 'project-cost',
           backUrlObject: {
-            dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['project-items-A3'],
+            dependentQuestionYarKey: ['projectItems', 'applicant'],
+            dependentAnswerKeysArray: ['project-items-A3', 'applicant-A2'],
             urlOptions: {
-              thenUrl: 'item-conditional',
+              thenUrl: ['item-conditional', 'item-conditional'],
               elseUrl: 'project-items'
             }
           },
@@ -1989,7 +1989,7 @@ const questionBank = {
           sidebar: {
             values: [
               {
-                heading: 'Your eligible items',
+                heading: 'Your project items',
                 content: [{
                   para: '',
                   items: []
@@ -2244,10 +2244,10 @@ const questionBank = {
           baseUrl: 'energy-source',
           // preValidationKeys: ['projectItems'],
           backUrlObject: {
-            dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['project-items-A3'],
+            dependentQuestionYarKey: ['projectItems', 'applicant'],
+            dependentAnswerKeysArray: ['project-items-A3', 'applicant-A2'],
             urlOptions: {
-              thenUrl: 'data-analytics',
+              thenUrl: ['data-analytics', 'data-analytics'],
               elseUrl: 'project-impact'
             }
           },
@@ -2418,10 +2418,10 @@ const questionBank = {
           baseUrl: 'technology-use',
           backUrl: 'agricultural-sector',
           dependantNextUrl: {
-            dependentQuestionYarKey: 'projectItems',
-            dependentAnswerKeysArray: ['project-items-A3'],
+            dependentQuestionYarKey: ['projectItems', 'applicant'],
+            dependentAnswerKeysArray: ['project-items-A3', 'applicant-A2'],
             urlOptions: {
-              thenUrl: 'labour-replaced',
+              thenUrl: ['labour-replaced', 'labour-replaced'],
               elseUrl: 'score'
             }
           },

@@ -17,7 +17,8 @@ const currentPath = `${urlPrefix}/${viewTemplate}`
 const nextPath = `${urlPrefix}/business-details`
 
 function createModel (data, request) {
-  const previousPathRobotics = getYarValue(request, 'projectItems')?.includes(getQuestionAnswer('project-items', 'project-items-A3')) ? 'labour-replaced' : 'technology-use'
+  const projectItemsList = getYarValue(request, 'projectItemsList')
+  const previousPathRobotics = (getYarValue(request, 'projectItems')?.includes(getQuestionAnswer('project-items', 'project-items-A3')) || projectItemsList?.length > 0) ? 'labour-replaced' : 'technology-use'
   const previousPath = `${urlPrefix}/${getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A1') ? previousPathRobotics : 'agricultural-sector-solar'}`
 
   return {

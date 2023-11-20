@@ -82,7 +82,12 @@
         "Can control its actuators (the devices that move robotic joints)", 
         "Works in a continuous loop"
       ],
-      "description": " I am a tester woohoo"
+      "description": {
+        "itemName": "hello",
+        "brand": "values",
+        "model": "values",
+        "numberOfItems": 26
+    }
     },
     {
       "index": 1,
@@ -96,7 +101,12 @@
         "Has sensing system that can understand its environment", 
         "Makes decisions and plans"
       ],
-      "description": " I am a tester woohoo"
+      "description": {
+        "itemName": "hello",
+        "brand": null,
+        "model": null,
+        "numberOfItems": null
+      }
     }
   ],
   "projectImpact": "Yes",
