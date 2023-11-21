@@ -2103,7 +2103,12 @@ const questionBank = {
           baseUrl: 'data-analytics',
           backUrl: 'project-impact',
           nextUrl: 'energy-source',
-          // preValidationKeys: ['projectImpact'],
+          preValidationObject: {
+            preValidationKeys: ['projectImpact'],
+            preValidationAnswer: ['project-impact-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['project-impact']
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Improve productivity</li><li>Introduce innovation</li></ul>',
@@ -2158,7 +2163,12 @@ const questionBank = {
           pageTitle: '',
           url: 'energy-source',
           baseUrl: 'energy-source',
-          // preValidationKeys: ['projectItems'],
+          preValidationObject: {
+            preValidationKeys: ['dataAnalytics'],
+            preValidationAnswer: ['data-analytics-A1', 'data-analytics-A2', 'data-analytics-A3'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['data-analytics']
+          },
           backUrlObject: {
             dependentQuestionYarKey: ['projectItems', 'applicant'],
             dependentAnswerKeysArray: ['project-items-A3', 'applicant-A2'],
