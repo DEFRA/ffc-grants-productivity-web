@@ -13,12 +13,19 @@ const varListTemplate = {
   businessLocation: 'Yes',
   country: 'Yes',
   tenancy: 'No',
+  projectStart: 'Random data',
   projectResponsibility: 'Yes, I plan to take full responsibility for my project',
   existingSolar: 'Yes',
   farmersDetails: 'voila',
   consentMain: 'lalal',
   technologyItems: 'Solar PV panels',
   projectItems: 'Advanced ventilation control units',
+  energySource: 'Fossil fuels',
+  dataAnalytics: 'Yes, we have the technology already',
+  solarTechnologies: 'Solar PV panels',
+  solarInstallation: 'randomData',
+  legalStatus: 'Trust',
+  projectImpact: 'Yes',
   projectItemsList: [
     {
       realItem: 'hello',
@@ -92,7 +99,22 @@ describe('All default GET routes', () => {
         varList.projectSubject = 'Solar project items'
       } else if (question.key === 'robotics-project-items') {
         varList.projectSubject = 'Farm productivity project items'
-    
+      }else if(question.key === 'agents-details'){
+        varList.applicant = 'Farmer'
+        varList.applying = 'Agent'
+      }else if(question.key === 'robotic-automatic'){
+        varList.technologyItems = 'Harvesting technology'
+      }else if(question.key === 'farmer-details'){
+        varList.applicant = 'Farmer'
+      }else if(question.key === 'robotic-eligibility'){
+        varList. roboticAutomatic = 'Robotic'
+      }else if(question.key === 'automatic-eligibility'){
+        varList.projectItems = 'Robotic and automatic technology'
+        varList.roboticAutomatic = 'Automatic'
+        varList.technologyItems = 'Harvesting technology'
+      }else if(question.key === 'project-cost-solar'){
+        varList.solarTechnologies = 'Solar PV panels'
+        varList.solarOutput = 'Up to 50kW'
       }
 
       const options = {
