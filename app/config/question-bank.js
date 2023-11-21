@@ -2489,7 +2489,7 @@ const questionBank = {
           baseUrl: 'business-details',
           backUrl: 'score',
           nextUrl: 'applying',
-          // preValidationKeys: ['current-score'],
+          preValidationKeys: ['current-score'],
           ga: [
             { dimension: 'cd2', value: { type: 'score' } },
             { dimension: 'cm1', value: { type: 'journey-time' } }
@@ -2640,7 +2640,7 @@ const questionBank = {
               elseUrl: 'farmers-details'
             }
           },
-          // preValidationKeys: ['businessDetails'],
+          preValidationKeys: ['businessDetails'],
           eliminationAnswerKeys: '',
           fundingPriorities: '',
           type: 'single-answer',
@@ -2673,15 +2673,20 @@ const questionBank = {
           url: 'farmers-details',
           baseUrl: 'farmer-details',
           nextUrl: 'check-details',
-          // preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           backUrlObject: {
-            dependentQuestionYarKey: 'applying',
+            dependentQuestionYarKey: ['applying'],
             dependentAnswerKeysArray: ['applying-A2'],
             urlOptions: {
               thenUrl: 'agents-details',
               elseUrl: 'applying'
             }
+          },
+          preValidationObject: {
+            preValidationKeys: ['applicant'],
+            preValidationAnswer: ['applicant-A2'],
+            preValidationRule: 'NOT',
+            preValidationUrls: ['applicant'],
           },
           fundingPriorities: '',
           type: 'multi-input',
@@ -2949,7 +2954,6 @@ const questionBank = {
           url: 'contractors-details',
           baseUrl: 'contractors-details',
           nextUrl: 'check-details',
-          // preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           backUrlObject: {
             dependentQuestionYarKey: 'applying',
@@ -2958,6 +2962,12 @@ const questionBank = {
               thenUrl: 'applying',
               elseUrl: 'agents-details'
             }
+          },
+          preValidationObject: {
+            preValidationKeys: ['applicant', 'projectSubject'],
+            preValidationAnswer: ['applicant-A1', 'project-subject-A2'],
+            preValidationRule: 'NOT',
+            preValidationUrls: ['applicant', 'project-subject'],
           },
           fundingPriorities: '',
           type: 'multi-input',
@@ -3210,7 +3220,12 @@ const questionBank = {
               elseUrl: 'contractors-details'
             }
           },
-          // preValidationKeys: ['applying'],
+          preValidationObject: {
+            preValidationKeys: ['applying'],
+            preValidationAnswer: ['applying-A2'],
+            preValidationRule: 'AND',
+            preValidationUrls: ['applying']
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -3465,7 +3480,6 @@ const questionBank = {
             }
           ],
           yarKey: 'agentsDetails'
-
         },
         {
           key: 'check-details',
@@ -3482,7 +3496,7 @@ const questionBank = {
             }
           },
           nextUrl: 'confirm',
-          // preValidationKeys: ['applying'],
+          preValidationKeys: ['applying'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           pageData: {
