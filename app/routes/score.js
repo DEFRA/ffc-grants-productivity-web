@@ -116,7 +116,7 @@ module.exports = [{
         }
         setYarValue(request, 'current-score', msgData.desirability.overallRating.band)
         await gapiService.sendGAEvent(request, {
-          name: gapiService.eventTypes.SCORE,
+          name: gapiService.eventTypes.SCORING,
           params: {
             score: msgData.desirability.overallRating.band
           }
