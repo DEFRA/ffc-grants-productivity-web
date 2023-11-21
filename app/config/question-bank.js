@@ -106,6 +106,7 @@ const questionBank = {
             html: `
               If you want to apply for both a farm productivity project and a solar project, you must submit 2 separate applications. 
               <br/>
+              <br/>
               The maximum grant amount for both projects together is £500,000.
               <br/>
               <br/>
