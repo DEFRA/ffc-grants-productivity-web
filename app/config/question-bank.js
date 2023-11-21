@@ -2245,12 +2245,12 @@ const questionBank = {
           baseUrl: 'fossil-fuel-conditional',
           backUrl: 'energy-source',
           nextUrl: 'agricultural-sector',
-          // preValidationObject: {
-          //   preValidationKeys: ['energySource'],
-          //   preValidationAnswer: ['energy-source-A4'],
-          //   preValidationRule: 'AND',
-          //   preValidationUrls: ['energy-source']
-          // },
+          preValidationObject: {
+            preValidationKeys: ['energySource'],
+            preValidationAnswer: ['energy-source-A4'],
+            preValidationRule: 'NOTINCLUDES',
+            preValidationUrls: ['energy-source']
+          },
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Your fossil fuel technology might be eligible',
@@ -2279,7 +2279,7 @@ const questionBank = {
             }
           },
           nextUrl: 'technology-use',
-          // preValidationKeys: ['energySource'],
+          preValidationKeys: ['energySource'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',
@@ -2351,7 +2351,7 @@ const questionBank = {
               elseUrl: 'score'
             }
           },
-          // preValidationKeys: ['agriculturalSector'],
+          preValidationKeys: ['agriculturalSector'],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Introduce innovation</li></ul>',
@@ -2402,6 +2402,7 @@ const questionBank = {
           hint: {
             text: 'One job is equal to 30 hours or more per week'
           },
+          preValidationKeys: ['technologyUse'],
           url: 'labour-replaced',
           baseUrl: 'labour-replaced',
           backUrl: 'technology-use',

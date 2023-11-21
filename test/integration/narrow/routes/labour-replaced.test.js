@@ -2,7 +2,8 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /labour-replaced', () => {
     const varList = {
-        labourReplaced: ''
+        labourReplaced: '',
+        technologyUse: 'Yes, we’re using it now',
     }
 
     jest.mock('../../../../app/helpers/session', () => ({
@@ -31,15 +32,15 @@ it('page loads successfully, with all options', async () => {
 
 test('should show error message if no option selected', async () => {
     const options = {
-      method: 'POST',
-      url: `${global.__URLPREFIX__}/labour-replaced`,
-      headers: { cookie: 'crumb=' + crumbToken },
-      payload: { crumb: crumbToken }
+        method: 'POST',
+        url: `${global.__URLPREFIX__}/labour-replaced`,
+        headers: { cookie: 'crumb=' + crumbToken },
+        payload: { crumb: crumbToken }
     }
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Select how much manual labour the technology will replace')
-  })
+const response = await global.__SERVER__.inject(options)
+expect(response.statusCode).toBe(200)
+expect(response.payload).toContain('Select how much manual labour the technology will replace')
+})
 
 
 it('should redirect to /score-summary when an option is selected', async () => {
