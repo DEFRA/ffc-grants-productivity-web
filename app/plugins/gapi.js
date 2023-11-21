@@ -10,6 +10,7 @@ exports.plugin = {
      * @param options the hapi-gapi configuration settings
      */
   register: async (server, options) => {
+    console.log('[THIS IS GA OPTIONS: ', options)
     const analytics = new Analytics(options)
     server.decorate('request', 'ga', request => analytics.ga(request), { apply: true })
 

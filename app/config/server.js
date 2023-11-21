@@ -13,8 +13,13 @@ const schema = Joi.object({
   serviceEndTime: Joi.string().default(serviceEndTime),
   surveyLink: Joi.string().default('https://defragroup.eu.qualtrics.com/jfe/preview/SV_9ugumqZO9w4M20e?Q_CHL=preview&Q_SurveyVersionID=current'),
   cookiePassword: Joi.string().default('dummycookiepassworddummycookiepassword'),
+  analyticsTagKey: Joi.string().default('GT-MJPRKW7'),
   googleTagManagerKey: Joi.string().default('GTM-WJ5C78H'),
   googleTagManagerServerKey: Joi.string().default('UA-179628664-4'),
+
+  analyticsPropertyApi: Joi.string().default('NVW29SmFTueM1qVawk2H2Q'),
+  analyticsPropertyId: Joi.string().default('G-1NQ7QYDS14'),
+
   protectiveMonitoringUrl: Joi.string().allow(''),
   startPageUrl: Joi.string().default(`${urlPrefix}${startPageUrl}`),
   cookieOptions: Joi.object({
@@ -36,8 +41,13 @@ const config = {
   urlPrefix: process.env.URL_PREFIX,
   surveyLink: process.env.SURVEY_LINK,
   cookiePassword: process.env.COOKIE_PASSWORD,
+
   googleTagManagerKey: process.env.GOOGLE_TAG_MANAGER_KEY,
   googleTagManagerServerKey: process.env.GOOGLE_TAG_MANAGER_SERVER_KEY,
+  analyticsPropertyApi: process.env.ANALYTICS_PROPERTY_API,
+  analyticsTagKey: process.env.ANALYTICS_TAG_KEY,
+  analyticsPropertyId: process.env.ANALYTICS_PROPERTY_ID,
+
   protectiveMonitoringUrl: process.env.PROTECTIVE_MONITORING_URL,
   startPageUrl: process.env.START_PAGE_URL,
   serviceEndDate: process.env.SERVICE_END_DATE,

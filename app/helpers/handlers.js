@@ -338,7 +338,6 @@ const getPage = async (question, request, h) => {
 
     return h.view('check-details', MODEL)
   }
-  console.log('here: ', url, 1);
   switch (url) {
     case 'score':
       const scoreData = getYarValue(request, 'overAllScore')
