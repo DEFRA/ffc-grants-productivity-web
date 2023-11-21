@@ -171,6 +171,7 @@ describe('Page Guard', () => {
     expect(getResponse.payload).toContain('Is the planned project in England?')
   })
 
+
   it('should redirect to start page if the user skip journey question - old way', async () => {
     varList.projectSubject = null
     server = await createServer()
@@ -195,6 +196,20 @@ describe('Page Guard', () => {
     const response = await server.inject(getOptions)
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('Who are you?')
+  })
+
+  it('NOT - should load start page in preValidationKeys is not answered', async () => {
+
+    varList.applicant = null
+
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/farmers-details`
+    }
+
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toBe(302)
+    expect(getResponse.headers.location).toBe(process.env.START_PAGE_URL)
   })
 
   it('SPECIFICANDANY - should load start page if first parameter is not entered', async () => {
