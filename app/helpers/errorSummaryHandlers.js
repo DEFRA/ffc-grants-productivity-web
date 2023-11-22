@@ -2,6 +2,7 @@ const { getModel } = require('../helpers/models')
 const { getHtml } = require('../helpers/conditionalHTML')
 const { getYarValue } = require('../helpers/session')
 const { getQuestionAnswer } = require('../helpers/utils')
+const { urlPrefix } = require('../config/server')
 
 const validateAnswerField = (value, validationType, details, payload) => {
   switch (validationType) {
@@ -101,6 +102,20 @@ const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
     }
   }
 
+  if(yarKey === 'technologyItems') {
+    if(getYarValue(request, 'applicant') === 'Contractor') {
+      currentQuestion = {
+        ...currentQuestion,
+        answers: currentQuestion.answers.filter((option) => option.contractorOnly)
+      }
+
+      if(getYarValue(request, 'tenancy') === 'Yes') {
+        currentQuestion.backUrl = `${urlPrefix}/tenancy`
+      } else {
+        currentQuestion.backUrl = `${urlPrefix}/project-responsibility`
+      }
+    } 
+  }
   if (conditionalKey) {
     const conditionalFieldError = errorList.find(thisErrorHref => thisErrorHref.href.includes(conditionalKey))?.text
     const conditionalFieldValue = (type === 'multi-input') ? getYarValue(request, yarKey)[conditionalKey] : getYarValue(request, conditionalKey)
