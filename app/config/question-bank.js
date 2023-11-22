@@ -1747,18 +1747,6 @@ const questionBank = {
           hint: {
             html: `Technology powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative<br/><br/>`
           },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'To be eligible for grant funding, your robotic technology must:',
-                items: ['have a sensing system and can understand their environment', 'make decisions and plans', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop'],
-                additionalPara: 'Automatic technology must fit at least 2 of these eligibility criteria. '
-              }],
-              
-
-            }]
-          },
           type: 'multi-input',
           allFields: [
             {
