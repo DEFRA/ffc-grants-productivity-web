@@ -25,7 +25,9 @@ describe('Page: /technology-description', () => {
       if (varList[key]) return varList[key]
       else return undefined
   }}))
-  it('page loads successfully, with all options', async () => {
+
+  it('page loads successfully with item name', async () => {
+    varList.technologyItems = 'Harvesting technology'
       const options = {
           method: 'GET',
           url: `${global.__URLPREFIX__}/technology-description`
@@ -35,10 +37,11 @@ describe('Page: /technology-description', () => {
       expect(response.statusCode).toBe(200)
       let page = new JSDOM(response.payload).window.document
       const heading = page.querySelectorAll('.govuk-heading-l')[1]
-      expect(heading.textContent.trim()).toBe('Describe the automatic technology')
+      expect(heading.textContent.trim()).toBe('Describe the harvesting technology')
   })
   it('page loads successfully, with robotic title', async () => {
     varList.roboticAutomatic = 'Robotic'
+    varList.technologyItems = 'Other robotics or automatic technology'
       const options = {
           method: 'GET',
           url: `${global.__URLPREFIX__}/technology-description`
@@ -50,9 +53,9 @@ describe('Page: /technology-description', () => {
       const heading = page.querySelectorAll('.govuk-heading-l')[1]
       expect(heading.textContent.trim()).toBe('Describe the robotic technology')
   })
-  it('page loads successfully, with item name title', async () => {
+  it('page loads successfully, with automatic title', async () => {
     varList.technologyItems = 'Other robotics or automatic technology'
-    varList.roboticAutomatic = ''
+    varList.roboticAutomatic = 'Automatic'
       const options = {
           method: 'GET',
           url: `${global.__URLPREFIX__}/technology-description`
@@ -62,7 +65,7 @@ describe('Page: /technology-description', () => {
       expect(response.statusCode).toBe(200)
       let page = new JSDOM(response.payload).window.document
       const heading = page.querySelectorAll('.govuk-heading-l')[1]
-      expect(heading.textContent.trim()).toBe('Describe the other robotics or automatic technology')
+      expect(heading.textContent.trim()).toBe('Describe the automatic technology')
   })
   it('should display an error message if itemName is missing', async () => {
     varList.technologyItems = 'Harvesting technology',
@@ -180,35 +183,38 @@ describe('Page: /technology-description', () => {
 })
 
 
-  it('page loads with correct back link > automatic', async () => {
-    varList.roboticEligibility = null
-    varList.automaticEligibility = 'value'
-    varList.roboticAutomatic = 'Automatic'  
-    const options = {
-          method: 'GET',
-          url: `${global.__URLPREFIX__}/technology-description`
-      }
-      const response = await global.__SERVER__.inject(options)
-      expect(response.statusCode).toBe(200)
-      const page = new JSDOM(response.payload).window.document
-      const backLink = page.querySelector('.govuk-back-link')
-      expect(backLink.getAttribute('href')).toBe('automatic-eligibility')
-      expect(backLink.textContent).toBe('Back')
-  })
+  // it('page loads with correct back link > automatic', async () => {
+  //   varList.roboticEligibility = null
+  //   varList.automaticEligibility = 'value'
+  //   varList.roboticAutomatic = 'Automatic'  
+  //   const options = {
+  //         method: 'GET',
+  //         url: `${global.__URLPREFIX__}/technology-description`
+  //     }
+  //     const response = await global.__SERVER__.inject(options)
+  //     expect(response.statusCode).toBe(200)
+  //     const page = new JSDOM(response.payload).window.document
+  //     const backLink = page.querySelector('.govuk-back-link')
+  //     expect(backLink.getAttribute('href')).toBe('automatic-eligibility')
+  //     expect(backLink.textContent).toBe('Back')
+  // })
 
 
-  it('page loads with correct back link > robotic', async () => {
-    varList.roboticEligibility = 'value'
-    varList.automaticEligibility = null
-    varList.roboticAutomatic = 'Robotic'
-    const options = {
-        method: 'GET',
-        url: `${global.__URLPREFIX__}/technology-description`
-    }
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Describe the robotic technology')
-})
+//   it('page loads with correct back link > robotic', async () => {
+//     varList.roboticEligibility = 'value'
+//     varList.automaticEligibility = null
+//     varList.roboticAutomatic = 'Robotic'
+//     const options = {
+//         method: 'GET',
+//         url: `${global.__URLPREFIX__}/technology-description`
+//     }
+//     const response = await global.__SERVER__.inject(options)
+//       expect(response.statusCode).toBe(200)
+//       const page = new JSDOM(response.payload).window.document
+//       const backLink = page.querySelector('.govuk-back-link')
+//       expect(backLink.getAttribute('href')).toBe('robotic-eligibility')
+//       expect(backLink.textContent).toBe('Back')
+// })
 
 it('should redirect to /project-items-summary - normal vals', async () => {
     varList.otherItem = 'No'
@@ -284,8 +290,7 @@ it('page loads with correct back link > automatic', async () => {
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"automatic-eligibility\" class=\"govuk-back-link\">Back</a>' )
     })
-
-
+  
 it('page loads with correct back link > robotic', async () => {
   varList.roboticEligibility = 'value'
   varList.automaticEligibility = null
