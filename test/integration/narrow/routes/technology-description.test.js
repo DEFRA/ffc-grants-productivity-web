@@ -182,40 +182,6 @@ describe('Page: /technology-description', () => {
 
 })
 
-
-  // it('page loads with correct back link > automatic', async () => {
-  //   varList.roboticEligibility = null
-  //   varList.automaticEligibility = 'value'
-  //   varList.roboticAutomatic = 'Automatic'  
-  //   const options = {
-  //         method: 'GET',
-  //         url: `${global.__URLPREFIX__}/technology-description`
-  //     }
-  //     const response = await global.__SERVER__.inject(options)
-  //     expect(response.statusCode).toBe(200)
-  //     const page = new JSDOM(response.payload).window.document
-  //     const backLink = page.querySelector('.govuk-back-link')
-  //     expect(backLink.getAttribute('href')).toBe('automatic-eligibility')
-  //     expect(backLink.textContent).toBe('Back')
-  // })
-
-
-//   it('page loads with correct back link > robotic', async () => {
-//     varList.roboticEligibility = 'value'
-//     varList.automaticEligibility = null
-//     varList.roboticAutomatic = 'Robotic'
-//     const options = {
-//         method: 'GET',
-//         url: `${global.__URLPREFIX__}/technology-description`
-//     }
-//     const response = await global.__SERVER__.inject(options)
-//       expect(response.statusCode).toBe(200)
-//       const page = new JSDOM(response.payload).window.document
-//       const backLink = page.querySelector('.govuk-back-link')
-//       expect(backLink.getAttribute('href')).toBe('robotic-eligibility')
-//       expect(backLink.textContent).toBe('Back')
-// })
-
 it('should redirect to /project-items-summary - normal vals', async () => {
     varList.otherItem = 'No'
     varList.projectItemsList = ['Harvesting technology', "Weeding technology"]
