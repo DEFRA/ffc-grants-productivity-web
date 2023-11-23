@@ -100,6 +100,7 @@ it('should display ineligible page with "Add another technology" and "Continue w
 }) 
 
     const title_dict = {
+      'Feeding robots': 'Do your feeding robots fit the eligibility criteria?',
       'Slurry robots': 'Do your slurry robots fit the eligibility criteria?',
       'Driverless robotic tractor or platform': 'Does your driverless robotic tractor or platform fit the eligibility criteria?',
       'Voluntary robotic milking system': 'Does your voluntary robotic milking system fit the eligibility criteria?',
