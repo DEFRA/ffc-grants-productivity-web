@@ -1757,7 +1757,7 @@ const questionBank = {
               maxlength: 250,
               classes: 'govuk-input--width-10',
               label: {
-                text: 'Name of item',
+                text: 'Item name',
                 classes: 'govuk-label',
                 for: 'itemName'
               },
