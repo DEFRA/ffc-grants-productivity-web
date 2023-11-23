@@ -266,16 +266,14 @@ const getPage = async (question, request, h) => {
         'technology-items-A5': 'Does your robotic spraying technology fit the eligiblity criteria?'
 
       }
-      const technologyItems = getYarValue(request, 'technologyItems')
-      console.log('HERE   technologyItems: ', technologyItems)
+     
       Object.keys(title_dict).forEach((value) => {
-        if (technologyItems === getQuestionAnswer('technology-items', value)) {
+        if (selectedOption === getQuestionAnswer('technology-items', value)) {
           question = {
             ...question,
             title: title_dict[value]
           }
         }
-        console.log('new Title: ', question.title)
       })
     }
   }
