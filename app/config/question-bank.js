@@ -1,4 +1,5 @@
 const {
+  WHOLE_NUMBER_REGEX_ZERO,
   CURRENCY_FORMAT,
   CHARS_MAX_10,
   CHARS_MIN_10,
@@ -105,6 +106,7 @@ const questionBank = {
           hint: {
             html: `
               If you want to apply for both a farm productivity project and a solar project, you must submit 2 separate applications. 
+              <br/>
               <br/>
               The maximum grant amount for both projects together is £500,000.
               <br/>
@@ -1699,7 +1701,7 @@ const questionBank = {
             values: [{
               heading: 'Eligibility',
               content: [{
-                para: 'Robotic items must meet all 4 criteria to be eligible.',
+                para: 'Robotic technology must fit all 4 criteria to be eligible.',
                 items: []
               }],
               
@@ -1746,18 +1748,6 @@ const questionBank = {
           hint: {
             html: `Technology powered by fossil fuels will only be funded where there is no commercially available electric or renewable energy alternative<br/><br/>`
           },
-          sidebar: {
-            values: [{
-              heading: 'Eligibility',
-              content: [{
-                para: 'To be eligible for grant funding, your robotic technology must:',
-                items: ['have a sensing system and can understand their environment', 'make decisions and plans', 'can control its actuators (the devices that move robot joints)', 'work in a continuous loop'],
-                additionalPara: 'Automatic technology must fit at least 2 of these eligibility criteria. '
-              }],
-              
-
-            }]
-          },
           type: 'multi-input',
           allFields: [
             {
@@ -1768,7 +1758,7 @@ const questionBank = {
               maxlength: 250,
               classes: 'govuk-input--width-10',
               label: {
-                text: 'Name of item',
+                text: 'Item name',
                 classes: 'govuk-label',
                 for: 'itemName'
               },
@@ -1842,13 +1832,13 @@ const questionBank = {
               validate: [
                 {
                   type: 'REGEX',
-                  regex: WHOLE_NUMBER_REGEX,
+                  regex: WHOLE_NUMBER_REGEX_ZERO,
                   error: 'Number of items must be a number, like 18'
                 },
                 {
                   type: 'MAX_ONLY',
                   max: 100,
-                  error: 'Number of items must be between 1 and 100'
+                  error: 'Number of items must be between 0 and 100'
                 }
               ]
             },

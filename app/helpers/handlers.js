@@ -173,7 +173,7 @@ const getPage = async (question, request, h) => {
     }
     if (url === 'technology-description') {
       const techItem = getYarValue(request, 'technologyItems')
-      if (techItem === 'Other robotics or automatic technology') {
+      if (techItem !== 'Other robotics or automatic technology') {
         const descriptionTitle = title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
           getYarValue(request, additionalYarKeyName).toLowerCase()
         )
@@ -182,7 +182,7 @@ const getPage = async (question, request, h) => {
           title: descriptionTitle
         }
       }
-      if (getYarValue(request, 'roboticAutomatic') === 'Robotic') {
+      else if (getYarValue(request, 'roboticAutomatic') === 'Robotic') {
         question = {
           ...question,
           title: 'Describe the robotic technology'
@@ -207,7 +207,7 @@ const getPage = async (question, request, h) => {
           ...question,
           title: 'Which eligibility criteria does your automatic technology meet?'
         }
-    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'robotic-eligibility') {
+    }else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'robotic-eligibility') {
         question = {
           ...question,
           title: 'Does your robotic technology fit the eligibility criteria?'
@@ -246,22 +246,21 @@ const getPage = async (question, request, h) => {
       }
 
       const title_dict = {
+        'technology-items-A7': 'Do your feeding robots fit the eligibility criteria?',
         'technology-items-A8': 'Do your slurry robots fit the eligibility criteria?',
         'technology-items-A4': 'Does your driverless robotic tractor or platform fit the eligibility criteria?',
         'technology-items-A6': 'Does your voluntary robotic milking system fit the eligibility criteria?',
-        'technology-items-A5': 'Does your robotic spraying technology fit the eligiblity Criteria?'
+        'technology-items-A5': 'Does your robotic spraying technology fit the eligiblity criteria?'
 
       }
-      const technologyItems = getYarValue(request, 'technologyItems')
-      console.log('HERE   technologyItems: ', technologyItems)
+     
       Object.keys(title_dict).forEach((value) => {
-        if (technologyItems === getQuestionAnswer('technology-items', value)) {
+        if (selectedOption === getQuestionAnswer('technology-items', value)) {
           question = {
             ...question,
             title: title_dict[value]
           }
         }
-        console.log('new Title: ', question.title)
       })
     }
   }
@@ -511,7 +510,7 @@ const showPostPage = async (currentQuestion, request, h) => {
     })
     setYarValue(request, yarKey, dataObject)
   }
-  if (title) {
+  if (title && (yarKey === 'remainingCosts' || yarKey === 'canPayRemainingCost')) {
     currentQuestion = {
       ...currentQuestion,
       title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) => (
