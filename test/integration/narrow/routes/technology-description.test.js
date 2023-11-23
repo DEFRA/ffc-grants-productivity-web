@@ -26,19 +26,51 @@ describe('Page: /technology-description', () => {
       else return undefined
   }}))
 
-  it('page loads successfully with item name', async () => {
-    varList.technologyItems = 'Harvesting technology'
-      const options = {
-          method: 'GET',
-          url: `${global.__URLPREFIX__}/technology-description`
-      }
 
-      const response = await global.__SERVER__.inject(options)
-      expect(response.statusCode).toBe(200)
-      let page = new JSDOM(response.payload).window.document
-      const heading = page.querySelectorAll('.govuk-heading-l')[1]
-      expect(heading.textContent.trim()).toBe('Describe the harvesting technology')
+const testTitle = async (title, expectedTitle) => {
+    varList.technologyItems = title
+    const options = {
+        method: 'GET',
+        url: `${global.__URLPREFIX__}/technology-description`
+    }
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    let page = new JSDOM(response.payload).window.document
+    const heading = page.querySelectorAll('.govuk-heading-l')[1]
+    expect(heading.textContent.trim()).toBe(expectedTitle)
+}
+
+  it('page loads successfully with item name', async () => {
+    testTitle('Harvesting technology', 'Describe the harvesting technology')
   })
+
+
+  it('page loads successfully with item name', async () => {
+    testTitle("Weeding technology", 'Describe the weeding technology')
+  })
+
+  it('page loads successfully with item name', async () => {
+    testTitle("Transplanting technology", 'Describe the transplanting technology')
+  })
+
+  it('page loads successfully with item name', async () => {
+    testTitle("Driverless robotic tractor or platform", 'Describe the driverless robotic tractor or platform')
+  })
+  it('page loads successfully with item name', async () => {
+    testTitle("Robotic spraying technology", 'Describe the robotic spraying technology')
+  })
+
+  it('page loads successfully with item name', async () => {
+    testTitle("Voluntary robotic milking system", 'Describe the voluntary robotic milking system')
+  })
+
+  it('page loads successfully with item name', async () => {
+    testTitle("Feeding robots", 'Describe the feeding robots')
+  })
+  it('page loads successfully with item name', async () => {
+    testTitle("Slurry robots", 'Describe the slurry robots')
+  })
+
   it('page loads successfully, with robotic title', async () => {
     varList.roboticAutomatic = 'Robotic'
     varList.technologyItems = 'Other robotics or automatic technology'
