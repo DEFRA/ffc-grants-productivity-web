@@ -40,34 +40,28 @@ const testTitle = async (title, expectedTitle) => {
     expect(heading.textContent.trim()).toBe(expectedTitle)
 }
 
-  it('page loads successfully with item name', async () => {
+  it('page loads successfully with Harvesting technology', async () => {
     testTitle('Harvesting technology', 'Describe the harvesting technology')
   })
-
-
-  it('page loads successfully with item name', async () => {
+  it('page loads successfully with Weeding technology', async () => {
     testTitle("Weeding technology", 'Describe the weeding technology')
   })
-
-  it('page loads successfully with item name', async () => {
+  it('page loads successfully with Transplanting technology', async () => {
     testTitle("Transplanting technology", 'Describe the transplanting technology')
   })
-
-  it('page loads successfully with item name', async () => {
+  it('page loads successfully with Driverless robotic tractor or platform', async () => {
     testTitle("Driverless robotic tractor or platform", 'Describe the driverless robotic tractor or platform')
   })
-  it('page loads successfully with item name', async () => {
+  it('page loads successfully with obotic spraying technology', async () => {
     testTitle("Robotic spraying technology", 'Describe the robotic spraying technology')
   })
-
-  it('page loads successfully with item name', async () => {
+  it('page loads successfully with Voluntary robotic milking system', async () => {
     testTitle("Voluntary robotic milking system", 'Describe the voluntary robotic milking system')
   })
-
-  it('page loads successfully with item name', async () => {
+  it('page loads successfully with Feeding robots', async () => {
     testTitle("Feeding robots", 'Describe the feeding robots')
   })
-  it('page loads successfully with item name', async () => {
+  it('page loads successfully with Slurry robots', async () => {
     testTitle("Slurry robots", 'Describe the slurry robots')
   })
 

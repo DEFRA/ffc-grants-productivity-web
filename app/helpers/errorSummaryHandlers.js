@@ -128,16 +128,16 @@ const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
     }
 
     const title_dict = {
+      'technology-items-A7': 'Do your feeding robots fit the eligibility criteria?',
       'technology-items-A8': 'Do your slurry robots fit the eligibility criteria?',
       'technology-items-A4': 'Does your driverless robotic tractor or platform fit the eligibility criteria?',
       'technology-items-A6': 'Does your voluntary robotic milking system fit the eligibility criteria?',
       'technology-items-A5': 'Does your robotic spraying technology fit the eligiblity criteria?'
 
     }
-    const technologyItems = getYarValue(request, 'technologyItems')
   
     Object.keys(title_dict).forEach((value) => {
-      if (technologyItems === getQuestionAnswer('technology-items', value)) {
+      if (selectedOption === getQuestionAnswer('technology-items', value)) {
         currentQuestion = {
           ...currentQuestion,
           title: title_dict[value]
