@@ -24,14 +24,18 @@ async function createServer () {
     }]
   })
 
+  // await server.register(require('./plugins/query-string'))
+
+
   if (authConfig.enabled) {
     await server.register(require('./plugins/auth'))
   }
   await server.register(inert)
   await server.register(vision)
-  await server.register(require('./plugins/cookies'))
-  // await server.register(require('./plugins/query-string'))
+  // await server.register(require('./plugins/cookies'))
+
   await server.register(require('./plugins/error-pages'))
+
   await server.register({
     plugin: require('./plugins/header'),
     options: {
@@ -70,6 +74,7 @@ async function createServer () {
       batchInterval: 15000
     }
   })
+
   // Session cache redis with yar
   await server.register([
     {
@@ -103,6 +108,8 @@ async function createServer () {
     }]
   )
 
+
+
   const routes = [].concat(
     require('./routes/healthy'),
     require('./routes/healthz'),
@@ -116,6 +123,8 @@ async function createServer () {
   )
   console.log('[SERVER][GET ALL ROUTES]')
   server.route(routes)
+
+
 
   server.views({
     engines: {

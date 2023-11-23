@@ -78,6 +78,17 @@ const getPage = async (question, request, h) => {
   //   }
   // }
 
+  if (url === 'remove-item' && request.url.href.includes('?')) {
+
+    const queryParams = new URLSearchParams(request.url.href.split('?')[1])
+
+    setYarValue(request, 'confirmItem', queryParams.get('item'))
+    setYarValue(request, 'index', queryParams.get('index'))
+
+    return h.redirect('/productivity/remove-item')
+
+  }
+
   if(url === 'technology-items') {
     if(getYarValue(request, 'applicant') === 'Contractor') {
       question = {
