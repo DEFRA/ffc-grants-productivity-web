@@ -1,4 +1,5 @@
 const {
+  WHOLE_NUMBER_REGEX_ZERO,
   CURRENCY_FORMAT,
   CHARS_MAX_10,
   CHARS_MIN_10,
@@ -1831,13 +1832,13 @@ const questionBank = {
               validate: [
                 {
                   type: 'REGEX',
-                  regex: WHOLE_NUMBER_REGEX,
+                  regex: WHOLE_NUMBER_REGEX_ZERO,
                   error: 'Number of items must be a number, like 18'
                 },
                 {
                   type: 'MAX_ONLY',
                   max: 100,
-                  error: 'Number of items must be between 1 and 100'
+                  error: 'Number of items must be between 0 and 100'
                 }
               ]
             },
