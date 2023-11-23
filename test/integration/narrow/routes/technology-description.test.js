@@ -204,7 +204,7 @@ const testTitle = async (title, expectedTitle) => {
     let errorSummary = page.querySelector('.govuk-error-summary__list')
     let errors = errorSummary.querySelectorAll('li')
     expect(errors.length).toBe(1)
-    expect(errors[0].textContent.trim()).toBe('Number of items must be between 1 and 100')
+    expect(errors[0].textContent.trim()).toBe('Number of items must be between 0 and 100')
 
 })
 
