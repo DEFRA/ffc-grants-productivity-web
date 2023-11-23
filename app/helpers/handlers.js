@@ -220,7 +220,7 @@ const getPage = async (question, request, h) => {
           ...question,
           title: 'Which eligibility criteria does your automatic technology meet?'
         }
-    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'robotic-eligibility') {
+    }else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'robotic-eligibility') {
         question = {
           ...question,
           title: 'Does your robotic technology fit the eligibility criteria?'
@@ -259,6 +259,7 @@ const getPage = async (question, request, h) => {
       }
 
       const title_dict = {
+        'technology-items-A7': 'Do your feeding robots fit the eligibility criteria?',
         'technology-items-A8': 'Do your slurry robots fit the eligibility criteria?',
         'technology-items-A4': 'Does your driverless robotic tractor or platform fit the eligibility criteria?',
         'technology-items-A6': 'Does your voluntary robotic milking system fit the eligibility criteria?',
