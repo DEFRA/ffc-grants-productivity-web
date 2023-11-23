@@ -340,21 +340,6 @@ const getPage = async (question, request, h) => {
   }
   switch (url) {
     case 'score':
-      const scoreData = getYarValue(request, 'overAllScore')
-      // send score to GA
-      try {
-        await gapiService.sendGAEvent(request, {
-          name: gapiService.eventTypes.SCORING,
-          params: {
-            score: scoreData.desirability.overallRating.band,
-            action: 'Score results presented',
-            label: getYarValue(request, 'projectSubject') // Solar project items or Robotics project items
-          }
-        })
-      } catch (err) {
-        console.error('ERROR: ', err)
-      }
-      break
     case 'agents-details': {
         if (getYarValue(request, 'projectSubject') === 'Solar project items' ) {
           question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/farmers-details`
@@ -433,6 +418,23 @@ const getPage = async (question, request, h) => {
       await gapiService.sendGAEvent(request, metrics)
     } catch (err) {
       console.error('ERROR: ', err)
+    }
+  }
+  if (url === 'score') {
+    const scoreData = getYarValue(request, 'overAllScore')
+    console.log('here: ', 1);
+    // send score to GA
+    try {
+      await gapiService.sendGAEvent(request, {
+        name: gapiService.eventTypes.SCORING,
+        params: {
+          score: scoreData.desirability.overallRating.band,
+          action: 'Score results presented',
+          label: getYarValue(request, 'projectSubject') // Solar project items or Robotics project items
+        }
+      })
+    } catch (err) {
+      console.error('ERROR in GA: ', err)
     }
   }
   const PAGE_MODEL = getModel(data, question, request, conditionalHtml)
