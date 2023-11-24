@@ -724,11 +724,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `Applicants who already have a solar 
-                PV system can still apply for this 
-                grant. For example, you can apply 
-                for a battery to add to your existing 
-                solar PV panels.`,
+                para: `Applicants who already have a solar PV system can still apply for this grant. For example, you can apply for a battery to add to your existing solar PV panels.`,
                 items: []
               }],
               
@@ -2665,10 +2661,10 @@ const questionBank = {
             {
               yarKey: 'sbi',
               type: 'input',
-              title: 'Single Business Identifier (SBI)',
+              title: 'Single Business Identifier (SBI) (Optional)',
               classes: 'govuk-input govuk-input--width-10',
               label: {
-                text: 'Single Business Identifier (SBI)',
+                text: 'Single Business Identifier (SBI) (Optional)',
                 classes: 'govuk-label'
               },
               hint: {
