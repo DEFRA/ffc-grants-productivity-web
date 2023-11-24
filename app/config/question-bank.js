@@ -707,13 +707,13 @@ const questionBank = {
               elseUrl: '/productivity/project-responsibility'
             }
           },
-          preValidationObject: {
-            preValidationKeys: ['tenancy', 'projectResponsibility'],
-            preValidationAnswer: ['tenancy-A1', 'project-responsibility-A1', 'project-responsibility-A2'],
-            preValidationRule: 'OR',
-            preValidationUrls: ['tenancy', 'project-responsibility'],
-            andCheck: 'project-subject-A2'
-          },
+          // preValidationObject: {
+          //   preValidationKeys: ['tenancy', 'projectResponsibility'],
+          //   preValidationAnswer: ['tenancy-A1', 'project-responsibility-A1', 'project-responsibility-A2'],
+          //   preValidationRule: 'OR',
+          //   preValidationUrls: ['tenancy', 'project-responsibility'],
+          //   andCheck: 'project-subject-A2'
+          // },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -724,11 +724,7 @@ const questionBank = {
             values: [{
               heading: 'Funding priorities',
               content: [{
-                para: `Applicants who already have a solar 
-                PV system can still apply for this 
-                grant. For example, you can apply 
-                for a battery to add to your existing 
-                solar PV panels.`,
+                para: `Applicants who already have a solar PV system can still apply for this grant. For example, you can apply for a battery to add to your existing solar PV panels.`,
                 items: []
               }],
               
