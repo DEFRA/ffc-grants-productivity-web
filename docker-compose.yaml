@@ -15,8 +15,6 @@ services:
       AUTH_PASSWORD_HASH: ${AUTH_PASSWORD_HASH:-grants}
       GOOGLE_TAG_MANAGER_KEY: 'GTM-WJ5C78H'
       GOOGLE_TAG_MANAGER_SERVER_KEY: 'UA-179628664-4'
-      ANALYTICS_PROPERTY_API: ${ANALYTICS_PROPERTY_API:-notset}
-      ANALYTICS_PROPERTY_ID: ${ANALYTICS_PROPERTY_ID:-notset}
       COOKIE_PASSWORD: thisistestcookiepasswordthisistestcookiepasswordthisistestcookiepassword
       SERVICE_BUS_HOST: ${SERVICE_BUS_HOST:-notset}
       SERVICE_BUS_PASSWORD: ${SERVICE_BUS_PASSWORD:-notset}
