@@ -338,7 +338,6 @@ const getPage = async (question, request, h) => {
     return h.view('check-details', MODEL)
   }
   switch (url) {
-    case 'score':
     case 'agents-details': {
         if (getYarValue(request, 'projectSubject') === 'Solar project items' ) {
           question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/farmers-details`
