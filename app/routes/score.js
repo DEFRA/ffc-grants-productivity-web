@@ -115,6 +115,7 @@ module.exports = [{
             break
         }
         setYarValue(request, 'current-score', msgData.desirability.overallRating.band)
+        // GA event: scoring
         await gapiService.sendGAEvent(request, {
           name: gapiService.eventTypes.SCORING,
           params: {
@@ -128,6 +129,7 @@ module.exports = [{
           scoreChance: scoreChance
         }, request))
       } else {
+        // GA event: error
         await gapiService.sendGAEvent(request, {
           name: gapiService.eventTypes.EXCEPTION,
           params: {
