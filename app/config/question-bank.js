@@ -2810,7 +2810,7 @@ const questionBank = {
                 classes: 'govuk-label'
               },
               hint: {
-                text: "We'll only use this to send them confirmation"
+                text: "We'll only use this to send you confirmation"
               },
               validate: [
                 {
