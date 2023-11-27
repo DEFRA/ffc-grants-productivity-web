@@ -79,6 +79,12 @@ const getPage = async (question, request, h) => {
   // }
 
   if(url === 'technology-items') {
+    // reset values if going back to this page from automatic-eligibility or robotic-eligibility if not eligible
+    if(getYarValue(request, 'automaticEligibility') === 'None of the above' || getYarValue(request, 'roboticEligibility') === 'No') {
+      setYarValue(request, 'technologyItems', null)
+      setYarValue(request, 'automaticEligibility', null)
+    }
+
     if(getYarValue(request, 'applicant') === 'Contractor') {
       question = {
         ...question,
