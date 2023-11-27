@@ -371,7 +371,9 @@ const getPage = async (question, request, h) => {
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
     case 'technology-items': 
-      setYarValue(request, 'backToItemsSummary', false)    
+      setYarValue(request, 'backToItemsSummary', false)
+      setYarValue(request, 'roboticAutomatic', null)
+      setYarValue(request, 'roboticEligibility', null)
       break
 
     case 'project-items-summary': {
