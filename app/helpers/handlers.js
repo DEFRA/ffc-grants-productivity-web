@@ -384,7 +384,7 @@ const getPage = async (question, request, h) => {
       if (getYarValue(request, 'backToItemsSummary')) {
         question.backUrl = `${urlPrefix}/project-items`
       } else {
-        question.backUrl = `${urlPrefix}/technology-description`
+        question.backUrl = `${urlPrefix}/technology-items`
       }
 
       if (projectItemsList.length === 5) {
