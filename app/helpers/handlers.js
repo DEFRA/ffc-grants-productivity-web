@@ -80,7 +80,7 @@ const getPage = async (question, request, h) => {
 
   if(url === 'technology-items') {
     // reset values if going back to this page from automatic-eligibility or robotic-eligibility if not eligible
-    if(getYarValue(request, 'automaticEligibility') === 'None of the above' || getYarValue(request, 'roboticEligibility') === 'No') {
+    if([getYarValue(request, 'automaticEligibility')].flat().length === 1 || getYarValue(request, 'roboticEligibility') === 'No') {
       setYarValue(request, 'technologyItems', null)
       setYarValue(request, 'automaticEligibility', null)
     }
@@ -409,7 +409,7 @@ const getPage = async (question, request, h) => {
           brand: projectItemsList.at(-1).description.brand,
           model: projectItemsList.at(-1).description.model,
           numberOfItems: projectItemsList.at(-1).description.numberOfItems,
-         })
+        })
       }
 
       setYarValue(request, 'removeItem', null)
