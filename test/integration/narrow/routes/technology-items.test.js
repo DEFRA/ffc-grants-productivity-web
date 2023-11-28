@@ -45,7 +45,7 @@ describe('technology-items', () => {
   it('page loads successfully, with all the options when automaticEligibility is null', async () => {
     varList.applicant = 'Farmer'
     varList.automaticEligibility = null
-    varList.roboticEligibility = 'Yes'
+    varList.roboticEligibility = null
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/technology-items`

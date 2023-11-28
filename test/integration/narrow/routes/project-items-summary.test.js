@@ -145,9 +145,6 @@ it('should load page successfully - 5 items, backToSummary', async () => {
     expect(response.payload).toContain('Your project technology')
     // can also chekc back link too if wanted
 })
-
-
-
 it('click continue redirects to item-conditional page', async () => {
 const postOptions = {
     method: 'POST',
@@ -159,5 +156,82 @@ const postOptions = {
 const postResponse = await global.__SERVER__.inject(postOptions)
 expect(postResponse.statusCode).toBe(302)
 expect(postResponse.headers.location).toBe('item-conditional')
+})
+
+let projectItemsList = [{
+    realItem: 'hello',
+    type: 'Robotic',
+    description: {
+        itemName: '',
+        brand: '',
+        model: '',
+        numberOfItems: '',
+    },
+},
+{
+    realItem: 'hello',
+    type: 'Robotic',
+    description: {
+        itemName: '',
+        brand: '',
+        model: '',
+        numberOfItems: '',
+    },
+},
+{
+    realItem: 'hello',
+    type: 'Robotic',
+    description: {
+        itemName: '',
+        brand: '',
+        model: '',
+        numberOfItems: '',
+    },
+},
+{
+    realItem: 'hello',
+    type: 'Robotic',
+    description: {
+        itemName: '',
+        brand: '',
+        model: '',
+        numberOfItems: '',
+    },
+},
+{
+    realItem: 'hello',
+    type: 'Robotic',
+    description: {
+        itemName: '',
+        brand: '',
+        model: '',
+        numberOfItems: '',
+    },
+}]
+it('page loads with correct back link if backToItemsSummary is false', async () => {
+    varList.backToItemsSummary = false
+    varList.projectItemsList = projectItemsList
+    const options = {
+        method: 'GET',
+        url: `${global.__URLPREFIX__}/project-items-summary`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"/productivity/technology-description\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
+})
+
+it('page loads with correct back link if automaticEligibility has only one item and not null', async () => {
+    varList.backToItemsSummary = null
+    varList.automaticEligibility = ['Has sensing system that can understand its environment']
+    varList.projectItemsList = projectItemsList
+    const options = {
+        method: 'GET',
+        url: `${global.__URLPREFIX__}/project-items-summary`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+    expect(response.payload).toContain('<a href=\"/productivity/technology-items\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
 })
 })
