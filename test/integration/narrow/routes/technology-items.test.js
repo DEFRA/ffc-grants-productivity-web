@@ -9,7 +9,7 @@ describe('technology-items', () => {
     projectStart: 'Yes, preparatory work',
     tenancy: 'Yes',
     projectItems: 'Robotic equipment item',
-    automaticEligibility: ['Fake Data'],
+    automaticEligibility: ['Has sensing system that can understand its environment'],
     roboticEligibility: 'No'
   }
 
