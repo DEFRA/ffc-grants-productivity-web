@@ -79,6 +79,12 @@ const getPage = async (question, request, h) => {
   // }
 
   if(url === 'technology-items') {
+    // reset values if going back to this page from automatic-eligibility or robotic-eligibility if not eligible
+    if(getYarValue(request, 'automaticEligibility') === 'None of the above' || getYarValue(request, 'roboticEligibility') === 'No') {
+      setYarValue(request, 'technologyItems', null)
+      setYarValue(request, 'automaticEligibility', null)
+    }
+
     if(getYarValue(request, 'applicant') === 'Contractor') {
       question = {
         ...question,
@@ -371,7 +377,9 @@ const getPage = async (question, request, h) => {
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
     case 'technology-items': 
-      setYarValue(request, 'backToItemsSummary', false)    
+      setYarValue(request, 'backToItemsSummary', false)
+      setYarValue(request, 'roboticAutomatic', null)
+      setYarValue(request, 'roboticEligibility', null)
       break
 
     case 'project-items-summary': {
@@ -382,7 +390,7 @@ const getPage = async (question, request, h) => {
       if (getYarValue(request, 'backToItemsSummary')) {
         question.backUrl = `${urlPrefix}/project-items`
       } else {
-        question.backUrl = `${urlPrefix}/technology-description`
+        question.backUrl = `${urlPrefix}/technology-items`
       }
 
       if (projectItemsList.length === 5) {
