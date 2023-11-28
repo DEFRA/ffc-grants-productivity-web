@@ -80,9 +80,13 @@ const getPage = async (question, request, h) => {
 
   if(url === 'technology-items') {
     // reset values if going back to this page from automatic-eligibility or robotic-eligibility if not eligible
-    if([getYarValue(request, 'automaticEligibility')].flat().length === 1 || getYarValue(request, 'roboticEligibility') === 'No') {
+    console.log([getYarValue(request, 'automaticEligibility')].flat().length)
+    console.log(getYarValue(request, 'roboticEligibility') )
+    console.log(![getYarValue(request, 'automaticEligibility')].flat().includes(null))
+    if(([getYarValue(request, 'automaticEligibility')].flat().length === 1 && ![getYarValue(request, 'automaticEligibility')].flat().includes(null)) || getYarValue(request, 'roboticEligibility') === 'No') {
       setYarValue(request, 'technologyItems', null)
       setYarValue(request, 'automaticEligibility', null)
+      setYarValue(request, 'technologyDescription', null)
     }
 
     if(getYarValue(request, 'applicant') === 'Contractor') {
@@ -389,8 +393,10 @@ const getPage = async (question, request, h) => {
       // back to project-items if reentering loop with items and not added a new item
       if (getYarValue(request, 'backToItemsSummary')) {
         question.backUrl = `${urlPrefix}/project-items`
-      } else {
+      }else if(([getYarValue(request, 'automaticEligibility')].flat().length === 1 && ![getYarValue(request, 'automaticEligibility')].flat().includes(null)) || getYarValue(request, 'roboticEligibility') === 'No') {
         question.backUrl = `${urlPrefix}/technology-items`
+      }else {
+        question.backUrl = `${urlPrefix}/technology-description`
       }
 
       if (projectItemsList.length === 5) {
