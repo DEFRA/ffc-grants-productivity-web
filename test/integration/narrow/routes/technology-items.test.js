@@ -9,7 +9,7 @@ describe('technology-items', () => {
     projectStart: 'Yes, preparatory work',
     tenancy: 'Yes',
     projectItems: 'Robotic equipment item',
-    automaticEligibility: ['Has sensing system that can understand its environment'],
+    automaticEligibility: ['Has sensing system that can understand its environment', 'Fake data'],
     roboticEligibility: null
   }
 
@@ -54,6 +54,19 @@ describe('technology-items', () => {
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
   })
+  it('page loads successfully, with all the options when automaticEligibility has one answer', async () => {
+    varList.applicant = 'Farmer'
+    varList.automaticEligibility = 'Has sensing system that can understand its environment'
+    varList.roboticEligibility = 'Yes'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/technology-items`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+  })
+
 
   it('page loads successfully, with all the options for Contractor', async () => {
     varList.applicant = 'Contractor'
