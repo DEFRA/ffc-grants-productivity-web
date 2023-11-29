@@ -9,7 +9,8 @@ describe('technology-items', () => {
     projectStart: 'Yes, preparatory work',
     tenancy: 'Yes',
     projectItems: 'Robotic equipment item',
-    automaticEligibility: ['Has sensing system that can understand its environment', 'Fake data']
+    automaticEligibility: ['Has sensing system that can understand its environment', 'Fake data'],
+    roboticEligibility: null
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -43,6 +44,7 @@ describe('technology-items', () => {
   })
   it('page loads successfully, with all the options when automaticEligibility is null', async () => {
     varList.applicant = 'Farmer'
+    varList.automaticEligibility = null
     varList.roboticEligibility = 'No'
     const options = {
       method: 'GET',
@@ -54,7 +56,7 @@ describe('technology-items', () => {
   })
   it('page loads successfully, with all the options when automaticEligibility has one answer', async () => {
     varList.applicant = 'Farmer'
-    varList.automaticEligibility = 'Has sensing system that can understand its environment'
+    varList.automaticEligibility = ['Has sensing system that can understand its environment']
     varList.roboticEligibility = 'Yes'
     const options = {
       method: 'GET',
