@@ -81,7 +81,7 @@ const getPage = async (question, request, h) => {
   if(url === 'technology-items') {
 
     // reset values if going back to this page from automatic-eligibility or robotic-eligibility if not eligible
-    if([getYarValue(request, 'automaticEligibility')].flat().length === 1  || getYarValue(request, 'roboticEligibility') === 'No') {
+    if(([getYarValue(request, 'automaticEligibility')].flat().length === 1 && ![getYarValue(request, 'automaticEligibility')].flat().includes(null)) || getYarValue(request, 'roboticEligibility') === 'No') {
       setYarValue(request, 'technologyItems', null)
       setYarValue(request, 'automaticEligibility', null)
       setYarValue(request, 'technologyDescription', null)
