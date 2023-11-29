@@ -274,7 +274,7 @@ const getPage = async (question, request, h) => {
         'technology-items-A5': 'Does your robotic spraying technology fit the eligiblity criteria?'
 
       }
-     
+      
       Object.keys(title_dict).forEach((value) => {
         if (selectedOption === getQuestionAnswer('technology-items', value)) {
           question = {
