@@ -1846,7 +1846,7 @@ const questionBank = {
           order: 310,
           title: 'Your project technology',
           hint: {
-            text: 'You can add or remove items you will be using on your project'
+            text: 'You can add or remove technology you will be using on your project'
           },
           showButton: true,
           pageTitle: 'project-items-summary',
@@ -1859,8 +1859,8 @@ const questionBank = {
             values: [{
               heading: 'Your project technology',
               content: [{
-                para: `Automatic items must fit at least 2 criteria to be eligible for funding. \n\n 
-                      Robotic items must fit all 4 criteria to be eligible for funding.`
+                para: `Automatic technology must fit at least 2 criteria to be eligible for funding. \n\n 
+                        Robotic technology must fit all 4 criteria to be eligible for funding.`
               }],
               
 
