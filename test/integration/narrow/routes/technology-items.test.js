@@ -8,7 +8,9 @@ describe('technology-items', () => {
     planningPermission: 'Secured',
     projectStart: 'Yes, preparatory work',
     tenancy: 'Yes',
-    projectItems: 'Robotic equipment item'
+    projectItems: 'Robotic equipment item',
+    automaticEligibility: 'None of the above',
+    roboticEligibility: 'No'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
