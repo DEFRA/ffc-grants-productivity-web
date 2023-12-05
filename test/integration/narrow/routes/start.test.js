@@ -13,7 +13,7 @@ describe('Start page', () => {
     expect(response.payload).toContain('Who can apply')
     expect(response.payload).toContain('You can apply if:')
     expect(response.payload).toContain('you are a farmer and will do the grant-funded work in England')
-    expect(response.payload).toContain('your business is registered in England or you will do the grant-funded work in England')
+    expect(response.payload).toContain('you are an agricultural contractor and your business is registered in England')
     expect(response.payload).toContain('Agricultural contractors cannot apply for solar project items.')
     expect(response.payload).toContain('What you can apply for')
     expect(response.payload).toContain('You can apply for up to:')
