@@ -327,7 +327,7 @@ describe('Page Guard', () => {
 
     const getResponse = await server.inject(getOptions)
     expect(getResponse.statusCode).toBe(200)
-    expect(getResponse.payload).toContain('Describe the robotic technology')
+    expect(getResponse.payload).toContain('Describe the harvesting technology')
   })
 
   it('NOTINCLUDES - should load start page if expected the preValidationAnswer is not entered', async () => {
