@@ -403,7 +403,7 @@ const questionBank = {
               notEligible: true
             }
           ],
-          yarKey: 'country'
+          yarKey: 'inEngland'
         },
         {
           key: 'planning-permission',
@@ -415,7 +415,7 @@ const questionBank = {
           backUrl: 'country',
           nextUrl: 'project-start',
           preValidationObject: {
-            preValidationKeys: ['country'],
+            preValidationKeys: ['inEngland'],
             preValidationAnswer: ['country-A1'],
             preValidationRule: 'AND',
             preValidationUrls: ['country']

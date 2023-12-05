@@ -20,7 +20,7 @@ describe('country', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/country`,
-      payload: { country: 'Yes', projectPostcode: 'XX1 5XX', crumb: crumbToken },
+      payload: { inEngland: 'Yes', projectPostcode: 'XX1 5XX', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }
@@ -35,7 +35,7 @@ describe('country', () => {
     const postOptions = {
       method: 'POST',
       url: `${global.__URLPREFIX__}/country`,
-      payload: { projectPostcode: '', country: 'No', crumb: crumbToken },
+      payload: { projectPostcode: '', inEngland: 'No', crumb: crumbToken },
       headers: {
         cookie: 'crumb=' + crumbToken
       }

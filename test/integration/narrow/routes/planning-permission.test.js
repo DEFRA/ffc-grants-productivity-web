@@ -2,7 +2,7 @@ const { crumbToken } = require('./test-helper')
 describe('Page: /planning-permission', () => {
   const varList = {
     'current-score': null,
-    country: 'Yes',
+    inEngland: 'Yes',
     planningPermission: 'Should be in place by the time I make my full application'
   }
   jest.mock('../../../../app/helpers/session', () => ({
