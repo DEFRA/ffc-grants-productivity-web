@@ -633,7 +633,7 @@ const questionBank = {
           order: 65,
           title: 'Will you take full responsibility for your project?',
           hint: {
-            html: `If you are on a short tenancy, you can ask your landlord to underwrite your agreement. This means they will take over your agreement if your tenancy ends. For example, your landlord could pass the agreed project to the new tenant.<br/><br/>
+            html: `If you are on a short tenancy, you can ask your landlord to underwrite your agreement. This means they will take over your agreement if your tenancy ends.<br/><br/>
             This approach is optional and we will only ask for details at full application.`
           },
           pageTitle: '',
@@ -1733,7 +1733,7 @@ const questionBank = {
               maxlength: 250,
               classes: 'govuk-input--width-2',
               label: {
-                text: 'Number of items, if you need funding for multiple (optional)',
+                text: 'Number of these items (optional)',
                 classes: 'govuk-label',
                 for: 'numberOfItems'
               },
@@ -3567,7 +3567,7 @@ const questionBank = {
               <li>apply for planning permission</li>
             </ul>`,
             insertText: {
-              text: 'If you want your landlord to underwrite your project, you will need them to sign a letter of assurance. This letter will say your landlord agrees to take over your project, including conditions in the Grant Funding Agreement, if your tenancy ends. You should discuss and agree this with your landlord before you begin your full application.'
+              text: 'If you want your landlord to underwrite your project, you should agree this with them before you begin your full application. Your landlord will need to complete a form at full application. This will confirm that they agree to take over your project, including conditions in your Grant Funding Agreement, if your tenancy ends.'
             },
             messageLink: {
               url: 'https://defragroup.eu.qualtrics.com/jfe/preview/SV_9ugumqZO9w4M20e?Q_CHL=preview&Q_SurveyVersionID=current',
