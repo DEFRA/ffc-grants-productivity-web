@@ -6,6 +6,8 @@ const varListTemplate = {
   projectItems: ['Advanced ventilation control units', 'Wavelength-specific LED lighting for horticultural crops'],
   projectCost: '12345678',
   technologyItems: '12345',
+  applicant: 'Farmer',
+  projectSubject: 'Farm productivity project items',
   projectItemsList: [
     {
         item: 'hello',

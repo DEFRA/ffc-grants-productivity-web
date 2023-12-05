@@ -71,7 +71,7 @@ describe('Create submission message', () => {
     expect(msg.applicantEmail.details).toHaveProperty(
       'firstName', 'lastName', 'referenceNumber', 'overallRating', 'scoreChance', 'projectSubject', 'isSlurry', 'isRobotics'
       , 'legalStatus', 'location', 'planningPermission', 'projectStart', 'tenancy', 'tenancyLength', 'projectItems', 'projectCost'
-      , 'potentialFunding', 'remainingCost', 'slurryCurrentlyTreated', 'slurryToBeTreated', 'projectImpacts'
+      , 'potentialFunding', 'remainingCost', 'slurryCurrentlyTreated', 'slurryToBeTreated', 'projectImpacts', 'inEngland'
       , 'dataAnalytics', 'dataAnalyticsScore', 'energySourceScore', 'agriculturalSector', 'agriculturalSectorScore', 'technology', 'technologyScore'
       , 'projectName', 'businessName', 'farmerName', 'farmerSurname', 'farmerEmail', 'agentName', 'agentSurname', 'agentBusinessName', 'agentEmail', 'projectImpactsScore'
       , 'contactConsent', 'scoreDate'
