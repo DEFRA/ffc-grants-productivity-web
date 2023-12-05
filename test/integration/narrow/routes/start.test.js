@@ -12,7 +12,7 @@ describe('Start page', () => {
     expect(response.payload).toContain('check how well your project fits the funding priorities (takes about 15 minutes if you have all the project details)')
     expect(response.payload).toContain('Who can apply')
     expect(response.payload).toContain('You can apply if:')
-    expect(response.payload).toContain('you are a farmer or agricultural contractor')
+    expect(response.payload).toContain('You are a farmer and will do the grant-funded work in England')
     expect(response.payload).toContain('your business is registered in England or you will do the grant-funded work in England')
     expect(response.payload).toContain('Agricultural contractors cannot apply for solar project items.')
     expect(response.payload).toContain('What you can apply for')
