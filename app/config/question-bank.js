@@ -1821,7 +1821,7 @@ const questionBank = {
               maxlength: 250,
               classes: 'govuk-input--width-2',
               label: {
-                text: 'Number of items, if you need funding for multiple (optional)',
+                text: 'Number of these items (optional)',
                 classes: 'govuk-label',
                 for: 'numberOfItems'
               },
