@@ -67,14 +67,59 @@ function guardPage (request, guardData) {
 
       case 'NOT':
         // check if answer exists in list (if key and value pair contains needed answer)
-
         for (let i = 0; i < preValidationList.length; i++) {
-          if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length > 0) {
+          if(!getYarValue(request, preValidationList[i].key)){
+            return true
+          }else if (preValidationList[i].values.filter((answer) => getQuestionAnswer(preValidationList[i].url, answer) === getYarValue(request, preValidationList[i].key)).length > 0) {
             return true
           }
         }
 
         return false
+
+        case 'SPECIFICANDANY':
+          // page guard take action if nothing has selected OR if first(spesific-checkbox) and second(any option - radiobox) preValidationAnswer not selected.
+        for (let i = 0; i < preValidationList.length; i++) {
+          if(getYarValue(request, preValidationList[i].key) === null){
+            return true
+          }else if (preValidationList[i].values.filter((answer) => getYarValue(request, preValidationList[i].key).includes(getQuestionAnswer(preValidationList[i].url, answer))).length > 0 ) {
+              if(getYarValue(request, preValidationList[i + 1].key)){
+                return false
+              }
+            }else{
+              if(getYarValue(request, preValidationList[i + 1].key) === null){
+                return false
+              }
+            }
+            return true
+          
+          }
+
+          case 'NOTOR':
+            // page guard take action if nothing has selected OR if first(checkbox) OR second(radiobox) preValidationAnswer selected.
+          for (let i = 0; i < preValidationList.length; i++) {
+            if(getYarValue(request, preValidationList[i].key) === null && getYarValue(request, preValidationList[i + 1].key) === null){
+              return true
+            }else if(getYarValue(request, preValidationList[i + 1].key) === getQuestionAnswer(preValidationList[i + 1].url, preValidationList[i + 1].values[i])) {
+              return true
+            }else if(preValidationList[i].values.filter((answer) => [getYarValue(request, preValidationList[i].key)].flat().includes(getQuestionAnswer(preValidationList[i].url, answer))).length > 0) {
+                return true
+            }else{
+                return false
+            }
+          }
+
+        case 'NOTINCLUDES':
+          // check if answer is not exists in list (if key and value pair not contains needed answer)
+          for (let i = 0; i < preValidationList.length; i++) {
+            if(!getYarValue(request, preValidationList[i].key)){
+              return true
+            }if (preValidationList[i].values.filter((answer) => !getYarValue(request, preValidationList[i].key).includes(getQuestionAnswer(preValidationList[i].url, answer))).length > 0) {
+              return true
+            }
+          }
+  
+          return false
     }
   }
   return result
