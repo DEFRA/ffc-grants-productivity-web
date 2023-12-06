@@ -1766,7 +1766,7 @@ const questionBank = {
           baseUrl: 'project-items-summary',
           backUrl: 'technology-description',
           nextUrl: 'item-conditional',
-          preValidationKeys: ['projectItems'],
+          preValidationKeys: ['projectItemsList'],
           sidebar: {
             values: [{
               heading: 'Your project technology',
