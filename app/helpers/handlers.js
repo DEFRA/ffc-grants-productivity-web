@@ -79,10 +79,12 @@ const getPage = async (question, request, h) => {
   // }
 
   if(url === 'technology-items') {
+
     // reset values if going back to this page from automatic-eligibility or robotic-eligibility if not eligible
-    if(getYarValue(request, 'automaticEligibility') === 'None of the above' || getYarValue(request, 'roboticEligibility') === 'No') {
+    if(([getYarValue(request, 'automaticEligibility')].flat().length === 1 && ![getYarValue(request, 'automaticEligibility')].flat().includes(null)) || getYarValue(request, 'roboticEligibility') === 'No') {
       setYarValue(request, 'technologyItems', null)
       setYarValue(request, 'automaticEligibility', null)
+      setYarValue(request, 'technologyDescription', null)
     }
 
     if(getYarValue(request, 'applicant') === 'Contractor') {
@@ -272,7 +274,7 @@ const getPage = async (question, request, h) => {
         'technology-items-A5': 'Does your robotic spraying technology fit the eligiblity criteria?'
 
       }
-     
+
       Object.keys(title_dict).forEach((value) => {
         if (selectedOption === getQuestionAnswer('technology-items', value)) {
           question = {
@@ -389,8 +391,10 @@ const getPage = async (question, request, h) => {
       // back to project-items if reentering loop with items and not added a new item
       if (getYarValue(request, 'backToItemsSummary')) {
         question.backUrl = `${urlPrefix}/project-items`
-      } else {
+      }else if(([getYarValue(request, 'automaticEligibility')].flat().length === 1 && ![getYarValue(request, 'automaticEligibility')].flat().includes(null)) || getYarValue(request, 'roboticEligibility') === 'No') {
         question.backUrl = `${urlPrefix}/technology-items`
+      }else {
+        question.backUrl = `${urlPrefix}/technology-description`
       }
 
       if (projectItemsList.length === 5) {
@@ -409,7 +413,7 @@ const getPage = async (question, request, h) => {
           brand: projectItemsList.at(-1).description.brand,
           model: projectItemsList.at(-1).description.model,
           numberOfItems: projectItemsList.at(-1).description.numberOfItems,
-         })
+        })
       }
 
       setYarValue(request, 'removeItem', null)
@@ -740,16 +744,16 @@ const showPostPage = (currentQuestion, request, h) => {
       let roboticArrScore = ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
       let automaticFinalArr = []
       if (getYarValue(request, 'automaticEligibility')) {
-        automaticFinalArr = getYarValue(request, 'automaticEligibility').map((item) =>   item.includes('sensing system') ? 'sensing system' : item.includes('Makes decisions') ? 'makes decisions' : item.includes('actuators') ? 'control actuators' : item.includes('continuous loop') ? 'continuous loop' : '')
+        automaticFinalArr = getYarValue(request, 'automaticEligibility').map((item) =>   item.includes('sensing system') ? 'sensing system' : item.includes('Makes decisions') ? 'makes decisions' : item.includes('actuators') ? 'control actuators' : item.includes('continuous loop') ?? 'continuous loop')
       }
       let tempArray = getYarValue(request, 'projectItemsList') ?? []
       let tempObject = {
         index: tempArray.length + 1,
         item: getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ? 'Other technology' : getYarValue(request, 'technologyItems'),
-        type: getYarValue(request, 'roboticAutomatic') ? getYarValue(request, 'roboticAutomatic') : null,
-        criteria: getYarValue(request, 'automaticEligibility') ? automaticFinalArr : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArr : null,
+        type: getYarValue(request, 'roboticAutomatic') ?? getYarValue(request, 'roboticAutomatic'),
+        criteria: getYarValue(request, 'automaticEligibility') ? automaticFinalArr : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArr : null ,
         criteriaScoring: getYarValue(request, 'automaticEligibility') ? getYarValue(request, 'automaticEligibility') : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArrScore : null,
-        description: getYarValue(request, 'technologyDescription') ?  getYarValue(request, 'technologyDescription') : null,
+        description: getYarValue(request, 'technologyDescription') ??  getYarValue(request, 'technologyDescription'),
         realItem: getYarValue(request, 'technologyItems')
       }
 

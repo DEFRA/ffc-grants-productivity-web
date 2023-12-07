@@ -9,8 +9,9 @@ describe('technology-items', () => {
     projectStart: 'Yes, preparatory work',
     tenancy: 'Yes',
     projectItems: 'Robotic equipment item',
-    automaticEligibility: 'None of the above',
-    roboticEligibility: 'No'
+    automaticEligibility: ['Has sensing system that can understand its environment', 'Fake data'],
+    roboticEligibility: null,
+    projectItems: 'Robotic and automatic technology'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
@@ -42,6 +43,31 @@ describe('technology-items', () => {
     expect(response.payload).toContain('Slurry robots')
     expect(response.payload).toContain('Other robotics or automatic technology')
   })
+  it('page loads successfully, with all the options when automaticEligibility is null', async () => {
+    varList.applicant = 'Farmer'
+    varList.automaticEligibility = null
+    varList.roboticEligibility = 'No'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/technology-items`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+  })
+  it('page loads successfully, with all the options when automaticEligibility has one answer', async () => {
+    varList.applicant = 'Farmer'
+    varList.automaticEligibility = ['Has sensing system that can understand its environment']
+    varList.roboticEligibility = 'Yes'
+    const options = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/technology-items`
+    }
+
+    const response = await global.__SERVER__.inject(options)
+    expect(response.statusCode).toBe(200)
+  })
+
 
   it('page loads successfully, with all the options for Contractor', async () => {
     varList.applicant = 'Contractor'

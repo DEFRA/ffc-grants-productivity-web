@@ -115,6 +115,8 @@ describe('All default GET routes', () => {
       }else if(question.key === 'project-cost-solar'){
         varList.solarTechnologies = 'Solar PV panels'
         varList.solarOutput = 'Up to 50kW'
+      }else if(question.key === 'technology-items'){
+        varList.projectItems = 'Robotic and automatic technology'
       }
 
       const options = {

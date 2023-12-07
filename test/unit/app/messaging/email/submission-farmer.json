@@ -66,5 +66,7 @@
   "projectStarted": "No",
   "payRemainingCosts": "Yes",
   "score-calculated": true,
-  "landOwnership": "Yes"
+  "landOwnership": "Yes",
+  "automaticEligibility": "None of the above",
+  "roboticEligibility": "No"
 }
