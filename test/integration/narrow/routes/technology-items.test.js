@@ -10,7 +10,8 @@ describe('technology-items', () => {
     tenancy: 'Yes',
     projectItems: 'Robotic equipment item',
     automaticEligibility: ['Has sensing system that can understand its environment', 'Fake data'],
-    roboticEligibility: null
+    roboticEligibility: null,
+    projectItems: 'Robotic and automatic technology'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({
