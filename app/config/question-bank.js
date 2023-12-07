@@ -1315,10 +1315,10 @@ const questionBank = {
           baseUrl: 'technology-items',
           backUrl: 'project-items',
           preValidationObject: {
-            preValidationKeys: ['tenancy', 'applicant'],
-            preValidationAnswer: ['tenancy-A1', 'applicant-A1', 'applicant-A2'],
-            preValidationRule: 'OR',
-            preValidationUrls: ['tenancy', 'applicant'],
+            preValidationKeys: ['projectItems'],
+            preValidationAnswer: ['project-items-A3'],
+            preValidationRule: 'NOTINCLUDES',
+            preValidationUrls: ['project-items']
           },
           nextUrl: 'robotic-automatic',
           id: 'technologyItems',
