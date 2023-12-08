@@ -4,7 +4,8 @@ describe('Page: /remaining-costs-solar', () => {
   const varList = { 
     projectCost: '150000', 
     calculatedGrant: '37500', 
-    remainingCost: 112500
+    remainingCost: 112500,
+    projectSubject: 'Solar project items',
   }
 
   jest.mock('../../../../app/helpers/session', () => ({

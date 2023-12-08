@@ -1076,7 +1076,12 @@ const questionBank = {
           baseUrl: 'potential-amount-solar',
           backUrl: 'project-cost-solar',
           nextUrl: 'remaining-costs-solar',
-          preValidationKeys: ['projectCost'],
+          preValidationObject: {
+            preValidationKeys: ['projectSubject'],
+            preValidationAnswer: ['project-subject-A2'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['project-subject']
+          },
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -1095,7 +1100,12 @@ const questionBank = {
           baseUrl: 'remaining-costs-solar',
           backUrl: 'potential-amount-solar',
           nextUrl: 'agricultural-sector-solar',
-          preValidationKeys: ['projectCost'],
+          preValidationObject: {
+            preValidationKeys: ['projectSubject'],
+            preValidationAnswer: ['project-subject-A2'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['project-subject']
+          },
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
             insertText: {
@@ -1934,7 +1944,12 @@ const questionBank = {
           baseUrl: 'potential-amount',
           backUrl: 'project-cost',
           nextUrl: 'remaining-costs',
-          preValidationKeys: ['projectCost'],
+          preValidationObject: {
+            preValidationKeys: ['projectSubject'],
+            preValidationAnswer: ['project-subject-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['project-subject']
+          },
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Potential grant funding',
@@ -1954,7 +1969,12 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'potential-amount',
           nextUrl: 'project-impact',
-          preValidationKeys: ['projectCost'],
+          preValidationObject: {
+            preValidationKeys: ['projectSubject'],
+            preValidationAnswer: ['project-subject-A1'],
+            preValidationRule: 'OR',
+            preValidationUrls: ['project-subject']
+          },
           eliminationAnswerKeys: '',
           ineligibleContent: {
             messageContent: '<p class="govuk-body">You cannot use public money (for example, grant funding from government or local authorities) towards the project costs.</p>',
