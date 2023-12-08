@@ -26,6 +26,9 @@ const varListTemplate = {
   solarInstallation: 'randomData',
   legalStatus: 'Trust',
   projectImpact: 'Yes',
+  businessDetails: {
+    projectName: 'randomData',
+  },
   projectItemsList: [
     {
       realItem: 'hello',
