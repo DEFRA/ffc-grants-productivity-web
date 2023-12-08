@@ -21,7 +21,7 @@ function guardPage (request, guardData) {
     if(guardData[0] === 'projectItemsList' && ![getYarValue(request, 'projectItems')].flat().includes('Robotic and automatic technology')
     && ([getYarValue(request, 'projectItemsList')].flat().length === 0 || getYarValue(request, 'projectItemsList') === null )){
       return true
-    }else if(guardData.preValidationRule === 'NOTINCLUDES' && isContractor && getYarValue(request, 'tenancy') === 'Yes'){
+    }else if(guardData.preValidationRule === 'NOTINCLUDES' && isContractor && getYarValue(request, 'tenancy')){
       return false
     }
 

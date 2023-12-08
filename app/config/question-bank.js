@@ -2670,10 +2670,10 @@ const questionBank = {
             }
           },
           preValidationObject: {
-            preValidationKeys: ['applicant'],
+            preValidationKeys: ['applicant', 'businessDetails'],
             preValidationAnswer: ['applicant-A2'],
             preValidationRule: 'NOT',
-            preValidationUrls: ['applicant'],
+            preValidationUrls: ['applicant', 'businessDetails'],
           },
           fundingPriorities: '',
           type: 'multi-input',
