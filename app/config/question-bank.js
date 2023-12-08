@@ -1822,6 +1822,7 @@ const questionBank = {
           baseUrl: 'item-conditional',
           backUrl: 'project-items-summary',
           nextUrl: 'project-cost',
+          preValidationKeys: ['projectItemsList'],
           maybeEligible: true,
           maybeEligibleContent: {
             messageHeader: 'Your technology might get a grant from this scheme',

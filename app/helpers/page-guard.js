@@ -15,11 +15,12 @@ function guardPage (request, guardData) {
 
   if (isServiceDecommissioned) return isServiceDecommissioned
   if (guardData) {
-
-    if(guardData[0] === 'projectItemsList' && getYarValue(request, 'projectItemsList').length === 0){
+    console.log(guardData, [getYarValue(request, 'projectItemsList')].flat().length, guardData[0] === 'projectItemsList',  'guardData')
+    if(guardData[0] === 'projectItemsList' && ([getYarValue(request, 'projectItemsList')].flat().length === 0 || getYarValue(request, 'projectItemsList') === null )){
+      console.log('hello')
       return true
     }
-    
+
     if (Array.isArray(guardData)) {
       return guardData.filter(dependcyKey => getYarValue(request, dependcyKey) === null).length > 0
     }
