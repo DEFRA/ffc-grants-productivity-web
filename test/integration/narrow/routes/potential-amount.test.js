@@ -53,6 +53,7 @@ it('should redirect to /remaining-costs-solar when user press continue', async (
 
   //  Solar Journey url checks // 
   it('page loads with correct back link when the user on solar journey', async () => {
+    varList.projectSubject = 'Solar project items'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/potential-amount-solar`
