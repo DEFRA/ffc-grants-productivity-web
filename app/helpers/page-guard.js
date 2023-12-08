@@ -15,6 +15,16 @@ function guardPage (request, guardData) {
 
   if (isServiceDecommissioned) return isServiceDecommissioned
   if (guardData) {
+    let isContractor = getYarValue(request, 'applicant') === getQuestionAnswer('applicant','applicant-A2')
+    
+    // first - project-items-summary and item-conditional page guard
+    if(guardData[0] === 'projectItemsList' && ![getYarValue(request, 'projectItems')].flat().includes('Robotic and automatic technology')
+    && ([getYarValue(request, 'projectItemsList')].flat().length === 0 || getYarValue(request, 'projectItemsList') === null )){
+      return true
+    }else if(guardData.preValidationRule === 'NOTINCLUDES' && isContractor && getYarValue(request, 'tenancy') === 'Yes'){
+      return false
+    }
+
     if (Array.isArray(guardData)) {
       return guardData.filter(dependcyKey => getYarValue(request, dependcyKey) === null).length > 0
     }
