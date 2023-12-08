@@ -15,6 +15,11 @@ function guardPage (request, guardData) {
 
   if (isServiceDecommissioned) return isServiceDecommissioned
   if (guardData) {
+
+    if(guardData[0] === 'projectItemsList' && getYarValue(request, 'projectItemsList').length === 0){
+      return true
+    }
+    
     if (Array.isArray(guardData)) {
       return guardData.filter(dependcyKey => getYarValue(request, dependcyKey) === null).length > 0
     }
