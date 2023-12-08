@@ -1851,10 +1851,10 @@ const questionBank = {
           },
           nextUrl: 'potential-amount',
           preValidationObject: {
-            preValidationKeys: ['applicant', 'projectSubject'],
-            preValidationAnswer: ['applicant-A1', 'applicant-A2', 'project-subject-A1'],
+            preValidationKeys: ['projectSubject'],
+            preValidationAnswer: ['project-subject-A1'],
             preValidationRule: 'OR',
-            preValidationUrls: ['applicant', 'projectSubject' ]
+            preValidationUrls: ['project-subject']
           },
           classes: 'govuk-input--width-10',
           id: 'projectCost',
