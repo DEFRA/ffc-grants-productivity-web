@@ -234,4 +234,18 @@ it('page loads with correct back link if automaticEligibility has only one item 
     expect(response.statusCode).toBe(200)
     expect(response.payload).toContain('<a href=\"/productivity/technology-items\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
 })
+
+it('Project items summary - should load start page if the projectItemsList does not have item', async () => {
+    varList.projectItems = 'Advanced ventilation control units'
+    varList.projectItemsList = []
+
+    const options = {
+        method: 'GET',
+        url: `${global.__URLPREFIX__}/project-items-summary`
+    }
+
+    const getResponse = await global.__SERVER__.inject(options)
+    expect(getResponse.statusCode).toBe(302)
+    expect(getResponse.headers.location).toBe('/productivity/start')
+})
 })
