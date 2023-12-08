@@ -17,11 +17,12 @@ function guardPage (request, guardData) {
   if (guardData) {
     let isContractor = getYarValue(request, 'applicant') === getQuestionAnswer('applicant','applicant-A2')
     
+    console.log(guardData, 'guardData')
     // first - project-items-summary and item-conditional page guard
     if(guardData[0] === 'projectItemsList' && ![getYarValue(request, 'projectItems')].flat().includes('Robotic and automatic technology')
     && ([getYarValue(request, 'projectItemsList')].flat().length === 0 || getYarValue(request, 'projectItemsList') === null )){
       return true
-    }else if(guardData.preValidationRule === 'NOTINCLUDES' && isContractor && getYarValue(request, 'tenancy') === 'Yes'){
+    }else if(guardData.preValidationRule === 'NOTINCLUDES' && isContractor && getYarValue(request, 'tenancy')){
       return false
     }
 
