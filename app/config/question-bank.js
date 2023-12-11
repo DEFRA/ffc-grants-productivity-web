@@ -2427,9 +2427,9 @@ const questionBank = {
           minAnswerCount: 1,
           sidebar: {
             values: [{
-              heading: 'Funding priorities',
+              heading: 'Manual labour shortage',
               content: [{
-                para: 'RPA wants to fund the use of robotic or automatic technology due to the current manual labour shortage.',
+                para: 'Using robotic or automatic technologies can reduce the need to find manual labour.',
                 items: []
               }],
               
