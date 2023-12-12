@@ -1672,7 +1672,7 @@ const questionBank = {
               yarKey: 'itemName',
               id: "itemName",
               name: "itemName",
-              type: 'input',
+              type: 'text',
               maxlength: 250,
               classes: 'govuk-input--width-10',
               label: {
@@ -1697,7 +1697,7 @@ const questionBank = {
               yarKey: 'brand',
               id: "brand",
               name: "brand",
-              type: 'input',
+              type: 'text',
               maxlength: 250,
               classes: 'govuk-input--width-10',
               label: {
@@ -1718,7 +1718,7 @@ const questionBank = {
               yarKey: 'model',
               id: "model",
               name: "model",
-              type: 'input',
+              type: 'text',
               maxlength: 250,
               classes: 'govuk-input--width-10',
               label: {
@@ -1739,7 +1739,8 @@ const questionBank = {
               yarKey: 'numberOfItems',
               id: "numberOfItems",
               name: "numberOfItems",
-              type: 'input',
+              type: 'text',
+              inputmode: 'numeric',
               maxlength: 250,
               classes: 'govuk-input--width-2',
               label: {
@@ -2510,7 +2511,7 @@ const questionBank = {
           allFields: [
             {
               yarKey: 'projectName',
-              type: 'input',
+              type: 'text',
               label: {
                 text: 'Project name',
                 classes: 'govuk-label'
@@ -2550,7 +2551,8 @@ const questionBank = {
             },
             {
               yarKey: 'numberEmployees',
-              type: 'input',
+              type: 'text',
+              inputmode: 'numeric',
               classes: 'govuk-input--width-10',
               label: {
                 text: 'Number of employees',
@@ -2579,7 +2581,8 @@ const questionBank = {
             },
             {
               yarKey: 'businessTurnover',
-              type: 'input',
+              type: 'text',
+              inputmode: 'numeric',
               classes: 'govuk-input--width-10',
               prefix: {
                 text: '£'
@@ -2608,7 +2611,8 @@ const questionBank = {
             },
             {
               yarKey: 'sbi',
-              type: 'input',
+              type: 'text',
+              inputmode: 'numeric',
               title: 'Single Business Identifier (SBI) (Optional)',
               classes: 'govuk-input govuk-input--width-10',
               label: {
@@ -2707,7 +2711,7 @@ const questionBank = {
             },
             {
               yarKey: 'firstName',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'First name',
@@ -2727,7 +2731,7 @@ const questionBank = {
             },
             {
               yarKey: 'lastName',
-              type: 'input',
+              type: 'text',
               endFieldset: 'true',
               classes: 'govuk-input--width-20',
               label: {
@@ -2838,7 +2842,7 @@ const questionBank = {
             },
             {
               yarKey: 'address1',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Address line 1',
@@ -2858,7 +2862,7 @@ const questionBank = {
             },
             {
               yarKey: 'address2',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Address line 2 (optional)',
@@ -2874,7 +2878,7 @@ const questionBank = {
             },
             {
               yarKey: 'town',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-10',
               label: {
                 text: 'Town',
@@ -2907,7 +2911,7 @@ const questionBank = {
             },
             {
               yarKey: 'postcode',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-5',
               label: {
                 text: 'Business postcode',
@@ -2927,7 +2931,7 @@ const questionBank = {
             },
             {
               yarKey: 'projectPostcode',
-              type: 'input',
+              type: 'text',
               endFieldset: 'true',
               classes: 'govuk-input--width-5',
               label: {
@@ -2988,7 +2992,7 @@ const questionBank = {
             },
             {
               yarKey: 'firstName',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'First name',
@@ -3008,7 +3012,7 @@ const questionBank = {
             },
             {
               yarKey: 'lastName',
-              type: 'input',
+              type: 'text',
               endFieldset: 'true',
               classes: 'govuk-input--width-20',
               label: {
@@ -3119,7 +3123,7 @@ const questionBank = {
             },
             {
               yarKey: 'address1',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Address line 1',
@@ -3139,7 +3143,7 @@ const questionBank = {
             },
             {
               yarKey: 'address2',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Address line 2 (optional)',
@@ -3155,7 +3159,7 @@ const questionBank = {
             },
             {
               yarKey: 'town',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-10',
               label: {
                 text: 'Town',
@@ -3188,7 +3192,7 @@ const questionBank = {
             },
             {
               yarKey: 'postcode',
-              type: 'input',
+              type: 'text',
               endFieldset: 'true',
               classes: 'govuk-input--width-5',
               label: {
@@ -3246,7 +3250,7 @@ const questionBank = {
             },
             {
               yarKey: 'firstName',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'First name',
@@ -3266,7 +3270,7 @@ const questionBank = {
             },
             {
               yarKey: 'lastName',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Last name',
@@ -3286,7 +3290,7 @@ const questionBank = {
             },
             {
               yarKey: 'businessName',
-              type: 'input',
+              type: 'text',
               endFieldset: 'true',
               classes: 'govuk-input--width-20',
               label: {
@@ -3397,7 +3401,7 @@ const questionBank = {
             },
             {
               yarKey: 'address1',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Address line 1',
@@ -3417,7 +3421,7 @@ const questionBank = {
             },
             {
               yarKey: 'address2',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-20',
               label: {
                 text: 'Address line 2 (optional)',
@@ -3433,7 +3437,7 @@ const questionBank = {
             },
             {
               yarKey: 'town',
-              type: 'input',
+              type: 'text',
               classes: 'govuk-input--width-10',
               label: {
                 text: 'Town',
@@ -3466,7 +3470,7 @@ const questionBank = {
             },
             {
               yarKey: 'postcode',
-              type: 'input',
+              type: 'text',
               endFieldset: 'true',
               classes: 'govuk-input--width-5',
               label: {
