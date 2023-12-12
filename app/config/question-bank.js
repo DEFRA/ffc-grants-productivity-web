@@ -1034,11 +1034,11 @@ const questionBank = {
           },
           hint: {
             html: `
-                  <p>You can only apply for a grant of up to 25% of the estimated costs. The 
-                  minimum grant you can apply for this project is £15,000 (25% of £60,000). 
-                  The maximum grant is £100,000 (25% of £400,000).<p/>
-                  <p>Do not include VAT<p/>
-                  <p>Enter amount, for example 95,000<p/>
+                  <p>You can only apply for a grant of up to 25% of the estimated costs.</p>
+                  <p>The minimum grant you can apply for this project is £15,000 (25% of £60,000).</p>
+                  <p>The maximum grant is £100,000 (25% of £400,000).</p>
+                  <p>Do not include VAT</p>
+                  <p>Enter amount, for example 95,000</p>
               `
           },
           validate: [
@@ -1885,11 +1885,11 @@ const questionBank = {
           },
           hint: {
             html: `
-              You can only apply for a grant of up to 40% of the estimated costs.
-              <br/>The minimum grant you can apply for this project is £25,000 (40% of £62,500).
-              <br/>The maximum grant is £500,000 (40% of £1.25 million).
-              <br/><br/>Do not include VAT.
-              <br/><br/>Enter amount, for example 95,000`
+              <p>You can only apply for a grant of up to 40% of the estimated costs.</p>
+              <p>The minimum grant you can apply for this project is £25,000 (40% of £62,500).</p>
+              <p>The maximum grant is £500,000 (40% of £1.25 million).</p>
+              <p>Do not include VAT.</p>
+              <p>Enter amount, for example 95,000</p>`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -3573,7 +3573,7 @@ const questionBank = {
             messageContentPartSolar: `<p>You can check if you can apply for a grant for <a class="govuk-link" href="${urlPrefix}/project-subject" rel="noopener noreferrer">farm productivity project items</a>. The minimum grant is £25,000 (40% of £62,500). The maximum grant amount for both projects together is £500,000. </p>`,
             messageContentPostConditional: `<h2 class="govuk-heading-m">RPA helpline</h2>
             <h3 class="govuk-heading-s">Telephone</h3>
-            Telephone: 0300 0200 301<br/>
+            <p>Telephone: <a href="tel:0300 0200 301">0300 0200 301</a></p><br/>
             Monday to Friday, 9am to 5pm (except public holidays)<br/>
             <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in a new tab)</a></p>
             <h3 class="govuk-heading-s">Email</h3>

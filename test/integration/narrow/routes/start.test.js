@@ -38,7 +38,7 @@ describe('Start page', () => {
     expect(response.payload).toContain('Problems using the online service')
     expect(response.payload).toContain('If you have any problems using the online service, call the RPA and follow the options for the Farming Transformation Fund scheme.')
     expect(response.payload).toContain('Telephone')
-    expect(response.payload).toContain('Telephone: 0300 0200 301')
+    expect(response.payload).toContain('<p>Telephone: <a href=\"tel:0300 0200 301\">0300 0200 301</a></p>')
     expect(response.payload).toContain('Monday to Friday, 9am to 5pm (except public holidays)')
     expect(response.payload).toContain('Find out about call charges')
     expect(response.payload).toContain('Email')
