@@ -3,7 +3,7 @@ const Joi = require('joi')
 // Define config schema
 const schema = Joi.object({
   useRedis: Joi.bool().default(false),
-  expiresIn: Joi.number().default(900 * 1000), // 15 mins in mili sec
+  expiresIn: Joi.number().default(1200 * 1000), // 20 mins in mili sec
   catboxOptions: Joi.object({
     host: Joi.string().required(),
     port: Joi.string().required(),
