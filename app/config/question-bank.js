@@ -1034,11 +1034,11 @@ const questionBank = {
           },
           hint: {
             html: `
-                  <p>You can only apply for a grant of up to 25% of the estimated costs. The 
-                  minimum grant you can apply for this project is £15,000 (25% of £60,000). 
-                  The maximum grant is £100,000 (25% of £400,000).<p/>
-                  <p>Do not include VAT<p/>
-                  <p>Enter amount, for example 95,000<p/>
+                  <p>You can only apply for a grant of up to 25% of the estimated costs.</p>
+                  <p>The minimum grant you can apply for this project is £15,000 (25% of £60,000).</p>
+                  <p>The maximum grant is £100,000 (25% of £400,000).</p>
+                  <p>Do not include VAT</p>
+                  <p>Enter amount, for example 95,000</p>
               `
           },
           validate: [
@@ -1885,11 +1885,11 @@ const questionBank = {
           },
           hint: {
             html: `
-              You can only apply for a grant of up to 40% of the estimated costs.
-              <br/>The minimum grant you can apply for this project is £25,000 (40% of £62,500).
-              <br/>The maximum grant is £500,000 (40% of £1.25 million).
-              <br/><br/>Do not include VAT.
-              <br/><br/>Enter amount, for example 95,000`
+              <p>You can only apply for a grant of up to 40% of the estimated costs.</p>
+              <p>The minimum grant you can apply for this project is £25,000 (40% of £62,500).</p>
+              <p>The maximum grant is £500,000 (40% of £1.25 million).</p>
+              <p>Do not include VAT.</p>
+              <p>Enter amount, for example 95,000</p>`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
