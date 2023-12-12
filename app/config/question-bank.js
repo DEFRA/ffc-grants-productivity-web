@@ -3575,9 +3575,10 @@ const questionBank = {
             <h3 class="govuk-heading-s">Email</h3>
             <a class="govuk-link" title="Send email to RPA" target="_blank" rel="noopener noreferrer" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a><br/><br/>
             <h2 class="govuk-heading-m">What happens next</h2>
-            <p>1. RPA will be in touch when the full application period opens. They will tell you if your project scored well enough to get the full application form.</p>
-            <p>2. If you submit an application, RPA will assess it against other projects and value for money. You will not automatically get a grant. The grant is expected to be highly competitive and you are competing against other projects.</p>
-            <p>3. If your application is successful, you’ll be sent a funding agreement and can begin work on the project.</p>`,
+            <ol class="govuk-list govuk-list--number">
+            <li> RPA will be in touch when the full application period opens. They will tell you if your project scored well enough to get the full application form.</li>
+            <li> If you submit an application, RPA will assess it against other projects and value for money. You will not automatically get a grant. The grant is expected to be highly competitive and you are competing against other projects.</li>
+            <li> If your application is successful, you’ll be sent a funding agreement and can begin work on the project.</li></ol>`,
             warning: {
               text: 'You must not start the project'
             },
