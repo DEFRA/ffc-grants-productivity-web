@@ -80,7 +80,7 @@ const selectField = (data, question) => {
 }
 
 const textField = (data, question, request = null) => {
-  const { yarKey, prefix, suffix, label, classes } = question
+  const { yarKey, prefix, suffix, label, classes, inputmode } = question
   const project = request ? getYarValue(request, 'projectSubject') : null
   if (yarKey === 'projectName') {
     question.hint.text = project === 'Slurry Acidification' ? 'For example, Browns Hill Farm slurry acidification' : 'For example, Browns Hill Farm robotic milking'
@@ -93,7 +93,8 @@ const textField = (data, question, request = null) => {
     suffix,
     label,
     hint: question.hint,
-    value: data || ''
+    value: data || '',
+    inputmode
   }
 }
 
@@ -142,6 +143,9 @@ const getAllInputs = (data, question, conditionalHtml, request) => {
         fieldItems = textField(data[field.yarKey], field, request)
         break
       case 'tel':
+        fieldItems = textField(data[field.yarKey], field, request)
+        break
+      case 'text':
         fieldItems = textField(data[field.yarKey], field, request)
         break
       case 'textarea':
