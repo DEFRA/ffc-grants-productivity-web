@@ -391,9 +391,18 @@ const getPage = async (question, request, h) => {
       // back to project-items if reentering loop with items and not added a new item
       if (getYarValue(request, 'backToItemsSummary')) {
         question.backUrl = `${urlPrefix}/project-items`
-      }else if(([getYarValue(request, 'automaticEligibility')].flat().length === 1 && ![getYarValue(request, 'automaticEligibility')].flat().includes(null)) || getYarValue(request, 'roboticEligibility') === 'No') {
+      
+      } else if(([getYarValue(request, 'automaticEligibility')].flat().length === 1 && ![getYarValue(request, 'automaticEligibility')].flat().includes(null)) || getYarValue(request, 'roboticEligibility') === 'No') {
+        
+        setYarValue(request, 'technologyItems', null)
+        setYarValue(request, 'roboticAutomatic', null)
+        setYarValue(request, 'automaticEligibility', null)
+        setYarValue(request, 'roboticEligibility', null)
+        setYarValue(request, 'technologyDescription', null)
+
         question.backUrl = `${urlPrefix}/technology-items`
-      }else {
+      
+      } else {
         question.backUrl = `${urlPrefix}/technology-description`
       }
 
@@ -403,7 +412,7 @@ const getPage = async (question, request, h) => {
         question.showButton = true
       }
 
-      if (projectItemsList?.length > 0) {
+      if (projectItemsList?.length > 0 && question.backUrl !== `${urlPrefix}/technology-items`) {
         setYarValue(request, 'technologyItems', projectItemsList.at(-1).realItem)
         setYarValue(request, 'roboticAutomatic', projectItemsList.at(-1).type)
         setYarValue(request, 'roboticEligibility', projectItemsList.at(-1).type === 'Robotic' ? 'Yes' : null)
