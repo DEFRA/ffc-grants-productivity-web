@@ -211,7 +211,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(93, 'RAG date reviewed ', todayStr),
           generateRow(54, 'Electronic OA received date ', todayStr),
           generateRow(370, 'Status', 'Pending RPA review'),
-          generateRow(85, 'Full Application Submission Date', (new Date('2025-10-31')).toLocaleDateString('en-GB')),
+          generateRow(85, 'Full Application Submission Date', (new Date('2025-04-30')).toLocaleDateString('en-GB')),
           generateRow(375, 'OA percent', ( desirabilityScore.desirability.overallRating.score )),
           ...addAgentDetails(submission.agentsDetails)
         ]
