@@ -30,7 +30,7 @@ describe('confirm page', () => {
     expect(response.payload).toContain('I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.')
     expect(response.payload).toContain('Improving our schemes')
     expect(response.payload).toContain('So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party working for us, to contact you.')
-    expect(response.payload).toContain('(Optional) I confirm') //checkbox
+    expect(response.payload).toContain('(Optional) I consent to being contacted by Defra or a third party about service improvements') //checkbox
     expect(response.payload).toContain('You can only submit your details once')
     expect(response.payload).toContain('Confirm and send') //button
   })

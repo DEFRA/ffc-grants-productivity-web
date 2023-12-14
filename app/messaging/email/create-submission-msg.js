@@ -211,8 +211,8 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(93, 'RAG date reviewed ', todayStr),
           generateRow(54, 'Electronic OA received date ', todayStr),
           generateRow(370, 'Status', 'Pending RPA review'),
-          generateRow(85, 'Full Application Submission Date', (new Date('2025-10-31')).toLocaleDateString('en-GB')),
-          generateRow(375, 'OA percent', String(( desirabilityScore.desirability.overallRating.score / (submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? 600 : 300) * 100).toFixed(2))), // calculate percentage for robotics or solar based on project
+          generateRow(85, 'Full Application Submission Date', (new Date('2025-04-30')).toLocaleDateString('en-GB')),
+          generateRow(375, 'OA percent', ( desirabilityScore.desirability.overallRating.score )),
           ...addAgentDetails(submission.agentsDetails)
         ]
       }
@@ -295,7 +295,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       technologyUseScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'technology-use') : '',
 
       labourReplaced:  submission?.labourReplaced ?? '',
-      labourReplacedScore: submission.projectSubject !== PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'labour-replaced') : '',
+      labourReplacedScore: (submission.projectSubject !== PROJECT_SUBJECT_SOLAR && (submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')) || submission.projectItemsList?.length > 0)) ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'labour-replaced') : '',
       isLabourReplaced: submission.projectSubject !== PROJECT_SUBJECT_SOLAR && (submission.projectItems?.includes(getQuestionAnswer('project-items', 'project-items-A3')) || submission.projectItemsList?.length > 0),
 
       solarTechnologies: submission.solarTechnologies ? [submission.solarTechnologies].flat().join(' | ') : '',

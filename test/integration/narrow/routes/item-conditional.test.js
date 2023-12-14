@@ -2,7 +2,18 @@ const { crumbToken } = require('./test-helper')
 
 describe('Page: /item-conditional', () => {
     const varList = {
-        projectItemsList: []
+        projectItemsList: [
+            {
+                item: 'hello',
+                type: 'Robotic',
+                index: 0
+            },
+            {
+                item: 'hello',
+                type: 'sdjfhaf',
+                index: 1
+            }
+        ]
     }
 
     jest.mock('../../../../app/helpers/session', () => ({

@@ -1,7 +1,7 @@
 const { crumbToken } = require('./test-helper')
 
 describe('Farmer details page', () => {
-  const varList = { applying: 'someValue' }
+  const varList = { applying: 'someValue', applicant: 'Farmer' }
 
   jest.mock('../../../../app/helpers/session', () => ({
     setYarValue: (request, key, value) => null,

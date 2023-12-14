@@ -48,7 +48,7 @@ describe('Create submission message', () => {
     expect(msg.agentEmail).toBe(null)
   })
 
-  test('Agent submission generates correct message payload', () => {
+  test('Agent submission generates correct message payload - project items list', () => {
     const agentSubmission = require('./submission-agent.json')
     const msg = createMsg(agentSubmission, desirabilityScore)
 
@@ -61,6 +61,20 @@ describe('Create submission message', () => {
     expect(msg.rpaEmail.emailAddress).toBe('FTF@rpa.gov.uk')
   })
 
+  test('Agent submission generates correct message payload - no project items list', () => {
+    const agentSubmission = require('./submission-agent-nolist.json')
+    const msg = createMsg(agentSubmission, desirabilityScore)
+
+    expect(msg).toHaveProperty('agentEmail')
+    expect(msg).toHaveProperty('applicantEmail')
+    expect(msg).toHaveProperty('rpaEmail')
+    expect(msg).toHaveProperty('spreadsheet')
+    expect(msg.agentEmail.emailAddress).toBe(agentSubmission.agentsDetails.emailAddress)
+    expect(msg.applicantEmail.emailAddress).toBe(agentSubmission.farmerDetails.emailAddress)
+    expect(msg.rpaEmail.emailAddress).toBe('FTF@rpa.gov.uk')
+  })
+
+
   test('Email part of message should have correct properties', () => {
     const farmerSubmission = require('./submission-farmer.json')
     const msg = createMsg(farmerSubmission, desirabilityScore)
@@ -71,7 +85,7 @@ describe('Create submission message', () => {
     expect(msg.applicantEmail.details).toHaveProperty(
       'firstName', 'lastName', 'referenceNumber', 'overallRating', 'scoreChance', 'projectSubject', 'isSlurry', 'isRobotics'
       , 'legalStatus', 'location', 'planningPermission', 'projectStart', 'tenancy', 'tenancyLength', 'projectItems', 'projectCost'
-      , 'potentialFunding', 'remainingCost', 'slurryCurrentlyTreated', 'slurryToBeTreated', 'projectImpacts'
+      , 'potentialFunding', 'remainingCost', 'slurryCurrentlyTreated', 'slurryToBeTreated', 'projectImpacts', 'inEngland'
       , 'dataAnalytics', 'dataAnalyticsScore', 'energySourceScore', 'agriculturalSector', 'agriculturalSectorScore', 'technology', 'technologyScore'
       , 'projectName', 'businessName', 'farmerName', 'farmerSurname', 'farmerEmail', 'agentName', 'agentSurname', 'agentBusinessName', 'agentEmail', 'projectImpactsScore'
       , 'contactConsent', 'scoreDate'
