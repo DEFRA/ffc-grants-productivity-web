@@ -423,23 +423,6 @@ const getPage = async (question, request, h) => {
       break
   }
 
-  //  GA events
-  if (url === 'confirmation') {
-    const metrics = {
-      name: gapiService.eventTypes.CONFIRMATION,
-      params: {
-        action: 'Confirmation page reached',
-        label: getYarValue(request, 'projectSubject'), // Solar project items or Robotics project items
-        final_score: getYarValue(request, 'overAllScore').desirability.overallRating.band
-      }
-    }
-    try {
-      await gapiService.sendGAEvent(request, metrics)
-    } catch (err) {
-      console.error('ERROR: ', err)
-    }
-  }
-
   const PAGE_MODEL = getModel(data, question, request, conditionalHtml)
   return h.view('page', PAGE_MODEL)
 }
