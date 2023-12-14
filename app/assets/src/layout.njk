@@ -6,7 +6,7 @@
 {% set urlPrefix = "<%= htmlWebpackPlugin.options.metadata.urlPrefix %>" %}
 {% set assetPath = urlPrefix + "/assets" %}
 {% set timeoutPath = urlPrefix + "/session-timeout" %}
-{% set siteTitle = "Check if you can apply for a Farming Transformation Fund Improving Farm Productivity Grant – GOV.UK" %}
+{% set siteTitle = "Check if you can apply for a Farming Transformation Fund Grant Round 2 – GOV.UK" %}
 
 {% block pageTitle %}
   {{ siteTitle }}
@@ -24,7 +24,7 @@
   {% block header %}
     {{ govukHeader({
     homepageUrl: "https://www.gov.uk",
-    serviceName: "Check if you can apply for a Farming Transformation Fund Improving Farm Productivity Grant",
+    serviceName: "Check if you can apply for a Farming Transformation Fund Grant Round 2",
     serviceUrl: urlPrefix + "/start",
     attributes: {title: "Back to start page"}
   }) }}
