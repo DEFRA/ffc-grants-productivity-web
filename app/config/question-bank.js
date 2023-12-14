@@ -102,7 +102,7 @@ const questionBank = {
           baseUrl: 'project-subject',
           type: 'single-answer',
           minAnswerCount: 1,
-          ga: [{ journeyStart: true }],
+          ga: { journeyStart: true },
           hint: {
             html: `
               If you want to apply for both a farm productivity project and a solar project, you must submit 2 separate applications. 
@@ -1205,6 +1205,7 @@ const questionBank = {
           backUrl: 'remaining-costs-solar',
           nextUrl: 'score',
           preValidationKeys: ['remainingCosts'],
+          ga: { name: 'eligibility_passed', params: {} },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',          
@@ -2107,9 +2108,6 @@ const questionBank = {
           baseUrl: 'project-impact',
           backUrl: 'remaining-costs',
           // preValidationKeys: ['canPayRemainingCost'],
-          ga: [
-            { dimension: 'cm2', value: { type: 'journey-time' } }
-          ],
           nextUrl: 'data-analytics',
           eliminationAnswerKeys: '',
           ineligibleContent: {
@@ -2174,6 +2172,7 @@ const questionBank = {
           backUrl: 'project-impact',
           nextUrl: 'energy-source',
           // preValidationKeys: ['projectImpact'],
+          ga: { name: 'eligibility_passed', params: {} },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Improve productivity</li><li>Introduce innovation</li></ul>',
@@ -2549,10 +2548,6 @@ const questionBank = {
           backUrl: 'score',
           nextUrl: '/productivity/applying',
           // preValidationKeys: ['current-score'],
-          ga: [
-            { dimension: 'cd2', value: { type: 'score' } },
-            { dimension: 'cm1', value: { type: 'journey-time' } }
-          ],
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '',
@@ -2746,7 +2741,6 @@ const questionBank = {
           type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
-          ga: [{ dimension: 'cd3', value: { type: 'yar', key: 'applying' } }],
           allFields: [
             {
               type: 'sub-heading',
@@ -3022,7 +3016,6 @@ const questionBank = {
           type: 'multi-input',
           minAnswerCount: '',
           maxAnswerCount: '',
-          ga: [{ dimension: 'cd3', value: { type: 'yar', key: 'applying' } }],
           allFields: [
             {
               type: 'sub-heading',
@@ -3589,11 +3582,7 @@ const questionBank = {
           url: 'confirmation',
           baseUrl: 'confirmation',
           preValidationKeys: ['applying', 'consentOptional'],
-          ga: [
-            { dimension: 'cd2', value: { type: 'score' } },
-            { dimension: 'cd5', value: { type: 'confirmationId' } },
-            { dimension: 'cm1', value: { type: 'journey-time' } }
-          ],
+          ga: { name: 'confirmation', params: {} },
           maybeEligible: true,
           maybeEligibleContent: {
             reference: {

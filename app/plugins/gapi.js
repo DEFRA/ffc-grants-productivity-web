@@ -22,7 +22,7 @@ exports.plugin = {
             name: gapiService.eventTypes.PAGEVIEW,
             params: {
               page_path: request.route.path,
-              scoreReached: getYarValue(request, 'onScorePage') ? 'Yes' : 'No',
+              scoreReached: getYarValue(request, 'onScorePage') ? '/productivity/score' : '0',
             }
           })
         }

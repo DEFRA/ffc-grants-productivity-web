@@ -418,23 +418,7 @@ const getPage = async (question, request, h) => {
       console.error('ERROR: ', err)
     }
   }
-  if (url === 'score') {
-    const scoreData = getYarValue(request, 'overAllScore')
-    console.log('here: ', 1);
-    // send score to GA
-    try {
-      await gapiService.sendGAEvent(request, {
-        name: gapiService.eventTypes.SCORING,
-        params: {
-          score: scoreData.desirability.overallRating.band,
-          action: 'Score results presented',
-          label: getYarValue(request, 'projectSubject') // Solar project items or Robotics project items
-        }
-      })
-    } catch (err) {
-      console.error('ERROR in GA: ', err)
-    }
-  }
+
   const PAGE_MODEL = getModel(data, question, request, conditionalHtml)
   return h.view('page', PAGE_MODEL)
 }

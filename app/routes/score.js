@@ -117,11 +117,16 @@ module.exports = [{
         setYarValue(request, 'current-score', msgData.desirability.overallRating.band)
         // GA event: scoring
         await gapiService.sendGAEvent(request, {
-          name: gapiService.eventTypes.SCORING,
+          name: gapiService.eventTypes.SCORE,
           params: {
-            score: msgData.desirability.overallRating.band
+            score: msgData.desirability.overallRating.band,
+            action: 'Score results presented',
+          label: getYarValue(request, 'projectSubject') // Solar project items or Robotics project items
           }
         })
+
+        setYarValue(request, 'onScorePage', true)
+
         return h.view(viewTemplate, createModel({
           titleText: msgData.desirability.overallRating.band,
           scoreData: msgData,

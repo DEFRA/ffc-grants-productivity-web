@@ -2,9 +2,7 @@ const appInsights = require('./app-insights')
 const { getYarValue } = require('../helpers/session')
 
 const blockDefaultPageViews = [
-  'start', 'applying', 'project-impact', 'remaining-costs', 'project-cost',
-  'project-cost-solar', 'project-start', 'planning-permission', 'score',
-  'legal-status', 'farming-type'
+  'start', 'applying', 'session-timeout', 'login'
 ]
 const isBlockDefaultPageView = (url) => {
   const currentUrl = url.split('/').pop().toString().toLowerCase()
@@ -15,12 +13,11 @@ const grant_type = 'Productivity'
 
 const eventTypes = {
   PAGEVIEW: 'pageview',
-  ELIGIBILITIES: 'eligibilities',
   ELIGIBILITY: 'eligibility_passed',
   CONFIRMATION: 'confirmation',
   ELIMINATION: 'elimination',
   EXCEPTION: 'exception',
-  SCORING: 'scoring'
+  SCORE: 'score'
 }
 
 const sendGAEvent = async (request, metrics) => {
@@ -31,14 +28,16 @@ const sendGAEvent = async (request, metrics) => {
   const { name, params } = metrics
   const isEliminationEvent = name === eventTypes.ELIMINATION
   const isEligibilityEvent = name === eventTypes.ELIGIBILITY
+  const isScoreEvent = name === eventTypes.SCORE
   const isConfirmationEvent = name === eventTypes.CONFIRMATION
-  const isEligibilitiesEvent = name === eventTypes.ELIGIBILITIES
   const dmetrics = {
     ...params,
     ...(isEliminationEvent && { elimination_time: timeSinceStart }),
     ...(isEligibilityEvent && { eligibility_time: timeSinceStart }),
-    ...(isEligibilitiesEvent && { reference_cost: 'Eligible' }),
-    ...(isConfirmationEvent && { final_score: 'Eligible', user_type: getYarValue(request, 'applying'), confirmation_time: timeSinceStart }),
+    ...(isScoreEvent && { score_time: timeSinceStart }),
+    ...(isConfirmationEvent && { final_score: getYarValue(request, 'current-score'), user_type: getYarValue(request, 'applying'), confirmation_time: timeSinceStart }),
+    ...(params?.score_presented && { score_presented: params.score_presented }),
+    ...(params?.scoreReached && { scoreReached: params.scoreReached }),
     grant_type,
     page_title: page_path,
     host_name
