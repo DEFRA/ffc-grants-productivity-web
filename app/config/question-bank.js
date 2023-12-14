@@ -1439,8 +1439,7 @@ const questionBank = {
           id: 'roboticAutomatic',
           hint: {
             html: 
-            ` <div id="roboticAutomatic" class="govuk-hint">
-                There are 4 eligibility criteria for grant funding.<br/><br/>
+            ` There are 4 eligibility criteria for grant funding.<br/><br/>
                 Eligible technology should:
                   <ul>
                     <li>have a sensing system and be able to understand its environment</li>
@@ -1448,7 +1447,6 @@ const questionBank = {
                     <li>be able to control its actuators (the devices that move robot joints)</li>
                     <li>work in a continuous loop</li>
                   <ul>
-              </div>
             `
           },
           sidebar: {
