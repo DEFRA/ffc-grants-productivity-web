@@ -6,7 +6,7 @@ describe('Start page', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('Check if you can apply for a Farming Transformation Fund Improving Farm Productivity Grant')
+    expect(response.payload).toContain('Check if you can apply for a Farming Transformation Fund Grant Round 2')
     expect(response.payload).toContain('Use this service to:')
     expect(response.payload).toContain('check if you are eligible to apply for a grant for your project (takes about 5 minutes)')
     expect(response.payload).toContain('check how well your project fits the funding priorities (takes about 15 minutes if you have all the project details)')
