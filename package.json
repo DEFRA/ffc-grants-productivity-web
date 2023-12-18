@@ -51,6 +51,9 @@
     "uuid": "^8.3.2"
   },
   "overrides": {
+    "@azure/identity": {	
+      "jsonwebtoken": "9.0.0"	
+    },
     "semver": "7.5.3"
   },
   "devDependencies": {
