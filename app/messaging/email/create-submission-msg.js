@@ -147,8 +147,8 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(2, 'FA or OA', 'Outline Application'),
           generateRow(40, 'Scheme', 'Farming Transformation Fund'),
           generateRow(39, 'Sub scheme', 'FTF-Productivity Round 2'),
-          generateRow(43, 'Theme', 'Robotics, automation and solar'),
-          generateRow(90, 'Project type', submission.projectSubject),
+          generateRow(43, 'Theme', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? 'Robotics and automation' : 'Solar PV'),
+          generateRow(90, 'Project type', ''),
           generateRow(41, 'Owner', 'RD'),
           generateRow(341, 'Grant Launch Date', (new Date('2024-01-17')).toLocaleDateString('en-GB')),
           generateRow(385, 'Applicant Type', submission.applicant),
@@ -160,7 +160,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
 
           // robotics project items
           generateRow(464, 'Project Responsibility', submission.tenancy === getQuestionAnswer('tenancy', 'tenancy-A2') ? submission.projectResponsibility : 'N/A'),
-          generateRow(44, 'Project Items', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatProjectItems(submission.projectItemsList, submission.projectItems) : 'N/A'),
+          generateRow(44, 'Project Items', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatProjectItems(submission.projectItemsList, submission.projectItems) : [submission.solarTechnologies].flat().join(' ~ ')),
           generateRow(474, 'Technology Description', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? formatDescriptions(submission.projectItemsList) : 'N/A'), 
           generateRow(472, 'Improve Productivity', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? submission.projectImpact : 'N/A'),
 
