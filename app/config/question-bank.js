@@ -1586,15 +1586,13 @@ const questionBank = {
           id: 'roboticEligibility',
           hint: {
             html: 
-            ` <div id="roboticEligibility">
-                To be eligible, your robotic technology must:
+            `To be eligible, your robotic technology must:
                   <ul>
                     <li>have a sensing system and can understand its environment</li>
                     <li>make decisions and plan</li>
                     <li>be able to control its actuators (the devices that move robot joints)</li>
                     <li>work in a continuous loop</li>
                   <ul>
-              </div>
             `
           },
           ineligibleContent: {
@@ -2521,7 +2519,7 @@ const questionBank = {
             },
             {
               yarKey: 'businessName',
-              type: 'input',
+              type: 'text',
               label: {
                 text: 'Business name',
                 classes: 'govuk-label'
@@ -3583,7 +3581,7 @@ const questionBank = {
               text: 'If you want your landlord to underwrite your project, you should agree this with them before you begin your full application. Your landlord will need to complete a form at full application. This will confirm that they agree to take over your project, including conditions in your Grant Funding Agreement, if your tenancy ends.'
             },
             messageLink: {
-              url: 'https://defragroup.eu.qualtrics.com/jfe/preview/SV_9ugumqZO9w4M20e?Q_CHL=preview&Q_SurveyVersionID=current',
+              url: 'https://defragroup.eu.qualtrics.com/jfe/form/SV_9ugumqZO9w4M20e',
               title: 'What do you think of this service?',
               target: '_blank'
             },
