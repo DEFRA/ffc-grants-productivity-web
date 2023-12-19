@@ -4,6 +4,7 @@ describe('Page: /labour-replaced', () => {
     const varList = {
         labourReplaced: '',
         technologyUse: 'Yes, we’re using it now',
+        projectItems: ['Robotic and automatic technology']
     }
 
     jest.mock('../../../../app/helpers/session', () => ({

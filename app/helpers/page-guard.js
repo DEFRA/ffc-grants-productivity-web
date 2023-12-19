@@ -66,6 +66,8 @@ function guardPage (request, guardData) {
 
         if (guardData?.andCheck && getYarValue(request, 'projectSubject') != getQuestionAnswer('project-subject', guardData.andCheck)) {
           return true
+        }else if(isContractor && getYarValue(request, 'tenancy') && guardData.andCheck === 'project-subject-A1'){
+          return true
         }
 
         for (let i = 0; i < preValidationList.length; i++) {
