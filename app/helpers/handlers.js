@@ -78,6 +78,17 @@ const getPage = async (question, request, h) => {
   //   }
   // }
 
+  if (url === 'remove-item' && request.url.href.includes('?')) {
+
+    const queryParams = new URLSearchParams(request.url.href.split('?')[1])
+
+    setYarValue(request, 'confirmItem', queryParams.get('item'))
+    setYarValue(request, 'index', queryParams.get('index'))
+
+    return h.redirect('/productivity/remove-item')
+
+  }
+
   if(url === 'technology-items') {
 
     // reset values if going back to this page from automatic-eligibility or robotic-eligibility if not eligible
