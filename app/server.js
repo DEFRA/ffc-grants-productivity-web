@@ -24,8 +24,6 @@ async function createServer () {
     }]
   })
 
-  // await server.register(require('./plugins/query-string'))
-
 
   if (authConfig.enabled) {
     await server.register(require('./plugins/auth'))
