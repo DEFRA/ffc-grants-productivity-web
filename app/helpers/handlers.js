@@ -15,12 +15,12 @@ const { startPageUrl, urlPrefix } = require('../config/server')
 
 const emailFormatting = require('./../messaging/email/process-submission')
 
-const resetYarValues = (applying, request) => {
-  setYarValue(request, 'agentsDetails', null)
-  setYarValue(request, 'contractorsDetails', null)
-  setYarValue(request, 'farmerDetails', null)
-  setYarValue(request, 'reachedCheckDetails', false)
-}
+// const resetYarValues = (applying, request) => {
+//   setYarValue(request, 'agentsDetails', null)
+//   setYarValue(request, 'contractorsDetails', null)
+//   setYarValue(request, 'farmerDetails', null)
+//   setYarValue(request, 'reachedCheckDetails', false)
+// }
 
 const getConfirmationId = (guid, journey) => {
   const prefix = journey.toLowerCase() === 'solar project items' ? 'S' : 'R'
@@ -112,6 +112,8 @@ const getPage = async (question, request, h) => {
     } 
   }
 
+  await processGA(question, request)
+
   if (question.maybeEligible) {
     let { maybeEligibleContent } = question
     maybeEligibleContent.title = question.title
@@ -126,21 +128,8 @@ const getPage = async (question, request, h) => {
         const overAllScore = getYarValue(request, 'overAllScore')
         const emailData = await emailFormatting({ body: createMsg.getAllDetails(request, confirmationId), overAllScore, correlationId: request.yar.id })
         await senders.sendDesirabilitySubmitted(emailData, request.yar.id)
-        await gapiService.sendDimensionOrMetrics(request, [{
-          dimensionOrMetric: gapiService.dimensions.CONFIRMATION,
-          value: confirmationId
-        }, {
-          dimensionOrMetric: gapiService.dimensions.FINALSCORE,
-          value: 'Eligible'
-        },
-        {
-          dimensionOrMetric: gapiService.metrics.CONFIRMATION,
-          value: 'TIME'
-        }
-        ])
-        console.log('Confirmation event sent')
       } catch (err) {
-        console.log('ERROR: ', err)
+        console.error('ERROR: ', err)
       }
       maybeEligibleContent = {
         ...maybeEligibleContent,
@@ -307,9 +296,6 @@ const getPage = async (question, request, h) => {
   //     request
   //   )
   // }
-  if (question.ga) {
-    await gapiService.processGA(request, question.ga, confirmationId)
-  }
   if (url === 'check-details') {
     setYarValue(request, 'reachedCheckDetails', true)
     const applying = getYarValue(request, 'applying')
@@ -373,7 +359,6 @@ const getPage = async (question, request, h) => {
     return h.view('check-details', MODEL)
   }
   switch (url) {
-    case 'score':
     case 'agents-details': {
         if (getYarValue(request, 'projectSubject') === 'Solar project items' ) {
           question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/farmers-details`
@@ -452,13 +437,14 @@ const getPage = async (question, request, h) => {
   }
 
   const PAGE_MODEL = getModel(data, question, request, conditionalHtml)
-
   return h.view('page', PAGE_MODEL)
 }
 
-const showPostPage = (currentQuestion, request, h) => {
+const showPostPage = async (currentQuestion, request, h) => {
   const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields, replace } = currentQuestion
-
+    if (baseUrl !== 'score') {
+    setYarValue(request, 'onScorePage', false)
+  }
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
   const payload = request.payload
   let thisAnswer
@@ -587,8 +573,12 @@ const showPostPage = (currentQuestion, request, h) => {
   }
   const errors = checkErrors(payload, currentQuestion, h, request)
   if (errors) {
-    gapiService.sendValidationDimension(request)
-    
+    gapiService.sendGAEvent(request, {
+      name: gapiService.eventTypes.EXCEPTION,
+      params: {
+        errors: errors.length
+      }
+    })
     return errors
   }
 
@@ -596,7 +586,9 @@ const showPostPage = (currentQuestion, request, h) => {
   if (thisAnswer?.notEligible ||
     (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)
   ) {
-    gapiService.sendEligibilityEvent(request, !!thisAnswer?.notEligible)
+    gapiService.sendGAEvent(request, {
+      name: gapiService.eventTypes.ELIMINATION
+    })
 
     // if (thisAnswer?.alsoMaybeEligible) {
     //   const {
@@ -649,6 +641,7 @@ const showPostPage = (currentQuestion, request, h) => {
     setYarValue(request, 'remainingCost', remainingCost)
     setYarValue(request, 'projectCost', projectCost)
   }
+
   
   let isSolar = getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A2')
   let isContractor = getYarValue(request, 'applicant') === getQuestionAnswer('applicant','applicant-A2')
@@ -805,6 +798,8 @@ const showPostPage = (currentQuestion, request, h) => {
     default:
       break
   }
+
+    
   return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.secBtn))
 }
 
@@ -819,6 +814,18 @@ const getPostHandler = (currentQuestion) => {
     return showPostPage(currentQuestion, request, h)
   }
 }
+
+const processGA = async (question, request) => {
+  if (question.ga) {
+    if (question.ga.journeyStart) {
+      setYarValue(request, 'journey-start-time', Date.now())
+      console.log('[JOURNEY STARTED] ')
+    } else {
+      await gapiService.sendGAEvent(request, question.ga)
+    }
+  }
+}
+
 
 module.exports = {
   getHandler,

@@ -115,14 +115,18 @@ module.exports = [{
             break
         }
         setYarValue(request, 'current-score', msgData.desirability.overallRating.band)
-        await gapiService.sendDimensionOrMetrics(request, [{
-          dimensionOrMetric: gapiService.dimensions.SCORE,
-          value: msgData.desirability.overallRating.band
-        },
-        {
-          dimensionOrMetric: gapiService.metrics.SCORE,
-          value: 'TIME'
-        }])
+        // GA event: scoring
+        await gapiService.sendGAEvent(request, {
+          name: gapiService.eventTypes.SCORE,
+          params: {
+            score: msgData.desirability.overallRating.band,
+            action: 'Score results presented',
+          label: getYarValue(request, 'projectSubject') // Solar project items or Robotics project items
+          }
+        })
+
+        setYarValue(request, 'onScorePage', true)
+
         return h.view(viewTemplate, createModel({
           titleText: msgData.desirability.overallRating.band,
           scoreData: msgData,
@@ -130,7 +134,13 @@ module.exports = [{
           scoreChance: scoreChance
         }, request))
       } else {
-        await gapiService.sendEvent(request, gapiService.categories.EXCEPTION, 'Error')
+        // GA event: error
+        await gapiService.sendGAEvent(request, {
+          name: gapiService.eventTypes.EXCEPTION,
+          params: {
+            exceptionDescription: 'Score not received'
+          }
+        })
         throw new Error('Score not received.')
       }
     } catch (error) {

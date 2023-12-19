@@ -55,13 +55,14 @@ async function createServer () {
       ]
     }
   })
-  // GTM Server side
+  // Google Analytics 4
   await server.register({
     plugin: require('./plugins/gapi'),
     options: {
       propertySettings: [
         {
           id: config.googleTagManagerServerKey,
+          key: config.analyticsPropertyApi,
           hitTypes: ['pageview']
         }
       ],
@@ -148,7 +149,8 @@ async function createServer () {
       govukAssetpath: '/assets',
       serviceName: 'FFC Grants Service',
       pageTitle: 'FFC Grants Service - GOV.UK',
-      googleTagManagerKey: config.googleTagManagerKey
+      googleTagManagerKey: config.googleTagManagerKey,
+      analyticsTagKey: config.analyticsTagKey
     }
   })
 
@@ -156,13 +158,13 @@ async function createServer () {
 
   function getSecurityPolicy () {
     return "default-src 'self';" +
-            "object-src 'none';" +
-            "script-src  'unsafe-hashes' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com/ https://www.google-analytics.com https://www.googletagmanager.com/gtm.js" +
-            "form-action 'self';" +
-            "base-uri 'self';" +
-            "connect-src 'self' https://www.google-analytics.com;" +
-            "style-src 'self' 'unsafe-inline' https://tagmanager.google.com https://fonts.googleapis.com;" +
-            "img-src 'self' data: ssl.gstatic.com www.gstatic.com www.google-analytics.com"
+      "object-src 'none';" +
+      "script-src 'self' www.google-analytics.com *.googletagmanager.com ajax.googleapis.com *.googletagmanager.com/gtm.js 'unsafe-inline' 'unsafe-eval' 'unsafe-hashes';" +
+      "form-action 'self';" +
+      "base-uri 'self';" +
+      "connect-src 'self' *.google-analytics.com *.analytics.google.com *.googletagmanager.com;" +
+      "style-src 'self' 'unsafe-inline' tagmanager.google.com *.googleapis.com;" +
+      "img-src 'self' *.google-analytics.com *.googletagmanager.com;"
   }
 }
 module.exports = createServer
