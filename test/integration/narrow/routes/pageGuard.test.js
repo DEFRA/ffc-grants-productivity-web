@@ -362,6 +362,8 @@ describe('Page Guard', () => {
   it('project-items page should load start page if the applicant is Contractor', async () => {
 
     varList.applicant = 'Contractor'
+    varList.tenancy = 'Yes'
+    varList.projectSubject = 'Farm productivity project items'
 
     server = await createServer()
     const getOptions = {
