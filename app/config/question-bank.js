@@ -1586,15 +1586,13 @@ const questionBank = {
           id: 'roboticEligibility',
           hint: {
             html: 
-            ` <div id="roboticEligibility">
-                To be eligible, your robotic technology must:
+            `To be eligible, your robotic technology must:
                   <ul>
                     <li>have a sensing system and can understand its environment</li>
                     <li>make decisions and plan</li>
                     <li>be able to control its actuators (the devices that move robot joints)</li>
                     <li>work in a continuous loop</li>
                   <ul>
-              </div>
             `
           },
           ineligibleContent: {
