@@ -1,3 +1,4 @@
+const { validate } = require('uuid')
 const { ALL_QUESTIONS } = require('../../../../app/config/question-bank')
 
 const senders = require('../../../../app/messaging/senders')
@@ -124,6 +125,9 @@ describe('All default GET routes', () => {
         varList.projectSubject = 'Solar project items'
       }else if(question.key === 'remaining-costs-solar'){
         varList.projectSubject = 'Solar project items'
+      }else if(question.key === 'project-items'){
+        varList.applicant = 'Farmer'
+        varList.tenancy = 'Yes'
       }
 
       const options = {
