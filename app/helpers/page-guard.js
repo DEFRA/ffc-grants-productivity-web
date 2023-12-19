@@ -23,6 +23,8 @@ function guardPage (request, guardData) {
       return true
     }else if(guardData.preValidationRule === 'NOTINCLUDES' && isContractor && getYarValue(request, 'tenancy')){
       return false
+    }else if(guardData.preValidationRule === 'OR' && isContractor && getYarValue(request, 'tenancy') && guardData.andCheck === 'project-subject-A1'){
+      return true
     }
 
     if (Array.isArray(guardData)) {

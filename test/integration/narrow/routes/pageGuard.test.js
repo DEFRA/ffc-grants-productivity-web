@@ -359,5 +359,19 @@ describe('Page Guard', () => {
     expect(getResponse.statusCode).toBe(302)
     expect(getResponse.headers.location).toBe(process.env.START_PAGE_URL)
   })
+  it('project-items page should load start page if the applicant is Contractor', async () => {
+
+    varList.applicant = 'Contractor'
+
+    server = await createServer()
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-items`
+    }
+
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toBe(302)
+    expect(getResponse.headers.location).toBe(process.env.START_PAGE_URL)
+  })
 
 })
