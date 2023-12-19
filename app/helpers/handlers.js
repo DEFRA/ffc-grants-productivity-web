@@ -112,6 +112,8 @@ const getPage = async (question, request, h) => {
     } 
   }
 
+  await processGA(question, request)
+
   if (question.maybeEligible) {
     let { maybeEligibleContent } = question
     maybeEligibleContent.title = question.title
@@ -812,6 +814,18 @@ const getPostHandler = (currentQuestion) => {
     return showPostPage(currentQuestion, request, h)
   }
 }
+
+const processGA = async (question, request) => {
+  if (question.ga) {
+    if (question.ga.journeyStart) {
+      setYarValue(request, 'journey-start-time', Date.now())
+      console.log('[JOURNEY STARTED] ')
+    } else {
+      await gapiService.sendGAEvent(request, question.ga)
+    }
+  }
+}
+
 
 module.exports = {
   getHandler,
