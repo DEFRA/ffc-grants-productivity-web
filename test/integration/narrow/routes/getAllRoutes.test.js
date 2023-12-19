@@ -128,6 +128,9 @@ describe('All default GET routes', () => {
       }else if(question.key === 'project-items'){
         varList.applicant = 'Farmer'
         varList.tenancy = 'Yes'
+      }else if(question.key === 'labour-replaced'){
+        varList.projectItems = 'Robotic and automatic technology',
+        varList. technologyUse = 'Yes, we’re using it now'
       }
 
       const options = {
