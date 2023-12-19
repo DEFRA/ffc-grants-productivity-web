@@ -10,7 +10,7 @@
     "lint": "standard",
     "lint-fix": "standard --fix",
     "lint-changed": "standard --fix $(git diff --name-only HEAD | xargs)",
-    "test": "jest --runInBand --detectOpenHandles",
+    "test": "jest --runInBand --forceExit",
     "test:watch": "jest --watch",
     "start:watch": "npm-run-all --parallel build:watch start:nodemon",
     "start:nodemon": "nodemon --verbose --inspect=0.0.0.0 --ext js,njk --legacy-watch app/index.js"
@@ -44,15 +44,15 @@
     "dotenv": "^16.0.3",
     "ffc-messaging": "^2.6.5",
     "ffc-protective-monitoring": "^1.0.3",
-    "govuk-frontend": "^4.3.1",
+    "govuk-frontend": "^4.7.0",
     "joi": "^17.6.0",
     "jsdom": "^22.0.0",
     "nunjucks": "^3.2.3",
     "uuid": "^8.3.2"
   },
   "overrides": {
-    "@azure/identity": {
-      "jsonwebtoken": "9.0.0"
+    "@azure/identity": {	
+      "jsonwebtoken": "9.0.0"	
     },
     "semver": "7.5.3"
   },
@@ -74,7 +74,7 @@
     "standard": "^16.0.3",
     "string-replace-loader": "^3.1.0",
     "style-loader": "^3.3.1",
-    "webpack": "^5.74.0",
+    "webpack": "^5.77.0",
     "webpack-cli": "^4.10.0"
   },
   "standard": {
