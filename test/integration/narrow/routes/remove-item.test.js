@@ -84,14 +84,14 @@ describe('Remove item page', () => {
         varList.errorForRemove = 'the other robotic technology'
         const Options = {
             method: 'GET',
-            url: `${global.__URLPREFIX__}/remove-item`,
+            url: `${global.__URLPREFIX__}/remove-item?item=hi&index=1`,
             payload: { crumb: crumbToken },
             headers: { cookie: 'crumb=' + crumbToken }
         }
         
         const response = await global.__SERVER__.inject(Options)
-        expect(response.statusCode).toBe(200)
-        expect(response.payload).toContain('Are you sure you want to remove the other robotic technology?')
+        expect(response.statusCode).toBe(302)
+        expect(response.headers.location).toBe('/productivity/remove-item')
     })
 
     it('should load page successfully - other auto item', async () => {
