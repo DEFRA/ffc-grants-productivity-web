@@ -2405,7 +2405,12 @@ const questionBank = {
           hint: {
             text: 'One job is equal to 30 hours or more per week'
           },
-          preValidationKeys: ['technologyUse'],
+          preValidationObject: {
+            preValidationKeys: ['projectItems', 'technologyUse'],
+            preValidationAnswer: ['project-items-A3'],
+            preValidationRule: 'SPECIFICANDANY',
+            preValidationUrls: ['project-items', 'technology-use']
+          },
           url: 'labour-replaced',
           baseUrl: 'labour-replaced',
           backUrl: 'technology-use',
