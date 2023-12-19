@@ -2521,7 +2521,7 @@ const questionBank = {
             },
             {
               yarKey: 'businessName',
-              type: 'input',
+              type: 'text',
               label: {
                 text: 'Business name',
                 classes: 'govuk-label'
