@@ -2,7 +2,8 @@ const { crumbToken } = require('./test-helper')
 
 describe('Robotics Energy Source Page', () => {
   const varList = { 
-    energySource: ['Biofuels', 'another source']
+    energySource: ['Biofuels', 'another source'],
+    dataAnalytics: 'Yes, we have the technology already'
   }
 
   jest.mock('../../../../app/helpers/session', () => ({

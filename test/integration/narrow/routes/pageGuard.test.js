@@ -171,7 +171,8 @@ describe('Page Guard', () => {
     expect(getResponse.payload).toContain('Is the planned project in England?')
   })
 
-   it('should redirect to start page if the user skip journey question - old way', async () => {
+
+  it('should redirect to start page if the user skip journey question - old way', async () => {
     varList.projectSubject = null
     server = await createServer()
     const getOptions = {
@@ -197,5 +198,166 @@ describe('Page Guard', () => {
     expect(response.payload).toContain('Who are you?')
   })
 
+  it('NOT - should load start page in preValidationKeys is not answered', async () => {
+
+    varList.applicant = null
+
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/farmers-details`
+    }
+
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toBe(302)
+    expect(getResponse.headers.location).toBe(process.env.START_PAGE_URL)
+  })
+
+  it('SPECIFICANDANY - should load start page if first parameter is not entered', async () => {
+
+    varList.solarTechnologies = 'fake data'
+    varList.solarOutput = 'Up to 50kW'
+
+    server = await createServer()
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-cost-solar`
+    }
+
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toBe(302)
+    expect(getResponse.headers.location).toBe(process.env.START_PAGE_URL)
+  })
+
+  it('SPECIFICANDANY - should load start page if first parameter is not entered', async () => {
+
+    varList.solarTechnologies = null
+    varList.solarOutput = null
+
+    server = await createServer()
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-cost-solar`
+    }
+
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toBe(302)
+    expect(getResponse.headers.location).toBe(process.env.START_PAGE_URL)
+  })
+
+
+  it('SPECIFICANDANY - should load project cost solar page if first parameter is prevalidation answer and second parameter is any', async () => {
+
+    varList.solarTechnologies = 'Solar PV panels'
+    varList.solarOutput = 'Up to 50kW'
+    varList.solarInstallation = 'On a rooftop'
+
+    server = await createServer()
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-cost-solar`
+    }
+
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toBe(200)
+    expect(getResponse.payload).toContain('What is the total estimated cost of the solar project items?')
+  })
+
+  it('SPECIFICANDANY - should load project cost solar page if first parameter is not prevalidation answered and second parameter is not needed.', async () => {
+
+    varList.solarTechnologies = 'An electrical grid connection'
+    varList.solarOutput = null
+    varList.solarInstallation = null
+
+    server = await createServer()
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/project-cost-solar`
+    }
+
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toBe(200)
+    expect(getResponse.payload).toContain('What is the total estimated cost of the solar project items?')
+  })
+
+
+  it('NOTOR - should load start page if first parameter or second preValidationAnswer is entered', async () => {
+
+    varList.automaticEligibility = 'None of the above'
+    varList.roboticEligibility = 'Yes'
+
+    server = await createServer()
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/technology-description`
+    }
+
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toBe(302)
+    expect(getResponse.headers.location).toBe(process.env.START_PAGE_URL)
+  })
+
+  it('NOTOR - should load start page if first parameter or second is not entered', async () => {
+
+    varList.automaticEligibility = null
+    varList.roboticEligibility = null
+
+    server = await createServer()
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/technology-description`
+    }
+
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toBe(302)
+    expect(getResponse.headers.location).toBe(process.env.START_PAGE_URL)
+  })
+
+
+  it('NOTOR - should load technology-description page if first parameter or second preValidationAnswer is not entered', async () => {
+
+    varList.roboticEligibility = 'Yes'
+    varList.roboticAutomatic= 'Robotic'
+    varList.technologyItems = 'Harvesting technology'
+
+    server = await createServer()
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/technology-description`
+    }
+
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toBe(200)
+    expect(getResponse.payload).toContain('Describe the harvesting technology')
+  })
+
+  it('NOTINCLUDES - should load start page if expected the preValidationAnswer is not entered', async () => {
+
+    varList.solarTechnologies = 'An electrical grid connection'
+
+    server = await createServer()
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/solar-installation`
+    }
+
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toBe(302)
+    expect(getResponse.headers.location).toBe(process.env.START_PAGE_URL)
+  })
+
+  it('NOTINCLUDES - should load start page if the preValidationAnswer is not entered', async () => {
+
+    varList.solarTechnologies = null
+
+    server = await createServer()
+    const getOptions = {
+      method: 'GET',
+      url: `${global.__URLPREFIX__}/solar-installation`
+    }
+
+    const getResponse = await server.inject(getOptions)
+    expect(getResponse.statusCode).toBe(302)
+    expect(getResponse.headers.location).toBe(process.env.START_PAGE_URL)
+  })
 
 })

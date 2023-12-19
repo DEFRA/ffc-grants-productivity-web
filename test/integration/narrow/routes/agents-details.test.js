@@ -208,7 +208,7 @@ describe('Agent details page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/productivity/farmers-details')
+    expect(postResponse.headers.location).toBe('farmers-details')
   })
   it('should store user response and redirects to farmer details page, if the applicant is farmer', async () => {
     const postOptions = {
@@ -231,7 +231,7 @@ describe('Agent details page', () => {
 
     const postResponse = await global.__SERVER__.inject(postOptions)
     expect(postResponse.statusCode).toBe(302)
-    expect(postResponse.headers.location).toBe('/productivity/farmers-details')
+    expect(postResponse.headers.location).toBe('farmers-details')
   })
 
   it('should store user response and redirects to contractor details page, if the applicant is contractor', async () => {

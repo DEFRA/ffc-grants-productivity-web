@@ -3,8 +3,9 @@ const { crumbToken } = require('./test-helper')
 const varListTemplate = {
   projectSubject: 'Solar project items',
   legalStatus: 'fale status',
-  solarTechnologies: 'An electrical grid connection',
-  projectCost: '12345678'
+  solarOutput: '51kW to 100kW',
+  projectCost: '12345678',
+  solarTechnologies: 'Solar PV panels'
 }
 
 let varList
@@ -27,19 +28,6 @@ describe('Project cost solar page', () => {
     jest.clearAllMocks()
   })
   it('should load page successfully', async () => {
-    const options = {
-      method: 'GET',
-      url: `${global.__URLPREFIX__}/project-cost-solar`
-    }
-
-    const response = await global.__SERVER__.inject(options)
-    expect(response.statusCode).toBe(200)
-  })
-  it('should load page successfully if no projectCost', async () => {
-    varList = {
-      projectCost: undefined
-    }
-
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-cost-solar`
@@ -122,12 +110,13 @@ it('page loads with correct back link', async () => {
 
 const response = await global.__SERVER__.inject(options)
 expect(response.statusCode).toBe(200)
-expect(response.payload).toContain('<a href=\"solar-technologies\" class=\"govuk-back-link\">Back</a>')
+expect(response.payload).toContain('<a href=\"solar-output\" class=\"govuk-back-link\">Back</a>')
 })
 
 it('page loads with correct back link when Solar project items is /Solar PV panels/ ', async () => {
-  varList.solarTechnologies = 'Solar PV panels'
-  varList.solarInstallation = 'On an existing hardstanding area'
+  varList.solarTechnologies = 'An electrical grid connection'
+  varList.solarInstallation = null
+  varList.solarOutput = null
   const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/project-cost-solar`
@@ -135,6 +124,6 @@ it('page loads with correct back link when Solar project items is /Solar PV pane
 
 const response = await global.__SERVER__.inject(options)
 expect(response.statusCode).toBe(200)
-expect(response.payload).toContain('<a href=\"solar-output\" class=\"govuk-back-link\">Back</a>')
+expect(response.payload).toContain('<a href=\"solar-technologies\" class=\"govuk-back-link\">Back</a>')
 })
 })

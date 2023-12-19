@@ -6,7 +6,7 @@
 {% set urlPrefix = "<%= htmlWebpackPlugin.options.metadata.urlPrefix %>" %}
 {% set assetPath = urlPrefix + "/assets" %}
 {% set timeoutPath = urlPrefix + "/session-timeout" %}
-{% set siteTitle = "Check if you can apply for a Farming Transformation Fund Improving Farm Productivity Grant – GOV.UK" %}
+{% set siteTitle = "Check if you can apply for a Farming Transformation Fund Grant Round 2 – GOV.UK" %}
 
 {% block pageTitle %}
   {{ siteTitle }}
@@ -23,8 +23,8 @@
 
   {% block header %}
     {{ govukHeader({
-    homepageUrl: urlPrefix + "/start",
-    serviceName: "Check if you can apply for a Farming Transformation Fund Improving Farm Productivity Grant",
+    homepageUrl: "https://www.gov.uk",
+    serviceName: "Check if you can apply for a Farming Transformation Fund Grant Round 2",
     serviceUrl: urlPrefix + "/start",
     attributes: {title: "Back to start page"}
   }) }}
@@ -58,35 +58,31 @@
 
   {% block footer %}
     {{ govukFooter({
-  meta: {
-  html: '<h2 class="govuk-visually-hidden">Support links</h2>
-          <ul class="govuk-footer__inline-list">
-            <li class="govuk-footer__inline-list-item">
-              <a class="govuk-footer__link" href="<%= htmlWebpackPlugin.options.metadata.urlPrefix %>/accessibility" rel="noopener noreferrer">
-                Accessibility
-              </a>
-            </li>
+      meta: {
+      items: [
+          {
+            href: "<%= htmlWebpackPlugin.options.metadata.urlPrefix %>/accessibility",
+            text: "Accessibility"
+          },
+          {
+            href: "<%= htmlWebpackPlugin.options.metadata.urlPrefix %>/cookies",
+            text: "Cookies"
+          },
+          {
+            href: surveyLink,
+            text: "Feedback",
+            attributes: { target: "_blank", rel:"noopener noreferrer" }
+          },
+          {
+            href: "https://www.gov.uk/government/organisations/rural-payments-agency/about/personal-information-charter",
+            text: "Privacy",
+            attributes: { target: "_blank", rel:"noopener noreferrer" }
 
-            <li class="govuk-footer__inline-list-item">
-              <a class="govuk-footer__link" href="<%= htmlWebpackPlugin.options.metadata.urlPrefix %>/cookies" rel="noopener noreferrer">
-                Cookies
-              </a>
-            </li>
-              <li class="govuk-footer__inline-list-item">
-              <a class="govuk-footer__link" target="_blank" href="'+ surveyLink +'" rel="noopener noreferrer">
-                Feedback
-              </a>
-            </li>
-
-            <li class="govuk-footer__inline-list-item">
-              <a class="govuk-footer__link" href="https://www.gov.uk/government/organisations/rural-payments-agency/about/personal-information-charter" target="_blank" rel="noopener noreferrer">
-                Privacy
-              </a>
-            </li>
-          </ul>'
-    }
-}) }}
+          }
+        ]}
+    }) }}
   {% endblock %}
   {% block bodyEnd %}
-    <%= htmlWebpackPlugin.tags.bodyTags %>
-  {% endblock %}
+<% htmlWebpackPlugin.files.js.forEach(file => { %>
+  <script src="<%= file.replace('../dist/', '/static/') %>"></script>
+<% }) %>  {% endblock %}

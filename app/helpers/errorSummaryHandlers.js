@@ -2,6 +2,8 @@ const { getModel } = require('../helpers/models')
 const { getHtml } = require('../helpers/conditionalHTML')
 const { getYarValue } = require('../helpers/session')
 const { getQuestionAnswer } = require('../helpers/utils')
+const { urlPrefix } = require('../config/server')
+const { SELECT_VARIABLE_TO_REPLACE } = require('../helpers/regex')
 
 const validateAnswerField = (value, validationType, details, payload) => {
   switch (validationType) {
@@ -79,7 +81,7 @@ const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
 
   if (yarKey === 'technologyDescription') {
     const techItem = getYarValue(request, 'technologyItems')
-    if (techItem === 'Other robotics or automatic technology') {
+    if (techItem !== 'Other robotics or automatic technology') {
       const descriptionTitle = currentQuestion.title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
         getYarValue(request, additionalYarKeyName).toLowerCase()
       )
@@ -88,7 +90,7 @@ const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
         title: descriptionTitle
       }
     }
-    if (getYarValue(request, 'roboticAutomatic') === 'Robotic') {
+    else if (getYarValue(request, 'roboticAutomatic') === 'Robotic') {
       currentQuestion = {
         ...currentQuestion,
         title: 'Describe the robotic technology'
@@ -99,6 +101,49 @@ const customiseErrorText = (value, currentQuestion, errorList, h, request) => {
         title: 'Describe the automatic technology'
       }
     }
+  }
+
+  if(yarKey === 'technologyItems') {
+    if(getYarValue(request, 'applicant') === 'Contractor') {
+      currentQuestion = {
+        ...currentQuestion,
+        answers: currentQuestion.answers.filter((option) => option.contractorOnly)
+      }
+
+      if(getYarValue(request, 'tenancy') === 'Yes') {
+        currentQuestion.backUrl = `${urlPrefix}/tenancy`
+      } else {
+        currentQuestion.backUrl = `${urlPrefix}/project-responsibility`
+      }
+    } 
+  }
+
+  if (yarKey === 'roboticEligibility') {
+    const selectedOption = getYarValue(request, 'technologyItems')
+    const shortListAnswers = ['technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7', 'technology-items-A8']
+      .map((item) => getQuestionAnswer('technology-items', item))
+
+    if(shortListAnswers.includes(selectedOption)) {
+      currentQuestion.backUrl = `${urlPrefix}/technology-items`
+    }
+
+    const title_dict = {
+      'technology-items-A7': 'Do your feeding robots fit the eligibility criteria?',
+      'technology-items-A8': 'Do your slurry robots fit the eligibility criteria?',
+      'technology-items-A4': 'Does your driverless robotic tractor or platform fit the eligibility criteria?',
+      'technology-items-A6': 'Does your voluntary robotic milking system fit the eligibility criteria?',
+      'technology-items-A5': 'Does your robotic spraying technology fit the eligiblity criteria?'
+
+    }
+  
+    Object.keys(title_dict).forEach((value) => {
+      if (selectedOption === getQuestionAnswer('technology-items', value)) {
+        currentQuestion = {
+          ...currentQuestion,
+          title: title_dict[value]
+        }
+      }
+    })
   }
 
   if (conditionalKey) {

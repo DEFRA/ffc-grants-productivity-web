@@ -95,6 +95,7 @@ describe('Page: /robotic-automatic', () => {
   })
 
   it('page loads with correct back link', async () => {
+    varList.technologyItems = 'Harvesting technology'
     const options = {
       method: 'GET',
       url: `${global.__URLPREFIX__}/robotic-automatic`

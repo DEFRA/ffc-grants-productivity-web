@@ -48,7 +48,7 @@
           {{ govukCheckboxes(items) }}
         {%endif%}
 
-        {%if type ==='input' or type ==='email' or type ==='tel' %}
+        {%if type ==='input' or type ==='text' or type ==='email' or type ==='tel' %}
           {{ govukInput(items) }}
         {%endif%}
 
@@ -73,7 +73,7 @@
                 </legend>
             {%endif%}
 
-            {%if item.type ==='input' or item.type ==='email' or item.type ==='tel' %}
+            {%if item.type ==='input' or item.type ==='text' or item.type ==='email' or item.type ==='tel' %}
               {{ govukInput(item) }}
             {%endif%}
 

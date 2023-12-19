@@ -77,7 +77,7 @@ describe('Page: /existing-solar', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/productivity/tenancy\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"tenancy\" class=\"govuk-back-link\">Back</a>')
   })
   it('page loads with correct back link', async () => {
     varList.tenancy = 'No'
@@ -87,6 +87,6 @@ describe('Page: /existing-solar', () => {
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/productivity/project-responsibility\" class=\"govuk-back-link\">Back</a>')
+    expect(response.payload).toContain('<a href=\"project-responsibility\" class=\"govuk-back-link\">Back</a>')
   })
 })

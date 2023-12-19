@@ -1,7 +1,10 @@
 const { crumbToken } = require('./test-helper')
 
 describe('robotics agricultural sector page', () => {
-  const varList = { }
+  const varList = { 
+    energySource: 'Mains electricity',
+    agriculturalSector: 'randomData'
+  }
 
   jest.mock('../../../../app/helpers/session', () => ({
     setYarValue: (request, key, value) => null,
@@ -77,7 +80,7 @@ describe('robotics agricultural sector page', () => {
     expect(postResponse.statusCode).toBe(302)
     expect(postResponse.headers.location).toBe('technology-use')
   })
-  it('page loads with correct back link when energy source is ains electricity', async () => {
+  it('page loads with correct back link when energy source is mains electricity', async () => {
     varList.energySource = 'Mains electricity'
     const options = {
       method: 'GET',

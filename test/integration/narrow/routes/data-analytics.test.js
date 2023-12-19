@@ -1,6 +1,17 @@
 const { crumbToken } = require('./test-helper')
 
 describe('robotics data analytics page', () => {
+  const varList = {
+    projectImpact: 'Yes'
+  }
+
+  jest.mock('../../../../app/helpers/session', () => ({
+    setYarValue: (request, key, value) => null,
+    getYarValue: (request, key) => {
+      if (varList[key]) return varList[key]
+      else return undefined
+    }
+  }))
   it('no option is selected -> return error message', async () => {
     const postOptions = {
       method: 'POST',
