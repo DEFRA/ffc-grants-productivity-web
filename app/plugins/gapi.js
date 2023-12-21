@@ -18,13 +18,7 @@ exports.plugin = {
         const response = request.response
         const statusFamily = Math.floor(response.statusCode / 100)
         if (statusFamily === 2 && response.variety === 'view' && !gapiService.isBlockDefaultPageView(request.url.pathname)) {
-          await gapiService.sendGAEvent(request, {
-            name: gapiService.eventTypes.PAGEVIEW,
-            params: {
-              page_path: request.route.path,
-              scoreReached: getYarValue(request, 'onScorePage') ? '/productivity/score' : '0',
-            }
-          })
+          await gapiService.sendGAEvent(request, { name: gapiService.eventTypes.PAGEVIEW, params: { page_path: request.route.path, scoreReached: getYarValue(request, 'onScorePage') ? '/productivity/score' : '0' } })
         }
         if (statusFamily === 5) {
           await request.ga.event({ category: 'Exception', action: request.route.path, label: response.statusCode })

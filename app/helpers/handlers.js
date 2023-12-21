@@ -63,7 +63,7 @@ const getContractorFarmerModel = (data, question, request, conditionalHtml) => {
 const getPage = async (question, request, h) => {
   const { url, backUrlObject, dependantNextUrl, type, title, yarKey, replace } = question
   const preValidationObject = question.preValidationObject ?? question.preValidationKeys
-  let backUrl = getUrl(backUrlObject, question.backUrl, request)
+  const backUrl = getUrl(backUrlObject, question.backUrl, request)
   const nextUrl = getUrl(dependantNextUrl, question.nextUrl, request)
   const isRedirect = guardPage(request, preValidationObject)
   if (isRedirect) {
@@ -79,37 +79,34 @@ const getPage = async (question, request, h) => {
   // }
 
   if (url === 'remove-item' && request.url.href.includes('?')) {
-
     const queryParams = new URLSearchParams(request.url.href.split('?')[1])
 
     setYarValue(request, 'confirmItem', queryParams.get('item'))
     setYarValue(request, 'index', queryParams.get('index'))
 
     return h.redirect('/productivity/remove-item')
-
   }
 
-  if(url === 'technology-items') {
-
+  if (url === 'technology-items') {
     // reset values if going back to this page from automatic-eligibility or robotic-eligibility if not eligible
-    if(([getYarValue(request, 'automaticEligibility')].flat().length === 1 && ![getYarValue(request, 'automaticEligibility')].flat().includes(null)) || getYarValue(request, 'roboticEligibility') === 'No') {
+    if (([getYarValue(request, 'automaticEligibility')].flat().length === 1 && ![getYarValue(request, 'automaticEligibility')].flat().includes(null)) || getYarValue(request, 'roboticEligibility') === 'No') {
       setYarValue(request, 'technologyItems', null)
       setYarValue(request, 'automaticEligibility', null)
       setYarValue(request, 'technologyDescription', null)
     }
 
-    if(getYarValue(request, 'applicant') === 'Contractor') {
+    if (getYarValue(request, 'applicant') === 'Contractor') {
       question = {
         ...question,
         answers: question.answers.filter((option) => option.contractorOnly)
       }
 
-      if(getYarValue(request, 'tenancy') === 'Yes') {
+      if (getYarValue(request, 'tenancy') === 'Yes') {
         question.backUrl = `${urlPrefix}/tenancy`
       } else {
         question.backUrl = `${urlPrefix}/project-responsibility`
       }
-    } 
+    }
   }
 
   await processGA(question, request)
@@ -202,8 +199,7 @@ const getPage = async (question, request, h) => {
           ...question,
           title: descriptionTitle
         }
-      }
-      else if (getYarValue(request, 'roboticAutomatic') === 'Robotic') {
+      } else if (getYarValue(request, 'roboticAutomatic') === 'Robotic') {
         question = {
           ...question,
           title: 'Describe the robotic technology'
@@ -224,18 +220,18 @@ const getPage = async (question, request, h) => {
         title: 'Is the other technology robotic or automatic?'
       }
     } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'automatic-eligibility') {
-        question = {
-          ...question,
-          title: 'Which eligibility criteria does your automatic technology meet?'
-        }
-    }else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'robotic-eligibility') {
-        question = {
-          ...question,
-          title: 'Does your robotic technology fit the eligibility criteria?'
-        }
+      question = {
+        ...question,
+        title: 'Which eligibility criteria does your automatic technology meet?'
+      }
+    } else if (getYarValue(request, 'technologyItems') === getQuestionAnswer('technology-items', 'technology-items-A9') && url === 'robotic-eligibility') {
+      question = {
+        ...question,
+        title: 'Does your robotic technology fit the eligibility criteria?'
+      }
     } else if (url === 'remove-item') {
-      let index = getYarValue(request, 'index')
-      let itemType = getYarValue(request, 'projectItemsList')[index].type
+      const index = getYarValue(request, 'index')
+      const itemType = getYarValue(request, 'projectItemsList')[index].type
       if (getYarValue(request, 'confirmItem') === 'Other technology' && itemType === 'Automatic') {
         setYarValue(request, 'errorForRemove', 'the other automatic technology')
       } else if (getYarValue(request, 'confirmItem') === 'Other technology' && itemType === 'Robotic') {
@@ -262,8 +258,8 @@ const getPage = async (question, request, h) => {
       const shortListAnswers = ['technology-items-A4', 'technology-items-A5', 'technology-items-A6', 'technology-items-A7', 'technology-items-A8']
         .map((item) => getQuestionAnswer('technology-items', item))
 
-      if(shortListAnswers.includes(selectedOption)) {
-          question.backUrl = `${urlPrefix}/technology-items`
+      if (shortListAnswers.includes(selectedOption)) {
+        question.backUrl = `${urlPrefix}/technology-items`
       }
 
       const title_dict = {
@@ -324,10 +320,10 @@ const getPage = async (question, request, h) => {
         ...farmerDetails,
         ...(farmerDetails
           ? {
-            name: `${farmerDetails.firstName} ${farmerDetails.lastName}`,
-            contact: farmerContact.join('<br/>'),
-            address: farmerAddress.join('<br/>')
-          }
+              name: `${farmerDetails.firstName} ${farmerDetails.lastName}`,
+              contact: farmerContact.join('<br/>'),
+              address: farmerAddress.join('<br/>')
+            }
           : {}
         )
       },
@@ -335,10 +331,10 @@ const getPage = async (question, request, h) => {
         ...agentDetails,
         ...(agentDetails
           ? {
-            name: `${agentDetails.firstName} ${agentDetails.lastName}`,
-            contact: agentContact.join('<br/>'),
-            address: agentAddress.join('<br/>')
-          }
+              name: `${agentDetails.firstName} ${agentDetails.lastName}`,
+              contact: agentContact.join('<br/>'),
+              address: agentAddress.join('<br/>')
+            }
           : {}
         )
       },
@@ -346,10 +342,10 @@ const getPage = async (question, request, h) => {
         ...contractorDetails,
         ...(contractorDetails
           ? {
-            name: `${contractorDetails.firstName} ${contractorDetails.lastName}`,
-            contact: contractorContact.join('<br/>'),
-            address: contractorAddress.join('<br/>')
-          }
+              name: `${contractorDetails.firstName} ${contractorDetails.lastName}`,
+              contact: contractorContact.join('<br/>'),
+              address: contractorAddress.join('<br/>')
+            }
           : {}
         )
       }
@@ -360,11 +356,11 @@ const getPage = async (question, request, h) => {
   }
   switch (url) {
     case 'agents-details': {
-        if (getYarValue(request, 'projectSubject') === 'Solar project items' ) {
-          question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/farmers-details`
-        }else {
-          question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/contractors-details`
-        }
+      if (getYarValue(request, 'projectSubject') === 'Solar project items') {
+        question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/farmers-details`
+      } else {
+        question.dependantNextUrl.urlOptions.elseUrl = `${urlPrefix}/contractors-details`
+      }
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
     case 'business-details':
@@ -374,7 +370,7 @@ const getPage = async (question, request, h) => {
     case 'contractors-details': {
       return h.view('page', getContractorFarmerModel(data, question, request, conditionalHtml))
     }
-    case 'technology-items': 
+    case 'technology-items':
       setYarValue(request, 'backToItemsSummary', false)
       setYarValue(request, 'roboticAutomatic', null)
       setYarValue(request, 'roboticEligibility', null)
@@ -387,9 +383,7 @@ const getPage = async (question, request, h) => {
       // back to project-items if reentering loop with items and not added a new item
       if (getYarValue(request, 'backToItemsSummary')) {
         question.backUrl = `${urlPrefix}/project-items`
-      
-      } else if(([getYarValue(request, 'automaticEligibility')].flat().length === 1 && ![getYarValue(request, 'automaticEligibility')].flat().includes(null)) || getYarValue(request, 'roboticEligibility') === 'No') {
-        
+      } else if (([getYarValue(request, 'automaticEligibility')].flat().length === 1 && ![getYarValue(request, 'automaticEligibility')].flat().includes(null)) || getYarValue(request, 'roboticEligibility') === 'No') {
         setYarValue(request, 'technologyItems', null)
         setYarValue(request, 'roboticAutomatic', null)
         setYarValue(request, 'automaticEligibility', null)
@@ -397,7 +391,6 @@ const getPage = async (question, request, h) => {
         setYarValue(request, 'technologyDescription', null)
 
         question.backUrl = `${urlPrefix}/technology-items`
-      
       } else {
         question.backUrl = `${urlPrefix}/technology-description`
       }
@@ -413,11 +406,11 @@ const getPage = async (question, request, h) => {
         setYarValue(request, 'roboticAutomatic', projectItemsList.at(-1).type)
         setYarValue(request, 'roboticEligibility', projectItemsList.at(-1).type === 'Robotic' ? 'Yes' : null)
         setYarValue(request, 'automaticEligibility', projectItemsList.at(-1).type === 'Automatic' ? projectItemsList.at(-1).criteriaScoring : null)
-        setYarValue(request, 'technologyDescription', { 
+        setYarValue(request, 'technologyDescription', {
           itemName: projectItemsList.at(-1).description.itemName,
           brand: projectItemsList.at(-1).description.brand,
           model: projectItemsList.at(-1).description.model,
-          numberOfItems: projectItemsList.at(-1).description.numberOfItems,
+          numberOfItems: projectItemsList.at(-1).description.numberOfItems
         })
       }
 
@@ -442,7 +435,7 @@ const getPage = async (question, request, h) => {
 
 const showPostPage = async (currentQuestion, request, h) => {
   const { yarKey, answers, baseUrl, ineligibleContent, nextUrl, dependantNextUrl, title, type, allFields, replace } = currentQuestion
-    if (baseUrl !== 'score') {
+  if (baseUrl !== 'score') {
     setYarValue(request, 'onScorePage', false)
   }
   const NOT_ELIGIBLE = { ...ineligibleContent, backUrl: baseUrl }
@@ -473,31 +466,28 @@ const showPostPage = async (currentQuestion, request, h) => {
 
     if (yarKey === 'projectItems' && !value.includes(getQuestionAnswer('project-items', 'project-items-A3'))) {
       setYarValue(request, 'projectItemsList', [])
-      setYarValue(request, 'labourReplaced', null) 
+      setYarValue(request, 'labourReplaced', null)
       setYarValue(request, 'technologyItems', null)
       setYarValue(request, 'roboticAutomatic', null)
       setYarValue(request, 'roboticEligibility', null)
       setYarValue(request, 'automaticEligibility', null)
       setYarValue(request, 'technologyDescription', null)
       setYarValue(request, 'addToItemList', true)
-
     } else if (yarKey === 'solarTechnologies' && !value.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2'))) {
       setYarValue(request, 'solarOutput', null)
       setYarValue(request, 'solarInstallation', null)
-
     } else if (yarKey === 'roboticAutomatic' && value === 'Robotic') {
       setYarValue(request, 'automaticEligibility', null)
     } else if (yarKey === 'roboticAutomatic' && value === 'Automatic') {
       setYarValue(request, 'roboticEligibility', null)
     }
-
   }
   if (type === 'multi-input') {
     allFields.forEach(field => {
       const payloadYarVal = payload[field.yarKey]
         ? payload[field.yarKey].replace(DELETE_POSTCODE_CHARS_REGEX, '').split(/(?=.{3}$)/).join(' ').toUpperCase()
         : ''
-      
+
       dataObject = {
         ...dataObject,
         [field.yarKey]: (
@@ -518,14 +508,14 @@ const showPostPage = async (currentQuestion, request, h) => {
       ))
     }
   }
-  
+
   if (replace) {
     if (getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' && baseUrl === 'robotic-automatic') {
       currentQuestion = {
         ...currentQuestion,
         title: 'Is the other technology robotic or automatic?'
       }
-    } else if (getYarValue(request, 'removeItem') === 'Yes' && baseUrl === 'remove-item')  {
+    } else if (getYarValue(request, 'removeItem') === 'Yes' && baseUrl === 'remove-item') {
       {
         getYarValue(request, 'projectItemsList')?.splice(getYarValue(request, 'index'), 1)
       }
@@ -537,9 +527,9 @@ const showPostPage = async (currentQuestion, request, h) => {
         ),
         validate: [
           {
-            type: "NOT_EMPTY",
-            error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-                getYarValue(request, additionalYarKeyName).toLowerCase()
+            type: 'NOT_EMPTY',
+            error: currentQuestion.validate[0].error.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+              getYarValue(request, additionalYarKeyName).toLowerCase()
             )
           },
           {
@@ -550,24 +540,24 @@ const showPostPage = async (currentQuestion, request, h) => {
               answerKey: 'automatic-eligibility-A5'
             }
           }
-        ],
+        ]
       }
     } else {
       {
         currentQuestion = {
           ...currentQuestion,
           title: title.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-              getYarValue(request, additionalYarKeyName)?.toLowerCase()
+            getYarValue(request, additionalYarKeyName)?.toLowerCase()
           ),
           validate: [
             {
-              type: "NOT_EMPTY",
-              error: currentQuestion.validate[0].error.replace( SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
-                  getYarValue(request, additionalYarKeyName)?.toLowerCase()
+              type: 'NOT_EMPTY',
+              error: currentQuestion.validate[0].error.replace(SELECT_VARIABLE_TO_REPLACE, (_ignore, additionalYarKeyName) =>
+                getYarValue(request, additionalYarKeyName)?.toLowerCase()
               )
             }
-          ],
-        };
+          ]
+        }
       }
     }
   }
@@ -581,7 +571,6 @@ const showPostPage = async (currentQuestion, request, h) => {
     })
     return errors
   }
-
 
   if (thisAnswer?.notEligible ||
     (yarKey === 'projectCost' ? !getGrantValues(payload[Object.keys(payload)[0]], currentQuestion.grantInfo).isEligible : null)
@@ -627,7 +616,6 @@ const showPostPage = async (currentQuestion, request, h) => {
 
     return h.view('not-eligible', NOT_ELIGIBLE)
   } else if (thisAnswer?.redirectUrl) {
-
     // add if here to populate robotic-automatic
     if (yarKey === 'technologyItems') {
       setYarValue(request, 'roboticAutomatic', 'Robotic')
@@ -642,12 +630,11 @@ const showPostPage = async (currentQuestion, request, h) => {
     setYarValue(request, 'projectCost', projectCost)
   }
 
-  
-  let isSolar = getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A2')
-  let isContractor = getYarValue(request, 'applicant') === getQuestionAnswer('applicant','applicant-A2')
+  const isSolar = getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A2')
+  const isContractor = getYarValue(request, 'applicant') === getQuestionAnswer('applicant', 'applicant-A2')
   switch (baseUrl) {
     case 'applicant': {
-      if(isContractor && isSolar ){
+      if (isContractor && isSolar) {
         return h.view('not-eligible', NOT_ELIGIBLE)
       }
       break
@@ -670,7 +657,7 @@ const showPostPage = async (currentQuestion, request, h) => {
     case 'project-subject':
       setYarValue(request, 'addToItemList', false)
       break
-      
+
     case 'solar-technologies':
       if (payload.secBtn === 'Back to score') {
         break
@@ -690,7 +677,7 @@ const showPostPage = async (currentQuestion, request, h) => {
     }
 
     case 'project-items':
-      let projectItems = getYarValue(request, 'projectItemsList')
+      const projectItems = getYarValue(request, 'projectItemsList')
       if (projectItems?.length > 0 && getYarValue(request, 'projectItems')?.includes('Robotic and automatic technology')) {
         setYarValue(request, 'backToItemsSummary', true)
         return h.redirect(`${urlPrefix}/project-items-summary`)
@@ -700,29 +687,29 @@ const showPostPage = async (currentQuestion, request, h) => {
       break
 
     case 'automatic-eligibility': {
-        const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
-        if (automaticEligibilityAnswer.length === 1 || automaticEligibilityAnswer.includes('None of the above')) {
-          const projectItemsList = getYarValue(request, 'projectItemsList') ?? []
-          if (projectItemsList.length === 0) {
-            NOT_ELIGIBLE.primaryBtn = {
-              text: 'Add another technology',
-              url: `${urlPrefix}/technology-items`
-            }
-          } else {
-            NOT_ELIGIBLE.primaryBtn = {
-              text: 'Continue with eligible technology',
-              url: `${urlPrefix}/project-items-summary`
-            }
-            NOT_ELIGIBLE.secondaryBtn = {
-              text: 'Add another technology',
-              url: `${urlPrefix}/technology-items`
-            }
+      const automaticEligibilityAnswer = [getYarValue(request, 'automaticEligibility')].flat()
+      if (automaticEligibilityAnswer.length === 1 || automaticEligibilityAnswer.includes('None of the above')) {
+        const projectItemsList = getYarValue(request, 'projectItemsList') ?? []
+        if (projectItemsList.length === 0) {
+          NOT_ELIGIBLE.primaryBtn = {
+            text: 'Add another technology',
+            url: `${urlPrefix}/technology-items`
           }
-          return h.view('not-eligible', NOT_ELIGIBLE)
         } else {
-          return h.redirect(`${urlPrefix}/technology-description`)
+          NOT_ELIGIBLE.primaryBtn = {
+            text: 'Continue with eligible technology',
+            url: `${urlPrefix}/project-items-summary`
+          }
+          NOT_ELIGIBLE.secondaryBtn = {
+            text: 'Add another technology',
+            url: `${urlPrefix}/technology-items`
+          }
         }
+        return h.view('not-eligible', NOT_ELIGIBLE)
+      } else {
+        return h.redirect(`${urlPrefix}/technology-description`)
       }
+    }
 
     case 'robotic-eligibility': {
       const roboticEligibilityAnswer = getYarValue(request, 'roboticEligibility')
@@ -746,27 +733,27 @@ const showPostPage = async (currentQuestion, request, h) => {
           }
         }
         return h.view('not-eligible', NOT_ELIGIBLE)
-      } 
+      }
       else {
         return h.redirect(`${urlPrefix}/technology-description`)
       }
     }
 
-    case 'technology-description': {  
-      let roboticArr = ['sensing system', 'makes decisions', 'control actuators', 'continuous loop']
-      let roboticArrScore = ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
+    case 'technology-description': {
+      const roboticArr = ['sensing system', 'makes decisions', 'control actuators', 'continuous loop']
+      const roboticArrScore = ['Has sensing system that can understand its environment', 'Makes decisions and plans', 'Can control its actuators (the devices that move robotic joints)', 'Works in a continuous loop']
       let automaticFinalArr = []
       if (getYarValue(request, 'automaticEligibility')) {
-        automaticFinalArr = getYarValue(request, 'automaticEligibility').map((item) =>   item.includes('sensing system') ? 'sensing system' : item.includes('Makes decisions') ? 'makes decisions' : item.includes('actuators') ? 'control actuators' : item.includes('continuous loop') ? 'continuous loop' : '')
+        automaticFinalArr = getYarValue(request, 'automaticEligibility').map((item) => item.includes('sensing system') ? 'sensing system' : item.includes('Makes decisions') ? 'makes decisions' : item.includes('actuators') ? 'control actuators' : item.includes('continuous loop') ? 'continuous loop' : '')
       }
-      let tempArray = getYarValue(request, 'projectItemsList') ?? []
-      let tempObject = {
+      const tempArray = getYarValue(request, 'projectItemsList') ?? []
+      const tempObject = {
         index: tempArray.length + 1,
         item: getYarValue(request, 'technologyItems') === 'Other robotics or automatic technology' ? 'Other technology' : getYarValue(request, 'technologyItems'),
         type: getYarValue(request, 'roboticAutomatic') ?? getYarValue(request, 'roboticAutomatic'),
-        criteria: getYarValue(request, 'automaticEligibility') ? automaticFinalArr : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArr : null ,
+        criteria: getYarValue(request, 'automaticEligibility') ? automaticFinalArr : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArr : null,
         criteriaScoring: getYarValue(request, 'automaticEligibility') ? getYarValue(request, 'automaticEligibility') : getYarValue(request, 'roboticEligibility') === 'Yes' ? roboticArrScore : null,
-        description: getYarValue(request, 'technologyDescription') ??  getYarValue(request, 'technologyDescription'),
+        description: getYarValue(request, 'technologyDescription') ?? getYarValue(request, 'technologyDescription'),
         realItem: getYarValue(request, 'technologyItems')
       }
 
@@ -799,7 +786,6 @@ const showPostPage = async (currentQuestion, request, h) => {
       break
   }
 
-    
   return h.redirect(getUrl(dependantNextUrl, nextUrl, request, payload.secBtn))
 }
 
@@ -825,7 +811,6 @@ const processGA = async (question, request) => {
     }
   }
 }
-
 
 module.exports = {
   getHandler,

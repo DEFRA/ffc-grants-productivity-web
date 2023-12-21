@@ -23,7 +23,7 @@ const eventTypes = {
 const sendGAEvent = async (request, metrics) => {
   console.log('[Event Metrics]: ', metrics)
   const timeSinceStart = getTimeofJourneySinceStart(request).toString()
-  const page_path = request.route.path
+  const pagePath = request.route.path
   const host_name = request.info.hostname
   const { name, params } = metrics
   const isEliminationEvent = name === eventTypes.ELIMINATION
@@ -39,7 +39,7 @@ const sendGAEvent = async (request, metrics) => {
     ...(params?.score_presented && { score_presented: params.score_presented }),
     ...(params?.scoreReached && { scoreReached: params.scoreReached }),
     grant_type,
-    page_title: page_path,
+    page_title: pagePath,
     host_name
   }
   try {

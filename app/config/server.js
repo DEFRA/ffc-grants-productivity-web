@@ -41,7 +41,7 @@ const config = {
   googleTagManagerKey: process.env.GOOGLE_TAG_MANAGER_KEY,
   googleTagManagerServerKey: process.env.GOOGLE_TAG_MANAGER_SERVER_KEY,
   analyticsPropertyApi: process.env.ANALYTICS_PROPERTY_API,
-  analyticsTagKey:  process.env.ANALYTICS_TAG_KEY,
+  analyticsTagKey: process.env.ANALYTICS_TAG_KEY,
   protectiveMonitoringUrl: process.env.PROTECTIVE_MONITORING_URL,
   startPageUrl: process.env.START_PAGE_URL,
   serviceEndDate: process.env.SERVICE_END_DATE,

@@ -1100,6 +1100,7 @@ const questionBank = {
           baseUrl: 'remaining-costs-solar',
           backUrl: 'potential-amount-solar',
           nextUrl: 'agricultural-sector-solar',
+          ga: { name: 'eligibility_passed', params: {} },
           preValidationObject: {
             preValidationKeys: ['projectSubject'],
             preValidationAnswer: ['project-subject-A2'],
@@ -1140,9 +1141,7 @@ const questionBank = {
                     'overdrafts',
                     'the Basic Payment Scheme'
                   ]
-                }],
-                
-
+                }]
               }
             ]
           },
@@ -1185,7 +1184,6 @@ const questionBank = {
           backUrl: 'remaining-costs-solar',
           nextUrl: 'score',
           preValidationKeys: ['remainingCosts'],
-          ga: { name: 'eligibility_passed', params: {} },
           eliminationAnswerKeys: '',
           ineligibleContent: {},
           fundingPriorities: '<ul class="govuk-list govuk-list--bullet govuk-!-font-size-16"><li>Significant labour shortages</li><li>Not received many grants in past</li></ul>',          
@@ -1197,9 +1195,7 @@ const questionBank = {
               content: [{
                 para: 'RPA wants to fund sectors that:',
                 items: ['have significant labour shortages', 'have not received many grants in the past, such as dairy']
-              }],
-              
-
+              }]
             }]
           },
           validate: [
@@ -1967,6 +1963,7 @@ const questionBank = {
           baseUrl: 'remaining-costs',
           backUrl: 'potential-amount',
           nextUrl: 'project-impact',
+          ga: { name: 'eligibility_passed', params: {} },
           preValidationObject: {
             preValidationKeys: ['projectSubject'],
             preValidationAnswer: ['project-subject-A1'],
@@ -2008,8 +2005,7 @@ const questionBank = {
                     'overdrafts',
                     'the Basic Payment Scheme'
                   ]
-                }],
-                
+                }]
               }
             ]
           },
@@ -2105,7 +2101,6 @@ const questionBank = {
           baseUrl: 'data-analytics',
           backUrl: 'project-impact',
           nextUrl: 'energy-source',
-          ga: { name: 'eligibility_passed', params: {} },
           preValidationObject: {
             preValidationKeys: ['projectImpact'],
             preValidationAnswer: ['project-impact-A1'],
