@@ -16,6 +16,7 @@ function guardPage (request, guardData) {
   if (isServiceDecommissioned) return isServiceDecommissioned
   if (guardData) {
     let isContractor = getYarValue(request, 'applicant') === getQuestionAnswer('applicant','applicant-A2')
+    let isRobotics = getYarValue(request, 'projectSubject') === getQuestionAnswer('project-subject', 'project-subject-A1')
     
     // first - project-items-summary and item-conditional page guard
     if(guardData[0] === 'projectItemsList' && ![getYarValue(request, 'projectItems')].flat().includes('Robotic and automatic technology')
@@ -91,6 +92,9 @@ function guardPage (request, guardData) {
 
         case 'SPECIFICANDANY':
           // page guard take action if nothing has selected OR if first(spesific-checkbox) and second(any option - radiobox) preValidationAnswer not selected.
+        if(isContractor && isRobotics){
+            return false
+          }
         for (let i = 0; i < preValidationList.length; i++) {
           if(getYarValue(request, preValidationList[i].key) === null){
             return true
