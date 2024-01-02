@@ -3526,7 +3526,7 @@ const questionBank = {
             <li> I am aware that the information I submit will be checked by the RPA.</li>
             <li> I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.</li></ul>
             <h2 class="govuk-heading-m">Improving our schemes</h2>
-            <p>So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party workigovukng for us, to contact you.</p>`,
+            <p>So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party working for us, to contact you.</p>`,
           },
           answers: [
             {
