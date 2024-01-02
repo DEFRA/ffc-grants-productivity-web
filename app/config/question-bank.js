@@ -3526,7 +3526,7 @@ const questionBank = {
             <li> I am aware that the information I submit will be checked by the RPA.</li>
             <li> I am happy to be contacted by Defra and RPA (or third-party on their behalf) about my application.</li></ul>
             <h2 class="govuk-heading-m">Improving our schemes</h2>
-            <p>So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party working for us, to contact you.</p>`,
+            <p>So that we can continue to improve our services and schemes, we may wish to contact you in the future. Please confirm if you are happy for us, or a third-party workigovukng for us, to contact you.</p>`,
           },
           answers: [
             {
@@ -3554,13 +3554,13 @@ const questionBank = {
             },
             messageContentBeforeConditional: `We have sent you a confirmation email with a record of your answers.<br/><br/>
             If you do not get an email within 72 hours, contact the RPA helpline and follow the options for Farming Transformation Fund scheme.<br/><br/>`,
-            messageContentPartRobotics: `<p> You can check if you can apply for a grant for <a class="govuk-link" href="${urlPrefix}/project-subject" rel="noopener noreferrer">solar project items</a>. The minimum grant is £15,000 (25% of £60,000). The maximum grant amount for both projects together is £500,000.</p>`,
-            messageContentPartSolar: `<p>You can check if you can apply for a grant for <a class="govuk-link" href="${urlPrefix}/project-subject" rel="noopener noreferrer">farm productivity project items</a>. The minimum grant is £25,000 (40% of £62,500). The maximum grant amount for both projects together is £500,000. </p>`,
+            messageContentPartRobotics: `<p class="govuk-body"> You can check if you can apply for a grant for <a class="govuk-link" href="${urlPrefix}/project-subject" rel="noopener noreferrer">solar project items</a>. The minimum grant is £15,000 (25% of £60,000). The maximum grant amount for both projects together is £500,000.</p>`,
+            messageContentPartSolar: `<p class="govuk-body">You can check if you can apply for a grant for <a class="govuk-link" href="${urlPrefix}/project-subject" rel="noopener noreferrer">farm productivity project items</a>. The minimum grant is £25,000 (40% of £62,500). The maximum grant amount for both projects together is £500,000. </p>`,
             messageContentPostConditional: `<h2 class="govuk-heading-m">RPA helpline</h2>
             <h3 class="govuk-heading-s">Telephone</h3>
-            <p>Telephone: <a href="tel:0300 0200 301">0300 0200 301</a></p>
+            <p class="govuk-body">Telephone: <a href="tel:0300 0200 301">0300 0200 301</a></p>
             Monday to Friday, 9am to 5pm (except public holidays)<br/>
-            <p><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in a new tab)</a></p>
+            <p class="govuk-body"><a class="govuk-link" target="_blank" href="https://www.gov.uk/call-charges" rel="noopener noreferrer">Find out about call charges (opens in a new tab)</a></p>
             <h3 class="govuk-heading-s">Email</h3>
             <a class="govuk-link" title="Send email to RPA" target="_blank" rel="noopener noreferrer" href="mailto:ftf@rpa.gov.uk">FTF@rpa.gov.uk</a><br/><br/>
             <h2 class="govuk-heading-m">What happens next</h2>
