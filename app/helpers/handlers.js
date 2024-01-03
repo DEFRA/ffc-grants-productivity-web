@@ -635,6 +635,9 @@ const showPostPage = async (currentQuestion, request, h) => {
   switch (baseUrl) {
     case 'applicant': {
       if (isContractor && isSolar) {
+        gapiService.sendGAEvent(request, {
+          name: gapiService.eventTypes.ELIMINATION
+        })
         return h.view('not-eligible', NOT_ELIGIBLE)
       }
       break
@@ -667,6 +670,9 @@ const showPostPage = async (currentQuestion, request, h) => {
         if (getYarValue(request, 'existingSolar') === 'Yes') {
           return h.redirect(`${urlPrefix}/project-cost-solar`)
         } else {
+          gapiService.sendGAEvent(request, {
+            name: gapiService.eventTypes.ELIMINATION
+          })
           return h.view('not-eligible', NOT_ELIGIBLE)
         }
       }
@@ -705,6 +711,9 @@ const showPostPage = async (currentQuestion, request, h) => {
             url: `${urlPrefix}/technology-items`
           }
         }
+        gapiService.sendGAEvent(request, {
+          name: gapiService.eventTypes.ELIMINATION
+        })
         return h.view('not-eligible', NOT_ELIGIBLE)
       } else {
         return h.redirect(`${urlPrefix}/technology-description`)
@@ -732,6 +741,9 @@ const showPostPage = async (currentQuestion, request, h) => {
             url: `${urlPrefix}/technology-items`
           }
         }
+        gapiService.sendGAEvent(request, {
+          name: gapiService.eventTypes.ELIMINATION
+        })
         return h.view('not-eligible', NOT_ELIGIBLE)
       }
       else {
