@@ -1868,7 +1868,7 @@ const questionBank = {
           grantInfo: {
             minGrant: 25000,
             maxGrant: 500000,
-            grantPercentage: 40,
+            grantPercentage: 50,
             cappedGrant: true
           },
           label: {
@@ -1878,16 +1878,16 @@ const questionBank = {
           },
           hint: {
             html: `
-              <p>You can only apply for a grant of up to 40% of the estimated costs.</p>
-              <p>The minimum grant you can apply for this project is £25,000 (40% of £62,500).</p>
-              <p>The maximum grant is £500,000 (40% of £1.25 million).</p>
+              <p>You can only apply for a grant of up to 50% of the estimated costs.</p>
+              <p>The minimum grant you can apply for this project is £25,000 (50% of £62,500).</p>
+              <p>The maximum grant is £500,000 (50% of £1.25 million).</p>
               <p>Do not include VAT.</p>
               <p>Enter amount, for example 95,000</p>`
           },
           eliminationAnswerKeys: '',
           ineligibleContent: {
-            messageContent: 'You can only apply for a grant of up to 40% of the estimated costs.',
-            insertText: { text: 'The minimum grant you can apply for is £25,000 (40% of £62,500). The maximum grant is £500,000 (40% of £1.25 million).' },
+            messageContent: 'You can only apply for a grant of up to 50% of the estimated costs.',
+            insertText: { text: 'The minimum grant you can apply for is £25,000 (50% of £62,500). The maximum grant is £500,000 (50% of £1.25 million).' },
             messageLink: {
               url: 'https://www.gov.uk/topic/farming-food-grants-payments/rural-grants-payments',
               title: 'See other grants you may be eligible for.'
@@ -3555,7 +3555,7 @@ const questionBank = {
             messageContentBeforeConditional: `We have sent you a confirmation email with a record of your answers.<br/><br/>
             If you do not get an email within 72 hours, contact the RPA helpline and follow the options for Farming Transformation Fund scheme.<br/><br/>`,
             messageContentPartRobotics: `<p class="govuk-body"> You can check if you can apply for a grant for <a class="govuk-link" href="${urlPrefix}/project-subject" rel="noopener noreferrer">solar project items</a>. The minimum grant is £15,000 (25% of £60,000). The maximum grant amount for both projects together is £500,000.</p>`,
-            messageContentPartSolar: `<p class="govuk-body">You can check if you can apply for a grant for <a class="govuk-link" href="${urlPrefix}/project-subject" rel="noopener noreferrer">farm productivity project items</a>. The minimum grant is £25,000 (40% of £62,500). The maximum grant amount for both projects together is £500,000. </p>`,
+            messageContentPartSolar: `<p class="govuk-body">You can check if you can apply for a grant for <a class="govuk-link" href="${urlPrefix}/project-subject" rel="noopener noreferrer">farm productivity project items</a>. The minimum grant is £25,000 (50% of £62,500). The maximum grant amount for both projects together is £500,000. </p>`,
             messageContentPostConditional: `<h2 class="govuk-heading-m">RPA helpline</h2>
             <h3 class="govuk-heading-s">Telephone</h3>
             <p class="govuk-body">Telephone: <a href="tel:0300 0200 301">0300 0200 301</a></p>
