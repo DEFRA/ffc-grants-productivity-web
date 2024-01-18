@@ -19,7 +19,7 @@ describe('Start page', () => {
     expect(response.payload).toContain('You can apply for up to:')
     expect(response.payload).toContain('50% of estimated costs of farm productivity project items')
     expect(response.payload).toContain('25% of estimated costs for solar project items')
-    expect(response.payload).toContain('For farm productivity project items, the maximum grant you can apply for is £500,000. The minimum grant is £25,000 (50% of £62,500).')
+    expect(response.payload).toContain('For farm productivity project items, the maximum grant you can apply for is £500,000. The minimum grant is £25,000 (50% of £50,000).')
     expect(response.payload).toContain(
       'For solar project items, the maximum grant you can apply for is £100,000. The minimum grant is £15,000 (25% of £60,000). You can apply for grant funding to add solar project items (for example a battery) to a solar photovoltaic (PV) system you already have or to buy a new solar PV system.'
     )

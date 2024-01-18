@@ -51,7 +51,7 @@ describe('Reference number page', () => {
     const getResponse = await global.__SERVER__.inject(getOtions)
     expect(getResponse.statusCode).toBe(200)
     expect(getResponse.payload).toContain('Details submitted')
-    expect(getResponse.payload).toContain('You can check if you can apply for a grant for <a class="govuk-link" href="/productivity/project-subject" rel="noopener noreferrer">farm productivity project items</a>. The minimum grant is £25,000 (50% of £62,500). The maximum grant amount for both projects together is £500,000.')
+    expect(getResponse.payload).toContain('You can check if you can apply for a grant for <a class="govuk-link" href="/productivity/project-subject" rel="noopener noreferrer">farm productivity project items</a>. The minimum grant is £25,000 (50% of £50,000). The maximum grant amount for both projects together is £500,000.')
   })
 
   it('load page successfully with the Farm productivity project items Reference ID', async () => {
