@@ -168,7 +168,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(469, 'Solar PV Panel Location',  submission.solarTechnologies?.includes(getQuestionAnswer('solar-technologies', 'solar-technologies-A2')) ? submission.solarInstallation : 'N/A'),
 
           generateRow(55, 'Total project expenditure', String(submission.projectCost).replace(/,/g, '')),
-          generateRow(57, 'Grant rate', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? '40' : '25'),
+          generateRow(57, 'Grant rate', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? '50' : '25'),
           generateRow(56, 'Grant amount requested', submission.calculatedGrant),
           generateRow(345, 'Remaining Cost to Farmer', submission.remainingCost),
           generateRow(346, 'Planning Permission Status', getPlanningPermissionDoraValue(submission.planningPermission)),
@@ -310,7 +310,7 @@ function getEmailDetails (submission, desirabilityScore, rpaEmail, isAgentEmail 
       agriculturalSectorSolar: ( submission.agriculturalSector && submission.projectSubject === PROJECT_SUBJECT_SOLAR ) ? [submission.agriculturalSector].flat().join(' | ') : '',
       agriculturalSectorSolarScore: submission.projectSubject === PROJECT_SUBJECT_SOLAR ? getQuestionScoreBand(desirabilityScore.desirability.questions, 'agricultural-sector-solar') : '',
 
-      grantRate: submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? 'Up to 40%' : 'Up to 25%',
+      grantRate: submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? 'Up to 50%' : 'Up to 25%',
 
       projectName: submission.businessDetails.projectName,
       businessName: submission.businessDetails.businessName,
