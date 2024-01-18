@@ -150,7 +150,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(43, 'Theme', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? 'Robotics and automation' : 'Solar PV'),
           generateRow(90, 'Project type', ''),
           generateRow(41, 'Owner', 'RD'),
-          generateRow(341, 'Grant Launch Date', (new Date('2024-01-18')).toLocaleDateString('en-GB')),
+          generateRow(341, 'Grant Launch Date', (new Date('2024-01-25')).toLocaleDateString('en-GB')),
           generateRow(385, 'Applicant Type', submission.applicant),
           
           generateRow(23, 'Status of applicant', submission.legalStatus),
@@ -211,7 +211,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(93, 'RAG date reviewed ', todayStr),
           generateRow(54, 'Electronic OA received date ', todayStr),
           generateRow(370, 'Status', 'Pending RPA review'),
-          generateRow(85, 'Full Application Submission Date', (new Date('2025-04-30')).toLocaleDateString('en-GB')),
+          generateRow(85, 'Full Application Submission Date', (new Date('2025-06-30')).toLocaleDateString('en-GB')),
           generateRow(375, 'OA percent', ( desirabilityScore.desirability.overallRating.score )),
           ...addAgentDetails(submission.agentsDetails)
         ]

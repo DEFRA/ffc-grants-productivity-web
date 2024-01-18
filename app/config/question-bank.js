@@ -435,7 +435,7 @@ const questionBank = {
               heading: 'Eligibility',
               content: [{
                 para: `You must have secured planning permission before you submit a full application.
-                \n\n The application deadline is 30 April 2025.`,
+                \n\n The application deadline is 30 June 2025.`,
                 items: []
               }],
               
@@ -487,7 +487,7 @@ const questionBank = {
           maybeEligibleContent: {
             messageHeader: 'You may be able to apply for a grant from this scheme',
             messageContent: `Any planning permission must be in place before you submit your full application.<br/><br/>
-                            The application deadline is 30 April 2025.`
+                            The application deadline is 30 June 2025.`
           }
         },
         {
