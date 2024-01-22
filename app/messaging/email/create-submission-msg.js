@@ -147,7 +147,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(2, 'FA or OA', 'Outline Application'),
           generateRow(40, 'Scheme', 'Farming Transformation Fund'),
           generateRow(39, 'Sub scheme', 'FTF-Productivity Round 2'),
-          generateRow(43, 'Theme', 'Robotics, automation and solar'),
+          generateRow(43, 'Theme', submission.projectSubject === getQuestionAnswer('project-subject', 'project-subject-A1') ? 'Robotics and automation' : 'Solar PV'),
           generateRow(90, 'Project type', ''),
           generateRow(41, 'Owner', 'RD'),
           generateRow(341, 'Grant Launch Date', (new Date('2024-01-25')).toLocaleDateString('en-GB')),
