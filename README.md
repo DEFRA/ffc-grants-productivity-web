@@ -21,7 +21,7 @@ It is designed to encourage use and re-use of information freely and flexibly, w
 
 ## Project Description
 
-This repository contains all the code for the Slurry grant frontend application, which provides a series of questions for a user to determine what they need from the grant application, if the grant is something they can apply for and how strong their application is. If the user finishes the application, it also submits their answers along with their contact details for review.
+This repository contains all the code for the Productivity grant frontend application, which provides a series of questions for a user to determine what they need from the grant application, if the grant is something they can apply for and how strong their application is. If the user finishes the application, it also submits their answers along with their contact details for review.
 
 The strength of the application is checked via a request sent to and received from the **ffc-grants-desirability-scoring** service using Azure Service Bus Session Queues, and the users' answers and details are submitted via a request sent to the **ffc-grants-desirability-notification** service using an Azure Service Bus Topic
 
@@ -34,7 +34,7 @@ This application requires the following to be run locally:
 - Docker
 - Access to Azure, and the Azure SND environment
 - A running instance of **ffc-grants-desirability-scoring** (This is optional, and only needed if navigating to or past the _/score_ page)
- - This also means you will need PostgreSQL, with the latest Slurry DB script containing the Slurry Scoring algorithm
+ - This also means you will need PostgreSQL, with the latest Productivity DB script containing the Productivity Scoring algorithm
  - This also means you will need A DEFRA VPN connection (AKA being connected to OpenVPN)
 - A running instance of **ffc-grants-desirability-notification** (This is optional, and only needed for sending/receiving the Email after the application is complete)
 
