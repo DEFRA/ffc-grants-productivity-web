@@ -55,7 +55,7 @@
       "jsonwebtoken": "9.0.0"	
     },
     "semver": "7.5.3",
-    "follow-redirects": "1.15.5"
+    "follow-redirects": "1.15.6"
   },
   "devDependencies": {
     "@hapi/catbox-memory": "^5.0.1",
