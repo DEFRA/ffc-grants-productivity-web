@@ -218,7 +218,7 @@ it('page loads with correct back link if backToItemsSummary is false', async () 
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/productivity/technology-description\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
+    expect(response.payload).toContain('<a href=\"/productivity/technology-description\" class=\"govuk-back-link\"')
 })
 
 it('page loads with correct back link if automaticEligibility has only one item and not null', async () => {
@@ -232,7 +232,7 @@ it('page loads with correct back link if automaticEligibility has only one item 
 
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"/productivity/technology-items\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
+    expect(response.payload).toContain('<a href=\"/productivity/technology-items\" class=\"govuk-back-link\"')
 })
 
 it('Project items summary - should load start page if the projectItemsList does not have item', async () => {

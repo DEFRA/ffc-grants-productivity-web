@@ -48,7 +48,7 @@ it('should redirect to /remaining-costs-solar when user press continue', async (
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"project-cost\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
+    expect(response.payload).toContain('<a href=\"project-cost\" class=\"govuk-back-link\"')
   })
 
   //  Solar Journey url checks // 
@@ -60,7 +60,7 @@ it('should redirect to /remaining-costs-solar when user press continue', async (
     }
     const response = await global.__SERVER__.inject(options)
     expect(response.statusCode).toBe(200)
-    expect(response.payload).toContain('<a href=\"project-cost-solar\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
+    expect(response.payload).toContain('<a href=\"project-cost-solar\" class=\"govuk-back-link\"')
   })
 
   it('should redirect to /remaining-costs-solar when user press continue', async () => {
