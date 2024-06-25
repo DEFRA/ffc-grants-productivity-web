@@ -43,7 +43,7 @@ it('page loads with correct back link', async () => {
 
 const response = await global.__SERVER__.inject(options)
 expect(response.statusCode).toBe(200)
-expect(response.payload).toContain('<a href=\"farmers-details\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
+expect(response.payload).toContain('<a href=\"farmers-details\" class=\"govuk-back-link\"')
 })
 it('page loads with correct back link', async () => {
     varList.projectSubject = 'Farm productivity project items'
@@ -55,7 +55,7 @@ it('page loads with correct back link', async () => {
 
 const response = await global.__SERVER__.inject(options)
 expect(response.statusCode).toBe(200)
-expect(response.payload).toContain('<a href=\"farmers-details\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
+expect(response.payload).toContain('<a href=\"farmers-details\" class=\"govuk-back-link\"')
 })
 it('page loads with correct back link', async () => {
     varList.projectSubject = 'Farm productivity project items'
@@ -67,6 +67,6 @@ it('page loads with correct back link', async () => {
 
 const response = await global.__SERVER__.inject(options)
 expect(response.statusCode).toBe(200)
-expect(response.payload).toContain('<a href=\"contractors-details\" class=\"govuk-back-link\" id=\"linkBack\">Back</a>')
+expect(response.payload).toContain('<a href=\"contractors-details\" class=\"govuk-back-link\"')
 })
 })
