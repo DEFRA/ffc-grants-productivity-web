@@ -36,7 +36,7 @@
     "@hapi/hapi": "^20.2.1",
     "@hapi/inert": "^7.0.0",
     "@hapi/vision": "^7.0.0",
-    "@hapi/wreck": "^18.0.0",
+    "@hapi/wreck": "^18.1.0",
     "@hapi/yar": "^11.0.0",
     "applicationinsights": "^2.3.4",
     "bcrypt": "^5.0.1",
